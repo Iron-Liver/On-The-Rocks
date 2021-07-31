@@ -1,0 +1,29 @@
+{
+    "name": "OnTheRocks",
+    "version": "1.0.0",
+    "description": "e-commerce focused on drinks",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon index.js"
+    },
+    "author": "Nicolas Sanchez",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^2.0.12"
+    },
+    "dependencies": {
+        "cookie-session": "^1.4.0",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "helmet": "^4.6.0",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.12",
+        "passport": "^0.4.1",
+        "pg": "^8.7.1",
+        "postgres": "^1.0.2",
+        "sequelize": "^6.6.5"
+    }
+}
