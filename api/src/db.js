@@ -45,7 +45,6 @@ fs.readdirSync(path.join(__dirname, "/models"))
     .forEach((file) => {
         modelDefiners.push(require(path.join(__dirname, "/models", file)));
     });
-
 modelDefiners.forEach((model) => model(sequelize));
 
 let entries = Object.entries(sequelize.models);
@@ -56,13 +55,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Product, Order, Category } = sequelize.models;
-
-Product.belongsToMany(Category, { through: "products_category" });
-Category.belongsToMany(Product, { through: "products_category" });
-
-User.hasMany(Order);
-Order.belongsTo(User);
+const {User, Order} = sequelize.models
 
 module.exports = {
     ...sequelize.models, 
