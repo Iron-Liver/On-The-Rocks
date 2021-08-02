@@ -45,8 +45,6 @@ fs.readdirSync(path.join(__dirname, "/models"))
     .forEach((file) => {
         modelDefiners.push(require(path.join(__dirname, "/models", file)));
     });
-    console.log("acaaaaa")
-    console.log({modelDefiners})
 modelDefiners.forEach((model) => model(sequelize));
 
 let entries = Object.entries(sequelize.models);
