@@ -32,7 +32,7 @@ const CreateCategory = (props) => {
 			}
 		} else {
 			if(typeof(categoryDetail) !== 'undefined') {
-				swal('Categoria creada exitosamente', 'Felicitaciones!', 'success')
+				swal('Congratulations!', 'Category successfully created!', 'success')
 				dispatch(clearCategoryDetail())
 				setInput(wipedInput)
 			}
