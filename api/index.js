@@ -18,4 +18,5 @@ conn.sync({ force: true })
     // await ordersMockUp();
     });
 })
+.catch(e => console.log(e.message))
 
