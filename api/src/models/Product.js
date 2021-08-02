@@ -42,5 +42,8 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       defaultValue: "http://anokha.world/images/not-found.png",
     },
+    category:{
+      type:DataTypes.STRING,
+    }
   });
 };
