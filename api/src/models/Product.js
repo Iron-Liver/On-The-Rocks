@@ -14,7 +14,6 @@ module.exports = (sequelize) => {
     description: {
       type: DataTypes.TEXT,
     },
-
     size: {
       type:DataTypes.STRING,
     },

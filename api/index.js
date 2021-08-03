@@ -5,7 +5,7 @@ const {conn} = require('./src/db.js');
 
 // const {userMockUp, adminMockUp} = require('./src/utils/mockUps/users')
 const {productsMockUp} = require('./src/utils/mockUps/products')
-// const {categoriesMockUp} = require('./src/utils/mockUps/categories')
+const {categoriesMockUp} = require('./src/utils/mockUps/categories')
 // const {ordersMockUp} = require('./src/utils/mockUps/orders')
 
 conn.sync({ force: true })
@@ -16,7 +16,7 @@ conn.sync({ force: true })
     // await adminMockUp();
     // await userMockUp();
     await productsMockUp();
-    // await categoriesMockUp();
+    await categoriesMockUp();
     // await ordersMockUp();
     });
 })
