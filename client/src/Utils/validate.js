@@ -39,7 +39,7 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
                 setError({...error, password: true})
                 if(field.value.length < 8) {setHelperText({...helperText, password: "Is too short"})}
                 else if(field.value.length > 60) {setHelperText({...helperText, password: "Is too long"})}
-                else{setHelperText({...helperText, password: "You need a number and a capital letter"})}
+                else{setHelperText({...helperText, password: "You need a number and a capital letter and a lowercase one"})}
             }
             else{
                 setError({...error, password: false})
@@ -56,6 +56,28 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
             else{
                 setError({...error, contact: false})
                 setHelperText({...helperText, contact: ""})
+            }
+            break;
+        case "description":
+            if(!/^[A-Za-z ().,'-]{28,280}$/.test(field.value)) {
+                setError({...error, description: true})
+                if(field.value.length < 28) {setHelperText({...helperText, description: "Too short"})}
+                else if (field.value.length > 280) {setHelperText({...helperText, description: "Too long"})}
+                else{setHelperText({...helperText, description: "Special characters are not allowed"})}
+            }else{
+                setError({...error, description: false})
+                setHelperText({...helperText, description: ""})
+            }
+            break;
+        case "image":
+            if(!/[(http(s)?):(www)?a-zA-Z0-9@:%._~#=]{2,256}[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/.test(field.value)) {
+                setError({...error, image: true})
+                if(field.value.length < 2) {setHelperText({...helperText, image: "Too short"})}
+                else if (field.value.length > 280) {setHelperText({...helperText, image: "Too long"})}
+                else{setHelperText({...helperText, image: "Not an url"})}
+            }else{
+                setError({...error, image: false})
+                setHelperText({...helperText, image: ""})
             }
             break;
         default:
