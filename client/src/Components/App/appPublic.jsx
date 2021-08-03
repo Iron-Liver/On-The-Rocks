@@ -1,9 +1,9 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
-import createCategory from '../Categories/CreateCategory/createCategory';
-import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 
+import CreateUser from '../Users/UserAdd/CreateUser'
+import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 
 function AppPublic() {
 
@@ -13,11 +13,10 @@ function AppPublic() {
 	return (
 			<BrowserRouter>
 
-				<Route exact path='/category/add' component={createCategory} />
 				<Route exact path='/category/:id' component={categoryDetail} />
 				<Route exact path='/login' component= {CreateUser}/>
 
-      </BrowserRouter>
+			</BrowserRouter>
 	);
 }
 
