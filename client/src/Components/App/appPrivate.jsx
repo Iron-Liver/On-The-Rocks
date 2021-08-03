@@ -3,6 +3,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
 
 import createCategory from '../Categories/CreateCategory/createCategory';
+import updateCategory from '../Categories/UpdateCategory/updateCategory';
 
 function AppPrivate() {
 
@@ -10,8 +11,9 @@ function AppPrivate() {
 
 			<BrowserRouter>
 
-				<Route exact path='/category/add' component={createCategory} />
-
+				<Route path="/private/category/add" component={createCategory} />
+				<Route path="/private/category/update/:id" component={updateCategory} />
+				
             </BrowserRouter>
 
 	);
