@@ -1,197 +1,176 @@
-import React, { useState } from "react";
-import {useDispatch} from 'react-redux'
-import {
-  Container,
-  AppBar,
-  Toolbar,
-  Typography,
-  makeStyles,
-  Button,
-  IconButton,
-  Hidden,
-  Drawer,
-  Divider
+import { useState } from "react";
+import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
+import { Menu, ShoppingCart, Search } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
+import { MenuList, SearchList,CartList } from "./drawerLists"
 
-} from "@material-ui/core"
-import { Link } from "react-router-dom"
-import MenuIcon from "@material-ui/icons/Menu"
-//import SearchBar from "../SearchBar/SearchBar";
-//import List from "../List/List"
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
-//import theme from '../../../Utils/theme'
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: { display: "none" },
-  },
-  title: {
-    fontFamily: "Merienda One",
-    minWidth: "150px",
-  },
-  image: {
-    borderRadius: "50%",
-    marginRight: "20px",
-    width: "65px",
-    height: "80px",
-  },
-  buttons: {
-    textDecoration: "none",
-    marginRight: "2%",
+  root: {
+    display: "flex"
   },
   drawer: {
-    width: 240,
-    flexShrink: 0,
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0
+    }
   },
-  drawerPaper: {
-    width: 240,
+  appBar: {
+    [theme.breakpoints.up("sm")]: {
+      width: `100%`,
+      marginLeft: drawerWidth
+    }
   },
-
-  center: {
-    justifyContent: "space-between",
+  menuButton: {
+    marginRight: theme.spacing(0),
+    marginLeft: theme.spacing(0),
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
   },
+  // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth
+  },
+  drawerPaperTop: {
+    width: "100%"
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  }
 }));
 
-export default function NavBar() {
+function NavBar(props) {
+  const { window } = props;
   const classes = useStyles();
-  const [openApp, setOpenApp] = useState(false);
-  const dispatch = useDispatch();
+  const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
+  const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
 
-  function openAction() {
-    setOpenApp(!openApp);
-  }
+  const handleDrawerMenu = () => {
+    setMenuDrawerOpen(!menuDrawerOpen);
+  };
+
+  const handleDrawerSearch = () => {
+    setSearchDrawerOpen(!searchDrawerOpen);
+  };
+
+  const handleDrawerCart = () => {
+    setCartDrawerOpen(!cartDrawerOpen);
+  };
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div>
-      <Hidden only={["xs", "sm"]}>
-        <AppBar position="fixed">
-          <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-              <img src="https://mejorwhisky.com/wp-content/uploads/2018/12/whisky-on-the-rocks.jpg" alt="Not found"className={classes.image} />
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <Container>
+            <Typography variant="h6" noWrap>
+              OnTheRocks
+            </Typography>
+          </Container>
 
-              <Link
-                to="/"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  margin: "auto",
-                }}
-              >
-                <Hidden>
-                  <Typography variant="h6" className={classes.title}>
-                    On The Rocks
-                  </Typography>
-                </Hidden>
-              </Link>
-            </div>
-
-            <Toolbar>
-                SearchBar
-            </Toolbar>
-
-            <Toolbar>
-              <Hidden>
-                <Link to="/products" className={classes.buttons}>
-                  <Button color="secondary">Products</Button>
-                </Link>
-                <Link to="/private/category/add" className={classes.buttons}>
-                  <Button color="secondary">Categories</Button>
-                </Link>
-              </Hidden>
-              <Link
-                to="/cart"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <AddShoppingCartIcon />
-              </Link>
-              <Container>
-                {
-                  !   JSON.parse(localStorage.getItem('profile'))
-                  ? (<Toolbar style={{ display: "flex", justifyContent: "flex-end" }}>
-                      <Link to="/login"><Button color="secondary">Register</Button></Link>
-                      <Link to="/login"><Button color="secondary">Login</Button></Link>
-                    </Toolbar>)
-                  : (<Toolbar style={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Link to="/profile"><Button color="secondary">Profile</Button></Link>
-                    <Link to="/"><Button /*onClick={handleLogOut}*/ color="secondary">LogOut</Button></Link>
-                    </Toolbar>)
-                }
-              </Container>
-            </Toolbar>
-
-            
-
-          </Toolbar>
-
-        </AppBar>
-      </Hidden>
-
-      {/*Mobile Screen  */}
-
-      <Hidden only={["md", "lg", "xl"]}>
-        <AppBar position="static">
-          <Toolbar style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-              <Hidden only={["xs", "sm"]}>
-                <img src="https://mejorwhisky.com/wp-content/uploads/2018/12/whisky-on-the-rocks.jpg" alt="Not found" className={classes.image} />
-              </Hidden>
-
-              <Link
-                to="/"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  margin: "auto",
-                }}
-              >
-                <Hidden only={["xs", "sm"]}>
-                  <Typography variant="h6" className={classes.title}>
-                    On The Rocks
-                  </Typography>
-                </Hidden>
-              </Link>
-            </div>
-
-            <IconButton color="secondary" onClick={openAction}>
-              <MenuIcon />
-            </IconButton>
-
-            <Toolbar>
-              SearchBar 
-            </Toolbar>
-
-            <Toolbar>
-              <Hidden only={["xs", "sm"]}>
-                <Link to="/products" className={classes.buttons}>
-                  <Button color="secondary">Products</Button>
-                </Link>
-                <Link to="/categories" className={classes.buttons}>
-                  <Button color="secondary">Categories</Button>
-                </Link>
-              </Hidden>
-              <Link
-                to="/cart"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <AddShoppingCartIcon />
-              </Link>
-            </Toolbar>
-
-            <Drawer
-              className={classes.drawer}
-              classes={{ paper: classes.drawerPaper }}
-              anchor="left"
-              open={openApp}
-              onClose={openAction}
-            >
-              <div className={classes.toolbar} />
-              <Divider />
-                List
-            </Drawer>
-          </Toolbar>
-        </AppBar>
-      </Hidden>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerSearch}
+            className={classes.menuButton}
+          >
+            <Search />
+          </IconButton>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerMenu}
+            className={classes.menuButton}
+          >
+            <Menu />
+          </IconButton>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerCart}
+            className={classes.menuButton}
+          >
+            <ShoppingCart />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor="right"
+            open={menuDrawerOpen}
+            onClose={handleDrawerMenu}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+          >
+            <MenuList/>
+          </Drawer>
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor="top"
+            open={searchDrawerOpen}
+            onClose={handleDrawerSearch}
+            classes={{
+              paper: classes.drawerPaperTop
+            }}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+          >
+            <SearchList/>
+          </Drawer>
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor="left"
+            open={cartDrawerOpen}
+            onClose={handleDrawerCart}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+          >
+            <CartList/>
+          </Drawer>
+        </Hidden>
+        {/* <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden> */}
+      </nav>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+      </main>
     </div>
   );
 }
+
+export default NavBar;
