@@ -59,6 +59,9 @@ module.exports = (sequelize) => {
         notEmpty: {
           msg: "Total cannot be empty",
         },
+        isFloat: {
+          msg: "Total must be integer/decimal"
+        }
       }
     },
     status: {
