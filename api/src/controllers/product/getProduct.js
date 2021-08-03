@@ -5,15 +5,15 @@ module.exports = async (req, res, next) => {
   try {
     const { product } = req.query;
     if (!product) {
-      await Product.findAll()
-      .then(product => res.send(product))
+      const product = await Product.findAll()
+      res.send(product).status(200)
     } else {
-      await Product.findAll({
+      const product = await Product.findAll({
         where:{
           name:{[Op.iLike]: `%${product}%`}
         }
       })
-      .then(product => res.send(product))
+      res.send(product).status(200)
     }
     
   } catch (error) {
