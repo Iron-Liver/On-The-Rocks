@@ -3,9 +3,9 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
         case "name":
             if(!/^[A-Za-z .'-]{3,20}$/.test(field.value)) {
                 setError({...error, name: true})
-                if(field.value.length < 3) {setHelperText({...helperText, name: "too short"})}
-                else if (field.value.length > 20) {setHelperText({...helperText, name: "too long"})}
-                else{setHelperText({...helperText, name: "special characters are not allowed"})}
+                if(field.value.length < 3) {setHelperText({...helperText, name: "Is too short"})}
+                else if (field.value.length > 20) {setHelperText({...helperText, name: "Is too long"})}
+                else{setHelperText({...helperText, name: "Special characters are not allowed"})}
             }else{
                 setError({...error, name: false})
                 setHelperText({...helperText, name: ""})
@@ -14,9 +14,9 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
         case "username":
             if(!/^[A-Za-z0-9]{3,20}$/.test(field.value)) {
                 setError({...error, username: true})
-                if(field.value.length < 3) {setHelperText({...helperText, username: "too short"})}
-                else if (field.value.length > 20) {setHelperText({...helperText, username: "too long"})}
-                else{setHelperText({...helperText, username: "only letters and numbers"})}
+                if(field.value.length < 3) {setHelperText({...helperText, username: "Is too short"})}
+                else if (field.value.length > 20) {setHelperText({...helperText, username: "Is too long"})}
+                else{setHelperText({...helperText, username: "Only numbers and letters"})}
             }else{
                 setError({...error, username: false})
                 setHelperText({...helperText, username: ""})
@@ -25,9 +25,9 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
         case "email":
             if(!/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(field.value)) {
                 setError({...error, email: true})
-                if(field.value.length < 3) {setHelperText({...helperText, email: "too short"})}
-                else if(field.value.length > 20) {setHelperText({...helperText, email: "too long"})}
-                else{setHelperText({...helperText, email: "contains characters that are not allowed"})}
+                if(field.value.length < 3) {setHelperText({...helperText, email: "Is too short"})}
+                else if(field.value.length > 20) {setHelperText({...helperText, email: "Is too long"})}
+                else{setHelperText({...helperText, email: "Contains unaccepted characters"})}
             }
             else{
                 setError({...error, email: false})
@@ -37,9 +37,9 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
         case "password":
             if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,60}$/.test(field.value)) {
                 setError({...error, password: true})
-                if(field.value.length < 8) {setHelperText({...helperText, password: "too short"})}
-                else if(field.value.length > 60) {setHelperText({...helperText, password: "too long"})}
-                else{setHelperText({...helperText, password: "needs numbers, lowercase and uppercase"})}
+                if(field.value.length < 8) {setHelperText({...helperText, password: "Is too short"})}
+                else if(field.value.length > 60) {setHelperText({...helperText, password: "Is too long"})}
+                else{setHelperText({...helperText, password: "You need a number and a capital letter and a lowercase one"})}
             }
             else{
                 setError({...error, password: false})
@@ -49,9 +49,9 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
         case "contact":
             if(!/^[+0-9-]{8,20}$/.test(field.value)) {
                 setError({...error, contact: true})
-                if(field.value.length < 8) {setHelperText({...helperText, contact: "too short"})}
-                else if(field.value.length > 20) {setHelperText({...helperText, contact: "too long"})}
-                else{setHelperText({...helperText, contact: "only numbers are allowed"})}
+                if(field.value.length < 8) {setHelperText({...helperText, contact: "Is too short"})}
+                else if(field.value.length > 20) {setHelperText({...helperText, contact: "Is too long"})}
+                else{setHelperText({...helperText, contact: "Only numbers are allowed"})}
             }
             else{
                 setError({...error, contact: false})
@@ -61,9 +61,9 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
         case "description":
             if(!/^[A-Za-z ().,'-]{28,280}$/.test(field.value)) {
                 setError({...error, description: true})
-                if(field.value.length < 28) {setHelperText({...helperText, description: "too short"})}
-                else if (field.value.length > 280) {setHelperText({...helperText, description: "too long"})}
-                else{setHelperText({...helperText, description: "special characters are not allowed"})}
+                if(field.value.length < 28) {setHelperText({...helperText, description: "Too short"})}
+                else if (field.value.length > 280) {setHelperText({...helperText, description: "Too long"})}
+                else{setHelperText({...helperText, description: "Special characters are not allowed"})}
             }else{
                 setError({...error, description: false})
                 setHelperText({...helperText, description: ""})
@@ -72,9 +72,9 @@ export default function Validate(field,error,setError,helperText,setHelperText) 
         case "image":
             if(!/[(http(s)?):(www)?a-zA-Z0-9@:%._~#=]{2,256}[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/.test(field.value)) {
                 setError({...error, image: true})
-                if(field.value.length < 2) {setHelperText({...helperText, image: "too short"})}
-                else if (field.value.length > 280) {setHelperText({...helperText, image: "too long"})}
-                else{setHelperText({...helperText, image: "not an url"})}
+                if(field.value.length < 2) {setHelperText({...helperText, image: "Too short"})}
+                else if (field.value.length > 280) {setHelperText({...helperText, image: "Too long"})}
+                else{setHelperText({...helperText, image: "Not an url"})}
             }else{
                 setError({...error, image: false})
                 setHelperText({...helperText, image: ""})
