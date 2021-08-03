@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
 import createCategory from '../Categories/createCategory';
-import CreateUser from './Users/UserAdd/CreateUser';
+import CreateUser from '../Users/UserAdd/CreateUser';
 
 
 function AppPublic() {
