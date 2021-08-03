@@ -4,7 +4,6 @@ module.exports = async (req, res, next) => {
   let product = req.body;
   try {
     product = await Product.create({ ...product });
-    console.log(created)
     return res.json(product).status(200);
   } catch (err) {
     next(err);

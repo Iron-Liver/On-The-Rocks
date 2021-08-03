@@ -1,5 +1,5 @@
 const { Product } = require("../../db");
-const {Op} = require('sequelize')
+const { Op } = require('sequelize')
 
 module.exports = async (req, res, next) => {
   try {
@@ -9,13 +9,13 @@ module.exports = async (req, res, next) => {
       res.send(product).status(200)
     } else {
       const product = await Product.findAll({
-        where:{
-          name:{[Op.iLike]: `%${product}%`}
+        where: {
+          name: { [Op.iLike]: `%${product}%` }
         }
       })
       res.send(product).status(200)
     }
-    
+
   } catch (error) {
     next(error)
   }
