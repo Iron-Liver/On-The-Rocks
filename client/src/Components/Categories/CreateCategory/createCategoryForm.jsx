@@ -2,8 +2,8 @@ import {useState} from 'react'
 import {makeStyles, Grid, Button, TextField} from '@material-ui/core'
 import { Label, Description, Image } from '@material-ui/icons';
 import { ThemeProvider } from '@material-ui/core/styles';
-import Validate from '../../Utils/validate'
-import theme from '../../Utils/theme'
+import Validate from '../../../Utils/validate'
+import theme from '../../../Utils/theme'
 
 const useStyles = makeStyles((theme)=>({
     root: {

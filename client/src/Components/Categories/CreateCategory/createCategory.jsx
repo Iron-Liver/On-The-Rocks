@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import CreateCategoryForm from './createCategoryForm'
-import {createCategory, clearCategoryDetail} from '../../Redux/Category/categoryActions'
+import {createCategory, clearCategoryDetail} from '../../../Redux/Category/categoryActions'
 
 import swal from "sweetalert";
 
