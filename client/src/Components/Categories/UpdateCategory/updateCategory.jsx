@@ -50,6 +50,7 @@ const UpdateCategory = (props) => {
 			}else{
 				swal('We are sorry!', aux, 'error')
 			}
+			dispatch(clearCategoryReply())
 		}
         if (categoryReply?.hasOwnProperty('success')) {
             swal('Congratulations!', categoryReply.success , 'success')
