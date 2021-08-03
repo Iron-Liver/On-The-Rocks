@@ -31,15 +31,15 @@ const CreateUser = (props) => {
 	useEffect(() => {
 		if(typeof(userDetail) === "string"){
 			let aux = userDetail.split(',')[0]
-			if(aux.includes('llave duplicada')){
-				aux.includes('email') ? swal('Lo sentimos!', 'El email ya esta en uso', 'error') : swal('El usuario ya esta en uso', 'Lo sentimos!', 'error')
+			if(aux.includes('duplicated key')){
+				aux.includes('email') ? swal('We are sorry!', 'The email is already in use', 'error') : swal('The user is already in use', 'We are sorry!', 'error')
 			}else{
-				swal( 'Lo sentimos!', aux, 'error')
+				swal( 'We are sorry!', aux, 'error')
 			}
 		} else {
-			typeof(userDetail) !== 'undefined' && swal('Bienvenido!', 'Usuario creado exitosamente',  'success')
+			typeof(userDetail) !== 'undefined' && swal('Welcome!', 'User created successfully',  'success')
 			setInput(wipedInput)
-			if(Boolean(next)) { console.log('redirigir') }
+			if(Boolean(next)) { console.log('redirect') }
 		}
 	},
 	// eslint-disable-next-line
