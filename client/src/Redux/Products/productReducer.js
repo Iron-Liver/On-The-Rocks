@@ -2,7 +2,7 @@ import { GET_PRODUCTS, CREATE_PRODUCT, CLEAR_PRODUCT } from "../../Utils/constan
 
 const initialState = {
     Products: [],
-    productDetail: {},
+    productDetail: undefined,
 };
 
 const productReducer = (state = initialState, action) => {

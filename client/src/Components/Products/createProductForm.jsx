@@ -102,7 +102,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 					
 					<Grid container spacing={1} alignItems="center">
                         <Grid item>
-                            <Size />
+                            <size />
                         </Grid>
                         <Grid item>
                             <TextField
@@ -119,7 +119,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 
 					<Grid container spacing={1} alignItems="center">
                         <Grid item>
-                            <Brand />
+                            <brand />
                         </Grid>
                         <Grid item>
                             <TextField
@@ -136,7 +136,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 
 					<Grid container spacing={1} alignItems="center">
                         <Grid item>
-                            <Sku />
+                            <sku />
                         </Grid>
                         <Grid item>
                             <TextField
@@ -153,7 +153,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 
 					<Grid container spacing={1} alignItems="center">
                         <Grid item>
-                            <Price />
+                            <price />
                         </Grid>
                         <Grid item>
                             <TextField

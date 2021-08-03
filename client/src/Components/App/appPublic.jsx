@@ -3,6 +3,8 @@ import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
 import createCategory from '../Categories/createCategory';
 import CreateUser from '../Users/UserAdd/CreateUser';
+import CreateProduct from '../Products/createProduct';
+import products from '../Products/products';
 
 
 function AppPublic() {
@@ -14,6 +16,8 @@ function AppPublic() {
 			<BrowserRouter>
 				<Route exact path='/login' component= {CreateUser}/>
 				<Route path='/category/add' component={createCategory} exact></Route>
+				<Route path='/product/add' component={CreateProduct} exact></Route>
+				<Route path='/products' component={products} exact></Route>
             </BrowserRouter>
 	);
 }

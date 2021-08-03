@@ -8,7 +8,7 @@ import swal from "sweetalert";
 const CreateProduct = (props) => {
 
 	const dispatch = useDispatch();
-	const {productDetail} = useSelector(state => state.productDetail);
+	const {productDetail} = useSelector(state => state.productReducer);
 
 	var wipedInput = {
 		name: "",
