@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
-import createCategory from '../Categories/createCategory';
+import createCategory from '../Categories/CreateCategory/createCategory';
 
 
 function AppPublic() {
