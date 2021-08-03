@@ -3,18 +3,18 @@ const { Category } = require('../../db')
 const categoriesMockUp = async () => {
     try {
         await Category.create({
-            name: "white wines",
+            name: "White wines",
             description: "Fine wines made from white grapes etc etc",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Aligote_wine.jpg/250px-Aligote_wine.jpg"
 
         })
         await Category.create({
-            name: "red wines",
+            name: "Red wines",
             description: "high red wines made with fine grapes from the valley of the rose of guadeloupe",
             image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Tempranillowine.jpg"
         })
         await Category.create({
-            name: "sparkling wines",
+            name: "Sparkling wines",
             description: "high wines made with very fine grapes from the valley of the rose of guadeloupe, BUT, sparkling hehe",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Bouteillemontagecordeliers.jpg/350px-Bouteillemontagecordeliers.jpg" 
         })
@@ -34,7 +34,7 @@ const categoriesMockUp = async () => {
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/15-09-26-RalfR-WLC-0244.jpg/220px-15-09-26-RalfR-WLC-0244.jpg"
         })
         await Category.create({
-            name: "cognacs",
+            name: "Cognacs",
             description: "the richest cognacs and at the best prices etc etc",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Cognac_Braastad_XO_and_tulip_shaped_glass.JPG/200px-Cognac_Braastad_XO_and_tulip_shaped_glass.JPG"
         })
