@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
 import createCategory from '../Categories/CreateCategory/createCategory';
+import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 
 
 function AppPublic() {
@@ -11,7 +12,8 @@ function AppPublic() {
 
 	return (
 			<BrowserRouter>
-				<Route path='/category/add' component={createCategory} exact></Route>
+				<Route exact path='/category/add' component={createCategory} />
+				<Route exact path='/category/:id' component={categoryDetail} />
             </BrowserRouter>
 	);
 }
