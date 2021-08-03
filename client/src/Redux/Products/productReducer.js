@@ -2,15 +2,17 @@ import { GET_PRODUCTS, CREATE_PRODUCT, CLEAR_PRODUCT } from "../../Utils/constan
 
 const initialState = {
     Products: [],
+    FoundProds: [],
     productDetail: undefined,
 };
 
 const productReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_PRODUCTS:
-            return {
+            return {                
                 ...state,
                 Products: action.payload,
+                FoundProds: action.payload
             };
 
         case CREATE_PRODUCT:

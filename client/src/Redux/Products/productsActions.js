@@ -17,7 +17,7 @@ export function clearProductDetail() {
 
 export function getProducts() {
     return async function (dispatch) {
-        const { products } = await axios.get(`/products/`);
-        dispatch({ type: GET_PRODUCTS, payload: products });
+        const products = await axios.get(`http://localhost:3001/product`);
+        dispatch({ type: GET_PRODUCTS, payload: products.data });
     };
 }
