@@ -10,7 +10,7 @@ const CreateCategory = (props) => {
 	const dispatch = useDispatch();
 	const {categoryReply} = useSelector(state => state.categoryReducer);
 
-	var wipedInput = {
+	const wipedInput = {
 		name: '',
 		description: '',
 		image:'',

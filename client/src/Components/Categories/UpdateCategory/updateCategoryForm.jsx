@@ -26,16 +26,16 @@ const useStyles = makeStyles((theme)=>({
 	}
 }));
 
-const UpdateCategoryForm = ({ input, setInput, handleSubmit, match }) => {
+const UpdateCategoryForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 	
 	const classes = useStyles();
 
-	const [error, setError] = useState({//Control the error red border of the inputs
+	const [error, setError] = useState({
 		name: false,
         description: false,
         image: false
     })
-	const [helperText, setHelperText] = useState({//Control the warning message
+	const [helperText, setHelperText] = useState({
 		name: "Enter a Name",
 		description: "Enter a description",
         image: "Enter an image-url"
@@ -117,7 +117,7 @@ const UpdateCategoryForm = ({ input, setInput, handleSubmit, match }) => {
                 </Grid>
                 <Grid container direction="row" justifyContent="center" alignItems="center">
                     <Grid item>
-                        <Button style={{fontWeight: 1000, marginTop: 30}} color="primary" onClick={handleSubmit} variant="contained">Delete Category</Button>
+                        <Button style={{fontWeight: 1000, marginTop: 30}} color="primary" onClick={handleDelete} variant="contained">Delete Category</Button>
                     </Grid>
                 </Grid>
 			</Grid>
