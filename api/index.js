@@ -6,7 +6,7 @@ const {conn} = require('./src/db.js');
 // const {userMockUp, adminMockUp} = require('./src/utils/mockUps/users')
 const {productsMockUp} = require('./src/utils/mockUps/products')
 const {categoriesMockUp} = require('./src/utils/mockUps/categories')
-// const {ordersMockUp} = require('./src/utils/mockUps/orders')
+const {ordersMockUp} = require('./src/utils/mockUps/orders')
 
 conn.sync({ force: true })
 .then(async() => {
@@ -17,7 +17,7 @@ conn.sync({ force: true })
     // await userMockUp();
     await productsMockUp();
     await categoriesMockUp();
-    // await ordersMockUp();
+    await ordersMockUp();
     });
 })
 .catch(e => console.log(e.message))
