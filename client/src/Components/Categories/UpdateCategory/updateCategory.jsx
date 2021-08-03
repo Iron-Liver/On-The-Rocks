@@ -44,7 +44,7 @@ const UpdateCategory = (props) => {
 		if (categoryReply?.hasOwnProperty('error')) {
 			let aux = categoryReply.error.split(',')[0]
 			if(aux.includes('llave duplicada')){
-				swal('El nombre ya esta en uso', 'Lo sentimos!', 'error')
+				swal('We are sorry!', 'Name already in use', 'error')
 			}else{
 				swal('We are sorry!', aux, 'error')
 			}
