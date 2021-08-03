@@ -15,6 +15,8 @@ module.exports = async (req, res) => {
   try {
     const user = await User.findOne({where: { id }});
 
+    if (!user) { throw new Error(`User not found`); }
+
     const newOrder = {
       name,
       address,
