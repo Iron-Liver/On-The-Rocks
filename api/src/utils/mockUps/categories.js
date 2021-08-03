@@ -19,17 +19,17 @@ const categoriesMockUp = async () => {
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Bouteillemontagecordeliers.jpg/350px-Bouteillemontagecordeliers.jpg" 
         })
         await Category.create({
-            name: "whiskys",
+            name: "whisky",
             description: "whiskeys of the best categories and the best prices",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Old_Smuggler_Scotch_whisky.jpg/245px-Old_Smuggler_Scotch_whisky.jpg"
         })
         await Category.create({
-            name: "vodkas",
+            name: "Vodka",
             description: "You can find the best and strongest vodkas in the world here, etc.",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Absolut_Vodka.jpg/303px-Absolut_Vodka.jpg"
         })
         await Category.create({
-            name: "tequilas",
+            name: "Tequila",
             description: "The best and strongest tequilas in the world, to knock you down",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/15-09-26-RalfR-WLC-0244.jpg/220px-15-09-26-RalfR-WLC-0244.jpg"
         })
@@ -52,6 +52,16 @@ const categoriesMockUp = async () => {
             name: "Gin",
             description: "Gin is a distilled alcoholic beverage that has a predominant taste of mist, the fruits of the juniper (Juniperus communis)",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Assorted_gin_bottles_on_a_store_shelf.jpg/300px-Assorted_gin_bottles_on_a_store_shelf.jpg"
+        })
+        await Category.create({
+            name: "Brandy",
+            description: "Brandy (short for brandewijn, in Dutch and Low German burnt wine ) or brandy is a spirit obtained through the distillation of wine, almost always with 36-40% (up to 60%) by volume of alcohol, upon being issued to the market. Unless a complementary adjective is added fruit brandy, cereal brandy, etc. It is considered made with grape wine.",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Brandy_solera_reseva.jpg/220px-Brandy_solera_reseva.jpg"
+        })
+        await Category.create({
+            name: "Liqueur",
+            description: "Liquor (from the Latin liquor) is an alcoholic beverage obtained by maceration in brandy of herbs or fruits, which are sometimes sweetened with sucrose, grape sugar, must or honey, with a richness in sugars greater than 100 grams / liter (expressed in sucrose)",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Licor_de_Cactus.jpg/220px-Licor_de_Cactus.jpg"
         })
     }catch (e) {
         console.log(e)
