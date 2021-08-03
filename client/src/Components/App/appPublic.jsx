@@ -12,9 +12,12 @@ function AppPublic() {
 
 	return (
 			<BrowserRouter>
+
 				<Route exact path='/category/add' component={createCategory} />
 				<Route exact path='/category/:id' component={categoryDetail} />
-            </BrowserRouter>
+				<Route exact path='/login' component= {CreateUser}/>
+
+      </BrowserRouter>
 	);
 }
 
