@@ -1,6 +1,6 @@
 const { Order } = require('../../db');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
   const { orderId } = req.body;
 
   try {
@@ -12,6 +12,7 @@ module.exports = async (req, res) => {
 
     return res.send(order).status(200);
   } catch (err) {
-    return res.send({error: err.message}).status(409);
+    next(err);
+    return res.send({ error: err.message }).status(409);
   }
 };
