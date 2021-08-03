@@ -12,7 +12,7 @@ const UpdateCategory = (props) => {
     const {id} = useParams();
     const {categoryDetail} = useSelector(state => state.categoryReducer);
 
-	var wipedInput = {
+	const wipedInput = {
         name: '',
 		description: '',
 		image:'',
@@ -34,10 +34,12 @@ const UpdateCategory = (props) => {
         if(categoryDetail) setCategory();
     },[categoryDetail])
     
-	const handleSubmit = e => {
-        e.target.innerHTML === 'UPDATE CATEGORY' 
-        ? dispatch(updateCategory(id,input)) 
-        : dispatch(deleteCategory(id))
+	const handleSubmit = e => { 
+        dispatch(updateCategory(id,input)) 
+	};
+
+    const handleDelete = e => { 
+        dispatch(deleteCategory(id))
 	};
 
 	useEffect(() => {
@@ -48,6 +50,7 @@ const UpdateCategory = (props) => {
 			}else{
 				swal('We are sorry!', aux, 'error')
 			}
+			dispatch(clearCategoryReply())
 		}
         if (categoryReply?.hasOwnProperty('success')) {
             swal('Congratulations!', categoryReply.success , 'success')
@@ -57,7 +60,7 @@ const UpdateCategory = (props) => {
 
 	return (
 		<>
-			<UpdateCategoryForm input={input} setInput={setInput} handleSubmit={handleSubmit} />
+			<UpdateCategoryForm input={input} setInput={setInput} handleSubmit={handleSubmit} handleDelete={handleDelete} />
 		</>
 	);
 };

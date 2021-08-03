@@ -26,16 +26,16 @@ const useStyles = makeStyles((theme)=>({
 	}
 }));
 
-const CreateCategoryForm = ({ input, setInput, handleSubmit, match }) => {
+const CreateCategoryForm = ({ input, setInput, handleSubmit }) => {
 	
 	const classes = useStyles();
 
-	const [error, setError] = useState({//Control the error red border of the inputs
+	const [error, setError] = useState({
 		name: false,
         description: false,
         image: false
     })
-	const [helperText, setHelperText] = useState({//Control the warning message
+	const [helperText, setHelperText] = useState({
 		name: "Enter a Name",
 		description: "Enter a description",
         image: "Enter an image-url"

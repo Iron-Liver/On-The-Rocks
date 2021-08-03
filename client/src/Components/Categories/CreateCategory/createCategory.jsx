@@ -10,7 +10,7 @@ const CreateCategory = (props) => {
 	const dispatch = useDispatch();
 	const {categoryReply} = useSelector(state => state.categoryReducer);
 
-	var wipedInput = {
+	const wipedInput = {
 		name: '',
 		description: '',
 		image:'',
@@ -33,6 +33,7 @@ const CreateCategory = (props) => {
 			}else{
 				swal('We are sorry!', aux, 'error')
 			}
+			dispatch(clearCategoryReply())
 		}
         if (categoryReply?.hasOwnProperty('success')) {
             swal('Congratulations!', categoryReply.success , 'success')
