@@ -6,16 +6,19 @@ module.exports = async (req, res, next) => {
   try {
     const userOrders = await Order.findAll({
       attributes: [
-        'id',
-        'address',
-        'city',
-        'total',
-        'createdAt',
-        'state'
+        "id",
+        "firstName",
+        "lastName",
+        "address",
+        "city",
+        "total",
+        "createdAt",
+        "state",
       ],
       where: {
-        userId: id
-      }
+        userId: id,
+      },
+      order: [["createdAt", "DESC"]]
     });
     
     if(!userOrders) {
