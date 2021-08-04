@@ -7,12 +7,23 @@ import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typo
 
 const useStyles = makeStyles({
     root: {
+        minWidth: 250,
         maxWidth: 345,
+        height: 460,
+        margin: 10
     },
     media: {
-        height: 350,
-        width: 200
+        height: 250,
+        width: 200,
+        margin: "auto"
     },
+    wrapped: {
+        justifyContent: "center",
+        display: "flex",
+        flexWrap: "wrap",
+        margin: 50,
+        marginTop: "3%",
+    }
 });
 
 
@@ -30,30 +41,32 @@ const Products = () => {
     return (
         <div>
             <Grid container>
-                <Grid item xs={6}>
-                    <div>
+                <Grid>
+                    <div className={classes.wrapped}>
                         {products1?.map((spirits) => {
                             return (
-                                <Card className={classes.root}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            className={classes.media}
-                                            image={spirits.image}
-                                            title={spirits.name}
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="h2">
-                                                {spirits.name}
-                                            </Typography>
-                                            <Typography variant="body2" color="textSecondary" component="p">
-                                                {spirits.brand}
-                                            </Typography>
-                                            <Typography gutterBottom variant="h6" component="h6">
-                                                {spirits.price}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
+                                <Grid item md={3} sm={6} xs={12}>
+                                    <Card className={classes.root}>
+                                        <CardActionArea>
+                                            <CardMedia
+                                                className={classes.media}
+                                                image={spirits.image}
+                                                title={spirits.name}
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="h2">
+                                                    {spirits.name}
+                                                </Typography>
+                                                <Typography variant="body2" color="textSecondary" component="p">
+                                                    {spirits.brand}
+                                                </Typography>
+                                                <Typography gutterBottom variant="h6" component="h6">
+                                                    {spirits.price}
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Card>
+                                </Grid>
                             )
                         })}
                     </div>
