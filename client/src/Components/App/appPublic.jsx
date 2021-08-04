@@ -16,7 +16,6 @@ function AppPublic() {
 
 	return (
 			<BrowserRouter>
-
 				<Route exact path='/category/:id' component={categoryDetail} />
 				<Route exact path='/login' component= {CreateUser}/>
 				<Route path='/category/add' component={createCategory} exact></Route>
