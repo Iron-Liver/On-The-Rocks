@@ -7,14 +7,23 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: "Name cannot be empty",
+          msg: "First name cannot be empty",
         },
-      }
+      },
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Last name cannot be empty",
+        },
+      },
     },
     address: {
       type: DataTypes.STRING,
@@ -23,7 +32,7 @@ module.exports = (sequelize) => {
         notEmpty: {
           msg: "Address cannot be empty",
         },
-      }
+      },
     },
     city: {
       type: DataTypes.STRING,
@@ -32,7 +41,7 @@ module.exports = (sequelize) => {
         notEmpty: {
           msg: "City cannot be empty",
         },
-      }
+      },
     },
     paymentMethod: {
       type: DataTypes.STRING,
@@ -41,7 +50,7 @@ module.exports = (sequelize) => {
         notEmpty: {
           msg: "Payment method cannot be empty",
         },
-      }
+      },
     },
     zipCode: {
       type: DataTypes.STRING,
@@ -50,8 +59,8 @@ module.exports = (sequelize) => {
         notEmpty: {
           msg: "City cannot be empty",
         },
-      }
-    },     
+      },
+    },
     total: {
       type: DataTypes.FLOAT,
       allowNull: false,
@@ -60,13 +69,14 @@ module.exports = (sequelize) => {
           msg: "Total cannot be empty",
         },
         isFloat: {
-          msg: "Total must be integer/decimal"
-        }
-      }
+          msg: "Total must be integer/decimal",
+        },
+      },
     },
-    status: {
-      type: DataTypes.ENUM,
-      values: ['paid', 'pending']
-    }
+    state: {
+      type: DataTypes.ENUM({
+        values: ["created", "cancelled", "processing", "completed"],
+      }),
+    },
   });
 };
