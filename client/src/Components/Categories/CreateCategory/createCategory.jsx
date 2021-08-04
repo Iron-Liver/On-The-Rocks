@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import CreateCategoryForm from './createCategoryForm'
-import {createCategory, clearCategoryDetail} from '../../Redux/Category/categoryActions'
+import {createCategory, clearCategoryReply} from '../../../Redux/Category/categoryActions'
 
 import swal from "sweetalert";
 
 const CreateCategory = (props) => {
 
 	const dispatch = useDispatch();
-	const {categoryDetail} = useSelector(state => state.categoryReducer);
+	const {categoryReply} = useSelector(state => state.categoryReducer);
 
-	var wipedInput = {
+	const wipedInput = {
 		name: '',
 		description: '',
 		image:'',
@@ -23,23 +23,26 @@ const CreateCategory = (props) => {
 	};
 
 	useEffect(() => {
-		if(typeof(categoryDetail) === "string"){
-			let aux = categoryDetail.split(',')[0]
+		if(categoryReply === null){
+			swal('We are sorry!', 'This category was deleted.', 'error')
+		}
+		if (categoryReply?.hasOwnProperty('error')) {
+			let aux = categoryReply.error.split(',')[0]
 			if(aux.includes('llave duplicada')){
-				swal('El nombre ya esta en uso', 'Lo sentimos!', 'error')
+				swal('We are sorry!', 'Name already in use', 'error')
 			}else{
 				swal('We are sorry!', aux, 'error')
 			}
-		} else {
-			if(typeof(categoryDetail) !== 'undefined') {
-				swal('Congratulations!', 'Category successfully created!', 'success')
-				dispatch(clearCategoryDetail())
-				setInput(wipedInput)
-			}
+			dispatch(clearCategoryReply())
 		}
+        if (categoryReply?.hasOwnProperty('success')) {
+            swal('Congratulations!', categoryReply.success , 'success')
+            dispatch(clearCategoryReply())
+            setInput(wipedInput)
+        }
 	},
 	// eslint-disable-next-line
-	[categoryDetail])
+	[categoryReply])
 
 	return (
 		<>

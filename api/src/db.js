@@ -57,6 +57,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const {User, Order, Category, Product} = sequelize.models
 
+User.hasMany(Order, { constraints: false });
+Order.belongsTo(User, { constraints: false });
+
 module.exports = {
     ...sequelize.models, 
     conn: sequelize, 

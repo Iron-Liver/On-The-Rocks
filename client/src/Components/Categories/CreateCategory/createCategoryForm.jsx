@@ -2,8 +2,8 @@ import {useState} from 'react'
 import {makeStyles, Grid, Button, TextField} from '@material-ui/core'
 import { Label, Description, Image } from '@material-ui/icons';
 import { ThemeProvider } from '@material-ui/core/styles';
-import Validate from '../../Utils/validate'
-import theme from '../../Utils/theme'
+import Validate from '../../../Utils/validate'
+import theme from '../../../Utils/theme'
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -26,16 +26,16 @@ const useStyles = makeStyles((theme)=>({
 	}
 }));
 
-const CreateCategoryForm = ({ input, setInput, handleSubmit, match }) => {
+const CreateCategoryForm = ({ input, setInput, handleSubmit }) => {
 	
 	const classes = useStyles();
 
-	const [error, setError] = useState({//Control the error red border of the inputs
+	const [error, setError] = useState({
 		name: false,
         description: false,
         image: false
     })
-	const [helperText, setHelperText] = useState({//Control the warning message
+	const [helperText, setHelperText] = useState({
 		name: "Enter a Name",
 		description: "Enter a description",
         image: "Enter an image-url"
