@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { getProducts } from '../../Redux/Products/productsActions'
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Grid, Hidden, } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid } from "@material-ui/core";
+import { NavLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -46,26 +47,28 @@ const Products = () => {
                         {products1?.map((spirits) => {
                             return (
                                 <Grid item md={3} sm={6} xs={12}>
-                                    <Card className={classes.root}>
-                                        <CardActionArea>
-                                            <CardMedia
-                                                className={classes.media}
-                                                image={spirits.image}
-                                                title={spirits.name}
-                                            />
-                                            <CardContent>
-                                                <Typography gutterBottom variant="h5" component="h2">
-                                                    {spirits.name}
-                                                </Typography>
-                                                <Typography variant="body2" color="textSecondary" component="p">
-                                                    {spirits.brand}
-                                                </Typography>
-                                                <Typography gutterBottom variant="h6" component="h6">
-                                                    {spirits.price}
-                                                </Typography>
-                                            </CardContent>
-                                        </CardActionArea>
-                                    </Card>
+                                    <NavLink to={`/products/${spirits.id}`}>
+                                        <Card className={classes.root}>
+                                            <CardActionArea>
+                                                <CardMedia
+                                                    className={classes.media}
+                                                    image={spirits.image}
+                                                    title={spirits.name}
+                                                />
+                                                <CardContent>
+                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                        {spirits.name}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="textSecondary" component="p">
+                                                        {spirits.brand}
+                                                    </Typography>
+                                                    <Typography gutterBottom variant="h6" component="h6">
+                                                        {spirits.price}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                        </Card>
+                                    </NavLink>
                                 </Grid>
                             )
                         })}

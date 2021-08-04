@@ -8,6 +8,7 @@ import products from '../Products/products';
 
 // import CreateUser from '../Users/UserAdd/CreateUser'
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
+import ProductDetail from '../Products/productDetail';
 
 function AppPublic() {
 
@@ -21,6 +22,7 @@ function AppPublic() {
 				<Route path='/category/add' component={createCategory} exact></Route>
 				<Route path='/product/add' component={CreateProduct} exact></Route>
 				<Route path='/products' component={products} exact></Route>
+				<Route path='/products/:id' component={ProductDetail} exact></Route>
             </BrowserRouter>
 	);
 }

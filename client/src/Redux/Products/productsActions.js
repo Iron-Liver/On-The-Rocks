@@ -21,3 +21,11 @@ export function getProducts() {
         dispatch({ type: GET_PRODUCTS, payload: products.data });
     };
 }
+
+export function getProductById(id) {
+    return async function (dispatch) {
+      const product = await axios.get(`http://localhost:3001/product/${id}`);
+        dispatch({ type: "GET_PRODUCT_BY_ID", payload: product.data,
+        });
+    };
+}

@@ -27,6 +27,7 @@ const CreateProduct = (props) => {
 	};
 
 	useEffect(() => {
+		console.log(productDetail, "asda")
 		if(typeof(productDetail) === "string"){
 			let aux = productDetail.split(',')[0]
 			if(aux.includes('llave duplicada')){
