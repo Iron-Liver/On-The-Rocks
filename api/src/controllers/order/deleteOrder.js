@@ -14,9 +14,9 @@ module.exports = async (req, res, next) => {
       throw new Error(`Order with id: ${orderId} not found`);
     }
 
-    return res.send(`Order ${orderId} successfully deleted`).status(200);
+    return res.status(200).send(`Order ${orderId} successfully deleted`);
   } catch (err) {
     next(err);
-    return res.send({error: err.message}).status(409);
+    return res.status(409).send({ error: err.message });
   }
 };

@@ -1,7 +1,7 @@
 const { Order } = require('../../db');
 
 module.exports = async (req, res, next) => {
-  const { orderId } = req.body;
+  const { orderId } = req.params;
 
   try {
     const order = await Order.findByPk(orderId);
@@ -10,9 +10,9 @@ module.exports = async (req, res, next) => {
       throw new Error(`Order with id: ${orderId} not found`)
     }
 
-    return res.send(order).status(200);
+    return res.status(200).send(order);
   } catch (err) {
     next(err);
-    return res.send({ error: err.message }).status(409);
+    return res.status(409).send({ error: err.message });
   }
 };

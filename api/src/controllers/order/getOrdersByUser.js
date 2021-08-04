@@ -1,7 +1,7 @@
 const { Order } = require('../../db');
 
 module.exports = async (req, res, next) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     const userOrders = await Order.findAll({
@@ -22,12 +22,12 @@ module.exports = async (req, res, next) => {
     });
     
     if(!userOrders) {
-      return res.send([]).status(200);
+      return res.status(200).send([]);
     }
 
-    return res.send(userOrders).status(200);
+    return res.status(200).send(userOrders);
   } catch (err) {
     next(err);
-    return res.send({error: err.message}).status(409);
+    return res.status(409).send({ error: err.message });
   }
 };

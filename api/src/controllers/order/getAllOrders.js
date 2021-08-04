@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
     });
 
     if(!orders) {
-      return res.send([]).status(200);
+      return res.status(200).send([]);
     }
 
     return res.send(orders).status(200);

@@ -6,11 +6,11 @@ const updateOrderState = require('../controllers/order/updateOrderState.js');
 const getOrdersByUser = require("../controllers/order/getOrdersByUser.js");
 const getOrderById = require('../controllers/order/getOrderById.js');
 
-router.get('/getOrdersByUser', getOrdersByUser);
+router.get('/getOrdersByUser/:id', getOrdersByUser);
 router.post('/deleteOrder', deleteOrder);
 router.post('/addOrder', createOrder);
 router.post('/updateOrderState', updateOrderState);
 router.get('/getAllOrders', getAllOrders);
-router.get('/getOrderById', getOrderById);
+router.get('/getOrderById/:orderId', getOrderById);
 
 module.exports = router

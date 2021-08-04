@@ -40,9 +40,9 @@ module.exports = async (req, res, next) => {
     await user.addOrder(order.id);
     await order.setUser(user.id);
 
-    return res.send(order).status(201);
+    return res.status(201).send(order);
   } catch (err) {
     next(err);
-    return res.send({ error: err.message }).status(409);
+    return res.status(409).send({ error: err.message });
   }
 };
