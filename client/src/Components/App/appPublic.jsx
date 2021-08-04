@@ -1,20 +1,37 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import {Route} from 'react-router';
+import {Route, Redirect} from 'react-router';
 
-import CreateUser from '../Users/UserAdd/CreateUser'
+import CreateUser from '../Users/UserAdd/createUser'
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
+import Login from '../Users/UserLogin/userLogin'
 
 function AppPublic() {
 
-	// const currentUser = (JSON.parse(localStorage.getItem('profile')));
-	// const adminAllowed = (JSON.parse(localStorage.getItem('2FA')))
+	 const currentUser = (JSON.parse(localStorage.getItem('profile')));
+	 const adminAllowed = (JSON.parse(localStorage.getItem('2FA')))
 
 	return (
 			<BrowserRouter>
 
 				<Route exact path='/category/:id' component={categoryDetail} />
-				<Route exact path='/login' component= {CreateUser}/>
+				<Route exact path='/register' component= {CreateUser}/>
+				<Route 
+					exact path="/login"
+					component={ () => (
+						( !currentUser )
+						? 
+						( <Login/> )
+						:
+						(
+							(currentUser.isAdmin && adminAllowed)
+							?
+							( <Redirect to="/private/panel" /> )
+							:
+							( <Redirect to={`/`} /> )
+						) 
+					)}
+				/>
 
 			</BrowserRouter>
 	);

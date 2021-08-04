@@ -1,7 +1,8 @@
-import {CREATE_USER} from '../../Utils/constants'
+import {CREATE_USER, LOGIN} from '../../Utils/constants'
 
 const initialState = {
 	users: [],
+	currentUser: undefined,
 	userDetail: undefined,
 };
 
@@ -13,6 +14,12 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				userDetail: action.payload,
 			};
+		case LOGIN:
+			console.log("login action",action.payload)
+			return {
+				...state,
+				currentUser: action.payload,
+			} 	
 		default:
 			return state;
 	}

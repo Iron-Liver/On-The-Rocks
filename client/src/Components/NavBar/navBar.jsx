@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, C
 import { Menu, ShoppingCart, Search } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -49,7 +50,8 @@ function NavBar(props) {
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
-
+  const estado = useSelector(state => state.currentUser)
+  console.log(estado)
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);
   };

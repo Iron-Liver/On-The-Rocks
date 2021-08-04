@@ -1,6 +1,12 @@
-export const CREATE_USER = "CREATE_USER"
 export const CREATE_CATEGORY = 'CREATE_CATEGORY';
 export const CLEAR_CATEGORY_REPLY = 'CLEAR_CATEGORY_REPLY';
 export const READ_CATEGORY = 'READ_CATEGORY';
 export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const CREATE_USER = "CREATE_USER"
+export const READ_USER= 'READ_USER';
+export const UPDATE_USER= 'UPDATE_USER';
+export const DELETE_USER='DELETE_USER';
+export const LOGIN= 'LOGIN';
+export const LOGOUT= 'LOGOUT';
+export const ADMIN_ALLOWED= 'ADMIN_ALLOWED';
