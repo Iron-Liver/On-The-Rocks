@@ -1,8 +1,9 @@
-import { CREATE_CATEGORY, CLEAR_CATEGORY } from '../../Utils/constants';
+import { CREATE_CATEGORY, CLEAR_CATEGORY_REPLY, READ_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY } from '../../Utils/constants';
 
 const initialState = {
 	categories: [],
     categoryDetail: undefined,
+	categoryReply: undefined
 };
 
 const categoryReducer = (state = initialState, action) => {
@@ -10,12 +11,27 @@ const categoryReducer = (state = initialState, action) => {
 		case CREATE_CATEGORY:
 			return {
 				...state,
-				categoryDetail: action.payload,
+				categoryReply: action.payload,
 			};
-		case CLEAR_CATEGORY:
+		case READ_CATEGORY:
 			return {
 				...state,
-				categoryDetail: undefined,
+				categoryDetail: action.payload,
+			}
+		case UPDATE_CATEGORY:
+			return {
+				...state,
+				categoryReply: action.payload,
+			}
+		case DELETE_CATEGORY:
+			return {
+				...state,
+				categoryReply: action.payload,
+			}
+		case CLEAR_CATEGORY_REPLY:
+			return {
+				...state,
+				categoryReply: undefined,
 			}
 		default:
 			return state;
