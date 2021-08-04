@@ -14,6 +14,7 @@ const CreateProduct = (props) => {
 		name: "",
         description: "",
         size: "",
+		category: "",
         brand: "",
         sku: "",
         price: "",

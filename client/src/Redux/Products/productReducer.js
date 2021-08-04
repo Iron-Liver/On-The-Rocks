@@ -1,4 +1,5 @@
-import { GET_PRODUCTS, CREATE_PRODUCT, CLEAR_PRODUCT, GET_PRODUCT_BY_ID } from "../../Utils/constants"
+import { GET_PRODUCTS, CREATE_PRODUCT, CLEAR_PRODUCT, GET_PRODUCT_BY_ID,DELETE_PRODUCT } from "../../Utils/constants"
+
 
 const initialState = {
     Products: [],
@@ -31,6 +32,12 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productDetail: undefined,
+            }
+        case DELETE_PRODUCT:
+            let productsList = Products.filter(product => product.id !== action.payload)
+            return {
+                ...state,
+                Products: productsList,
             }
 
         default:
