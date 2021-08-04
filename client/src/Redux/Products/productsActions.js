@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT } from "../../Utils/constants"
+import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, DELETE_PRODUCT } from "../../Utils/constants"
 
 
 export function createProduct(product) {
@@ -19,5 +19,12 @@ export function getProducts() {
     return async function (dispatch) {
         const { products } = await axios.get(`/products/`);
         dispatch({ type: GET_PRODUCTS, payload: products });
+    };
+}
+
+export function deleteUser(id) {
+    return async function (dispatch) {
+        const { data } = await axios.delete(`/product/${id}`);
+        dispatch({ type: DELETE_PRODUCT, payload: data });
     };
 }
