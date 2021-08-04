@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
 
     return res.send(`Order ${orderId} successfully deleted`).status(200);
   } catch (err) {
+    next(err);
     return res.send({error: err.message}).status(409);
   }
 };
