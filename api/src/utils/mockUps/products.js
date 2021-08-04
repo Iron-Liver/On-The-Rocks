@@ -107,7 +107,7 @@ const productsMockUp = async () => {
             name:"Hibiki 30 Year Old Kacho Fugetsu Limited Edition Japanese Suntory Whisky 700mL",
             description:"The 2015 'Kacho Fugetsu' edition is a design that embodies the beauty of Japanese nature. This whisky inside is a meld of grain and malt whiskies aged for 30 years on average.",
             size:"700 mL",
-            brand:"Kacho Fugestu",
+            brand:"Kacho Fugetsu",
             category: "Whisky",
             sku:"a11",
             price:8999.99,
