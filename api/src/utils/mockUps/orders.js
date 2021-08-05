@@ -3,95 +3,105 @@ const { Order } = require('../../db');
 const ordersMockUp = async () => {
   try {
     await Order.create({
-      name: 'Pablo Hernández',
+      firstName: 'Pablo' ,
+      lastName: 'Hernández',
       address: 'Moreno 322',
       city: 'Bolívar, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: '1900',     
       total: 100,
-      status: 'pending'
-    })
+      state: 'created'
+    });
     await Order.create({
-      name: 'Gianfranco Saavedra',
+      firstName: 'Gianfranco',
+      lastName: 'Saavedra',
       address: 'Calle 22, Av.13, 1078',
       city: 'La Plata, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: '1900',     
       total: 50.10,
-      status: 'paid'
-    }) 
+      state: 'cancelled'
+    }); 
     await Order.create({
-      name: 'Marcelo Piero',
+      firstName: 'Marcelo',
+      lastName: 'Piero',
       address: 'Calle 5, Av.53, 1510',
       city: 'La Plata, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: '1900',     
       total: 78.10,
-      status: 'paid'
-    }) 
+      state: 'created'
+    }); 
     await Order.create({
-      name: 'Alexis Chavez',
+      firstName: 'Alexis',
+      lastName: 'Chavez',
       address: 'Belgrano 866',
       city: 'Olavarría, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: 'B7400',     
       total: 225.85,
-      status: 'paid'
-    }) 
+      state: 'completed'
+    }); 
     await Order.create({
-      name: 'Cristian Prieto',
+      firstName: 'Cristian',
+      lastName: 'Prieto',
       address: 'Calle 5, Av.53, 860',
       city: 'La Plata, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: 'B1900',     
       total: 55,
-      status: 'paid'
-    }) 
+      state: 'processing'
+    }); 
     await Order.create({
-      name: 'Juana Sosa',
+      firstName: 'Juana',
+      lastName: 'Sosa',
       address: 'Las Heras, 1870',
       city: 'Bolivar, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: 'B6550',     
       total: 859.50,
-      status: 'paid'
-    }) 
+      state: 'completed'
+    }); 
     await Order.create({
-      name: 'Pablo Campos',
+      firstName: 'Pablo',
+      lastName: 'Campos',
       address: 'Savedra, 750',
       city: 'Urdampilleta, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: 'B6553',     
       total: 467,
-      status: 'paid'
-    }) 
+      state: 'completed'
+    }); 
     await Order.create({
-      name: 'Julian Viero',
+      firstName: 'Julian',
+      lastName: 'Viero',
       address: 'Ocampo, 420',
       city: 'Pehuajò, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: 'B6450',     
       total: 930.60,
-      status: 'paid'
-    }) 
+      state: 'processing'
+    }); 
     await Order.create({
-      name: 'Gonzalo Carrero',
+      firstName: 'Gonzalo',
+      lastName: 'Carrero',
       address: 'San Cayetano, 1950',
       city: 'Bolivar, Buenos Aires',
       paymentMethod: 'MercadoPago',
       zipCode: 'B6550',     
       total: 205,
-      status: 'pending'
-    }) 
+      state: 'completed'
+    }); 
     await Order.create({
-      name: 'Isabella Lafuente',
+      firstName: 'Isabella',
+      lastName: 'Lafuente',
       address: 'Av. Hipólito Yrigoyen, 1870',
       city: 'Córdoba, Córdoba',
       paymentMethod: 'MercadoPago',
       zipCode: 'B5000',     
       total: 789.87,
-      status: 'paid'
-    })
+      state: 'cancelled'
+    });
   } catch (err) {
     console.log(err.message);
   }
@@ -99,4 +109,4 @@ const ordersMockUp = async () => {
 
 module.exports = {
   ordersMockUp
-}
+};
