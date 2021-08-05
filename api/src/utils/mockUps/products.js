@@ -14,15 +14,15 @@ const productsMockUp = async () => {
             
         }),
         await  Product.create({
-            name:"Smirnoff Gold Cinnamon Flavoured Liqueur Vodka With Gold Leaf 1L",
-            description:"Rather than sinking to the bottom of the bottle, these gold leaves have been innovatively designed to remain suspended throughout the liquid, creating a stunning look not only in the bottle but in your drink as well.",
-            size:"1000 mL",
-            brand:"Smirnoff",
+            name:"Kalashnikov Premium Vodka 700mL AK-47",
+            description:"The bottle itself is in the shape of the AK47 Kalashnikov machine gun and has a capacity of 700ml of Vodka.  The main section of the bottle is made of one piece clear glass and the labelling is black ink printed onto the butt of the bottle.  The ‘bottle top’ as such is made from black plastic or metal and incorporates a front sight, the same as the AK 47 machine gun.",
+            size:"700 mL",
+            brand:"KALASHNIKOV",
             category: "Vodka",
             sku:"a2",
-            price:89.99,            
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-smirnoff-gold-1l_720x.jpg?v=1622193026"
-        }),
+            price:234.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-ak47_720x.jpg?v=1603236568"
+        }),    
         await  Product.create({
             name:"Gangstar Vodka 175mL Pistol Gun",
             description:"Gangstar is an Australian vodka and has created a bottle shaped like an automatic pistol or handgun.",
@@ -179,10 +179,10 @@ const productsMockUp = async () => {
             description:"Rather than sinking to the bottom of the bottle, these gold leaves have been innovatively designed to remain suspended throughout the liquid, creating a stunning look not only in the bottle but in your drink as well.",
             size:"1000 mL",
             brand:"Smirnoff",
-            category: "Liqueur",
+            category: "Vodka",
             sku:"a18",
-            price:89.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-smirnoff-gold-1l_900x.jpg?v=1622193026"
+            price:89.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-smirnoff-gold-1l_720x.jpg?v=1622193026"
         })
         
         
