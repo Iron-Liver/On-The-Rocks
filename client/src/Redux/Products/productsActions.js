@@ -30,7 +30,7 @@ export function getProductById(id) {
     };
 }
 
-export function deleteUser(id) {
+export function deleteProduct(id) {
     return async function (dispatch) {
         await axios.delete(`http://localhost:3001/product/${id}`);
         dispatch({ type: DELETE_PRODUCT, payload: id});

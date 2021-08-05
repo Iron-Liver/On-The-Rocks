@@ -34,10 +34,10 @@ const productReducer = (state = initialState, action) => {
                 productDetail: undefined,
             }
         case DELETE_PRODUCT:
-            let productsList = Products.filter(product => product.id !== action.payload)
+            
             return {
-                ...state,
-                Products: productsList,
+                ...state,                
+                Products: state.FoundProds.filter(product => product.id !== action.payload)
             }
 
         default:
