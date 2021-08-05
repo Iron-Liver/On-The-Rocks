@@ -1,5 +1,5 @@
 const {User} = require('../../db');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 module.exports = async(req,res,next) =>{
     let user = req.body;

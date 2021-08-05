@@ -10,6 +10,8 @@ const routes = require('./routes/index.js');
 const { SECRET_KEY, CLIENT_DOMAIN } = process.env;
 
 require('./db.js');
+require("./utils/auth/passport");
+require("./utils/auth/passportGoogleSSO");
 
 const server = express();
 server.name = 'ONTHEROCKS-API';
