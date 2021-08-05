@@ -29,7 +29,7 @@ const CreateProduct = (props) => {
 
 	useEffect(() => {
 		console.log(createState)
-		if(createState === 'invalid inputs'){
+		if(createState && createState[0] === 'invalid inputs'){
 			swal('Invalid input!', 'Error', 'An error has occurred')
 		} else if(createState && createState !== undefined){
 			setInput(wipedInput);
