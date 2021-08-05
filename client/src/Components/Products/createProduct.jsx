@@ -30,10 +30,10 @@ const CreateProduct = (props) => {
 	useEffect(() => {
 		console.log(createState)
 		if(createState && createState[0] === 'invalid inputs'){
-			swal('Invalid input!', 'Error', 'An error has occurred')
+			swal('Error', 'invalid inputs', 'error')
 		} else if(createState && createState !== undefined){
 			setInput(wipedInput);
-			swal('Congratulations!', 'Product successfully created!', 'Success')	
+			swal('Congratulations!', 'Product successfully created', 'success')	
 		}
 	},
 	// eslint-disable-next-line
