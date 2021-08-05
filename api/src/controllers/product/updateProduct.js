@@ -1,18 +1,18 @@
 const { Product } = require("../../db.js");
 
 module.exports = async (req, res, next) => {
-  let product = req.body;
+  const product = req.body;
   const { id } = req.params;
+  console.log(product)
   try {
-    await Product.update(
-      { ...product },
+    let updated = await Product.update(
+      product,
       {
-        where: id,
+        where: {id: id},
       }
     );
-    const updatedProduct = await Product.findOne({ where: { id } });
-    return res.json(updatedProduct).status(200);
+    res.send(`${updated} product/s updated'`);
   } catch (err) {
-    res.send(['invalid inputs']).sendStatus(400), next();
+    res.send(['invalid inputs']).sendStatus(400), next(err);
   }
 };
