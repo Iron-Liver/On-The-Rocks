@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { getProducts, deleteProduct } from '../../Redux/Products/productsActions'
+import { getProducts } from '../../Redux/Products/productsActions'
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Button } from "@material-ui/core";
 import { NavLink } from 'react-router-dom';
 import { Delete } from '@material-ui/icons';
+import Filters from './Filters';
 
 
 const useStyles = makeStyles({
@@ -39,21 +40,19 @@ const Products = () => {
         dispatch(getProducts());
     }, []);
 
-    function onClose(e) {
-        console.log("entra",e.target.value)
-        dispatch(deleteProduct(e.target.value))
-    }
-
     return (
         <div>
             <Grid container>
+                <Grid item xs={2}>
+                    <Filters/>
+                </Grid>
                 <Grid>
                     <div className={classes.wrapped}>
                         {products1?.map((spirits) => {
                             return (
                                 <Grid item md={3} sm={6} xs={12}>
                                     <Card className={classes.root} >
-                                        <Button onClick={onClose}>
+                                        <Button>
                                             <Delete/>
                                         </Button>
                                         <NavLink to={`/products/${spirits.id}`}>
