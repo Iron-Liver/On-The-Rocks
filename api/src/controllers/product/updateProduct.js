@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
         where: {id: id},
       }
     );
-    res.send(`${updated} product/s updated'`);
+    res.send(`${updated} product/s updated`);
   } catch (err) {
     res.send(['invalid inputs']).sendStatus(400), next(err);
   }
