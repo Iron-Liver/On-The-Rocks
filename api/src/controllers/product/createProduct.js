@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
     product = await Product.create({ ...product });
     return res.json(product);
   } catch (err) {
-    res.send('invalid inputs').sendStatus(400), next(err);
+    res.send('invalid inputs').sendStatus(400), next();
   }
 };
 
