@@ -4,6 +4,7 @@ import {Route} from 'react-router';
 
 import CreateUser from '../Users/UserAdd/CreateUser'
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
+import OrderDetail from '../Orders/OrderDetail/orderDetail';
 
 function AppPublic() {
 
@@ -15,7 +16,7 @@ function AppPublic() {
 
 				<Route exact path='/category/:id' component={categoryDetail} />
 				<Route exact path='/login' component= {CreateUser}/>
-
+        <Route exact path='/orderDetail/:id' component={OrderDetail} />
 			</BrowserRouter>
 	);
 }

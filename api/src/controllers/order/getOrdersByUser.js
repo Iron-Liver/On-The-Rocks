@@ -1,4 +1,4 @@
-const { Order } = require('../../db');
+const { Order, Order_products, Product } = require('../../db');
 
 module.exports = async (req, res, next) => {
   const { id } = req.params;
@@ -13,11 +13,21 @@ module.exports = async (req, res, next) => {
         "city",
         "total",
         "createdAt",
-        "state",
+        "status",
       ],
       where: {
         userId: id,
       },
+      include: [{
+        model: Order_products,
+        attributes: [
+          "units", 
+          "productId", 
+          "createdAt",
+          "unitPrice"
+        ],
+        include: [Product]
+      }],
       order: [["createdAt", "DESC"]]
     });
     
