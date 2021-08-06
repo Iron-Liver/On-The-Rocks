@@ -40,7 +40,7 @@ const UpdateProduct = ({ match }) => {
     useEffect(() => {
         if (updateState && updateState[0] === 'invalid inputs') {
             swal('Error', 'invalid inputs', 'error')
-        } else if (updateState && updateState[0] == '0 product/s updated') {
+        } else if (updateState && updateState[0] === '0 product/s updated') {
             swal('Error', 'invalid inputs', 'error')
         } else if (updateState && updateState !== undefined) {
             setInput(wipedInput);
