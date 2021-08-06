@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import {useLocation} from 'react-router-dom'
 import CreateUserForm from './createUserForm'
-import {createUser} from '../../../Redux/Users/UserActions'
+import {createUser} from '../../../Redux/Users/userActions'
 
 import swal from "sweetalert";
 

@@ -8,6 +8,7 @@ import CreateUser from '../Users/UserAdd/createUser';
 
 import createCategory from '../Categories/CreateCategory/createCategory';
 import updateCategory from '../Categories/UpdateCategory/updateCategory';
+import CreateProduct from '../Products/createProduct';
 
 function AppPrivate() {
 
@@ -17,7 +18,8 @@ function AppPrivate() {
 
 				<Route path="/private/category/add" component={createCategory} />
 				<Route path="/private/category/update/:id" component={updateCategory} />
-				
+				<Route path='/category/add' component={createCategory} exact></Route>
+				<Route path='/product/add' component={CreateProduct} exact></Route>
 				{/* ============ User ==================== */}
 				<Route exact path="/private/createuser" component={CreateUser} />
 {/*                 <Route exact path="/private/updateuser/:id" component={UpdateUser} />

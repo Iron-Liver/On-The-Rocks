@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {CREATE_USER, LOGIN, LOGOUT, ADMIN_ALLOWED} from '../../Utils/constants'
 import swal from 'sweetalert'
-import { useParams } from 'react-router';
 
 
 

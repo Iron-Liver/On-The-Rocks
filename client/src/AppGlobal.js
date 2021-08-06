@@ -17,7 +17,7 @@ const AppGlobal = () => {
 					<Route 
 						path="/private"
 						component={ () => (
-							( (true) )
+							( (currentUser.isAdmin && adminAllowed) )
 							? ( <AppPrivate /> )
 							: ( <Redirect to="/login" /> )
 						)}

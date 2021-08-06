@@ -3,7 +3,9 @@ import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, C
 import { Menu, ShoppingCart, Search } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, 
+  // eslint-disable-next-line
+  useSelector } from "react-redux";
 
 
 import { logOutUser } from "../../Redux/Users/userActions";
@@ -53,7 +55,7 @@ function NavBar(props) {
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
-  const estado = useSelector(state => state.currentUser)
+  // const estado = useSelector(state => state.currentUser)
   const dispatch = useDispatch()
 
   const handleDrawerMenu = () => {
