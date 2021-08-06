@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   try {
     const [ updated ] = await Order.update({status: newStatus}, { 
       where: {
-        id: orderId
+        id: parseInt(orderId)
       }
     });
 

@@ -1,6 +1,11 @@
-const { Order } = require('../../db');
+const { Order, User } = require('../../db');
+const getFilterCallback = require('./utils/getFilterCallback');
 
 module.exports = async (req, res, next) => {
+
+  const { itemsPerPage, orderBy, sort, filterBy, filterQuery } = req.body;
+  let { page } = req.body;
+
   try {
     const orders = await Order.findAll({
       attributes: [
@@ -13,14 +18,42 @@ module.exports = async (req, res, next) => {
         "createdAt",
         "status",
       ],
-      order: [["createdAt", "DESC"]]
+      include: {
+        model: User,
+        attributes: ['name', 'username']
+      },
+      order: [[orderBy, sort]]
     });
 
-    if(!orders) {
-      return res.status(200).send([]);
-    }
+    let filtered = [...orders];
 
-    return res.send(orders).status(200);
+    filterBy.forEach((filter, index) => {
+      filtered = filtered.filter(getFilterCallback(filter, filterQuery[index]));
+    });
+    
+    const pages = Math.ceil(filtered.length / itemsPerPage);
+    
+    if(page > pages) {
+      page = pages;
+    }
+    
+    const from = itemsPerPage * page - itemsPerPage;
+    const to = page * itemsPerPage;
+
+    const pageOrders = filtered.slice(from, to);
+
+    const response = {
+      page,
+      pages,
+      data: pageOrders,
+      orderBy: [orderBy, sort],
+      filters: {
+        filterBy: filterBy ? filterBy : null,
+        filterQuery: filterQuery ? filterQuery : null
+      },
+    }; 
+
+    return res.send(response).status(200);
   } catch (err) {
     next(err);
     return res.send({error: err.message}).status(409);
