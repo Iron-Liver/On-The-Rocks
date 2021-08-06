@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, TextField, makeStyles, Button } from '@material-ui/core'
+import { useState } from 'react';
+import { Grid, TextField, makeStyles, Button, Modal } from '@material-ui/core'
 import { useForm, Form } from './useForm'
 import { RoomSharp, PersonSharp, MarkunreadMailboxSharp, LocationCitySharp, PeopleAlt }  from '@material-ui/icons';
 import IconButton from "@material-ui/core/IconButton";
@@ -36,12 +37,21 @@ const validate = (state, name, errors) => {
 };
 
 const useStyle = makeStyles(theme =>({
+  modalForm: {
+    position:"absolute",
+    width: 400,
+    backgroundColor: "white",
+    borderRadius: '10px',
+    boxShadow: theme.shadows[5],
+    top:"50%",
+    left:"50%",
+    transform:"translate(-50%, -50%)"
+  },
   gridContainer : {
+    width:"100%",
     dispaly: 'flex',
     margin: '0 auto',
     justifyContent: 'center',
-    border: '1px solid black',
-    borderRadius: '10px',
     padding: '1px'
   },
   buttons: {
@@ -69,6 +79,14 @@ const useStyle = makeStyles(theme =>({
 
 const CreateOrder = () => {
 
+  const [modal, setModal] = useState(false);
+
+  const openCloseModal = () => {
+    setModal(!modal);
+    setErrors({})
+    setState(initialForm);
+  }
+
   const classes = useStyle()
 
   const {
@@ -79,14 +97,12 @@ const CreateOrder = () => {
     handleInputChange,
   }=useForm({initialForm, validate});
 
-
-  
-  return ( 
-      <Form>
-      <Grid container >
-        <Grid item xs={6} className={classes.gridContainer}>
+  const body = (
+    <Form >
+      <Grid container className={classes.modalForm} >
+        <Grid item xs={12} className={classes.gridContainer}>
             <Grid container justifyContent="flex-end" className={classes.clearContainer}>
-            <IconButton edge="start" color="inherit" size="small">
+            <IconButton edge="start" color="inherit" size="small" onClick={openCloseModal}>
               <Clear className={classes.clear}/>
             </IconButton>
             </Grid>
@@ -101,13 +117,13 @@ const CreateOrder = () => {
            </Grid>
            <Grid item xs={9}>
           <TextField 
-          className={errors.firstName ? classes.inputError : ''}
+            color= { errors.firstName ? "primary" : "secondary"}
           	helperText={ errors.firstName ? errors.firstName : ""}
             variant="standard"
             label="First name"
             value={state.firstName}
             name="firstName"
-            onBlur={handleInputChange}
+            onChange={handleInputChange}
           />
            </Grid>
           </Grid>
@@ -124,7 +140,7 @@ const CreateOrder = () => {
             label="Last name"
             value={state.lastName}
             name="lastName"
-            onBlur={handleInputChange}
+            onChange={handleInputChange}
             />
            </Grid>
           </Grid>
@@ -141,7 +157,7 @@ const CreateOrder = () => {
             label="City"
             value={state.city}
             name="city"
-            onBlur={handleInputChange}
+            onChange={handleInputChange}
           />
            </Grid>
           </Grid>
@@ -158,7 +174,7 @@ const CreateOrder = () => {
             label="Address"
             value={state.address}
             name="address"
-            onBlur={handleInputChange}
+            onChange={handleInputChange}
           />
            </Grid>
           </Grid>
@@ -176,7 +192,7 @@ const CreateOrder = () => {
             label="Zip code"
             value={state.zipCode}
             name="zipCode"
-            onBlur={handleInputChange}
+            onChange={handleInputChange}
           />
            </Grid>
           </Grid>
@@ -194,6 +210,19 @@ const CreateOrder = () => {
         </Grid>
       </Grid>
      </Form>
+  )
+  
+  return ( 
+      <div>
+        <Button color="primary" variant="outlined" onClick={openCloseModal}> Pay </Button>
+        <Modal
+        closeAfterTransition
+        open={modal}
+        onClose={openCloseModal}
+        >
+          {body}
+        </Modal>
+      </div>
   )
 }
 
