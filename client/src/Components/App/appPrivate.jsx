@@ -1,14 +1,13 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
+// User Imports
 
-import CreateUser from '../Users/UserAdd/createUser';
-/* import UpdateUser from '../Users/UserUpdate/updateUser';
- *//* import UserList from '../Users/UserList/userList'; */
-
+// Product Imports
+import CreateProduct from '../Products/createProduct';
+// Category Imports
 import createCategory from '../Categories/CreateCategory/createCategory';
 import updateCategory from '../Categories/UpdateCategory/updateCategory';
-import CreateProduct from '../Products/createProduct';
 
 function AppPrivate() {
 
@@ -20,10 +19,6 @@ function AppPrivate() {
 				<Route path="/private/category/update/:id" component={updateCategory} />
 				<Route path='/category/add' component={createCategory} exact></Route>
 				<Route path='/product/add' component={CreateProduct} exact></Route>
-				{/* ============ User ==================== */}
-				<Route exact path="/private/createuser" component={CreateUser} />
-{/*                 <Route exact path="/private/updateuser/:id" component={UpdateUser} />
- */}				{/* <Route exact path="/private/userlist" component={UserList} /> */}
 				
             </BrowserRouter>
 
