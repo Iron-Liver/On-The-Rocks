@@ -2,16 +2,16 @@ import axios from 'axios';
 import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE } from "../../Utils/constants"
 
 
+export function clearProductDetail() {
+    return async function (dispatch) {
+        dispatch({ type: CLEAR_PRODUCT, payload: null });
+    };
+}
+
 export function createProduct(product) {
     return async function (dispatch) {
         const { data } = await axios.post(`/product/add`, product);
         dispatch({ type: CREATE_PRODUCT, payload: data });
-    };
-}
-
-export function clearProductDetail() {
-    return async function (dispatch) {
-        dispatch({ type: CLEAR_PRODUCT, payload: null });
     };
 }
 

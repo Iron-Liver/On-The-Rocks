@@ -105,9 +105,6 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 									/>
 								</Grid>
 							</Grid>
-
-							
-
 							<Grid container spacing={1} alignItems="center">
 								<Grid item>
 									<Crop />
@@ -214,6 +211,19 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 						<Grid container direction="row" justifyContent="center" alignItems="center">
 							<Grid item>
 								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
+								{Object.values(error).indexOf(true) === -1
+									? <Button
+										style={{ fontWeight: 1000, marginTop: 50 }}
+										color="secondary" onClick={handleSubmit}
+										variant="contained">
+										Add Product
+									</Button>
+									: <Button style={{ fontWeight: 1000, marginTop: 50 }}
+										color="secondary" onClick={handleSubmit}
+										variant="contained" disabled={true}>
+										Add Product
+									</Button>
+								}
 							</Grid>
 						</Grid>
 					</Grid>

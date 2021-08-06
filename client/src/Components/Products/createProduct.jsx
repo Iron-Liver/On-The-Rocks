@@ -1,51 +1,43 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import CreateProductForm from './createProductForm'
-import {createProduct, clearProductDetail} from '../../Redux/Products/productsActions'
+import {createProduct} from '../../Redux/Products/productsActions.js';
 
 import swal from "sweetalert";
 
 const CreateProduct = (props) => {
 
 	const dispatch = useDispatch();
-	const {productDetail} = useSelector(state => state.productReducer);
+	const {createState} = useSelector(state => state.productReducer);
 
 	var wipedInput = {
 		name: "",
-        description: "",
-        size: "",
+		description: "",
+		size: "",
 		category: "",
-        brand: "",
-        sku: "",
-        price: "",
-        image: ""
+		brand: "",
+		sku: "",
+		price: "",
+		image: ""
 	}
 
 	const [input, setInput] = useState(wipedInput);
 
-	const handleSubmit = e => {
+	const handleSubmit = async(e) => {
 		dispatch(createProduct(input))
 	};
 
 	useEffect(() => {
-		console.log(productDetail, "asda")
-		if(typeof(productDetail) === "string"){
-			let aux = productDetail.split(',')[0]
-			if(aux.includes('llave duplicada')){
-				swal('El nombre ya esta en uso', 'Lo sentimos!', 'error')
-			}else{
-				swal('We are sorry!', aux, 'error')
-			}
-		} else {
-			if(typeof(productDetail) !== 'undefined') {
-				swal('Congratulations!', 'Product successfully created!', 'success')
-				dispatch(clearProductDetail())
-				setInput(wipedInput)
-			}
+		console.log(createState)
+		if(createState && createState[0] === 'invalid inputs'){
+			swal('Error', 'invalid inputs', 'error')
+		} else if(createState && createState !== undefined){
+			setInput(wipedInput);
+			swal('Congratulations!', 'Product successfully created', 'success')	
 		}
 	},
 	// eslint-disable-next-line
-	[productDetail])
+	[createState]);
 
 	return (
 		<>
