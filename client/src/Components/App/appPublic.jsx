@@ -1,14 +1,14 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import {Route, Redirect} from 'react-router';
+import {Route} from 'react-router';
+import createCategory from '../Categories/CreateCategory/createCategory';
+import CreateUser from '../Users/UserAdd/CreateUser';
+import CreateProduct from '../Products/createProduct';
+import products from '../Products/products';
 
+// import CreateUser from '../Users/UserAdd/CreateUser'
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
-import Login from '../Users/UserLogin/userLogin'
-import CreateUser from '../Users/UserAdd/createUser'
-import resetPassword from '../Users/UserResetPassword/resetPassword'
-import admin2FA from '../Users/Admin2FA/admin2FA'
-
-
+import ProductDetail from '../Products/productDetail';
 
 function AppPublic() {
 
@@ -17,30 +17,15 @@ function AppPublic() {
 
 	return (
 			<BrowserRouter>
-				
-				<Route exact path='/category/:id' component={categoryDetail} />
-				<Route exact path='/register' component= {CreateUser}/>
-				<Route 
-					exact path="/login"
-					component={ () => (
-						( !currentUser )
-						? 
-						( <Login/> )
-						:
-						(
-							(currentUser.isAdmin && adminAllowed)
-							?
-							( <Redirect to="/private/panel" /> )
-							:
-							( <Redirect to={`/`} /> )
-						) 
-					)}
-				
-				/>
-				<Route path="/verify/password" component = {resetPassword}/>
-				<Route path="/verify/admin" component = {admin2FA}/>
 
-			</BrowserRouter>
+				<Route exact path='/category/:id' component={categoryDetail} />
+				<Route exact path='/login' component= {CreateUser}/>
+				<Route path='/category/add' component={createCategory} exact></Route>
+				<Route path='/product/add' component={CreateProduct} exact></Route>
+				<Route path='/products' component={products} exact></Route>
+				<Route path='/products/:id' component={ProductDetail} exact></Route>
+
+      </BrowserRouter>
 	);
 }
 
