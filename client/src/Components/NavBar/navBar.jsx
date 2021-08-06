@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import { useSelector } from "react-redux";
 
+import { logOutUser } from "../../Redux/Users/userActions";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -76,6 +78,7 @@ function NavBar(props) {
             <Typography variant="h6" noWrap>
               OnTheRocks
             </Typography>
+    <button onClick={logOutUser()}>LOGOUT</button>
           </Container>
 
           <IconButton

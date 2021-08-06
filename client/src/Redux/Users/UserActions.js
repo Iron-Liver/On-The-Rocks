@@ -1,6 +1,8 @@
 import axios from 'axios';
-import {CREATE_USER, LOGIN} from '../../Utils/constants'
+import {CREATE_USER, LOGIN, LOGOUT, ADMIN_ALLOWED} from '../../Utils/constants'
 import swal from 'sweetalert'
+
+
 
 export function createUser(user) {
     return async function (dispatch) {
@@ -52,3 +54,44 @@ export function sendEmail(email, type) {
     }
   };
 }
+
+export function logOutUser() {
+	return async function (dispatch) {
+		try{
+			await localStorage.removeItem('profile')
+			await localStorage.removeItem('2FA')
+      await localStorage.removeItem("cartItems");
+      await localStorage.removeItem("shippingAddress");
+      await localStorage.removeItem("wishListItems");
+			await axios.get(`/auth/logout`, 
+			{withCredentials: true})
+			dispatch({type: LOGOUT})
+		}catch (e){
+			console.log(e.message)
+		}
+	}
+}
+
+export function resetPass(token, newPassword) {
+  return async function (dispatch) {
+    try {
+      await axios.post(`/auth/passwordreset`, { token, newPassword });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+}
+
+export function allowAdmin(token) {
+	return async function (dispatch) {
+		try {
+			const {data} = await axios.post(`/auth/admin`,{token})
+			localStorage.setItem('2FA',JSON.stringify(data))
+			dispatch({type: ADMIN_ALLOWED, payload: data})
+		} catch(e) {
+			console.log(e.message)
+		}
+	}
+}
+
+
