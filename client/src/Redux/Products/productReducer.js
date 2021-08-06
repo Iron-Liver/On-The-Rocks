@@ -1,9 +1,11 @@
-import { GET_PRODUCTS, CREATE_PRODUCT, CLEAR_PRODUCT, GET_PRODUCT_BY_ID, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE } from "../../Utils/constants"
+import { GET_PRODUCTS, CLEAR_PRODUCT, GET_PRODUCT_BY_ID, CREATE_PRODUCT, UPDATE_PRODUCT } from "../../Utils/constants"
+
 
 const initialState = {
     Products: [],
     FoundProds: [],
     createState: [],
+    updateState: [],
     productDetail: undefined,
 };
 
@@ -19,6 +21,11 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 createState: action.payload,
+            };
+        case UPDATE_PRODUCT:
+            return {
+                ...state,
+                updateState: action.payload,
             };
 
         case GET_PRODUCT_BY_ID:

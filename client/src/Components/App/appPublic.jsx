@@ -28,6 +28,7 @@ function AppPublic() {
 				<Route exact path='/category/:id' component={categoryDetail} />
 
 			</BrowserRouter>
+
 	);
 }
 

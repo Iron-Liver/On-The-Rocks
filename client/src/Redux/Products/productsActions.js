@@ -30,6 +30,12 @@ export function getProductById(id) {
     };
 }
 
+export function updateProduct(id, update) {
+    return async function (dispatch) {
+      const product = await axios.put(`http://localhost:3001/product/${id}`, update);
+        dispatch({ type: UPDATE_PRODUCT, payload: product.data });
+    };
+
 export function deleteProduct(id) {
     return async function (dispatch) {
         await axios.delete(`http://localhost:3001/product/${id}`);
@@ -48,4 +54,5 @@ export function filterByPrice(type){
     return async function(dispatch){        
         dispatch({type: FILTER_BY_PRICE ,payload: type})
     }
+
 }
