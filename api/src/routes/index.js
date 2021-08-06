@@ -9,6 +9,10 @@ const product = require('./product')
 router.use("/category", category);
 router.use("/product", product);
 
+const user = require("./user")
+router.use("/user", user);
 
+const auth = require("./auth")
+router.use("/auth", auth)
 
 module.exports = router;
