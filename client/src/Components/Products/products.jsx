@@ -2,8 +2,10 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { getProducts } from '../../Redux/Products/productsActions'
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Button } from "@material-ui/core";
 import { NavLink } from 'react-router-dom';
+import { Delete } from '@material-ui/icons';
+import Filters from './Filters';
 
 
 const useStyles = makeStyles({
@@ -36,19 +38,26 @@ const Products = () => {
 
     useEffect(() => {
         dispatch(getProducts());
-    }, []);
-
+    }, 
+    // eslint-disable-next-line
+    []);
 
     return (
         <div>
             <Grid container>
+                <Grid item xs={2}>
+                    <Filters/>
+                </Grid>
                 <Grid>
                     <div className={classes.wrapped}>
                         {products1?.map((spirits) => {
                             return (
                                 <Grid item md={3} sm={6} xs={12}>
-                                    <NavLink to={`/products/${spirits.id}`}>
-                                        <Card className={classes.root}>
+                                    <Card className={classes.root} >
+                                        <Button>
+                                            <Delete/>
+                                        </Button>
+                                        <NavLink to={`/products/${spirits.id}`}>
                                             <CardActionArea>
                                                 <CardMedia
                                                     className={classes.media}
@@ -67,8 +76,9 @@ const Products = () => {
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
-                                        </Card>
-                                    </NavLink>
+                                        </NavLink>
+                                    </Card>
+
                                 </Grid>
                             )
                         })}

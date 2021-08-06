@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router';
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { getProductById } from "../../Redux/Products/productsActions"
-import { Card, CardContent, CardMedia, Typography, IconButton, Button, Grid } from "@material-ui/core";
+import { Card, CardContent, CardMedia, Typography, Button, Grid, Box, Select, FormControl,MenuItem, InputLabel} from "@material-ui/core";
 import { ShoppingCart } from '@material-ui/icons';
-import { blue } from '@material-ui/core/colors';
+import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     cont1: {
-        marginBottom: 30,        
+        marginBottom: 30,
     },
 
     cover: {
@@ -50,21 +50,41 @@ const useStyles = makeStyles((theme) => ({
         width: 500,
         height: 70,
     },
+    review: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: "space-between",
+        paddingLeft: theme.spacing(2),
+        paddingBottom: theme.spacing(1),
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        width: 110,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
 }));
 
 
 const ProductDetail = () => {
 
+    const [value, setValue] = React.useState(2);
     const dispatch = useDispatch();
     const spirits = useSelector((state) => state.productReducer.FoundProds)
-    // const id = props.match.params.id;
     const { id: liqueur } = useParams();
     const classes = useStyles();
-    const theme = useTheme();
+    const [quant, setQuant] = React.useState('');
+
+    const handleChange = (event) => {
+        setQuant(event.target.value);
+    };
 
     useEffect(() => {
         dispatch(getProductById(liqueur))
-    }, [])
+    }, 
+    // eslint-disable-next-line
+    [])
 
     if (!spirits) {
         return (<h1>Please wait</h1>)
@@ -87,7 +107,7 @@ const ProductDetail = () => {
                         </Typography>
                         <Typography component="h4" variant="h4">
                             {spirits[0].brand}
-                        </Typography>                        
+                        </Typography>
                     </Grid>
                     <Typography variant="h4" color="textSecondary">
                         {spirits[0].description}
@@ -102,9 +122,38 @@ const ProductDetail = () => {
                     >
                         <h2>ADD TO CART</h2>
                     </Button>
-                    <Typography component="h5" variant="h5">
-                        QUANTITY
-                    </Typography>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel id="Quantity">Quantity</InputLabel>
+                        <Select
+                            labelId="Quantity"
+                            id="Quantity"
+                            value={quant}
+                            onChange={handleChange}
+                            label="Quantity"                            
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+                <div className={classes.review}>
+                    <Box component="fieldset" mb={3} borderColor="transparent">
+                        <Typography component="legend">Review</Typography>
+                        <Rating
+                            name="review product"
+                            value={value}
+                            size="large"
+                            onChange={(event, newValue) => {
+                                setValue(newValue);
+                            }}
+                        />
+                    </Box>
                 </div>
             </div>
         </Card>

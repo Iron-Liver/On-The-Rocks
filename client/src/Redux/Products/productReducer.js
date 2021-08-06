@@ -1,5 +1,6 @@
 import { GET_PRODUCTS, CLEAR_PRODUCT, GET_PRODUCT_BY_ID, CREATE_PRODUCT, UPDATE_PRODUCT } from "../../Utils/constants"
 
+
 const initialState = {
     Products: [],
     FoundProds: [],
@@ -37,6 +38,33 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productDetail: undefined,
+            }
+        case DELETE_PRODUCT:
+
+            return {
+                ...state,
+                Products: state.FoundProds.filter(product => product.id !== action.payload)
+            }
+
+        case FILTER_BY_CATEGORY:
+            return {
+                ...state,
+                FoundProds: state.Products.filter(liquor => liquor.category === action.payload)
+            };
+
+        case FILTER_BY_PRICE:
+            return {
+                ...state,
+                FoundProds: [...state.FoundProds]?.sort((a, b) => {
+                    if (a.price < b.price) {
+                        return action.payload === "MAX" ? 1 : -1;
+                    }
+                    if (a.price > b.price) {
+                        return action.payload === "MAX" ? -1 : 1;
+                    }
+                    return 0;
+
+                })
             }
 
         default:
