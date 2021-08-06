@@ -18,3 +18,4 @@ export const LOGOUT= 'LOGOUT';
 export const ADMIN_ALLOWED= 'ADMIN_ALLOWED';
 export const FILTER_BY_CATEGORY = 'FILTER_BY_CATEGORY';
 export const FILTER_BY_PRICE = 'FILTER_BY_PRICE';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
