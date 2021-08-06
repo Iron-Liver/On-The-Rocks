@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import {Grid, Button, TextField} from '@material-ui/core'
 import { Email, VpnKey } from '@material-ui/icons';
-import {loginUser,fetchAuthUser, sendEmail} from '../../../Redux/Users/UserActions'
+import {loginUser,fetchAuthUser, sendEmail} from '../../../Redux/Users/userActions'
 import useFormStyles from '../../../Utils/formStyles'
 import GoogleButton from "react-google-button";
 import swal from 'sweetalert'
@@ -22,10 +22,10 @@ export default function UserLogin() {
 
    useEffect(() => {
         if(currentUser) {
-           /*  if(currentUser.isAdmin){
+             if(currentUser.isAdmin){
                 dispatch(sendEmail(currentUser.email,"verifyadmin"))
                 swal("Hemos enviado un link a tu correo para que verifiques tu identidad", "Disculpa las molestias", "success")
-            } */
+            } 
             history.push('/')
         }
     },

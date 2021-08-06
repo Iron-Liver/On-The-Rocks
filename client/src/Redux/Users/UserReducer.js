@@ -15,8 +15,7 @@ const userReducer = (state = initialState, action) => {
         userDetail: action.payload,
       };
     case LOGIN:
-      console.log("login action", action.payload);
-      return {
+       return {
         ...state,
         currentUser: action.payload,
       };

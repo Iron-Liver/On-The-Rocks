@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {CREATE_USER, LOGIN, LOGOUT, ADMIN_ALLOWED} from '../../Utils/constants'
 import swal from 'sweetalert'
+import { useParams } from 'react-router';
 
 
 
@@ -20,6 +21,7 @@ export function loginUser(login) {
         { withCredentials: true }
       );
       const user = await axios.get(`/auth/user`, { withCredentials: true });
+      console.log(user)
       localStorage.setItem("profile", JSON.stringify(user.data));
       dispatch({ type: LOGIN, payload: user.data });
     } catch (e) {

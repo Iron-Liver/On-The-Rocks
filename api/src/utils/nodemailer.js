@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const {GMAIL_APP_EMAIL, GMAIL_APP_PASSWORD} = process.env
 
+
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,

@@ -47,8 +47,8 @@ router.get("/user", isLogedIn, async(req,res)=>{
         const user = await User.findOne({
              where: {id:req.user.id}
          })
-         const {id,email} = user;
-         res.json({id,email})
+         const {id,email,isAdmin} = user;
+         res.json({id,email,isAdmin})
         
     } catch (error) {
          res.json(error.message);     
@@ -72,7 +72,10 @@ router.post('/email', async (req,res,next) => {
         res.json({success: 'Email sent'})
     }
     if(type === 'verifyadmin'){
-        transporter.sendMail({
+        console.log("entre")
+        console.log(email)
+        console.log(GMAIL_APP_EMAIL)
+        await transporter.sendMail({
             from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
             to: email, // list of receivers
             subject: "Two steps verification", // Subject line

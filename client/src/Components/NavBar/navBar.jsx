@@ -3,7 +3,8 @@ import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, C
 import { Menu, ShoppingCart, Search } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 
 import { logOutUser } from "../../Redux/Users/userActions";
 
@@ -53,7 +54,8 @@ function NavBar(props) {
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const estado = useSelector(state => state.currentUser)
-  console.log(estado)
+  const dispatch = useDispatch()
+
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);
   };
@@ -66,6 +68,9 @@ function NavBar(props) {
     setCartDrawerOpen(!cartDrawerOpen);
   };
 
+  const logout = () =>{
+    dispatch(logOutUser())
+  }
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -78,7 +83,7 @@ function NavBar(props) {
             <Typography variant="h6" noWrap>
               OnTheRocks
             </Typography>
-    <button onClick={logOutUser()}>LOGOUT</button>
+    <button onClick={logout}>LOGOUT</button>
           </Container>
 
           <IconButton
