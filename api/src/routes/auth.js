@@ -72,6 +72,7 @@ router.post('/email', async (req,res,next) => {
         res.json({success: 'Email sent'})
     }
     if(type === 'verifyadmin'){
+        console.log(FRONT)
         await transporter.sendMail({
             from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
             to: email, // list of receivers
