@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { makeStyles,  Button,  Container, Grid } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles';
-/* import { DataGrid } from '@material-ui/core'; */
+import { DataGrid } from '@material-ui/data-grid';
 import theme from '../../../Utils/theme';
 import {Link} from 'react-router-dom';
 import { getAllUsers } from '../../../Redux/Users/userActions'
@@ -27,7 +27,7 @@ const UserList = () => {
 	const {users} = useSelector(state => state.userReducer)
 	const classes = useStyles();
 	const dispatch = useDispatch();
-    
+    console.log(users)
 	useEffect(() => {
         dispatch(getAllUsers())
         console.log(users)
@@ -98,7 +98,7 @@ const UserList = () => {
 
 				<Container style={{height: 400, width: '90%'}}>
 					<Container style={{display: 'flex', height: '100%'}}>
-						<Grid rows={users} columns={columns} />
+						<DataGrid rows={users} columns={columns} />
 					</Container>
 				</Container>
 
