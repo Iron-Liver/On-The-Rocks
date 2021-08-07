@@ -9,6 +9,7 @@ const useStyle = makeStyles((theme) => ({
     flexShrink: 0,
   },
   drawerPaper: {
+   backgroundColor: '#E9ECEF',
     width: 240,
   },
   toolbar: theme.mixins.toolbar,

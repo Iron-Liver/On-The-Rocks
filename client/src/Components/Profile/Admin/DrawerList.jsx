@@ -4,13 +4,17 @@ import { Create, NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, Alternat
 
 
 const useStyles= makeStyles(theme => ({
+  list: {
+ backgroundColor: ' #E9ECEF '
+  },
   Container: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: '90%'  
   },
   imageContainer: {
-    textAlign: 'center',
-    margin: 8,   
+    textAlign: 'center', 
+    marginLeft: '10px'
   },
   belowImage: {
     display: 'flex',
@@ -34,7 +38,7 @@ export default function DrawerList() {
 
   return (
     <div>
-      <List component="nav"> 
+      <List component="nav" className={classes.list}> 
 
       <Grid container className={classes.Container}>
         <Grid item className={classes.imageContainer}> 
