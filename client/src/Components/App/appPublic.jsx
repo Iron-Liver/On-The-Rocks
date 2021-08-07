@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Switch} from 'react-router-dom';
 import {Route} from 'react-router';
 import landingPage from '../LandingPage/landingPage'
 import NavBar from '../NavBar/navBar'
@@ -19,16 +19,18 @@ function AppPublic() {
 	return (
 			<BrowserRouter>
 				<Route path="/" component={NavBar}/>
-				<Route exact path='/register' component= {CreateUser} />
-				<Route exact path='/login' component={LoginUser} />
-				<Route exact path='/profile' component={landingPage} />
-				<Route path='/verify/password' component={ResetPassword} />
-				<Route path='/verify/admin' component={Admin2FA} />
+				<Switch>
+					<Route exact path='/register' component= {CreateUser} />
+					<Route exact path='/login' component={LoginUser} />
+					<Route exact path='/profile' component={landingPage} />
+					<Route path='/verify/password' component={ResetPassword} />
+					<Route path='/verify/admin' component={Admin2FA} />
 
-				<Route exact path='/products' component={products} />
-				<Route exact path='/products/:id' component={ProductDetail} />
+					<Route exact path='/products/:id' component={ProductDetail} />
+					<Route path='/products' component={products} />
 
-				<Route exact path='/category/:id' component={categoryDetail} />
+					<Route exact path='/category/:id' component={categoryDetail} />
+				</Switch>
 
 			</BrowserRouter>
 

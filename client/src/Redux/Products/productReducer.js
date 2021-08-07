@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, CLEAR_PRODUCT, GET_PRODUCT_BY_ID, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE } from "../../Utils/constants"
+import { GET_PRODUCTS, CLEAR_PRODUCT, GET_PRODUCT_BY_ID, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE, FILTER_BY_NAME } from "../../Utils/constants"
 
 
 const initialState = {
@@ -65,6 +65,11 @@ const productReducer = (state = initialState, action) => {
                     return 0;
 
                 })
+            }
+        case FILTER_BY_NAME:
+            return {
+                ...state,
+                FoundProds: [...state.FoundProds]?.filter(product => product.name.includes(action.payload))
             }
 
         default:

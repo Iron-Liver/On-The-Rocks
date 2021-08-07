@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE } from "../../Utils/constants"
+import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE, FILTER_BY_NAME } from "../../Utils/constants"
 
 
 export function clearProductDetail() {
@@ -28,6 +28,12 @@ export function getProductById(id) {
         dispatch({ type: "GET_PRODUCT_BY_ID", payload: product.data,
         });
     };
+}
+
+export function searchProduct(name) {
+    return function (dispatch) {
+        dispatch({ type: FILTER_BY_NAME, payload: name });
+    }
 }
 
 export function updateProduct(id, update) {
