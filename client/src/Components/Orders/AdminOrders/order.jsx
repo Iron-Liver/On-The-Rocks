@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     minWidth: "max-content",
+    width: "210px",
     backgroundColor: "#ced4da",
     padding: "10px",
     borderRadius: "3%",
@@ -70,9 +71,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Order = ({ order }) => {
   const classes = useStyles();
+
+  const initialStatus = order.status;
   
   const [ anchorEl, setAnchorEl ] = useState(null);
-  const [ orderStatus, setOrderStatus ] = useState(order.status)
+  const [ orderStatus, setOrderStatus ] = useState(initialStatus);
   
   useEffect(() => {
     setOrderStatus(order.status);
@@ -88,11 +91,11 @@ const Order = ({ order }) => {
 
   const handleStatusClick = async (e) => {
     setAnchorEl(null);
+    setOrderStatus(e.target.id);
     await axios.post('/order/updateOrderStatus', {
       orderId: order.id,
       newStatus: e.target.id
     });
-    setOrderStatus(e.target.id);
   };
 
   return (

@@ -64,7 +64,7 @@ const ProductsAccordion = ({ order }) => {
             className={classes.product}
           >
             <div style={{ flexGrow: "1" }}>
-              <Link href={`/productDetail/${order.product.id}`}>
+              <Link href={`/products/${order.product.id}`}>
                 <Typography variant="h6">{order.product.name}</Typography>
               </Link>
               <Typography variant="overline" display="block">
@@ -95,7 +95,7 @@ const ProductsAccordion = ({ order }) => {
               </Typography>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <Link href={`/productDetail/${order.product.id}`}>
+              <Link href={`/products/${order.product.id}`}>
                 <img
                   src={order.product.image}
                   width="150px"

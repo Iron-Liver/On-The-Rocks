@@ -39,7 +39,7 @@ const validate = (state, name, errors) => {
 const useStyle = makeStyles(theme =>({
   modalForm: {
     position:"absolute",
-    width: 400,
+    width: 350,
     backgroundColor: "white",
     borderRadius: '10px',
     boxShadow: theme.shadows[5],

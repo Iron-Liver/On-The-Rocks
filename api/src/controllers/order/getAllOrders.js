@@ -43,11 +43,14 @@ module.exports = async (req, res, next) => {
     const from = itemsPerPage * page - itemsPerPage;
     const to = page * itemsPerPage;
 
+    const total = filtered.length;
+
     const pageOrders = filtered.slice(from, to);
 
     const response = {
       page,
       pages,
+      total,
       data: pageOrders,
       orderBy: [orderBy, sort],
       filters: filterBy ? filterBy : null

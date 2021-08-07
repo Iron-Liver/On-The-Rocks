@@ -2,25 +2,41 @@ import React, { useState, useEffect } from "react";
 import Order from "./order";
 import axios from "axios";
 import { useHistory } from "react-router";
+import { makeStyles, Button } from "@material-ui/core";
+import { ArrowForwardIos, ArrowBackIos } from "@material-ui/icons";
+import { Pagination } from '@material-ui/lab';
+
+const useStyles = makeStyles((theme) => ({
+  paginationContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  }
+}));
 
 const initialFilters = {
   orderBy: "id",
   sort: "DESC",
-  page: 1,
-  itemsPerPage: 2,
-  filterBy: {}
+  filterBy: {},
+  itemsPerPage: 2
 };
 
 const DisplayOrders = () => {
   const [orders, setOrders] = useState({});
   const [form, setForm] = useState(initialFilters);
+  const [page, setPage] = useState(1);
 
   const history = useHistory();
+
+  const classes = useStyles();
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.post("/order/getAllOrders", initialFilters);
+        const response = await axios.post("/order/getAllOrders", {
+          ...initialFilters,
+          page: 1
+        });
         setOrders(response.data);
       } catch (error) {
         history.push("/");
@@ -31,12 +47,12 @@ const DisplayOrders = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/order/getAllOrders", form);
-      setOrders(response.data);
-      setForm({
+      const response = await axios.post("/order/getAllOrders", {
         ...form,
         page: 1
-      })
+      });
+      setOrders(response.data);
+      setPage(1);
     } catch (error) {
       history.push("/");
     }
@@ -59,58 +75,21 @@ const DisplayOrders = () => {
       ...form,
       filterBy: obj
     });
-
-
-    // let idx = form.filterBy.indexOf(e.target.name);
-    // if(e.target.value === "" && idx === -1) return;
-    // if(e.target.value === "") {
-    //   setForm({
-    //     ...form,
-    //     filterBy: form.filterBy.filter((param, index) => index !== idx),
-    //     filterQuery: form.filterQuery.filter((param, index) => index !== idx),
-    //   });
-    // } else {
-    //   if(idx === -1) {
-    //     setForm({
-    //       ...form,
-    //       filterBy: [...form.filterBy, e.target.name],
-    //       filterQuery: [...form.filterQuery, e.target.value]
-    //     });
-    //   } else {
-    //     let newArray = [...form.filterQuery]
-    //     newArray[idx] = e.target.value 
-    //     setForm({
-    //       ...form,
-    //       filterQuery: newArray,
-    //     });
-    //   }
-    // }
   };
 
   useEffect(() => {
     axios
-      .post("/order/getAllOrders", form)
+      .post("/order/getAllOrders", {
+        ...form,
+        page
+      })
       .then((response) => setOrders(response.data))
       .catch((err) => history.push("/"));
-  },[form, history])
+  },[page, history])
 
-  const handleBack = () => {
-    if(form.page > 1) {
-      setForm({
-        ...form,
-        page: form.page - 1
-      }); 
-    }
+  const handlePageChange = (e, val) => {
+    setPage(val);
   };
-
-  const handleNext = () => {
-    if (form.page < orders.pages) {
-      setForm({
-        ...form,
-        page: form.page + 1,
-      });
-    }
-  }
 
   return (
     <>
@@ -165,10 +144,15 @@ const DisplayOrders = () => {
           <input type="submit" />
         </form>
       </div>
-      <button onClick={handleBack}>{"<"}</button>
-      <h1 style={{display: "inline"}}>{orders.page}</h1>
-      <button onClick={handleNext}>{">"}</button>
-      <h1>{orders.pages}</h1>
+      <div className={classes.paginationContainer}>
+        <div>
+          <Pagination 
+            count={orders.pages} 
+            page={page} 
+            onChange={handlePageChange}
+          />
+        </div>
+      </div>
       <div
         style={{
           display: "flex",
@@ -177,7 +161,9 @@ const DisplayOrders = () => {
         }}
       >
         {orders.data &&
-        orders.data.map((order, idx) => <Order order={order} key={idx} />)}
+          orders.data.map((order, idx) => (
+            <Order order={order} key={Math.random() * 100} />
+          ))}
       </div>
     </>
   );

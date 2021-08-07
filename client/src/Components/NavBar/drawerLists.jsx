@@ -1,5 +1,6 @@
 import {Divider,List, ListItem, ListItemText, InputBase} from '@material-ui/core'
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import {LocalBar, Receipt, Star, ListAlt, Business, Search, AccountCircle, Loyalty} from '@material-ui/icons'
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
@@ -15,44 +16,55 @@ export const MenuList = () => {
           <List component="nav">
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
+                <LocalBar />
               </ListItemIcon>
-              <ListItemText primary="Productos" />
+              <ListItemText primary="Products" />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemIcon>
+                <Loyalty />
+              </ListItemIcon>
+              <ListItemText primary="On Sale" />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemIcon>
+                <ListAlt />
+              </ListItemIcon>
+              <ListItemText primary="Categories" />
+            </ListItem>
+
+            <Divider />
+
+            <ListItem button>
+              <ListItemIcon>
+                <Receipt />
+              </ListItemIcon>
+              <ListItemText primary="My Orders" />
             </ListItem>
     
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
+                <Star />
               </ListItemIcon>
-              <ListItemText primary="Mi Carrito" />
+              <ListItemText primary="My Wishlist" />
             </ListItem>
     
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
+                <AccountCircle />
               </ListItemIcon>
-              <ListItemText primary="Mis Compras" />
+              <ListItemText primary="My Account" />
             </ListItem>
+
+            <Divider />
     
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
+                <Business />
               </ListItemIcon>
-              <ListItemText primary="Mis Favoritos" />
-            </ListItem>
-    
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Recetas" />
-            </ListItem>
-    
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Nosotros" />
+              <ListItemText primary="About Us" />
             </ListItem>
           </List>
         </div>
@@ -64,9 +76,9 @@ return (
     <div>
       <ListItem>
         <ListItemIcon>
-          <InboxIcon />
+          <Search />
         </ListItemIcon>
-        <InputBase placeholder="Búsqueda" />
+        <InputBase placeholder="Search" />
       </ListItem>
     </div>
   );
@@ -83,7 +95,7 @@ return (
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="ProductoRandom" />
+          <ListItemText primary="Should map cart" />
         </ListItem>
       </List>
     </div>

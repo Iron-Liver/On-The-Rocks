@@ -29,21 +29,25 @@ const OrderDetail = () => {
   const {id} = useParams();
   const classes = useStyles();
   const user = useSelector(state => state.userReducer);
-
+  
   useEffect(() => {
     (async () => {
       try {
+        const localProfile = JSON.parse(localStorage.getItem("profile"));
+        if(!localProfile.id) {
+          history.push("/");
+        }
         const response = await axios.get(`/order/getOrderById/${id}`);
-        // if (!user.userDetail || order.data.userId !== user.userDetail.id) {
-        //   history.push("/");
-        // }
-        setOrder(response.data);
+        if (response.data.userId === localProfile.id || localProfile.isAdmin) {
+          return setOrder(response.data);
+        }
+        history.push("/");
       } catch (err) {
         history.push("/");
       }
     })();
   }, [id, history, user]);
-  
+
   return (
     <div>
       {order && (

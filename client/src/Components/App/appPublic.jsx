@@ -2,6 +2,8 @@ import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
 import Order from '../Orders/UserOrders/order';
+import landingPage from '../LandingPage/landingPage'
+import NavBar from '../NavBar/navBar'
 // User Imports
 import CreateUser from '../Users/UserAdd/CreateUser'
 import LoginUser from '../Users/UserLogin/userLogin'
@@ -20,23 +22,23 @@ function AppPublic() {
 
 	return (
 			<BrowserRouter>
-
+				<Route path="/" component={NavBar}/>
 				<Route exact path='/register' component= {CreateUser} />
 				<Route exact path='/login' component={LoginUser} />
+				<Route exact path='/login' component= {CreateUser} />
+				<Route exact path='/profile' component={landingPage} />
 				<Route path='/verify/password' component={ResetPassword} />
 				<Route path='/verify/admin' component={Admin2FA} />
 
-				<Route path='/products' component={products} exact />
-				<Route path='/products/:id' component={ProductDetail} exact />
+				<Route exact path='/products' component={products} />
+				<Route exact path='/products/:id' component={ProductDetail} />
 
 				<Route exact path='/category/:id' component={categoryDetail} />
-				<Route exact path='/login' component= {CreateUser} />
-				<Route exact path='/login' component= {CreateUser}/>
 
-        <Route exact path='/orderDetail/:id' component={OrderDetail} />
-        <Route exact path='/orderAll' component={DisplayOrders} />
-				<Route exact path='/userOrder' component={Order} />
-				<Route exact path='/createOrder' component={CreateOrder} />
+        <Route exact path='/order/:id' component={OrderDetail} />
+        <Route exact path='/orders' component={DisplayOrders} />
+				<Route exact path='/user_orders' component={Order} />
+				<Route exact path='/create_order' component={CreateOrder} />
 			</BrowserRouter>
 
 	);

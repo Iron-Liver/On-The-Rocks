@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
+import NavBar from '../NavBar/navBar'
 // User Imports
 
 // Product Imports
@@ -15,14 +16,14 @@ function AppPrivate() {
 	return (
 
 			<BrowserRouter>
-
+				<Route path="/" component={NavBar}/>
 				<Route path="/private/category/add" component={createCategory} />
 				<Route path="/private/category/update/:id" component={updateCategory} />
 				<Route path='/private/category/add' component={createCategory} exact />
 				<Route path='/private/product/add' component={CreateProduct} exact />
 				<Route path='/private/product/update/:id' component={updateProduct} exact />
 				
-            </BrowserRouter>
+      </BrowserRouter>
 
 	);
 }
