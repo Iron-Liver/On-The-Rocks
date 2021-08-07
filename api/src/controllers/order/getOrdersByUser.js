@@ -1,4 +1,4 @@
-const { Order, Order_products, Product } = require('../../db');
+const { Order, Order_products, Product, User } = require('../../db');
 
 module.exports = async (req, res, next) => {
   const { id } = req.params;
@@ -19,16 +19,16 @@ module.exports = async (req, res, next) => {
         userId: id,
       },
       include: [{
-        model: Order_products,
-        attributes: [
-          "units", 
-          "productId", 
-          "createdAt",
-          "unitPrice"
-        ],
-        include: [Product]
-      }],
-      order: [["createdAt", "DESC"]]
+          model: User,
+          attributes: ["username", "id"],
+          right: true
+        },{
+          model: Order_products,
+          attributes: ["units", "productId", "createdAt", "unitPrice"],
+          include: [Product],
+        }
+      ],
+      order: [["createdAt", "DESC"]],
     });
     
     if(!userOrders) {

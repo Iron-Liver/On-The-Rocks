@@ -77,6 +77,9 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM({
         values: ["created", "cancelled", "processing", "completed"],
       }),
-    },
+      allowNull: false
+    }
+  }, {
+    paranoid: true
   });
 };

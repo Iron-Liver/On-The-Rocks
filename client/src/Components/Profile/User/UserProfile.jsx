@@ -1,4 +1,4 @@
-import DrawerProfile from './DrawerProfile';
+import DrawerUserProfile from './DrawerUserProfile';
 import { makeStyles, Hidden } from '@material-ui/core'
 import { React } from 'react';
 
@@ -19,7 +19,7 @@ export default function AdminProfile() {
    
       <Hidden xsDown>
         <div className={classes.eldraw}>
-          {<DrawerProfile/>}
+          {<DrawerUserProfile/>}
         </div>
       </Hidden>
    

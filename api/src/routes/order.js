@@ -10,7 +10,7 @@ router.get('/getOrdersByUser/:id', getOrdersByUser);
 router.post('/deleteOrder', deleteOrder);
 router.post('/addOrder', createOrder);
 router.post('/updateOrderStatus', updateOrderStatus);
-router.get('/getAllOrders', getAllOrders);
+router.post('/getAllOrders', getAllOrders);
 router.get('/getOrderById/:orderId', getOrderById);
 
 module.exports = router

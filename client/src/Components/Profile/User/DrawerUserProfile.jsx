@@ -1,21 +1,22 @@
 import React from 'react';
 import { makeStyles, Drawer, Divider } from '@material-ui/core'
-import DrawerList from './DrawerList';
-
+import DrawerListUser from './DrawerListUser';
 
 const useStyle = makeStyles((theme) => ({
   drawer: {
-    width: 240,
-    flexShrink: 0,
+    width: '300px',
+    
   },
   drawerPaper: {
    backgroundColor: '#E9ECEF',
-    width: 240,
+   flexGrow: 1,
+   width: '292px'
+   
   },
   toolbar: theme.mixins.toolbar,
 }))
 
-export default function DrawerProfile() {
+export default function DrawerUserProfile() {
 
   const classes = useStyle();
 
@@ -29,7 +30,7 @@ export default function DrawerProfile() {
     >
       <div className={classes.toolbar}></div>
       <Divider />
-      <DrawerList />
+      <DrawerListUser />
     </Drawer>
   )
 }

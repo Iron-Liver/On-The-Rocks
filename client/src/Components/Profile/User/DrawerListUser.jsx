@@ -1,6 +1,6 @@
 import { React } from 'react';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase, } from '@material-ui/core'
-import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined  } from '@material-ui/icons'
+import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase} from '@material-ui/core'
+import { NoteAdd, AddShoppingCart, Settings, ShoppingCart, AlternateEmailOutlined, DnsOutlined  } from '@material-ui/icons'
 
 
 const useStyles= makeStyles(theme => ({
@@ -23,7 +23,7 @@ const useStyles= makeStyles(theme => ({
     marginBottom: 7,
   },
   image: {
-    border: '2px solid   #fcf3cf   ',
+    border: '1px solid  #212f3c ',
     borderRadius: '100px',
     backgroundColor: '#a7aaad',
     width: 135,
@@ -32,7 +32,7 @@ const useStyles= makeStyles(theme => ({
   }
 }))
 
-export default function DrawerList() {
+export default function DrawerListUser() {
 
   const classes = useStyles();
 
@@ -63,38 +63,38 @@ export default function DrawerList() {
       <Divider/>
 
       <ListItem  button> 
-      <ButtonBase href="http://localhost:3000/adminProfile/Users">
+      <ButtonBase href="">
         <ListItemIcon>
-          <AssignmentInd />
+        <ShoppingCart />
         </ListItemIcon>
-        <ListItemText  primary="All-Users" />
+        <ListItemText  primary="My Orders" />
       </ButtonBase>
       </ListItem>
       <ListItem divider button> 
-      <ButtonBase href="http://localhost:3000/adminProfile/Orders">
+      <ButtonBase href="">
         <ListItemIcon>
-          <ShoppingCart />
+         <Settings />
         </ListItemIcon>
-        <ListItemText primary="All-Orders"/>
+        <ListItemText primary="Settings"/>
         </ButtonBase>
       </ListItem>
 
 
 
       <ListItem  button> 
-      <ButtonBase href="http://localhost:3000/adminProfile/CreateCategory">
+      <ButtonBase href="">
         <ListItemIcon>
           <NoteAdd />
         </ListItemIcon>
-        <ListItemText primary="Create-Category"/>
+        <ListItemText primary="nose"/>
        </ButtonBase>
       </ListItem>
       <ListItem  button> 
-      <ButtonBase href="http://localhost:3000/adminProfile/CreateProduct">
+      <ButtonBase href="">
         <ListItemIcon>
           <AddShoppingCart />
         </ListItemIcon>
-        <ListItemText primary="Create-Product"/>
+        <ListItemText primary="nose x2"/>
         </ButtonBase>
       </ListItem>
       

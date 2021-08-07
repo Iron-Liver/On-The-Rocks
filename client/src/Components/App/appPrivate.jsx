@@ -23,7 +23,7 @@ function AppPrivate() {
 				<Route path='/private/product/add' component={CreateProduct} exact />
 				<Route path='/private/product/update/:id' component={updateProduct} exact />
 				
-            </BrowserRouter>
+      </BrowserRouter>
 
 	);
 }

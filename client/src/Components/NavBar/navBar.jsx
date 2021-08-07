@@ -9,6 +9,11 @@ import {
   useSelector } from "react-redux";
 import NavBox from './navBox'
 
+
+// import { logOutUser } from "../../Redux/Users/UserActions";
+
+// const drawerWidth = 240;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex"

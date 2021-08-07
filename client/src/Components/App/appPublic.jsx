@@ -16,8 +16,13 @@ import ProductDetail from '../Products/productDetail';
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 import CreateOrder from '../Orders/CreateOrder/createOrder';
 import OrderDetail from '../Orders/OrderDetail/orderDetail';
-import AdminProfile from '../Profile/Admin/AdminProfile';
 
+import AdminProfile from '../Profile/Admin/AdminProfile';
+import AdminProfileOrders from '../Profile/Admin/AdminProfileOrders';
+import AdminProfileUsers from '../Profile/Admin/AdminProfileUsers';
+
+import UserProfile from '../Profile/User/UserProfile';
+import DisplayOrders from '../Orders/AdminOrders/displayOrders';
 
 function AppPublic() {
 
@@ -26,6 +31,7 @@ function AppPublic() {
 				<Route path="/" component={NavBar}/>
 				<Route exact path='/register' component= {CreateUser} />
 				<Route exact path='/login' component={LoginUser} />
+				<Route exact path='/login' component= {CreateUser} />
 				<Route exact path='/profile' component={landingPage} />
 				<Route path='/verify/password' component={ResetPassword} />
 				<Route path='/verify/admin' component={Admin2FA} />
@@ -34,13 +40,19 @@ function AppPublic() {
 				<Route exact path='/products/:id' component={ProductDetail} />
 
 				<Route exact path='/category/:id' component={categoryDetail} />
-				<Route exact path='/login' component= {CreateUser} />
-				<Route exact path='/login' component= {CreateUser}/>
 
         <Route exact path='/orderDetail/:id' component={OrderDetail} />
 				<Route exact path='/userOrder' component={Order} />
 				<Route exact path='/createOrder' component={CreateOrder} />
-				<Route  path="/adminProfile" component ={AdminProfile} />
+				<Route path="/adminProfile" component ={AdminProfile} />
+				<Route path="/adminProfile/Orders" component= {AdminProfileOrders}/>
+				<Route path="/adminProfile/Users" component = {AdminProfileUsers} />
+        <Route exact path='/order/:id' component={OrderDetail} />
+        <Route exact path='/orders' component={DisplayOrders} />
+				<Route exact path='/user_orders' component={Order} />
+				<Route exact path='/create_order' component={CreateOrder} />
+
+				<Route path="/userProfile" component={UserProfile} />
 			</BrowserRouter>
 
 	);
