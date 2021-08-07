@@ -102,7 +102,7 @@ return (
         freeSolo
         options={Products?.map((option) => option.name)}
         renderInput={(params) => (
-          <TextField {...params} label="Search" variant="outlined" />
+          <TextField {...params} label="Search" variant="standard" />
         )}
       />
       </ListItem>
