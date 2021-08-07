@@ -78,7 +78,7 @@ return (
         <ListItemIcon>
           <Search />
         </ListItemIcon>
-        <InputBase placeholder="Búsqueda" />
+        <InputBase placeholder="Search" />
       </ListItem>
     </div>
   );
@@ -95,7 +95,7 @@ return (
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="ProductoRandom" />
+          <ListItemText primary="Should map cart" />
         </ListItem>
       </List>
     </div>
