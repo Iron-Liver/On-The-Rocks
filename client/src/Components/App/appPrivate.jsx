@@ -10,6 +10,7 @@ import updateProduct from '../Products/updateProduct';
 // Category Imports
 import createCategory from '../Categories/CreateCategory/createCategory';
 import updateCategory from '../Categories/UpdateCategory/updateCategory';
+// Order Imports
 
 function AppPrivate() {
 
@@ -22,6 +23,7 @@ function AppPrivate() {
 				<Route path='/private/category/add' component={createCategory} exact />
 				<Route path='/private/product/add' component={CreateProduct} exact />
 				<Route path='/private/product/update/:id' component={updateProduct} exact />
+        
 				
       </BrowserRouter>
 

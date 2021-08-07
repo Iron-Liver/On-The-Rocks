@@ -15,8 +15,10 @@ import ProductDetail from '../Products/productDetail';
 // Category Imports
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 import CreateOrder from '../Orders/CreateOrder/createOrder';
+// Order Imports
 import OrderDetail from '../Orders/OrderDetail/orderDetail';
-import DisplayOrders from '../Orders/AdminOrders/displayOrders';
+import DisplayAdminOrders from '../Orders/AdminOrders/displayOrders';
+import DisplayUserOrders from '../Orders/UserOrders/displayOrders';
 
 function AppPublic() {
 
@@ -36,9 +38,10 @@ function AppPublic() {
 				<Route exact path='/category/:id' component={categoryDetail} />
 
         <Route exact path='/order/:id' component={OrderDetail} />
-        <Route exact path='/orders' component={DisplayOrders} />
 				<Route exact path='/user_orders' component={Order} />
 				<Route exact path='/create_order' component={CreateOrder} />
+        <Route exact path='/orders' component={DisplayAdminOrders} />
+        <Route exact path='/userOrders/:userId' component={DisplayUserOrders} />
 			</BrowserRouter>
 
 	);

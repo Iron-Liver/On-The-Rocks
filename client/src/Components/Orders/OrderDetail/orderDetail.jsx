@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
 const OrderDetail = () => {
   const [order, setOrder] = useState({});
 
+  const initialStatus = order.status;
+
+  const [orderStatus, setOrderStatus] = useState(initialStatus);
+
   const history = useHistory();
   const {id} = useParams();
   const classes = useStyles();
@@ -53,8 +57,8 @@ const OrderDetail = () => {
       {order && (
         <>
           <Grid container className={classes.gridContainer}>
-            <PersonalInfo order={order} id={id} />
-            <Summary order={order} id={id} />
+            <PersonalInfo order={order} id={id} setOrderStatus={setOrderStatus} orderStatus={orderStatus}/>
+            <Summary order={order} id={id} orderStatus={orderStatus} />
           </Grid>
           <div className={classes.accordionContainer}>
             <ProductsAccordion order={order} />
