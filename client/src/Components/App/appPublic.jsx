@@ -1,7 +1,12 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
+<<<<<<< HEAD
 import Order from '../Orders/UserOrders/order';
+=======
+import landingPage from '../LandingPage/landingPage'
+import NavBar from '../NavBar/navBar'
+>>>>>>> 33c973f8a937c3944a6757fccf3e561c03acfcdc
 // User Imports
 import CreateUser from '../Users/UserAdd/CreateUser'
 import LoginUser from '../Users/UserLogin/userLogin'
@@ -19,14 +24,15 @@ function AppPublic() {
 
 	return (
 			<BrowserRouter>
-
+				<Route path="/" component={NavBar}/>
 				<Route exact path='/register' component= {CreateUser} />
 				<Route exact path='/login' component={LoginUser} />
+				<Route exact path='/profile' component={landingPage} />
 				<Route path='/verify/password' component={ResetPassword} />
 				<Route path='/verify/admin' component={Admin2FA} />
 
-				<Route path='/products' component={products} exact />
-				<Route path='/products/:id' component={ProductDetail} exact />
+				<Route exact path='/products' component={products} />
+				<Route exact path='/products/:id' component={ProductDetail} />
 
 				<Route exact path='/category/:id' component={categoryDetail} />
 				<Route exact path='/login' component= {CreateUser} />
