@@ -1,6 +1,6 @@
 import {Divider,List, ListItem, ListItemText, InputBase} from '@material-ui/core'
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import {LocalBar, Receipt, Star, ListAlt, Business, Search} from '@material-ui/icons'
+import {LocalBar, Receipt, Star, ListAlt, Business, Search, AccountCircle, Loyalty} from '@material-ui/icons'
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
@@ -18,35 +18,53 @@ export const MenuList = () => {
               <ListItemIcon>
                 <LocalBar />
               </ListItemIcon>
-              <ListItemText primary="Productos" />
+              <ListItemText primary="Products" />
             </ListItem>
-    
+
+            <ListItem button>
+              <ListItemIcon>
+                <Loyalty />
+              </ListItemIcon>
+              <ListItemText primary="On Sale" />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemIcon>
+                <ListAlt />
+              </ListItemIcon>
+              <ListItemText primary="Categories" />
+            </ListItem>
+
+            <Divider />
+
             <ListItem button>
               <ListItemIcon>
                 <Receipt />
               </ListItemIcon>
-              <ListItemText primary="Mis Compras" />
+              <ListItemText primary="My Orders" />
             </ListItem>
     
             <ListItem button>
               <ListItemIcon>
                 <Star />
               </ListItemIcon>
-              <ListItemText primary="Mis Favoritos" />
+              <ListItemText primary="My Wishlist" />
             </ListItem>
     
             <ListItem button>
               <ListItemIcon>
-                <ListAlt />
+                <AccountCircle />
               </ListItemIcon>
-              <ListItemText primary="Recetas" />
+              <ListItemText primary="My Account" />
             </ListItem>
+
+            <Divider />
     
             <ListItem button>
               <ListItemIcon>
                 <Business />
               </ListItemIcon>
-              <ListItemText primary="Nosotros" />
+              <ListItemText primary="About Us" />
             </ListItem>
           </List>
         </div>

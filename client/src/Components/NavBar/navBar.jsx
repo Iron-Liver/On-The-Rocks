@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
 import { Menu, ShoppingCart, Search, AccountCircle } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   drawerPaperTop: {
-    width: "100%"
+    width: "100%",
+    height: theme.mixins.toolbar.minHeight
   },
   content: {
     flexGrow: 1,
@@ -99,7 +100,7 @@ function NavBar(props) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerSearch}
-              className={classes.menuButton}
+              className={`${classes.menuButton} ${classes.search}`}
             >
               <Search />
             </IconButton>
