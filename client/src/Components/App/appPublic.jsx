@@ -1,12 +1,9 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
-<<<<<<< HEAD
 import Order from '../Orders/UserOrders/order';
-=======
 import landingPage from '../LandingPage/landingPage'
 import NavBar from '../NavBar/navBar'
->>>>>>> 33c973f8a937c3944a6757fccf3e561c03acfcdc
 // User Imports
 import CreateUser from '../Users/UserAdd/CreateUser'
 import LoginUser from '../Users/UserLogin/userLogin'
@@ -19,6 +16,7 @@ import ProductDetail from '../Products/productDetail';
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 import CreateOrder from '../Orders/CreateOrder/createOrder';
 import OrderDetail from '../Orders/OrderDetail/orderDetail';
+import AdminProfile from '../Profile/AdminProfile.jsx/AdminProfile'
 
 function AppPublic() {
 
@@ -41,6 +39,7 @@ function AppPublic() {
         <Route exact path='/orderDetail/:id' component={OrderDetail} />
 				<Route exact path='/userOrder' component={Order} />
 				<Route exact path='/createOrder' component={CreateOrder} />
+				<Route path="/adminProfile/:username" component ={AdminProfile} />
 			</BrowserRouter>
 
 	);
