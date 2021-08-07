@@ -128,14 +128,14 @@ return (
         <ListItemIcon>
           <Search />
         </ListItemIcon>
-        {Products && (<Autocomplete   
+        <Autocomplete   
           id="Search"
           freeSolo
-          options={Products?.map((option) => option?.name)}
+          options={typeof(Products) !== 'undefined' ? Products.map((option) => option?.name) : []}
           renderInput={(params) => (
             <TextField {...params} onKeyUp={handleKeyPress.bind(this)} label="Search" variant="standard" InputProps={{ ...params.InputProps, type: "search" }} />
           )}
-        />)}
+        />
       </ListItem>
     </div>
   );

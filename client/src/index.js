@@ -7,10 +7,10 @@ import axios from 'axios'
 
 axios.defaults.baseURL = "http://localhost:3001" || "/";
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <AppGlobal/>
-    </Provider> 
-  </React.StrictMode>,
+    </Provider> ,
+  // </React.StrictMode>,
   document.getElementById('root')
 );

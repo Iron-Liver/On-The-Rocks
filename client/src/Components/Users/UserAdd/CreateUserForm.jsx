@@ -36,15 +36,13 @@ const CreateUserForm = ({ input, setInput, handleSubmit}) => {
         email: false,
 		password: false,
 		contact: false,
-        isDeleted:false
     })
 	const [helperText, setHelperText] = useState({//Control the warning message
 		name: "Insert Name",
 		username: "Insert Username",
-        email: "Isert Email",
+        email: "Insert Email",
         password: "Insert Password",
 		contact: "Insert contact phone number",
-        isDeleted:"Insert if is deleted"
     })
 	
 	const handleInputChange = function (e) {

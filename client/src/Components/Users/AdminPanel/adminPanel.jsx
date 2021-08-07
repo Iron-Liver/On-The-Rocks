@@ -35,14 +35,14 @@ function AdminPanel() {
             justifyContent="center"
             alignItems="center"
           >
-            <Button className={style.button} variant="body2" href="http://localhost:3000/private/category/add" color="secondary">
-              Add Category
+            <Button className={style.button} variant="body2" href="http://localhost:3000/private/panel/users" color="secondary">
+              Users
             </Button>
-            <Button className={style.button} variant="body2" href="http://localhost:3000/private/category/update/:id" color="secondary">
-              Category Update
+            <Button className={style.button} variant="body2" href="http://localhost:3000/private/panel/categories" color="secondary">
+              Categories
             </Button>
-            <Button className={style.button} variant="body2" href="http://localhost:3000/private/product/add" color="secondary">
-              Add Product
+            <Button className={style.button} variant="body2" href="http://localhost:3000/private/panel/products" color="secondary">
+              Products
             </Button>
           </Grid>
         </Grid>
