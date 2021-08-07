@@ -1,10 +1,13 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {Divider,List, ListItem, ListItemText, TextField} from '@material-ui/core'
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import {LocalBar, Receipt, Star, ListAlt, Business, Search, AccountCircle, Loyalty} from '@material-ui/icons'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {getProducts} from '../../Redux/Products/productsActions'
+import {FRONTEND} from '../../Utils/constants'
 
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
@@ -105,27 +108,40 @@ export const MenuList = () => {
 
 export const SearchList = () => {
   const classes = useStyles();
+  const dispatch = useDispatch()
   const {Products} = useSelector(state => state.productReducer)
+
+  useEffect(() => {
+    dispatch(getProducts())
+  },[dispatch])
+
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      window.location.replace(`${FRONTEND}products?search=${e.target.value.split(' ').join('-').toLowerCase()}`)
+    }
+  }
+
 return (
     <div className={classes.autocomplete}>
       <ListItem >
         <ListItemIcon>
           <Search />
         </ListItemIcon>
-        <Autocomplete       
-        id="Search"
-        freeSolo
-        options={Products?.map((option) => option.name)}
-        renderInput={(params) => (
-          <TextField {...params} label="Search" variant="standard" />
-        )}
-      />
+        {Products && (<Autocomplete   
+          id="Search"
+          freeSolo
+          options={Products?.map((option) => option?.name)}
+          renderInput={(params) => (
+            <TextField {...params} onKeyUp={handleKeyPress.bind(this)} label="Search" variant="standard" InputProps={{ ...params.InputProps, type: "search" }} />
+          )}
+        />)}
       </ListItem>
     </div>
   );
 }
 
- export  const CartList = () => { 
+export  const CartList = () => { 
     const classes = useStyles();
       return (
     <div>
