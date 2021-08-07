@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Summary = ({ order }) => {
+const Summary = ({ order, orderStatus }) => {
 
   const [summaryExpanded, setSummaryExpanded] = useState(false);
 
@@ -61,15 +61,13 @@ const Summary = ({ order }) => {
             <div style={{ padding: "0 20px", display: "flex" }}>
               <Typography style={{ flexGrow: "1" }}>Status:</Typography>
               <Typography>
-                {order.status &&
-                  order.status[0].toUpperCase() + order.status.slice(1)}
+                {orderStatus &&
+                  orderStatus[0].toUpperCase() + orderStatus.slice(1)}
               </Typography>
             </div>
             <br />
             <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>
-                Payment method:
-              </Typography>
+              <Typography style={{ flexGrow: "1" }}>Payment method:</Typography>
               <Typography>{order.paymentMethod}</Typography>
             </div>
             <br />

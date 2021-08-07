@@ -23,7 +23,7 @@ const useStyles= makeStyles(theme => ({
     marginBottom: 7,
   },
   image: {
-    border: '2px solid   #fcf3cf   ',
+    border: '2px solid  #fcf3cf   ',
     borderRadius: '100px',
     backgroundColor: '#a7aaad',
     width: 135,

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Grid, Paper, Typography, makeStyles, Button } from "@material-ui/core";
-import { Delete, Info } from "@material-ui/icons";
+import { Grid, Paper, Typography, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
+import { Delete, Info, Edit, Email } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   paperContainer: {
@@ -21,11 +21,39 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     background: "#e9ecef",
   },
+  paperPosition: {
+    width: "100%",
+    height: "100%",
+    margin: "20px 0",
+  },
+  imgContainer: {
+    margin: "0 auto",
+    padding: "20px",
+    display: "flex",
+    width: "90%",
+    justifyContent: "center",
+    background: "white",
+  },
+  personalItem: { 
+    padding: "20px 20px 0px", 
+    display: "flex" 
+  },
+  typoGrow: {
+    flexGrow: "1"
+  },
+  actionsContainer: {
+    display: "flex", 
+    justifyContent: "space-around"
+  }
 }));
 
-const PersonalInfo = ({ order, id }) => {
+const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
   const classes = useStyles();
   const history = useHistory();
+
+  const localProfile = JSON.parse(localStorage.getItem("profile"));
+
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleRemove = async () => {
     let doubleCheck = window.confirm(
@@ -42,82 +70,141 @@ const PersonalInfo = ({ order, id }) => {
     }
   };
 
+  useEffect(() => {
+    setOrderStatus(order.status);
+  }, [order.status, setOrderStatus]);
+
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleStatusClick = async (e) => {
+    setAnchorEl(null);
+    setOrderStatus(e.target.id);
+    await axios.post("/order/updateOrderStatus", {
+      orderId: order.id,
+      newStatus: e.target.id,
+    });
+  };
+
   return (
     <Grid item xs={12} sm={5} md={4}>
-      <div className={classes.paperContainer}>
+      <Box className={classes.paperContainer}>
         <Paper className={classes.paperInfo} square>
-          <div style={{ width: "100%", height: "100%", margin: "20px 0" }}>
-            <div
-              style={{
-                margin: "0 auto",
-                padding: "20px",
-                display: "flex",
-                width: "90%",
-                justifyContent: "center",
-                background: "white",
-              }}
-            >
+          <Box className={classes.paperPosition}>
+            <Box className={classes.imgContainer}>
               <img
-                src={
-                  order.order_products &&
-                  order.order_products[0].product.image
-                }
-                alt=""
+                src={order.order_products && order.order_products[0].product.image}
+                alt="order_product"
                 width="200px"
               />
-            </div>
-            <br />
-            <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>
+            </Box>
+            <Box className={classes.personalItem}>
+              <Typography className={classes.typoGrow}>
                 Order#{order.id}
               </Typography>
-            </div>
-            <br />
-            <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>First name:</Typography>
+            </Box>
+            <Box className={classes.personalItem}>
+              <Typography className={classes.typoGrow}>First name:</Typography>
               <Typography>{order.firstName}</Typography>
-            </div>
-            <br />
-            <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>Last name:</Typography>
+            </Box>
+            <Box className={classes.personalItem}>
+              <Typography className={classes.typoGrow}>Last name:</Typography>
               <Typography>{order.lastName}</Typography>
-            </div>
-            <br />
-            <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>Address:</Typography>
+            </Box>
+            <Box className={classes.personalItem}>
+              <Typography className={classes.typoGrow}>Address:</Typography>
               <Typography>{order.address}</Typography>
-            </div>
-            <br />
-            <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>City:</Typography>
+            </Box>
+            <Box className={classes.personalItem}>
+              <Typography className={classes.typoGrow}>City:</Typography>
               <Typography>{order.city}</Typography>
-            </div>
-            <br />
-            <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>Zip code:</Typography>
+            </Box>
+            <Box className={classes.personalItem}>
+              <Typography className={classes.typoGrow}>Zip code:</Typography>
               <Typography>{order.zipCode}</Typography>
-            </div>
+            </Box>
             <br />
-            <div
-              style={{ display: "flex", justifyContent: "space-around" }}
-            >
-              <Button
-                color="default"
-                variant="text"
-                startIcon={<Delete />}
-                onClick={handleRemove}
-              >
-                Remove order
-              </Button>
-              <Button variant="text" color="default" startIcon={<Info />}>
-                Get help
-              </Button>
-            </div>
-          </div>
+            {localProfile.isAdmin ? (
+              <Box className={classes.actionsContainer}>
+                <Button
+                  aria-controls="status-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                  startIcon={<Edit />}
+                  disableElevation
+                >
+                  SET STATUS
+                </Button>
+                <Menu
+                  id="status-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                  className={classes.menu}
+                >
+                  <MenuItem
+                    id="created"
+                    disabled={orderStatus === "created"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Created
+                  </MenuItem>
+                  <MenuItem
+                    id="processing"
+                    disabled={orderStatus === "processing"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Processing
+                  </MenuItem>
+                  <MenuItem
+                    id="completed"
+                    disabled={orderStatus === "completed"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Completed
+                  </MenuItem>
+                  <MenuItem
+                    id="cancelled"
+                    disabled={orderStatus === "cancelled"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Cancelled
+                  </MenuItem>
+                </Menu>
+                <Button variant="text" color="default" startIcon={<Email />}>
+                  Contact user
+                </Button>
+              </Box>
+            ) : (
+              <Box className={classes.actionsContainer}>
+                <Button
+                  color="default"
+                  variant="text"
+                  startIcon={<Delete />}
+                  onClick={handleRemove}
+                >
+                  Remove order
+                </Button>
+                <Button variant="text" color="default" startIcon={<Info />}>
+                  Get help
+                </Button>
+              </Box>
+            )}
+          </Box>
         </Paper>
-      </div>
+      </Box>
     </Grid>
-  )
+  );
 }
 
 export default PersonalInfo;

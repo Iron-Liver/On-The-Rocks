@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import Order from "./order";
 import axios from "axios";
 import { useHistory } from "react-router";
-import { makeStyles, Button } from "@material-ui/core";
-import { ArrowForwardIos, ArrowBackIos } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core";
 import { Pagination } from '@material-ui/lab';
+import theme from "../../../Utils/theme";
 
 const useStyles = makeStyles((theme) => ({
   paginationContainer: {
@@ -28,12 +28,12 @@ const DisplayOrders = () => {
 
   const history = useHistory();
 
-  const classes = useStyles();
+  const classes = useStyles(theme);
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.post("/order/getAllOrders", {
+        const response = await axios.post("/order/getOrders", {
           ...initialFilters,
           page: 1
         });
@@ -47,7 +47,7 @@ const DisplayOrders = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/order/getAllOrders", {
+      const response = await axios.post("/order/getOrders", {
         ...form,
         page: 1
       });
@@ -79,7 +79,7 @@ const DisplayOrders = () => {
 
   useEffect(() => {
     axios
-      .post("/order/getAllOrders", {
+      .post("/order/getOrders", {
         ...form,
         page
       })
@@ -146,9 +146,9 @@ const DisplayOrders = () => {
       </div>
       <div className={classes.paginationContainer}>
         <div>
-          <Pagination 
-            count={orders.pages} 
-            page={page} 
+          <Pagination
+            count={orders.pages}
+            page={page}
             onChange={handlePageChange}
           />
         </div>

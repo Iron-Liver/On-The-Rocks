@@ -11,7 +11,7 @@ const useStyle = makeStyles((theme) => ({
   }
 }))
 
-export default function AdminProfile() {
+export default function UserProfile() {
 
   const classes = useStyle();
 

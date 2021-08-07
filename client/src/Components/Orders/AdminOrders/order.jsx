@@ -158,7 +158,7 @@ const Order = ({ order }) => {
         <Hidden smDown>
           <Box className={classes.orderActions}>
             <Link
-              href={`/orderDetail/${order.id}`}
+              href={`/order/${order.id}`}
               className={classes.orderButton}
             >
               <Button startIcon={<Add />} variant="contained" disableElevation>
@@ -252,7 +252,7 @@ const Order = ({ order }) => {
           </Box>
           <div className={classes.buttonsContainer}>
             <Link
-              href={`/orderDetail/${order.id}`}
+              href={`/order/${order.id}`}
               className={classes.orderButton}
             >
               <Button startIcon={<Add />} variant="contained" disableElevation>
