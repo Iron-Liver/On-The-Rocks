@@ -1,5 +1,6 @@
 import {Divider,List, ListItem, ListItemText, InputBase} from '@material-ui/core'
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import {LocalBar, Receipt, Star, ListAlt, Business, Search} from '@material-ui/icons'
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
@@ -15,42 +16,35 @@ export const MenuList = () => {
           <List component="nav">
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
+                <LocalBar />
               </ListItemIcon>
               <ListItemText primary="Productos" />
             </ListItem>
     
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Mi Carrito" />
-            </ListItem>
-    
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
+                <Receipt />
               </ListItemIcon>
               <ListItemText primary="Mis Compras" />
             </ListItem>
     
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
+                <Star />
               </ListItemIcon>
               <ListItemText primary="Mis Favoritos" />
             </ListItem>
     
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
+                <ListAlt />
               </ListItemIcon>
               <ListItemText primary="Recetas" />
             </ListItem>
     
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon />
+                <Business />
               </ListItemIcon>
               <ListItemText primary="Nosotros" />
             </ListItem>
@@ -64,7 +58,7 @@ return (
     <div>
       <ListItem>
         <ListItemIcon>
-          <InboxIcon />
+          <Search />
         </ListItemIcon>
         <InputBase placeholder="Búsqueda" />
       </ListItem>
