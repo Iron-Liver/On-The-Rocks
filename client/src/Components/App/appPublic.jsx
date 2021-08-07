@@ -1,6 +1,8 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
+import landingPage from '../LandingPage/landingPage'
+import NavBar from '../NavBar/navBar'
 // User Imports
 import CreateUser from '../Users/UserAdd/createUser';
 import LoginUser from '../Users/UserLogin/userLogin'
@@ -16,18 +18,20 @@ function AppPublic() {
 
 	return (
 			<BrowserRouter>
-
+				<Route path="/" component={NavBar}/>
 				<Route exact path='/register' component= {CreateUser} />
 				<Route exact path='/login' component={LoginUser} />
+				<Route exact path='/profile' component={landingPage} />
 				<Route path='/verify/password' component={ResetPassword} />
 				<Route path='/verify/admin' component={Admin2FA} />
 
-				<Route path='/products' component={products} exact />
-				<Route path='/products/:id' component={ProductDetail} exact />
+				<Route exact path='/products' component={products} />
+				<Route exact path='/products/:id' component={ProductDetail} />
 
 				<Route exact path='/category/:id' component={categoryDetail} />
 
 			</BrowserRouter>
+
 	);
 }
 

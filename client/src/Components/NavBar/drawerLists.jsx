@@ -1,8 +1,27 @@
-import {Divider,List, ListItem, ListItemText, InputBase} from '@material-ui/core'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import {Divider,List, ListItem, ListItemText, TextField} from '@material-ui/core'
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import {LocalBar, Receipt, Star, ListAlt, Business, Search, AccountCircle, Loyalty} from '@material-ui/icons'
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
+    autocomplete:{
+      '& .MuiAutocomplete-root':{
+        width: '100%',
+        height: '100%',
+      },
+      '& .MuiOutlinedInput-notchedOutline':{
+        height: '90%',
+        margin: 'auto'
+      },
+      '& .MuiListItem-root':{
+        paddingTop:'0',
+        paddingBottom:'0',
+      },
+    },
     toolbar: theme.mixins.toolbar,
 }));
 
@@ -13,60 +32,94 @@ export const MenuList = () => {
           <div className={classes.toolbar}>OnTheRocks</div>
           <Divider />
           <List component="nav">
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Productos" />
-            </ListItem>
-    
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Mi Carrito" />
-            </ListItem>
-    
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Mis Compras" />
-            </ListItem>
-    
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Mis Favoritos" />
-            </ListItem>
-    
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Recetas" />
-            </ListItem>
-    
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Nosotros" />
-            </ListItem>
+            <Link to="/products" style={{textDecoration: 'none', color: 'black'}}>
+              <ListItem button>
+                <ListItemIcon>
+                  <LocalBar />
+                </ListItemIcon>
+                <ListItemText primary="Products" />
+              </ListItem>
+            </Link>
+
+            <Link to="/sale" style={{textDecoration: 'none', color: 'black'}}>
+              <ListItem button>
+                <ListItemIcon>
+                  <Loyalty />
+                </ListItemIcon>
+                <ListItemText primary="On Sale" />
+              </ListItem>
+            </Link>
+
+            <Link to="/categories" style={{textDecoration: 'none', color: 'black'}}>
+              <ListItem button>
+                <ListItemIcon>
+                  <ListAlt />
+                </ListItemIcon>
+                <ListItemText primary="Categories" />
+              </ListItem>
+            </Link>
+
+            <Divider />
+
+            <Link to="/orders" style={{textDecoration: 'none', color: 'black'}}>
+              <ListItem button>
+                <ListItemIcon>
+                  <Receipt />
+                </ListItemIcon>
+                <ListItemText primary="My Orders" />
+              </ListItem>
+            </Link>
+
+            <Link to="/wishlist" style={{textDecoration: 'none', color: 'black'}}>
+              <ListItem button>
+                <ListItemIcon>
+                  <Star />
+                </ListItemIcon>
+                <ListItemText primary="My Wishlist" />
+              </ListItem>
+            </Link>
+
+            <Link to="/profile" style={{textDecoration: 'none', color: 'black'}}>
+              <ListItem button>
+                <ListItemIcon>
+                  <AccountCircle />
+                </ListItemIcon>
+                <ListItemText primary="My Profile" />
+              </ListItem>
+            </Link>
+
+            <Divider />
+
+            <Link to="/OnTheRocks" style={{textDecoration: 'none', color: 'black'}}>
+              <ListItem button>
+                <ListItemIcon>
+                  <Business />
+                </ListItemIcon>
+                <ListItemText primary="About Us" />
+              </ListItem>
+            </Link>
           </List>
         </div>
       );
 }
 
 export const SearchList = () => {
+  const classes = useStyles();
+  const {Products} = useSelector(state => state.productReducer)
 return (
-    <div>
-      <ListItem>
+    <div className={classes.autocomplete}>
+      <ListItem >
         <ListItemIcon>
-          <InboxIcon />
+          <Search />
         </ListItemIcon>
-        <InputBase placeholder="Búsqueda" />
+        <Autocomplete       
+        id="Search"
+        freeSolo
+        options={Products?.map((option) => option.name)}
+        renderInput={(params) => (
+          <TextField {...params} label="Search" variant="standard" />
+        )}
+      />
       </ListItem>
     </div>
   );
@@ -83,7 +136,7 @@ return (
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="ProductoRandom" />
+          <ListItemText primary="Should map cart" />
         </ListItem>
       </List>
     </div>
