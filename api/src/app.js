@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require('express');
-const morgan = require('morgan'); 
+const morgan = require('morgan');
 const helmet = require('helmet')
 const cors = require("cors");
 const passport = require("passport");
@@ -10,6 +10,8 @@ const routes = require('./routes/index.js');
 const { SECRET_KEY, CLIENT_DOMAIN } = process.env;
 
 require('./db.js');
+require("./utils/auth/passport");
+require("./utils/auth/passportGoogleSSO");
 
 const server = express();
 server.name = 'ONTHEROCKS-API';
@@ -17,6 +19,7 @@ server.name = 'ONTHEROCKS-API';
 server.use(morgan('dev'));
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));
+
 
 server.use(helmet())
 server.use(cors({ origin: CLIENT_DOMAIN, credentials: true }));
@@ -31,7 +34,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', `${CLIENT_DOMAIN}`); 
+    res.header('Access-Control-Allow-Origin', `${CLIENT_DOMAIN}`);
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header(
         "Access-Control-Allow-Headers",

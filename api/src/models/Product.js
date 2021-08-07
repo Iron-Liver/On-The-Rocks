@@ -16,9 +16,11 @@ module.exports = (sequelize) => {
     },
     size: {
       type:DataTypes.STRING,
+      allowNull: false,
     },
     brand:{
       type:DataTypes.STRING,
+      allowNull: false,
     },
     sku: {
       type: DataTypes.STRING(60),
@@ -39,7 +41,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.TEXT,
-      defaultValue: "http://anokha.world/images/not-found.png",
+      allowNull: false,
     },
     category:{
       type:DataTypes.STRING,
