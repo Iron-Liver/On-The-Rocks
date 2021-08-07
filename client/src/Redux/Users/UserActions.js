@@ -1,8 +1,14 @@
 import axios from 'axios';
-import {CREATE_USER, LOGIN, LOGOUT, ADMIN_ALLOWED} from '../../Utils/constants'
+import {CREATE_USER, GET_ALL_USERS, LOGIN, LOGOUT, ADMIN_ALLOWED} from '../../Utils/constants'
 import swal from 'sweetalert'
 
 
+export function getAllUsers() {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/user/getAll`);
+    dispatch({ type: GET_ALL_USERS, payload: data });
+  };
+}
 
 export function createUser(user) {
     return async function (dispatch) {

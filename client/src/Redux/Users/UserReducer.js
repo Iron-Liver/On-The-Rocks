@@ -1,4 +1,4 @@
-import { CREATE_USER, LOGIN, LOGOUT, ADMIN_ALLOWED } from "../../Utils/constants";
+import { GET_ALL_USERS, CREATE_USER, LOGIN, LOGOUT, ADMIN_ALLOWED } from "../../Utils/constants";
 
 const initialState = {
   users: [],
@@ -9,6 +9,11 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_USERS:
+			return {
+				...state,
+				users: action.payload,
+			};
     case CREATE_USER:
       return {
         ...state,
