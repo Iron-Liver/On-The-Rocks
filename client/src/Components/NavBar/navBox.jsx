@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Container, ButtonBase, Typography } from '@material-ui/core'
+import { Container, ButtonBase } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -22,17 +22,6 @@ const useStyles = makeStyles((theme) => ({
             },
         }
     },
-    // imageButton: {
-    //     position: "absolute",
-    //     left: 0,
-    //     right: 0,
-    //     top: 0,
-    //     bottom: 0,
-    //     display: "flex",
-    //     alignItems: "center",
-    //     justifyContent: "center",
-    //     color: theme.palette.common.white
-    // },
     imageTitle: {
         position: "relative",
         width: '70px',
@@ -62,7 +51,6 @@ export const NavBox = () => {
                     key={"On Sale"}
                     className={classes.text}
                 >
-                    <span className={classes.imageButton}>
                     <p
                         component="span"
                         variant="subtitle1"
@@ -72,7 +60,6 @@ export const NavBox = () => {
                         {"On Sale"}
                         <span className={classes.imageMarked} />
                     </p>
-                    </span>
                 </ButtonBase>
             </Link>
 
@@ -82,7 +69,6 @@ export const NavBox = () => {
                     key={"Categories"}
                     className={classes.text}
                 >
-                    <span className={classes.imageButton}>
                     <p
                         component="span"
                         variant="subtitle1"
@@ -92,7 +78,6 @@ export const NavBox = () => {
                         {"Categories"}
                         <span className={classes.imageMarked} />
                     </p>
-                    </span>
                 </ButtonBase>
             </Link>
             
@@ -102,7 +87,6 @@ export const NavBox = () => {
                     key={"View All"}
                     className={classes.text}
                 >
-                    <span className={classes.imageButton}>
                     <p
                         component="span"
                         variant="subtitle1"
@@ -112,7 +96,6 @@ export const NavBox = () => {
                         {"View All"}
                         <span className={classes.imageMarked} />
                     </p>
-                    </span>
                 </ButtonBase>
             </Link>
 

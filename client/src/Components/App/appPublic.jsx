@@ -25,8 +25,8 @@ function AppPublic() {
 				<Route path='/verify/password' component={ResetPassword} />
 				<Route path='/verify/admin' component={Admin2FA} />
 
-				<Route exact path='/products' component={products} exact />
-				<Route exact path='/products/:id' component={ProductDetail} exact />
+				<Route exact path='/products' component={products} />
+				<Route exact path='/products/:id' component={ProductDetail} />
 
 				<Route exact path='/category/:id' component={categoryDetail} />
 
