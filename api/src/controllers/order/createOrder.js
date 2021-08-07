@@ -1,4 +1,4 @@
-const { Order, User } = require("../../db");
+const { Order, User, Order_products, Product } = require("../../db");
 
 module.exports = async (req, res, next) => {
   const {
@@ -10,7 +10,8 @@ module.exports = async (req, res, next) => {
     paymentMethod,
     zipCode,
     total,
-    state,
+    status,
+    cart
   } = req.body;
 
   try {
@@ -32,13 +33,22 @@ module.exports = async (req, res, next) => {
       paymentMethod,
       zipCode,
       total,
-      state,
+      status
     };
 
     const order = await Order.create(newOrder);
-
+    
     await user.addOrder(order.id);
     await order.setUser(user.id);
+
+    await cart.forEach(async (product) => {
+      const orderProducts = await Order_products.create({
+        units: product.units,
+        unitPrice: product.price
+      });
+      orderProducts.setOrder(order.id);
+      orderProducts.setProduct(product.id);
+    });
 
     return res.status(201).send(order);
   } catch (err) {

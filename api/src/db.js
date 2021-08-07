@@ -55,10 +55,20 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const {User, Order, Category, Product} = sequelize.models
+const { User, Order, Category, Product, Order_products } = sequelize.models;
 
-User.hasMany(Order, { constraints: false });
-Order.belongsTo(User, { constraints: false });
+User.hasMany(Order);
+Order.belongsTo(User);
+
+Product.hasMany(Order_products);
+Order_products.belongsTo(Product, {
+  foreignKey: "productId",
+});
+
+Order.hasMany(Order_products);
+Order_products.belongsTo(Order, {
+  foreignKey: "orderId",
+});
 
 module.exports = {
     ...sequelize.models, 

@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
         "city",
         "total",
         "createdAt",
-        "state",
+        "status",
       ],
       order: [["createdAt", "DESC"]]
     });

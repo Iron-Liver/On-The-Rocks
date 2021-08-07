@@ -13,6 +13,7 @@ import ProductDetail from '../Products/productDetail';
 // Category Imports
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 import CreateOrder from '../Orders/CreateOrder/createOrder';
+import OrderDetail from '../Orders/OrderDetail/orderDetail';
 
 function AppPublic() {
 
@@ -29,9 +30,11 @@ function AppPublic() {
 
 				<Route exact path='/category/:id' component={categoryDetail} />
 				<Route exact path='/login' component= {CreateUser} />
+				<Route exact path='/login' component= {CreateUser}/>
+
+        <Route exact path='/orderDetail/:id' component={OrderDetail} />
 				<Route exact path='/userOrder' component={Order} />
 				<Route exact path='/createOrder' component={CreateOrder} />
-
 			</BrowserRouter>
 
 	);

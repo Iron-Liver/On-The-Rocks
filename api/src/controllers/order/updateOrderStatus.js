@@ -1,10 +1,10 @@
 const { Order } = require("../../db");
 
 module.exports = async (req, res, next) => {
-  const { orderId, newState } = req.body;
+  const { orderId, newStatus } = req.body;
   
   try {
-    const [ updated ] = await Order.update({state: newState}, { 
+    const [ updated ] = await Order.update({status: newStatus}, { 
       where: {
         id: orderId
       }
