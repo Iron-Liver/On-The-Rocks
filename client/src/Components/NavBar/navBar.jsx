@@ -1,47 +1,53 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
-import { Menu, ShoppingCart, Search } from "@material-ui/icons";
+import { Menu, ShoppingCart, Search, AccountCircle } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
-import { useDispatch, 
+import { 
   // eslint-disable-next-line
   useSelector } from "react-redux";
-
-
-import { logOutUser } from "../../Redux/Users/userActions";
-
-const drawerWidth = 240;
+import NavBox from './navBox'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex"
   },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0
-    }
-  },
   appBar: {
     [theme.breakpoints.up("sm")]: {
-      width: `100%`,
-      marginLeft: drawerWidth
+      width: '100%',
     }
   },
+  menu: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+},
   menuButton: {
     marginRight: theme.spacing(0),
-    marginLeft: theme.spacing(0),
+    marginLeft: theme.spacing(0)
+  },
+  mobile: {
     [theme.breakpoints.up("sm")]: {
       display: "none"
     }
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    width: '100%',
+    maxWidth: '1300px',
+    margin: 'auto',
+  },
+  blank: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth
+    width: '70%',
+    [theme.breakpoints.up("sm")]: {
+      width: '30%',
+      flexShrink: 0
+    }
   },
   drawerPaperTop: {
-    width: "100%"
+    width: "100%",
+    height: theme.mixins.toolbar.minHeight
   },
   content: {
     flexGrow: 1,
@@ -56,7 +62,6 @@ function NavBar(props) {
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   // const estado = useSelector(state => state.currentUser)
-  const dispatch = useDispatch()
 
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);
@@ -70,9 +75,6 @@ function NavBar(props) {
     setCartDrawerOpen(!cartDrawerOpen);
   };
 
-  const logout = () =>{
-    dispatch(logOutUser())
-  }
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -80,50 +82,72 @@ function NavBar(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
+
           <Container>
             <Typography variant="h6" noWrap>
-              OnTheRocks
+              <Link to="/" style={{textDecoration: 'none', color: 'white'}}>OnTheRocks</Link>
             </Typography>
-    <button onClick={logout}>LOGOUT</button>
           </Container>
 
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerSearch}
-            className={classes.menuButton}
-          >
-            <Search />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerMenu}
-            className={classes.menuButton}
-          >
-            <Menu />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerCart}
-            className={classes.menuButton}
-          >
-            <ShoppingCart />
-          </IconButton>
+          <Hidden smDown>
+            <NavBox/>
+          </Hidden>
+
+          <Container className={classes.menu}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerSearch}
+              className={`${classes.menuButton} ${classes.search}`}
+            >
+              <Search />
+            </IconButton>
+
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerCart}
+              className={classes.menuButton}
+            >
+              <ShoppingCart />
+            </IconButton>
+
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerMenu}
+              className={`${classes.menuButton} ${classes.mobile}`}
+            >
+              <Menu />
+            </IconButton>
+
+            <Hidden smDown>
+              <Link to='/profile' style={{textDecoration: 'none', color: 'white'}}>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  className={classes.menuButton}
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Link>
+            </Hidden>
+
+          </Container>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
             container={container}
             variant="temporary"
-            anchor="right"
+            anchor="left"
             open={menuDrawerOpen}
             onClose={handleDrawerMenu}
             classes={{
@@ -133,7 +157,7 @@ function NavBar(props) {
               keepMounted: true // Better open performance on mobile.
             }}
           >
-            <MenuList/>
+            <MenuList  />
           </Drawer>
           <Drawer
             container={container}
@@ -153,7 +177,7 @@ function NavBar(props) {
           <Drawer
             container={container}
             variant="temporary"
-            anchor="left"
+            anchor="right"
             open={cartDrawerOpen}
             onClose={handleDrawerCart}
             classes={{
@@ -166,20 +190,8 @@ function NavBar(props) {
             <CartList/>
           </Drawer>
         </Hidden>
-        {/* <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden> */}
-      </nav>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        <div className={classes.blank} />
       </main>
     </div>
   );
