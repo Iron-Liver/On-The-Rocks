@@ -5,9 +5,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import theme from '../../../Utils/theme';
 import {Link} from 'react-router-dom';
-import { getAllUsers } from '../../../Redux/Users/userActions'
+import { getProducts } from '../../../Redux/Products/productsActions'
 
-const UserList = () => {
+const ProductsList = () => {
 	const useStyles = makeStyles((theme)=>({
 		root: {
 			marginTop: 100,
@@ -24,13 +24,11 @@ const UserList = () => {
 		}
 	}));
 
-	const {users} = useSelector(state => state.userReducer)
+	const {Products} = useSelector(state => state.productReducer)
 	const classes = useStyles();
 	const dispatch = useDispatch();
-    console.log(users)
 	useEffect(() => {
-        dispatch(getAllUsers())
-        console.log(users)
+        dispatch(getProducts())
 	},
 	// eslint-disable-next-line
 	[])
@@ -38,15 +36,8 @@ const UserList = () => {
     const columns = [
         {field: 'id', headerName: '#', width: 90 },
 		{field: 'name', headerName: 'Name', width: 160},
-		{field: 'email', headerName: 'Email', width: 180},
-		{field: 'contact', headerName: 'Phone', width: 150 },
-		{
-			field: 'isDeleted', headerName: 'Status', width: 130, renderCell: params => {
-				return (
-					<ThemeProvider theme={theme}>
-					{params.row.isDeleted ? 'Deleted' : 'Allowed'}
-					</ThemeProvider>
-		)} },
+		{field: 'description', headerName: 'Description', width: 400},
+		{field: 'price', headerName: 'Price', width: 150 },
 		{
 			field: 'Edit',
 			headerName: 'EDIT',
@@ -56,7 +47,7 @@ const UserList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/user/update/${params.id}`} style={{textDecoration:'none'}}>
+					<Link to={`/private/product/update/${params.id}`} style={{textDecoration:'none'}}>
 						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">EDIT</Button>
 					</Link>
 					</ThemeProvider>
@@ -72,8 +63,8 @@ const UserList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/user/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Details</Button>
+					<Link to={`/private/product/${params.id}`} style={{textDecoration:'none'}}>
+						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">DETAILS</Button>
 					</Link>
 					</ThemeProvider>
 				);
@@ -87,18 +78,18 @@ const UserList = () => {
 
 					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
 						<h1 >
-							Users:
+						Products:
 						</h1>
 						<Link to="/private/user/add" style={{textDecoration:'none'}}>
 							<Button variant="contained" color="secondary" >
-								Add New User
+								Add New Product
 							</Button>
 						</Link>
 					</Container>
 
 				<Container style={{height: 400, width: '90%'}}>
 					<Container style={{display: 'flex', height: '100%'}}>
-						<DataGrid rows={users} columns={columns} />
+						<DataGrid rows={Products ? Products : []} columns={columns} />
 					</Container>
 				</Container>
 
@@ -107,4 +98,4 @@ const UserList = () => {
     )
 
 }
-export default UserList;
+export default ProductsList;

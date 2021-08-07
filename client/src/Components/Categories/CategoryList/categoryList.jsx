@@ -5,9 +5,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import theme from '../../../Utils/theme';
 import {Link} from 'react-router-dom';
-import { getAllUsers } from '../../../Redux/Users/userActions'
+import { getAllCategories } from '../../../Redux/Category/categoryActions'
 
-const UserList = () => {
+const CategoryList = () => {
 	const useStyles = makeStyles((theme)=>({
 		root: {
 			marginTop: 100,
@@ -24,13 +24,11 @@ const UserList = () => {
 		}
 	}));
 
-	const {users} = useSelector(state => state.userReducer)
+	const {categories} = useSelector(state => state.categoryReducer)
 	const classes = useStyles();
 	const dispatch = useDispatch();
-    console.log(users)
 	useEffect(() => {
-        dispatch(getAllUsers())
-        console.log(users)
+        dispatch(getAllCategories())
 	},
 	// eslint-disable-next-line
 	[])
@@ -38,15 +36,7 @@ const UserList = () => {
     const columns = [
         {field: 'id', headerName: '#', width: 90 },
 		{field: 'name', headerName: 'Name', width: 160},
-		{field: 'email', headerName: 'Email', width: 180},
-		{field: 'contact', headerName: 'Phone', width: 150 },
-		{
-			field: 'isDeleted', headerName: 'Status', width: 130, renderCell: params => {
-				return (
-					<ThemeProvider theme={theme}>
-					{params.row.isDeleted ? 'Deleted' : 'Allowed'}
-					</ThemeProvider>
-		)} },
+		{field: 'description', headerName: 'Description', width: 400},
 		{
 			field: 'Edit',
 			headerName: 'EDIT',
@@ -56,8 +46,8 @@ const UserList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/user/update/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">EDIT</Button>
+					<Link to={`/private/category/update/${params.id}`} style={{textDecoration:'none'}}>
+						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Edit</Button>
 					</Link>
 					</ThemeProvider>
 				);
@@ -65,15 +55,15 @@ const UserList = () => {
 		},
 		{
 			field: 'Detail',
-			headerName: 'DETAILS',
+			headerName: 'DETAIL',
 			sortable: false,
 			width: 120,
 			disableClickEventBubbling: true,
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/user/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Details</Button>
+					<Link to={`/private/userdetail/${params.id}`} style={{textDecoration:'none'}}>
+						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Detail</Button>
 					</Link>
 					</ThemeProvider>
 				);
@@ -87,18 +77,18 @@ const UserList = () => {
 
 					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
 						<h1 >
-							Users:
+							Categories:
 						</h1>
-						<Link to="/private/user/add" style={{textDecoration:'none'}}>
+						<Link to="/private/category/add" style={{textDecoration:'none'}}>
 							<Button variant="contained" color="secondary" >
-								Add New User
+								Add New Category
 							</Button>
 						</Link>
 					</Container>
 
 				<Container style={{height: 400, width: '90%'}}>
 					<Container style={{display: 'flex', height: '100%'}}>
-						<DataGrid rows={users} columns={columns} />
+						<DataGrid rows={categories} columns={columns} />
 					</Container>
 				</Container>
 
@@ -107,4 +97,4 @@ const UserList = () => {
     )
 
 }
-export default UserList;
+export default CategoryList;

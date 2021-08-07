@@ -11,7 +11,7 @@ const deleteUser = require('../controllers/user/deleteUser');
 router.use(express.json());
 
 router.get('/getAll', getAllUsers);
-/* router.get('/getUser/:id', getUserById); */
+router.get('/getUser/:id', getUserById)
 router.put('/updateUser/:id', updateUser)
 router.delete('/deleteUser/:id', deleteUser);
 router.post('/addUser', createUser);
