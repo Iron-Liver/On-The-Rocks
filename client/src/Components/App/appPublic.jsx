@@ -16,7 +16,8 @@ import ProductDetail from '../Products/productDetail';
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 import CreateOrder from '../Orders/CreateOrder/createOrder';
 import OrderDetail from '../Orders/OrderDetail/orderDetail';
-import AdminProfile from '../Profile/AdminProfile.jsx/AdminProfile'
+import AdminProfile from '../Profile/Admin/AdminProfile';
+
 
 function AppPublic() {
 
@@ -39,7 +40,7 @@ function AppPublic() {
         <Route exact path='/orderDetail/:id' component={OrderDetail} />
 				<Route exact path='/userOrder' component={Order} />
 				<Route exact path='/createOrder' component={CreateOrder} />
-				<Route path="/adminProfile/:username" component ={AdminProfile} />
+				<Route  path="/adminProfile" component ={AdminProfile} />
 			</BrowserRouter>
 
 	);
