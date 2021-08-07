@@ -3,7 +3,7 @@ const getFilterCallback = require('./utils/getFilterCallback');
 
 module.exports = async (req, res, next) => {
 
-  const { itemsPerPage, orderBy, sort, filterBy, filterQuery } = req.body;
+  const { itemsPerPage, orderBy, sort, filterBy } = req.body;
   let { page } = req.body;
 
   try {
@@ -25,11 +25,14 @@ module.exports = async (req, res, next) => {
       order: [[orderBy, sort]]
     });
 
-    let filtered = [...orders];
+    const filters = Object.entries(filterBy);
 
-    filterBy.forEach((filter, index) => {
-      filtered = filtered.filter(getFilterCallback(filter, filterQuery[index]));
-    });
+    let filtered = [...orders].filter(order => {
+      for(filter of filters) {
+        if(getFilterCallback(filter[0], filter[1])(order) === false) return false;
+      }
+      return true;
+    })
     
     const pages = Math.ceil(filtered.length / itemsPerPage);
     
@@ -47,10 +50,7 @@ module.exports = async (req, res, next) => {
       pages,
       data: pageOrders,
       orderBy: [orderBy, sort],
-      filters: {
-        filterBy: filterBy ? filterBy : null,
-        filterQuery: filterQuery ? filterQuery : null
-      },
+      filters: filterBy ? filterBy : null
     }; 
 
     return res.send(response).status(200);

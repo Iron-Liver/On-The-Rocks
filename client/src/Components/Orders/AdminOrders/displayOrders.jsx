@@ -6,10 +6,9 @@ import { useHistory } from "react-router";
 const initialFilters = {
   orderBy: "id",
   sort: "DESC",
-  page: 2,
-  itemsPerPage: 3,
-  filterBy: [],
-  filterQuery: [],
+  page: 1,
+  itemsPerPage: 2,
+  filterBy: {}
 };
 
 const DisplayOrders = () => {
@@ -29,43 +28,89 @@ const DisplayOrders = () => {
     })();
   }, [history]);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("/order/getAllOrders", form);
       setOrders(response.data);
+      setForm({
+        ...form,
+        page: 1
+      })
     } catch (error) {
       history.push("/");
     }
   };
 
   const handleChange = (e) => {
-    let idx = form.filterBy.indexOf(e.target.name);
-    if(e.target.value === "" && idx === -1) return;
-    if(e.target.value === "") {
+    if (e.target.value === "") {
+      const obj = {...form.filterBy};
+      delete obj[e.target.name];
       setForm({
         ...form,
-        filterBy: form.filterBy.filter((param, index) => index !== idx),
-        filterQuery: form.filterQuery.filter((param, index) => index !== idx),
+        filterBy: obj
       });
-    } else {
-      if(idx === -1) {
-        setForm({
-          ...form,
-          filterBy: [...form.filterBy, e.target.name],
-          filterQuery: [...form.filterQuery, e.target.value]
-        });
-      } else {
-        let newArray = [...form.filterQuery]
-        newArray[idx] = e.target.value 
-        setForm({
-          ...form,
-          filterQuery: newArray,
-        });
-      }
+      return;
+    }
+
+    const obj = {...form.filterBy};
+    obj[e.target.name] = e.target.value;
+    setForm({
+      ...form,
+      filterBy: obj
+    });
+
+
+    // let idx = form.filterBy.indexOf(e.target.name);
+    // if(e.target.value === "" && idx === -1) return;
+    // if(e.target.value === "") {
+    //   setForm({
+    //     ...form,
+    //     filterBy: form.filterBy.filter((param, index) => index !== idx),
+    //     filterQuery: form.filterQuery.filter((param, index) => index !== idx),
+    //   });
+    // } else {
+    //   if(idx === -1) {
+    //     setForm({
+    //       ...form,
+    //       filterBy: [...form.filterBy, e.target.name],
+    //       filterQuery: [...form.filterQuery, e.target.value]
+    //     });
+    //   } else {
+    //     let newArray = [...form.filterQuery]
+    //     newArray[idx] = e.target.value 
+    //     setForm({
+    //       ...form,
+    //       filterQuery: newArray,
+    //     });
+    //   }
+    // }
+  };
+
+  useEffect(() => {
+    axios
+      .post("/order/getAllOrders", form)
+      .then((response) => setOrders(response.data))
+      .catch((err) => history.push("/"));
+  },[form, history])
+
+  const handleBack = () => {
+    if(form.page > 1) {
+      setForm({
+        ...form,
+        page: form.page - 1
+      }); 
     }
   };
+
+  const handleNext = () => {
+    if (form.page < orders.pages) {
+      setForm({
+        ...form,
+        page: form.page + 1,
+      });
+    }
+  }
 
   return (
     <>
@@ -120,7 +165,9 @@ const DisplayOrders = () => {
           <input type="submit" />
         </form>
       </div>
-      <h1>{orders.page}</h1>
+      <button onClick={handleBack}>{"<"}</button>
+      <h1 style={{display: "inline"}}>{orders.page}</h1>
+      <button onClick={handleNext}>{">"}</button>
       <h1>{orders.pages}</h1>
       <div
         style={{
@@ -130,7 +177,7 @@ const DisplayOrders = () => {
         }}
       >
         {orders.data &&
-          orders.data.map((order, idx) => <Order order={order} key={idx} />)}
+        orders.data.map((order, idx) => <Order order={order} key={idx} />)}
       </div>
     </>
   );

@@ -18,15 +18,27 @@ module.exports = (prop, param) => {
   ];
 
   if(stringOrderProperties.includes(prop)) {
-    return (order) => order[prop].includes(param);
+    return (order) => {
+      if (!order[prop].toLowerCase().includes(param.toLowerCase())) {
+        return false;
+      }
+    }
   }
   
   if (intOrderProperties.includes(prop)) {
-    return (order) => order[prop] === parseFloat(param);
+    return (order) => {
+      if(order[prop] !== parseFloat(param)) {
+        return false;
+      }
+    }
   }
 
-  if(userProperties.includes(prop)) {
-    return (order) => order.user[prop].includes(param);
+  if (userProperties.includes(prop)) {
+    return (order) => {
+      if (!order.user[prop].toLowerCase().includes(param.toLowerCase())) {
+        return false;
+      }
+    }
   } 
 
   return () => true 
