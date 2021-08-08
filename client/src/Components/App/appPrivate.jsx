@@ -29,14 +29,11 @@ function AppPrivate() {
 			// 	<Route exact path='/private/panel/users' component={UserList} />
 			// 	<Route exact path='/private/panel/categories' component={CategoryList} />
 			// 	<Route exact path='/private/panel/products' component={ProductsList} />
-			// 	<Route exact path="/private/panel" component={adminPanel} />
 			// 	<Route exact path='/private/user/add' component={CreateUser} />
 			// 	<Route exact path='/private/user/update/:id' component={UserUpdate} />
 			// 	{/* <Route exact path='/private/user/:id' component={UserDetail} /> */}
-			// 	<Route exact path="/private/category/add" component={createCategory} />
 			// 	<Route exact path="/private/category/update/:id" component={updateCategory} />
 			// 	{/* <Route exact path='/private/product/:id' component={ProductDetail} /> */}
-			// 	<Route exact path='/private/product/add' component={CreateProduct} />
 			// 	<Route exact path='/private/product/update/:id' component={updateProduct} />
 			// </BrowserRouter>
 

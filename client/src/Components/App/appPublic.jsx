@@ -45,7 +45,6 @@ function AppPublic() {
 				<Route exact path='/userOrder' component={Order} />
 				<Route exact path='/createOrder' component={CreateOrder} />
         <Route exact path='/order/:id' component={OrderDetail} />
-				<Route exact path='/user_orders' component={Order} />
 
 
 				<Route path='/profile/:userId/:view' component={UserProfile} />

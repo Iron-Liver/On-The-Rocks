@@ -2,6 +2,9 @@ import AdminOrders from '../../Orders/AdminOrders/AdminOrders';
 import { React, useEffect } from 'react';
 import AdminPanel from './AdminPanel';
 import { useHistory, useParams } from 'react-router-dom';
+import CreateCategory from '../../Categories/CreateCategory/createCategory';
+import CreateProduct from '../../Products/createProduct';
+import UserList from '../../Users/UserList/userList';
 
 export default function AdminProfile() {
 
@@ -33,16 +36,19 @@ export default function AdminProfile() {
       </div>
       }
       {
+        
         view === 'users' &&
-         <h1> All users </h1>
+         <UserList />
       }
        {
-        view === 'create_category' &&
-        <h1>create  category </h1>
+         view === 'create_category' &&
+        <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
+         <CreateCategory/>
+        </div>
       }
        {
         view === 'create_product' &&
-        <h1>create  products </h1>
+        <CreateProduct/>
       }
     </div>
   )

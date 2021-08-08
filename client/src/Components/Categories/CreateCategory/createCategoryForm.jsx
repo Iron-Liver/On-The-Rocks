@@ -7,9 +7,7 @@ import theme from '../../../Utils/theme'
 
 const useStyles = makeStyles((theme)=>({
     root: {
-		marginTop: 50,
-		marginBottom: 30,
-		border:5,
+
 		display:'flex'
 	},
 	title: {
@@ -23,6 +21,9 @@ const useStyles = makeStyles((theme)=>({
 	},
 	last: {
 		padding: 8,
+	},
+	createCat: {
+		border: '1px solid red'
 	}
 }));
 
@@ -52,6 +53,7 @@ const CreateCategoryForm = ({ input, setInput, handleSubmit }) => {
     return (
 		<ThemeProvider theme={theme}>
         <div className= 'extContCAF'>
+					<div className={classes.createCat}>
 			<form noValidate autoComplete="off" >
 			<h1 className={classes.title}>Create Category</h1>
 			<Grid container direction="row" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
@@ -111,12 +113,13 @@ const CreateCategoryForm = ({ input, setInput, handleSubmit }) => {
                     
                 </Grid>
                 <Grid container direction="row" justifyContent="center" alignItems="center">
-                    <Grid item>
-                        <Button style={{fontWeight: 1000, marginTop: 50}} color="secondary" onClick={handleSubmit} variant="contained">Add Category</Button>
+                    <Grid item style={{paddingBottom:'30px'}}>
+                        <Button style={{fontWeight: 700, marginTop: 50}} color="secondary" onClick={handleSubmit} variant="contained">Add Category</Button>
                     </Grid>
                 </Grid>
 			</Grid>
         </form>
+				</div>
 		</div>
 		</ThemeProvider>
     )
