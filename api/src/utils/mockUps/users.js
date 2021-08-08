@@ -32,6 +32,7 @@ const userMockUp = async () => {
             email: 'agus-234@hotmail.com',
             password: hashedPasswordA,
             contact: '2314610603',
+            isAdmin: true
         });
 
         await User.create({
