@@ -3,10 +3,12 @@ const getFilterCallback = require('./utils/getFilterCallback');
 
 module.exports = async (req, res, next) => {
 
-  const { itemsPerPage, orderBy, sort, filterBy, userId } = req.body;
+  const { itemsPerPage, orderBy, filterBy, userId } = req.body;
   let { page } = req.body;
 
   try {
+
+    const [ sort, type ] = orderBy.split("-");
 
     const query = {
       attributes: [
@@ -19,7 +21,7 @@ module.exports = async (req, res, next) => {
         "createdAt",
         "status",
       ],
-      order: [[orderBy, sort]]
+      order: [[sort, type]]
     }
 
     if(userId) {
@@ -44,7 +46,9 @@ module.exports = async (req, res, next) => {
 
     let filtered = orders.filter(order => {
       for(filter of filters) {
-        if(getFilterCallback(filter[0], filter[1])(order) === false) return false;
+        if(getFilterCallback(filter[0], filter[1])(order) === false) {
+          return false
+        }
       }
       return true;
     })
@@ -68,7 +72,7 @@ module.exports = async (req, res, next) => {
       total,
       data: pageOrders,
       orderBy: {
-        [orderBy]: sort
+        [sort]: type
       },
       filters: filterBy ? filterBy : false
     }; 
