@@ -11,17 +11,18 @@ const AppGlobal = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
-				<Switch> 			
-					<Route 
-						path="/private"
-						component={ () => (
-							( (currentUser?.isAdmin) )
-							? ( <AppPrivate /> )
-							: ( <Redirect to="/login" /> )
-							)}
-					/>
-							<Route path="/" component={ () => <AppPublic />}/>
-					
+				<Switch> 	
+          {
+            currentUser?.isAdmin ? (
+              <Route path="/" component={AppPrivate}/>
+              ) : (
+                currentUser ? (
+                  <Route path="/" component={ () => <AppPublic />}/>
+                ) : (
+                <Redirect to="/login" />
+                )
+              )
+          }
 				</Switch>
 			</BrowserRouter>
 		</ThemeProvider>
