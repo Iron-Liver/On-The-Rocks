@@ -1,7 +1,7 @@
 import { React } from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase, } from '@material-ui/core'
 import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined  } from '@material-ui/icons'
-
+import { Link } from 'react-router-dom'
 
 const useStyles= makeStyles(theme => ({
   list: {
@@ -36,6 +36,8 @@ export default function DrawerList() {
 
   const classes = useStyles();
 
+  const userId = JSON.parse(localStorage.getItem('profile')).id
+
   return (
     <div>
       <List component="nav" className={classes.list}> 
@@ -61,42 +63,46 @@ export default function DrawerList() {
       </Grid>
 
       <Divider/>
-
-      <ListItem  button> 
-      <ButtonBase href="http://localhost:3000/adminProfile/Users">
-        <ListItemIcon>
-          <AssignmentInd />
-        </ListItemIcon>
-        <ListItemText  primary="All-Users" />
-      </ButtonBase>
-      </ListItem>
-      <ListItem divider button> 
-      <ButtonBase href="http://localhost:3000/adminProfile/Orders">
-        <ListItemIcon>
-          <ShoppingCart />
-        </ListItemIcon>
-        <ListItemText primary="All-Orders"/>
+      <Link to={`/private/profile/${userId}/users`}>
+        <ListItem  button> 
+        <ButtonBase>
+          <ListItemIcon>
+            <AssignmentInd />
+          </ListItemIcon>
+          <ListItemText  primary="All-Users" />
         </ButtonBase>
-      </ListItem>
-
-
-
-      <ListItem  button> 
-      <ButtonBase href="http://localhost:3000/adminProfile/CreateCategory">
-        <ListItemIcon>
-          <NoteAdd />
-        </ListItemIcon>
-        <ListItemText primary="Create-Category"/>
-       </ButtonBase>
-      </ListItem>
-      <ListItem  button> 
-      <ButtonBase href="http://localhost:3000/adminProfile/CreateProduct">
-        <ListItemIcon>
-          <AddShoppingCart />
-        </ListItemIcon>
-        <ListItemText primary="Create-Product"/>
+        </ListItem>
+      </Link>
+      <Link to={`/private/profile/${userId}/orders`}>
+        <ListItem divider button> 
+          <ButtonBase>
+            <ListItemIcon>
+              <ShoppingCart />
+            </ListItemIcon>
+            <ListItemText primary="All-Orders"/>
+          </ButtonBase>
+        </ListItem>
+      </Link> 
+      <Link to={`/private/profile/${userId}/create_category`}>
+        <ListItem  button> 
+        <ButtonBase>
+          <ListItemIcon>
+            <NoteAdd />
+          </ListItemIcon>
+          <ListItemText primary="Create-Category"/>
         </ButtonBase>
-      </ListItem>
+        </ListItem>
+      </Link>
+      <Link to={`/private/profile/${userId}/create_product`}>
+        <ListItem  button> 
+        <ButtonBase>
+          <ListItemIcon>
+            <AddShoppingCart />
+          </ListItemIcon>
+          <ListItemText primary="Create-Product"/>
+          </ButtonBase>
+        </ListItem>
+      </Link>
       
       </List>
     </div>

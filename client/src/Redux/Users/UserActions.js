@@ -1,8 +1,14 @@
 import axios from 'axios';
-import {CREATE_USER, LOGIN, LOGOUT, ADMIN_ALLOWED} from '../../Utils/constants'
+import {CREATE_USER, GET_ALL_USERS, LOGIN, LOGOUT, ADMIN_ALLOWED, API_URL, READ_USER, UPDATE_USER} from '../../Utils/constants'
 import swal from 'sweetalert'
 
 
+export function getAllUsers() {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/user/getAll`);
+    dispatch({ type: GET_ALL_USERS, payload: data });
+  };
+}
 
 export function createUser(user) {
     return async function (dispatch) {
@@ -27,6 +33,23 @@ export function loginUser(login) {
       swal(e.message, "An error has occurred", "error");
     }
   };
+}
+
+export function readUser(id) {
+	return async function (dispatch) {
+		const {data} = await axios.get(`${API_URL}user/getUser/${id}`);
+		dispatch({type: READ_USER, payload: data});
+	};
+}
+
+export function updateUser(user) {
+	return async function (dispatch) {
+		const {data} = await axios.put(
+			`${API_URL}users/updateuser/${user.id}`,
+			user
+		);
+		dispatch({type: UPDATE_USER, payload: data});
+	};
 }
 
 export function fetchAuthUser () {
