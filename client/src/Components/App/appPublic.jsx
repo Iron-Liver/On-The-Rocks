@@ -47,7 +47,7 @@ function AppPublic() {
         <Route exact path='/order/:id' component={OrderDetail} />
 
 
-				<Route path='/profile/:userId/:view' component={UserProfile} />
+				<Route exact path='/profile/:userId/:view' component={UserProfile} />
 				{/* <Route path="/adminProfile" component ={AdminProfile} />
 				<Route path="/adminProfile/:userId/Orders" component= {AdminProfileOrders}/>
 				<Route path="/adminProfile/Users" component = {AdminProfileUsers} />

@@ -18,10 +18,10 @@ const AppGlobal = () => {
 							( (currentUser?.isAdmin) )
 							? ( <AppPrivate /> )
 							: ( <Redirect to="/login" /> )
-						)}
+							)}
 					/>
+							<Route path="/" component={ () => <AppPublic />}/>
 					
-					<Route path="/" component={ () => <AppPublic />}/>
 				</Switch>
 			</BrowserRouter>
 		</ThemeProvider>

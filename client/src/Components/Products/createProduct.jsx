@@ -43,7 +43,6 @@ const CreateProduct = (props) => {
 
 	return (
 		<>
-			<h1 className={classes.title}>Create Product</h1>
 			<CreateProductForm input={input} setInput={setInput} handleSubmit={handleSubmit} />
 		</>
 	);

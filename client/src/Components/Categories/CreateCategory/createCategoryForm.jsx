@@ -7,7 +7,7 @@ import theme from '../../../Utils/theme'
 
 const useStyles = makeStyles((theme)=>({
     root: {
-
+		marginTop: '10px',
 		display:'flex'
 	},
 	title: {
@@ -23,7 +23,9 @@ const useStyles = makeStyles((theme)=>({
 		padding: 8,
 	},
 	createCat: {
-		border: '1px solid red'
+		border: '1px solid grey',
+		borderRadius: '5px',
+		boxShadow: ' 0px 0 1px 1px grey'
 	}
 }));
 

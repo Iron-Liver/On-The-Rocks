@@ -48,7 +48,9 @@ export default function AdminProfile() {
       }
        {
         view === 'create_product' &&
+        <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
         <CreateProduct/>
+        </div>
       }
     </div>
   )

@@ -67,6 +67,7 @@ function NavBar(props) {
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   // const estado = useSelector(state => state.currentUser)
+  // const { id, isAdmin } = JSON.parse(localStorage.getItem('profile'));
 
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);
@@ -131,7 +132,7 @@ function NavBar(props) {
             </IconButton>
 
             <Hidden smDown>
-              <Link to='/profile' style={{textDecoration: 'none', color: 'white'}}>
+              <Link to={""} style={{textDecoration: 'none', color: 'white'}}>
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"

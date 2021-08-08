@@ -14,6 +14,14 @@ const userMockUp = async () => {
             password: hashedPasswordA,
             contact: '3364013491',
         });     
+
+        await User.create({
+            name: 'Lucas Panaro',
+            username: 'marlopc',
+            email: 'lucaspanaro1@gmail.com',
+            password: hashedPasswordA,
+            contact: '2314558392'
+          });
     }catch (e) {
         console.log(e.message);
     }
@@ -33,15 +41,6 @@ const adminMockUp = async() => {
             email: 'tonga30.gnb@gmail.com',
             password: hashedPasswordB,
             contact: '3743414898',
-        });
-
-        await User.create({
-          name: 'Lucas Panaro',
-          username: 'marlopc',
-          email: 'lucaspanaro1@gmail.com',
-          password: hashedPasswordB,
-          contact: '2314558392',
-          isAdmin: true
         });
 
         await User.create({

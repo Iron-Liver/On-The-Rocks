@@ -15,8 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFilters = {
-  orderBy: "id",
-  sort: "DESC",
+  orderBy: "id-DESC-",
   filterBy: {},
   itemsPerPage: 3
 };
@@ -36,9 +35,9 @@ const UserOrders = () => {
     (async () => {
       try {
         const localProfile = JSON.parse(localStorage.getItem('profile'));
-        // if(localProfile.id !== userId) {
-        //   history.push("/");
-        // }
+        if(localProfile.id !== userId) {
+          history.push("/");
+        }
         const response = await axios.post("/order/getOrders", {
           ...initialFilters,
           page: 1,
