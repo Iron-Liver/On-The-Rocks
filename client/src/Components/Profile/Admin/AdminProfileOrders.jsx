@@ -1,4 +1,4 @@
-import DisplayOrders from '../../Orders/AdminOrders/displayOrders';
+import AdminOrders from '../../Orders/AdminOrders/AdminOrders';
 import { React } from 'react';
 import AdminProfile from './AdminProfile';
 
@@ -13,7 +13,7 @@ export default function AdminProfileOrders() {
 
       }
       <div style={{marginRight: 20}}>
-        {<DisplayOrders />}
+        {<AdminOrders />}
       </div>
     </div>
   )

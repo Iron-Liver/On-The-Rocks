@@ -1,6 +1,7 @@
 import { React } from 'react';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase} from '@material-ui/core'
+import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase } from '@material-ui/core'
 import { NoteAdd, AddShoppingCart, Settings, ShoppingCart, AlternateEmailOutlined, DnsOutlined  } from '@material-ui/icons'
+import { Link } from 'react-router-dom';
 
 
 const useStyles= makeStyles(theme => ({
@@ -36,6 +37,8 @@ export default function DrawerListUser() {
 
   const classes = useStyles();
 
+  const userId = JSON.parse(localStorage.getItem('profile')).id
+
   return (
     <div>
       <List component="nav" className={classes.list}> 
@@ -62,22 +65,26 @@ export default function DrawerListUser() {
 
       <Divider/>
 
-      <ListItem  button> 
-      <ButtonBase href="http://localhost:3000/userProfile/Orders/:userId">
-        <ListItemIcon>
-        <ShoppingCart />
-        </ListItemIcon>
-        <ListItemText  primary="My Orders" />
-      </ButtonBase>
-      </ListItem>
-      <ListItem divider button> 
-      <ButtonBase href="">
-        <ListItemIcon>
-         <Settings />
-        </ListItemIcon>
-        <ListItemText primary="Settings"/>
-        </ButtonBase>
-      </ListItem>
+      <Link to={`/profile/${userId}/orders`}>
+        <ListItem  button> 
+          <ButtonBase>
+            <ListItemIcon>
+            <ShoppingCart />
+            </ListItemIcon>
+            <ListItemText  primary="My Orders" />
+          </ButtonBase>
+        </ListItem>
+      </Link>
+      <Link to={`/profile/${userId}/settings`}>
+        <ListItem divider button>
+          <ButtonBase>
+            <ListItemIcon>
+              <Settings />
+            </ListItemIcon>
+            <ListItemText primary="Settings"/>
+          </ButtonBase>
+        </ListItem>
+      </Link>
 
 
 

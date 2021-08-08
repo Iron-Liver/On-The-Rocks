@@ -21,7 +21,7 @@ const initialFilters = {
   itemsPerPage: 2
 };
 
-const DisplayOrders = () => {
+const AdminOrders = () => {
   const [orders, setOrders] = useState({});
   const [form, setForm] = useState(initialFilters);
   const [page, setPage] = useState(1);
@@ -169,4 +169,4 @@ const DisplayOrders = () => {
   );
 }
 
-export default DisplayOrders
+export default AdminOrders

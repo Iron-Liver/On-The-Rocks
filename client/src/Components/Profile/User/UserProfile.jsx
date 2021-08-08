@@ -1,27 +1,44 @@
-import DrawerUserProfile from './DrawerUserProfile';
-import { makeStyles, Hidden } from '@material-ui/core'
-import { React } from 'react';
 
-const useStyle = makeStyles((theme) => ({
-  eldraw: {
-    minWidth: "max-content",
-    width: "max-content",
-    maxWidth: "max-content",
-    flexGrow: "1"
-  }
-}))
+import React, { useEffect } from 'react';
+import UserOrders from '../../Orders/UserOrders/userOrders';
+import UserPanel from './UserPanel';
+import { useParams, useHistory } from 'react-router';
 
 export default function UserProfile() {
 
-  const classes = useStyle();
+  let { userId, view } = useParams();
+
+  const localProfile = JSON.parse(localStorage.getItem('profile'));
+  const history = useHistory();
+  useEffect(() => {
+    if(!userId) {
+      history.push("/login");
+    }
+    if(!localProfile.id || parseInt(userId) !== localProfile.id) {
+      history.push("/login");
+    }
+    if(!view) {
+      history.push(`/private/profile/${userId}/dashboard`)
+      view = "dashboard";
+    }
+  }, [userId, view, history]);
 
   return (
-   
-      <Hidden xsDown>
-        <div className={classes.eldraw}>
-          {<DrawerUserProfile/>}
-        </div>
-      </Hidden>
-   
+   <div style= {{display: "flex", justifyContent: "space-evenly"}}>
+      {<UserPanel />}
+      {
+        view === 'orders' && (
+          <div style= {{marginRight: 25}}>
+            {<UserOrders />}
+          </div>
+        )
+      }
+      {
+        view === 'settings' && (
+          <h1>HOLA</h1>
+        )
+      }
+   </div>
   )
 }
+

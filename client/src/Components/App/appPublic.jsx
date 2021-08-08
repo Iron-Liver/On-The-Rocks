@@ -18,12 +18,11 @@ import CreateOrder from '../Orders/CreateOrder/createOrder';
 // Order Imports
 import OrderDetail from '../Orders/OrderDetail/orderDetail';
 
-import AdminProfile from '../Profile/Admin/AdminProfile';
-import AdminProfileOrders from '../Profile/Admin/AdminProfileOrders';
-import AdminProfileUsers from '../Profile/Admin/AdminProfileUsers';
+// import AdminProfile from '../Profile/Admin/AdminProfile';
+// import AdminProfileOrders from '../Profile/Admin/AdminProfileOrders';
+// import AdminProfileUsers from '../Profile/Admin/AdminProfileUsers';
 
 import UserProfile from '../Profile/User/UserProfile';
-import UserProfileOrders from '../Profile/User/UserProfileOrders';
 
 function AppPublic() {
 
@@ -49,12 +48,13 @@ function AppPublic() {
 				<Route exact path='/user_orders' component={Order} />
 				<Route exact path='/create_order' component={CreateOrder} />
 
-				<Route path="/adminProfile" component ={AdminProfile} />
+				{/* <Route path="/adminProfile" component ={AdminProfile} />
 				<Route path="/adminProfile/:userId/Orders" component= {AdminProfileOrders}/>
 				<Route path="/adminProfile/Users" component = {AdminProfileUsers} />
 
-				<Route path="/userProfile" component={UserProfile} />
-				<Route path="/userProfile/:userId/Orders" component={UserProfileOrders} />
+				<Route path="/userProfile" component={UserProfile} /> */}
+
+				<Route path='/profile/:userId/:view' component={UserProfile} />
 			</BrowserRouter>
 
 	);
