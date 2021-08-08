@@ -1,4 +1,4 @@
-import { CREATE_CATEGORY, CLEAR_CATEGORY_REPLY, READ_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY } from '../../Utils/constants';
+import { CREATE_CATEGORY, CLEAR_CATEGORY_REPLY, READ_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY, GET_ALL_CATEGORIES } from '../../Utils/constants';
 
 const initialState = {
 	categories: [],
@@ -8,6 +8,12 @@ const initialState = {
 
 const categoryReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case GET_ALL_CATEGORIES: {
+			return {
+				...state,
+				categories: action.payload,
+			}
+		}
 		case CREATE_CATEGORY:
 			return {
 				...state,

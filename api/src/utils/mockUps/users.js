@@ -7,14 +7,13 @@ const userMockUp = async () => {
     const hashedPasswordA = await bcrypt.hash('123', 12);
 
     try {
-    
         await User.create({
             name: 'Fede Fleitas',
             username: 'FedeFleitas',
             email: 'solamentefedee@gmail.com',
             password: hashedPasswordA,
             contact: '3364013491',
-        });
+        });     
     }catch (e) {
         console.log(e.message);
     }
@@ -79,6 +78,15 @@ const adminMockUp = async() => {
             email: 'david_melo10@yahoo.es',
             password: hashedPasswordB,
             contact: '3187826213',
+        });
+
+        await User.create({
+            name: 'Matias Vega',
+            username: 'mativegal',
+            isAdmin: true,
+            email: 'matiasvegalera@gmail.com',
+            password: hashedPasswordB,
+            contact: '1160011862',
         });
 
     }catch (e) {

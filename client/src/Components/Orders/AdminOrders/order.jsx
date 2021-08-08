@@ -122,7 +122,7 @@ const Order = ({ order }) => {
             </Typography>
           </div>
           <Hidden smUp>
-            <div className={classes.division} />
+            <div className={classes.divider} />
           </Hidden>
           <div className={classes.fieldContainer}>
             <Typography variant="overline">First name:</Typography>
@@ -234,7 +234,7 @@ const Order = ({ order }) => {
       </Box>
       <Box>
         <Hidden smUp>
-          <div className={classes.division} />
+          <div className={classes.divider} />
           <Box className={classes.orderActionsResponsive}>
             <Typography variant="overline" className={classes.infoField}>
               User: {order.user.name}
