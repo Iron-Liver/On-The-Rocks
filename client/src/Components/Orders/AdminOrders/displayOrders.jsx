@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Order from "./order";
 import axios from "axios";
 import { useHistory } from "react-router";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, FormControl, NativeSelect } from "@material-ui/core";
 import { Pagination } from '@material-ui/lab';
 import theme from "../../../Utils/theme";
 
@@ -15,8 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFilters = {
-  orderBy: "id",
-  sort: "DESC",
+  orderBy: "id-DESC-",
   filterBy: {},
   itemsPerPage: 2
 };
@@ -58,7 +57,7 @@ const DisplayOrders = () => {
     }
   };
 
-  const handleChange = (e) => {
+  const handleFilterChange = (e) => {
     if (e.target.value === "") {
       const obj = {...form.filterBy};
       delete obj[e.target.name];
@@ -75,6 +74,13 @@ const DisplayOrders = () => {
       ...form,
       filterBy: obj
     });
+  };
+
+  const handleSortChange = (e) => {
+    setForm({
+      ...form,
+      orderBy: e.target.value
+    })
   };
 
   useEffect(() => {
@@ -99,38 +105,39 @@ const DisplayOrders = () => {
             type="text"
             placeholder="First name"
             name="firstName"
-            onChange={handleChange}
+            onChange={handleFilterChange}
           />
           <input
             type="text"
             placeholder="Last name"
             name="lastName"
-            onChange={handleChange}
+            onChange={handleFilterChange}
           />
           <input
             type="text"
             placeholder="Address"
             name="address"
-            onChange={handleChange}
+            onChange={handleFilterChange}
           />
           <input
             type="text"
             placeholder="City"
             name="city"
-            onChange={handleChange}
+            onChange={handleFilterChange}
           />
           <input
             type="text"
             placeholder="Total"
             name="total"
-            onChange={handleChange}
+            onChange={handleFilterChange}
           />
-          <label htmlFor="status">
-            <select
-              id="status"
-              name="status"
+          <FormControl className={classes.formControl}>
+            <NativeSelect
+              className={classes.selectEmpty}
               defaultValue=""
-              onChange={handleChange}
+              name="status"
+              onChange={handleFilterChange}
+              inputProps={{ 'aria-label': 'status' }}
             >
               <option value="" hidden="hidden">
                 Status
@@ -139,8 +146,50 @@ const DisplayOrders = () => {
               <option value="processing">Processing</option>
               <option value="completed">Completed</option>
               <option value="cancelled">Cancelled</option>
+            </NativeSelect>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <NativeSelect
+              className={classes.selectEmpty}
+              value={form.orderBy}
+              name="sort"
+              onChange={handleSortChange}
+              inputProps={{ 'aria-label': 'sort' }}
+            >
+              <option value="id-DESC-" disabled>
+                Sort
+              </option>
+                <option value="id-DESC">Order ID Desc</option>
+                <option value="id-ASC">Order ID Asc</option>
+                <option value="createdAt-DESC">Date Desc</option>
+                <option value="createdAt-ASC">Date Asc</option>
+                <option value="total-DESC">Total Desc</option>
+                <option value="total-ASC">Total Asc</option>
+                <option value="firstName-DESC">First Name Desc</option>
+                <option value="firstName-ASC">First Name Asc</option>
+            </NativeSelect>
+          </FormControl>
+              {/* <option value="" hidden="hidden">
+                Sort
+              </option>
+              <optgroup label="Order ID">
+                <option value="id-DESC">Order ID Desc</option>
+                <option value="id-ASC">Order ID Asc</option>
+              </optgroup>
+              <optgroup label="Date">
+                <option value="createdAt-DESC">Date Desc</option>
+                <option value="createdAt-ASC">Date Asc</option>
+              </optgroup>
+              <optgroup label="Total">
+                <option value="total-DESC">Total Desc</option>
+                <option value="total-ASC">Total Asc</option>
+              </optgroup>
+              <optgroup label="First Name">
+                <option value="firstName-DESC">First Name Desc</option>
+                <option value="firstName-ASC">First Name Asc</option>
+              </optgroup>
             </select>
-          </label>
+          </label> */}
           <input type="submit" />
         </form>
       </div>
