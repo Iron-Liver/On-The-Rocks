@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     padding: "5px",
   },
-  divider: {
+  division: {
     width: "95%",
     margin: "0 auto",
     height: "2px",
@@ -122,7 +122,7 @@ const Order = ({ order }) => {
             </Typography>
           </div>
           <Hidden smUp>
-            <div className={classes.divider} />
+            <div className={classes.division} />
           </Hidden>
           <div className={classes.fieldContainer}>
             <Typography variant="overline">First name:</Typography>
@@ -234,7 +234,7 @@ const Order = ({ order }) => {
       </Box>
       <Box>
         <Hidden smUp>
-          <div className={classes.divider} />
+          <div className={classes.division} />
           <Box className={classes.orderActionsResponsive}>
             <Typography variant="overline" className={classes.infoField}>
               User: {order.user.name}

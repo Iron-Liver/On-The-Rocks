@@ -74,7 +74,7 @@ const Order = ({ order, userId, handleSubmit }) => {
         <Box className={classes.imgContainer}>
           <img
             className={classes.cover}
-            src={order.order_products[0].product.image}
+            src={order.order_products && order.order_products[0].product.image}
             alt="orderproduct"
           />
         </Box>

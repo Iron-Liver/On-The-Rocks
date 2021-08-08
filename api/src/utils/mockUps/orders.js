@@ -1,7 +1,7 @@
 const { Order } = require('../../db');
 
 const ordersMockUp = async () => {
-  // try {
+  try {
   //   await Order.create({
   //     firstName: 'Pablo' ,
   //     lastName: 'Hernández',
@@ -102,9 +102,10 @@ const ordersMockUp = async () => {
   //     total: 789.87,
   //     status: "cancelled",
   //   });
-  // } catch (err) {
-  //   console.log(err.message);
-  // }
+  } catch (err) {
+    console.log(err.message);
+  }
+
 }
 
 module.exports = {

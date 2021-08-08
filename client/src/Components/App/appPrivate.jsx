@@ -11,22 +11,20 @@ import updateProduct from '../Products/updateProduct';
 import createCategory from '../Categories/CreateCategory/createCategory';
 import updateCategory from '../Categories/UpdateCategory/updateCategory';
 // Order Imports
-
+import Profile from '../Profile/userProfile';
 function AppPrivate() {
 
 	return (
 
 			<BrowserRouter>
 				<Route path="/" component={NavBar}/>
+				<Route path='/private/profile/:userId/:view' component={Profile} />
 				<Route path="/private/category/add" component={createCategory} />
 				<Route path="/private/category/update/:id" component={updateCategory} />
 				<Route path='/private/category/add' component={createCategory} exact />
 				<Route path='/private/product/add' component={CreateProduct} exact />
 				<Route path='/private/product/update/:id' component={updateProduct} exact />
-        
-				
       </BrowserRouter>
-
 	);
 }
 
