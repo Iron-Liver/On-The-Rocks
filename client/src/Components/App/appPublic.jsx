@@ -14,8 +14,8 @@ import products from '../Products/products';
 import ProductDetail from '../Products/productDetail';
 // Category Imports
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
-// Order Imports
 import CreateOrder from '../Orders/CreateOrder/createOrder';
+// Order Imports
 import OrderDetail from '../Orders/OrderDetail/orderDetail';
 
 // import AdminProfile from '../Profile/Admin/AdminProfile';
@@ -31,6 +31,7 @@ function AppPublic() {
 				<Route path="/" component={NavBar}/>
 				<Route exact path='/register' component= {CreateUser} />
 				<Route exact path='/login' component={LoginUser} />
+				<Route exact path='/login' component= {CreateUser} />
 				<Route exact path='/profile' component={landingPage} />
 				<Route path='/verify/password' component={ResetPassword} />
 				<Route path='/verify/admin' component={Admin2FA} />
@@ -40,10 +41,11 @@ function AppPublic() {
 
 				<Route exact path='/category/:id' component={categoryDetail} />
 
-        <Route exact path='/order/:id' component={OrderDetail} />
+        <Route exact path='/orderDetail/:id' component={OrderDetail} />
+				<Route exact path='/userOrder' component={Order} />
 				<Route exact path='/createOrder' component={CreateOrder} />
-				<Route exact path='/profile/:userId/:view' component={UserProfile} />
-
+        <Route exact path='/order/:id' component={OrderDetail} />
+				<Route exact path='/profile/:userId?/:view?' component={UserProfile} />
 				{/* <Route path="/adminProfile" component ={AdminProfile} />
 				<Route path="/adminProfile/:userId/Orders" component= {AdminProfileOrders}/>
 				<Route path="/adminProfile/Users" component = {AdminProfileUsers} />

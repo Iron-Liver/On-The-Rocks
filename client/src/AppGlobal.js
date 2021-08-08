@@ -3,6 +3,8 @@ import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import AppPrivate from './Components/App/appPrivate';
 import AppPublic from './Components/App/appPublic';
 import theme from './Utils/theme'
+import NavBar from './Components/NavBar/navBar';
+
 
 const AppGlobal = () => {
 	const currentUser = (JSON.parse(localStorage.getItem('profile')));
@@ -13,14 +15,11 @@ const AppGlobal = () => {
 			<BrowserRouter>
 				<Switch> 	
           {
-            currentUser?.isAdmin ? (
+            currentUser?.isAdmin && adminAllowed ? (
+
               <Route path="/" component={AppPrivate}/>
-              ) : (
-                currentUser ? (
-                  <Route path="/" component={ () => <AppPublic />}/>
-                ) : (
-                <Redirect to="/login" />
-                )
+              ) : (            
+                <Route path="/" component={AppPublic}/> 
               )
           }
 				</Switch>

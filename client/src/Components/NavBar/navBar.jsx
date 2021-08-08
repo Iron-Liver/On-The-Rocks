@@ -81,6 +81,8 @@ function NavBar(props) {
     setCartDrawerOpen(!cartDrawerOpen);
   };
 
+  const currentUser = (JSON.parse(localStorage.getItem('profile')));
+
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -130,17 +132,16 @@ function NavBar(props) {
             >
               <Menu />
             </IconButton>
-            <Hidden smDown>
-              <Link to={`/private/profile/2`} style={{textDecoration: 'none', color: 'white'}}>
+            <Hidden smDown>  
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
                   edge="start"
                   className={classes.menuButton}
+                  href={currentUser ? (currentUser.isAdmin ? `private/profile/${currentUser.id}` : `/profile/${currentUser.id}/orders`) : '/login'}
                 >
                   <AccountCircle />
                 </IconButton>
-              </Link>
             </Hidden>
 
           </Container>
