@@ -28,7 +28,7 @@ export default function AdminProfile() {
 
   return (
     <div style={{ display: "flex", justifyContent: "space-evenly"}}>
-         <AdminPanel />
+        {<AdminPanel />}
       {
         view === 'orders' &&
       <div style={{marginRight: 20}}>
@@ -40,16 +40,22 @@ export default function AdminProfile() {
         view === 'users' &&
          <UserList />
       }
-       {
+      {
          view === 'create_category' &&
         <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
          <CreateCategory/>
         </div>
       }
-       {
+      {
         view === 'create_product' &&
         <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
         <CreateProduct/>
+        </div>
+      }
+      {
+        view === 'dashboard' &&
+        <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
+          <h1>dashboard</h1>
         </div>
       }
     </div>

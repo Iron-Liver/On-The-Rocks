@@ -130,9 +130,8 @@ function NavBar(props) {
             >
               <Menu />
             </IconButton>
-
             <Hidden smDown>
-              <Link to={""} style={{textDecoration: 'none', color: 'white'}}>
+              <Link to={`/private/profile/2`} style={{textDecoration: 'none', color: 'white'}}>
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
