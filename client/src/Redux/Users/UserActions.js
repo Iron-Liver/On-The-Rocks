@@ -87,10 +87,6 @@ export function logOutUser() {
       await localStorage.removeItem("cartItems");
       await localStorage.removeItem("shippingAddress");
       await localStorage.removeItem("wishListItems");
-			document.cookie.split(";").forEach((c) => {
-				document.cookie = c
-					.replace(/^ +/, "")
-			});
 			await axios.get(`/auth/logout`, 
 			{withCredentials: true})
 			dispatch({type: LOGOUT})

@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const CreateProductForm = ({ input, setInput, handleSubmit, match,  handleDelete }) => {
+const CreateProductForm = ({ input, setInput, handleSubmit, match, handleDelete }) => {
 
 	const classes = useStyles();
 
@@ -213,8 +213,21 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match,  handleDelete
 						</Grid>
 						<Grid container direction="row" justifyContent="center" alignItems="center">
 							<Grid item>
-								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
-							
+								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">set changes</Button>
+								{Object.values(error).indexOf(true) === -1
+									? <Button
+										style={{ fontWeight: 1000, marginTop: 50 }}
+										color="secondary" onClick={handleDelete}
+										variant="contained">
+										delete
+									</Button>
+									: <Button style={{ fontWeight: 1000, marginTop: 50 }}
+										color="secondary" onClick={handleDelete}
+										variant="contained" disabled={true}>
+                      
+										delete
+									</Button>
+								}
 							</Grid>
 						</Grid>
 					</Grid>

@@ -43,6 +43,7 @@ const CreateProduct = (props) => {
 
 	return (
 		<>
+			<h1 style={{display: 'flex', justifyContent:'center'}}>Create Product</h1>
 			<CreateProductForm input={input} setInput={setInput} handleSubmit={handleSubmit} />
 		</>
 	);

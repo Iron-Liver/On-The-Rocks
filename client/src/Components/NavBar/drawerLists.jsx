@@ -98,7 +98,7 @@ export const MenuList = () => {
               </ListItem>
             </Link>
 
-            <Link to="/login" style={{textDecoration: 'none', color: 'black'}}>
+            <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
               <ListItem button onClick={logOut}>
                 <ListItemIcon>
                   <ExitToApp/>

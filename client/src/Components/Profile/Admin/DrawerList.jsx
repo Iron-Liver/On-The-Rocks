@@ -114,7 +114,7 @@ export default function DrawerList() {
           </ButtonBase>
         </ListItem>
       </Link>
-      <Link to={`/login`}  className={classes.link}>
+      <Link to={`/`}  className={classes.link}>
         <ListItem  button> 
         <ButtonBase onClick={logOut}>
           <ListItemIcon>

@@ -3,8 +3,8 @@ import { useDispatch, useSelector} from 'react-redux';
 import { makeStyles,  Button,  Container } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
+import { Link } from 'react-router-dom';
 import theme from '../../../Utils/theme';
-import {Link} from 'react-router-dom';
 import { getProducts } from '../../../Redux/Products/productsActions'
 
 const ProductsList = () => {
@@ -60,9 +60,9 @@ const ProductsList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/product/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">DETAILS</Button>
-					</Link>
+						<Link to={`/products/${params.id}`}>
+							<Button style={{fontWeight: 1000}} variant="contained" color="secondary">DETAILS</Button>
+						</Link>
 					</ThemeProvider>
 				);
 			},

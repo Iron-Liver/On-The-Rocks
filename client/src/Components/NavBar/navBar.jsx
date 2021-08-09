@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
 import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
@@ -66,6 +66,7 @@ function NavBar(props) {
   const dispatch = useDispatch()
   const { window } = props;
   const classes = useStyles();
+  const history = useHistory();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
@@ -74,6 +75,7 @@ function NavBar(props) {
 
   const logOut = () => {
     dispatch(logOutUser())
+    history.push("/")
   }
 
   const handleDrawerMenu = () => {
@@ -158,7 +160,6 @@ function NavBar(props) {
                   aria-label="open drawer"
                   edge="start"
                   className={classes.menuButton}
-                  href='/login'
                   onClick={logOut}
                 >
                   <ExitToApp/>

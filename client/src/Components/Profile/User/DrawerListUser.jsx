@@ -119,7 +119,7 @@ export default function DrawerListUser() {
         <ListItemText primary="***"/>
         </ButtonBase>
       </ListItem>
-      <Link to={`/login`}  className={classes.link}>
+      <Link to={`/`}  className={classes.link}>
         <ListItem  button> 
         <ButtonBase onClick={logOut}>
           <ListItemIcon>

@@ -64,7 +64,7 @@ const ProductsAccordion = ({ order }) => {
             className={classes.product}
           >
             <div style={{ flexGrow: "1" }}>
-              <Link to={`/products/${order.product.id}`}>
+              <Link to={`/products/${order.product.id}`} style={{ color: "black", textDecoration: "none" }}>
                 <Typography variant="h6">{order.product.name}</Typography>
               </Link>
               <Typography variant="overline" display="block">
