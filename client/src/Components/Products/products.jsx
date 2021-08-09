@@ -26,6 +26,10 @@ const useStyles = makeStyles({
         flexWrap: "wrap",
         margin: 50,
         marginTop: "3%",
+    },
+    links: {
+      color: "black",
+      textDecoration: "none"
     }
 });
 
@@ -62,7 +66,7 @@ const Products = () => {
                                         <Button>
                                             <Delete/>
                                         </Button>
-                                        <NavLink to={`/products/${spirits.id}`}>
+                                        <NavLink to={`/products/${spirits.id}`} className={classes.links}>
                                             <CardActionArea>
                                                 <CardMedia
                                                     className={classes.media}

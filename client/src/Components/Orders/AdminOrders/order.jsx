@@ -69,17 +69,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Order = ({ order }) => {
+const Order = ({ order, setOrderStatus }) => {
   const classes = useStyles();
-
-  const initialStatus = order.status;
   
   const [ anchorEl, setAnchorEl ] = useState(null);
-  const [ orderStatus, setOrderStatus ] = useState(initialStatus);
-  
-  useEffect(() => {
-    setOrderStatus(order.status);
-  }, [order.status]);
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
@@ -91,7 +84,7 @@ const Order = ({ order }) => {
 
   const handleStatusClick = async (e) => {
     setAnchorEl(null);
-    setOrderStatus(e.target.id);
+    setOrderStatus(e.target.id, order.id);
     await axios.post('/order/updateOrderStatus', {
       orderId: order.id,
       newStatus: e.target.id
@@ -99,222 +92,227 @@ const Order = ({ order }) => {
   };
 
   return (
-    <Paper className={classes.orderPaper}>
-      <Box className={classes.orderBox}>
-        <Box className={classes.orderInfo}>
-          <div>
-            <Typography variant="overline">
-              Order #{order.id} | Status:{" "}
-              <span
-                style={{
-                  color:
-                    orderStatus === "completed"
-                      ? "#2a5000"
-                      : orderStatus === "cancelled"
-                      ? "#751d0c"
-                      : orderStatus === "processing"
-                      ? "#7a6200"
-                      : "#231f58",
-                }}
-              >
-                {orderStatus} ⬤
-              </span>
-            </Typography>
-          </div>
-          <Hidden smUp>
-            <div className={classes.divider} />
-          </Hidden>
-          <div className={classes.fieldContainer}>
-            <Typography variant="overline">First name:</Typography>
-            <Typography variant="body2" className={classes.infoValue}>
-              {order.firstName}
-            </Typography>
-          </div>
-          <div className={classes.fieldContainer}>
-            <Typography variant="overline">Last name:</Typography>
-            <Typography variant="body2" className={classes.infoValue}>
-              {order.lastName}
-            </Typography>
-          </div>
-          <div className={classes.fieldContainer}>
-            <Typography variant="overline">Address:</Typography>
-            <Typography variant="body2" className={classes.infoValue}>
-              {order.address}
-            </Typography>
-          </div>
-          <div className={classes.fieldContainer}>
-            <Typography variant="overline">City:</Typography>
-            <Typography variant="body2" className={classes.infoValue}>
-              {order.city}
-            </Typography>
-          </div>
-          <div className={classes.fieldContainer}>
-            <Typography variant="overline">Total:</Typography>
-            <Typography variant="body2" className={classes.infoValue}>
-              $ {order.total}
-            </Typography>
-          </div>
-        </Box>
-        <Hidden xsDown>
-          <Box className={classes.orderActions}>
-            <Link
-              href={`/order/${order.id}`}
-              className={classes.orderButton}
-            >
-              <Button startIcon={<Add />} variant="contained" disableElevation>
-                <span className={classes.moreDetails}>MORE DETAILS</span>
-              </Button>
-            </Link>
-            <Typography variant="overline" className={classes.infoField}>
-              User: {order.user.name}
-            </Typography>
-            <Typography variant="overline" className={classes.infoField}>
-              Username: {order.user.username}
-            </Typography>
-            <Typography
-              variant="overline"
-              className={classes.infoField}
-              gutterBottom
-            >
-              Date: {order.createdAt.split("T")[0]}
-            </Typography>
-            <Button
-              aria-controls="status-menu"
-              aria-haspopup="true"
-              variant="contained"
-              onClick={handleClick}
-              startIcon={<Edit />}
-              disableElevation
-            >
-              SET STATUS
-            </Button>
-            <Menu
-              id="status-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-              className={classes.menu}
-            >
-              <MenuItem
-                id="created"
-                disabled={orderStatus === "created"}
-                onClick={handleStatusClick}
-                className={classes.menuItem}
-              >
-                Created
-              </MenuItem>
-              <MenuItem
-                id="processing"
-                disabled={orderStatus === "processing"}
-                onClick={handleStatusClick}
-                className={classes.menuItem}
-              >
-                Processing
-              </MenuItem>
-              <MenuItem
-                id="completed"
-                disabled={orderStatus === "completed"}
-                onClick={handleStatusClick}
-                className={classes.menuItem}
-              >
-                Completed
-              </MenuItem>
-              <MenuItem
-                id="cancelled"
-                disabled={orderStatus === "cancelled"}
-                onClick={handleStatusClick}
-                className={classes.menuItem}
-              >
-                Cancelled
-              </MenuItem>
-            </Menu>
+    <>
+      {order &&
+        <Paper className={classes.orderPaper}>
+          <Box className={classes.orderBox}>
+            <Box className={classes.orderInfo}>
+              <div>
+                <Typography variant="overline">
+                  Order #{order.id} | Status:{" "}
+                  <span
+                    style={{
+                      color:
+                      order.status === "completed"
+                          ? "#2a5000"
+                          : order.status === "cancelled"
+                          ? "#751d0c"
+                          : order.status === "processing"
+                          ? "#7a6200"
+                          : "#231f58",
+                    }}
+                  >
+                    {order.status} ⬤
+                  </span>
+                </Typography>
+              </div>
+              <Hidden smUp>
+                <div className={classes.divider} />
+              </Hidden>
+              <div className={classes.fieldContainer}>
+                <Typography variant="overline">First name:</Typography>
+                <Typography variant="body2" className={classes.infoValue}>
+                  {order.firstName}
+                </Typography>
+              </div>
+              <div className={classes.fieldContainer}>
+                <Typography variant="overline">Last name:</Typography>
+                <Typography variant="body2" className={classes.infoValue}>
+                  {order.lastName}
+                </Typography>
+              </div>
+              <div className={classes.fieldContainer}>
+                <Typography variant="overline">Address:</Typography>
+                <Typography variant="body2" className={classes.infoValue}>
+                  {order.address}
+                </Typography>
+              </div>
+              <div className={classes.fieldContainer}>
+                <Typography variant="overline">City:</Typography>
+                <Typography variant="body2" className={classes.infoValue}>
+                  {order.city}
+                </Typography>
+              </div>
+              <div className={classes.fieldContainer}>
+                <Typography variant="overline">Total:</Typography>
+                <Typography variant="body2" className={classes.infoValue}>
+                  $ {order.total}
+                </Typography>
+              </div>
+            </Box>
+            <Hidden xsDown>
+              <Box className={classes.orderActions}>
+                <Link
+                  href={`/order/${order.id}`}
+                  className={classes.orderButton}
+                >
+                  <Button startIcon={<Add />} variant="contained" color="primary" disableElevation>
+                    <span className={classes.moreDetails}>MORE DETAILS</span>
+                  </Button>
+                </Link>
+                <Typography variant="overline" className={classes.infoField}>
+                  User: {order.user.name}
+                </Typography>
+                <Typography variant="overline" className={classes.infoField}>
+                  Username: {order.user.username}
+                </Typography>
+                <Typography
+                  variant="overline"
+                  className={classes.infoField}
+                  gutterBottom
+                >
+                  Date: {order.createdAt.split("T")[0]}
+                </Typography>
+                <Button
+                  aria-controls="status-menu"
+                  aria-haspopup="true"
+                  variant="contained"
+                  onClick={handleClick}
+                  startIcon={<Edit />}
+                  color="primary"
+                  disableElevation
+                >
+                  SET STATUS
+                </Button>
+                <Menu
+                  id="status-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                  className={classes.menu}
+                >
+                  <MenuItem
+                    id="created"
+                    disabled={order.status === "created"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Created
+                  </MenuItem>
+                  <MenuItem
+                    id="processing"
+                    disabled={order.status === "processing"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Processing
+                  </MenuItem>
+                  <MenuItem
+                    id="completed"
+                    disabled={order.status === "completed"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Completed
+                  </MenuItem>
+                  <MenuItem
+                    id="cancelled"
+                    disabled={order.status === "cancelled"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Cancelled
+                  </MenuItem>
+                </Menu>
+              </Box>
+            </Hidden>
           </Box>
-        </Hidden>
-      </Box>
-      <Box>
-        <Hidden smUp>
-          <div className={classes.divider} />
-          <Box className={classes.orderActionsResponsive}>
-            <Typography variant="overline" className={classes.infoField}>
-              User: {order.user.name}
-            </Typography>
-            <Typography variant="overline" className={classes.infoField}>
-              Username: {order.user.username}
-            </Typography>
-            <Typography
-              variant="overline"
-              className={classes.infoField}
-              gutterBottom
-            >
-              Date: {order.createdAt.split("T")[0]}
-            </Typography>
+          <Box>
+            <Hidden smUp>
+              <div className={classes.divider} />
+              <Box className={classes.orderActionsResponsive}>
+                <Typography variant="overline" className={classes.infoField}>
+                  User: {order.user.name}
+                </Typography>
+                <Typography variant="overline" className={classes.infoField}>
+                  Username: {order.user.username}
+                </Typography>
+                <Typography
+                  variant="overline"
+                  className={classes.infoField}
+                  gutterBottom
+                >
+                  Date: {order.createdAt.split("T")[0]}
+                </Typography>
+              </Box>
+              <div className={classes.buttonsContainer}>
+                <Link
+                  href={`/order/${order.id}`}
+                  className={classes.orderButton}
+                >
+                  <Button startIcon={<Add />} variant="contained" color="primary" disableElevation>
+                    <span className={classes.moreDetails}>MORE DETAILS</span>
+                  </Button>
+                </Link>
+                <Button
+                  aria-controls="status-menu"
+                  aria-haspopup="true"
+                  variant="contained"
+                  onClick={handleClick}
+                  startIcon={<Edit />}
+                  disableElevation
+                  color="primary"
+                >
+                  SET STATUS
+                </Button>
+                <Menu
+                  id="status-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                  className={classes.menu}
+                >
+                  <MenuItem
+                    id="created"
+                    disabled={order.status === "created"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Created
+                  </MenuItem>
+                  <MenuItem
+                    id="processing"
+                    disabled={order.status === "processing"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Processing
+                  </MenuItem>
+                  <MenuItem
+                    id="completed"
+                    disabled={order.status === "completed"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Completed
+                  </MenuItem>
+                  <MenuItem
+                    id="cancelled"
+                    disabled={order.status === "cancelled"}
+                    onClick={handleStatusClick}
+                    className={classes.menuItem}
+                  >
+                    Cancelled
+                  </MenuItem>
+                </Menu>
+              </div>
+              <br />
+            </Hidden>
           </Box>
-          <div className={classes.buttonsContainer}>
-            <Link
-              href={`/order/${order.id}`}
-              className={classes.orderButton}
-            >
-              <Button startIcon={<Add />} variant="contained" disableElevation>
-                <span className={classes.moreDetails}>MORE DETAILS</span>
-              </Button>
-            </Link>
-            <Button
-              aria-controls="status-menu"
-              aria-haspopup="true"
-              variant="contained"
-              onClick={handleClick}
-              startIcon={<Edit />}
-              disableElevation
-            >
-              SET STATUS
-            </Button>
-            <Menu
-              id="status-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-              className={classes.menu}
-            >
-              <MenuItem
-                id="created"
-                disabled={orderStatus === "created"}
-                onClick={handleStatusClick}
-                className={classes.menuItem}
-              >
-                Created
-              </MenuItem>
-              <MenuItem
-                id="processing"
-                disabled={orderStatus === "processing"}
-                onClick={handleStatusClick}
-                className={classes.menuItem}
-              >
-                Processing
-              </MenuItem>
-              <MenuItem
-                id="completed"
-                disabled={orderStatus === "completed"}
-                onClick={handleStatusClick}
-                className={classes.menuItem}
-              >
-                Completed
-              </MenuItem>
-              <MenuItem
-                id="cancelled"
-                disabled={orderStatus === "cancelled"}
-                onClick={handleStatusClick}
-                className={classes.menuItem}
-              >
-                Cancelled
-              </MenuItem>
-            </Menu>
-          </div>
-          <br />
-        </Hidden>
-      </Box>
-    </Paper>
+        </Paper>}
+    </>
   );
 }
 

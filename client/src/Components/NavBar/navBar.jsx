@@ -76,7 +76,7 @@ function NavBar(props) {
   const logOut = () => {
     dispatch(logOutUser())
     history.push("/")
-  }
+  };
 
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);

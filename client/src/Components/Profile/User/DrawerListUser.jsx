@@ -1,7 +1,7 @@
 import { React, useEffect } from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase } from '@material-ui/core'
 import { NoteAdd, AddShoppingCart, Settings, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp  } from '@material-ui/icons'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
 import theme from '../../../Utils/theme';
@@ -41,6 +41,7 @@ const useStyles= makeStyles(theme => ({
 
 export default function DrawerListUser() {
   const classes = useStyles(theme);
+  const history = useHistory();
   const dispatch = useDispatch();
   const userDetail = useSelector(state => state.userReducer.userDetail)
 
@@ -51,7 +52,8 @@ export default function DrawerListUser() {
   }, [dispatch, userId]);
 
   const logOut = () => {
-    dispatch(logOutUser())
+    dispatch(logOutUser());
+    history.push("/");
   }
 
   return (
@@ -119,16 +121,14 @@ export default function DrawerListUser() {
         <ListItemText primary="***"/>
         </ButtonBase>
       </ListItem>
-      <Link to={`/`}  className={classes.link}>
-        <ListItem  button> 
-        <ButtonBase onClick={logOut}>
-          <ListItemIcon>
-           <ExitToApp/>
-          </ListItemIcon>
-          <ListItemText primary="Logout"/>
-          </ButtonBase>
-        </ListItem>
-      </Link>
+      <ListItem  button> 
+      <ButtonBase onClick={logOut}>
+        <ListItemIcon>
+          <ExitToApp/>
+        </ListItemIcon>
+        <ListItemText primary="Logout"/>
+        </ButtonBase>
+      </ListItem>
       </List>
     </div>
   )

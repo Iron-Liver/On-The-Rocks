@@ -30,21 +30,26 @@ const ordersMockUp = async () => {
         ] 
       }
     };
+
     const mockUpRes = {
       status: (order) => ({
         send: () => {}
       })
-    }
+    };
+
     const users = await User.count();
-    let order = 0;
+
+    let order = 1;
+
     while (mockUpReq.body.id <= users) {
-      mockUpReq.body.id = mockUpReq.body.id + 1;
+      mockUpReq.body.id++;
       while (order < 5) {
-        order++
         await createOrder(mockUpReq, mockUpRes, () => {});
+        order++
       }
-      order = 0;
+      order = 1;
     }
+    
   } catch (err) {
     console.log(err.message);
   }

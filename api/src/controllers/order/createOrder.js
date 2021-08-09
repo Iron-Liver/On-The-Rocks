@@ -41,7 +41,7 @@ module.exports = async (req, res, next) => {
     await user.addOrder(order.id);
     await order.setUser(user.id);
 
-    await cart.forEach(async (product) => {
+    cart.forEach(async (product) => {
       const orderProducts = await Order_products.create({
         units: product.units,
         unitPrice: product.price
