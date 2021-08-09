@@ -16,23 +16,24 @@ const userMockUp = async () => {
         });     
 
         await User.create({
-            name: 'Lucas Panaro',
-            username: 'marlopc',
-            email: 'lucaspanaro1@gmail.com',
-            password: hashedPasswordA,
-            contact: '2314558392'
-          });
-    }catch (e) {
+          name: 'Lucas Panaro',
+          username: 'marlopc',
+          email: 'lucaspanaro1@gmail.com',
+          password: hashedPasswordA,
+          contact: '2314558392',
+        });
+      }catch (e) {
         console.log(e.message);
+      }
     }
-}
-
+    
 const adminMockUp = async() => {
-    // --- Admin ---
-
-    const hashedPasswordB = await bcrypt.hash('321', 12);
-
-    try{
+  // --- Admin ---
+  
+  const hashedPasswordB = await bcrypt.hash('321', 12);
+  
+  try{
+    
 
         await User.create({
             name: 'Gaston Benitez',

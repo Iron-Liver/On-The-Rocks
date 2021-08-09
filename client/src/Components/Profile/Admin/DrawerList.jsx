@@ -1,9 +1,9 @@
-import { React } from 'react';
-import { useDispatch } from 'react-redux';
+import { React, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase, } from '@material-ui/core'
 import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp  } from '@material-ui/icons'
-import { Link } from 'react-router-dom'
-import { logOutUser } from '../../../Redux/Users/UserActions';
+import { Link, useHistory } from 'react-router-dom'
+import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
 
 const useStyles= makeStyles(theme => ({
   list: {
@@ -40,14 +40,20 @@ const useStyles= makeStyles(theme => ({
 
 export default function DrawerList() {
   const dispatch = useDispatch()
-
   const classes = useStyles();
+  const history = useHistory();
+  const userDetail = useSelector(state => state.userReducer.userDetail);
 
   const userId = JSON.parse(localStorage.getItem('profile')).id
 
+  useEffect(() => {
+    dispatch(readUser(userId));
+  }, [dispatch, userId]);
+
   const logOut = () => {
-    dispatch(logOutUser())
-  }
+    dispatch(logOutUser());
+    history.push("/")
+  };
 
   return (
     <div>
@@ -63,12 +69,12 @@ export default function DrawerList() {
         <Grid container className={classes.belowImage}>
           <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
           <DnsOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
-        <ListItemText secondary="Agustin Moroni" style={{width: '75%', display: "inline-block"}}/>
+        <ListItemText secondary={userDetail ? userDetail.name : ""} style={{width: '75%', display: "inline-block"}}/>
           </Grid>
         
            <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
         <AlternateEmailOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
-        <ListItemText secondary="agusmoroni@hotmail.com" style={{width: '75%', display: "inline-block"}}/>
+        <ListItemText secondary={userDetail ? userDetail.email : ""} style={{width: '75%', display: "inline-block"}}/>
           </Grid>
         </Grid>
       </Grid>
@@ -114,16 +120,14 @@ export default function DrawerList() {
           </ButtonBase>
         </ListItem>
       </Link>
-      <Link to={`/`}  className={classes.link}>
-        <ListItem  button> 
-        <ButtonBase onClick={logOut}>
-          <ListItemIcon>
-           <ExitToApp/>
-          </ListItemIcon>
-          <ListItemText primary="Logout"/>
-          </ButtonBase>
-        </ListItem>
-      </Link>
+      <ListItem  button> 
+      <ButtonBase onClick={logOut}>
+        <ListItemIcon>
+          <ExitToApp/>
+        </ListItemIcon>
+        <ListItemText primary="Logout"/>
+        </ButtonBase>
+      </ListItem>
       
       </List>
     </div>

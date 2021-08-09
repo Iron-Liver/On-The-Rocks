@@ -97,6 +97,20 @@ const AdminOrders = () => {
     setPage(val);
   };
 
+  const setOrderStatus = (status, id) => {
+    const order = orders.data.find(order => order.id === id);
+    const orderIndex = orders.data.findIndex(order => order.id === id);
+    order.status = status;
+
+    const newData = [...orders.data];
+    newData[orderIndex] = order;
+
+    setOrders({
+      ...orders,
+      data: newData
+    })
+  };
+
   return (
     <div>
       <div>
@@ -211,7 +225,7 @@ const AdminOrders = () => {
       >
         {orders.data &&
           orders.data.map((order, idx) => (
-            <Order order={order} key={Math.random() * 100} />
+            <Order order={order} key={Math.random() * 100} setOrderStatus={setOrderStatus}/>
           ))}
       </div>
     </div>

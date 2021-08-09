@@ -98,7 +98,12 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
           <Box className={classes.paperPosition}>
             <Box className={classes.imgContainer}>
               <img
-                src={order.order_products && order.order_products[0].product.image}
+                src={order.order_products 
+                  ? order.order_products[0]?.product?.image 
+                    ? order.order_products[0].product.image 
+                    : "https://i.stack.imgur.com/y9DpT.jpg" 
+                  : "https://i.stack.imgur.com/y9DpT.jpg"
+                }
                 alt="order_product"
                 width="200px"
               />

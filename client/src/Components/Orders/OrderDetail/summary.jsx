@@ -54,92 +54,118 @@ const Summary = ({ order, orderStatus }) => {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12} sm={7} md={8}>
-      <div className={classes.paperContainer}>
-        <Paper className={classes.paperDetails}>
-          <div style={{ width: "100%", height: "100%", margin: "20px 0" }}>
-            <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>Status:</Typography>
-              <Typography>
-                {orderStatus &&
-                  orderStatus[0].toUpperCase() + orderStatus.slice(1)}
-              </Typography>
-            </div>
-            <br />
-            <div style={{ padding: "0 20px", display: "flex" }}>
-              <Typography style={{ flexGrow: "1" }}>Payment method:</Typography>
-              <Typography>{order.paymentMethod}</Typography>
-            </div>
-            <br />
-            <div>
-              <Accordion
-                expanded={summaryExpanded}
-                onChange={toggleAccordionSummary}
-                className={classes.accordionSummary}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMore />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  {summaryExpanded ? (
-                    <Typography variant="body2" className={classes.heading}>
-                      Hide summary
-                    </Typography>
-                  ) : (
-                    <Typography variant="body2" className={classes.heading}>
-                      Summary
-                    </Typography>
-                  )}
-                </AccordionSummary>
-                {order.order_products &&
-                  order.order_products.map((order) => (
-                    <AccordionDetails
-                      key={`${order.product.id}${order.id}`}
-                      className={classes.product}
+    <>
+      {order &&
+          <Grid item xs={12} sm={7} md={8}>
+          <div className={classes.paperContainer}>
+            <Paper className={classes.paperDetails}>
+              <div style={{ width: "100%", height: "100%", margin: "20px 0" }}>
+                <div style={{ padding: "0 20px", display: "flex" }}>
+                  <Typography style={{ flexGrow: "1" }}>Status:</Typography>
+                  <Typography>
+                    {orderStatus &&
+                      orderStatus[0].toUpperCase() + orderStatus.slice(1)}
+                  </Typography>
+                </div>
+                <br />
+                <div style={{ padding: "0 20px", display: "flex" }}>
+                  <Typography style={{ flexGrow: "1" }}>Payment method:</Typography>
+                  <Typography>{order.paymentMethod}</Typography>
+                </div>
+                <br />
+                <div>
+                  <Accordion
+                    expanded={summaryExpanded}
+                    onChange={toggleAccordionSummary}
+                    className={classes.accordionSummary}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMore />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
                     >
-                      <div style={{ flexGrow: "1" }}>
-                        <Typography variant="body2">
-                          {order.product.name}
+                      {summaryExpanded ? (
+                        <Typography variant="body2" className={classes.heading}>
+                          Hide summary
                         </Typography>
-                      </div>
-                      <div>
-                        <Typography variant="body2">
-                          {order.product.price > order.unitPrice ? (
-                            <>
-                              <Hidden smDown>
-                                <del> ${order.product.price} </del>
-                              </Hidden>
-                              <strong> ${order.unitPrice} </strong>
-                            </>
+                      ) : (
+                        <Typography variant="body2" className={classes.heading}>
+                          Summary
+                        </Typography>
+                      )}
+                    </AccordionSummary>
+                    {order.order_products &&
+                      order.order_products.map((order) => (
+                        <>
+                          {order.product ? (
+                            <AccordionDetails
+                              key={`${order.product.id}${order.id}`}
+                              className={classes.product}
+                            >
+                              <div style={{ flexGrow: "1" }}>
+                                <Typography variant="body2">
+                                  {order.product.name}
+                                </Typography>
+                              </div>
+                              <div>
+                                <Typography variant="body2">
+                                  {order.product.price > order.unitPrice ? (
+                                    <>
+                                      <Hidden smDown>
+                                        <del> ${order.product.price} </del>
+                                      </Hidden>
+                                      <strong> ${order.unitPrice} </strong>
+                                    </>
+                                  ) : (
+                                    <>${order.unitPrice} </>
+                                  )}
+                                  x {order.units}
+                                </Typography>
+                              </div>
+                            </AccordionDetails>
                           ) : (
-                            <>${order.unitPrice} </>
+                            <AccordionDetails
+                              key={`${Math.random() * 9999}`}
+                              className={classes.product}
+                            >
+                              <div style={{ flexGrow: "1" }}>
+                                <Typography variant="body2">
+                                  Product not found
+                                </Typography>
+                              </div>
+                              <div>
+                                <Typography variant="body2">
+                                <>${order.unitPrice} </>
+                                x {order.units}
+                                </Typography>
+                              </div>
+                            </AccordionDetails>
                           )}
-                          x {order.units}
-                        </Typography>
-                      </div>
-                    </AccordionDetails>
-                  ))}
-              </Accordion>
-            </div>
+                        </>
+                      ))
+                    }
+                  </Accordion>
+                </div>
 
-            <br />
-            <div
-              style={{
-                padding: "0 20px",
-                display: "flex",
-                alignItems: "baseline",
-              }}
-            >
-              <Typography variant="h6" style={{ flexGrow: "1" }}>
-                Total:
-              </Typography>
-              <Typography>${order.total}</Typography>
-            </div>
+                <br />
+                <div
+                  style={{
+                    padding: "0 20px",
+                    display: "flex",
+                    alignItems: "baseline",
+                  }}
+                >
+                  <Typography variant="h6" style={{ flexGrow: "1" }}>
+                    Total:
+                  </Typography>
+                  <Typography>${order.total}</Typography>
+                </div>
+              </div>
+            </Paper>
           </div>
-        </Paper>
-      </div>
-    </Grid>
+        </Grid>
+      }
+    </>
   );
 }
 
