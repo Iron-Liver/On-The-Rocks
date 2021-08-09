@@ -4,9 +4,9 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  makeStyles,
-  Link
+  makeStyles
 } from "@material-ui/core";
+import { Link } from 'react-router-dom';
 import { ExpandMore, VisibilityOff, ShoppingCart } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +64,7 @@ const ProductsAccordion = ({ order }) => {
             className={classes.product}
           >
             <div style={{ flexGrow: "1" }}>
-              <Link href={`/products/${order.product.id}`}>
+              <Link to={`/products/${order.product.id}`}>
                 <Typography variant="h6">{order.product.name}</Typography>
               </Link>
               <Typography variant="overline" display="block">
@@ -95,7 +95,7 @@ const ProductsAccordion = ({ order }) => {
               </Typography>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <Link href={`/products/${order.product.id}`}>
+              <Link to={`/products/${order.product.id}`}>
                 <img
                   src={order.product.image}
                   width="150px"

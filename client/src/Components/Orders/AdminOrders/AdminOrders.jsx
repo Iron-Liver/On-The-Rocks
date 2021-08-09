@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 const initialFilters = {
   orderBy: "id-DESC-",
   filterBy: {},
-  itemsPerPage: 2
+  itemsPerPage: 4
 };
 
 const AdminOrders = () => {
@@ -139,7 +139,7 @@ const AdminOrders = () => {
               onChange={handleFilterChange}
               inputProps={{ 'aria-label': 'status' }}
             >
-              <option value="" hidden="hidden">
+              <option value="">
                 Status
               </option>
               <option value="created">Created</option>

@@ -1,7 +1,9 @@
 import { React } from 'react';
+import { useDispatch } from 'react-redux';
 import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase, } from '@material-ui/core'
-import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined  } from '@material-ui/icons'
+import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp  } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
+import { logOutUser } from '../../../Redux/Users/UserActions';
 
 const useStyles= makeStyles(theme => ({
   list: {
@@ -29,14 +31,23 @@ const useStyles= makeStyles(theme => ({
     width: 135,
     height: 135,
     textAlign: 'center'
+  },
+  link: {
+    textDecoration:'none',
+     color:'#1c2624'
   }
 }))
 
 export default function DrawerList() {
+  const dispatch = useDispatch()
 
   const classes = useStyles();
 
   const userId = JSON.parse(localStorage.getItem('profile')).id
+
+  const logOut = () => {
+    dispatch(logOutUser())
+  }
 
   return (
     <div>
@@ -63,43 +74,53 @@ export default function DrawerList() {
       </Grid>
 
       <Divider/>
-      <Link to={`/private/profile/${userId}/users`}>
+      <Link to={`/private/profile/${userId}/users`}  className={classes.link}>
         <ListItem  button> 
         <ButtonBase>
           <ListItemIcon>
             <AssignmentInd />
           </ListItemIcon>
-          <ListItemText  primary="All-Users" />
+          <ListItemText  primary="All users" />
         </ButtonBase>
         </ListItem>
       </Link>
-      <Link to={`/private/profile/${userId}/orders`}>
+      <Link to={`/private/profile/${userId}/orders`} className={classes.link}>
         <ListItem divider button> 
           <ButtonBase>
             <ListItemIcon>
               <ShoppingCart />
             </ListItemIcon>
-            <ListItemText primary="All-Orders"/>
+            <ListItemText primary="All orders"/>
           </ButtonBase>
         </ListItem>
       </Link> 
-      <Link to={`/private/profile/${userId}/create_category`}>
+      <Link to={`/private/profile/${userId}/create_category`}  className={classes.link}>
         <ListItem  button> 
         <ButtonBase>
           <ListItemIcon>
             <NoteAdd />
           </ListItemIcon>
-          <ListItemText primary="Create-Category"/>
+          <ListItemText primary="Categories"/>
         </ButtonBase>
         </ListItem>
       </Link>
-      <Link to={`/private/profile/${userId}/create_product`}>
+      <Link to={`/private/profile/${userId}/create_product`}  className={classes.link}>
         <ListItem  button> 
         <ButtonBase>
           <ListItemIcon>
             <AddShoppingCart />
           </ListItemIcon>
-          <ListItemText primary="Create-Product"/>
+          <ListItemText primary="Products"/>
+          </ButtonBase>
+        </ListItem>
+      </Link>
+      <Link to={`/login`}  className={classes.link}>
+        <ListItem  button> 
+        <ButtonBase onClick={logOut}>
+          <ListItemIcon>
+           <ExitToApp/>
+          </ListItemIcon>
+          <ListItemText primary="Logout"/>
           </ButtonBase>
         </ListItem>
       </Link>

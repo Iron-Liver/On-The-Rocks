@@ -31,27 +31,19 @@ function AppPublic() {
 				<Route path="/" component={NavBar}/>
 				<Route exact path='/register' component= {CreateUser} />
 				<Route exact path='/login' component={LoginUser} />
-				<Route exact path='/login' component= {CreateUser} />
 				<Route exact path='/profile' component={landingPage} />
 				<Route path='/verify/password' component={ResetPassword} />
 				<Route path='/verify/admin' component={Admin2FA} />
 
-				<Route exact path='/products' component={products} />
 				<Route exact path='/products/:id' component={ProductDetail} />
+				<Route exact path='/products' component={products} />
 
 				<Route exact path='/category/:id' component={categoryDetail} />
+				<Route exact path='/' component={landingPage} />
 
-        <Route exact path='/orderDetail/:id' component={OrderDetail} />
-				<Route exact path='/userOrder' component={Order} />
-				<Route exact path='/createOrder' component={CreateOrder} />
         <Route exact path='/order/:id' component={OrderDetail} />
 				<Route exact path='/profile/:userId?/:view?' component={UserProfile} />
-				{/* <Route path="/adminProfile" component ={AdminProfile} />
-				<Route path="/adminProfile/:userId/Orders" component= {AdminProfileOrders}/>
-				<Route path="/adminProfile/Users" component = {AdminProfileUsers} />
-
-				<Route path="/userProfile" component={UserProfile} /> */}
-
+				<Route exact path='/createOrder' component={CreateOrder} />
 			</BrowserRouter>
 
 	);

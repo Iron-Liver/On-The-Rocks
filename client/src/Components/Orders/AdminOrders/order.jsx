@@ -117,7 +117,7 @@ const Order = ({ order }) => {
                       : "#231f58",
                 }}
               >
-                {orderStatus}
+                {orderStatus} ⬤
               </span>
             </Typography>
           </div>

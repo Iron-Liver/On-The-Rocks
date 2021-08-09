@@ -2,9 +2,9 @@ import AdminOrders from '../../Orders/AdminOrders/AdminOrders';
 import { React, useEffect } from 'react';
 import AdminPanel from './AdminPanel';
 import { useHistory, useParams } from 'react-router-dom';
-import CreateCategory from '../../Categories/CreateCategory/createCategory';
-import CreateProduct from '../../Products/createProduct';
 import UserList from '../../Users/UserList/userList';
+import CategoryList from '../../Categories/CategoryList/categoryList';
+import ProductsList from '../../Products/ProductsList/productsList';
 
 export default function AdminProfile() {
 
@@ -42,15 +42,15 @@ export default function AdminProfile() {
       }
       {
          view === 'create_category' &&
-        <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
-         <CreateCategory/>
-        </div>
+        // <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
+         <CategoryList/>
+        // </div>
       }
       {
         view === 'create_product' &&
-        <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
-        <CreateProduct/>
-        </div>
+        //  <div style={{ display: 'flex', justifyContent:'center', width: '100%', marginRight:'10px'}}>
+          <ProductsList/>
+        // </div>
       }
       {
         view === 'dashboard' &&

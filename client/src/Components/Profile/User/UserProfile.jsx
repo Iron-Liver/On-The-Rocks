@@ -25,7 +25,7 @@ export default function UserProfile() {
 
   return (
    <div style= {{display: "flex", justifyContent: "space-evenly"}}>
-      {<UserPanel />}
+      {<UserPanel id={userId}/>}
       {
         view === 'orders' && (
           <div style= {{marginRight: 25}}>

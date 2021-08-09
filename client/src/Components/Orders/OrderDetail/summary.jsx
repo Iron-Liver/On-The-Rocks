@@ -108,12 +108,12 @@ const Summary = ({ order, orderStatus }) => {
                           {order.product.price > order.unitPrice ? (
                             <>
                               <Hidden smDown>
-                                <del>${order.product.price}</del>
+                                <del> ${order.product.price} </del>
                               </Hidden>
                               <strong> ${order.unitPrice} </strong>
                             </>
                           ) : (
-                            order.unitPrice
+                            <>${order.unitPrice} </>
                           )}
                           x {order.units}
                         </Typography>

@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {Divider,List, ListItem, ListItemText, TextField} from '@material-ui/core'
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import {LocalBar, Receipt, Star, ListAlt, Business, Search, AccountCircle, Loyalty} from '@material-ui/icons'
+import {LocalBar, Receipt, Star, ListAlt, Business, Search, AccountCircle, Loyalty, ExitToApp} from '@material-ui/icons'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {getProducts} from '../../Redux/Products/productsActions'
 import {FRONTEND} from '../../Utils/constants'
 
 import { makeStyles } from "@material-ui/core/styles";
+import { logOutUser } from '../../Redux/Users/UserActions';
 const useStyles = makeStyles((theme) => ({
     autocomplete:{
       '& .MuiAutocomplete-root':{
@@ -28,7 +29,13 @@ const useStyles = makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,
 }));
 
-export const MenuList = () => {
+export const MenuList = () => {   
+    const dispatch = useDispatch()
+
+    const logOut = () => {
+      dispatch(logOutUser())
+    }
+
     const classes = useStyles();
     return (
         <div>
@@ -88,6 +95,15 @@ export const MenuList = () => {
                   <AccountCircle />
                 </ListItemIcon>
                 <ListItemText primary="My Profile" />
+              </ListItem>
+            </Link>
+
+            <Link to="/login" style={{textDecoration: 'none', color: 'black'}}>
+              <ListItem button onClick={logOut}>
+                <ListItemIcon>
+                  <ExitToApp/>
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
               </ListItem>
             </Link>
 

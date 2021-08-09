@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, Drawer, Divider } from '@material-ui/core'
+import { makeStyles, Drawer, Divider, Typography, ListItem, Toolbar, IconButton } from '@material-ui/core';
 import DrawerList from './DrawerList';
+import { Link } from 'react-router-dom';
 
 
 const useStyle = makeStyles((theme) => ({
@@ -29,7 +30,11 @@ export default function DrawerProfile() {
         paper: classes.drawerPaper,
       }}
     >
-      <div className={classes.toolbar}></div>
+      <div className={classes.toolbar}>
+        <Link to="/">
+          <IconButton style={{textDecoration: 'none', color: '#1c2624', marginTop:'5px', marginLeft:'51px'}}>On The Rocks</IconButton>
+        </Link>
+      </div>
       <Divider />
       <DrawerList />
     </Drawer>

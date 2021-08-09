@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
-import { Menu, ShoppingCart, Search, AccountCircle } from "@material-ui/icons";
+import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import { 
   // eslint-disable-next-line
   useSelector } from "react-redux";
 import NavBox from './navBox'
+import { logOutUser } from "../../Redux/Users/UserActions";
 
 
 // import { logOutUser } from "../../Redux/Users/UserActions";
@@ -61,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavBar(props) {
+  const dispatch = useDispatch()
   const { window } = props;
   const classes = useStyles();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
@@ -68,6 +71,10 @@ function NavBar(props) {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   // const estado = useSelector(state => state.currentUser)
   // const { id, isAdmin } = JSON.parse(localStorage.getItem('profile'));
+
+  const logOut = () => {
+    dispatch(logOutUser())
+  }
 
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);
@@ -138,9 +145,23 @@ function NavBar(props) {
                   aria-label="open drawer"
                   edge="start"
                   className={classes.menuButton}
-                  href={currentUser ? (currentUser.isAdmin ? `private/profile/${currentUser.id}` : `/profile/${currentUser.id}/orders`) : '/login'}
+                  href={currentUser ? (currentUser.isAdmin ? `http://localhost:3000/private/profile/${currentUser.id}` : `http://localhost:3000/profile/${currentUser.id}/orders`) : 'http://localhost:3000/login'}
                 >
                   <AccountCircle />
+                </IconButton>
+            </Hidden>
+
+           
+            <Hidden smDown>  
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  className={classes.menuButton}
+                  href='/login'
+                  onClick={logOut}
+                >
+                  <ExitToApp/>
                 </IconButton>
             </Hidden>
 

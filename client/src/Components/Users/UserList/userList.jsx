@@ -94,7 +94,7 @@ const UserList = () => {
 						</Link>
 					</Container>
 
-				<Container style={{height: 480, width: '100%'}}>
+				<Container style={{height: 460, width: '100%'}}>
 					<Container style={{display: 'flex', height: '100%'}}>
 						<DataGrid rows={users} columns={columns} />
 					</Container>

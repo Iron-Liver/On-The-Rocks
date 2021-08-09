@@ -82,9 +82,8 @@ const ProductDetail = () => {
 
     useEffect(() => {
         dispatch(getProductById(liqueur))
-    }, 
+    }, [dispatch, liqueur])
     // eslint-disable-next-line
-    [])
 
     if (!spirits) {
         return (<h1>Please wait</h1>)

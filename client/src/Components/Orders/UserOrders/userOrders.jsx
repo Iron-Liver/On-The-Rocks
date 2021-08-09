@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 const initialFilters = {
   orderBy: "id-DESC-",
   filterBy: {},
-  itemsPerPage: 3
+  itemsPerPage: 4
 };
 
 const UserOrders = () => {

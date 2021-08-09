@@ -14,8 +14,8 @@ passport.use(
       user = await User.findOne({where:{ email: email }})
       if (!user) return done(null, false);
       bcrypt.compare(password, user.password, (err, result) => {
-        if (err) throw err;
-        if (result === true) {
+        if (err) {return done(err)};
+        if (result) {
           return done(null, user);
         } else {
           return done(null, false);

@@ -90,7 +90,7 @@ const Order = ({ order, userId, handleSubmit }) => {
               Date: {order.createdAt.split("T")[0]}
             </Typography>
             <Typography variant="body1" color="textSecondary">
-              Address
+              Address: {order.address}
             </Typography>
           </CardContent>
         </Box>

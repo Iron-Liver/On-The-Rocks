@@ -10,14 +10,11 @@ import { getProducts } from '../../../Redux/Products/productsActions'
 const ProductsList = () => {
 	const useStyles = makeStyles((theme)=>({
 		root: {
-			marginTop: 100,
-			marginBottom: 30,
-			border:5
+			width: "100%",
+
 		},
 		formControl: {
 			margin: theme.spacing(1),
-			minWidth: 120,
-			width:500,
 		},
 		last: {
 			padding: 8,
@@ -76,18 +73,18 @@ const ProductsList = () => {
         <div className={classes.root}>  
             <ThemeProvider theme={theme}>
 
-					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: 50, marginBottom:'20px'}}>
 						<h1 >
 						Products:
 						</h1>
-						<Link to="/private/user/add" style={{textDecoration:'none'}}>
-							<Button variant="contained" color="secondary" >
+					
+							<Button variant="contained" color="secondary" href="http://localhost:3000/private/product/add">
 								Add New Product
 							</Button>
-						</Link>
+						
 					</Container>
 
-				<Container style={{height: 400, width: '90%'}}>
+				<Container style={{height: 460, width: '100%'}}>
 					<Container style={{display: 'flex', height: '100%'}}>
 						<DataGrid rows={Products ? Products : []} columns={columns} />
 					</Container>
