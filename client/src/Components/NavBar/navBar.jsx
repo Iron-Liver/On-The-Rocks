@@ -9,7 +9,7 @@ import {
   // eslint-disable-next-line
   useSelector } from "react-redux";
 import NavBox from './navBox'
-import { logOutUser } from "../../Redux/Users/UserActions";
+import { logOutUser } from "../../Redux/Users/userActions";
 
 
 // import { logOutUser } from "../../Redux/Users/UserActions";

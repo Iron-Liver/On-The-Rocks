@@ -5,7 +5,7 @@ import Order from '../Orders/UserOrders/order';
 import landingPage from '../LandingPage/landingPage'
 import NavBar from '../NavBar/navBar'
 // User Imports
-import CreateUser from '../Users/UserAdd/CreateUser'
+import CreateUser from '../Users/UserAdd/createUser'
 import LoginUser from '../Users/UserLogin/userLogin'
 import ResetPassword from '../Users/UserResetPassword/resetPassword';
 import Admin2FA from '../Users/Admin2FA/admin2FA';
