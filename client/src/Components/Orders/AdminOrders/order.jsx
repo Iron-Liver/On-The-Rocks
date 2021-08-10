@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Paper, makeStyles, Box, Typography, Button, Link, Menu, MenuItem, Hidden } from '@material-ui/core';
+import { Paper, makeStyles, Box, Typography, Button, Menu, MenuItem, Hidden } from '@material-ui/core';
 import { Add, Edit } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -153,7 +154,7 @@ const Order = ({ order, setOrderStatus }) => {
             <Hidden xsDown>
               <Box className={classes.orderActions}>
                 <Link
-                  href={`/order/${order.id}`}
+                  to={`/order/${order.id}`}
                   className={classes.orderButton}
                 >
                   <Button startIcon={<Add />} variant="contained" color="primary" disableElevation>
@@ -248,7 +249,7 @@ const Order = ({ order, setOrderStatus }) => {
               </Box>
               <div className={classes.buttonsContainer}>
                 <Link
-                  href={`/order/${order.id}`}
+                  to={`/order/${order.id}`}
                   className={classes.orderButton}
                 >
                   <Button startIcon={<Add />} variant="contained" color="primary" disableElevation>

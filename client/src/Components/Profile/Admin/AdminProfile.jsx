@@ -8,22 +8,22 @@ import ProductsList from '../../Products/ProductsList/productsList';
 
 export default function AdminProfile() {
 
-  let { userId, view } = useParams();
+  let { id, view } = useParams();
 
   const localProfile = JSON.parse(localStorage.getItem('profile'));
   const history = useHistory();
   useEffect(() => {
-    if(!userId) {
+    if(!id) {
       history.push("/login");
     }
-    if(!localProfile.id || parseInt(userId) !== localProfile.id) {
+    if(!localProfile.id || parseInt(id) !== localProfile.id) {
       history.push("/login");
     }
     if(!view) {
-      history.push(`/private/profile/${userId}/dashboard`)
+      history.push(`/private/profile/${id}/dashboard`)
       view = "dashboard";
     }
-  }, [userId, view, history]);
+  }, [id, view, history]);
 
 
   return (

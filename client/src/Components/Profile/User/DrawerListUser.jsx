@@ -1,7 +1,7 @@
 import { React, useEffect } from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase } from '@material-ui/core'
 import { NoteAdd, AddShoppingCart, Settings, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp  } from '@material-ui/icons'
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
 import theme from '../../../Utils/theme';
@@ -43,9 +43,10 @@ export default function DrawerListUser() {
   const classes = useStyles(theme);
   const history = useHistory();
   const dispatch = useDispatch();
-  const userDetail = useSelector(state => state.userReducer.userDetail)
+  const userDetail = useSelector(state => state.userReducer.userDetail);
+  const { url } = useRouteMatch();
 
-  const userId = JSON.parse(localStorage.getItem('profile')).id;
+  const userId = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')).id : undefined
 
   useEffect(() => {
     dispatch(readUser(userId));
@@ -60,75 +61,80 @@ export default function DrawerListUser() {
     <div>
       <List component="nav" className={classes.list}> 
 
-      <Grid container className={classes.Container}>
-        <Grid item className={classes.imageContainer}> 
-          <img className={classes.image} src="https://png.pngtree.com/png-vector/20190501/ourmid/pngtree-users-icon-design-png-image_1014936.jpg" alt="user" />
-        </Grid>
-
-      
-
-        <Grid container className={classes.belowImage}>
-          <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
-          <DnsOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
-        <ListItemText secondary={userDetail ? userDetail.name : ""} style={{width: '75%', display: "inline-block"}}/>
+        <Grid container className={classes.Container}>
+          <Grid item className={classes.imageContainer}> 
+            <img className={classes.image} src="https://png.pngtree.com/png-vector/20190501/ourmid/pngtree-users-icon-design-png-image_1014936.jpg" alt="user" />
           </Grid>
+
         
-           <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
-        <AlternateEmailOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
-        <ListItemText secondary={userDetail ? userDetail.email : ""} style={{width: '75%', display: "inline-block"}}/>
+
+          <Grid container className={classes.belowImage}>
+            <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
+            <DnsOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
+          <ListItemText secondary={userDetail ? userDetail.name : ""} style={{width: '75%', display: "inline-block"}}/>
+            </Grid>
+          
+            <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
+          <AlternateEmailOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
+          <ListItemText secondary={userDetail ? userDetail.email : ""} style={{width: '75%', display: "inline-block"}}/>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
 
-      <Divider/>
+        <Divider/>
 
-      <Link to={`/profile/${userId}/orders`} className={classes.link}>
+        <Link to={`${url}/orders`} className={classes.link}>
+          <ListItem  button> 
+            <ButtonBase>
+              <ListItemIcon>
+              <ShoppingCart />
+              </ListItemIcon>
+              <ListItemText  primary="My Orders" />
+            </ButtonBase>
+          </ListItem>
+        </Link>
+
+        <Link to={`${url}/settings`} className={classes.link}>
+          <ListItem divider button>
+            <ButtonBase>
+              <ListItemIcon>
+                <Settings />
+              </ListItemIcon>
+              <ListItemText primary="Settings"/>
+            </ButtonBase>
+          </ListItem>
+        </Link>
+
+        <Link className={classes.link}>
+          <ListItem  button> 
+            <ButtonBase>
+              <ListItemIcon>
+                <NoteAdd />
+              </ListItemIcon>
+              <ListItemText primary="***"/>
+            </ButtonBase>
+          </ListItem>
+        </Link>
+
+        <Link className={classes.link}>
+          <ListItem  button> 
+          <ButtonBase>
+            <ListItemIcon>
+              <AddShoppingCart />
+            </ListItemIcon>
+            <ListItemText primary="***"/>
+            </ButtonBase>
+          </ListItem>
+        </Link>
+
         <ListItem  button> 
-          <ButtonBase>
-            <ListItemIcon>
-            <ShoppingCart />
-            </ListItemIcon>
-            <ListItemText  primary="My Orders" />
+        <ButtonBase onClick={logOut}>
+          <ListItemIcon>
+            <ExitToApp/>
+          </ListItemIcon>
+          <ListItemText primary="Logout"/>
           </ButtonBase>
         </ListItem>
-      </Link>
-      <Link to={`/profile/${userId}/settings`} className={classes.link}>
-        <ListItem divider button>
-          <ButtonBase>
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-            <ListItemText primary="Settings"/>
-          </ButtonBase>
-        </ListItem>
-      </Link>
-
-
-
-      <ListItem  button> 
-      <ButtonBase href="">
-        <ListItemIcon>
-          <NoteAdd />
-        </ListItemIcon>
-        <ListItemText primary="***"/>
-       </ButtonBase>
-      </ListItem>
-      <ListItem  button> 
-      <ButtonBase href="">
-        <ListItemIcon>
-          <AddShoppingCart />
-        </ListItemIcon>
-        <ListItemText primary="***"/>
-        </ButtonBase>
-      </ListItem>
-      <ListItem  button> 
-      <ButtonBase onClick={logOut}>
-        <ListItemIcon>
-          <ExitToApp/>
-        </ListItemIcon>
-        <ListItemText primary="Logout"/>
-        </ButtonBase>
-      </ListItem>
       </List>
     </div>
   )

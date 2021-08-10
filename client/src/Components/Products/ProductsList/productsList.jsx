@@ -77,10 +77,11 @@ const ProductsList = () => {
 						<h1 >
 						Products:
 						</h1>
-					
-							<Button variant="contained" color="secondary" href="http://localhost:3000/private/product/add">
+            <Link to="/private/product/add">
+							<Button variant="contained" color="secondary">
 								Add New Product
 							</Button>
+            </Link>
 						
 					</Container>
 
