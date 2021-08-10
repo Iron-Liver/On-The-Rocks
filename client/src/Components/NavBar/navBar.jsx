@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
@@ -73,9 +73,22 @@ function NavBar(props) {
   // const estado = useSelector(state => state.currentUser)
   // const { id, isAdmin } = JSON.parse(localStorage.getItem('profile'));
 
-  const logOut = () => {
-    dispatch(logOutUser())
+  const handleLogOut = () => {
+    dispatch(logOutUser());
     history.push("/")
+  };
+
+  const handleProfile = () => {
+    const currentUser = localStorage.getItem('profile');
+    if(!currentUser) {
+      return history.push("/login")
+    } else {
+      const { id, isAdmin } = JSON.parse(currentUser);
+  
+      isAdmin 
+        ? history.push(`/private/profile/${id}`)
+        : history.push(`/profile/${id}`);
+    }
   };
 
   const handleDrawerMenu = () => {
@@ -89,8 +102,6 @@ function NavBar(props) {
   const handleDrawerCart = () => {
     setCartDrawerOpen(!cartDrawerOpen);
   };
-
-  const currentUser = (JSON.parse(localStorage.getItem('profile')));
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -141,17 +152,17 @@ function NavBar(props) {
             >
               <Menu />
             </IconButton>
-            <Hidden smDown>  
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="start"
-                  className={classes.menuButton}
-                  href={currentUser ? (currentUser.isAdmin ? `http://localhost:3000/private/profile/${currentUser.id}` : `http://localhost:3000/profile/${currentUser.id}/orders`) : 'http://localhost:3000/login'}
-                >
-                  <AccountCircle />
-                </IconButton>
-            </Hidden>
+              <Hidden smDown>  
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    className={classes.menuButton}
+                    onClick={handleProfile}
+                    >
+                    <AccountCircle />
+                  </IconButton>
+              </Hidden>
 
            
             <Hidden smDown>  
@@ -160,7 +171,7 @@ function NavBar(props) {
                   aria-label="open drawer"
                   edge="start"
                   className={classes.menuButton}
-                  onClick={logOut}
+                  onClick={handleLogOut}
                 >
                   <ExitToApp/>
                 </IconButton>

@@ -30,19 +30,21 @@ const OrderDetail = () => {
   const [orderStatus, setOrderStatus] = useState(initialStatus);
 
   const history = useHistory();
-  const {id} = useParams();
+  const { id } = useParams();
   const classes = useStyles();
   const user = useSelector(state => state.userReducer);
   
   useEffect(() => {
     (async () => {
       try {
-        const localProfile = JSON.parse(localStorage.getItem("profile"));
-        if(!localProfile.id) {
+        const localProfile = localStorage.getItem("profile");
+        if(!localProfile) {
           history.push("/");
         }
+
+        const { id: userId , isAdmin } = JSON.parse(localProfile);
         const response = await axios.get(`/order/getOrderById/${id}`);
-        if (response.data.userId === localProfile.id || localProfile.isAdmin) {
+        if (response.data.userId === userId || isAdmin) {
           return setOrder(response.data);
         }
         history.push("/");
