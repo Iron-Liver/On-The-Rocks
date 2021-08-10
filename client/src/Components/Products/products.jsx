@@ -78,14 +78,14 @@ const Products = () => {
                                                     title={spirits.name}
                                                 />
                                                 <CardContent>
-                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                    <Typography gutterBottom variant="h6" component="h6">
                                                         {spirits.name}
                                                     </Typography>
                                                     <Typography variant="body2" color="textSecondary" component="p">
                                                         {spirits.brand}
                                                     </Typography>
                                                     <Typography gutterBottom variant="h6" component="h6">
-                                                        {spirits.price}
+                                                        ${spirits.price}
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>

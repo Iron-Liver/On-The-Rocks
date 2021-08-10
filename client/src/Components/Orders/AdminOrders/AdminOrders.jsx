@@ -183,28 +183,7 @@ const AdminOrders = () => {
                 <option value="firstName-ASC">First Name Asc</option>
             </NativeSelect>
           </FormControl>
-              {/* <option value="" hidden="hidden">
-                Sort
-              </option>
-              <optgroup label="Order ID">
-                <option value="id-DESC">Order ID Desc</option>
-                <option value="id-ASC">Order ID Asc</option>
-              </optgroup>
-              <optgroup label="Date">
-                <option value="createdAt-DESC">Date Desc</option>
-                <option value="createdAt-ASC">Date Asc</option>
-              </optgroup>
-              <optgroup label="Total">
-                <option value="total-DESC">Total Desc</option>
-                <option value="total-ASC">Total Asc</option>
-              </optgroup>
-              <optgroup label="First Name">
-                <option value="firstName-DESC">First Name Desc</option>
-                <option value="firstName-ASC">First Name Asc</option>
-              </optgroup>
-            </select>
-          </label> */}
-          <input type="submit" />
+          <input type="submit" value="Filter"/>
         </form>
       </div>
       <div className={classes.paginationContainer}>

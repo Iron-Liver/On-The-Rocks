@@ -153,7 +153,7 @@ const UserOrders = () => {
               <option value="cancelled">Cancelled</option>
             </select>
           </label>
-          <input type="submit" />
+          <input type="submit" value="Filter"/>
         </form>
       </div>
       <div className={classes.paginationContainer}>

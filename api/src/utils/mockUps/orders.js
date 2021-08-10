@@ -11,23 +11,23 @@ const ordersMockUp = async () => {
         city: "Springfield",
         paymentMethod: "MercadoPago",
         zipCode: "B333",
-        total: 3905.74,
+        total: 8823.94,
         status: "created",
         cart: [
           {
-              units: 9,
-              price: 68.99,
-              id: 9
+              units: 1,
+              price: 8599.99,
+              id: 11
           },{
-              units: 5,
-              price: 92.99,
-              id: 4
+              units: 3,
+              price: 47.99,
+              id: 7
           },{
-              units: 12,
-              price: 234.99,
-              id: 2
+              units: 2,
+              price: 39.99,
+              id: 6
           }
-        ] 
+      ]
       }
     };
 

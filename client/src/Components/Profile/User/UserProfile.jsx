@@ -35,7 +35,7 @@ export default function UserProfile() {
       }
       {
         view === 'settings' && (
-          <h1>HOLA</h1>
+          <h1>Settings</h1>
         )
       }
    </div>

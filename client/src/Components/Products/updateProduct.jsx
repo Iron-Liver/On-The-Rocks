@@ -37,7 +37,8 @@ const UpdateProduct = ({ match }) => {
     };
 
     const handleDelete = async e => {
-        dispatch(deleteProduct(id))
+        dispatch(deleteProduct(id));
+        alert('Product has been deleted!')
     }
     
     useEffect(() => {
