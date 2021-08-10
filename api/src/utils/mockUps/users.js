@@ -7,28 +7,33 @@ const userMockUp = async () => {
     const hashedPasswordA = await bcrypt.hash('123', 12);
 
     try {
-
         await User.create({
             name: 'Fede Fleitas',
             username: 'FedeFleitas',
             email: 'solamentefedee@gmail.com',
             password: hashedPasswordA,
             contact: '3364013491',
+        });     
+
+        await User.create({
+          name: 'Lucas Panaro',
+          username: 'marlopc',
+          email: 'lucaspanaro1@gmail.com',
+          password: hashedPasswordA,
+          contact: '2314558392',
         });
-    
-
-        
-    }catch (e) {
+      }catch (e) {
         console.log(e.message);
+      }
     }
-}
-
+    
 const adminMockUp = async() => {
-    // --- Admin ---
-
-    const hashedPasswordB = await bcrypt.hash('321', 12);
-
-    try{
+  // --- Admin ---
+  
+  const hashedPasswordB = await bcrypt.hash('321', 12);
+  
+  try{
+    
 
         await User.create({
             name: 'Gaston Benitez',
@@ -37,6 +42,15 @@ const adminMockUp = async() => {
             email: 'tonga30.gnb@gmail.com',
             password: hashedPasswordB,
             contact: '3743414898',
+        });
+
+        await User.create({
+          name: 'Agustin Moroni',
+          username: 'Moroni82',
+          email: 'agus-234@hotmail.com',
+          password: hashedPasswordB,
+          contact: '2314610603',
+          isAdmin: true
         });
 
         await User.create({
@@ -67,30 +81,12 @@ const adminMockUp = async() => {
         });
 
         await User.create({
-            name: 'Agustin Moroni',
-            username: 'Moroni82',
-            isAdmin: true,
-            email: 'agus-234@hotmail.com',
-            password: hashedPasswordB,
-            contact: '2314610603',
-        });
-
-        await User.create({
             name: 'Matias Vega',
             username: 'mativegal',
             isAdmin: true,
             email: 'matiasvegalera@gmail.com',
             password: hashedPasswordB,
             contact: '1160011862',
-        });
-
-        await User.create({
-            name: 'Lucas Panaro',
-            username: 'marlopc',
-            isAdmin: true,
-            email: 'lucaspanaro1@gmail.com',
-            password: hashedPasswordB,
-            contact: '2314558392',
         });
 
     }catch (e) {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
-import {allowAdmin} from '../../../Redux/Users/userActions'
+import {allowAdmin} from '../../../Redux/Users/UserActions'
 import swal from 'sweetalert'
 
 export const Admin2FA = () => {
@@ -14,7 +14,7 @@ export const Admin2FA = () => {
    useEffect(() => {
       if(typeof(adminAllowed) !== 'undefined') {
          if(adminAllowed){
-            history.push('/private/panel')
+            history.push('/')
             swal('Successful authentication', 'Welcome', 'success')
          }else{
             history.push('/')

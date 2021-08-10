@@ -45,7 +45,7 @@ export function readUser(id) {
 export function updateUser(user) {
 	return async function (dispatch) {
 		const {data} = await axios.put(
-			`${API_URL}users/updateuser/${user.id}`,
+			`${API_URL}user/updateUser/${user.id}`,
 			user
 		);
 		dispatch({type: UPDATE_USER, payload: data});

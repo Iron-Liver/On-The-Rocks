@@ -39,7 +39,7 @@ router.get( "/google/redirect", passport.authenticate("google",
 router.get('/logout', (req, res, next) =>{
    req.logOut();
    req.session = null;
-   res.json("Logged out")
+   res.send("Logged out")
 })
 
 router.get("/user", isLogedIn, async(req,res)=>{

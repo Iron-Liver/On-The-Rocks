@@ -10,9 +10,7 @@ import { getAllCategories } from '../../../Redux/Category/categoryActions'
 const CategoryList = () => {
 	const useStyles = makeStyles((theme)=>({
 		root: {
-			marginTop: 100,
-			marginBottom: 30,
-			border:5
+			width: "100%",
 		},
 		formControl: {
 			margin: theme.spacing(1),
@@ -62,9 +60,7 @@ const CategoryList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/userdetail/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Detail</Button>
-					</Link>
+						<Button style={{fontWeight: 1000}} variant="contained" color="secondary" href={`http://localhost:3000/category/${params.id}`}>Detail</Button>
 					</ThemeProvider>
 				);
 			},
@@ -75,7 +71,7 @@ const CategoryList = () => {
         <div className={classes.root}>  
             <ThemeProvider theme={theme}>
 
-					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '50px', marginBottom:'20px'}}>
 						<h1 >
 							Categories:
 						</h1>
@@ -86,7 +82,7 @@ const CategoryList = () => {
 						</Link>
 					</Container>
 
-				<Container style={{height: 400, width: '90%'}}>
+				<Container style={{height: 460, width: '100%'}}>
 					<Container style={{display: 'flex', height: '100%'}}>
 						<DataGrid rows={categories} columns={columns} />
 					</Container>

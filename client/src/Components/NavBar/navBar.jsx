@@ -1,13 +1,20 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
-import { Menu, ShoppingCart, Search, AccountCircle } from "@material-ui/icons";
+import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import { 
   // eslint-disable-next-line
   useSelector } from "react-redux";
 import NavBox from './navBox'
+import { logOutUser } from "../../Redux/Users/UserActions";
+
+
+// import { logOutUser } from "../../Redux/Users/UserActions";
+
+// const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,12 +63,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavBar(props) {
+  const dispatch = useDispatch()
   const { window } = props;
   const classes = useStyles();
+  const history = useHistory();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   // const estado = useSelector(state => state.currentUser)
+  // const { id, isAdmin } = JSON.parse(localStorage.getItem('profile'));
+
+  const logOut = () => {
+    dispatch(logOutUser())
+    history.push("/")
+  };
 
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);
@@ -74,6 +89,8 @@ function NavBar(props) {
   const handleDrawerCart = () => {
     setCartDrawerOpen(!cartDrawerOpen);
   };
+
+  const currentUser = (JSON.parse(localStorage.getItem('profile')));
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -124,18 +141,29 @@ function NavBar(props) {
             >
               <Menu />
             </IconButton>
-
-            <Hidden smDown>
-              <Link to='/profile' style={{textDecoration: 'none', color: 'white'}}>
+            <Hidden smDown>  
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
                   edge="start"
                   className={classes.menuButton}
+                  href={currentUser ? (currentUser.isAdmin ? `http://localhost:3000/private/profile/${currentUser.id}` : `http://localhost:3000/profile/${currentUser.id}/orders`) : 'http://localhost:3000/login'}
                 >
                   <AccountCircle />
                 </IconButton>
-              </Link>
+            </Hidden>
+
+           
+            <Hidden smDown>  
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  className={classes.menuButton}
+                  onClick={logOut}
+                >
+                  <ExitToApp/>
+                </IconButton>
             </Hidden>
 
           </Container>
