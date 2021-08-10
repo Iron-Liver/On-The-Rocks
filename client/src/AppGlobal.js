@@ -29,24 +29,24 @@ import Error404 from './Components/Error404/Error404';
 
 
 const AppGlobal = () => {
-  return (
-    <ThemeProvider theme={theme}>
+	return (
+		<ThemeProvider theme={theme}>
 			<Router>
-        <NavBar/>
+				<NavBar/>
 				<Switch>
-          <Route exact path="/" component={landingPage} />
-          <Route exact path="/login" component={LoginUser} />
-          <Route exact path="/register" component= {CreateUser} />
-          <Route path="/verify/password" component={ResetPassword} />
-				  <Route path="/verify/admin" component={Admin2FA} />
-          <Route exact path="/products" component={Products} />
-          <Route exact path="/products/:id" component={ProductDetail} />
-          <Route exact path='/category/:id' component={CategoryDetail} />
-          <AuthRoute exact path="/order/:id" component={OrderDetail}/>
-          <UserRoute path="/profile/:userId" component={UserProfile} />
-          <AdminRoute path="/private/profile/:userId" component={AdminProfile}/>
-          <AdminRoute path="/private" component={AdminFeatures}/>
-          <Route path="*" component={Error404} /> 
+					<Route exact path="/" component={landingPage} />
+					<Route exact path="/login" component={LoginUser} />
+					<Route exact path="/register" component= {CreateUser} />
+					<Route path="/verify/password" component={ResetPassword} />
+					<Route path="/verify/admin" component={Admin2FA} />
+					<Route exact path="/products" component={Products} />
+					<Route exact path="/products/:id" component={ProductDetail} />
+					<Route exact path='/category/:id' component={CategoryDetail} />
+					<AuthRoute exact path="/order/:id" component={OrderDetail}/>
+					<UserRoute path="/profile/:userId" component={UserProfile} />
+					<AdminRoute path="/private/profile/:userId" component={AdminProfile}/>
+					<AdminRoute path="/private" component={AdminFeatures}/>
+					<Route path="*" component={Error404} /> 
 				</Switch>
 			</Router>
 		</ThemeProvider>
