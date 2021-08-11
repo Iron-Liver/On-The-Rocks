@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import UpdateProductForm from './updateProductForm';
-import { deleteProduct, updateProduct } from '../../Redux/Products/productsActions.js';
+import { deleteProduct, updateProduct, clearState } from '../../Redux/Products/productsActions.js';
 import swal from "sweetalert";
 
 const UpdateProduct = ({ match }) => {
@@ -48,13 +48,22 @@ const UpdateProduct = ({ match }) => {
     }
 
     useEffect(() => {
-        if (updateState && updateState[0] === 'invalid inputs') {
-            swal('Error', 'invalid inputs', 'error')
-        } else if (updateState && updateState[0] === '0 product/s updated') {
-            swal('Error', 'invalid inputs', 'error')
-        } else if (updateState && updateState !== undefined) {
-            setInput(wipedInput);
-            swal('Congratulations!', 'Product successfully created', 'success')
+        if (updateState !== undefined) {
+            if (updateState && updateState[0] === 'invalid inputs') {
+                swal('Error', 'invalid inputs', 'error')
+                dispatch(clearState())
+
+            } else if (updateState && updateState[0] === '0 product/s updated') {
+                swal('Error', 'invalid inputs', 'error')
+                dispatch(clearState())
+
+            }
+            if (updateState && updateState[0] !== undefined) {
+                setInput(wipedInput);
+                dispatch(clearState())
+                swal('Congratulations!', 'Product successfully updated', 'success')
+            }
+            console.log(updateState[0])
         }
     },
         // eslint-disable-next-line
@@ -62,7 +71,6 @@ const UpdateProduct = ({ match }) => {
 
     return (
         <>
-            <h1 style={{ display: 'flex', justifyContent: 'center' }}>Update Product</h1>
             <UpdateProductForm input={input} setInput={setInput} id={id} handleSubmit={handleSubmit} handleDelete={handleDelete} />
         </>
     );

@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const CreateProductForm = ({ input, setInput, handleSubmit, match,  handleDelete }) => {
+const CreateProductForm = ({ input, setInput, handleSubmit, match, handleDelete }) => {
 
 	const classes = useStyles();
 
@@ -71,6 +71,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match,  handleDelete
 		<ThemeProvider theme={theme}>
 			<div className='extContCAF'>
 				<form noValidate autoComplete="off" >
+					<h1 className={classes.title}>Create Product</h1>
 					<Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
 						<Grid >
 							<Grid container spacing={1} alignItems="center">
@@ -214,7 +215,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match,  handleDelete
 						<Grid container direction="row" justifyContent="center" alignItems="center">
 							<Grid item>
 								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
-							
+
 							</Grid>
 						</Grid>
 					</Grid>

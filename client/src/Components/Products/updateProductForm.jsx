@@ -37,7 +37,7 @@ export const useStyles = makeStyles((theme) => ({
 const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 
 	const classes = useStyles();
-    
+
 	const [error, setError] = useState({//Control the error red border of the inputs
 		productName: false,
 		description: false,
@@ -71,6 +71,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 		<ThemeProvider theme={theme}>
 			<div className='extContCAF'>
 				<form noValidate autoComplete="off" >
+					<h1 className={classes.title}>Update Product</h1>
 					<Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
 						<Grid >
 							<Grid container spacing={1} alignItems="center">
@@ -224,7 +225,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 									: <Button style={{ fontWeight: 1000, marginTop: 50 }}
 										color="secondary" onClick={handleDelete}
 										variant="contained" disabled={true}>
-                      
+
 										delete
 									</Button>
 								}
