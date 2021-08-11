@@ -8,14 +8,6 @@ const userMockUp = async () => {
 
     try {
         await User.create({
-            name: 'Fede Fleitas',
-            username: 'FedeFleitas',
-            email: 'solamentefedee@gmail.com',
-            password: hashedPasswordA,
-            contact: '3364013491',
-        });     
-
-        await User.create({
           name: 'Agustin Moroni',
           username: 'Moroni82',
           email: 'agus-234@hotmail.com',
@@ -33,6 +25,14 @@ const userMockUp = async () => {
       const hashedPasswordB = await bcrypt.hash('321', 12);
       
       try{
+        await User.create({
+            name: 'Fede Fleitas',
+            username: 'FedeFleitas',
+            email: 'solamentefedee@gmail.com',
+            password: hashedPasswordA,
+            contact: '3364013491',
+            isAdmin: true
+        });     
         
         await User.create({
           name: 'Lucas Panaro',
