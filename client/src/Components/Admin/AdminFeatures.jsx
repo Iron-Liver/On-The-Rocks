@@ -5,7 +5,7 @@ import UpdateCategory from '../Categories/UpdateCategory/updateCategory';
 import CreateProduct from '../Products/createProduct';
 import UpdateProduct from '../Products/updateProduct';
 import CreateUser from '../Users/UserAdd/CreateUser';
-import UserUpdate from '../Users/UserUpdate/updateUserForm';
+import UpdateUser from '../Users/UserUpdate/updateUser';
 
 const AdminFeatures = () => {
   const { path } = useRouteMatch();
@@ -16,7 +16,7 @@ const AdminFeatures = () => {
         <Route exact path={`${path}/category/add`} component={CreateCategory} />
         <Route exact path={`${path}/category/update/:id`} component={UpdateCategory} />
         <Route exact path={`${path}/user/add`} component={CreateUser} />
-        <Route exact path={`${path}/user/update/:id`} component={UserUpdate} />
+        <Route exact path={`${path}/user/update/:id`} component={UpdateUser} />
         <Route exact path={`${path}/product/add`} component={CreateProduct} />
         <Route exact path={`${path}/product/update/:id`} component={UpdateProduct} />
       </Switch>
