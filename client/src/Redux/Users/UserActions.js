@@ -47,7 +47,7 @@ export function loginUser(login) {
                 withCredentials: true,
             });
             const { id, email, isAdmin } = jwt.verify(token.data, process.env.REACT_APP_SECRET_KEY);
-            localStorage.setItem("token", JSON.stringify(token));
+            localStorage.setItem("token", JSON.stringify(token.data));
             dispatch({ type: LOGIN, payload: { id, email, isAdmin } });
         } catch (e) {
             swal(e.message, "An error has occurred", "error");
@@ -108,7 +108,7 @@ export function sendEmail(email, type) {
 export function logOutUser() {
     return async function (dispatch) {
         try {
-            await localStorage.removeItem("profile");
+            await localStorage.removeItem("token");
             await localStorage.removeItem("2FA");
             await localStorage.removeItem("cartItems");
             await localStorage.removeItem("shippingAddress");

@@ -5,25 +5,18 @@ import AppPublic from "./Components/App/appPublic";
 import theme from "./Utils/theme";
 import dotenv from "dotenv";
 import jwt_decode from "jwt-decode"
+import jwt from 'jsonwebtoken'
 dotenv.config()
 
 const AppGlobal = () => {
-	
-    const currentUser = JSON.parse(localStorage.getItem("token".data)); 
-    console.log("current:", currentUser)
+    const currentUser = JSON.parse(localStorage.getItem('token')) ? jwt.verify(JSON.parse(localStorage.getItem('token')), process.env.REACT_APP_SECRET_KEY) : null
     const adminAllowed = JSON.parse(localStorage.getItem("2FA"));
-    var decoded;
-
-    if(currentUser!== null){
-       decoded = jwt_decode(currentUser, { header: true });
-    }
-    console.log(decoded)
-     
+     console.log(currentUser)
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
                 <Switch>
-                    {decoded?.isAdmin && adminAllowed ? (
+                    {currentUser?.isAdmin && adminAllowed ? (
                         <Route path="/" component={AppPrivate} />
                     ) : (
                         <Route path="/" component={AppPublic} />
