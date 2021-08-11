@@ -80,12 +80,12 @@ export function updateUser(user) {
 export function fetchAuthUser() {
     return async (dispatch) => {
         try {
-            const user = await axios.get(`auth/user`, {
+            const token = await axios.get(`auth/user`, {
                 withCredentials: true,
             });
-            if (user) {
-                localStorage.setItem("profile", JSON.stringify(user.data));
-                dispatch({ type: LOGIN, payload: user.data });
+            if (token) {
+                localStorage.setItem("token", JSON.stringify(token.data));
+                dispatch({ type: LOGIN, payload: token.data });
             } else {
                 throw new Error("Error fetching user");
             }

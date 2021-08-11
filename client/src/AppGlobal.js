@@ -4,7 +4,6 @@ import AppPrivate from "./Components/App/appPrivate";
 import AppPublic from "./Components/App/appPublic";
 import theme from "./Utils/theme";
 import dotenv from "dotenv";
-import jwt_decode from "jwt-decode"
 import jwt from 'jsonwebtoken'
 dotenv.config()
 

@@ -6,6 +6,7 @@ import { Email, VpnKey } from '@material-ui/icons';
 import {loginUser,fetchAuthUser, sendEmail} from '../../../Redux/Users/userActions'
 import useFormStyles from '../../../Utils/formStyles'
 import GoogleButton from "react-google-button";
+import jwt from 'jsonwebtoken'
 import swal from 'sweetalert'
 
 export default function UserLogin() {
@@ -13,24 +14,31 @@ export default function UserLogin() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const {currentUser} = useSelector(state => state.userReducer);
-
+    const currentUser = JSON.parse(localStorage.getItem('token')) ? jwt.verify(JSON.parse(localStorage.getItem('token')), process.env.REACT_APP_SECRET_KEY) : null
+    console.log(currentUser)
     const [input,setInput] = useState({
         email: '',
         password: ''
     })
 
-   useEffect(() => {
-        if(currentUser) {
-             if(currentUser.isAdmin){
+    if(currentUser) {
+        console.log(currentUser.Authenticated)
+        if(currentUser.isAdmin){
+            if(typeof(currentUser?.Authenticated) === 'undefined'){
                 dispatch(sendEmail(currentUser.email,"verifyadmin"))
+                history.push(`/`)
                 swal("Hemos enviado un link a tu correo para que verifiques tu identidad", "Disculpa las molestias", "success")
-            } 
-            history.push('/')
-        }
-    },
-    // eslint-disable-next-line
-    [currentUser])
+            }
+            else{
+                history.push(`private/profile/${currentUser.id}`)
+            }
+        }else{
+            history.push(`/profile/${currentUser.id}`)
+        } 
+        
+        
+        
+   }
 
     const GoogleSSOHandler = async () => {
         let timer = null;
@@ -40,9 +48,10 @@ export default function UserLogin() {
             "width=500,height=600"
         );
         if (newWindow) {
-            timer = setInterval(() => {
+            timer = setInterval(async() => {
                 if (newWindow.closed) {
-                    dispatch(fetchAuthUser());
+                    await dispatch(fetchAuthUser());
+                    window.location.reload()
                     if (timer) clearInterval(timer);
                 }
             }, 500);
