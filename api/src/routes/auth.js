@@ -54,7 +54,7 @@ router.get("/user", isLogedIn, async (req, res) => {
 
     const { id, email, isAdmin } = user;
     let token = await jwt.sign({ id, email, isAdmin }, SECRET_KEY, { expiresIn: "24hr" });
-    console.log(token);
+
     res.json(token);
   } catch (error) {
     res.json(error.message);
@@ -78,7 +78,6 @@ router.post("/email", async (req, res, next) => {
     res.json({ success: "Email sent" });
   }
   if (type === "verifyadmin") {
-    console.log(FRONT);
     await transporter.sendMail({
       from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
       to: email, // list of receivers
@@ -110,10 +109,13 @@ router.post("/passwordreset",passport.authenticate("bearer", { session: false })
   }
 });
 
-router.post("/admin",passport.authenticate("bearer", { session: false }), async (req, res, next) => {
-  let { token } = req.body;
+router.post("/admin", async (req, res, next) => {
+  console.log(req.body)
+  let token  = req.body;
+  console.log("aca el token: ", token.headers.Authorization)
   try {
     let email = jwt.verify(token, SECRET_KEY).email.toLowerCase();
+    console.log(email)
     let isAdmin = await User.findOne({
       where: { email: email, isAdmin: true },
     });

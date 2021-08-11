@@ -7,7 +7,10 @@ import swal from 'sweetalert'
 export const Admin2FA = () => {
    const {adminAllowed} = useSelector(state => state.userReducer)
    console.log(adminAllowed)
-   const token = new URLSearchParams(window.location.search).get('token')
+   const tok = new URLSearchParams(window.location.search).get('token')
+   console.log("TOOOK:", tok)
+   const token = tok.toString()
+   console.log("TOOOKEEEEN:", token)
    const dispatch = useDispatch();
    const history = useHistory();
 

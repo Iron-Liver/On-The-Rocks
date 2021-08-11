@@ -46,8 +46,7 @@ export function loginUser(login) {
             const token = await axios.get(`/auth/user`, {
                 withCredentials: true,
             });
-            console.log(process.env.SECRET_KEY);
-            const { id, email, isAdmin } = jwt.verify(token.data, process.env.SECRET_KEY);
+            const { id, email, isAdmin } = jwt.verify(token.data, process.env.REACT_APP_SECRET_KEY);
             localStorage.setItem("token", JSON.stringify(token));
             dispatch({ type: LOGIN, payload: { id, email, isAdmin } });
         } catch (e) {
@@ -135,7 +134,7 @@ export function resetPass(token, newPassword) {
 export function allowAdmin(token) {
     return async function (dispatch) {
         try {
-            const token = localStorage.getItem("token");
+            
             const { data } = await axios.post(`/auth/admin`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
