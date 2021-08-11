@@ -28,7 +28,7 @@ const ProductsList = () => {
         dispatch(getProducts())
 	},
 	// eslint-disable-next-line
-	[])
+	[Products])
 
     const columns = [
         {field: 'id', headerName: '#', width: 90 },

@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import UpdateProductForm from './updateProductForm';
 import { deleteProduct, updateProduct } from '../../Redux/Products/productsActions.js';
-import { useStyles } from '../../Components/Products/createProductForm'
 import swal from "sweetalert";
 
 const UpdateProduct = ({ match }) => {
 
     const dispatch = useDispatch();
     const { updateState } = useSelector(state => state.productReducer);
+    const { Products } = useSelector(state => state.productReducer);
     const id = match.params.id
 
     var wipedInput = {
@@ -31,16 +31,22 @@ const UpdateProduct = ({ match }) => {
                 updated[prop] = input[prop];
             }
         };
-       // if (Object.keys(updated).length > 0) {
-            dispatch(updateProduct(id, updated))
-       // }
+        dispatch(updateProduct(id, updated))
     };
+    useEffect(() => {
+        async function setProduct() {
+            let product = Products.filter(e => e.id === Number(id))
+            await setInput(product[0])
+        }
+        if (Products) setProduct();
+    }, [Products, id])
+
 
     const handleDelete = async e => {
         dispatch(deleteProduct(id));
         alert('Product has been deleted!')
     }
-    
+
     useEffect(() => {
         if (updateState && updateState[0] === 'invalid inputs') {
             swal('Error', 'invalid inputs', 'error')
@@ -56,8 +62,8 @@ const UpdateProduct = ({ match }) => {
 
     return (
         <>
-                <h1 style={{display: 'flex', justifyContent:'center'}}>Update Product</h1>
-            <UpdateProductForm input={input} setInput={setInput} handleSubmit={handleSubmit} handleDelete={handleDelete} />
+            <h1 style={{ display: 'flex', justifyContent: 'center' }}>Update Product</h1>
+            <UpdateProductForm input={input} setInput={setInput} id={id} handleSubmit={handleSubmit} handleDelete={handleDelete} />
         </>
     );
 };

@@ -34,10 +34,10 @@ export const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const CreateProductForm = ({ input, setInput, handleSubmit, match, handleDelete }) => {
+const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 
 	const classes = useStyles();
-
+    
 	const [error, setError] = useState({//Control the error red border of the inputs
 		productName: false,
 		description: false,
@@ -82,7 +82,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match, handleDelete 
 										error={error["productName"]}
 										helperText={[helperText["productName"]]}
 										id="name"
-										label="Name"
+										label='Name'
 										name="name"
 										value={input.name}
 										onChange={handleInputChange}
