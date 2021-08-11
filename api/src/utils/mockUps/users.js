@@ -29,7 +29,7 @@ const userMockUp = async () => {
             name: 'Fede Fleitas',
             username: 'FedeFleitas',
             email: 'solamentefedee@gmail.com',
-            password: hashedPasswordA,
+            password: hashedPasswordB,
             contact: '3364013491',
             isAdmin: true
         });     
