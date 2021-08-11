@@ -4,9 +4,9 @@ import {Route} from 'react-router';
 import landingPage from '../LandingPage/landingPage'
 import NavBar from '../NavBar/navBar'
 // User Imports
-import CreateUser from '../Users/UserAdd/createUser';
+import CreateUser from '../Users/UserAdd/CreateUser';
 import LoginUser from '../Users/UserLogin/userLogin'
-import UserUpdate from '../Users/UserUpdate/UpdateUser';
+import UserUpdate from '../Users/UserUpdate/updateUser';
 import ResetPassword from '../Users/UserResetPassword/resetPassword';
 import Admin2FA from '../Users/Admin2FA/admin2FA';
 // Product Imports

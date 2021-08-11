@@ -3,9 +3,9 @@ import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
 import NavBar from '../NavBar/navBar'
 // User Imports
-import CreateUser from '../Users/UserAdd/createUser'
+import CreateUser from '../Users/UserAdd/CreateUser'
 import UserList from '../Users/UserList/userList';
-import UserUpdate from '../Users/UserUpdate/UpdateUser';
+import UserUpdate from '../Users/UserUpdate/updateUser';
 // Product Imports
 import CreateProduct from '../Products/createProduct';
 import updateProduct from '../Products/updateProduct';

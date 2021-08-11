@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import UpdateUserForm from './UpdateUserForm'
+import UpdateUserForm from './updateUserForm'
 import {updateUser} from '../../../Redux/Users/userActions'
 
 import swal from "sweetalert";
