@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
-import { Menu, ShoppingCart, Search, AccountCircle } from "@material-ui/icons";
+import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import { 
   // eslint-disable-next-line
   useSelector } from "react-redux";
 import NavBox from './navBox'
+import { logOutUser } from "../../Redux/Users/UserActions";
+
+
+// import { logOutUser } from "../../Redux/Users/UserActions";
+
+// const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,12 +63,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavBar(props) {
+  const dispatch = useDispatch()
   const { window } = props;
   const classes = useStyles();
+  const history = useHistory();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   // const estado = useSelector(state => state.currentUser)
+  // const { id, isAdmin } = JSON.parse(localStorage.getItem('profile'));
+
+  const handleLogOut = () => {
+    dispatch(logOutUser());
+    history.push("/")
+  };
+
+  const handleProfile = () => {
+    const currentUser = localStorage.getItem('profile');
+    if(!currentUser) {
+      return history.push("/login")
+    } else {
+      const { id, isAdmin } = JSON.parse(currentUser);
+  
+      isAdmin 
+        ? history.push(`/private/profile/${id}`)
+        : history.push(`/profile/${id}`);
+    }
+  };
 
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);
@@ -124,18 +152,29 @@ function NavBar(props) {
             >
               <Menu />
             </IconButton>
+              <Hidden smDown>  
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    className={classes.menuButton}
+                    onClick={handleProfile}
+                    >
+                    <AccountCircle />
+                  </IconButton>
+              </Hidden>
 
-            <Hidden smDown>
-              <Link to='/profile' style={{textDecoration: 'none', color: 'white'}}>
+           
+            <Hidden smDown>  
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
                   edge="start"
                   className={classes.menuButton}
+                  onClick={handleLogOut}
                 >
-                  <AccountCircle />
+                  <ExitToApp/>
                 </IconButton>
-              </Link>
             </Hidden>
 
           </Container>

@@ -4,15 +4,13 @@ import { makeStyles,  Button,  Container } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import theme from '../../../Utils/theme';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getAllCategories } from '../../../Redux/Category/categoryActions'
 
 const CategoryList = () => {
 	const useStyles = makeStyles((theme)=>({
 		root: {
-			marginTop: 100,
-			marginBottom: 30,
-			border:5
+			width: "100%",
 		},
 		formControl: {
 			margin: theme.spacing(1),
@@ -46,9 +44,9 @@ const CategoryList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/category/update/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Edit</Button>
-					</Link>
+            <Link to={`/private/category/update/${params.id}`} style={{textDecoration:'none'}}>
+              <Button style={{fontWeight: 1000}} variant="contained" color="secondary">Edit</Button>
+            </Link>
 					</ThemeProvider>
 				);
 			},
@@ -62,9 +60,9 @@ const CategoryList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/userdetail/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Detail</Button>
-					</Link>
+            <Link to={`/category/${params.id}`}>
+						  <Button style={{fontWeight: 1000}} variant="contained" color="secondary">Detail</Button>
+            </Link>
 					</ThemeProvider>
 				);
 			},
@@ -75,7 +73,7 @@ const CategoryList = () => {
         <div className={classes.root}>  
             <ThemeProvider theme={theme}>
 
-					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '50px', marginBottom:'20px'}}>
 						<h1 >
 							Categories:
 						</h1>
@@ -86,7 +84,7 @@ const CategoryList = () => {
 						</Link>
 					</Container>
 
-				<Container style={{height: 400, width: '90%'}}>
+				<Container style={{height: 460, width: '100%'}}>
 					<Container style={{display: 'flex', height: '100%'}}>
 						<DataGrid rows={categories} columns={columns} />
 					</Container>

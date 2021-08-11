@@ -7,10 +7,14 @@ import theme from '../../Utils/theme'
 
 export const useStyles = makeStyles((theme) => ({
 	root: {
-		marginTop: 50,
-		marginBottom: 30,
-		border: 5,
-		display: 'flex'
+		marginTop: 5,
+		marginBottom: 10,
+		display: 'flex',
+		border: '1px solid grey',
+		borderRadius: '5px',
+		boxShadow: ' 0px 0 1px 1px grey',
+		padding: '0 90px',
+		paddingBottom: '30px'
 	},
 	title: {
 		display: 'flex',
@@ -30,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
+const CreateProductForm = ({ input, setInput, handleSubmit, match,  handleDelete }) => {
 
 	const classes = useStyles();
 
@@ -67,7 +71,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 		<ThemeProvider theme={theme}>
 			<div className='extContCAF'>
 				<form noValidate autoComplete="off" >
-					<Grid container direction="row" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
+					<Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
 						<Grid >
 							<Grid container spacing={1} alignItems="center">
 								<Grid item >
@@ -210,19 +214,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 						<Grid container direction="row" justifyContent="center" alignItems="center">
 							<Grid item>
 								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
-								{Object.values(error).indexOf(true) === -1
-									? <Button
-										style={{ fontWeight: 1000, marginTop: 50 }}
-										color="secondary" onClick={handleSubmit}
-										variant="contained">
-										Submit
-									</Button>
-									: <Button style={{ fontWeight: 1000, marginTop: 50 }}
-										color="secondary" onClick={handleSubmit}
-										variant="contained" disabled={true}>
-										Submit
-									</Button>
-								}
+							
 							</Grid>
 						</Grid>
 					</Grid>

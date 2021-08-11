@@ -30,11 +30,11 @@ const useStyles = makeStyles((theme) => ({
         }px`
     },
     imageMarked: {
-        height: 4,
+        height: 2,
         width: "calc(20%)",
         backgroundColor: theme.palette.common.white,
         position: "absolute",
-        bottom: -2,
+        bottom: 1,
         left: "calc(40%)",
         transition: 'all 0.35s ease-out',
     }

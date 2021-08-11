@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux';
 import { Button, TextField, makeStyles,Grid, Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
 import { Person, Email, VpnKey, Phone } from '@material-ui/icons';
-import { readUser } from '../../../Redux/Users/userActions';
+import { readUser } from '../../../Redux/Users/UserActions';
 import Validate from '../../../Utils/validate'
 
 const useStyles = makeStyles((theme)=>({

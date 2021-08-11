@@ -1,112 +1,59 @@
-const { Order } = require('../../db');
-
+const { User } = require('../../db');
+const createOrder = require("../../controllers/order/createOrder")
 const ordersMockUp = async () => {
   try {
-    await Order.create({
-      firstName: 'Pablo' ,
-      lastName: 'Hernández',
-      address: 'Moreno 322',
-      city: 'Bolívar, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: '1900',     
-      total: 100,
-      state: 'created'
-    });
-    await Order.create({
-      firstName: 'Gianfranco',
-      lastName: 'Saavedra',
-      address: 'Calle 22, Av.13, 1078',
-      city: 'La Plata, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: '1900',     
-      total: 50.10,
-      state: 'cancelled'
-    }); 
-    await Order.create({
-      firstName: 'Marcelo',
-      lastName: 'Piero',
-      address: 'Calle 5, Av.53, 1510',
-      city: 'La Plata, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: '1900',     
-      total: 78.10,
-      state: 'created'
-    }); 
-    await Order.create({
-      firstName: 'Alexis',
-      lastName: 'Chavez',
-      address: 'Belgrano 866',
-      city: 'Olavarría, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: 'B7400',     
-      total: 225.85,
-      state: 'completed'
-    }); 
-    await Order.create({
-      firstName: 'Cristian',
-      lastName: 'Prieto',
-      address: 'Calle 5, Av.53, 860',
-      city: 'La Plata, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: 'B1900',     
-      total: 55,
-      state: 'processing'
-    }); 
-    await Order.create({
-      firstName: 'Juana',
-      lastName: 'Sosa',
-      address: 'Las Heras, 1870',
-      city: 'Bolivar, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: 'B6550',     
-      total: 859.50,
-      state: 'completed'
-    }); 
-    await Order.create({
-      firstName: 'Pablo',
-      lastName: 'Campos',
-      address: 'Savedra, 750',
-      city: 'Urdampilleta, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: 'B6553',     
-      total: 467,
-      state: 'completed'
-    }); 
-    await Order.create({
-      firstName: 'Julian',
-      lastName: 'Viero',
-      address: 'Ocampo, 420',
-      city: 'Pehuajò, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: 'B6450',     
-      total: 930.60,
-      state: 'processing'
-    }); 
-    await Order.create({
-      firstName: 'Gonzalo',
-      lastName: 'Carrero',
-      address: 'San Cayetano, 1950',
-      city: 'Bolivar, Buenos Aires',
-      paymentMethod: 'MercadoPago',
-      zipCode: 'B6550',     
-      total: 205,
-      state: 'completed'
-    }); 
-    await Order.create({
-      firstName: 'Isabella',
-      lastName: 'Lafuente',
-      address: 'Av. Hipólito Yrigoyen, 1870',
-      city: 'Córdoba, Córdoba',
-      paymentMethod: 'MercadoPago',
-      zipCode: 'B5000',     
-      total: 789.87,
-      state: 'cancelled'
-    });
+    const mockUpReq = {
+      body: {
+        id: 0,
+        firstName: "Juan",
+        lastName: "Lopez",
+        address: "Evergreen Terrace 742",
+        city: "Springfield",
+        paymentMethod: "MercadoPago",
+        zipCode: "B333",
+        total: 8823.94,
+        status: "created",
+        cart: [
+          {
+              units: 1,
+              price: 8599.99,
+              id: 11
+          },{
+              units: 3,
+              price: 47.99,
+              id: 7
+          },{
+              units: 2,
+              price: 39.99,
+              id: 6
+          }
+      ]
+      }
+    };
+
+    const mockUpRes = {
+      status: (order) => ({
+        send: () => {}
+      })
+    };
+
+    const users = await User.count();
+
+    let order = 1;
+
+    while (mockUpReq.body.id <= users) {
+      mockUpReq.body.id++;
+      while (order < 5) {
+        await createOrder(mockUpReq, mockUpRes, () => {});
+        order++
+      }
+      order = 1;
+    }
+    
   } catch (err) {
     console.log(err.message);
   }
 }
-
 module.exports = {
   ordersMockUp
 };

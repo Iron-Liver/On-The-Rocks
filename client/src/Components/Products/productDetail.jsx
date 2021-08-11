@@ -9,46 +9,44 @@ import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
-        height: 800,
-        justifyContent: "center"
+        display: 'inline-flex',
+        height: '75vh',
+        width:'100%',
+        justifyContent: "space-evenly"
 
     },
     details: {
-        display: 'flex',
-        flexDirection: 'column',
+        textAlign:'start',
+        width:'60%',
+        
     },
     content: {
-        width: 650,
+        width: '100%',
+        marginTop:'5%',
+        
     },
 
     cont1: {
-        marginBottom: 30,
+        marginBottom: 15,
     },
 
     cover: {
-        width: 600,
-        height: 700,
-        marginTop: 50
+        width: '55%',
+        height: '300px',
+    
+        
+    },
+    divimage: {
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        width:'25%',
     },
 
-    controls: {
-
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: "space-between",
-        paddingLeft: theme.spacing(1),
-        paddingBottom: theme.spacing(1),
-
-    },
-    cartIcon: {
-        height: 38,
-        width: 38,
-    },
     button: {
         margin: theme.spacing(1),
-        width: 500,
-        height: 70,
+        width: 200,
+        height:55,
     },
     review: {
         display: 'flex',
@@ -82,9 +80,8 @@ const ProductDetail = () => {
 
     useEffect(() => {
         dispatch(getProductById(liqueur))
-    }, 
+    }, [dispatch, liqueur])
     // eslint-disable-next-line
-    [])
 
     if (!spirits) {
         return (<h1>Please wait</h1>)
@@ -92,24 +89,26 @@ const ProductDetail = () => {
 
     return (
         <Card className={classes.root}>
+            <div className={classes.divimage}>
             <CardMedia
                 className={classes.cover}
                 image={spirits[0].image}
             />
+            </div>
             <div className={classes.details}>
                 <CardContent className={classes.content}>
                     <Grid item className={classes.cont1}>
-                        <Typography component="h1" variant="h3">
+                        <Typography  variant="h4">
                             {spirits[0].name}
                         </Typography>
-                        <Typography component="h4" variant="h4">
-                            {spirits[0].price}
+                        <Typography component="h5" variant="h5">
+                            ${spirits[0].price}
                         </Typography>
-                        <Typography component="h4" variant="h4">
+                        <Typography component="h5" variant="h5">
                             {spirits[0].brand}
                         </Typography>
                     </Grid>
-                    <Typography variant="h4" color="textSecondary">
+                    <Typography variant="h6" color="textSecondary">
                         {spirits[0].description}
                     </Typography>
                 </CardContent>
@@ -120,7 +119,7 @@ const ProductDetail = () => {
                         className={classes.button}
                         startIcon={<ShoppingCart className={classes.cartIcon} />}
                     >
-                        <h2>ADD TO CART</h2>
+                        <h3>ADD TO CART</h3>
                     </Button>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel id="Quantity">Quantity</InputLabel>

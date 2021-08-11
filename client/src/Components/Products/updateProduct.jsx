@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import CreateProductForm from './createProductForm'
-import { updateProduct } from '../../Redux/Products/productsActions.js';
+import UpdateProductForm from './updateProductForm';
+import { deleteProduct, updateProduct } from '../../Redux/Products/productsActions.js';
 import { useStyles } from '../../Components/Products/createProductForm'
 import swal from "sweetalert";
 
@@ -9,7 +9,6 @@ const UpdateProduct = ({ match }) => {
 
     const dispatch = useDispatch();
     const { updateState } = useSelector(state => state.productReducer);
-    const classes = useStyles();
     const id = match.params.id
 
     var wipedInput = {
@@ -36,6 +35,11 @@ const UpdateProduct = ({ match }) => {
             dispatch(updateProduct(id, updated))
        // }
     };
+
+    const handleDelete = async e => {
+        dispatch(deleteProduct(id));
+        alert('Product has been deleted!')
+    }
     
     useEffect(() => {
         if (updateState && updateState[0] === 'invalid inputs') {
@@ -52,8 +56,8 @@ const UpdateProduct = ({ match }) => {
 
     return (
         <>
-            <h1 className={classes.title}>Update Product</h1>
-            <CreateProductForm input={input} setInput={setInput} handleSubmit={handleSubmit} />
+                <h1 style={{display: 'flex', justifyContent:'center'}}>Update Product</h1>
+            <UpdateProductForm input={input} setInput={setInput} handleSubmit={handleSubmit} handleDelete={handleDelete} />
         </>
     );
 };

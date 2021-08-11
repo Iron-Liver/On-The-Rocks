@@ -1,14 +1,20 @@
 const { Order } = require("../../db");
 
 module.exports = async (req, res, next) => {
-  const { orderId } = req.body;
+  const { orderId, force } = req.body;
 
   try {
-    const deleted = await Order.destroy({
+    const destroyQuery = {
       where: {
         id: orderId
       }
-    });
+    }
+
+    if(force) {
+      destroyQuery.force = true;
+    }
+
+    const deleted = await Order.destroy(destroyQuery);
 
     if(!deleted) {
       throw new Error(`Order with id: ${orderId} not found`);

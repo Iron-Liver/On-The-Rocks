@@ -1,100 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Grid, makeStyles, Hidden } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
+import { useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router';
+import Summary from './summary';
+import PersonalInfo from './personalInfo';
+import ProductsAccordion from './productsAccordion';
 
-const useStyles = makeStyles({
-  root: {
-    display: "flex"
+const useStyles = makeStyles((theme) => ({
+  loaderContainer: {
+    display: "flex",
+    justifyContent: "center"
   },
-  detailsContainer: {
-    minWidth: "60%",
-    width: "60%"
+  accordionContainer: {
+    margin: "0 auto",
+    width: "99%",
+    marginTop: "20px",
   },
-  imgContainer: {
-    padding: "0"
-  },
-  img: {
-    border: "1px solid black",
-    width: "100%",
-    objectFit: "fill"
+  gridContainer: { 
+    alignItems: "flex-start" 
   }
-});
+}));
 
-const OrderDetail = ({ orderId }) => {
+const OrderDetail = () => {
   const [order, setOrder] = useState({});
-  const [error, setError] = useState(false)
 
+  const initialStatus = order.status;
+
+  const [orderStatus, setOrderStatus] = useState(initialStatus);
+
+  const history = useHistory();
+  const { id } = useParams();
   const classes = useStyles();
-
+  const user = useSelector(state => state.userReducer);
+  
   useEffect(() => {
     (async () => {
       try {
-        const order = await axios.get(`/order/getOrderById/${orderId}`);
-        setOrder(order.data);
+        const localProfile = localStorage.getItem("profile");
+        if(!localProfile) {
+          history.push("/");
+        }
+
+        const { id: userId , isAdmin } = JSON.parse(localProfile);
+        const response = await axios.get(`/order/getOrderById/${id}`);
+        if (response.data.userId === userId || isAdmin) {
+          return setOrder(response.data);
+        }
+        history.push("/");
       } catch (err) {
-        setError(true);
+        history.push("/");
       }
     })();
-  }, [orderId]);
-  
+  }, [id, history, user]);
+
   return (
-    <Container className={classes.root}>
-      <Grid container className={classes.detailsContainer}>
-        <Grid item xs={12}>
-          <Typography variant="h3" color="initial">
-            Order details
-          </Typography>
-        </Grid>
-        <Hidden smUp>
-          <img
-            src="https://picsum.photos/800/800"
-            alt="testimage"
-            className={classes.img}
-          />
-        </Hidden>
-        <Grid item xs={12}>
-          <Typography variant="h6" color="initial">
-            First Name: {order.firstName}
-          </Typography>
-          <Typography variant="h6" color="initial">
-            Last Name: {order.lastName}
-          </Typography>
-          <Typography variant="h6" color="initial">
-            State: {order.state}
-          </Typography>
-          <Typography variant="h6" color="initial">
-            Address: {order.address}
-          </Typography>
-          <Typography variant="h6" color="initial">
-            City: {order.city}
-          </Typography>
-          <Typography variant="h6" color="initial">
-            Payment method: {order.paymentMethod}
-          </Typography>
-          <Typography variant="h6" color="initial">
-            Zip code: {order.zipCode}
-          </Typography>
-          <Typography variant="h6" color="initial">
-            Total: {order.total}
-          </Typography>
-          <Typography variant="h6" color="initial">
-            Order date: {order.createdAt}
-          </Typography>
-          <Typography variant="subtitle2" color="initial">
-            Order #{order.id}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Hidden xsDown>
-        <Container className={classes.imgContainer}>
-          <img
-            src="https://picsum.photos/800/800"
-            alt="testimage"
-            className={classes.img}
-          />
-        </Container>
-      </Hidden>
-    </Container>
+    <div>
+      {order && (
+        <>
+          <Grid container className={classes.gridContainer}>
+            <PersonalInfo order={order} id={id} setOrderStatus={setOrderStatus} orderStatus={orderStatus}/>
+            <Summary order={order} id={id} orderStatus={orderStatus} />
+          </Grid>
+          <div className={classes.accordionContainer}>
+            <ProductsAccordion order={order} />
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 

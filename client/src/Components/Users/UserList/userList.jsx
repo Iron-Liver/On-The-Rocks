@@ -5,19 +5,17 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import theme from '../../../Utils/theme';
 import {Link} from 'react-router-dom';
-import { getAllUsers } from '../../../Redux/Users/userActions'
+import { getAllUsers } from '../../../Redux/Users/UserActions'
 
 const UserList = () => {
 	const useStyles = makeStyles((theme)=>({
 		root: {
-			marginTop: 100,
-			marginBottom: 30,
-			border:5
+			width:'100%',
 		},
 		formControl: {
 			margin: theme.spacing(1),
 			minWidth: 120,
-			width:500,
+			
 		},
 		last: {
 			padding: 8,
@@ -85,7 +83,7 @@ const UserList = () => {
         <div className={classes.root}>  
             <ThemeProvider theme={theme}>
 
-					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+					<Container style={{display: 'flex',height:50 , marginBottom:'20px',justifyContent: 'space-around', alignItems: 'center'}}>
 						<h1 >
 							Users:
 						</h1>
@@ -96,7 +94,7 @@ const UserList = () => {
 						</Link>
 					</Container>
 
-				<Container style={{height: 400, width: '90%'}}>
+				<Container style={{height: 460, width: '100%'}}>
 					<Container style={{display: 'flex', height: '100%'}}>
 						<DataGrid rows={users} columns={columns} />
 					</Container>
