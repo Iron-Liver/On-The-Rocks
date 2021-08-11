@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import CreateProductForm from './createProductForm'
 import { createProduct } from '../../Redux/Products/productsActions.js';
-import {useStyles} from '../../Components/Products/createProductForm'
+
 
 import swal from "sweetalert";
 
@@ -10,8 +10,7 @@ const CreateProduct = (props) => {
 
 	const dispatch = useDispatch();
 	const { createState } = useSelector(state => state.productReducer);
-	const classes = useStyles();
-
+	
 
 	var wipedInput = {
 		name: "",

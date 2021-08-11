@@ -11,6 +11,7 @@ const productsMockUp = async () => {
             brand: "Absolut",
             category: "Vodka",
             image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-absolut-1l_450x650.jpg?v=1559562467",
+            stock:10
             
         }),
         await  Product.create({
@@ -21,7 +22,8 @@ const productsMockUp = async () => {
             category: "Vodka",
             sku:"a2",
             price:234.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-ak47_720x.jpg?v=1603236568"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-ak47_720x.jpg?v=1603236568",
+            stock:10            
         }),    
         await  Product.create({
             name:"Gangstar Vodka 175mL Pistol Gun",
@@ -31,7 +33,8 @@ const productsMockUp = async () => {
             category: "Vodka",
             sku:"a3",
             price:32.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-gangstar-vodka-1_720x.jpg?v=1575786461"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-gangstar-vodka-1_720x.jpg?v=1575786461",
+            stock:10
         }),
         await  Product.create({
             name:"Patron Silver Tequila 1L",
@@ -41,7 +44,8 @@ const productsMockUp = async () => {
             category: "Tequila",
             sku:"a4",
             price:95.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-patron-silver_96205781-102c-4039-953e-b0471b3e4784_720x.jpg?v=1613033306"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-patron-silver_96205781-102c-4039-953e-b0471b3e4784_720x.jpg?v=1613033306",
+            stock:10
         }),
         await  Product.create({
             name:"Don Julio Blanco Tequila 700mL",
@@ -51,7 +55,8 @@ const productsMockUp = async () => {
             category: "Tequila",
             sku:"a5",
             price:79.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-don-julio-blanco_720x.jpg?v=1598687753"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-don-julio-blanco_720x.jpg?v=1598687753",
+            stock:10
         }),
         await  Product.create({
             name:"Jose Cuervo Especial Gold Tequila 700mL",
@@ -61,7 +66,8 @@ const productsMockUp = async () => {
             category: "Tequila",
             sku:"a6",
             price:43.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jose-cuevo-gold_720x.jpg?v=1559566583"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jose-cuevo-gold_720x.jpg?v=1559566583",
+            stock:10
         }),
         await  Product.create({
             name:"Bombay Sapphire 47% London Dry Gin 750mL",
@@ -71,7 +77,8 @@ const productsMockUp = async () => {
             category: "Gin",
             sku:"a7",
             price:47.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-sapphire_720x.jpg?v=1607759796"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-sapphire_720x.jpg?v=1607759796",
+            stock:10
         }),
         await  Product.create({
             name:"Bombay Original London Dry Gin 700mL",
@@ -81,7 +88,8 @@ const productsMockUp = async () => {
             category: "Gin",
             sku:"a8",
             price:35.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-original-gin_720x.jpg?v=1576236940"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-original-gin_720x.jpg?v=1576236940",
+            stock:10
         }),
         await  Product.create({
             name:"Hendrick's Gin 44% Import Strength 750mL",
@@ -91,7 +99,8 @@ const productsMockUp = async () => {
             category: "Gin",
             sku:"a9",
             price:70.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hendricks-gin_720x.jpg?v=1567926371"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hendricks-gin_720x.jpg?v=1567926371",
+            stock:10
         }),
         await  Product.create({
             name:"Glenfiddich 40 Year Old Rare Collection Single Malt Scotch Whisky 700mL",
@@ -101,7 +110,8 @@ const productsMockUp = async () => {
             category: "Whisky",
             sku:"a10",
             price:4699.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-glenfiddich-40yo_720x.jpg?v=1614596002"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-glenfiddich-40yo_720x.jpg?v=1614596002",
+            stock:10
         })
         await  Product.create({
             name:"Hibiki 30 Year Old Kacho Fugetsu Limited Edition Japanese Suntory Whisky 700mL",
@@ -111,7 +121,8 @@ const productsMockUp = async () => {
             category: "Whisky",
             sku:"a11",
             price:8999.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hibiki-30-kacho-fugestu_720x.jpg?v=1615167006"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hibiki-30-kacho-fugestu_720x.jpg?v=1615167006",
+            stock:10
         })
         
         await  Product.create({
@@ -122,7 +133,8 @@ const productsMockUp = async () => {
             category: "Whisky",
             sku:"a12",
             price:8999.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-macallan-m-decanter_720x.jpg?v=1602041212"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-macallan-m-decanter_720x.jpg?v=1602041212",
+            stock:10
         })
         await  Product.create({
             name:"Martell L'Or de Jean Martell Cognac 700mL",
@@ -132,7 +144,8 @@ const productsMockUp = async () => {
             category: "Brandy",
             sku:"a13",
             price:3999.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jean-martell-cognac-2_720x.jpg?v=1580703500"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jean-martell-cognac-2_720x.jpg?v=1580703500",
+            stock:10
         })
         await  Product.create({
             name:"Remy Martin Coupe Shanghai 700mL",
@@ -142,7 +155,8 @@ const productsMockUp = async () => {
             category: "Brandy",
             sku:"a14",
             price:679.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-remy-martin-shanghai_720x.jpg?v=1559369227"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-remy-martin-shanghai_720x.jpg?v=1559369227",
+            stock:10
         })
         await  Product.create({
             name:"Martell Chanteloup Perspective Extra Cognac 700mL",
@@ -152,7 +166,8 @@ const productsMockUp = async () => {
             category: "Brandy",
             sku:"a15",
             price:549.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-martel-chanteloup_720x.jpg?v=1592737654"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-martel-chanteloup_720x.jpg?v=1592737654",
+            stock:10
         })
         await  Product.create({
             name:"Caffo Vecchio Amaro del Capo Riserva 100th Anniversary Herb Liqueur 700mL",
@@ -162,7 +177,8 @@ const productsMockUp = async () => {
             category: "Liqueur",
             sku:"a16",
             price:549.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-vecchio-amaro-capo-riserva_900x.jpg?v=1625615358"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-vecchio-amaro-capo-riserva_900x.jpg?v=1625615358",
+            stock:10
         })
         await  Product.create({
             name:"Jagermeister Herb Liqueur Party Pack With Hand Pump + 2 Glasses 1.75L",
@@ -172,7 +188,8 @@ const productsMockUp = async () => {
             category: "Liqueur",
             sku:"a17",
             price:109.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jagermeister-party-pack_900x.jpg?v=1607741478"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jagermeister-party-pack_900x.jpg?v=1607741478",
+            stock:10
         })
         await  Product.create({
             name:"Smirnoff Gold Cinnamon Flavoured Liqueur Vodka With Gold Leaf 1L",
@@ -182,7 +199,8 @@ const productsMockUp = async () => {
             category: "Vodka",
             sku:"a18",
             price:89.99,            
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-smirnoff-gold-1l_720x.jpg?v=1622193026"
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-smirnoff-gold-1l_720x.jpg?v=1622193026",
+            stock:10
         })
         
         

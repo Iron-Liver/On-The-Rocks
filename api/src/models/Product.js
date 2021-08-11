@@ -45,6 +45,9 @@ module.exports = (sequelize) => {
     },
     category:{
       type:DataTypes.STRING,
+    },
+    stock:{
+      type:DataTypes.INTEGER
     }
   });
 };

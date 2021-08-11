@@ -3,27 +3,36 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router';
 import { makeStyles } from "@material-ui/core/styles";
 import { getProductById } from "../../Redux/Products/productsActions"
-import { Card, CardContent, CardMedia, Typography, Button, Grid, Box, Select, FormControl,MenuItem, InputLabel} from "@material-ui/core";
-import { ShoppingCart } from '@material-ui/icons';
+import { Card, CardContent, CardMedia, Typography, Button, Grid, Box, Select, FormControl, MenuItem, InputLabel } from "@material-ui/core";
+import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart } from '@material-ui/icons';
 import Rating from '@material-ui/lab/Rating';
+import { green } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'inline-flex',
         height: '75vh',
-        width:'100%',
+        width: '100%',
         justifyContent: "space-evenly"
 
     },
+
+    stock: {
+        '& > svg': {
+            margin: theme.spacing(2),
+        }
+    },
     details: {
-        textAlign:'start',
-        width:'60%',
-        
+        textAlign: 'start',
+        width: '60%',
+
     },
     content: {
         width: '100%',
-        marginTop:'5%',
-        
+        marginTop: '5%',
+
     },
 
     cont1: {
@@ -33,20 +42,20 @@ const useStyles = makeStyles((theme) => ({
     cover: {
         width: '55%',
         height: '300px',
-    
-        
+
+
     },
     divimage: {
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center',
-        width:'25%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '25%',
     },
 
     button: {
         margin: theme.spacing(1),
         width: 200,
-        height:55,
+        height: 55,
     },
     review: {
         display: 'flex',
@@ -64,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 const ProductDetail = () => {
 
     const [value, setValue] = React.useState(2);
@@ -80,25 +88,63 @@ const ProductDetail = () => {
 
     useEffect(() => {
         dispatch(getProductById(liqueur))
+        console.log(spirits[0].stock, "holi")
     }, [dispatch, liqueur])
     // eslint-disable-next-line
 
     if (!spirits) {
         return (<h1>Please wait</h1>)
     }
+    let stockText = <div>
+        <CheckCircle style={{ color: green[500] }} />
+        <p>On Stock</p>
+    </div>
+
+    let btncart = <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        startIcon={<ShoppingCart className={classes.cartIcon} />}
+    >
+        <h3>ADD TO CART</h3>
+    </Button>
+
+    if (spirits[0].stock <= 5) {
+        stockText = <div>
+            <Info style={{ color: red[500] }} />
+            <p>Low Stock</p>
+        </div>
+    }
+    if (spirits[0].stock <= 0) {
+        stockText = <div>
+            <Info color="disabled" />
+            <p>No Stock</p>
+        </div>;
+        btncart = <Button
+            disabled
+            variant="contained"
+            color="disabled"
+            className={classes.button}
+            startIcon={<RemoveShoppingCart className={classes.cartIcon} />}
+        >
+            <h3>ADD TO CART</h3>
+        </Button>
+
+    }
+
 
     return (
         <Card className={classes.root}>
             <div className={classes.divimage}>
-            <CardMedia
-                className={classes.cover}
-                image={spirits[0].image}
-            />
+                <CardMedia
+                    className={classes.cover}
+                    image={spirits[0].image}
+                />
             </div>
             <div className={classes.details}>
                 <CardContent className={classes.content}>
                     <Grid item className={classes.cont1}>
-                        <Typography  variant="h4">
+                        <Typography variant="h4">
                             {spirits[0].name}
                         </Typography>
                         <Typography component="h5" variant="h5">
@@ -113,14 +159,9 @@ const ProductDetail = () => {
                     </Typography>
                 </CardContent>
                 <div className={classes.controls}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                        startIcon={<ShoppingCart className={classes.cartIcon} />}
-                    >
-                        <h3>ADD TO CART</h3>
-                    </Button>
+                    <div>
+                        {btncart}
+                    </div>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel id="Quantity">Quantity</InputLabel>
                         <Select
@@ -128,7 +169,7 @@ const ProductDetail = () => {
                             id="Quantity"
                             value={quant}
                             onChange={handleChange}
-                            label="Quantity"                            
+                            label="Quantity"
                         >
                             <MenuItem value="">
                                 <em>None</em>
@@ -140,6 +181,9 @@ const ProductDetail = () => {
                             <MenuItem value={5}>5</MenuItem>
                         </Select>
                     </FormControl>
+                    <div className={classes.stock}>
+                        {stockText}
+                    </div>
                 </div>
                 <div className={classes.review}>
                     <Box component="fieldset" mb={3} borderColor="transparent">

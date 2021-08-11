@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import UpdateProductForm from './updateProductForm';
 import { deleteProduct, updateProduct } from '../../Redux/Products/productsActions.js';
-import { useStyles } from '../../Components/Products/createProductForm'
 import swal from "sweetalert";
 
 const UpdateProduct = ({ match }) => {
