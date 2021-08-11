@@ -1,29 +1,38 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route} from 'react-router';
-import createCategory from '../Categories/CreateCategory/createCategory';
-import CreateUser from '../Users/UserAdd/CreateUser';
-import CreateProduct from '../Products/createProduct';
+import landingPage from '../LandingPage/landingPage'
+import NavBar from '../NavBar/navBar'
+// User Imports
+import CreateUser from '../Users/UserAdd/createUser';
+import LoginUser from '../Users/UserLogin/userLogin'
+import UserUpdate from '../Users/UserUpdate/UpdateUser';
+import ResetPassword from '../Users/UserResetPassword/resetPassword';
+import Admin2FA from '../Users/Admin2FA/admin2FA';
+// Product Imports
 import products from '../Products/products';
-
-// import CreateUser from '../Users/UserAdd/CreateUser'
-import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 import ProductDetail from '../Products/productDetail';
+// Category Imports
+import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
 
 function AppPublic() {
 
-	// const currentUser = (JSON.parse(localStorage.getItem('profile')));
-	// const adminAllowed = (JSON.parse(localStorage.getItem('2FA')))
-
 	return (
 			<BrowserRouter>
+
+				<Route path="/" component={NavBar}/>
+				<Route exact path='/register' component= {CreateUser} />
+				<Route exact path='/login' component={LoginUser} />
+				<Route path='/verify/password' component={ResetPassword} />
+				<Route path='/verify/admin' component={Admin2FA} />
+				<Route exact path='/profile' component={UserUpdate} />
+				<Route exact path='/products/:id' component={ProductDetail} />
+				<Route path='/products' component={products} />
 				<Route exact path='/category/:id' component={categoryDetail} />
-				<Route exact path='/login' component= {CreateUser}/>
-				<Route path='/category/add' component={createCategory} exact></Route>
-				<Route path='/product/add' component={CreateProduct} exact></Route>
-				<Route path='/products' component={products} exact></Route>
-				<Route path='/products/:id' component={ProductDetail} exact></Route>
-            </BrowserRouter>
+				<Route exact path='/' component={landingPage} />
+
+			</BrowserRouter>
+
 	);
 }
 

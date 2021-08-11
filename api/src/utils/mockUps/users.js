@@ -9,14 +9,6 @@ const userMockUp = async () => {
     try {
 
         await User.create({
-            name: 'Lucas Panaro',
-            username: 'marlopc',
-            email: 'lucaspanaro1@gmail.com',
-            password: hashedPasswordA,
-            contact: '2314558392',
-        });
-    
-        await User.create({
             name: 'Fede Fleitas',
             username: 'FedeFleitas',
             email: 'solamentefedee@gmail.com',
@@ -24,30 +16,8 @@ const userMockUp = async () => {
             contact: '3364013491',
         });
     
-        await User.create({
-            name: 'Hilber Fraiese',
-            username: 'Hilberfraiese',
-            email: 'hilberfraiese92@gmail.com',
-            password: hashedPasswordA,
-            contact: '2235421793',
-        });
 
-        await User.create({
-            name: 'Agustin Moroni',
-            username: 'Moroni82',
-            email: 'agus-234@hotmail.com',
-            password: hashedPasswordA,
-            contact: '2314610603',
-        });
-
-        await User.create({
-            name: 'Matias Vega',
-            username: 'mativegal',
-            email: 'matiasvegalera@gmail.com',
-            password: hashedPasswordA,
-            contact: '1160011862',
-        });
-
+        
     }catch (e) {
         console.log(e.message);
     }
@@ -70,6 +40,15 @@ const adminMockUp = async() => {
         });
 
         await User.create({
+            name: 'Hilber Fraiese',
+            username: 'Hilberfraiese',
+            isAdmin: true,
+            email: 'hilberfraiese92@gmail.com',
+            password: hashedPasswordB,
+            contact: '2235421793',
+        });
+
+        await User.create({
             name: 'Nicolas Sanchez',
             username: 'Drivello',
             isAdmin: true,
@@ -85,6 +64,33 @@ const adminMockUp = async() => {
             email: 'david_melo10@yahoo.es',
             password: hashedPasswordB,
             contact: '3187826213',
+        });
+
+        await User.create({
+            name: 'Agustin Moroni',
+            username: 'Moroni82',
+            isAdmin: true,
+            email: 'agus-234@hotmail.com',
+            password: hashedPasswordB,
+            contact: '2314610603',
+        });
+
+        await User.create({
+            name: 'Matias Vega',
+            username: 'mativegal',
+            isAdmin: true,
+            email: 'matiasvegalera@gmail.com',
+            password: hashedPasswordB,
+            contact: '1160011862',
+        });
+
+        await User.create({
+            name: 'Lucas Panaro',
+            username: 'marlopc',
+            isAdmin: true,
+            email: 'lucaspanaro1@gmail.com',
+            password: hashedPasswordB,
+            contact: '2314558392',
         });
 
     }catch (e) {

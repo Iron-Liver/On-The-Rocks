@@ -32,13 +32,20 @@ const useStyles = makeStyles({
 
 const Products = () => {
 
-    const products1 = useSelector(state => state.productReducer.FoundProds);
+    const {FoundProds, Products} = useSelector(state => state.productReducer)
     const dispatch = useDispatch()
     const classes = useStyles();
+    const {search} = window.location
+
+    const products = search.includes('?search') 
+                    ? Products?.filter(product => product.name.toLowerCase().includes(search.substring(8).toLowerCase().split('-').join(' ')))
+                    : FoundProds
 
     useEffect(() => {
         dispatch(getProducts());
-    }, []);
+    }, 
+    // eslint-disable-next-line
+    []);
 
     return (
         <div>
@@ -48,9 +55,9 @@ const Products = () => {
                 </Grid>
                 <Grid>
                     <div className={classes.wrapped}>
-                        {products1?.map((spirits) => {
+                        {products?.map((spirits) => {
                             return (
-                                <Grid item md={3} sm={6} xs={12}>
+                                <Grid key={spirits.id} item md={3} sm={6} xs={12}>
                                     <Card className={classes.root} >
                                         <Button>
                                             <Delete/>

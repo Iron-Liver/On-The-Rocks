@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { CREATE_CATEGORY, CLEAR_CATEGORY_REPLY, READ_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY } from '../../Utils/constants';
+import { CREATE_CATEGORY, CLEAR_CATEGORY_REPLY, READ_CATEGORY, UPDATE_CATEGORY, DELETE_CATEGORY, GET_ALL_CATEGORIES } from '../../Utils/constants';
+
+export function getAllCategories(){
+    return async function (dispatch) {
+        const {data} = await axios.get('/category/all');
+        dispatch({ type: GET_ALL_CATEGORIES, payload: data})
+    }
+}
 
 export function createCategory(category) {
     return async function (dispatch) {

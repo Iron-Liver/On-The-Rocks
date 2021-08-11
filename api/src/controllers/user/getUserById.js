@@ -1,6 +1,6 @@
 const {User} = require('../../db')
 
-module.export = async(req,res,next) =>{
+module.exports = async(req,res,next) =>{
     const {id} = req.params;
     try {
         const user = await User.findOne({
@@ -9,6 +9,6 @@ module.export = async(req,res,next) =>{
         return res.json(user)
     } catch (error) {
         next(error)
-        return res.json(error)
+        return res.json(error.message)
     }
 }

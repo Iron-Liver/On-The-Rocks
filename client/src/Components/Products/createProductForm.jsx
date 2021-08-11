@@ -5,7 +5,7 @@ import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
 	root: {
 		marginTop: 50,
 		marginBottom: 30,
@@ -67,7 +67,6 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 		<ThemeProvider theme={theme}>
 			<div className='extContCAF'>
 				<form noValidate autoComplete="off" >
-					<h1 className={classes.title}>Create Product</h1>
 					<Grid container direction="row" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
 						<Grid >
 							<Grid container spacing={1} alignItems="center">
@@ -105,9 +104,6 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 									/>
 								</Grid>
 							</Grid>
-
-
-
 							<Grid container spacing={1} alignItems="center">
 								<Grid item>
 									<Crop />
@@ -213,20 +209,20 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match }) => {
 						</Grid>
 						<Grid container direction="row" justifyContent="center" alignItems="center">
 							<Grid item>
+								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
 								{Object.values(error).indexOf(true) === -1
 									? <Button
 										style={{ fontWeight: 1000, marginTop: 50 }}
 										color="secondary" onClick={handleSubmit}
 										variant="contained">
-										Add Product
+										Submit
 									</Button>
 									: <Button style={{ fontWeight: 1000, marginTop: 50 }}
 										color="secondary" onClick={handleSubmit}
 										variant="contained" disabled={true}>
-										Add Product
+										Submit
 									</Button>
 								}
-
 							</Grid>
 						</Grid>
 					</Grid>
