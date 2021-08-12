@@ -4,13 +4,18 @@ import UserOrders from '../../Orders/UserOrders/userOrders';
 import UserPanel from './UserPanel';
 import jwt from 'jsonwebtoken'
 import { useParams, useHistory } from 'react-router';
+import jwt from 'jsonwebtoken'
 
 export default function UserProfile() {
 
   let { userId, view } = useParams();
-  const {id, email, isAdmin} = jwt.verify(JSON.parse(localStorage.getItem('token')), process.env.REACT_APP_SECRET_KEY)
+  const {id, email, isAdmin} = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
   const localProfile = {id, email, isAdmin}
-  console.log(localProfile)
+
+  console.log("local", localProfile)
   const history = useHistory();
   useEffect(() => {
     if(!userId) {

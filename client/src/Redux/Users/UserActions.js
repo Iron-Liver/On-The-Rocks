@@ -12,15 +12,19 @@ import {
 } from "../../Utils/constants";
 import swal from "sweetalert";
 import jwt from "jsonwebtoken";
+import { DataUsageSharp } from "@material-ui/icons";
 dotenv.config();
 
 export function getAllUsers() {
     return async function (dispatch) {
         try {
             const token = localStorage.getItem("token");
+            console.log("Token", token)
             const { data } = await axios.get(`/user/getAll`, {
                 headers: { Authorization: `Bearer ${token}` },
+            
             });
+            console.log("DATA", data)
             dispatch({ type: GET_ALL_USERS, payload: data });
         } catch (err) {
             console.log(err);

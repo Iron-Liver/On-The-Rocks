@@ -53,7 +53,7 @@ router.get("/user", isLogedIn, async (req, res) => {
     });
 
     const { id, email, isAdmin } = user;
-    let token = await jwt.sign({ id, email, isAdmin }, SECRET_KEY, { expiresIn: "24hr" });
+    let token = await jwt.sign({ id, email, isAdmin}, SECRET_KEY, { expiresIn: "24hr" });
 
     res.json(token);
   } catch (error) {

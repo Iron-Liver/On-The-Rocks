@@ -14,7 +14,10 @@ export default function UserLogin() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const currentUser = JSON.parse(localStorage.getItem('token')) ? jwt.verify(JSON.parse(localStorage.getItem('token')), process.env.REACT_APP_SECRET_KEY) : null
+    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+    jwt.verify(JSON.parse(localStorage.getItem('token')), 
+    process.env.REACT_APP_SECRET_KEY) : null
+
     console.log(currentUser)
     const [input,setInput] = useState({
         email: '',
@@ -65,8 +68,10 @@ export default function UserLogin() {
 		});
 	};
 
-  const handleLogIn = (e) => {
-		dispatch(loginUser(input))
+  const handleLogIn = async (e) => {
+		await dispatch(loginUser(input))
+        window.location.reload()
+
 	};
 
     return (

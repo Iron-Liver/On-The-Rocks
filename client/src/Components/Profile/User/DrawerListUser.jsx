@@ -5,6 +5,7 @@ import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser, readUser } from '../../../Redux/Users/userActions';
 import theme from '../../../Utils/theme';
+import jwt from 'jsonwebtoken'
 
 const useStyles= makeStyles(theme => ({
   list: {
@@ -46,7 +47,11 @@ export default function DrawerListUser() {
   const userDetail = useSelector(state => state.userReducer.userDetail);
   const { url } = useRouteMatch();
 
-  const userId = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')).id : undefined
+  const userTemp = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
+  const userId = userTemp?.id 
 
   useEffect(() => {
     dispatch(readUser(userId));
