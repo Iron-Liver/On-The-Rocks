@@ -2,6 +2,7 @@ import { Grid, Button } from "@material-ui/core";
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 
 import React from "react";
+import { Link } from "react-router-dom";
 import theme from "../../../Utils/theme";
 
 const useStyles = makeStyles((theme)=>({
@@ -35,15 +36,21 @@ function AdminPanel() {
             justifyContent="center"
             alignItems="center"
           >
-            <Button className={style.button} variant="body2" href="http://localhost:3000/private/user" color="secondary">
-              Users
-            </Button>
-            <Button className={style.button} variant="body2" href="http://localhost:3000/private/category" color="secondary">
-              Categories
-            </Button>
-            <Button className={style.button} variant="body2" href="http://localhost:3000/private/products" color="secondary">
-              Products
-            </Button>
+            <Link to="/private/panel/users">
+              <Button className={style.button} variant="body2" color="secondary">
+                Users
+              </Button>
+            </Link>
+            <Link to="/private/panel/categories">
+              <Button className={style.button} variant="body2" color="secondary">
+                Categories
+              </Button>
+            </Link>
+            <Link to="/private/panel/products">
+              <Button className={style.button} variant="body2" color="secondary">
+                Products
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Grid>

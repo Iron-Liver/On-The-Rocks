@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {Grid, Button, TextField} from '@material-ui/core'
 import { Email, VpnKey } from '@material-ui/icons';
 import {loginUser,fetchAuthUser, sendEmail} from '../../../Redux/Users/userActions'
@@ -65,7 +65,7 @@ export default function UserLogin() {
 		});
 	};
 
-    const handleLogIn = (e) => {
+  const handleLogIn = (e) => {
 		dispatch(loginUser(input))
 	};
 
@@ -108,7 +108,9 @@ export default function UserLogin() {
                     </Grid>
                     <Grid container direction="column" justifyContent="center" alignItems="center">
                             <Button style={{fontWeight: 1000, marginTop: 30}} color="primary" onClick={handleLogIn} variant="contained">Login</Button>
-                            <Button style={{fontWeight: 1000, marginTop: 20}} color="primary" href="/verify/password" variant="contained">Recover password</Button>                  
+                            <Link to="/verify/password">
+                                <Button style={{fontWeight: 1000, marginTop: 20}} color="primary" variant="contained">Recover password</Button>                  
+                            </Link>
                             <GoogleButton
                                 style={{fontWeight: 1000, marginTop: 20}}
                                 type="light"

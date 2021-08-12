@@ -104,7 +104,7 @@ const UserOrders = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginRight: 25}}>
       <div>
         <form onSubmit={handleSubmit}>
           <input
@@ -112,38 +112,38 @@ const UserOrders = () => {
             placeholder="First name"
             name="firstName"
             onChange={handleChange}
-          />
+            />
           <input
             type="text"
             placeholder="Last name"
             name="lastName"
             onChange={handleChange}
-          />
+            />
           <input
             type="text"
             placeholder="Address"
             name="address"
             onChange={handleChange}
-          />
+            />
           <input
             type="text"
             placeholder="City"
             name="city"
             onChange={handleChange}
-          />
+            />
           <input
             type="text"
             placeholder="Total"
             name="total"
             onChange={handleChange}
-          />
+            />
           <label htmlFor="status">
             <select
               id="status"
               name="status"
               defaultValue=""
               onChange={handleChange}
-            >
+              >
               <option value="" hidden="hidden">
                 Status
               </option>
@@ -162,7 +162,7 @@ const UserOrders = () => {
             count={orders.pages}
             page={page}
             onChange={handlePageChange}
-          />
+            />
         </div>
       </div>
       <div
@@ -171,16 +171,16 @@ const UserOrders = () => {
           flexDirection: "column",
           alignItems: "center",
         }}
-      >
+        >
         {orders.data &&
           orders.data.map((order, idx) => (
             <Order 
-              order={order} 
-              key={Math.random() * 100} 
-              userId={userId}
-              handleSubmit={handleSubmit}
+            order={order} 
+            key={Math.random() * 100 * idx} 
+            userId={userId}
+            handleSubmit={handleSubmit}
             />
-          ))}
+            ))}
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { Box, Button, Hidden, Link } from "@material-ui/core"; 
+import { Box, Button, Hidden } from "@material-ui/core"; 
 import axios from 'axios';
 
 
@@ -104,7 +105,7 @@ const Order = ({ order, userId, handleSubmit }) => {
             <Button variant="contained" color="primary" onClick={handleRemove}>
               Delete Order
             </Button>
-            <Link href={`/order/${order.id}`}>
+            <Link to={`/order/${order.id}`}>
               <Button variant="contained" color="primary">
                 Order Details
               </Button>
