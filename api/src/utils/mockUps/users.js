@@ -8,6 +8,13 @@ const userMockUp = async () => {
 
     try {
         await User.create({
+          name: 'Mariano Martinez',
+          username: 'Eltiktoker52',
+          email: 'user@email.com',
+          password: hashedPasswordA,
+          contact: '02201236969'
+        })
+        await User.create({
           name: 'Agustin Moroni',
           username: 'Moroni82',
           email: 'agus-234@hotmail.com',
