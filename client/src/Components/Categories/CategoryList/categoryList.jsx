@@ -4,7 +4,7 @@ import { makeStyles,  Button,  Container } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import theme from '../../../Utils/theme';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getAllCategories } from '../../../Redux/Category/categoryActions'
 
 const CategoryList = () => {
@@ -44,9 +44,9 @@ const CategoryList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-					<Link to={`/private/category/update/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Edit</Button>
-					</Link>
+            <Link to={`/private/category/update/${params.id}`} style={{textDecoration:'none'}}>
+              <Button style={{fontWeight: 1000}} variant="contained" color="secondary">Edit</Button>
+            </Link>
 					</ThemeProvider>
 				);
 			},
@@ -60,7 +60,9 @@ const CategoryList = () => {
 			renderCell: params => {
 				return (
 					<ThemeProvider theme={theme}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary" href={`http://localhost:3000/category/${params.id}`}>Detail</Button>
+            <Link to={`/category/${params.id}`}>
+						  <Button style={{fontWeight: 1000}} variant="contained" color="secondary">Detail</Button>
+            </Link>
 					</ThemeProvider>
 				);
 			},

@@ -22,9 +22,6 @@ import OrderDetail from '../Orders/OrderDetail/orderDetail';
 // import AdminProfileOrders from '../Profile/Admin/AdminProfileOrders';
 // import AdminProfileUsers from '../Profile/Admin/AdminProfileUsers';ç
 
-
-import CreateOrder from '../Orders/CreateOrder/CreateOrder';
-
 import UserProfile from '../Profile/User/UserProfile';
 
 function AppPublic() {
