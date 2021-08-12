@@ -110,7 +110,7 @@ export default function DrawerListUser() {
           </ListItem>
         </Link>
 
-        <Link className={classes.link}>
+        <Link className={classes.link} to={`${url}/notready`}>
           <ListItem  button> 
             <ButtonBase>
               <ListItemIcon>
@@ -121,7 +121,7 @@ export default function DrawerListUser() {
           </ListItem>
         </Link>
 
-        <Link className={classes.link}>
+        <Link className={classes.link} to={`${url}/notready`}>
           <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>

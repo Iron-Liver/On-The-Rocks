@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
 import {Grid, Button, TextField} from '@material-ui/core'
@@ -18,31 +18,29 @@ export default function UserLogin() {
     jwt.verify(JSON.parse(localStorage.getItem('token')), 
     process.env.REACT_APP_SECRET_KEY) : null
 
-    console.log(currentUser)
     const [input,setInput] = useState({
         email: '',
         password: ''
     })
-
-    if(currentUser) {
-        console.log(currentUser.Authenticated)
-        if(currentUser.isAdmin){
-            if(typeof(currentUser?.Authenticated) === 'undefined'){
-                dispatch(sendEmail(currentUser.email,"verifyadmin"))
-                history.push(`/`)
-                swal("Hemos enviado un link a tu correo para que verifiques tu identidad", "Disculpa las molestias", "success")
-            }
-            else{
-                history.push(`private/profile/${currentUser.id}`)
-            }
-        }else{
-            history.push(`/profile/${currentUser.id}`)
-        } 
-        
-        
-        
-   }
-
+    useEffect(() => {
+        if(currentUser) {
+            if(currentUser.isAdmin){
+                if(typeof(currentUser?.Authenticated) === 'undefined'){
+                    dispatch(sendEmail(currentUser.email,"verifyadmin"))
+                    history.push(`/`)
+                    swal("Hemos enviado un link a tu correo para que verifiques tu identidad", "Disculpa las molestias", "success")
+                }
+                else{
+                    history.push(`private/profile/${currentUser.id}`)
+                }
+            }else{
+                history.push(`/profile/${currentUser.id}`)
+            }    
+        }
+    },
+    // eslint-disable-next-line
+    [])
+    
     const GoogleSSOHandler = async () => {
         let timer = null;
         const newWindow = window.open(
@@ -76,6 +74,7 @@ export default function UserLogin() {
 
     return (
         <div>
+            {}
             <h1 className={classes.title}>Login</h1>
             <form noValidate autoComplete="off" > 
             <Grid container direction="row" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>

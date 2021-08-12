@@ -48,7 +48,6 @@ const UserOrders = () => {
         });
         setOrders(response.data);
       } catch (error) {
-        console.log(error.message)
         history.push("/");
       }
     })();

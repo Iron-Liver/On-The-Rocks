@@ -31,11 +31,11 @@ export const Admin2FA = () => {
    }
 
    return (
-      <fragment>
+      <>
          { token
          ? typeof(currentUser?.Authenticated)=== 'undefined' && adminAllowHandler()
          : ( <Redirect to={'/login'} />)}
-      </fragment>
+      </>
    )
 }
 

@@ -15,7 +15,6 @@ export default function UserProfile() {
 
   const localProfile = {id, email, isAdmin}
 
-  console.log("local", localProfile)
   const history = useHistory();
   useEffect(() => {
     if(!userId) {
