@@ -101,7 +101,7 @@ const UserOrders = () => {
         history.push("/"); 
       }
     })()
-  },[page, history, userId])
+  },[page, history, userId, form])
 
   const handlePageChange = (e, val) => {
     setPage(val);

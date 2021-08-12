@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
 import {allowAdmin} from '../../../Redux/Users/userActions'
 import jwt from 'jsonwebtoken'

@@ -91,7 +91,7 @@ const AdminOrders = () => {
       })
       .then((response) => setOrders(response.data))
       .catch((err) => history.push("/"));
-  },[page, history])
+  },[page, history, form])
 
   const handlePageChange = (e, val) => {
     setPage(val);

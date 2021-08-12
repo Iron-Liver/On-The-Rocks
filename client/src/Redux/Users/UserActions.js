@@ -12,7 +12,6 @@ import {
 } from "../../Utils/constants";
 import swal from "sweetalert";
 import jwt from "jsonwebtoken";
-import { DataUsageSharp } from "@material-ui/icons";
 dotenv.config();
 
 export function getAllUsers() {
