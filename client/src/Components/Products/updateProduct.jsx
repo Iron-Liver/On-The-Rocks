@@ -63,7 +63,6 @@ const UpdateProduct = ({ match }) => {
                 dispatch(clearState())
                 swal('Congratulations!', 'Product successfully updated', 'success')
             }
-            console.log(updateState[0])
         }
     },
         // eslint-disable-next-line

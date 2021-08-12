@@ -27,11 +27,9 @@ const ProductsList = () => {
 
 	useEffect(() => {
         dispatch(getProducts())
-		console.log('prods ?: ', Products)
 	},
 	// eslint-disable-next-line
 	[])
-	console.log('prods: ', Products)
 
     const columns = [
         {field: 'id', headerName: '#', width: 90 },
