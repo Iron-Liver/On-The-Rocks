@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import theme from '../../../Utils/theme';
 import {Link} from 'react-router-dom';
-import { getAllUsers } from '../../../Redux/Users/UserActions'
+import { getAllUsers } from '../../../Redux/Users/userActions'
 
 const UserList = () => {
 	const useStyles = makeStyles((theme)=>({
@@ -26,6 +26,7 @@ const UserList = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
     console.log(users)
+	
 	useEffect(() => {
         dispatch(getAllUsers())
         console.log(users)

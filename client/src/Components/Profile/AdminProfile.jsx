@@ -5,6 +5,8 @@ import AdminOrders from '../Orders/AdminOrders/AdminOrders';
 import ProductsList from '../Products/ProductsList/productsList';
 import UserList from '../Users/UserList/userList';
 import AdminPanel from './Admin/AdminPanel';
+import jwt from 'jsonwebtoken'
+
 const AdminProfile = () => {
   const { path } = useRouteMatch();
 
@@ -12,7 +14,9 @@ const AdminProfile = () => {
 
   const history = useHistory();
 
-  const localProfile = JSON.parse(localStorage.getItem('profile'));
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
   
   useEffect(() => {
     if(!id) {

@@ -79,6 +79,7 @@ module.exports = async (req, res, next) => {
 
     return res.status(200).send(response);
   } catch (err) {
+    console.log(err.message)
     next(err);
     return res.status(409).send({error: err.message});
   }

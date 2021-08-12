@@ -1,19 +1,22 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
-import {allowAdmin} from '../../../Redux/Users/UserActions'
+import {allowAdmin} from '../../../Redux/Users/userActions'
+import jwt from 'jsonwebtoken'
 import swal from 'sweetalert'
 
 export const Admin2FA = () => {
-   const {adminAllowed} = useSelector(state => state.userReducer)
-   console.log(adminAllowed)
    const token = new URLSearchParams(window.location.search).get('token')
+   localStorage.setItem('token', JSON.stringify(token))
+   const currentUser = JSON.parse(localStorage.getItem('token')) 
+                        ? jwt.verify(JSON.parse(localStorage.getItem('token')), process.env.REACT_APP_SECRET_KEY) 
+                        : null
    const dispatch = useDispatch();
    const history = useHistory();
 
    useEffect(() => {
-      if(typeof(adminAllowed) !== 'undefined') {
-         if(adminAllowed){
+      if(typeof(currentUser?.Authenticated) !== 'undefined') {
+         if(currentUser?.Authenticated){
             history.push('/')
             swal('Successful authentication', 'Welcome', 'success')
          }else{
@@ -21,7 +24,7 @@ export const Admin2FA = () => {
             swal('Authentication failed', 'We are sorry!', 'error')
          }
       }
-   },[adminAllowed,history]);
+   },[currentUser?.Authenticated,history]);
    
    const adminAllowHandler = () => {
       dispatch(allowAdmin(token))
@@ -30,7 +33,7 @@ export const Admin2FA = () => {
    return (
       <fragment>
          { token
-         ? typeof(adminAllowed)=== 'undefined' && adminAllowHandler()
+         ? typeof(currentUser?.Authenticated)=== 'undefined' && adminAllowHandler()
          : ( <Redirect to={'/login'} />)}
       </fragment>
    )
