@@ -14,13 +14,16 @@ import products from '../Products/products';
 import ProductDetail from '../Products/productDetail';
 // Category Imports
 import categoryDetail from '../Categories/CategoryDetail/categoryDetail';
-import CreateOrder from '../Orders/CreateOrder/createOrder';
+import CreateOrder from '../Orders/CreateOrder/CreateOrder';
 // Order Imports
 import OrderDetail from '../Orders/OrderDetail/orderDetail';
 
 // import AdminProfile from '../Profile/Admin/AdminProfile';
 // import AdminProfileOrders from '../Profile/Admin/AdminProfileOrders';
-// import AdminProfileUsers from '../Profile/Admin/AdminProfileUsers';
+// import AdminProfileUsers from '../Profile/Admin/AdminProfileUsers';ç
+
+
+import CreateOrder from '../Orders/CreateOrder/CreateOrder';
 
 import UserProfile from '../Profile/User/UserProfile';
 
@@ -44,6 +47,8 @@ function AppPublic() {
         <Route exact path='/order/:id' component={OrderDetail} />
 				<Route exact path='/profile/:userId?/:view?' component={UserProfile} />
 				<Route exact path='/createOrder' component={CreateOrder} />
+
+
 			</BrowserRouter>
 
 	);

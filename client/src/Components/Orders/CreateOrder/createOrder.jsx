@@ -1,14 +1,16 @@
 import React from 'react'
+
 import { useState } from 'react';
-import { Grid, TextField, makeStyles, Button, Modal } from '@material-ui/core'
+import {makeStyles, Button, Modal } from '@material-ui/core'
 import { useForm, Form } from './useForm'
-import { RoomSharp, PersonSharp, MarkunreadMailboxSharp, LocationCitySharp, PeopleAlt }  from '@material-ui/icons';
-import IconButton from "@material-ui/core/IconButton";
-import Clear from "@material-ui/icons/Clear";
+
+import { Link } from 'react-router-dom';
+import './CreateOrder.css'
 
 let initialForm = {
   firstName: '',
   lastName: '',
+  phone: '',
   address: '',
   city: '',
   zipCode: '',
@@ -29,6 +31,9 @@ const validate = (state, name, errors) => {
   } 
   if (name === "city" && !state.city){
     newErrors.city = "City is required.";   
+  }
+  if (name === "phone" && !state.phone){
+    newErrors.phone = "Phone is required.";
   }
   if (name === "zipCode" && !state.ZipCode){
     newErrors.zipCode = "ZipCode is required.";   
@@ -55,10 +60,11 @@ const useStyle = makeStyles(theme =>({
     padding: '1px'
   },
   buttons: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    margin: '25px 0'
-
+    margin: '25px ',
+    '&:hover' :{
+      backgroundColor:'gray',
+      boxShadow: '1px 1px 4px 1px gray'
+    }
   },
   icon: {
     height: '35px',
@@ -72,22 +78,27 @@ const useStyle = makeStyles(theme =>({
   },
   clearContainer: {
     height:"22px"
+  },
+  buttonsContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent:'center',
+    padding: '15px',
   }
   
 }))
 
 
 const CreateOrder = () => {
-
+  const [count, setCount] = useState(1)
   const [modal, setModal] = useState(false);
 
   const openCloseModal = () => {
     setModal(!modal);
     setErrors({})
     setState(initialForm);
+    setCount(1);
   }
-
-  const classes = useStyle()
 
   const {
     state,
@@ -96,134 +107,110 @@ const CreateOrder = () => {
     setErrors,
     handleInputChange,
   }=useForm({initialForm, validate});
-
-  const body = (
-    <Form >
-      <Grid container className={classes.modalForm} >
-        <Grid item xs={12} className={classes.gridContainer}>
-            <Grid container justifyContent="flex-end" className={classes.clearContainer}>
-            <IconButton edge="start" color="inherit" size="small" onClick={openCloseModal}>
-              <Clear className={classes.clear}/>
-            </IconButton>
-            </Grid>
-          <Grid container justifyContent="center" alignItems="center">
-            <Grid item>
-          <h2>Personal Details</h2>
-            </Grid>
-          </Grid>
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<PersonSharp/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-            color= { errors.firstName ? "primary" : "secondary"}
-          	helperText={ errors.firstName ? errors.firstName : ""}
-            variant="standard"
-            label="First name"
-            value={state.firstName}
-            name="firstName"
-            onChange={handleInputChange}
-          />
-           </Grid>
-          </Grid>
-
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<PeopleAlt/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-          	helperText={ errors.lastName ? errors.lastName : ""}
-            color={ errors.lastName ? "primary" : "secondary"}
-            variant="standard"
-            label="Last name"
-            value={state.lastName}
-            name="lastName"
-            onChange={handleInputChange}
-            />
-           </Grid>
-          </Grid>
-
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<LocationCitySharp/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-          	helperText={ errors.city ? errors.city : ""}
-            color={ errors.city ? "primary" : "secondary"}
-            variant="standard"
-            label="City"
-            value={state.city}
-            name="city"
-            onChange={handleInputChange}
-          />
-           </Grid>
-          </Grid>
-
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<MarkunreadMailboxSharp/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-          	helperText={ errors.address ? errors.address : ""}
-            color={ errors.address ? "primary" : "secondary"}
-            variant="standard"
-            label="Address"
-            value={state.address}
-            name="address"
-            onChange={handleInputChange}
-          />
-           </Grid>
-          </Grid>
-
-
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<RoomSharp/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-          	helperText={ errors.zipCode ? errors.zipCode : ""}
-            color={ errors.zipCode ? "primary" : "secondary"}
-            variant="standard"
-            label="Zip code"
-            value={state.zipCode}
-            name="zipCode"
-            onChange={handleInputChange}
-          />
-           </Grid>
-          </Grid>
-
-
-          <Grid className={classes.buttons}>
-          <Button
-            variant="contained"
-            size="large"
-            color="primary"
-            // onClick={}
-          >Next</Button>
-          </Grid>
-
-        </Grid>
-      </Grid>
-     </Form>
-  )
-  
-  return ( 
+      
+    return ( 
       <div>
+
+
         <Button color="primary" variant="outlined" onClick={openCloseModal}> Pay </Button>
         <Modal
         closeAfterTransition
         open={modal}
         onClose={openCloseModal}
         >
-          {body}
+          
+          <div style={{display:'flex', justifyContent:'center',marginTop:'40px', width:'100%', flexGrow:'1'}}>   
+          { count === 1 ? (
+              <div className="Full_card">
+              <div className="container">
+               <div className="card">
+
+                 <h1 className="card_title">Personal Details  <i class="fas fa-address-book"></i></h1>
+                 <p className="card_title-info">Step 1: Basic info</p>
+                 <form className="card_form">
+                   <div className="input">
+                     <input type="text" className="input_field" value={state.firstName} required />
+                     <label autoComplete="off" className="input_label">First Name - <i class="fas fa-user"></i></label>
+                   </div>
+                   <div class="input">
+                     <input autocomplete="off" type="text" value={state.lastName} className="input_field" required />
+                     <label type="text" className="input_label">Second Name - <i class="fas fa-user-check"></i></label>
+                   </div>
+                   <div class="input">
+                     <input type="text" className="input_field" required />
+                     <label autoComplete="off" className="input_label">Phone Number - <i class="fas fa-mobile-alt"></i> </label>
+                     <span className="input_eye">
+                     </span>
+                   </div>
+                   <div className="btn_cont1">
+                   <button className="card_button" style={{width:"46%"}} onClick={() => setCount(count + 1)}>Next</button>
+                   </div>
+                   <p className="p_color">Need help? <Link to="/help" className="help"> click here! </Link></p>
+                 </form>
+
+                 </div>
+                </div>
+           </div>
+          ) : null}
+
+          { count === 2 ? (
+             <div className="Full_card">
+             <div className="container">
+              <div className="card">
+                <h1 className="card_title">Personal Details <i class="fas fa-thumbtack"></i></h1>
+                <p className="card_title-info">Step 2: Locate </p>
+                <form className="card_form">
+                  <div className="input">
+                    <input type="text" className="input_field" required />
+                    
+                    <label autoComplete="off" className="input_label">Address - {<i class="fas fa-address-card"></i>}</label>
+                  </div>
+                  <div class="input">
+                    <input autocomplete="off" type="text" className="input_field" required />
+                    <label type="text" className="input_label">City - <i class="fas fa-location-arrow"></i></label>
+                  </div>
+                  <div class="input">
+                    <input type="text" className="input_field" required />
+                    <label autoComplete="off" className="input_label">Zip Code - <i class="fas fa-map-marker-alt"></i></label>
+                    <span className="input_eye">
+                    </span>
+                  </div>
+                  <div className="btn_group">
+                  <button className="card_button" onClick={() => setCount(count - 1 )}>Back</button>
+                  <div className="divis"></div>
+                  <button className="card_button">Next</button>
+                  </div>
+                     <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
+                </form>
+                </div>
+               </div>
+          </div>
+          ) : null}
+
+          { count === 3 ? (
+              <div></div>
+          ) : null}
+          </div>
         </Modal>
       </div>
   )
 }
 
 export default CreateOrder
+
+
+
+ 
+                  //  <div class="center">
+                  //  <p className="pe">Socials :</p>
+                  //     <div id="social-test">
+                  //     <ul class="social">
+                  //       <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                  //       <li><i class="fa fa-twitter" aria-hidden="true"></i>
+                  //     </li>
+                  //       <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
+                  //       <li><i class="fa fa-github" aria-hidden="true"></i>
+                  //     </li>
+                  //     </ul>
+                  //     </div>
+                  //   </div>
