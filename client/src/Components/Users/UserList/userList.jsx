@@ -26,6 +26,7 @@ const UserList = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
     console.log(users)
+	
 	useEffect(() => {
         dispatch(getAllUsers())
         console.log(users)

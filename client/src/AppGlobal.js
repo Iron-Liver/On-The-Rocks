@@ -29,7 +29,9 @@ import Error404 from './Components/Error404/Error404';
 
 
 const AppGlobal = () => {
-	return (
+
+	
+    return (
 		<ThemeProvider theme={theme}>
 			<Router>
 				<NavBar/>
