@@ -3,7 +3,7 @@ import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, 
 import { NoteAdd, AddShoppingCart, Settings, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp  } from '@material-ui/icons'
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
+import { logOutUser, readUser } from '../../../Redux/Users/userActions';
 import theme from '../../../Utils/theme';
 
 const useStyles= makeStyles(theme => ({

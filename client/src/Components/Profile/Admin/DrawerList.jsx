@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase } from '@material-ui/core'
 import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp, Dashboard  } from '@material-ui/icons'
 import { Link, useHistory } from 'react-router-dom'
-import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
+import { logOutUser, readUser } from '../../../Redux/Users/userActions';
 
 const useStyles= makeStyles(theme => ({
   list: {

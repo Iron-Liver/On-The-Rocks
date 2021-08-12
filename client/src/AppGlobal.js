@@ -4,7 +4,7 @@ import theme from './Utils/theme';
 
 //User imports
 import LoginUser from './Components/Users/UserLogin/userLogin'
-import CreateUser from './Components/Users/UserAdd/CreateUser'
+import CreateUser from './Components/Users/UserAdd/createUser'
 import ResetPassword from './Components/Users/UserResetPassword/resetPassword';
 import Admin2FA from './Components/Users/Admin2FA/admin2FA';
 //Category imports
