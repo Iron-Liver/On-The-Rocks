@@ -24,3 +24,4 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const FRONTEND = 'http://localhost:3000/';
 export const API_URL= 'http://localhost:3001/';
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
+export const UPDATE_STOCK = 'UPDATE_STOCK';

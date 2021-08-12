@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router';
 import { makeStyles } from "@material-ui/core/styles";
 import { getProductById } from "../../Redux/Products/productsActions"
-import { Card, CardContent, CardMedia, Typography, Button, Grid, Box, Select, FormControl, MenuItem, InputLabel } from "@material-ui/core";
+import { Card, CardContent, CardMedia, Typography, Button, Grid, Box } from "@material-ui/core";
 import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart } from '@material-ui/icons';
 import Rating from '@material-ui/lab/Rating';
 import { green } from '@material-ui/core/colors';
@@ -16,23 +16,20 @@ const useStyles = makeStyles((theme) => ({
         height: '75vh',
         width: '100%',
         justifyContent: "space-evenly"
-
     },
 
     stock: {
-        '& > svg': {
-            margin: theme.spacing(2),
-        }
+        display: "flex",
+        alignItems: "center",
+        marginBottom: 10
     },
     details: {
         textAlign: 'start',
         width: '60%',
-
     },
     content: {
         width: '100%',
         marginTop: '5%',
-
     },
 
     cont1: {
@@ -42,8 +39,6 @@ const useStyles = makeStyles((theme) => ({
     cover: {
         width: '55%',
         height: '300px',
-
-
     },
     divimage: {
         display: 'flex',
@@ -53,51 +48,48 @@ const useStyles = makeStyles((theme) => ({
     },
 
     button: {
-        margin: theme.spacing(1),
+        marginBottom: 15,
         width: 200,
         height: 55,
     },
     review: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: "space-between",
-        paddingLeft: theme.spacing(2),
+        justifyContent: "flex-start",
         paddingBottom: theme.spacing(1),
     },
-    formControl: {
-        margin: theme.spacing(1),
-        width: 110,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
+
 }));
 
 const ProductDetail = () => {
 
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = useState(2);
     const dispatch = useDispatch();
     const spirits = useSelector((state) => state.productReducer.FoundProds)
     const { id: liqueur } = useParams();
     const classes = useStyles();
-    const [quant, setQuant] = React.useState('');
+    const [quant, setQuant] = useState(1);
 
-    const handleChange = (event) => {
-        setQuant(event.target.value);
-    };
+
+    const handleChangeQuant = (type) => {
+        if (type === '+') {
+            setQuant(quant === spirits[0].stock ? spirits[0].stock : quant + 1)
+        } else {
+            setQuant(quant === 1 ? 1 : quant - 1)
+        }
+    }
 
     useEffect(() => {
         dispatch(getProductById(liqueur))
-        console.log(spirits[0].stock, "holi")
     }, [dispatch, liqueur])
-    // eslint-disable-next-line
+
 
     if (!spirits) {
         return (<h1>Please wait</h1>)
     }
     let stockText = <div>
         <CheckCircle style={{ color: green[500] }} />
-        <p>On Stock</p>
+        <span>On Stock</span>
     </div>
 
     let btncart = <Button
@@ -112,13 +104,13 @@ const ProductDetail = () => {
     if (spirits[0].stock <= 5) {
         stockText = <div>
             <Info style={{ color: red[500] }} />
-            <p>Low Stock</p>
+            <span>Low Stock</span>
         </div>
     }
     if (spirits[0].stock <= 0) {
         stockText = <div>
             <Info color="disabled" />
-            <p>No Stock</p>
+            <span>No Stock</span>
         </div>;
         btncart = <Button
             disabled
@@ -129,7 +121,6 @@ const ProductDetail = () => {
         >
             <h3>ADD TO CART</h3>
         </Button>
-
     }
 
 
@@ -160,30 +151,17 @@ const ProductDetail = () => {
                 </CardContent>
                 <div className={classes.controls}>
                     <div>
+                        <button onClick={() => handleChangeQuant('-')} >-</button>
+                        <span>{quant}</span>
+                        <button onClick={() => handleChangeQuant('+')} >+</button>
                         {btncart}
                     </div>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="Quantity">Quantity</InputLabel>
-                        <Select
-                            labelId="Quantity"
-                            id="Quantity"
-                            value={quant}
-                            onChange={handleChange}
-                            label="Quantity"
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                            <MenuItem value={4}>4</MenuItem>
-                            <MenuItem value={5}>5</MenuItem>
-                        </Select>
-                    </FormControl>
                     <div className={classes.stock}>
                         {stockText}
                     </div>
+                    <p>
+                    {spirits[0].stock}
+                    </p>
                 </div>
                 <div className={classes.review}>
                     <Box component="fieldset" mb={3} borderColor="transparent">

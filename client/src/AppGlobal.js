@@ -12,6 +12,7 @@ import CategoryDetail from './Components/Categories/CategoryDetail/categoryDetai
 //Product imports
 import Products from './Components/Products/products';
 import ProductDetail from './Components/Products/productDetail';
+import Stock from './Components/Products/Stock'
 //Order imports
 import OrderDetail from './Components/Orders/OrderDetail/orderDetail';
 //Private routes imports
@@ -35,6 +36,7 @@ const AppGlobal = () => {
 				<NavBar/>
 				<Switch>
 					<Route exact path="/" component={landingPage} />
+					<Route exact path="/stock" component={Stock} />
 					<Route exact path="/login" component={LoginUser} />
 					<Route exact path="/register" component= {CreateUser} />
 					<Route path="/verify/password" component={ResetPassword} />
