@@ -97,6 +97,7 @@ const UserOrders = () => {
         history.push("/"); 
       }
     })()
+  //eslint-disable-next-line
   },[page, history, userId])
 
   const handlePageChange = (e, val) => {

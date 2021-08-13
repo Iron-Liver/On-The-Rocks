@@ -105,7 +105,7 @@ export default function DrawerListUser() {
           </ListItem>
         </Link>
 
-        <Link className={classes.link}>
+        {/* <Link className={classes.link}> */}
           <ListItem  button> 
             <ButtonBase>
               <ListItemIcon>
@@ -114,9 +114,9 @@ export default function DrawerListUser() {
               <ListItemText primary="***"/>
             </ButtonBase>
           </ListItem>
-        </Link>
+        {/* </Link> */}
 
-        <Link className={classes.link}>
+        {/* <Link className={classes.link}> */}
           <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>
@@ -125,7 +125,7 @@ export default function DrawerListUser() {
             <ListItemText primary="***"/>
             </ButtonBase>
           </ListItem>
-        </Link>
+        {/* </Link> */}
 
         <ListItem  button> 
         <ButtonBase onClick={logOut}>

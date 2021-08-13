@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Drawer, Divider, Typography, ListItem, Toolbar, IconButton } from '@material-ui/core';
+import { makeStyles, Drawer, Divider, IconButton } from '@material-ui/core';
 import DrawerList from './DrawerList';
 import { Link } from 'react-router-dom';
 

@@ -14,19 +14,24 @@ const ordersMockUp = async () => {
         total: 8823.94,
         status: "created",
         cart: [
-          {
-              units: 1,
-              price: 8599.99,
-              id: 11
-          },{
-              units: 3,
-              price: 47.99,
-              id: 7
-          },{
-              units: 2,
-              price: 39.99,
-              id: 6
-          }
+        // {
+        //   units: 1,
+        //   price: 8599.99,
+        //   id: 11
+        // },{
+        //   units: 6,
+        //   price: 47.99,
+        //   id: 7
+        // },{
+        //   units: 2,
+        //   price: 39.99,
+        //   id: 6
+        // },
+        {
+          units: 1,
+          price: 1,
+          id: 6
+        }
       ]
       }
     };
