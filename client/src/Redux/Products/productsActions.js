@@ -7,6 +7,11 @@ export function clearProductDetail() {
         dispatch({ type: CLEAR_PRODUCT, payload: null });
     };
 }
+export function clearState() {
+    return function (dispatch) {
+        dispatch({ type: CLEAR_PRODUCT, payload: null });
+    };
+}
 
 export function createProduct(product) {
     return async function (dispatch) {
