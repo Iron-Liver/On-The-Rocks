@@ -37,7 +37,8 @@ const productReducer = (state = initialState, action) => {
         case CLEAR_PRODUCT:
             return {
                 ...state,
-                productDetail: undefined,
+                createState: [],
+                updateState: [],
             }
         case DELETE_PRODUCT:
 
@@ -74,7 +75,7 @@ const productReducer = (state = initialState, action) => {
 
         default:
             return {
-                state,
+                ...state,
             };
     }
 };

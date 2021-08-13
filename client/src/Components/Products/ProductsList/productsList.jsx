@@ -24,6 +24,7 @@ const ProductsList = () => {
 	const {Products} = useSelector(state => state.productReducer)
 	const classes = useStyles();
 	const dispatch = useDispatch();
+
 	useEffect(() => {
         dispatch(getProducts())
 	},

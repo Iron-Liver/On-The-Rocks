@@ -30,7 +30,9 @@ import MercadoPago from './Components/Mercadopago/Mercadopago';
 
 
 const AppGlobal = () => {
-	return (
+
+	
+    return (
 		<ThemeProvider theme={theme}>
 			<Router>
 				<NavBar/>
