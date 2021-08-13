@@ -6,6 +6,7 @@ import { getProductById } from "../../Redux/Products/productsActions"
 import { Card, CardContent, CardMedia, Typography, Button, Grid, Box, Select, FormControl,MenuItem, InputLabel} from "@material-ui/core";
 import { ShoppingCart } from '@material-ui/icons';
 import Rating from '@material-ui/lab/Rating';
+import { addProductCart } from '../../Redux/Cart/cartActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -87,6 +88,16 @@ const ProductDetail = () => {
         return (<h1>Please wait</h1>)
     }
 
+    function onSubmit(e){
+
+     addProductCart({
+        units: quant,
+        id: spirits[0].id,
+        price: spirits[0].price * quant,
+        image: spirits[0].image,
+        name: spirits[0].name})
+    }
+    console.log(spirits[0])
     return (
         <Card className={classes.root}>
             <div className={classes.divimage}>
@@ -118,6 +129,7 @@ const ProductDetail = () => {
                         color="primary"
                         className={classes.button}
                         startIcon={<ShoppingCart className={classes.cartIcon} />}
+                        onClick= {(e) => onSubmit(e)} 
                     >
                         <h3>ADD TO CART</h3>
                     </Button>
