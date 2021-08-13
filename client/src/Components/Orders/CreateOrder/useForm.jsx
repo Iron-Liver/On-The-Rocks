@@ -3,31 +3,33 @@ import { useState } from 'react'
 import { makeStyles } from '@material-ui/styles'
 
 
-export function useForm({initialForm, validate}) {
-  const [state, setState] = useState(initialForm);
-  const [errors, setErrors] = useState({})
+export function useForm({initialForm2, initialForm1}) {
+  const [state1, setState1] = useState(initialForm1);
+  const [state2, setState2] = useState(initialForm2);
 
-  const handleInputChange = ( e ) => {
+
+  const handleInputChange1 = ( e ) => {
     const  { name, value } = e.target;
-    setState({
-      ...state,
+    setState1({
+      ...state1,
       [name]: value
     });
-    setErrors(
-      validate({
-        ...state,
-        [name]: value
-      }, name, errors)
-    );
+  }
+  const handleInputChange2 = ( e ) => {
+    const  { name, value } = e.target;
+    setState2({
+      ...state2,
+      [name]: value
+    });
   }
 
   return {
-    state,
-    setState,
-    errors,
-    setErrors,
-    validate,
-    handleInputChange,
+    state1,
+    setState1,
+    state2,
+    setState2,
+    handleInputChange1,
+    handleInputChange2,
   }
 }
 

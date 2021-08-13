@@ -1,118 +1,81 @@
-import React from 'react'
-
+import React from 'react';
 import { useState } from 'react';
-import {makeStyles, Button, Modal } from '@material-ui/core'
-import { useForm, Form } from './useForm'
-
+import { Button, Modal } from '@material-ui/core';
+import { useForm } from './useForm';
 import { Link } from 'react-router-dom';
+import { userSchema1, userSchema2 } from './ValidationOrder'
 import './CreateOrder.css'
+import axios from 'axios'
 
-let initialForm = {
+let initialForm1 = {
   firstName: '',
   lastName: '',
-  phone: '',
+  phone: '',  
+}
+let initialForm2 = {    
   address: '',
   city: '',
   zipCode: '',
-  paymentMethod: ''   
+  patmentMethod: 'mercadopago',
 }
-
-const validate = (state, name, errors) => {
-  const newErrors = {...errors};
-  
-  if (name === "firstName" && !state.firstName){
-    newErrors.firstName = "FirstName is required.";
-  }
-  if (name === "lastName" && !state.lastName){
-    newErrors.lastName = "LastName is required."   
-  }
-  if (name === "address" && !state.address){
-    newErrors.address = "Adress Date is required.";   
-  } 
-  if (name === "city" && !state.city){
-    newErrors.city = "City is required.";   
-  }
-  if (name === "phone" && !state.phone){
-    newErrors.phone = "Phone is required.";
-  }
-  if (name === "zipCode" && !state.ZipCode){
-    newErrors.zipCode = "ZipCode is required.";   
-  }  
-  return newErrors;
-};
-
-const useStyle = makeStyles(theme =>({
-  modalForm: {
-    position:"absolute",
-    width: 350,
-    backgroundColor: "white",
-    borderRadius: '10px',
-    boxShadow: theme.shadows[5],
-    top:"50%",
-    left:"50%",
-    transform:"translate(-50%, -50%)"
-  },
-  gridContainer : {
-    width:"100%",
-    dispaly: 'flex',
-    margin: '0 auto',
-    justifyContent: 'center',
-    padding: '1px'
-  },
-  buttons: {
-    margin: '25px ',
-    '&:hover' :{
-      backgroundColor:'gray',
-      boxShadow: '1px 1px 4px 1px gray'
-    }
-  },
-  icon: {
-    height: '35px',
-    width: '30px'
-  },
-  inputError: {
-    color: 'red'
-  },
-  clear: {
-    fontSize:"35px"
-  },
-  clearContainer: {
-    height:"22px"
-  },
-  buttonsContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignContent:'center',
-    padding: '15px',
-  }
-  
-}))
 
 
 const CreateOrder = () => {
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(1);
   const [modal, setModal] = useState(false);
 
   const openCloseModal = () => {
     setModal(!modal);
-    setErrors({})
-    setState(initialForm);
+    setState1({});
+    setState2({});
     setCount(1);
   }
 
+  const nextPage1 = async (e) => {
+    e.preventDefault()
+    const isValid1 = await userSchema1.isValid(state1);
+    if(isValid1) setCount(count + 1)
+  }
+
+  const nextPage2 = async (e) => {
+    e.preventDefault()
+    const isValid2 = await userSchema2.isValid(state2);
+    if(isValid2) setCount(count + 1);
+  }
+
+  const SubmitForm = () => {
+    const order = {
+      ...state1, 
+      ...state2, 
+      cart: [{
+        units: 3, 
+        unitPrice: 100, 
+        id: 2
+      },{
+        units: 2, 
+        unitPrice: 50, 
+        id: 4
+      },{
+        units: 4, 
+        unitPrice: 35, 
+        id: 3
+      }]
+    }
+    axios.post('/addOrder', order)
+  }
+
   const {
-    state,
-    setState,
-    errors,
-    setErrors,
-    handleInputChange,
-  }=useForm({initialForm, validate});
+    state1,
+    setState1,
+    state2,
+    setState2,
+    handleInputChange1,
+    handleInputChange2,
+  }=useForm({initialForm2, initialForm1});
       
     return ( 
       <div>
-
-
-        <Button color="primary" variant="outlined" onClick={openCloseModal}> Pay </Button>
+       <Button color="primary" variant="outlined" onClick={openCloseModal}> Pay </Button>
         <Modal
         closeAfterTransition
         open={modal}
@@ -120,65 +83,68 @@ const CreateOrder = () => {
         >
           
           <div style={{display:'flex', justifyContent:'center',marginTop:'40px', width:'100%', flexGrow:'1'}}>   
+          <form onSubmit={SubmitForm}>
           { count === 1 ? (
-              <div className="Full_card">
-              <div className="container">
-               <div className="card">
+                     <div className="Full_card">
+                     <div className="container">
+                       <div className="exit">
+                       <button onClick={openCloseModal}> X </button>
+                       </div>
+                      <div className="card">
+                        <h1 className="card_title">Personal Details  <i class="fas fa-address-book"></i></h1>
+                        <div className="subtitle_form">
+                        <p className="card_title-info">Step 1: Basic info</p>          
+                        </div>
+                        <form className="card_form">
+                          <div className="input">
+                            <input type="text"   name="firstName" className={state1.firstName? 'input_field' : 'input_fieldw'} onChange={handleInputChange1} value={state1.firstName} required  />
+                            <label id="firstname" className="input_label">First Name - <i class="fas fa-user"></i></label>
+                          </div>
+                          <div class="input">
+                            <input  name="lastName" type="text" value={state1.lastName} onChange={handleInputChange1} className={state1.lastName ? 'input_field' : 'input_fieldw'} required />
+                            <label type="text" className="input_label">Last Name - <i class="fas fa-user-check"></i></label>
+                          </div>
+                          <div class="input">
+                            <input type="text" className={state1.phone ? 'input_field' : 'input_fieldw'} name="phone" value={state1.phone} onChange={handleInputChange1} required />
+                            <label className="input_label">Phone Number - <i class="fas fa-mobile-alt"></i> </label>
+                          </div>
+                          <div className="btn_cont1">
+                          <button className="card_button" style={{width:"46%"}} onClick={nextPage1}>Next</button>
+                          </div>
+                          <p className="p_color">Need help? <Link to="/help" className="help"> click here! </Link></p>
+                        </form>
+                        </div>
+                       </div>
+                  </div>
 
-                 <h1 className="card_title">Personal Details  <i class="fas fa-address-book"></i></h1>
-                 <p className="card_title-info">Step 1: Basic info</p>
-                 <form className="card_form">
-                   <div className="input">
-                     <input type="text" className="input_field" value={state.firstName} required />
-                     <label autoComplete="off" className="input_label">First Name - <i class="fas fa-user"></i></label>
-                   </div>
-                   <div class="input">
-                     <input autocomplete="off" type="text" value={state.lastName} className="input_field" required />
-                     <label type="text" className="input_label">Second Name - <i class="fas fa-user-check"></i></label>
-                   </div>
-                   <div class="input">
-                     <input type="text" className="input_field" required />
-                     <label autoComplete="off" className="input_label">Phone Number - <i class="fas fa-mobile-alt"></i> </label>
-                     <span className="input_eye">
-                     </span>
-                   </div>
-                   <div className="btn_cont1">
-                   <button className="card_button" style={{width:"46%"}} onClick={() => setCount(count + 1)}>Next</button>
-                   </div>
-                   <p className="p_color">Need help? <Link to="/help" className="help"> click here! </Link></p>
-                 </form>
-
-                 </div>
-                </div>
-           </div>
           ) : null}
 
           { count === 2 ? (
              <div className="Full_card">
              <div className="container">
+             <div className="exit">
+                <button onClick={openCloseModal}> X </button>
+                </div>
               <div className="card">
                 <h1 className="card_title">Personal Details <i class="fas fa-thumbtack"></i></h1>
-                <p className="card_title-info">Step 2: Locate </p>
+                <p className="card_title-info">Step 2: Locate </p>               
                 <form className="card_form">
                   <div className="input">
-                    <input type="text" className="input_field" required />
-                    
-                    <label autoComplete="off" className="input_label">Address - {<i class="fas fa-address-card"></i>}</label>
+                    <input type="text" className={state2.address ? 'input_field' : 'input_fieldw'} name="address" value={state2.address} onChange={handleInputChange2} required />
+                    <label className="input_label">Address - {<i class="fas fa-address-card"></i>}</label>
                   </div>
                   <div class="input">
-                    <input autocomplete="off" type="text" className="input_field" required />
+                    <input type="text" name="city" value={state2.city} onChange={handleInputChange2} className={state2.city ? 'input_field' : 'input_fieldw'} required />
                     <label type="text" className="input_label">City - <i class="fas fa-location-arrow"></i></label>
                   </div>
                   <div class="input">
-                    <input type="text" className="input_field" required />
-                    <label autoComplete="off" className="input_label">Zip Code - <i class="fas fa-map-marker-alt"></i></label>
-                    <span className="input_eye">
-                    </span>
+                    <input type="text" className={state2.zipCode ? 'input_field' : 'input_fieldw'} name="zipCode" value={state2.zipCode} onChange={handleInputChange2} required />
+                    <label className="input_label">Zip Code - <i class="fas fa-map-marker-alt"></i></label>
                   </div>
                   <div className="btn_group">
-                  <button className="card_button" onClick={() => setCount(count - 1 )}>Back</button>
+                  <button className="card_button" onClick={() => setCount(count - 1)} >Back</button>
                   <div className="divis"></div>
-                  <button className="card_button">Next</button>
+                  <button className="card_button" onClick={nextPage2}>Next</button>
                   </div>
                      <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
                 </form>
@@ -188,8 +154,28 @@ const CreateOrder = () => {
           ) : null}
 
           { count === 3 ? (
-              <div></div>
+               <div className="Full_card">
+               <div className="container">
+               <div className="exit">
+                <button onClick={openCloseModal}> X </button>
+                </div>
+                <div className="card">
+                  <h1 className="card_title" style={{marginTop:'20px', marginBottom:'25px'}}>Select payment method</h1>
+                  <form className="card_form">
+                    <div >
+                      <input type="radio" id="mercadopago" className="input_field" checked name="paymentMethod" required />                     
+                      <label for="mercadopago">Mercadopago</label>
+                    </div>
+                    <div className="btn_group">
+                    <button className="card_button" type="submit" onClick={SubmitForm}>Pay</button>
+                    </div>
+                       <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
+                  </form>
+                  </div>
+                 </div>
+            </div>  
           ) : null}
+          </form>
           </div>
         </Modal>
       </div>
@@ -214,3 +200,6 @@ export default CreateOrder
                   //     </ul>
                   //     </div>
                   //   </div>
+
+
+
