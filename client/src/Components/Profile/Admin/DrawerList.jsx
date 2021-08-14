@@ -4,6 +4,7 @@ import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, 
 import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp, Dashboard  } from '@material-ui/icons'
 import { Link, useHistory } from 'react-router-dom'
 import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
+import jwt from "jsonwebtoken"
 
 const useStyles= makeStyles(theme => ({
   list: {
@@ -44,7 +45,11 @@ export default function DrawerList() {
   const history = useHistory();
   const userDetail = useSelector(state => state.userReducer.userDetail);
 
-  const userId = JSON.parse(localStorage.getItem('profile')).id
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
+  const userId = localProfile?.id
 
   useEffect(() => {
     dispatch(readUser(userId));

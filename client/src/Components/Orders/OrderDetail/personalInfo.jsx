@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, Paper, Typography, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
 import { Delete, Info, Edit, Email } from "@material-ui/icons";
+import jwt from 'jsonwebtoken'
 
 const useStyles = makeStyles((theme) => ({
   paperContainer: {
@@ -51,7 +52,9 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const localProfile = JSON.parse(localStorage.getItem("profile"));
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null;
 
   const [anchorEl, setAnchorEl] = useState(null);
 

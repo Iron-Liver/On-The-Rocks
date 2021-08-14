@@ -4,7 +4,7 @@ import CreateCategory from '../Categories/CreateCategory/createCategory';
 import UpdateCategory from '../Categories/UpdateCategory/updateCategory';
 import CreateProduct from '../Products/createProduct';
 import UpdateProduct from '../Products/updateProduct';
-import CreateUser from '../Users/UserAdd/CreateUser';
+import CreateUser from '../Users/UserAdd/createUser';
 import UpdateUser from '../Users/UserUpdate/updateUser';
 
 const AdminFeatures = () => {

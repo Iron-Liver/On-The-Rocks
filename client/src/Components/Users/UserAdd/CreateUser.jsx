@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import {useLocation} from 'react-router-dom'
-import CreateUserForm from './CreateUserForm'
+// import {useLocation} from 'react-router-dom'
+import CreateUserForm from './createUserForm'
 import {createUser} from '../../../Redux/Users/UserActions'
 
 import swal from "sweetalert";
 
 const CreateUser = (props) => {
 
-	const search = useLocation().search;
-	const next = new URLSearchParams(search).get('next');
+	// const search = useLocation().search;
+	// const next = new URLSearchParams(search).get('next');
 
 	const dispatch = useDispatch();
 	const {userDetail} = useSelector(state => state.userReducer);
@@ -39,7 +39,7 @@ const CreateUser = (props) => {
 		} else {
 			typeof(userDetail) !== 'undefined' && swal('Welcome!', 'User created successfully',  'success')
 			setInput(wipedInput)
-			if(Boolean(next)) { console.log('redirect') }
+			// if(Boolean(next)) { console.log('redirect') }
 		}
 	},
 	// eslint-disable-next-line

@@ -10,16 +10,11 @@ module.exports = async (req, res, next) => {
     paymentMethod,
     zipCode,
     total,
-    status,
     cart
   } = req.body;
 
   try {
-    const user = await User.findOne({
-      where: {
-        id,
-      },
-    });
+    const user = await User.findByPk(id);
 
     if (!user) {
       throw new Error(`User with id: ${id} not found`);
@@ -33,7 +28,7 @@ module.exports = async (req, res, next) => {
       paymentMethod,
       zipCode,
       total,
-      status
+      status: "pending"
     };
 
     const order = await Order.create(newOrder);
@@ -46,11 +41,20 @@ module.exports = async (req, res, next) => {
         units: product.units,
         unitPrice: product.price
       });
-      orderProducts.setOrder(order.id);
-      orderProducts.setProduct(product.id);
+      await orderProducts.setOrder(order.id);
+      await orderProducts.setProduct(product.id);
+
+      // //uncomment when products support stock count 
+      // await Product.decrement({
+      //   stock: product.units
+      // }, {
+      //   where: {
+      //     id: product.id
+      //   }
+      // });
     });
 
-    return res.status(201).send(order);
+    return res.status(201).send({orderId: order.id});
   } catch (err) {
     next(err);
     return res.status(409).send({ error: err.message });
