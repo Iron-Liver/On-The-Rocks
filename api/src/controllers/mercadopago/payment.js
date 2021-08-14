@@ -1,4 +1,4 @@
-const { Order, Payment_detail } = require("../../db");
+const { Order, Payment_detail, Order_products, Product } = require("../../db");
 const { FRONT } = process.env;
 
 module.exports = async (req, res, next) => {
@@ -29,31 +29,76 @@ module.exports = async (req, res, next) => {
       await payment.setOrder(external_reference);
     }
 
-
     if(payment_status === "rejected") {
-      await Order.update({
-        status: "cancelled"
-      },{
+      const order = await Order.findOne({
         where: {
           id: external_reference
-        }
-      })
+        },
+        include: [Order_products]
+      });
+
+      // //uncomment when products support stock count
+      // order.order_products.forEach(async (product) => {
+      //   await Product.increment({
+      //     stock: product.units
+      //   }, {
+      //     where: {
+      //       id: product.productId
+      //     }
+      //   });
+      // });
+
+      order.status = "cancelled";
+      order.save();
     } else if(payment_status === "approved") {
-      await Order.update({
-        status: "created"
-      },{
+
+      const order = await Order.findOne({
         where: {
           id: external_reference
-        }
-      })
+        },
+        include: [Order_products]
+      });
+      
+      if(order.status === "processing") {
+        order.status = "created";
+        order.save();
+      } else {
+        
+        // //uncomment when products support stock count
+        // order.order_products.forEach(async (product) => {
+        //   await Product.decrement({
+        //     stock: product.units
+        //   }, {
+        //     where: {
+        //       id: product.productId
+        //     }
+        //   });
+        // });
+        order.status = "created";
+        order.save();
+      }
     } else {
-      await Order.update({
-        status: "processing"
-      },{
+
+      const order = await Order.findOne({
         where: {
           id: external_reference
-        }
-      })
+        },
+        include: [Order_products]
+      });
+
+      // //uncomment when products support stock count
+      // order.order_products.forEach(async (product) => {
+      //   await Product.decrement({
+      //     stock: product.units
+      //   }, {
+      //     where: {
+      //       id: product.productId
+      //     }
+      //   });
+      // });
+
+      order.status = "processing";
+      order.save();
     }
 
     return res.redirect(`${FRONT}/mercadopago/status/${payment_status}`);
