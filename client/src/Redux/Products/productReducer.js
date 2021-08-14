@@ -17,11 +17,13 @@ const productReducer = (state = initialState, action) => {
                 Products: action.payload,
                 FoundProds: action.payload
             };
+
         case CREATE_PRODUCT:
             return {
                 ...state,
                 createState: action.payload,
             };
+
         case UPDATE_PRODUCT:
             return {
                 ...state,
@@ -29,6 +31,7 @@ const productReducer = (state = initialState, action) => {
             };
 
         case GET_PRODUCT_BY_ID:
+            console.log('FoundProds', action.payload, action.type)
             return {
                 ...state,
                 FoundProds: action.payload

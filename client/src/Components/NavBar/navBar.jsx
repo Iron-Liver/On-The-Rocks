@@ -5,11 +5,8 @@ import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, C
 import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
-import { 
-  // eslint-disable-next-line
-  useSelector } from "react-redux";
 import NavBox from './navBox'
-import { logOutUser } from "../../Redux/Users/UserActions";
+import { logOutUser } from "../../Redux/Users/userActions";
 
 
 // import { logOutUser } from "../../Redux/Users/UserActions";
@@ -218,7 +215,7 @@ function NavBar(props) {
             <CartList/>
           </Drawer>
         </Hidden>
-      <main className={classes.content}>
+      <main>
         <div className={classes.blank} />
       </main>
     </div>

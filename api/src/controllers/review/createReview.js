@@ -4,7 +4,10 @@ module.exports = async (req, res, next) => {
     let {productId, userId, stars, description} = req.body;
     try {
         if (productId && userId && stars && description) {
-            review = await Review.create({productId, userId, stars, description});
+            review = await Review.findOrCreate ({
+                where: {productId, userId},
+                defaults: {productId, userId, stars, description}
+            });
             return res.json({ success: 'Review added successfully'})
         } else{
             throw new Error( 'Insufficient data' )
