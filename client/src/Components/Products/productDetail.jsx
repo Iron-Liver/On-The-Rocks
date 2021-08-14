@@ -97,7 +97,7 @@ const ProductDetail = () => {
         image: spirits[0].image,
         name: spirits[0].name})
     }
-    console.log(spirits[0])
+    
     return (
         <Card className={classes.root}>
             <div className={classes.divimage}>

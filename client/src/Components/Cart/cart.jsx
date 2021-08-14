@@ -1,9 +1,12 @@
 
-import {IconButton,CardContent,CardMedia,Typography,Grid,ListItem,  
+import {IconButton,CardContent,CardMedia,Typography,Grid,ListItem, Button,  
 } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from "@material-ui/core/styles";
 import { removeProductCart} from "../../Redux/Cart/cartActions";
+import { getCartItems} from '../../Redux/Cart/cartActions'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   
@@ -23,66 +26,100 @@ cont1: {
 },
 
 cover: {
-    width: '100px',
-    height: '100px',
-      
+    width: '120px',
+    height: '170px',       
+},
+button:{
+  width: '10px',
+  height: '20px',
+  marginLeft: "5px",
+  marginRight: "5px"
+},
+text:{
+  position: "absolute",
+  marginTop: "-30%",
+  marginLeft: "50%",
+  display: 'column'
 },
 
 margin:{
   position: "absolute", 
-  marginLeft: "70%"
+  marginLeft: "70%",
 },
 
 title:{
   display: "flex",
   marginLeft: '15px',
   justifyContent: 'center',
+}, 
+sum:{
+  display: "flex",
 }
 }));
 
 
 
 export function Cart(){
-
 const classes = useStyles();
-let data =  JSON.parse(localStorage.getItem('data'))
+let data = JSON.parse(localStorage.getItem('data')) 
+const [state, setState] = useState(data)
+console.log(state)
 var total = 0;
-data?.map( e =>(    
+
+function removeProduct(id){
+  let data = JSON.parse(localStorage.getItem('data'))
+  data = data.filter(e => e.id !== id)
+  localStorage.removeItem("data")
+  localStorage.setItem("data",JSON.stringify(data))
+  setState(data)
+ }
+
+state?.map( e =>(    
 total = total + e.price))
-console.log("total", total)
+
+const dispatch = useDispatch();
+
+useEffect( () =>{
+},[state, localStorage]
+) 
 
 return(
 <CardContent className={classes.content}>
-            { data?.map( e =>(   
+            { state?.map( e =>(   
               <ListItem button>
-              <div className={classes.details}>
+              <div className={classes.details} >
                     <Grid item className={classes.cont1}>
                         <IconButton 
                         aria-label="delete" 
                         className={classes.margin}
-                        onClick={() => removeProductCart(e.id)}
+                        onClick={() => removeProduct(e.id)}
                         >
-                             <DeleteIcon fontSize="medium" />
+                          <DeleteIcon fontSize="medium" />
                         </IconButton>  
                         <CardMedia
                         className={classes.cover}
                         image={e.image}/> 
-                      
-                        <Typography  variant="h5">
-                          {e.name}
-                        </Typography>
-                        <Typography component="h6" variant="h6">
-                           Quantity: {e.units}
-                        </Typography>
-                        <Typography component="h6" variant="h6">
-                           SubTotal: ${e.price} 
-                        </Typography>
+                        <div className={classes.text}>
+                            <Typography  >
+                             {e.name}
+                            </Typography>
+                            <div className={classes.sum}>
+                            <Button className={classes.button} >-</Button>
+                            <Grid>{e.units}
+                            </Grid>
+                            <Button className={classes.button}>+</Button>
+                            </div>
+                            <Typography component="h7" variant="h7">
+                             SubTotal: ${e.price} 
+                           </Typography>
+                        </div>  
                     </Grid> 
                </div>
              </ListItem>))}
              <Typography component="h5" variant="h5">
                             Total: ${total}
              </Typography>
-           </CardContent>)
+      
+      </CardContent>)
 
 }

@@ -18,6 +18,16 @@ export function removeProductCart(id){
  data = data.filter(e => e.id !== id)
  localStorage.removeItem("data")
  localStorage.setItem("data",JSON.stringify(data))
+}
 
- console.log(data)
+export function getCartItems(){
+console.log("sentra")    
+let data = JSON.parse(localStorage.getItem('data'))   
+     return function (dispatch) {
+         return dispatch({
+              type: "GET_ITEMS",
+              payload: data,
+            });
+        }
+        
 }

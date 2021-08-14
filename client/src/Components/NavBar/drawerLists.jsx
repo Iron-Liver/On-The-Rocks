@@ -3,25 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {Cart} from "../Cart/cart"
 import {
-  IconButton, 
-  Card, 
-  CardContent, 
-  CardMedia, 
   Typography, 
-  Button, 
-  Grid, 
-  Box, 
-  FormControl,
-  MenuItem, 
-  InputLabel,
   Divider,
   List,
   ListItem,
   ListItemText,
   TextField,
 } from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import {
   LocalBar,
   Receipt,
@@ -37,7 +25,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { getProducts } from "../../Redux/Products/productsActions";
 import { FRONTEND } from "../../Utils/constants";
-import { removeProduct } from "../Cart/cart";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { logOutUser } from "../../Redux/Users/userActions";
