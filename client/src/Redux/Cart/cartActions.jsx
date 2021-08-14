@@ -1,3 +1,4 @@
+import {Cart} from "../../Components/Cart/cart"
 
 export function addProductCart({id,units,price,image,name}){
     let data = []
@@ -20,14 +21,3 @@ export function removeProductCart(id){
  localStorage.setItem("data",JSON.stringify(data))
 }
 
-export function getCartItems(){
-console.log("sentra")    
-let data = JSON.parse(localStorage.getItem('data'))   
-     return function (dispatch) {
-         return dispatch({
-              type: "GET_ITEMS",
-              payload: data,
-            });
-        }
-        
-}

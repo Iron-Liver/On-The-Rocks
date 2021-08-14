@@ -7,6 +7,7 @@ import { Card, CardContent, CardMedia, Typography, Button, Grid, Box, Select, Fo
 import { ShoppingCart } from '@material-ui/icons';
 import Rating from '@material-ui/lab/Rating';
 import { addProductCart } from '../../Redux/Cart/cartActions';
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -89,13 +90,23 @@ const ProductDetail = () => {
     }
 
     function onSubmit(e){
-
-     addProductCart({
-        units: quant,
-        id: spirits[0].id,
-        price: spirits[0].price * quant,
-        image: spirits[0].image,
-        name: spirits[0].name})
+    let date = JSON.parse(localStorage.getItem('data')) 
+    let data = date.filter(e => e.id === spirits[0].id)
+    if (date.length > 0 && data.length > 0){
+         swal("The product is already in the cart!")}
+    else{
+        if (quant > 0){
+            addProductCart({
+               units: quant,
+               id: spirits[0].id,
+               price: spirits[0].price * quant,
+               image: spirits[0].image,
+               name: spirits[0].name})
+           swal("The product was added to the cart!")   
+        } else{
+           swal("Please enter a valid unit")
+        }
+    }
     }
     
     return (

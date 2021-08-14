@@ -62,9 +62,10 @@ sum:{
 export function Cart(){
 const classes = useStyles();
 let data = JSON.parse(localStorage.getItem('data')) 
-const [state, setState] = useState(data)
-console.log(state)
 var total = 0;
+const [state, setState] = useState()
+if(JSON.stringify(state) !== JSON.stringify(data))
+    setState(data)
 
 function removeProduct(id){
   let data = JSON.parse(localStorage.getItem('data'))
@@ -73,15 +74,60 @@ function removeProduct(id){
   localStorage.setItem("data",JSON.stringify(data))
   setState(data)
  }
+ 
 
 state?.map( e =>(    
-total = total + e.price))
+total = total+ e.price))
 
-const dispatch = useDispatch();
 
-useEffect( () =>{
-},[state, localStorage]
+/* useEffect( () =>{
+  let data = JSON.parse(localStorage.getItem('data'))
+  if(JSON.stringify(state) !== JSON.stringify(data))
+    setState(data)
+},[state]
 ) 
+ */
+
+function sum(id){
+  
+   state?.map((e) => {
+      if (e.id === id && e.units < 50){
+       let sub = e.price/ e.units;
+       e.units++;
+       sub = sub * e.units;
+       (e.price = sub.toFixed(2))}
+    })
+   
+   localStorage.removeItem("data")
+   localStorage.setItem("data",JSON.stringify(state))
+   let data = JSON.parse(localStorage.getItem('data'))
+   setState(data)
+  
+   state?.map( e =>(    
+    total = total + e.price))
+  
+}
+
+function res(id){
+
+  state?.map( (e) => { 
+    if (e.id === id  && e.units > 1){
+    let sub = e.price / e.units;
+    e.units--;
+    sub = sub * e.units;
+    e.price = sub.toFixed(2)}
+    total =+ e.price
+  })
+ localStorage.removeItem("data")
+ localStorage.setItem("data",JSON.stringify(state))
+ let data = JSON.parse(localStorage.getItem('data'))
+ setState(data)
+
+ state?.map( e =>(    
+  total = total+ e.price))
+}
+
+
 
 return(
 <CardContent className={classes.content}>
@@ -104,10 +150,10 @@ return(
                              {e.name}
                             </Typography>
                             <div className={classes.sum}>
-                            <Button className={classes.button} >-</Button>
+                            <Button className={classes.button} onClick = {() => res(e.id)}>-</Button>
                             <Grid>{e.units}
                             </Grid>
-                            <Button className={classes.button}>+</Button>
+                            <Button className={classes.button} onClick = {() => sum(e.id)}>+</Button>
                             </div>
                             <Typography component="h7" variant="h7">
                              SubTotal: ${e.price} 
