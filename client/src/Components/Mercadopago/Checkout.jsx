@@ -16,6 +16,7 @@ const Checkout = ({ products, data }) => {
     document.getElementById('form1').appendChild(script);
    },[data])
 
+  useEffect(() => {})
   return (
     <div>
       <form id='form1'>

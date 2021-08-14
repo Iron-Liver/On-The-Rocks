@@ -5,25 +5,27 @@ import { useForm } from './useForm';
 import { Link, useHistory } from 'react-router-dom';
 import { userSchema1, userSchema2 } from './ValidationOrder'
 import './CreateOrder.css'
+import jwt from "jsonwebtoken"
 import axios from 'axios'
+import mercadopagoimg from '../../../assets/mercado-pago.png';
+
+
 
 let initialForm1 = {
   firstName: '',
   lastName: '',
-  phone: '',  
+  phone: 0,  
 }
 let initialForm2 = {    
   address: '',
   city: '',
   zipCode: '',
-  paymentMethod: 'mercadopago',
 }
 
 
 const CreateOrder = () => {
   const [count, setCount] = useState(1);
   const [modal, setModal] = useState(false);
-
   const history = useHistory();
 
   const openCloseModal = () => {
@@ -45,17 +47,16 @@ const CreateOrder = () => {
     if(isValid2) setCount(count + 1);
   }
 
-  const SubmitForm = async () => {
+  const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
+  const SubmitForm = async () => { 
     const order = {
-        id: 9,
-        firstName: 'agustin',
-        lastName: 'nosenosneso',
-        phone: '123214',  
-        address: 'nosenosneos',
-        city: 'nosneose',
-        zipCode: 'nosenos',
-        paymentMethod: 'mercadopago',
-        total: 300,
+       ...state1, ...state2,
+      id: currentUser.id,
+      paymentMethod: 'mercadopago' ,
+      total: 300, 
       cart: [
       {
         units: 3, 
@@ -118,7 +119,7 @@ const CreateOrder = () => {
         >
           
           <div style={{display:'flex', justifyContent:'center',marginTop:'40px', width:'100%', flexGrow:'1'}}>   
-          <form >
+    
           { count === 1 ? (
                      <div className="Full_card">
                      <div className="container">
@@ -133,15 +134,15 @@ const CreateOrder = () => {
                         <form className="card_form">
                           <div className="input">
                             <input type="text"   name="firstName" className={state1.firstName? 'input_field' : 'input_fieldw'} onChange={handleInputChange1} value={state1.firstName} required  />
-                            <label id="firstname" className="input_label" label='First Name'>First Name - <i class="fas fa-user"></i> {state1.firstName? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> } </label>
+                            <label id="firstname" className="input_label" label='First Name'>First Name - <i class="fas fa-user"></i> {state1.firstName?.length >= 3 ? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> } </label>
                           </div>
                           <div class="input">
                             <input  name="lastName" type="text" value={state1.lastName} onChange={handleInputChange1} className={state1.lastName ? 'input_field' : 'input_fieldw'} required />
-                            <label type="text" className="input_label">Last Name - <i class="fas fa-user-check"></i> {state1.lastName? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
+                            <label type="text" className="input_label">Last Name - <i class="fas fa-user-check"></i> {state1.lastName?.length  >= 3? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
                           </div>
                           <div class="input">
                             <input type="text" className={state1.phone ? 'input_field' : 'input_fieldw'} name="phone" value={state1.phone} onChange={handleInputChange1} required />
-                            <label className="input_label">Phone Number - <i class="fas fa-mobile-alt"></i> {state1.phone? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> } </label>
+                            <label className="input_label">Phone Number - <i class="fas fa-mobile-alt"></i> {state1.phone?.length >= 6 && !isNaN(state1.phone) ? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> } </label>
                           </div>
                           <div className="btn_cont1">
                           <button className="card_button" style={{width:"46%"}} onClick={nextPage1}>Next</button>
@@ -166,15 +167,15 @@ const CreateOrder = () => {
                 <form className="card_form">
                   <div className="input">
                     <input type="text" className={state2.address ? 'input_field' : 'input_fieldw'} name="address" value={state2.address} onChange={handleInputChange2} required />
-                    <label className="input_label">Address - {<i class="fas fa-address-card"></i>} {state2.address? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
+                    <label className="input_label">Address - {<i class="fas fa-address-card"></i>} {state2.address?.length >= 6? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
                   </div>
                   <div class="input">
                     <input type="text" name="city" value={state2.city} onChange={handleInputChange2} className={state2.city ? 'input_field' : 'input_fieldw'} required />
-                    <label type="text" className="input_label">City - <i class="fas fa-location-arrow"></i> {state2.city? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
+                    <label type="text" className="input_label">City - <i class="fas fa-location-arrow"></i> {state2.city?.length >= 3? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
                   </div>
                   <div class="input">
                     <input type="text" className={state2.zipCode ? 'input_field' : 'input_fieldw'} name="zipCode" value={state2.zipCode} onChange={handleInputChange2} required />
-                    <label className="input_label">Zip Code - <i class="fas fa-map-marker-alt"></i>  {state2.zipCode? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
+                    <label className="input_label">Zip Code - <i class="fas fa-map-marker-alt"></i>  {state2.zipCode?.length >= 3? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
                   </div>
                   <div className="btn_group">
                   <button className="card_button" onClick={() => setCount(count - 1)} >Back</button>
@@ -195,22 +196,22 @@ const CreateOrder = () => {
                 <button onClick={openCloseModal}> X </button>
                 </div>
                 <div className="card">
-                  <h1 className="card_title" style={{marginTop:'20px', marginBottom:'25px'}}>Select payment method</h1>
+                  <h1 className="card_title" style={{marginTop:'20px', marginBottom:'25px'}}>Payment method <i class="fas fa-money-check-alt"></i></h1>
                   <form className="card_form">
-                    {/* <div >
-                      <input type="radio" id="mercadopago" className="input_field" checked name="paymentMethod" required />                     
-                      <label for="mercadopago">Mercadopago</label>
-                    </div> */}
+                  <div class="mercadoPagoCont">
+                    <input type="radio"  id="mercadopago" name="mercadopago" value={state2.mercadopago} />
+                    <label  for="mercadopago"><img className="imgmercadopago" src={mercadopagoimg} alt="mercadopago"></img></label>
+                  </div>
                     <div className="btn_group">
+          
                     </div>
-                       <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
+                     <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
                   </form>
                     <button className="card_button" onClick={SubmitForm}>Pay</button>
                   </div>
                  </div>
             </div>  
           ) : null}
-          </form>
           </div>
         </Modal>
       </div>
