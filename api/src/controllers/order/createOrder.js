@@ -43,15 +43,6 @@ module.exports = async (req, res, next) => {
       });
       await orderProducts.setOrder(order.id);
       await orderProducts.setProduct(product.id);
-
-      // //uncomment when products support stock count 
-      // await Product.decrement({
-      //   stock: product.units
-      // }, {
-      //   where: {
-      //     id: product.id
-      //   }
-      // });
     });
 
     return res.status(201).send({orderId: order.id});
