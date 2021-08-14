@@ -2,6 +2,7 @@ const { Review } = require("../../db");
 
 module.exports = async (req, res, next) => {
     let {productId, userId, stars, description} = req.body;
+    console.log(productId, userId, stars, description)
     try {
         if (productId && userId && stars && description) {
             review = await Review.findOrCreate ({

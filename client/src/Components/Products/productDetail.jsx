@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
-import { getProductById } from "../../Redux/Products/productsActions";
 import { getProductReviews } from "../../Redux/Reviews/reviewActions";
 import {
     Card,
@@ -19,7 +18,9 @@ import {
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
+import jwt from 'jsonwebtoken'
 import ProductReviewCard from "./ProductReview/productReviewCard";
+import AddProductReview from "./ProductReview/addProductReview";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         // height: '75vh',
         width: "100%",
         justifyContent: "space-evenly",
+        marginBottom: theme.spacing(4),
     },
     details: {
         textAlign: "start",
@@ -64,6 +66,12 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(2),
         paddingBottom: theme.spacing(1),
     },
+    noStars: {
+        "& .MuiGrid-container": {
+            display: "flex",
+            justifyContent: "center",
+        },
+    },
     formControl: {
         margin: theme.spacing(1),
         width: 110,
@@ -75,10 +83,14 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductDetail = () => {
     const [value, setValue] = React.useState(2);
+    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+    jwt.verify(JSON.parse(localStorage.getItem('token')), 
+    process.env.REACT_APP_SECRET_KEY) : null
+    const { id } = useParams();
     const dispatch = useDispatch();
-    const spirits = useSelector((state) => state.productReducer.FoundProds);
+    const { Products } = useSelector((state) => state.productReducer);
+    const liqueur = Products?.filter((p) => p.id === Number(id))[0];
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
-    const { id: liqueur } = useParams();
     const classes = useStyles();
     const [quant, setQuant] = React.useState("");
 
@@ -93,36 +105,29 @@ const ProductDetail = () => {
     };
 
     useEffect(() => {
-        (async function(){
-            console.log(liqueur);
-            await dispatch(getProductById(liqueur));
-            await dispatch(getProductReviews(liqueur));
-            console.log(spirits, reviews)
+        (async function () {
+            await dispatch(getProductReviews(id));
         })();
-    }, 
-    // eslint-disable-next-line
-    []);
+    }, [Products]);
 
-    // useEffect(() => {
-    //     console.log("state", spirits);
-    // }, [spirits]);
+    useEffect(() => {}, [Products]);
 
     return (
         <>
-            {spirits?.lenght === 1 ? (
+            {liqueur ? (
                 <>
                     <Card className={classes.root}>
                         <div className={classes.divimage}>
                             <CardMedia
                                 className={classes.cover}
-                                image={spirits[0].image}
+                                image={liqueur.image}
                             />
                         </div>
                         <div className={classes.details}>
                             <CardContent className={classes.content}>
                                 <Grid item className={classes.cont1}>
                                     <Typography variant="h4">
-                                        {spirits[0].name}
+                                        {liqueur.name}
                                     </Typography>
                                     <div className={classes.review}>
                                         <Box
@@ -147,14 +152,14 @@ const ProductDetail = () => {
                                         </Box>
                                     </div>
                                     <Typography component="h5" variant="h5">
-                                        ${spirits[0].price}
+                                        ${liqueur.price}
                                     </Typography>
                                     <Typography component="h5" variant="h5">
-                                        {spirits[0].brand}
+                                        {liqueur.brand}
                                     </Typography>
                                 </Grid>
                                 <Typography variant="h6" color="textSecondary">
-                                    {spirits[0].description}
+                                    {liqueur.description}
                                 </Typography>
                             </CardContent>
                             <div className={classes.controls}>
@@ -197,12 +202,15 @@ const ProductDetail = () => {
                             </div>
                         </div>
                     </Card>
-                    <Card>
-                        <ProductReviewCard reviews={reviews} />
-                    </Card>
+
+                    <AddProductReview prodId={id} userId={currentUser?.id}/>
+                    <ProductReviewCard reviews={reviews} prodId={id}/>
                 </>
             ) : (
-                <Typography variant> Loading </Typography>
+                <Typography variant="h1" align="center">
+                    {" "}
+                    Loading{" "}
+                </Typography>
             )}
         </>
     );

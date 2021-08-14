@@ -31,7 +31,6 @@ const productReducer = (state = initialState, action) => {
             };
 
         case GET_PRODUCT_BY_ID:
-            console.log('FoundProds', action.payload, action.type)
             return {
                 ...state,
                 FoundProds: action.payload
@@ -76,9 +75,7 @@ const productReducer = (state = initialState, action) => {
             }
 
         default:
-            return {
-                state,
-            };
+            return state
     }
 };
 

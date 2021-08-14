@@ -26,18 +26,18 @@ const useStyles = makeStyles((theme) => ({
         display: "block",
         maxWidth: "100%",
         maxHeight: "100%",
-    },
+    }
 }));
 
 export const ProductReviewCard = ({ reviews }) => {
     const classes = useStyles();
     return (
-        <>
+        <Grid container spacing={4} style={{width:'90%',margin: "auto"}}>
             {reviews.length > 1 ? (
                 reviews.map((review) => {
                     return (
-                        <Paper className={classes.paper} key={review.id}>
-                            {console.log('return test')}
+                        <Grid item xs={12} sm={6} lg={4} key={review.id}>
+                        <Paper className={classes.paper} >
                         <Grid
                             container
                             spacing={2}
@@ -63,12 +63,13 @@ export const ProductReviewCard = ({ reviews }) => {
                             </Typography>
                         </Grid>
                     </Paper>
+                    </Grid>
                     );
                 })
             ) : (
-                <h1>No reviews registered yet</h1>
+                <Typography variant="h4" align="center" >No reviews registered yet</Typography>
             )}
-        </>
+            </Grid>
     );
 };
 
