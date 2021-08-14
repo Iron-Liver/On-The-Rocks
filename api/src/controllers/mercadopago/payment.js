@@ -37,16 +37,16 @@ module.exports = async (req, res, next) => {
         include: [Order_products]
       });
 
-      // //uncomment when products support stock count
-      // order.order_products.forEach(async (product) => {
-      //   await Product.increment({
-      //     stock: product.units
-      //   }, {
-      //     where: {
-      //       id: product.productId
-      //     }
-      //   });
-      // });
+      //uncomment when products support stock count
+      order.order_products.forEach(async (product) => {
+        await Product.increment({
+          stock: product.units
+        }, {
+          where: {
+            id: product.productId
+          }
+        });
+      });
 
       order.status = "cancelled";
       order.save();
@@ -64,16 +64,16 @@ module.exports = async (req, res, next) => {
         order.save();
       } else {
         
-        // //uncomment when products support stock count
-        // order.order_products.forEach(async (product) => {
-        //   await Product.decrement({
-        //     stock: product.units
-        //   }, {
-        //     where: {
-        //       id: product.productId
-        //     }
-        //   });
-        // });
+        //uncomment when products support stock count
+        order.order_products.forEach(async (product) => {
+          await Product.decrement({
+            stock: product.units
+          }, {
+            where: {
+              id: product.productId
+            }
+          });
+        });
         order.status = "created";
         order.save();
       }
@@ -86,16 +86,16 @@ module.exports = async (req, res, next) => {
         include: [Order_products]
       });
 
-      // //uncomment when products support stock count
-      // order.order_products.forEach(async (product) => {
-      //   await Product.decrement({
-      //     stock: product.units
-      //   }, {
-      //     where: {
-      //       id: product.productId
-      //     }
-      //   });
-      // });
+      //uncomment when products support stock count
+      order.order_products.forEach(async (product) => {
+        await Product.decrement({
+          stock: product.units
+        }, {
+          where: {
+            id: product.productId
+          }
+        });
+      });
 
       order.status = "processing";
       order.save();
