@@ -1,9 +1,10 @@
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase, } from '@material-ui/core'
-import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp  } from '@material-ui/icons'
+import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase } from '@material-ui/core'
+import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp, Dashboard  } from '@material-ui/icons'
 import { Link, useHistory } from 'react-router-dom'
 import { logOutUser, readUser } from '../../../Redux/Users/userActions';
+import jwt from "jsonwebtoken"
 
 const useStyles= makeStyles(theme => ({
   list: {
@@ -44,7 +45,11 @@ export default function DrawerList() {
   const history = useHistory();
   const userDetail = useSelector(state => state.userReducer.userDetail);
 
-  const userId = JSON.parse(localStorage.getItem('profile')).id
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
+  const userId = localProfile?.id
 
   useEffect(() => {
     dispatch(readUser(userId));
@@ -80,13 +85,23 @@ export default function DrawerList() {
       </Grid>
 
       <Divider/>
+      <Link to={`/private/profile/${userId}/dashboard`}  className={classes.link}>
+        <ListItem  button> 
+        <ButtonBase>
+          <ListItemIcon>
+            <Dashboard />
+          </ListItemIcon>
+          <ListItemText  primary="Dashboard" />
+        </ButtonBase>
+        </ListItem>
+      </Link>
       <Link to={`/private/profile/${userId}/users`}  className={classes.link}>
         <ListItem  button> 
         <ButtonBase>
           <ListItemIcon>
             <AssignmentInd />
           </ListItemIcon>
-          <ListItemText  primary="All users" />
+          <ListItemText  primary="Users" />
         </ButtonBase>
         </ListItem>
       </Link>
@@ -96,11 +111,11 @@ export default function DrawerList() {
             <ListItemIcon>
               <ShoppingCart />
             </ListItemIcon>
-            <ListItemText primary="All orders"/>
+            <ListItemText primary="Orders"/>
           </ButtonBase>
         </ListItem>
       </Link> 
-      <Link to={`/private/profile/${userId}/create_category`}  className={classes.link}>
+      <Link to={`/private/profile/${userId}/categories`}  className={classes.link}>
         <ListItem  button> 
         <ButtonBase>
           <ListItemIcon>
@@ -110,7 +125,7 @@ export default function DrawerList() {
         </ButtonBase>
         </ListItem>
       </Link>
-      <Link to={`/private/profile/${userId}/create_product`}  className={classes.link}>
+      <Link to={`/private/profile/${userId}/products`}  className={classes.link}>
         <ListItem  button> 
         <ButtonBase>
           <ListItemIcon>
@@ -120,12 +135,12 @@ export default function DrawerList() {
           </ButtonBase>
         </ListItem>
       </Link>
-      <ListItem  button> 
-      <ButtonBase onClick={logOut}>
-        <ListItemIcon>
-          <ExitToApp/>
-        </ListItemIcon>
-        <ListItemText primary="Logout"/>
+      <ListItem onClick={logOut} button> 
+        <ButtonBase> 
+          <ListItemIcon>
+            <ExitToApp/>
+          </ListItemIcon>
+          <ListItemText primary="Logout"/>
         </ButtonBase>
       </ListItem>
       

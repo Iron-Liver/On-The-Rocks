@@ -186,7 +186,12 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                     Cancelled
                   </MenuItem>
                 </Menu>
-                <Button variant="text" color="default" startIcon={<Email />}>
+                <Button 
+                  variant="text" 
+                  color="default" 
+                  startIcon={<Email />}
+                  disabled
+                >
                   Contact user
                 </Button>
               </Box>
@@ -200,7 +205,12 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                 >
                   Remove order
                 </Button>
-                <Button variant="text" color="default" startIcon={<Info />}>
+                <Button 
+                  variant="text" 
+                  color="default" 
+                  startIcon={<Info />}
+                  disabled
+                >
                   Get help
                 </Button>
               </Box>

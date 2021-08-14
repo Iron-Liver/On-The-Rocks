@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Order from "./order";
 import axios from "axios";
+import jwt from 'jsonwebtoken'
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
@@ -34,7 +35,9 @@ const UserOrders = () => {
   useEffect(() => {
     (async () => {
       try {
-        const localProfile = JSON.parse(localStorage.getItem('profile'));
+        const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+        jwt.verify(JSON.parse(localStorage.getItem('token')), 
+        process.env.REACT_APP_SECRET_KEY) : null
         if(localProfile.id !== userId) {
           history.push("/");
         }
@@ -97,14 +100,14 @@ const UserOrders = () => {
         history.push("/"); 
       }
     })()
-  },[page, history, userId])
+  },[page, history, userId, form])
 
   const handlePageChange = (e, val) => {
     setPage(val);
   };
 
   return (
-    <div>
+    <div style={{ marginRight: 25}}>
       <div>
         <form onSubmit={handleSubmit}>
           <input
@@ -112,38 +115,38 @@ const UserOrders = () => {
             placeholder="First name"
             name="firstName"
             onChange={handleChange}
-          />
+            />
           <input
             type="text"
             placeholder="Last name"
             name="lastName"
             onChange={handleChange}
-          />
+            />
           <input
             type="text"
             placeholder="Address"
             name="address"
             onChange={handleChange}
-          />
+            />
           <input
             type="text"
             placeholder="City"
             name="city"
             onChange={handleChange}
-          />
+            />
           <input
             type="text"
             placeholder="Total"
             name="total"
             onChange={handleChange}
-          />
+            />
           <label htmlFor="status">
             <select
               id="status"
               name="status"
               defaultValue=""
               onChange={handleChange}
-            >
+              >
               <option value="" hidden="hidden">
                 Status
               </option>
@@ -162,7 +165,7 @@ const UserOrders = () => {
             count={orders.pages}
             page={page}
             onChange={handlePageChange}
-          />
+            />
         </div>
       </div>
       <div
@@ -171,16 +174,16 @@ const UserOrders = () => {
           flexDirection: "column",
           alignItems: "center",
         }}
-      >
+        >
         {orders.data &&
           orders.data.map((order, idx) => (
             <Order 
-              order={order} 
-              key={Math.random() * 100} 
-              userId={userId}
-              handleSubmit={handleSubmit}
+            order={order} 
+            key={Math.random() * 100 * idx} 
+            userId={userId}
+            handleSubmit={handleSubmit}
             />
-          ))}
+            ))}
       </div>
     </div>
   );
