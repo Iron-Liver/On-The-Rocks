@@ -26,7 +26,7 @@ import NavBar from './Components/NavBar/navBar';
 import landingPage from './Components/LandingPage/landingPage';
 import AdminFeatures from './Components/Admin/AdminFeatures';
 import Error404 from './Components/Error404/Error404';
-import CreateOrder from './Components/Orders/CreateOrder/CreateOrder';
+import CreateOrder from './Components/Orders/CreateOrder/createOrder';
 import MercadoPago from './Components/Mercadopago/Mercadopago';
 
 

@@ -1,4 +1,4 @@
-const { Order, Order_products, Product, Payment_detail } = require('../../db');
+const { Order, Order_products, Product, Payment_detail, User } = require('../../db');
 
 module.exports = async (req, res, next) => {
   const { orderId } = req.params;
@@ -16,6 +16,8 @@ module.exports = async (req, res, next) => {
         include: [Product]
       }, {
         model: Payment_detail
+      }, {
+        model: User
       }]
     });
 

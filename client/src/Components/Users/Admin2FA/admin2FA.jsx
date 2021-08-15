@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
-import {allowAdmin} from '../../../Redux/Users/UserActions'
+import {allowAdmin} from '../../../Redux/Users/userActions'
 import jwt from 'jsonwebtoken'
 import swal from 'sweetalert'
 

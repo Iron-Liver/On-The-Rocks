@@ -1,45 +1,69 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
+import './Checkout.css';
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const Checkout = ({ products, data }) => {
+// Import Swiper styles
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css"
+import "swiper/components/pagination/pagination.min.css"
+
+// import Swiper core and required modules
+import SwiperCore, {
+  Navigation,Pagination,Mousewheel,Keyboard
+} from 'swiper/core';
+import ProductSlide from './ProductSlide';
+import OrderInfo from './OrderInfo';
+
+// install Swiper modules
+SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard]);
+
+const Checkout = ({ order, data, stock }) => {
+
   useEffect(() => {
-    const script = document.createElement('script');
+    if(stock) {
+      const script = document.createElement('script');
     
-    const attr_data_preference = document.createAttribute('data-preference-id');
+      const attr_data_preference = document.createAttribute('data-preference-id');
 
-    attr_data_preference.value = data.id
+      attr_data_preference.value = data.id
   
-    script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";  
-    script.setAttributeNode(attr_data_preference)  
-  
-    console.log(data)
+      script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";  
+      script.setAttributeNode(attr_data_preference)  
     
-    document.getElementById('form1').appendChild(script);
-   },[data])
+      document.getElementById('form1').appendChild(script);
+    }
+   },[data, stock])
 
   return (
-    <div>
-      <form id='form1'>
-
-        <h4>Checkout</h4>
-        <img 
-          src="https://imgmp.mlstatic.com/org-img/banners/ar/medios/575X40.jpg" 
-          title="Mercado Pago - Medios de pago" alt="Mercado Pago - Medios de pago" 
-          width="575" height="40"
-        />
-        <div>  
-          {
-            products.map((producto, i) => (
-              <div key={i}>
-                <ul>
-                  <li>{producto.title}</li>
-                  <li>{'$' + producto.price}</li> 
-                  <li>{producto.quantity}</li>
-                </ul>
-              </div>   
-            ))
-          }
-        </div>   
-      </form>
+    <div className="checkout-wrapper">
+      <div style={{width: "100%", height: "100%", display: "flex", justifyContent: "center"}}>
+        <div className="order-info-container">
+          <OrderInfo order={order}/>
+          <div className="payment-button">
+            <form id='form1'>
+            </form>
+            {!stock &&
+            <p style={{color: "#d9534f", margin: "3px"}}>
+              No stock available, please try again later.
+            </p>}
+          </div>
+        </div>
+      </div>
+      <div className="productview-wrapper">
+        <div className="swiper-wrap">
+          <Swiper 
+            navigation={order.order_products.length > 1}
+            mousewheel={true} 
+            keyboard={true}
+          >
+            {order.order_products.map(product => 
+              <SwiperSlide key={Math.random() * 3}>
+                <ProductSlide product={product} />
+              </SwiperSlide>
+            )}
+          </Swiper>
+        </div>
+      </div>
     </div>
   )
 }

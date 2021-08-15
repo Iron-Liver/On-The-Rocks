@@ -58,18 +58,19 @@ const CreateOrder = () => {
         total: 300,
       cart: [
       {
-        units: 3, 
-        price: 100, 
+        units: 1, 
+        price: 1, 
         id: 2
-      },{
-        units: 2, 
-        price: 50, 
-        id: 4
-      },{
-        units: 4, 
-        price: 35, 
-        id: 3
-      }
+      },
+      // {
+      //   units: 2, 
+      //   price: 50, 
+      //   id: 4
+      // },{
+      //   units: 4, 
+      //   price: 35, 
+      //   id: 3
+      // }
     ]
     }
     try {

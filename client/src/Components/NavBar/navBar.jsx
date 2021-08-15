@@ -6,7 +6,8 @@ import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import NavBox from './navBox'
-import { logOutUser } from "../../Redux/Users/UserActions";
+import { logOutUser } from "../../Redux/Users/userActions";
+import jwt from 'jsonwebtoken';
 
 
 // import { logOutUser } from "../../Redux/Users/UserActions";
@@ -76,11 +77,13 @@ function NavBar(props) {
   };
 
   const handleProfile = () => {
-    const currentUser = localStorage.getItem('profile');
+    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+    jwt.verify(JSON.parse(localStorage.getItem('token')), 
+    process.env.REACT_APP_SECRET_KEY) : null;
     if(!currentUser) {
       return history.push("/login")
     } else {
-      const { id, isAdmin } = JSON.parse(currentUser);
+      const { id, isAdmin } = currentUser;
   
       isAdmin 
         ? history.push(`/private/profile/${id}`)

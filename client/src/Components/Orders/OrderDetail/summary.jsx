@@ -7,9 +7,12 @@ import {
   AccordionSummary,
   AccordionDetails,
   Hidden,
-  makeStyles
+  makeStyles,
+  Button
 } from "@material-ui/core";
-import { ExpandMore } from "@material-ui/icons";
+import { ExpandMore, Payment} from "@material-ui/icons";
+import { Link } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 
 const useStyles = makeStyles((theme) => ({
   accordionSummary: {
@@ -47,6 +50,10 @@ const Summary = ({ order, orderStatus }) => {
 
   const [summaryExpanded, setSummaryExpanded] = useState(false);
 
+  const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
   const toggleAccordionSummary = () => {
     setSummaryExpanded(!summaryExpanded);
   }; 
@@ -60,12 +67,18 @@ const Summary = ({ order, orderStatus }) => {
           <div className={classes.paperContainer}>
             <Paper className={classes.paperDetails}>
               <div style={{ width: "100%", height: "100%", margin: "20px 0" }}>
-                <div style={{ padding: "0 20px", display: "flex" }}>
+                <div style={{ padding: "0 20px", display: "flex", alignItems: "baseline" }}>
                   <Typography style={{ flexGrow: "1" }}>Status:</Typography>
-                  <Typography>
+                  <Typography style={{ marginRight: "5px"}}>
                     {orderStatus &&
                       orderStatus[0].toUpperCase() + orderStatus.slice(1)}
                   </Typography>
+                  {
+                    orderStatus === 'pending' && currentUser.id === order.userId &&
+                    <Link to={`/${order.paymentMethod.toLowerCase()}/${order.id}`}>
+                      <Button startIcon={<Payment />} >Pay</Button>
+                    </Link>
+                  }
                 </div>
                 <br />
                 <div style={{ padding: "0 20px", display: "flex" }}>
@@ -96,7 +109,7 @@ const Summary = ({ order, orderStatus }) => {
                     </AccordionSummary>
                     {order.order_products &&
                       order.order_products.map((order) => (
-                        <>
+                        <div key={Math.random()}>
                           {order.product ? (
                             <AccordionDetails
                               key={`${order.product.id}${order.id}`}
@@ -141,7 +154,7 @@ const Summary = ({ order, orderStatus }) => {
                               </div>
                             </AccordionDetails>
                           )}
-                        </>
+                        </div>
                       ))
                     }
                   </Accordion>

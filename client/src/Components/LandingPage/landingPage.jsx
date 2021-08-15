@@ -6,6 +6,9 @@ export const landingPage = () => {
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
             <h1>Landing Page</h1>
+            <Link to="/login">
+              <Button>Login</Button> 
+            </Link>
             <Link to="/products">
               <Button>See products</Button>
             </Link>

@@ -74,8 +74,8 @@ module.exports = async (req, res, next) => {
         //     }
         //   });
         // });
-        order.status = "created";
-        order.save();
+        // order.status = "created";
+        // order.save();
       }
     } else {
 

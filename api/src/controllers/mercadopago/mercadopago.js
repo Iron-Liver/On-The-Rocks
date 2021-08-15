@@ -1,6 +1,6 @@
 const { Order, Order_products, Product } = require('../../db');
 const mercadopago = require ('mercadopago');
-const { ACCESS_TOKEN_MERCADOPAGO, BACK } = process.env;
+const { ACCESS_TOKEN_MERCADOPAGO, BACK, FRONT } = process.env;
 
 mercadopago.configure({
   access_token: ACCESS_TOKEN_MERCADOPAGO

@@ -26,7 +26,7 @@ import { getProducts } from "../../Redux/Products/productsActions";
 import { FRONTEND } from "../../Utils/constants";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { logOutUser } from "../../Redux/Users/UserActions";
+import { logOutUser } from "../../Redux/Users/userActions";
 const useStyles = makeStyles((theme) => ({
   autocomplete: {
     "& .MuiAutocomplete-root": {

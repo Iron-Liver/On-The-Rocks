@@ -63,11 +63,22 @@ const OrderDetail = () => {
       {order && (
         <>
           <Grid container className={classes.gridContainer}>
-            <PersonalInfo order={order} id={id} setOrderStatus={setOrderStatus} orderStatus={orderStatus}/>
-            <Summary order={order} id={id} orderStatus={orderStatus} />
+            <PersonalInfo 
+              order={order} 
+              id={id} 
+              setOrderStatus={setOrderStatus} 
+              orderStatus={orderStatus}
+            />
+            <Summary 
+              order={order} 
+              id={id} 
+              orderStatus={orderStatus} 
+            />
           </Grid>
           <div className={classes.accordionContainer}>
-            <ProductsAccordion order={order} />
+            <ProductsAccordion 
+              order={order} 
+            />
           </div>
         </>
       )}

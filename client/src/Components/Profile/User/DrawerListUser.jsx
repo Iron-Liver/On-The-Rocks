@@ -3,7 +3,7 @@ import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, 
 import { NoteAdd, AddShoppingCart, Settings, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp  } from '@material-ui/icons'
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
+import { logOutUser, readUser } from '../../../Redux/Users/userActions';
 import theme from '../../../Utils/theme';
 import jwt from 'jsonwebtoken'
 
@@ -47,11 +47,11 @@ export default function DrawerListUser() {
   const userDetail = useSelector(state => state.UserReducer.userDetail);
   const { url } = useRouteMatch();
 
-  const userTemp = JSON.parse(localStorage.getItem('token')) ? 
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
 
-  const userId = userTemp?.id 
+  const userId = localProfile?.id 
 
   useEffect(() => {
     dispatch(readUser(userId));

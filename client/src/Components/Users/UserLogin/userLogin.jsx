@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
 import {Grid, Button, TextField} from '@material-ui/core'
 import { Email, VpnKey } from '@material-ui/icons';
-import {loginUser,fetchAuthUser, sendEmail} from '../../../Redux/Users/UserActions'
+import {loginUser,fetchAuthUser, sendEmail} from '../../../Redux/Users/userActions'
 import useFormStyles from '../../../Utils/formStyles'
 import GoogleButton from "react-google-button";
 import jwt from 'jsonwebtoken'
