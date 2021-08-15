@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
-import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
+import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp, MicNoneTwoTone } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import NavBox from './navBox'
 import { logOutUser } from "../../Redux/Users/userActions";
-import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken'
 
 
 // import { logOutUser } from "../../Redux/Users/UserActions";
@@ -16,20 +16,28 @@ import jwt from 'jsonwebtoken';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
+    outline: 'none'
+   
   },
   appBar: {
     [theme.breakpoints.up("sm")]: {
       width: '100%',
+      backgroundColor: 'transparent',
     }
   },
   menu: {
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
 },
   menuButton: {
     marginRight: theme.spacing(0),
-    marginLeft: theme.spacing(0)
+    marginLeft: theme.spacing(0),
+  },
+  icons: {
+    '&:hover':{
+      color:'#99af9d',
+    }
   },
   mobile: {
     [theme.breakpoints.up("sm")]: {
@@ -40,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     width: '100%',
     maxWidth: '1300px',
-    margin: 'auto',
   },
   blank: theme.mixins.toolbar,
   drawerPaper: {
@@ -57,7 +64,8 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3)
-  }
+  },
+
 }));
 
 function NavBar(props) {
@@ -107,9 +115,10 @@ function NavBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
+    <div>
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar elevation={false} position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
 
           <Container>
@@ -130,7 +139,7 @@ function NavBar(props) {
               onClick={handleDrawerSearch}
               className={`${classes.menuButton} ${classes.search}`}
             >
-              <Search />
+              <Search className={classes.icons}/>
             </IconButton>
 
             <IconButton
@@ -140,7 +149,7 @@ function NavBar(props) {
               onClick={handleDrawerCart}
               className={classes.menuButton}
             >
-              <ShoppingCart />
+              <ShoppingCart className={classes.icons}/>
             </IconButton>
 
             <IconButton
@@ -150,7 +159,7 @@ function NavBar(props) {
               onClick={handleDrawerMenu}
               className={`${classes.menuButton} ${classes.mobile}`}
             >
-              <Menu />
+              <Menu  />
             </IconButton>
               <Hidden smDown>  
                   <IconButton
@@ -160,7 +169,7 @@ function NavBar(props) {
                     className={classes.menuButton}
                     onClick={handleProfile}
                     >
-                    <AccountCircle />
+                    <AccountCircle className={classes.icons} />
                   </IconButton>
               </Hidden>
 
@@ -173,7 +182,7 @@ function NavBar(props) {
                   className={classes.menuButton}
                   onClick={handleLogOut}
                 >
-                  <ExitToApp/>
+                  <ExitToApp className={classes.icons}/>
                 </IconButton>
             </Hidden>
 
@@ -211,7 +220,7 @@ function NavBar(props) {
               keepMounted: true // Better open performance on mobile.
             }}
           >
-            <SearchList/>
+            <SearchList />
           </Drawer>
           <Drawer
             container={container}
@@ -229,9 +238,9 @@ function NavBar(props) {
             <CartList/>
           </Drawer>
         </Hidden>
-      <main className={classes.content}>
         <div className={classes.blank} />
-      </main>
+    </div>
+
     </div>
   );
 }

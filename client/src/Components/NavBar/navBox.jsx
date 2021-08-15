@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: "nowrap",
         width: "100%",
         justifyContent: "space-around",
+        
     },
     text: {
         position: "relative",
@@ -27,7 +28,10 @@ const useStyles = makeStyles((theme) => ({
         width: '70px',
         padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
             theme.spacing(1) + 2
-        }px`
+        }px`,
+        '&:hover': {
+            color: '#bcd8c3',
+          }
     },
     imageMarked: {
         height: 2,
@@ -37,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
         bottom: 1,
         left: "calc(40%)",
         transition: 'all 0.35s ease-out',
-    }
+    },
+
 }))
 
 export const NavBox = () => {
@@ -45,7 +50,7 @@ export const NavBox = () => {
 
     return (
         <Container className={classes.root}>
-            <Link to='/sale' style={{textDecoration: 'none', color: 'white'}}>
+            <Link to='/sale' className="linkNav" style={{textDecoration: 'none', color: 'white'}}>
                 <ButtonBase
                     focusRipple
                     key={"On Sale"}
@@ -63,7 +68,7 @@ export const NavBox = () => {
                 </ButtonBase>
             </Link>
 
-            <Link to='/categories' style={{textDecoration: 'none', color: 'white'}}>
+            <Link to='/register' className="linkNav" style={{textDecoration: 'none', color: 'white'}}>
                 <ButtonBase
                     focusRipple
                     key={"Categories"}
@@ -75,13 +80,13 @@ export const NavBox = () => {
                         color="inherit"
                         className={classes.imageTitle}
                     >
-                        {"Categories"}
+                        {"Register"}
                         <span className={classes.imageMarked} />
                     </p>
                 </ButtonBase>
             </Link>
             
-            <Link to='/products' style={{textDecoration: 'none', color: 'white'}}>
+            <Link to='/products' className="linkNav" style={{textDecoration: 'none', color: 'white'}}>
                 <ButtonBase
                     focusRipple
                     key={"View All"}

@@ -34,6 +34,7 @@ const Checkout = ({ order, data, stock }) => {
     }
    },[data, stock])
 
+  useEffect(() => {})
   return (
     <div className="checkout-wrapper">
       <div style={{width: "100%", height: "100%", display: "flex", justifyContent: "center"}}>

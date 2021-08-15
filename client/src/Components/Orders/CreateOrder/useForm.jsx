@@ -6,10 +6,11 @@ import { makeStyles } from '@material-ui/styles'
 export function useForm({initialForm2, initialForm1}) {
   const [state1, setState1] = useState(initialForm1);
   const [state2, setState2] = useState(initialForm2);
-
+  
 
   const handleInputChange1 = ( e ) => {
     const  { name, value } = e.target;
+    
     setState1({
       ...state1,
       [name]: value

@@ -4,6 +4,7 @@ import AppGlobal from './AppGlobal';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 import axios from 'axios'
+import "./index.css"
 
 
 

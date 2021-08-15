@@ -1,5 +1,5 @@
-import React from 'react'
-import { useDispatch } from "react-redux"
+import {useEffect, React} from 'react'
+import { useDispatch, useSelector } from "react-redux"
 import { filterByCategory, filterByPrice } from '../../Redux/Products/productsActions'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
+import { getAllCategories } from '../../Redux/Category/categoryActions';
 
 
 const useStyles = makeStyles({
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
 
     root:{
         display: "flex",
-        
+        backgroundColor: '#131313',
     },
 
     form:{
@@ -28,8 +29,14 @@ const useStyles = makeStyles({
 })
 
 const Filters = () => {
-
+    
+    const categoryes = useSelector(state => state.categoryReducer.categories)
     const dispatch = useDispatch()
+    
+    useEffect(() => {
+    dispatch(getAllCategories())
+   }, [dispatch])
+
 
     function handleSelect(e) {
         dispatch(filterByCategory(e.target.value))
@@ -47,25 +54,24 @@ const Filters = () => {
 
         <Grid container className={classes.root}>
             <Grid item>
-                <FormControl component="fieldset">
-                    <h4>Order By Category</h4>
-                    <RadioGroup className={classes.form} aria-label="gender" name="category" onChange={handleSelect}>
-                        <FormControlLabel value="Vodka" control={<Radio />} label="Vodka" />
-                        <FormControlLabel value="Tequila" control={<Radio />} label="Tequila" />
-                        <FormControlLabel value="Whisky" control={<Radio />} label="Whisky" />
-                        <FormControlLabel value="Gin" control={<Radio />} label="Gin" />
-                        <FormControlLabel value="Liqueur" control={<Radio />} label="Liqueur" />
-                        <FormControlLabel value="Brandy" control={<Radio />} label="Brandy" />
-                    </RadioGroup>
-                </FormControl>
             </Grid>
             <Grid item >
+                <div>
+                        <h4>Order by categories</h4>
+                    <select onChange={handleSelect}>
+                        {
+                            categoryes && categoryes.map(category => 
+                                <option value={category.name}>{category.name}</option>
+                            )
+                        }
+                    </select>
+                </div>
                 <h4>Order by Price</h4>
                 <Button size="small" className={classes.button} variant="contained" color="primary" onClick={() => orderByPrice("MAX")}>
-                    HIGHER - LOWER
+                    HIGHER 
                 </Button>
                 <Button size="small" variant="contained" color="primary" onClick={() => orderByPrice("MIN")}>
-                    LOWER - HIGHER
+                    LOWER 
                 </Button>
             </Grid>
         </Grid>
@@ -73,3 +79,15 @@ const Filters = () => {
 }
 
 export default Filters
+
+                // <FormControl component="fieldset">
+                //     <h4>Order By Category</h4>
+                //     <RadioGroup className={classes.form} aria-label="gender" name="category" onChange={handleSelect}>
+                //         <FormControlLabel value="Vodka" control={<Radio />} label="Vodka" />
+                //         <FormControlLabel value="Tequila" control={<Radio />} label="Tequila" />
+                //         <FormControlLabel value="Whisky" control={<Radio />} label="Whisky" />
+                //         <FormControlLabel value="Gin" control={<Radio />} label="Gin" />
+                //         <FormControlLabel value="Liqueur" control={<Radio />} label="Liqueur" />
+                //         <FormControlLabel value="Brandy" control={<Radio />} label="Brandy" />
+                //     </RadioGroup>
+                // </FormControl>
