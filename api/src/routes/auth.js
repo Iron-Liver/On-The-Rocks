@@ -67,7 +67,6 @@ router.post("/email", async (req, res, next) => {
   const user = await User.findOne({ where: { email } });
   if (!user) return res.json({ error: "Non-existent User" });
   let token = await jwt.sign({ email }, SECRET_KEY, { expiresIn: "1hr" });
-  console.log('fuera del if',user)
   if (type === "passwordreset") {
     transporter.sendMail({
       from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
@@ -79,7 +78,6 @@ router.post("/email", async (req, res, next) => {
     res.json({ success: "Email sent" });
   }
   if (type === "verifyadmin") {
-    console.log('dentro del if',user)
     let token = await jwt.sign({ id: user.id, email: user.email, isAdmin: user.isAdmin, Authenticated: true  }, SECRET_KEY, { expiresIn: "1hr" });
     await transporter.sendMail({
       from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
@@ -113,12 +111,9 @@ router.post("/passwordreset",passport.authenticate("bearer", { session: false })
 });
 
 router.post("/admin", async (req, res, next) => {
-  console.log(req.body)
   let token  = req.body;
-  console.log("aca el token: ", token.headers.Authorization)
   try {
     let email = jwt.verify(token, SECRET_KEY).email.toLowerCase();
-    console.log(email)
     let isAdmin = await User.findOne({
       where: { email: email, isAdmin: true },
     });
