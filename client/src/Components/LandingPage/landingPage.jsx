@@ -12,7 +12,6 @@ export const landingPage = () => {
             <Link to="/register">
               <Button>Register</Button>
             </Link>
-            {console.log(window.location)}
         </div>
     )
 }
