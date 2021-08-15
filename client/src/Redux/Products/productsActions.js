@@ -3,7 +3,6 @@ import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, UPDATE_PRODUCT, DELETE_PRO
 
 
 export function clearProductDetail() {
-    console.log('clearing product detail')
     return async function (dispatch) {
         dispatch({ type: CLEAR_PRODUCT, payload: null });
     };
@@ -22,7 +21,6 @@ export function createProduct(product) {
 }
 
 export function getProducts() {
-    console.log('getting products')
     return async function (dispatch) {
         const products = await axios.get(`http://localhost:3001/product`);
         dispatch({ type: GET_PRODUCTS, payload: products.data });
@@ -30,7 +28,6 @@ export function getProducts() {
 }
 
 export function getProductById(id) {
-    console.log('get product by id')
     return async function (dispatch) {
         const product = await axios.get(`http://localhost:3001/product/${id}`);
         dispatch({ type: GET_PRODUCT_BY_ID, payload: product.data});

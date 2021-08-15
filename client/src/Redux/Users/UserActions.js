@@ -18,12 +18,10 @@ export function getAllUsers() {
     return async function (dispatch) {
         try {
             const token = localStorage.getItem("token");
-            console.log("Token", token)
             const { data } = await axios.get(`/user/getAll`, {
                 headers: { Authorization: `Bearer ${token}` },
             
             });
-            console.log("DATA", data)
             dispatch({ type: GET_ALL_USERS, payload: data });
         } catch (err) {
             console.log(err);

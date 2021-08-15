@@ -82,6 +82,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetail = () => {
+    // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
     const currentUser = JSON.parse(localStorage.getItem('token')) ? 
     jwt.verify(JSON.parse(localStorage.getItem('token')), 
@@ -108,9 +109,9 @@ const ProductDetail = () => {
         (async function () {
             await dispatch(getProductReviews(id));
         })();
-    }, [Products]);
+    }, [Products,dispatch,id]);
 
-    useEffect(() => {}, [Products]);
+    useEffect(() => {}, [Products,reviews]);
 
     return (
         <>
