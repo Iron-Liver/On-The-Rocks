@@ -17,11 +17,13 @@ const productReducer = (state = initialState, action) => {
                 Products: action.payload,
                 FoundProds: action.payload
             };
+
         case CREATE_PRODUCT:
             return {
                 ...state,
                 createState: action.payload,
             };
+
         case UPDATE_PRODUCT:
             return {
                 ...state,
@@ -74,9 +76,7 @@ const productReducer = (state = initialState, action) => {
             }
 
         default:
-            return {
-                ...state,
-            };
+            return state
     }
 };
 

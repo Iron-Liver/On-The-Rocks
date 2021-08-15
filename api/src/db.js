@@ -56,20 +56,23 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Order, Category, Product, Order_products, Payment_detail } =
+const { User, Order, Category, Product, Order_products, Payment_detail, Review } =
   sequelize.models;
 
 User.hasMany(Order);
 Order.belongsTo(User);
 
+User.belongsToMany(Product, {through: Review});
+Product.belongsToMany(User, {through: Review});
+
 Product.hasMany(Order_products);
 Order_products.belongsTo(Product, {
-  foreignKey: "productId",
+    foreignKey: "productId",
 });
 
 Order.hasMany(Order_products);
 Order_products.belongsTo(Order, {
-  foreignKey: "orderId",
+    foreignKey: "orderId",
 });
 
 // Order.hasOne(Payment_detail, {

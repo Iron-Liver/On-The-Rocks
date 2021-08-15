@@ -226,7 +226,7 @@ function NavBar(props) {
             <CartList/>
           </Drawer>
         </Hidden>
-      <main className={classes.content}>
+      <main>
         <div className={classes.blank} />
       </main>
     </div>

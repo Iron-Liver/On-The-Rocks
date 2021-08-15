@@ -139,7 +139,7 @@ const CreateUserForm = ({ input, setInput, handleSubmit}) => {
 								name="contact"
 								label="Contact Number" 
 								value={input.contact}
-				ad				onChange={handleInputChange}
+								onChange={handleInputChange}
 							/>
                         </Grid>
                     </Grid>
