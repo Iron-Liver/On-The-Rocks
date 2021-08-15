@@ -6,7 +6,6 @@ import {
     LOGIN,
     LOGOUT,
     ADMIN_ALLOWED,
-    API_URL,
     READ_USER,
     UPDATE_USER,
 } from "../../Utils/constants";
@@ -59,7 +58,7 @@ export function loginUser(login) {
 export function readUser(id) {
     return async function (dispatch) {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get(`${API_URL}user/getUser/${id}`, {
+        const { data } = await axios.get(`${process.env.REACT_APP_API}user/getUser/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         dispatch({ type: READ_USER, payload: data });
@@ -70,7 +69,7 @@ export function updateUser(user) {
     return async function (dispatch) {
         const token = localStorage.getItem("token");
         const { data } = await axios.put(
-            `${API_URL}user/updateUser/${user.id}`,
+            `${process.env.REACT_APP_API}user/updateUser/${user.id}`,
             user,
             { headers: { Authorization: `Bearer ${token}` } }
         );

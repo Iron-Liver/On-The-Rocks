@@ -23,7 +23,6 @@ import {
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { getProducts } from "../../Redux/Products/productsActions";
-import { FRONTEND } from "../../Utils/constants";
 import { makeStyles } from "@material-ui/core/styles";
 import { logOutUser } from '../../Redux/Users/userActions';
 
@@ -175,7 +174,7 @@ export const SearchList = () => {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       window.location.replace(
-        `${FRONTEND}products?search=${e.target.value
+        `${window.location.origin}/products?search=${e.target.value
           .split(" ")
           .join("-")
           .toLowerCase()}`
