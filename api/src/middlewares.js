@@ -2,8 +2,7 @@ const isLogedIn = (req,res,next) => {
     if(req.isAuthenticated()){
         next();
     } else{
-        res.redirect("/auth/login");
-        next();
+        res.redirect("/login");
     }
 }
 
@@ -16,7 +15,6 @@ const isLogedAsAdmin = (req,res,next) => {
         }
     }else{
         res.redirect("/login");
-        next();
     }
 }
 

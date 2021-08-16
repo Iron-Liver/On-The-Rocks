@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
 import theme from '../../../Utils/theme';
 import {Link} from 'react-router-dom';
-import { getAllUsers } from '../../../Redux/Users/userActions'
+import { getAllUsers } from '../../../Redux/Users/UserActions'
 
 const UserList = () => {
 	const useStyles = makeStyles((theme)=>({
@@ -25,9 +25,10 @@ const UserList = () => {
 	const {users} = useSelector(state => state.userReducer)
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	
+    console.log(users)
 	useEffect(() => {
         dispatch(getAllUsers())
+        console.log(users)
 	},
 	// eslint-disable-next-line
 	[])

@@ -1,17 +1,6 @@
 import axios from 'axios';
-import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE, FILTER_BY_NAME, GET_PRODUCT_BY_ID } from "../../Utils/constants"
+import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE, FILTER_BY_NAME } from "../../Utils/constants"
 
-
-export function clearProductDetail() {
-    return async function (dispatch) {
-        dispatch({ type: CLEAR_PRODUCT, payload: null });
-    };
-}
-export function clearState() {
-    return function (dispatch) {
-        dispatch({ type: CLEAR_PRODUCT, payload: null });
-    };
-}
 
 export function createProduct(product) {
     return async function (dispatch) {
@@ -30,7 +19,8 @@ export function getProducts() {
 export function getProductById(id) {
     return async function (dispatch) {
         const product = await axios.get(`/product/${id}`);
-        dispatch({ type: GET_PRODUCT_BY_ID, payload: product.data});
+        dispatch({ type: "GET_PRODUCT_BY_ID", payload: product.data,
+        });
     };
 }
 

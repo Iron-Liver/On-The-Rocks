@@ -3,9 +3,8 @@ import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, 
 import { NoteAdd, AddShoppingCart, Settings, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp  } from '@material-ui/icons'
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOutUser, readUser } from '../../../Redux/Users/userActions';
+import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
 import theme from '../../../Utils/theme';
-import jwt from 'jsonwebtoken'
 
 const useStyles= makeStyles(theme => ({
   list: {
@@ -47,11 +46,7 @@ export default function DrawerListUser() {
   const userDetail = useSelector(state => state.userReducer.userDetail);
   const { url } = useRouteMatch();
 
-  const userTemp = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null
-
-  const userId = userTemp?.id 
+  const userId = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')).id : undefined
 
   useEffect(() => {
     dispatch(readUser(userId));
@@ -110,7 +105,7 @@ export default function DrawerListUser() {
           </ListItem>
         </Link>
 
-        <Link className={classes.link} to={`${url}/notready`}>
+        <Link className={classes.link}>
           <ListItem  button> 
             <ButtonBase>
               <ListItemIcon>
@@ -121,7 +116,7 @@ export default function DrawerListUser() {
           </ListItem>
         </Link>
 
-        <Link className={classes.link} to={`${url}/notready`}>
+        <Link className={classes.link}>
           <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>

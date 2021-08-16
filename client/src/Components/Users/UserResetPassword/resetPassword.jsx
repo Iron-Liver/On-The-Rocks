@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, TextField, Grid, makeStyles } from '@material-ui/core';
 import { Email, VpnKey } from '@material-ui/icons';
-import {sendEmail,resetPass} from '../../../Redux/Users/userActions'
+import {sendEmail,resetPass} from '../../../Redux/Users/UserActions'
 import swal from 'sweetalert'
 
 const useStyles = makeStyles((theme)=>({

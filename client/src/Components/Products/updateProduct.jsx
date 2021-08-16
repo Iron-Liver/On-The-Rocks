@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import UpdateProductForm from './updateProductForm';
-import { deleteProduct, updateProduct, clearState } from '../../Redux/Products/productsActions.js';
+import { deleteProduct, updateProduct } from '../../Redux/Products/productsActions.js';
 import swal from "sweetalert";
 
 const UpdateProduct = ({ match }) => {
 
     const dispatch = useDispatch();
     const { updateState } = useSelector(state => state.productReducer);
-    const { Products } = useSelector(state => state.productReducer);
     const id = match.params.id
 
     var wipedInput = {
@@ -19,8 +18,7 @@ const UpdateProduct = ({ match }) => {
         brand: "",
         sku: "",
         price: "",
-        image: "",
-        stock: ""
+        image: ""
     }
 
     const [input, setInput] = useState(wipedInput);
@@ -32,38 +30,24 @@ const UpdateProduct = ({ match }) => {
                 updated[prop] = input[prop];
             }
         };
-        dispatch(updateProduct(id, updated))
+       // if (Object.keys(updated).length > 0) {
+            dispatch(updateProduct(id, updated))
+       // }
     };
-    useEffect(() => {
-        async function setProduct() {
-            let product = Products.filter(e => e.id === Number(id))
-            await setInput(product[0])
-        }
-        if (Products) setProduct();
-    }, [Products, id])
-
 
     const handleDelete = async e => {
         dispatch(deleteProduct(id));
         alert('Product has been deleted!')
     }
-
+    
     useEffect(() => {
-        if (updateState !== undefined) {
-            if (updateState && updateState[0] === 'invalid inputs') {
-                swal('Error', 'invalid inputs', 'error')
-                dispatch(clearState())
-
-            } else if (updateState && updateState[0] === '0 product/s updated') {
-                swal('Error', 'invalid inputs', 'error')
-                dispatch(clearState())
-
-            }
-            if (updateState && updateState[0] !== undefined) {
-                setInput(wipedInput);
-                dispatch(clearState())
-                swal('Congratulations!', 'Product successfully updated', 'success')
-            }
+        if (updateState && updateState[0] === 'invalid inputs') {
+            swal('Error', 'invalid inputs', 'error')
+        } else if (updateState && updateState[0] === '0 product/s updated') {
+            swal('Error', 'invalid inputs', 'error')
+        } else if (updateState && updateState !== undefined) {
+            setInput(wipedInput);
+            swal('Congratulations!', 'Product successfully created', 'success')
         }
     },
         // eslint-disable-next-line
@@ -71,7 +55,8 @@ const UpdateProduct = ({ match }) => {
 
     return (
         <>
-            <UpdateProductForm input={input} setInput={setInput} id={id} handleSubmit={handleSubmit} handleDelete={handleDelete} />
+                <h1 style={{display: 'flex', justifyContent:'center'}}>Update Product</h1>
+            <UpdateProductForm input={input} setInput={setInput} handleSubmit={handleSubmit} handleDelete={handleDelete} />
         </>
     );
 };

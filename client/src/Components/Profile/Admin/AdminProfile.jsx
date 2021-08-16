@@ -5,23 +5,18 @@ import { useHistory, useParams } from 'react-router-dom';
 import UserList from '../../Users/UserList/userList';
 import CategoryList from '../../Categories/CategoryList/categoryList';
 import ProductsList from '../../Products/ProductsList/productsList';
-import jwt from 'jsonwebtoken'
 
 export default function AdminProfile() {
 
   let { id, view } = useParams();
-  
-  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null
-  
 
+  const localProfile = JSON.parse(localStorage.getItem('profile'));
   const history = useHistory();
   useEffect(() => {
     if(!id) {
       history.push("/login");
     }
-    if(!localProfile?.id || parseInt(id) !== localProfile?.id) {
+    if(!localProfile.id || parseInt(id) !== localProfile.id) {
       history.push("/login");
     }
     if(!view) {

@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 import { Grid, Button, TextField } from '@material-ui/core'
-import { Label, Description, Image, Crop, Fingerprint, MonetizationOn, Category, Storage, Assistant } from '@material-ui/icons';
+import { Label, Description, Image, Crop, Dns, FormatListNumbered, MonetizationOn, Category } from '@material-ui/icons';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
+const CreateProductForm = ({ input, setInput, handleSubmit, match, handleDelete }) => {
 
 	const classes = useStyles();
 
@@ -46,8 +46,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 		category: false,
 		sku: false,
 		price: false,
-		image: false,
-		stock: false
+		image: false
 	})
 	const [helperText, setHelperText] = useState({//Control the warning message
 		productName: "Enter a Name",
@@ -57,8 +56,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 		brand: "Enter a brand",
 		sku: "Enter a sku",
 		price: "Enter the price",
-		image: "Enter an image-url",
-		stock: "Enter product stock"
+		image: "Enter an image-url"
 	})
 
 	const handleInputChange = async (e) => {
@@ -73,7 +71,6 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 		<ThemeProvider theme={theme}>
 			<div className='extContCAF'>
 				<form noValidate autoComplete="off" >
-					<h1 className={classes.title}>Update Product</h1>
 					<Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
 						<Grid >
 							<Grid container spacing={1} alignItems="center">
@@ -85,7 +82,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 										error={error["productName"]}
 										helperText={[helperText["productName"]]}
 										id="name"
-										label='Name'
+										label="Name"
 										name="name"
 										value={input.name}
 										onChange={handleInputChange}
@@ -147,7 +144,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 
 							<Grid container spacing={1} alignItems="center">
 								<Grid item>
-									<Assistant />
+									<Dns />
 								</Grid>
 								<Grid item>
 									<TextField
@@ -164,7 +161,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 
 							<Grid container spacing={1} alignItems="center">
 								<Grid item>
-									<Fingerprint />
+									<FormatListNumbered />
 								</Grid>
 								<Grid item>
 									<TextField
@@ -191,23 +188,6 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 										label="Price"
 										name='price'
 										value={input.price}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
-
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<Storage />
-								</Grid>
-								<Grid item>
-									<TextField
-										error={error["stock"]}
-										helperText={[helperText["stock"]]}
-										id="stock"
-										label="Stock"
-										name='stock'
-										value={input.stock}
 										onChange={handleInputChange}
 									/>
 								</Grid>
@@ -244,7 +224,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 									: <Button style={{ fontWeight: 1000, marginTop: 50 }}
 										color="secondary" onClick={handleDelete}
 										variant="contained" disabled={true}>
-
+                      
 										delete
 									</Button>
 								}

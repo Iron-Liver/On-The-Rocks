@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
 import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
+import { 
+  // eslint-disable-next-line
+  useSelector } from "react-redux";
 import NavBox from './navBox'
-import { logOutUser } from "../../Redux/Users/userActions";
+import { logOutUser } from "../../Redux/Users/UserActions";
 
 
 // import { logOutUser } from "../../Redux/Users/UserActions";
@@ -226,7 +229,7 @@ function NavBar(props) {
             <CartList/>
           </Drawer>
         </Hidden>
-      <main>
+      <main className={classes.content}>
         <div className={classes.blank} />
       </main>
     </div>

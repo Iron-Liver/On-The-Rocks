@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import CreateProductForm from './createProductForm'
-import { createProduct, clearState } from '../../Redux/Products/productsActions.js';
+import { createProduct } from '../../Redux/Products/productsActions.js';
+
 
 import swal from "sweetalert";
 
@@ -9,6 +10,7 @@ const CreateProduct = (props) => {
 
 	const dispatch = useDispatch();
 	const { createState } = useSelector(state => state.productReducer);
+	
 
 	var wipedInput = {
 		name: "",
@@ -18,8 +20,7 @@ const CreateProduct = (props) => {
 		brand: "",
 		sku: "",
 		price: "",
-		image: "",
-		stock: ""
+		image: ""
 	}
 
 	const [input, setInput] = useState(wipedInput);
@@ -29,21 +30,19 @@ const CreateProduct = (props) => {
 	};
 
 	useEffect(() => {
-		if (createState && createState !== undefined && createState.name) {
-			setInput(wipedInput);
-			dispatch(clearState())
-			swal('Congratulations!', 'Product successfully created', 'success')
-		}
 		if (createState && createState[0] === 'invalid inputs') {
-			dispatch(clearState())
 			swal('Error', 'invalid inputs', 'error')
+		} else if (createState && createState !== undefined) {
+			setInput(wipedInput);
+			swal('Congratulations!', 'Product successfully created', 'success')
 		}
 	},
 		// eslint-disable-next-line
-		[createState, dispatch]);
+		[createState]);
 
 	return (
 		<>
+			<h1 style={{display: 'flex', justifyContent:'center'}}>Create Product</h1>
 			<CreateProductForm input={input} setInput={setInput} handleSubmit={handleSubmit} />
 		</>
 	);

@@ -1,60 +1,48 @@
-import {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
+import {useState, useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
 import {Grid, Button, TextField} from '@material-ui/core'
 import { Email, VpnKey } from '@material-ui/icons';
-import {loginUser,fetchAuthUser, sendEmail} from '../../../Redux/Users/userActions'
+import {loginUser,fetchAuthUser, sendEmail} from '../../../Redux/Users/UserActions'
 import useFormStyles from '../../../Utils/formStyles'
 import GoogleButton from "react-google-button";
-import jwt from 'jsonwebtoken'
 import swal from 'sweetalert'
-import dotenv from 'dotenv';
-dotenv.config()
 
 export default function UserLogin() {
     const classes = useFormStyles()
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
-    jwt.verify(JSON.parse(localStorage.getItem('token')), 
-    process.env.REACT_APP_SECRET_KEY) : null
+    const {currentUser} = useSelector(state => state.userReducer);
 
     const [input,setInput] = useState({
         email: '',
         password: ''
     })
-    useEffect(() => {
+
+   useEffect(() => {
         if(currentUser) {
-            if(currentUser.isAdmin){
-                if(typeof(currentUser?.Authenticated) === 'undefined'){
-                    dispatch(sendEmail(currentUser.email,"verifyadmin"))
-                    history.push(`/`)
-                    swal("Hemos enviado un link a tu correo para que verifiques tu identidad", "Disculpa las molestias", "success")
-                }
-                else{
-                    history.push(`private/profile/${currentUser.id}`)
-                }
-            }else{
-                history.push(`/profile/${currentUser.id}`)
-            }    
+             if(currentUser.isAdmin){
+                dispatch(sendEmail(currentUser.email,"verifyadmin"))
+                swal("Hemos enviado un link a tu correo para que verifiques tu identidad", "Disculpa las molestias", "success")
+            } 
+            history.push('/')
         }
     },
     // eslint-disable-next-line
-    [])
-    
+    [currentUser])
+
     const GoogleSSOHandler = async () => {
         let timer = null;
         const newWindow = window.open(
-            `${process.env.REACT_APP_API}/auth/login/google`,
+            `http://localhost:3001/auth/login/google`,
             "_blank",
             "width=500,height=600"
         );
         if (newWindow) {
-            timer = setInterval(async() => {
+            timer = setInterval(() => {
                 if (newWindow.closed) {
-                    await dispatch(fetchAuthUser());
-                    window.location.reload()
+                    dispatch(fetchAuthUser());
                     if (timer) clearInterval(timer);
                 }
             }, 500);
@@ -68,15 +56,12 @@ export default function UserLogin() {
 		});
 	};
 
-  const handleLogIn = async (e) => {
-		await dispatch(loginUser(input))
-        window.location.reload()
-
+  const handleLogIn = (e) => {
+		dispatch(loginUser(input))
 	};
 
     return (
         <div>
-            {}
             <h1 className={classes.title}>Login</h1>
             <form noValidate autoComplete="off" > 
             <Grid container direction="row" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>

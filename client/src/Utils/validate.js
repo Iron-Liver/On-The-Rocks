@@ -59,7 +59,7 @@ export default function Validate(field, error, setError, helperText, setHelperTe
             }
             break;
         case "description":
-            if (!/^[A-Za-z ().,'!¡¿?+-]{28,280}$/.test(field.value)) {
+            if (!/^[A-Za-z ().,'-]{28,280}$/.test(field.value)) {
                 setError({ ...error, description: true })
                 if (field.value.length < 28) { setHelperText({ ...helperText, description: "Too short" }) }
                 else if (field.value.length > 280) { setHelperText({ ...helperText, description: "Too long" }) }

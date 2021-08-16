@@ -1,9 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require('bcryptjs');
-const jwt = require("jsonwebtoken")
-require("dotenv").config();
-const { SECRET_KEY} = process.env;
 const {User} = require("../../db");
 
 passport.use(
@@ -39,15 +36,3 @@ passport.deserializeUser(async (id, cb) => {
     cb(err, null);
   }
 });
-
-const BearerStrategy = require("passport-http-bearer").Strategy;
-
-passport.use(
-    new BearerStrategy((token, done) => {
-      jwt.verify(token, SECRET_KEY, function (err, usuario) {
-        if (err) return done(err);
-        return done(null, usuario ? usuario : false);
-      });
-    })
-  );
-  

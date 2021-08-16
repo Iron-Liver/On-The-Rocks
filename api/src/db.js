@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 const { Sequelize } = require("sequelize");
@@ -6,31 +7,32 @@ const path = require("path");
 
 let sequelize =
     process.env.NODE_ENV === "production"
-        ? new Sequelize({
-              database: DB_NAME,
-              dialect: "postgres",
-              host: DB_HOST,
-              port: 5432,
-              username: DB_USER,
-              password: DB_PASSWORD,
-              pool: {
-                  max: 3,
-                  min: 1,
-                  idle: 10000,
-              },
-              dialectOptions: {
-                  ssl: {
-                      require: true,
-                      rejectUnauthorized: false,
-                  },
-                  keepAlive: true,
-              },
-              ssl: true,
-          })
-        : new Sequelize(
-              `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-              { logging: false, native: false }
-          );
+    ? new Sequelize({
+        database: "none",
+        dialect: "postgres",
+        host: "none",
+        port: 5432,
+        username: "none",
+        password: "none",
+        pool: {
+            max: 3,
+            min: 1,
+            idle: 10000,
+        },
+        dialectOptions: {
+            ssl: {
+            require: true,
+            rejectUnauthorized: false,
+            },
+            keepAlive: true,
+        },
+        ssl: true,
+    })
+    :
+    new Sequelize(
+        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+        { logging: false, native: false }
+    );
 
 const basename = path.basename(__filename);
 
@@ -39,9 +41,7 @@ const modelDefiners = [];
 fs.readdirSync(path.join(__dirname, "/models"))
     .filter(
         (file) =>
-            file.indexOf(".") !== 0 &&
-            file !== basename &&
-            file.slice(-3) === ".js"
+            file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
     )
     .forEach((file) => {
         modelDefiners.push(require(path.join(__dirname, "/models", file)));
@@ -56,33 +56,31 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const {
-    User,
-    Order,
-    Category,
-    Product,
-    Order_products,
-    Payment_detail,
-    Review,
-} = sequelize.models;
+const { User, Order, Category, Product, Order_products, Payment_detail } =
+  sequelize.models;
 
 User.hasMany(Order);
 Order.belongsTo(User);
 
-User.belongsToMany(Product, { through: Review });
-Product.belongsToMany(User, { through: Review });
-
 Product.hasMany(Order_products);
 Order_products.belongsTo(Product, {
-    foreignKey: "productId",
+  foreignKey: "productId",
 });
 
 Order.hasMany(Order_products);
 Order_products.belongsTo(Order, {
-    foreignKey: "orderId",
+  foreignKey: "orderId",
 });
 
+// Order.hasOne(Payment_detail, {
+//   foreignKey: 'paymentId'
+// });
+
+// Payment_detail.hasOne(Order, {
+//   foreignKey: 'orderId'
+// });
+
 module.exports = {
-    ...sequelize.models,
-    conn: sequelize,
+    ...sequelize.models, 
+    conn: sequelize, 
 };

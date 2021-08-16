@@ -3,9 +3,8 @@ import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux';
 import { Button, TextField, makeStyles,Grid, Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
 import { Person, Email, VpnKey, Phone } from '@material-ui/icons';
-import { readUser } from '../../../Redux/Users/userActions';
+import { readUser } from '../../../Redux/Users/UserActions';
 import Validate from '../../../Utils/validate'
-import jwt from "jsonwebtoken"
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -31,9 +30,7 @@ const useStyles = makeStyles((theme)=>({
 export function UserUpdate({ input, setInput, handleSubmit }) {
     var {id} = useParams();
     const {userDetail} = useSelector(state => state.userReducer);
-	const adminAllowed = JSON.parse(localStorage.getItem('token')) ? 
-    jwt.verify(JSON.parse(localStorage.getItem('token')), 
-    process.env.REACT_APP_SECRET_KEY) : null
+	const adminAllowed = (JSON.parse(localStorage.getItem('2FA')))
     if(typeof(id) === 'undefined' && window.location.href.includes("profile")){
         id = (JSON.parse(localStorage.getItem('profile'))).id;
     }
