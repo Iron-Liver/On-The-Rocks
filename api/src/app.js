@@ -29,7 +29,7 @@ server.use(
         secret: SECRET_KEY,
         // path: '/',
         // httpOnly: true,
-        domain: '.ontherocks-ft14.herokuapp.com',
+        domain: '.herokuapp.com',
         // secure: true,
         // sameSite: 'none'
         // secureProxy: true
