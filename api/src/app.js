@@ -29,7 +29,7 @@ server.use(
         secret: SECRET_KEY,
         // path: '/',
         // httpOnly: true,
-        domain: '.herokuapp.com',
+        domain: '.vercel.app',
         // secure: true,
         // sameSite: 'none'
         // secureProxy: true
