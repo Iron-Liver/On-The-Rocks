@@ -35,10 +35,9 @@ module.exports = async (req, res, next) => {
         where: {
           id: external_reference
         },
-        include: [Order_products]
+        include: [Order_products, User]
       });
 
-      //uncomment when products support stock count
       order.order_products.forEach(async (product) => {
         await Product.increment({
           stock: product.units
@@ -49,8 +48,17 @@ module.exports = async (req, res, next) => {
         });
       });
 
+      
       order.status = "cancelled";
       order.save();
+
+      transporter.sendMail({
+        from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
+        to: order.user.email, // list of receivers
+        subject: "Order cancelled", // Subject line
+        text: "The payment has been rejected, please try again", // plain text body
+        html: `<b>click on the link to see your order: <a href="${FRONT}/order/${order.id}"> HERE </a> </b>`, // html body
+      });
     } else if(payment_status === "approved") {
 
       const order = await Order.findOne({
@@ -65,21 +73,19 @@ module.exports = async (req, res, next) => {
         order.save();
       } else {
         
-        // //uncomment when products support stock count
-        // order.order_products.forEach(async (product) => {
-        //   await Product.decrement({
-        //     stock: product.units
-        //   }, {
-        //     where: {
-        //       id: product.productId
-        //     }
-        //   });
-        // });
+        order.order_products.forEach(async (product) => {
+          await Product.decrement({
+            stock: product.units
+          }, {
+            where: {
+              id: product.productId
+            }
+          });
+        });
+        
         order.status = "created";
         order.save();
       }
-
-      console.log(order.user.email);
       
       transporter.sendMail({
         from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
