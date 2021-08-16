@@ -4,8 +4,10 @@ module.exports = async (req, res, next) => {
   const product = req.body;
   const { id } = req.params;
   console.log(product)
+  console.log(Product.stock)
+  
   try {
-    let updated = await Product.update(
+    let updated = await Product.update(      
       product,
       {
         where: {id: id},
@@ -16,3 +18,4 @@ module.exports = async (req, res, next) => {
     res.send(['invalid inputs']).sendStatus(400), next(err);
   }
 };
+
