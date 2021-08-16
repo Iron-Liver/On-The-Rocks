@@ -3,9 +3,7 @@ const { Product } = require("../../db.js");
 module.exports = async (req, res, next) => {
   const product = req.body;
   const { id } = req.params;
-  console.log(product)
-  console.log(Product.stock)
-  
+    
   try {
     let updated = await Product.update(      
       product,

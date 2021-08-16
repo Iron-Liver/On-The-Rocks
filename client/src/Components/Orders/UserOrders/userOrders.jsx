@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Order from "./order";
 import axios from "axios";
+import jwt from 'jsonwebtoken'
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
@@ -34,7 +35,9 @@ const UserOrders = () => {
   useEffect(() => {
     (async () => {
       try {
-        const localProfile = JSON.parse(localStorage.getItem('profile'));
+        const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+        jwt.verify(JSON.parse(localStorage.getItem('token')), 
+        process.env.REACT_APP_SECRET_KEY) : null
         if(localProfile.id !== userId) {
           history.push("/");
         }
@@ -97,7 +100,7 @@ const UserOrders = () => {
         history.push("/"); 
       }
     })()
-  },[page, history, userId])
+  },[page, history, userId, form])
 
   const handlePageChange = (e, val) => {
     setPage(val);

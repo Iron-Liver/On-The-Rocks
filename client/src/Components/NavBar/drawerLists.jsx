@@ -1,77 +1,166 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import {Divider,List, ListItem, ListItemText, TextField} from '@material-ui/core'
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import {LocalBar, Receipt, Star, ListAlt, Business, Search, AccountCircle, Loyalty, ExitToApp} from '@material-ui/icons'
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import {Cart} from "../Cart/cart"
+import {
+  Typography, 
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
+} from "@material-ui/core";
+import {
+  LocalBar,
+  Receipt,
+  Star,
+  ListAlt,
+  Business,
+  Search,
+  AccountCircle,
+  Loyalty,
+  ExitToApp,
+} from "@material-ui/icons";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {getProducts} from '../../Redux/Products/productsActions'
-import {FRONTEND} from '../../Utils/constants'
-
+import { getProducts } from "../../Redux/Products/productsActions";
 import { makeStyles } from "@material-ui/core/styles";
-import { logOutUser } from '../../Redux/Users/UserActions';
+import { logOutUser } from '../../Redux/Users/userActions';
+
 const useStyles = makeStyles((theme) => ({
-    autocomplete:{
-      '& .MuiAutocomplete-root':{
-        width: '100%',
-        height: '100%',
-      },
-      '& .MuiOutlinedInput-notchedOutline':{
-        height: '90%',
-        margin: 'auto'
-      },
-      '& .MuiListItem-root':{
-        paddingTop:'0',
-        paddingBottom:'0',
-      },
+  autocomplete: {
+    "& .MuiAutocomplete-root": {
+      width: "100%",
+      height: "100%",
     },
-    toolbar: theme.mixins.toolbar,
+    "& .MuiOutlinedInput-notchedOutline": {
+      height: "90%",
+      margin: "auto",
+    },
+    "& .MuiListItem-root": {
+      paddingTop: "0",
+      paddingBottom: "0",
+    },
+  },
+  root: {
+    display: 'inline-flex',
+    height: '75vh',
+    width:'100%',
+    justifyContent: "space-evenly"
+
+},
+details: {
+    textAlign:'start',
+    width:'60%',
+    variant: "outlined",
+},
+content: {
+    width: '100%',
+    marginTop:'5%',
+    
+},
+
+cont1: {
+    marginBottom: 15,
+},
+
+cover: {
+    width: '100px',
+    height: '100px',
+      
+},
+divimage: {
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    width:'25%',
+},
+
+button: {
+    margin: theme.spacing(1),
+    width: 200,
+    height:55,
+},
+
+margin:{
+  position: "absolute", 
+  marginLeft: "70%"
+},
+review: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: "space-between",
+    paddingLeft: theme.spacing(2),
+    paddingBottom: theme.spacing(1),
+},
+formControl: {
+    margin: theme.spacing(1),
+    width: 110,
+},
+title:{
+  display: "flex",
+  marginLeft: '15px',
+  justifyContent: 'center',
+},
+selectEmpty: {
+    marginTop: theme.spacing(2),
+},
+  toolbar: theme.mixins.toolbar,
 }));
 
-export const MenuList = () => {   
-    const dispatch = useDispatch()
 
-    const logOut = () => {
-      dispatch(logOutUser())
-    }
 
-    const classes = useStyles();
-    return (
-        <div>
-          <div className={classes.toolbar}>OnTheRocks</div>
-          <Divider />
-          <List component="nav">
-            <Link to="/products" style={{textDecoration: 'none', color: 'black'}}>
-              <ListItem button>
-                <ListItemIcon>
-                  <LocalBar />
-                </ListItemIcon>
-                <ListItemText primary="Products" />
-              </ListItem>
-            </Link>
+export const MenuList = () => {
+  const dispatch = useDispatch();
 
-            <Link to="/sale" style={{textDecoration: 'none', color: 'black'}}>
-              <ListItem button>
-                <ListItemIcon>
-                  <Loyalty />
-                </ListItemIcon>
-                <ListItemText primary="On Sale" />
-              </ListItem>
-            </Link>
+  const logOut = () => {
+    dispatch(logOutUser());
+  };
 
-            <Link to="/categories" style={{textDecoration: 'none', color: 'black'}}>
-              <ListItem button>
-                <ListItemIcon>
-                  <ListAlt />
-                </ListItemIcon>
-                <ListItemText primary="Categories" />
-              </ListItem>
-            </Link>
+  const classes = useStyles();
+  return (
+    <div>
+      <div className={classes.toolbar}>OnTheRocks</div>
+      <Divider />
+      <List component="nav">
+        <Link to="/products" style={{ textDecoration: "none", color: "black" }}>
+          <ListItem button>
+            <ListItemIcon>
+              <LocalBar />
+            </ListItemIcon>
+            <ListItemText primary="Products" />
+          </ListItem>
+        </Link>
 
-            <Divider />
+        <Link to="/sale" style={{ textDecoration: "none", color: "black" }}>
+          <ListItem button>
+            <ListItemIcon>
+              <Loyalty />
+            </ListItemIcon>
+            <ListItemText primary="On Sale" />
+          </ListItem>
+        </Link>
 
-            <Link to="/orders" style={{textDecoration: 'none', color: 'black'}}>
+        <Link
+          to="/categories"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <ListAlt />
+            </ListItemIcon>
+            <ListItemText primary="Categories" />
+          </ListItem>
+        </Link>
+
+        <Divider />
+
+        {localStorage.getItem("token") ? (
+          <>
+            <Link
+              to="/orders"
+              style={{ textDecoration: "none", color: "black" }}
+            >
               <ListItem button>
                 <ListItemIcon>
                   <Receipt />
@@ -80,7 +169,10 @@ export const MenuList = () => {
               </ListItem>
             </Link>
 
-            <Link to="/wishlist" style={{textDecoration: 'none', color: 'black'}}>
+            <Link
+              to="/wishlist"
+              style={{ textDecoration: "none", color: "black" }}
+            >
               <ListItem button>
                 <ListItemIcon>
                   <Star />
@@ -89,94 +181,120 @@ export const MenuList = () => {
               </ListItem>
             </Link>
 
-            <Link to="/profile" style={{textDecoration: 'none', color: 'black'}}>
-              <ListItem button>
-                <ListItemIcon>
-                  <AccountCircle />
-                </ListItemIcon>
-                <ListItemText primary="My Profile" />
-              </ListItem>
-            </Link>
-
-            <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
+            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
               <ListItem button onClick={logOut}>
                 <ListItemIcon>
-                  <ExitToApp/>
+                  <ExitToApp />
                 </ListItemIcon>
                 <ListItemText primary="Logout" />
               </ListItem>
             </Link>
-
-            <Divider />
-
-            <Link to="/OnTheRocks" style={{textDecoration: 'none', color: 'black'}}>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "black" }}
+            >
               <ListItem button>
                 <ListItemIcon>
-                  <Business />
+                  <AccountCircle />
                 </ListItemIcon>
-                <ListItemText primary="About Us" />
+                <ListItemText
+                  primary={`${
+                    localStorage.getItem("token") ? "My Profile" : "Login"
+                  }`}
+                />
               </ListItem>
             </Link>
-          </List>
-        </div>
-      );
-}
+          </>
+        )}
+
+        <Divider />
+
+        <Link
+          to="/OnTheRocks"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <Business />
+            </ListItemIcon>
+            <ListItemText primary="About Us" />
+          </ListItem>
+        </Link>
+      </List>
+    </div>
+  );
+};
 
 export const SearchList = () => {
   const classes = useStyles();
-  const dispatch = useDispatch()
-  const {Products} = useSelector(state => state.productReducer)
+  const dispatch = useDispatch();
+  const { Products } = useSelector((state) => state.productReducer);
 
   useEffect(() => {
-    dispatch(getProducts())
-  },[dispatch])
-
+    dispatch(getProducts());
+  }, [dispatch]);
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      window.location.replace(`${FRONTEND}products?search=${e.target.value.split(' ').join('-').toLowerCase()}`)
+    if (e.key === "Enter") {
+      window.location.replace(
+        `${window.location.origin}/products?search=${e.target.value
+          .split(" ")
+          .join("-")
+          .toLowerCase()}`
+      );
     }
-  }
+  };
 
-return (
+  return (
     <div className={classes.autocomplete}>
-      <ListItem >
+      <ListItem>
         <ListItemIcon>
           <Search />
         </ListItemIcon>
-        <Autocomplete   
+        <Autocomplete
           id="Search"
           freeSolo
-          options={typeof(Products) !== 'undefined' ? Products.map((option) => option?.name) : []}
+          options={
+            typeof Products !== "undefined"
+              ? Products.map((option) => option?.name)
+              : []
+          }
           renderInput={(params) => (
-            <TextField {...params} onKeyUp={handleKeyPress.bind(this)} label="Search" variant="standard" InputProps={{ ...params.InputProps, type: "search" }} />
+            <TextField
+              {...params}
+              onKeyUp={handleKeyPress.bind(this)}
+              label="Search"
+              variant="standard"
+              InputProps={{ ...params.InputProps, type: "search" }}
+            />
           )}
         />
       </ListItem>
     </div>
   );
-}
+};
 
-export  const CartList = () => { 
-    const classes = useStyles();
-      return (
+
+export const CartList = () => {
+  const classes = useStyles();
+  return (
     <div>
-      <div className={classes.toolbar}>OnTheRocks</div>
+      <Typography className={classes.title} variant="h4">
+          Cart
+      </Typography>
       <Divider />
       <List component="nav">
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Should map cart" />
-        </ListItem>
+        <Cart/>   
       </List>
     </div>
-  )
-      }
+  );
+};
 // eslint-disable-next-line
-      export default  {
-        MenuList,
-        SearchList,
-        CartList
-      }
+export default {
+  MenuList,
+  SearchList,
+  CartList,
+};

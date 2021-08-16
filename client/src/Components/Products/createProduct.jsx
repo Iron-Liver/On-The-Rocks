@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import CreateProductForm from './createProductForm'
-import { createProduct } from '../../Redux/Products/productsActions.js';
-
+import { createProduct, clearState } from '../../Redux/Products/productsActions.js';
 
 import swal from "sweetalert";
 
@@ -10,7 +9,6 @@ const CreateProduct = (props) => {
 
 	const dispatch = useDispatch();
 	const { createState } = useSelector(state => state.productReducer);
-	
 
 	var wipedInput = {
 		name: "",
@@ -20,7 +18,8 @@ const CreateProduct = (props) => {
 		brand: "",
 		sku: "",
 		price: "",
-		image: ""
+		image: "",
+		stock: ""
 	}
 
 	const [input, setInput] = useState(wipedInput);
@@ -30,19 +29,21 @@ const CreateProduct = (props) => {
 	};
 
 	useEffect(() => {
-		if (createState && createState[0] === 'invalid inputs') {
-			swal('Error', 'invalid inputs', 'error')
-		} else if (createState && createState !== undefined) {
+		if (createState && createState !== undefined && createState.name) {
 			setInput(wipedInput);
+			dispatch(clearState())
 			swal('Congratulations!', 'Product successfully created', 'success')
+		}
+		if (createState && createState[0] === 'invalid inputs') {
+			dispatch(clearState())
+			swal('Error', 'invalid inputs', 'error')
 		}
 	},
 		// eslint-disable-next-line
-		[createState]);
+		[createState, dispatch]);
 
 	return (
 		<>
-			<h1 style={{display: 'flex', justifyContent:'center'}}>Create Product</h1>
 			<CreateProductForm input={input} setInput={setInput} handleSubmit={handleSubmit} />
 		</>
 	);
