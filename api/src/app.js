@@ -30,8 +30,8 @@ server.use(
         // path: '/',
         // httpOnly: true,
         domain: '.vercel.app',
-        // secure: true,
-        // sameSite: 'none'
+        secure: true,
+        sameSite: 'none'
         // secureProxy: true
     })
 );
