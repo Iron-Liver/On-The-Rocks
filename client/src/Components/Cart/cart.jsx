@@ -6,6 +6,7 @@ import {
     Grid,
     ListItem,
     Button,
+    Box,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
     cont1: {
         marginBottom: 15,
+        boxShadow: ""
     },
 
     cover: {
@@ -56,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     sum: {
         display: "flex",
     },
+    box:{
+     backgroundColor:'#5dc1b9',    
+     justifyContent: "center",
+    }
 }));
 
 export function Cart() {
@@ -111,12 +117,19 @@ export function Cart() {
         state?.forEach((e) => (total = Number(total) + Number(e.price)));
     }
 
+    function removeProducts() {
+        localStorage.removeItem("data");
+        let data = JSON.parse(localStorage.getItem("data"));
+        setState(data);
+    }
+
     return (
         <CardContent className={classes.content}>
             {state?.map((e) => (
-                <ListItem button key={e.id}>
-                    <div className={classes.details}>
-                        <Grid item className={classes.cont1}>
+              <Box borderBottom={2}>
+               <ListItem borderBottom={1} key={e.id}>
+                    <div  className={classes.details}>
+                        <Grid item  className={classes.cont1}>
                             <IconButton
                                 aria-label="delete"
                                 className={classes.margin}
@@ -152,10 +165,21 @@ export function Cart() {
                         </Grid>
                     </div>
                 </ListItem>
+              </Box> 
             ))}
-            <Typography component="h5" variant="h5">
-                Total: ${total}
-            </Typography>
+            { total ? 
+            <Box className={classes.box}>            
+                  <Typography className={classes.title} component="h5" variant="h5">
+                         Total: ${total} 
+                  </Typography> 
+              </Box>
+                    : 
+                   <Typography className={classes.title} component="h5" variant="h5">
+                  There are no products in the cart.
+                  </Typography>  
+                         }
+                
+          
         </CardContent>
     );
 }

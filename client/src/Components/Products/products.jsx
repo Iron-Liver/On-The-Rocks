@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { getProducts } from '../../Redux/Products/productsActions'
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid } from "@material-ui/core";
+import {Button, Card, CardActionArea, CardContent, CardMedia, Typography, Grid } from "@material-ui/core";
 import { NavLink } from 'react-router-dom';
 import Filters from './Filters';
+import { addProductCart } from "../../Redux/Cart/cartActions";
+import swal from "sweetalert";
 
 
 const useStyles = makeStyles({
@@ -37,7 +39,22 @@ const useStyles = makeStyles({
     links: {
         textDecoration: 'none',
         color: 'black'
-    }
+    },
+    button:{
+        width: "100%",
+        backgroundColor: "black",
+        color: "white",
+        '&:hover': {
+            backgroundColor: "grey",
+            boxShadow: 'none',
+          },
+          '&:active': {
+            boxShadow: 'none',
+            backgroundColor: '#5dc1b9',
+          },
+        },
+        
+
 });
 
 
@@ -57,6 +74,24 @@ const Products = () => {
     }, 
     // eslint-disable-next-line
     []);
+
+
+    function onSubmit(e,id,image,name,price) {
+        let data = JSON.parse(localStorage.getItem("data"));
+        let filteredData = data?.filter((e) => e.id === id);
+        if (filteredData?.length > 0 && data?.length > 0) {
+            swal("The product is already in the cart!");
+        } else {
+                addProductCart({
+                    units: 1,
+                    id: id,
+                    price: price,
+                    image: image,
+                    name: name,})
+                swal("The product was added to the cart!");
+            }
+        }
+    
 
     return (
         <div>
@@ -90,8 +125,8 @@ const Products = () => {
                                                 </CardContent>
                                             </CardActionArea>
                                         </NavLink>
+                                      <Button  className={classes.button} onClick={(e) => onSubmit(e, spirits.id, spirits.image, spirits.name, spirits.price)}>ADD+</Button>
                                     </Card>
-
                                 </Grid>
                             )
                         })}

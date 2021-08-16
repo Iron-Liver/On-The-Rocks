@@ -20,6 +20,7 @@ import {
   AccountCircle,
   Loyalty,
   ExitToApp,
+  ShoppingCart,
 } from "@material-ui/icons";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -106,6 +107,9 @@ selectEmpty: {
     marginTop: theme.spacing(2),
 },
   toolbar: theme.mixins.toolbar,
+icon:{
+  marginTop: "2%"
+}  
 }));
 
 
@@ -283,7 +287,7 @@ export const CartList = () => {
   return (
     <div>
       <Typography className={classes.title} variant="h4">
-          Cart
+      <ShoppingCart className={classes.icon}/>  Cart   
       </Typography>
       <Divider />
       <List component="nav">
