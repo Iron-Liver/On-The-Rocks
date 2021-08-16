@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
-import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp, MicNoneTwoTone } from "@material-ui/icons";
+import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import NavBox from './navBox'
@@ -116,7 +116,7 @@ function NavBar(props) {
     <div>
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar elevation={false} position="fixed" className={classes.appBar}>
+      <AppBar elevation={0} position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
 
           <Container>

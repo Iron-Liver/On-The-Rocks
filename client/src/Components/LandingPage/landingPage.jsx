@@ -1,9 +1,9 @@
 import './landingPage.css';
-import image1 from '../../assets/xd1.jpg'
-import image2 from '../../assets/xd2.jpg'
-import React, { useRef, useState } from "react";
+// import image1 from '../../assets/xd1.jpg'
+// import image2 from '../../assets/xd2.jpg'
+// import React, { useRef, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/swiper.min.css";

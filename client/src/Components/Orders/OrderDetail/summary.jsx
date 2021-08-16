@@ -11,7 +11,7 @@ import {
   Button,
   Tooltip
 } from "@material-ui/core";
-import { ExpandMore, Payment, Help, Message} from "@material-ui/icons";
+import { ExpandMore, Payment, Help} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 
