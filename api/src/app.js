@@ -28,9 +28,9 @@ server.use(
         maxAge: 24 * 60 * 60 * 1000,
         secret: SECRET_KEY,
         // path: '/',
-        httpOnly: true,
-        domain: 'https://on-the-rocks.vercel.app',
-        secure: true,
+        // httpOnly: true,
+        domain: '.ontherocks-ft14.herokuapp.com',
+        // secure: true,
         // sameSite: 'none'
         // secureProxy: true
     })
