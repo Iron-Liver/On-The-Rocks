@@ -110,7 +110,8 @@
   margin-right: 10px;
 }
 
-.containerproducts .card .contentBx a {
+.containerproducts .card .contentBx button {
+  cursor: pointer;
   display: inline-block;
   padding: 10px 20px;
   background: #fff;
@@ -122,12 +123,13 @@
   transform: translateY(50px);
   transition: 0.5s;
   margin-top: 0;
+  border: none;
 }
 
-.containerproducts .card:hover .contentBx a {
+.containerproducts .card:hover .contentBx button {
   opacity: 1;
   transform: translateY(0px);
-  transition-delay: 0.6s;
+  transition-delay: 350ms;
 }
 
 .filters{

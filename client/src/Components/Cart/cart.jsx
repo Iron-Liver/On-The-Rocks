@@ -7,6 +7,7 @@ import { removeProductCart} from "../../Redux/Cart/cartActions";
 import { getCartItems} from '../../Redux/Cart/cartActions'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CreateOrder from "../Orders/CreateOrder/createOrder";
 
 const useStyles = makeStyles((theme) => ({
   
@@ -104,7 +105,7 @@ function sum(id){
    setState(data)
   
    state?.map( e =>(    
-    total = total + e.price))
+    total = parseInt(total) + parseInt(e.price)))
   
 }
 
@@ -165,6 +166,7 @@ return(
              <Typography component="h5" variant="h5">
                             Total: ${total}
              </Typography>
+             <CreateOrder />
       
       </CardContent>)
 

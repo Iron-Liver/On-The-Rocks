@@ -22,7 +22,7 @@ const UserList = () => {
 		}
 	}));
 
-	const {users} = useSelector(state => state.UserReducer)
+	const {users} = useSelector(state => state.userReducer)
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	

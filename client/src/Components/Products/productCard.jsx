@@ -40,7 +40,7 @@ const ProductCard = ({ spirit }) => {
                 </Link>
               </div>
               <div className="contentBx">
-                <Link to={`/products/${spirit.id}`} style={{textDecoration: "none"}}>
+                <Link to={`/products/${spirit.id}`} style={{textDecoration: "none", background: "transparent"}}>
                   <h4>{spirit.name}</h4>
                 </Link>
                   <div className="size">
