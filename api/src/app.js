@@ -34,7 +34,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', `*`);
+    res.header('Access-Control-Allow-Origin', `${CLIENT_DOMAIN}`);
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header(
         "Access-Control-Allow-Headers",
