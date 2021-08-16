@@ -19,7 +19,8 @@ const UpdateProduct = ({ match }) => {
         brand: "",
         sku: "",
         price: "",
-        image: ""
+        image: "",
+        stock: ""
     }
 
     const [input, setInput] = useState(wipedInput);

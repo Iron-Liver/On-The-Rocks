@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const express = require('express');
+const passport = require("passport");
 
 const getAllUsers = require('../controllers/user/getAllUsers');
 const createUser = require('../controllers/user/createUser');
@@ -12,7 +13,7 @@ router.use(express.json());
 
 router.get('/getAll', getAllUsers);
 router.get('/getUser/:id', getUserById)
-router.put('/updateUser/:id', updateUser)
+router.put('/updateUser/:id',  updateUser)
 router.delete('/deleteUser/:id', deleteUser);
 router.post('/addUser', createUser);
 

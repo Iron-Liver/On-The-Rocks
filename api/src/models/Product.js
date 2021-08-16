@@ -42,6 +42,10 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    stock:{
+      type: DataTypes.INTEGER,
+      defaultValue: 1000
     }
   });
 };

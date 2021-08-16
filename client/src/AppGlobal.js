@@ -4,7 +4,7 @@ import theme from './Utils/theme';
 
 //User imports
 import LoginUser from './Components/Users/UserLogin/userLogin'
-import CreateUser from './Components/Users/UserAdd/CreateUser'
+import CreateUser from './Components/Users/UserAdd/createUser'
 import ResetPassword from './Components/Users/UserResetPassword/resetPassword';
 import Admin2FA from './Components/Users/Admin2FA/admin2FA';
 //Category imports
@@ -26,10 +26,14 @@ import NavBar from './Components/NavBar/navBar';
 import landingPage from './Components/LandingPage/landingPage';
 import AdminFeatures from './Components/Admin/AdminFeatures';
 import Error404 from './Components/Error404/Error404';
+import CreateOrder from './Components/Orders/CreateOrder/createOrder';
+import MercadoPago from './Components/Mercadopago/Mercadopago';
 
 
 const AppGlobal = () => {
-	return (
+
+	
+    return (
 		<ThemeProvider theme={theme}>
 			<Router>
 				<NavBar/>
@@ -40,9 +44,11 @@ const AppGlobal = () => {
 					<Route path="/verify/password" component={ResetPassword} />
 					<Route path="/verify/admin" component={Admin2FA} />
 					<Route exact path="/products" component={Products} />
+					<Route exact path="/createOrder" component={CreateOrder} />
 					<Route exact path="/products/:id" component={ProductDetail} />
 					<Route exact path='/category/:id' component={CategoryDetail} />
 					<AuthRoute exact path="/order/:id" component={OrderDetail}/>
+          <AuthRoute exact path="/mercadopago/:orderId" component={MercadoPago}/>
 					<UserRoute path="/profile/:userId" component={UserProfile} />
 					<AdminRoute path="/private/profile/:userId" component={AdminProfile}/>
 					<AdminRoute path="/private" component={AdminFeatures}/>

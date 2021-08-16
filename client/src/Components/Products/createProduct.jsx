@@ -18,7 +18,8 @@ const CreateProduct = (props) => {
 		brand: "",
 		sku: "",
 		price: "",
-		image: ""
+		image: "",
+		stock: ""
 	}
 
 	const [input, setInput] = useState(wipedInput);

@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
 					msg: 'Description field must not be empty',
 				},
 				is: {
-					args: /^[A-Za-z %0-9/().,'-]{28,512}$/,
+					args: /^[A-Za-z %0-9/().,'!¡¿?+-]{28,512}$/,
 					msg: 'Description field contains errors'
 				}
 			},

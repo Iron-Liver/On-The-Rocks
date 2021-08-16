@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE, FILTER_BY_NAME } from "../../Utils/constants"
+import { CREATE_PRODUCT, GET_PRODUCTS, CLEAR_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_BY_CATEGORY, FILTER_BY_PRICE, FILTER_BY_NAME, GET_PRODUCT_BY_ID } from "../../Utils/constants"
 
 
 export function clearProductDetail() {
@@ -22,16 +22,15 @@ export function createProduct(product) {
 
 export function getProducts() {
     return async function (dispatch) {
-        const products = await axios.get(`http://localhost:3001/product`);
+        const products = await axios.get(`/product`);
         dispatch({ type: GET_PRODUCTS, payload: products.data });
     };
 }
 
 export function getProductById(id) {
     return async function (dispatch) {
-        const product = await axios.get(`http://localhost:3001/product/${id}`);
-        dispatch({ type: "GET_PRODUCT_BY_ID", payload: product.data,
-        });
+        const product = await axios.get(`/product/${id}`);
+        dispatch({ type: GET_PRODUCT_BY_ID, payload: product.data});
     };
 }
 
@@ -43,14 +42,14 @@ export function searchProduct(name) {
 
 export function updateProduct(id, update) {
     return async function (dispatch) {
-        const product = await axios.put(`http://localhost:3001/product/${id}`, update);
+        const product = await axios.put(`/product/${id}`, update);
         dispatch({ type: UPDATE_PRODUCT, payload: product.data });
     };
 }
 
 export function deleteProduct(id) {
     return async function (dispatch) {
-        await axios.delete(`http://localhost:3001/product/${id}`);
+        await axios.delete(`/product/${id}`);
         dispatch({ type: DELETE_PRODUCT, payload: id});
     };
 }
