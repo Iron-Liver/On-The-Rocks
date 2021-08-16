@@ -72,13 +72,9 @@ Order_products.belongsTo(Order, {
   foreignKey: "orderId",
 });
 
-// Order.hasOne(Payment_detail, {
-//   foreignKey: 'paymentId'
-// });
+Order.hasOne(Payment_detail);
+Payment_detail.belongsTo(Order);
 
-// Payment_detail.hasOne(Order, {
-//   foreignKey: 'orderId'
-// });
 
 module.exports = {
     ...sequelize.models, 

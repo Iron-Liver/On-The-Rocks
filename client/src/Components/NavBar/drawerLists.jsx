@@ -1,10 +1,29 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import {Divider,List, ListItem, ListItemText, TextField} from '@material-ui/core'
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import {LocalBar, Receipt, Star, ListAlt, Business, Search, AccountCircle, Loyalty, ExitToApp} from '@material-ui/icons'
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import {Cart} from "../Cart/cart"
+import {
+  Typography, 
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
+  Button
+} from "@material-ui/core";
+import {
+  LocalBar,
+  Receipt,
+  Star,
+  ListAlt,
+  Business,
+  Search,
+  AccountCircle,
+  Loyalty,
+  ExitToApp,
+  ArrowForwardIos
+} from "@material-ui/icons";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {getProducts} from '../../Redux/Products/productsActions'
 import {FRONTEND} from '../../Utils/constants'
@@ -157,11 +176,16 @@ return (
   );
 }
 
-export  const CartList = () => { 
-    const classes = useStyles();
-      return (
+export const CartList = ({ handleDrawerCart }) => {
+  const classes = useStyles();
+  return (
     <div>
-      <div className={classes.toolbar}>OnTheRocks</div>
+      <div style={{display: "flex", width: "58%", justifyContent: "space-between"}}>
+        <Button onClick={handleDrawerCart}><ArrowForwardIos/></Button>
+        <Typography className={classes.title} variant="h4">
+          Cart
+        </Typography>
+      </div>
       <Divider />
       <List component="nav">
         <ListItem button>

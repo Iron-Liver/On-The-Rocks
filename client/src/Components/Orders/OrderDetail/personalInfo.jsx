@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, Paper, Typography, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
 import { Delete, Info, Edit, Email } from "@material-ui/icons";
+import jwt from 'jsonwebtoken'
 
 const useStyles = makeStyles((theme) => ({
   paperContainer: {
@@ -51,7 +52,9 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const localProfile = JSON.parse(localStorage.getItem("profile"));
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null;
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -142,6 +145,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                   onClick={handleClick}
                   startIcon={<Edit />}
                   disableElevation
+                  disabled={order.status === "pending"}
                 >
                   SET STATUS
                 </Button>
@@ -155,7 +159,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                 >
                   <MenuItem
                     id="created"
-                    disabled={orderStatus === "created"}
+                    disabled={order.status === "created" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -163,7 +167,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="processing"
-                    disabled={orderStatus === "processing"}
+                    disabled={order.status === "processing" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -171,7 +175,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="completed"
-                    disabled={orderStatus === "completed"}
+                    disabled={order.status === "completed" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -179,7 +183,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="cancelled"
-                    disabled={orderStatus === "cancelled"}
+                    disabled={order.status === "cancelled" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >

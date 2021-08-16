@@ -97,6 +97,7 @@ const UserOrders = () => {
         history.push("/"); 
       }
     })()
+  //eslint-disable-next-line
   },[page, history, userId])
 
   const handlePageChange = (e, val) => {
@@ -173,14 +174,15 @@ const UserOrders = () => {
         }}
         >
         {orders.data &&
-          orders.data.map((order, idx) => (
+          orders.data.map(order => (
             <Order 
-            order={order} 
-            key={Math.random() * 100 * idx} 
-            userId={userId}
-            handleSubmit={handleSubmit}
+              order={order} 
+              key={Math.random() * 3} 
+              userId={userId}
+              handleSubmit={handleSubmit}
             />
-            ))}
+          ))
+        }
       </div>
     </div>
   );
