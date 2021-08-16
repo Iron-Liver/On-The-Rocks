@@ -29,7 +29,7 @@ server.use(
         secret: SECRET_KEY,
         path: '/',
         httpOnly: true,
-        // domain: '.on-the-rocks.vercel.app/',
+        domain: '.on-the-rocks.vercel.app',
         secure: true,
         sameSite: 'none'
         // secureProxy: true
