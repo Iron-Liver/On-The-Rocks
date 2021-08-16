@@ -30,6 +30,7 @@ server.use(
         path: '/',
         domain: '.on-the-rocks.vercel.app',
         secure: true,
+        secureProxy: true
     })
 );
 
