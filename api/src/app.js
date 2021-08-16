@@ -24,18 +24,12 @@ server.use(express.json({ limit: '50mb' }));
 
 server.use(helmet())
 server.use(cors({ origin: CLIENT_DOMAIN, credentials: true }));
-server.use(session({
-    name: 'session-id',
+app.use(session({
     secret: SECRET_KEY,
     saveUninitialized: false,
-    resave: false,
-    cookie: {
-        httpOnly: false,
-        secure: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-        sameSite: 'none'
-    }
-}));
+    resave: false
+  }));
+
 // server.use(
 //     cookieSession({
 //         maxAge: 24 * 60 * 60 * 1000,
