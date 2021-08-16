@@ -24,7 +24,7 @@ server.use(express.json({ limit: '50mb' }));
 
 server.use(helmet())
 server.use(cors({ origin: CLIENT_DOMAIN, credentials: true }));
-app.use(session({
+server.use(session({
     secret: SECRET_KEY,
     saveUninitialized: false,
     resave: false
