@@ -1,229 +1,239 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
-import { Grid, TextField, makeStyles, Button, Modal } from '@material-ui/core'
-import { useForm, Form } from './useForm'
-import { RoomSharp, PersonSharp, MarkunreadMailboxSharp, LocationCitySharp, PeopleAlt }  from '@material-ui/icons';
-import IconButton from "@material-ui/core/IconButton";
-import Clear from "@material-ui/icons/Clear";
+import { Button, Modal } from '@material-ui/core';
+import { useForm } from './useForm';
+import { Link, useHistory } from 'react-router-dom';
+import { userSchema1, userSchema2 } from './ValidationOrder'
+import './CreateOrder.css'
+import jwt from "jsonwebtoken"
+import axios from 'axios'
+import mercadopagoimg from '../../../assets/mercado-pago.png';
 
-let initialForm = {
+
+
+let initialForm1 = {
   firstName: '',
   lastName: '',
+  phone: 0,  
+}
+let initialForm2 = {    
   address: '',
   city: '',
   zipCode: '',
-  paymentMethod: ''   
 }
-
-const validate = (state, name, errors) => {
-  const newErrors = {...errors};
-  
-  if (name === "firstName" && !state.firstName){
-    newErrors.firstName = "FirstName is required.";
-  }
-  if (name === "lastName" && !state.lastName){
-    newErrors.lastName = "LastName is required."   
-  }
-  if (name === "address" && !state.address){
-    newErrors.address = "Adress Date is required.";   
-  } 
-  if (name === "city" && !state.city){
-    newErrors.city = "City is required.";   
-  }
-  if (name === "zipCode" && !state.ZipCode){
-    newErrors.zipCode = "ZipCode is required.";   
-  }  
-  return newErrors;
-};
-
-const useStyle = makeStyles(theme =>({
-  modalForm: {
-    position:"absolute",
-    width: 350,
-    backgroundColor: "white",
-    borderRadius: '10px',
-    boxShadow: theme.shadows[5],
-    top:"50%",
-    left:"50%",
-    transform:"translate(-50%, -50%)"
-  },
-  gridContainer : {
-    width:"100%",
-    dispaly: 'flex',
-    margin: '0 auto',
-    justifyContent: 'center',
-    padding: '1px'
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    margin: '25px 0'
-
-  },
-  icon: {
-    height: '35px',
-    width: '30px'
-  },
-  inputError: {
-    color: 'red'
-  },
-  clear: {
-    fontSize:"35px"
-  },
-  clearContainer: {
-    height:"22px"
-  }
-  
-}))
 
 
 const CreateOrder = () => {
-
+  const [count, setCount] = useState(1);
   const [modal, setModal] = useState(false);
+  const history = useHistory();
 
   const openCloseModal = () => {
     setModal(!modal);
-    setErrors({})
-    setState(initialForm);
+    setState1({});
+    setState2({});
+    setCount(1);
   }
 
-  const classes = useStyle()
+  const nextPage1 = async (e) => {
+    e.preventDefault()
+    const isValid1 = await userSchema1.isValid(state1);
+    if(isValid1) setCount(count + 1)
+  }
+
+  const nextPage2 = async (e) => {
+    e.preventDefault()
+    const isValid2 = await userSchema2.isValid(state2);
+    if(isValid2) setCount(count + 1);
+  }
+
+  const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
+  const SubmitForm = async () => { 
+    const order = {
+       ...state1, ...state2,
+      id: currentUser.id,
+      paymentMethod: 'mercadopago' ,
+      total: JSON.parse(localStorage.getItem('data')).reduce((acc, el) => {
+        return acc = acc + el.price * el.units
+      }, 0).toFixed(2), 
+      cart: JSON.parse(localStorage.getItem('data')).map(({id, units, price}) => {
+        return {
+          id, 
+          units, 
+          price
+        }
+      })
+    }
+    try {
+      const { data } = await axios.post('/order/addOrder', order);
+      if(data) {
+        localStorage.removeItem("data");
+      }
+      openCloseModal()
+      history.push(`/mercadopago/${data.orderId}`);
+    } catch (err) {
+      console.error(err) 
+    }
+  }
 
   const {
-    state,
-    setState,
-    errors,
-    setErrors,
-    handleInputChange,
-  }=useForm({initialForm, validate});
-
-  const body = (
-    <Form >
-      <Grid container className={classes.modalForm} >
-        <Grid item xs={12} className={classes.gridContainer}>
-            <Grid container justifyContent="flex-end" className={classes.clearContainer}>
-            <IconButton edge="start" color="inherit" size="small" onClick={openCloseModal}>
-              <Clear className={classes.clear}/>
-            </IconButton>
-            </Grid>
-          <Grid container justifyContent="center" alignItems="center">
-            <Grid item>
-          <h2>Personal Details</h2>
-            </Grid>
-          </Grid>
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<PersonSharp/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-            color= { errors.firstName ? "primary" : "secondary"}
-          	helperText={ errors.firstName ? errors.firstName : ""}
-            variant="standard"
-            label="First name"
-            value={state.firstName}
-            name="firstName"
-            onChange={handleInputChange}
-          />
-           </Grid>
-          </Grid>
-
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<PeopleAlt/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-          	helperText={ errors.lastName ? errors.lastName : ""}
-            color={ errors.lastName ? "primary" : "secondary"}
-            variant="standard"
-            label="Last name"
-            value={state.lastName}
-            name="lastName"
-            onChange={handleInputChange}
-            />
-           </Grid>
-          </Grid>
-
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<LocationCitySharp/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-          	helperText={ errors.city ? errors.city : ""}
-            color={ errors.city ? "primary" : "secondary"}
-            variant="standard"
-            label="City"
-            value={state.city}
-            name="city"
-            onChange={handleInputChange}
-          />
-           </Grid>
-          </Grid>
-
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<MarkunreadMailboxSharp/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-          	helperText={ errors.address ? errors.address : ""}
-            color={ errors.address ? "primary" : "secondary"}
-            variant="standard"
-            label="Address"
-            value={state.address}
-            name="address"
-            onChange={handleInputChange}
-          />
-           </Grid>
-          </Grid>
-
-
-          <Grid container justifyContent="center" alignItems="flex-end">
-            <Grid item className={classes.icon}>
-          {<RoomSharp/>}
-           </Grid>
-           <Grid item xs={9}>
-          <TextField 
-          	helperText={ errors.zipCode ? errors.zipCode : ""}
-            color={ errors.zipCode ? "primary" : "secondary"}
-            variant="standard"
-            label="Zip code"
-            value={state.zipCode}
-            name="zipCode"
-            onChange={handleInputChange}
-          />
-           </Grid>
-          </Grid>
-
-
-          <Grid className={classes.buttons}>
-          <Button
-            variant="contained"
-            size="large"
-            color="primary"
-            // onClick={}
-          >Next</Button>
-          </Grid>
-
-        </Grid>
-      </Grid>
-     </Form>
-  )
-  
-  return ( 
+    state1,
+    setState1,
+    state2,
+    setState2,
+    handleInputChange1,
+    handleInputChange2,
+  }=useForm({initialForm2, initialForm1});
+      
+    return ( 
       <div>
-        <Button color="primary" variant="outlined" onClick={openCloseModal}> Pay </Button>
+
+{/*         
+<div class="center">
+  <p className="pe">Socials :</p>
+  <div id="social-test">
+    <ul class="social">
+      <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+      <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
+      <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
+      <li><i class="fa fa-github" aria-hidden="true"></i></li>
+    </ul>
+  </div>
+</div> */}
+      {
+        currentUser ? (
+          JSON.parse(localStorage.getItem('data')) && 
+            !!JSON.parse(localStorage.getItem('data')).length &&
+              <Button 
+                color="primary" 
+                variant="outlined" 
+                onClick={openCloseModal}
+              > 
+                Pay 
+              </Button>
+        ) : (
+          <Link to="/login">
+            <Button 
+              color="primary" 
+              variant="outlined"
+            > 
+              Login 
+            </Button> 
+          </Link>
+        )
+      }
         <Modal
         closeAfterTransition
         open={modal}
         onClose={openCloseModal}
         >
-          {body}
+          
+          <div style={{display:'flex', justifyContent:'center',marginTop:'40px', width:'100%', flexGrow:'1'}}>   
+    
+          { count === 1 ? (
+                     <div className="Full_card">
+                     <div className="container">
+                       <div className="exit">
+                       <button onClick={openCloseModal}> X </button>
+                       </div>
+                      <div className="card">
+                        <h1 className="card_title">Personal Details  <i class="fas fa-address-book"></i></h1>
+                        <div className="subtitle_form">
+                        <p className="card_title-info">Step 1: Basic info</p>          
+                        </div>
+                        <form className="card_form">
+                          <div className="input">
+                            <input type="text"   name="firstName" className={state1.firstName? 'input_field' : 'input_fieldw'} onChange={handleInputChange1} value={state1.firstName} required  />
+                            <label id="firstname" className="input_label" label='First Name'>First Name - <i class="fas fa-user"></i> {state1.firstName?.length >= 3 ? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> } </label>
+                          </div>
+                          <div class="input">
+                            <input  name="lastName" type="text" value={state1.lastName} onChange={handleInputChange1} className={state1.lastName ? 'input_field' : 'input_fieldw'} required />
+                            <label type="text" className="input_label">Last Name - <i class="fas fa-user-check"></i> {state1.lastName?.length  >= 3? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
+                          </div>
+                          <div class="input">
+                            <input type="text" className={state1.phone ? 'input_field' : 'input_fieldw'} name="phone" value={state1.phone} onChange={handleInputChange1} required />
+                            <label className="input_label">Phone Number - <i class="fas fa-mobile-alt"></i> {state1.phone?.length >= 6 && !isNaN(state1.phone) ? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> } </label>
+                          </div>
+                          <div className="btn_cont1">
+                          <button className="card_button" style={{width:"46%"}} onClick={nextPage1}>Next</button>
+                          </div>
+                          <p className="p_color">Need help? <Link to="/help" className="help"> click here! </Link></p>
+                        </form>
+                        </div>
+                       </div>
+                  </div>
+
+          ) : null}
+
+          { count === 2 ? (
+             <div className="Full_card">
+             <div className="container">
+             <div className="exit">
+                <button onClick={openCloseModal}> X </button>
+                </div>
+              <div className="card">
+                <h1 className="card_title">Personal Details <i class="fas fa-thumbtack"></i></h1>
+                <p className="card_title-info">Step 2: Locate </p>               
+                <form className="card_form">
+                  <div className="input">
+                    <input type="text" className={state2.address ? 'input_field' : 'input_fieldw'} name="address" value={state2.address} onChange={handleInputChange2} required />
+                    <label className="input_label">Address - {<i class="fas fa-address-card"></i>} {state2.address?.length >= 6? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
+                  </div>
+                  <div class="input">
+                    <input type="text" name="city" value={state2.city} onChange={handleInputChange2} className={state2.city ? 'input_field' : 'input_fieldw'} required />
+                    <label type="text" className="input_label">City - <i class="fas fa-location-arrow"></i> {state2.city?.length >= 3? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
+                  </div>
+                  <div class="input">
+                    <input type="text" className={state2.zipCode ? 'input_field' : 'input_fieldw'} name="zipCode" value={state2.zipCode} onChange={handleInputChange2} required />
+                    <label className="input_label">Zip Code - <i class="fas fa-map-marker-alt"></i>  {state2.zipCode?.length >= 3? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
+                  </div>
+                  <div className="btn_group">
+                  <button className="card_button" onClick={() => setCount(count - 1)} >Back</button>
+                  <div className="divis"></div>
+                  <button className="card_button" onClick={nextPage2}>Next</button>
+                  </div>
+                     <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
+                </form>
+                </div>
+               </div>
+          </div>
+          ) : null}
+
+          { count === 3 ? (
+               <div className="Full_card">
+               <div className="container">
+               <div className="exit">
+                <button onClick={openCloseModal}> X </button>
+                </div>
+                <div className="card">
+                  <h1 className="card_title" style={{marginTop:'20px', marginBottom:'25px'}}>Payment method <i class="fas fa-money-check-alt"></i></h1>
+                  <form className="card_form">
+                  <div class="mercadoPagoCont">
+                    <input type="radio"  id="mercadopago" name="mercadopago" value={state2.mercadopago} />
+                    <label  for="mercadopago"><img className="imgmercadopago" src={mercadopagoimg} alt="mercadopago"></img></label>
+                  </div>
+                    <div className="btn_group">
+          
+                    </div>
+                     <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
+                  </form>
+                    <button className="card_button" onClick={SubmitForm}>Pay</button>
+                  </div>
+                 </div>
+            </div>  
+          ) : null}
+          </div>
         </Modal>
       </div>
   )
 }
 
 export default CreateOrder
+
+
+
+ 
+

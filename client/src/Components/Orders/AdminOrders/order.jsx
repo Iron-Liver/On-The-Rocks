@@ -151,7 +151,7 @@ const Order = ({ order, setOrderStatus }) => {
                 </Typography>
               </div>
             </Box>
-            <Hidden xsDown>
+            <Hidden smDown>
               <Box className={classes.orderActions}>
                 <Link
                   to={`/order/${order.id}`}
@@ -182,6 +182,7 @@ const Order = ({ order, setOrderStatus }) => {
                   startIcon={<Edit />}
                   color="primary"
                   disableElevation
+                  disabled={order.status === "pending"}
                 >
                   SET STATUS
                 </Button>
@@ -195,7 +196,7 @@ const Order = ({ order, setOrderStatus }) => {
                 >
                   <MenuItem
                     id="created"
-                    disabled={order.status === "created"}
+                    disabled={order.status === "created" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -203,7 +204,7 @@ const Order = ({ order, setOrderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="processing"
-                    disabled={order.status === "processing"}
+                    disabled={order.status === "processing" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -211,7 +212,7 @@ const Order = ({ order, setOrderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="completed"
-                    disabled={order.status === "completed"}
+                    disabled={order.status === "completed" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -219,7 +220,7 @@ const Order = ({ order, setOrderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="cancelled"
-                    disabled={order.status === "cancelled"}
+                    disabled={order.status === "cancelled" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -230,7 +231,7 @@ const Order = ({ order, setOrderStatus }) => {
             </Hidden>
           </Box>
           <Box>
-            <Hidden smUp>
+            <Hidden mdUp>
               <div className={classes.divider} />
               <Box className={classes.orderActionsResponsive}>
                 <Typography variant="overline" className={classes.infoField}>
@@ -264,6 +265,7 @@ const Order = ({ order, setOrderStatus }) => {
                   startIcon={<Edit />}
                   disableElevation
                   color="primary"
+                  disabled={order.status === "pending"}
                 >
                   SET STATUS
                 </Button>
@@ -277,7 +279,7 @@ const Order = ({ order, setOrderStatus }) => {
                 >
                   <MenuItem
                     id="created"
-                    disabled={order.status === "created"}
+                    disabled={order.status === "created" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -285,7 +287,7 @@ const Order = ({ order, setOrderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="processing"
-                    disabled={order.status === "processing"}
+                    disabled={order.status === "processing" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -293,7 +295,7 @@ const Order = ({ order, setOrderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="completed"
-                    disabled={order.status === "completed"}
+                    disabled={order.status === "completed" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -301,7 +303,7 @@ const Order = ({ order, setOrderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="cancelled"
-                    disabled={order.status === "cancelled"}
+                    disabled={order.status === "cancelled" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >

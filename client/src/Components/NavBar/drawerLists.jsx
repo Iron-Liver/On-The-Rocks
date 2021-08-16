@@ -9,6 +9,7 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  Button
 } from "@material-ui/core";
 import {
   LocalBar,
@@ -20,6 +21,7 @@ import {
   AccountCircle,
   Loyalty,
   ExitToApp,
+  ArrowForwardIos
 } from "@material-ui/icons";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -278,13 +280,16 @@ export const SearchList = () => {
 };
 
 
-export const CartList = () => {
+export const CartList = ({ handleDrawerCart }) => {
   const classes = useStyles();
   return (
     <div>
-      <Typography className={classes.title} variant="h4">
+      <div style={{display: "flex", width: "58%", justifyContent: "space-between"}}>
+        <Button onClick={handleDrawerCart}><ArrowForwardIos/></Button>
+        <Typography className={classes.title} variant="h4">
           Cart
-      </Typography>
+        </Typography>
+      </div>
       <Divider />
       <List component="nav">
         <Cart/>   

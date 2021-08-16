@@ -91,7 +91,8 @@ const AdminOrders = () => {
       })
       .then((response) => setOrders(response.data))
       .catch((err) => history.push("/"));
-  },[page, history, form])
+  //eslint-disable-next-line
+  },[page, history])
 
   const handlePageChange = (e, val) => {
     setPage(val);

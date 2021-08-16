@@ -18,4 +18,7 @@ router.use("/review", review);
 const auth = require("./auth")
 router.use("/auth", auth)
 
+const mercadopago = require("./mercadopago");
+router.use("/mercadopago", mercadopago);
+
 module.exports = router;

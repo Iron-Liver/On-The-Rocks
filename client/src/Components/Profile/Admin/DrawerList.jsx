@@ -1,10 +1,28 @@
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, Grid, makeStyles, ButtonBase } from '@material-ui/core'
-import { NoteAdd, AddShoppingCart, AssignmentInd, ShoppingCart, AlternateEmailOutlined, DnsOutlined, ExitToApp, Dashboard  } from '@material-ui/icons'
-import { Link, useHistory } from 'react-router-dom'
+import { 
+  List, 
+  ListItem, 
+  ListItemIcon, 
+  ListItemText, 
+  Divider, 
+  Grid, 
+  makeStyles, 
+  ButtonBase 
+} from '@material-ui/core';
+import { 
+  NoteAdd, 
+  AddShoppingCart, 
+  AssignmentInd, 
+  ShoppingCart, 
+  AlternateEmailOutlined, 
+  DnsOutlined, 
+  ExitToApp, 
+  Dashboard  
+} from '@material-ui/icons';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { logOutUser, readUser } from '../../../Redux/Users/userActions';
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 const useStyles= makeStyles(theme => ({
   list: {
@@ -43,6 +61,7 @@ export default function DrawerList() {
   const dispatch = useDispatch()
   const classes = useStyles();
   const history = useHistory();
+  const { url } = useRouteMatch();
   const userDetail = useSelector(state => state.userReducer.userDetail);
 
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 
@@ -63,87 +82,83 @@ export default function DrawerList() {
   return (
     <div>
       <List component="nav" className={classes.list}> 
-
-      <Grid container className={classes.Container}>
-        <Grid item className={classes.imageContainer}> 
-          <img className={classes.image} src="https://png.pngtree.com/png-vector/20190501/ourmid/pngtree-users-icon-design-png-image_1014936.jpg" alt="user" />
-        </Grid>
-
-      
-
-        <Grid container className={classes.belowImage}>
-          <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
-          <DnsOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
-        <ListItemText secondary={userDetail ? userDetail.name : ""} style={{width: '75%', display: "inline-block"}}/>
+        <Grid container className={classes.Container}>
+          <Grid item className={classes.imageContainer}> 
+            <img className={classes.image} src="https://png.pngtree.com/png-vector/20190501/ourmid/pngtree-users-icon-design-png-image_1014936.jpg" alt="user" />
           </Grid>
-        
-           <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
-        <AlternateEmailOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
-        <ListItemText secondary={userDetail ? userDetail.email : ""} style={{width: '75%', display: "inline-block"}}/>
+
+          <Grid container className={classes.belowImage}>
+            <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
+            <DnsOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
+          <ListItemText secondary={userDetail ? userDetail.name : ""} style={{width: '75%', display: "inline-block"}}/>
+            </Grid>
+          
+            <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
+          <AlternateEmailOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
+          <ListItemText secondary={userDetail ? userDetail.email : ""} style={{width: '75%', display: "inline-block"}}/>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
 
-      <Divider/>
-      <Link to={`/private/profile/${userId}/dashboard`}  className={classes.link}>
-        <ListItem  button> 
-        <ButtonBase>
-          <ListItemIcon>
-            <Dashboard />
-          </ListItemIcon>
-          <ListItemText  primary="Dashboard" />
-        </ButtonBase>
-        </ListItem>
-      </Link>
-      <Link to={`/private/profile/${userId}/users`}  className={classes.link}>
-        <ListItem  button> 
-        <ButtonBase>
-          <ListItemIcon>
-            <AssignmentInd />
-          </ListItemIcon>
-          <ListItemText  primary="Users" />
-        </ButtonBase>
-        </ListItem>
-      </Link>
-      <Link to={`/private/profile/${userId}/orders`} className={classes.link}>
-        <ListItem divider button> 
+        <Divider/>
+        <Link to={`${url}/dashboard`}  className={classes.link}>
+          <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>
-              <ShoppingCart />
+              <Dashboard />
             </ListItemIcon>
-            <ListItemText primary="Orders"/>
+            <ListItemText  primary="Dashboard" />
+          </ButtonBase>
+          </ListItem>
+        </Link>
+        <Link to={`${url}/users`}  className={classes.link}>
+          <ListItem  button> 
+          <ButtonBase>
+            <ListItemIcon>
+              <AssignmentInd />
+            </ListItemIcon>
+            <ListItemText  primary="Users" />
+          </ButtonBase>
+          </ListItem>
+        </Link>
+        <Link to={`${url}/orders`} className={classes.link}>
+          <ListItem divider button> 
+            <ButtonBase>
+              <ListItemIcon>
+                <ShoppingCart />
+              </ListItemIcon>
+              <ListItemText primary="Orders"/>
+            </ButtonBase>
+          </ListItem>
+        </Link> 
+        <Link to={`${url}/categories`}  className={classes.link}>
+          <ListItem  button> 
+          <ButtonBase>
+            <ListItemIcon>
+              <NoteAdd />
+            </ListItemIcon>
+            <ListItemText primary="Categories"/>
+          </ButtonBase>
+          </ListItem>
+        </Link>
+        <Link to={`${url}/products`}  className={classes.link}>
+          <ListItem  button> 
+          <ButtonBase>
+            <ListItemIcon>
+              <AddShoppingCart />
+            </ListItemIcon>
+            <ListItemText primary="Products"/>
+            </ButtonBase>
+          </ListItem>
+        </Link>
+        <ListItem onClick={logOut} button> 
+          <ButtonBase> 
+            <ListItemIcon>
+              <ExitToApp/>
+            </ListItemIcon>
+            <ListItemText primary="Logout"/>
           </ButtonBase>
         </ListItem>
-      </Link> 
-      <Link to={`/private/profile/${userId}/categories`}  className={classes.link}>
-        <ListItem  button> 
-        <ButtonBase>
-          <ListItemIcon>
-            <NoteAdd />
-          </ListItemIcon>
-          <ListItemText primary="Categories"/>
-        </ButtonBase>
-        </ListItem>
-      </Link>
-      <Link to={`/private/profile/${userId}/products`}  className={classes.link}>
-        <ListItem  button> 
-        <ButtonBase>
-          <ListItemIcon>
-            <AddShoppingCart />
-          </ListItemIcon>
-          <ListItemText primary="Products"/>
-          </ButtonBase>
-        </ListItem>
-      </Link>
-      <ListItem onClick={logOut} button> 
-        <ButtonBase> 
-          <ListItemIcon>
-            <ExitToApp/>
-          </ListItemIcon>
-          <ListItemText primary="Logout"/>
-        </ButtonBase>
-      </ListItem>
-      
       </List>
     </div>
   )

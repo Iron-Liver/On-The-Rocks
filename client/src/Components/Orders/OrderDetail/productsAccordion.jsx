@@ -59,7 +59,7 @@ const ProductsAccordion = ({ order }) => {
       </AccordionSummary>
       {order.order_products &&
         order.order_products.map((order) => (
-          <>
+          <div key={Math.random()}>
             {order.product ? (
               <AccordionDetails
                 key={`${order.product.id}${order.id}`}
@@ -141,7 +141,7 @@ const ProductsAccordion = ({ order }) => {
                 </div>
               </AccordionDetails>
             )}
-          </>
+          </div>
         ))}
     </Accordion>
   );
