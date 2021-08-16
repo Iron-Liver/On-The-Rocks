@@ -27,11 +27,11 @@ server.use(
     cookieSession({
         maxAge: 24 * 60 * 60 * 1000,
         secret: SECRET_KEY,
-        path: '/',
+        // path: '/',
         httpOnly: true,
         domain: 'https://on-the-rocks.vercel.app',
         secure: true,
-        sameSite: 'none'
+        // sameSite: 'none'
         // secureProxy: true
     })
 );
