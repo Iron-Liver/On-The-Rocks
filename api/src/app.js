@@ -37,8 +37,8 @@ server.use(
         // path: '/',
         // httpOnly: true,
         domain: '.herokuapp.com',
-        secure: true,
-        sameSite: 'none'
+        // secure: true,
+        // sameSite: 'none'
         // secureProxy: true
     })
 );
