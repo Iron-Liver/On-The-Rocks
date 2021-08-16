@@ -1,11 +1,11 @@
 const isLogedIn = (req,res,next) => {
-    console.log('req',req)
-    console.log(req.isAuthenticated())
-    if(req.isAuthenticated()){
-        next();
-    } else{
-        res.redirect("/auth/login");
-        next();
+    try {
+        if(req.isAuthenticated()){
+        } else{
+            res.redirect("/auth/login");
+        }
+    } catch (e) {
+        console.log(e.message)
     }
 }
 
