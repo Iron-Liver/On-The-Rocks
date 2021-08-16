@@ -2,13 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
-import { getProductById } from "../../Redux/Products/productsActions"
-import { Card, CardContent, CardMedia, Typography, Button, Grid, Box, Select, FormControl,MenuItem, InputLabel} from "@material-ui/core";
-import { ShoppingCart } from '@material-ui/icons';
-import Rating from '@material-ui/lab/Rating';
-import { addProductCart } from '../../Redux/Cart/cartActions';
-import swal from "sweetalert";
-import { getProductReviews } from "../../Redux/Reviews/reviewActions";
 import {
     Card,
     CardContent,
@@ -24,7 +17,10 @@ import {
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
-import jwt from 'jsonwebtoken'
+import { addProductCart } from "../../Redux/Cart/cartActions";
+import swal from "sweetalert";
+import { getProductReviews } from "../../Redux/Reviews/reviewActions";
+import jwt from "jsonwebtoken";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
 
@@ -90,9 +86,12 @@ const useStyles = makeStyles((theme) => ({
 const ProductDetail = () => {
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
-    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
-    jwt.verify(JSON.parse(localStorage.getItem('token')), 
-    process.env.REACT_APP_SECRET_KEY) : null
+    const currentUser = JSON.parse(localStorage.getItem("token"))
+        ? jwt.verify(
+              JSON.parse(localStorage.getItem("token")),
+              process.env.REACT_APP_SECRET_KEY
+          )
+        : null;
     const { id } = useParams();
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
@@ -115,104 +114,32 @@ const ProductDetail = () => {
         (async function () {
             await dispatch(getProductReviews(id));
         })();
-    }, [Products,dispatch,id]);
+    }, [Products, dispatch, id]);
 
-    useEffect(() => {}, [Products,reviews]);
+    useEffect(() => {}, [Products, reviews]);
 
-    function onSubmit(e){
-    let date = JSON.parse(localStorage.getItem('data')) 
-    let data = date.filter(e => e.id === spirits[0].id)
-    if (date.length > 0 && data.length > 0){
-         swal("The product is already in the cart!")}
-    else{
-        if (quant > 0){
-            addProductCart({
-               units: quant,
-               id: spirits[0].id,
-               price: spirits[0].price * quant,
-               image: spirits[0].image,
-               name: spirits[0].name})
-           swal("The product was added to the cart!")   
-        } else{
-           swal("Please enter a valid unit")
+    function onSubmit(e) {
+        let data = JSON.parse(localStorage.getItem("data"));
+        let filteredData = data?.filter((e) => e.id === liqueur.id);
+        if (filteredData?.length > 0 && data?.length > 0) {
+            swal("The product is already in the cart!");
+        } else {
+            if (quant > 0) {
+                addProductCart({
+                    units: quant,
+                    id: liqueur.id,
+                    price: liqueur.price * quant,
+                    image: liqueur.image,
+                    name: liqueur.name,
+                });
+                swal("The product was added to the cart!");
+            } else {
+                swal("Please enter a valid unit");
+            }
         }
     }
-    }
-    
-    return (
 
-        <Card className={classes.root}>
-            <div className={classes.divimage}>
-            <CardMedia
-                className={classes.cover}
-                image={spirits[0].image}
-            />
-            </div>
-            <div className={classes.details}>
-                <CardContent className={classes.content}>
-                    <Grid item className={classes.cont1}>
-                        <Typography  variant="h4">
-                            {spirits[0].name}
-                        </Typography>
-                        <Typography component="h5" variant="h5">
-                            ${spirits[0].price}
-                        </Typography>
-                        <Typography component="h5" variant="h5">
-                            {spirits[0].brand}
-                        </Typography>
-                    </Grid>
-                    <Typography variant="h6" color="textSecondary">
-                        {spirits[0].description}
-                    </Typography>
-                </CardContent>
-                <div className={classes.controls}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                        startIcon={<ShoppingCart className={classes.cartIcon} />}
-                        onClick= {(e) => onSubmit(e)} 
-                    >
-                        <h3>ADD TO CART</h3>
-                    </Button>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="Quantity">Quantity</InputLabel>
-                        <Select
-                            labelId="Quantity"
-                            id="Quantity"
-                            value={quant}
-                            onChange={handleChange}
-                            label="Quantity"                            
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                            <MenuItem value={4}>4</MenuItem>
-                            <MenuItem value={5}>5</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-                <div className={classes.review}>
-                    <Box component="fieldset" mb={3} borderColor="transparent">
-                        <Typography component="legend">Review</Typography>
-                        <Rating
-                            name="review product"
-                            value={value}
-                            size="large"
-                            onChange={(event, newValue) => {
-                                setValue(newValue);
-                            }}
-                        />
-                    </Box>
-                </div>
-            </div>
-        </Card>
-    )
-}
-=======
+    return (
         <>
             {liqueur ? (
                 <>
@@ -240,7 +167,9 @@ const ProductDetail = () => {
                                                 name="review product"
                                                 value={
                                                     reviews.length > 0
-                                                        ? calculateStars(reviews)
+                                                        ? calculateStars(
+                                                              reviews
+                                                          )
                                                         : 0
                                                 }
                                                 precision={0.5}
@@ -272,6 +201,7 @@ const ProductDetail = () => {
                                             className={classes.cartIcon}
                                         />
                                     }
+                                    onClick={(e) => onSubmit(e)}
                                 >
                                     <h3>ADD TO CART</h3>
                                 </Button>
@@ -303,8 +233,8 @@ const ProductDetail = () => {
                         </div>
                     </Card>
 
-                    <AddProductReview prodId={id} userId={currentUser?.id}/>
-                    <ProductReviewCard reviews={reviews} prodId={id}/>
+                    {currentUser && (<AddProductReview prodId={id} userId={currentUser?.id} />)}
+                    <ProductReviewCard reviews={reviews} prodId={id} />
                 </>
             ) : (
                 <Typography variant="h1" align="center">
@@ -315,6 +245,5 @@ const ProductDetail = () => {
         </>
     );
 };
-
 
 export default ProductDetail;

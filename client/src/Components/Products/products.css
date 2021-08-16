@@ -110,7 +110,8 @@
   margin-right: 10px;
 }
 
-.containerproducts .card .contentBx a {
+.containerproducts .card .contentBx button {
+  cursor: pointer;
   display: inline-block;
   padding: 10px 20px;
   background: #fff;
@@ -124,7 +125,7 @@
   margin-top: 0;
 }
 
-.containerproducts .card:hover .contentBx a {
+.containerproducts .card:hover .contentBx button {
   opacity: 1;
   transform: translateY(0px);
   transition-delay: 0.6s;

@@ -57,16 +57,16 @@ const Filters = () => {
             </Grid>
             <Grid item >
                 <div>
-                        <h4>Order by categories</h4>
+                        <h4 style={{color: "white"}}>Order by categories</h4>
                     <select onChange={handleSelect}>
                         {
                             categoryes && categoryes.map(category => 
-                                <option value={category.name}>{category.name}</option>
+                                <option value={category.name} key={category.name}>{category.name}</option>
                             )
                         }
                     </select>
                 </div>
-                <h4>Order by Price</h4>
+                <h4 style={{color: "white"}}>Order by Price</h4>
                 <Button size="small" className={classes.button} variant="contained" color="primary" onClick={() => orderByPrice("MAX")}>
                     HIGHER 
                 </Button>
