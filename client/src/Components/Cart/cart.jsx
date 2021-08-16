@@ -10,6 +10,7 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
+import CreateOrder from '../Orders/CreateOrder/createOrder'
 
 const useStyles = makeStyles((theme) => ({
     details: {
@@ -156,6 +157,7 @@ export function Cart() {
             <Typography component="h5" variant="h5">
                 Total: ${total}
             </Typography>
+            <CreateOrder/>
         </CardContent>
     );
 }
