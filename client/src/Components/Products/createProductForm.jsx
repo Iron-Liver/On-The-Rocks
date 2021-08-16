@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Grid, Button, TextField, Chip, Select,FormControl, MenuItem, InputLabel, Input  } from '@material-ui/core'
+import { Grid, Button, TextField, Chip, Select, FormControl, MenuItem, InputLabel, Input } from '@material-ui/core'
 import { Label, Description, Image, Crop, Dns, FormatListNumbered, MonetizationOn, Category } from '@material-ui/icons';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
@@ -27,10 +27,11 @@ export const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(2),
 	},
 	formControl: {
-		display: 'flex',
 		margin: theme.spacing(1),
 		minWidth: 120,
-		maxWidth: 182,
+		maxWidth: 180,
+		width: 500,
+
 	},
 	last: {
 		padding: 8,
@@ -109,9 +110,9 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 		<ThemeProvider theme={theme}>
 			<div className='extContCAF'>
 				<form noValidate autoComplete="off" >
-					<h1 className={classes.title}>Create Product</h1>
 					<Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
 						<Grid >
+							<h1 className={classes.title}>Create Product</h1>
 							<Grid container spacing={1} alignItems="center">
 								<Grid item >
 									<Label />
@@ -163,8 +164,11 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 									/>
 								</Grid>
 							</Grid>
-							
+
 							<Grid container spacing={1}>
+								<Grid item>
+									<Category />
+								</Grid>
 								<FormControl className={classes.formControl}>
 									<InputLabel id="demo-mutiple-chip-label">Category</InputLabel>
 									<Select
@@ -176,27 +180,27 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 										onChange={handleInputChange}
 										input={<Input id="select-multiple-chip" />}
 										renderValue={(selected) => (
-											<div className={classes.chips}>																							
+											<div className={classes.chips}>
 												{categories?.map((value) => (
-													selected.map( e => value.id === e ?
-													
-													<Chip key={e} label={value.name} className={classes.chip} />
-													
-													: null
-												)))}
+													selected.map(e => value.id === e ?
+
+														<Chip key={e} label={value.name} className={classes.chip} />
+
+														: null
+													)))}
 											</div>
 										)}
 										MenuProps={MenuProps}
 									>
 										{categories?.map((category) => (
-											<MenuItem 
+											<MenuItem
 												key={category.id}
 												value={category.id}
 												style={getStyles(category.id, input.categories, theme)}
 											>
 												{category.name}
 											</MenuItem>
-												
+
 										))}
 									</Select>
 								</FormControl>

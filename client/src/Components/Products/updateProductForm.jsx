@@ -30,6 +30,7 @@ export const useStyles = makeStyles((theme) => ({
 	formControl: {
 		margin: theme.spacing(1),
 		minWidth: 120,
+		maxWidth: 182,
 		width: 500,
 	},
 	last: {
@@ -106,9 +107,9 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 		<ThemeProvider theme={theme}>
 			<div className='extContCAF'>
 				<form noValidate autoComplete="off" >
-					<h1 className={classes.title}>Update Product</h1>
 					<Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
 						<Grid >
+							<h1 className={classes.title}>Update Product</h1>
 							<Grid container spacing={1} alignItems="center">
 								<Grid item >
 									<Label />
@@ -161,23 +162,10 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 								</Grid>
 							</Grid>
 
-							{/* <Grid container spacing={1} alignItems="center">
+							<Grid container spacing={1}>
 								<Grid item>
 									<Category />
 								</Grid>
-								<Grid item>
-									<TextField
-										error={error["category"]}
-										helperText={[helperText["category"]]}
-										id="category"
-										label="Category"
-										name='category'
-										value={input.category}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid> */}
-							<Grid container spacing={1}>
 								<FormControl className={classes.formControl}>
 									<InputLabel id="demo-mutiple-chip-label">Category</InputLabel>
 									<Select
