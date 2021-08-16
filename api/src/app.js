@@ -28,7 +28,7 @@ server.use(
         maxAge: 24 * 60 * 60 * 1000,
         keys: [SECRET_KEY],
         domain: 'on-the-rocks.vercel.app',
-        // secure: true,
+        secure: true,
     })
 );
 
