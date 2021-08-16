@@ -27,8 +27,8 @@ server.use(
     cookieSession({
         maxAge: 24 * 60 * 60 * 1000,
         keys: [SECRET_KEY],
-        domain: CLIENT_DOMAIN,
-        secure: true,
+        domain: 'on-the-rocks.vercel.app',
+        // secure: true,
     })
 );
 
