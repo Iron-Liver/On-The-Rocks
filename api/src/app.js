@@ -31,8 +31,9 @@ server.use(session({
     resave: false,
     cookie: {
         httpOnly: false,
-        secure: false,
-        maxAge: 1000 * 60 * 60 * 24 * 7 
+        secure: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        sameSite: 'none'
     }
 }));
 // server.use(
