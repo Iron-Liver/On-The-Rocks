@@ -182,6 +182,7 @@ const Order = ({ order, setOrderStatus }) => {
                   startIcon={<Edit />}
                   color="primary"
                   disableElevation
+                  disabled={order.status === "pending"}
                 >
                   SET STATUS
                 </Button>
@@ -264,6 +265,7 @@ const Order = ({ order, setOrderStatus }) => {
                   startIcon={<Edit />}
                   disableElevation
                   color="primary"
+                  disabled={order.status === "pending"}
                 >
                   SET STATUS
                 </Button>

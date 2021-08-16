@@ -56,28 +56,23 @@ const CreateOrder = () => {
        ...state1, ...state2,
       id: currentUser.id,
       paymentMethod: 'mercadopago' ,
-      total: 300, 
-      cart: [
-      {
-        units: 1, 
-        price: 1, 
-        id: 2
-      },
-      // {
-      //   units: 2, 
-      //   price: 50, 
-      //   id: 4
-      // },{
-      //   units: 4, 
-      //   price: 35, 
-      //   id: 3
-      // }
-    ]
+      total: JSON.parse(localStorage.getItem('data')).reduce((acc, el) => {
+        return acc = acc + el.price * el.units
+      }, 0).toFixed(2), 
+      cart: JSON.parse(localStorage.getItem('data')).map(({id, units, price}) => {
+        return {
+          id, 
+          units, 
+          price
+        }
+      })
     }
     try {
-      console.log(order);
       const { data } = await axios.post('/order/addOrder', order);
-      console.log(data)
+      if(data) {
+        localStorage.removeItem("data");
+      }
+      openCloseModal()
       history.push(`/mercadopago/${data.orderId}`);
     } catch (err) {
       console.error(err) 
@@ -98,21 +93,38 @@ const CreateOrder = () => {
 
 {/*         
 <div class="center">
-                   <p className="pe">Socials :</p>
-                      <div id="social-test">
-                      <ul class="social">
-                        <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-twitter" aria-hidden="true"></i>
-                      </li>
-                        <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-github" aria-hidden="true"></i>
-                      </li>
-                      </ul>
-                      </div>
-                    </div> */}
-
-        <Button onClick={SubmitForm}> pagar </Button>
-       <Button color="primary" variant="outlined" onClick={openCloseModal}> Pay </Button>
+  <p className="pe">Socials :</p>
+  <div id="social-test">
+    <ul class="social">
+      <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+      <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
+      <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
+      <li><i class="fa fa-github" aria-hidden="true"></i></li>
+    </ul>
+  </div>
+</div> */}
+      {
+        currentUser ? (
+          JSON.parse(localStorage.getItem('data')) && 
+            !!JSON.parse(localStorage.getItem('data')).length &&
+              <Button 
+                color="primary" 
+                variant="outlined" 
+                onClick={openCloseModal}
+              > 
+                Pay 
+              </Button>
+        ) : (
+          <Link to="/login">
+            <Button 
+              color="primary" 
+              variant="outlined"
+            > 
+              Login 
+            </Button> 
+          </Link>
+        )
+      }
         <Modal
         closeAfterTransition
         open={modal}

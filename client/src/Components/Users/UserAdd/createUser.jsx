@@ -12,7 +12,7 @@ const CreateUser = (props) => {
 	// const next = new URLSearchParams(search).get('next');
 
 	const dispatch = useDispatch();
-	const {userDetail} = useSelector(state => state.UserReducer);
+	const {userDetail} = useSelector(state => state.userReducer);
 
 	var wipedInput = {
 		name: '',

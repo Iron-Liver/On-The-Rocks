@@ -44,7 +44,7 @@ export default function DrawerListUser() {
   const classes = useStyles(theme);
   const history = useHistory();
   const dispatch = useDispatch();
-  const userDetail = useSelector(state => state.UserReducer.userDetail);
+  const userDetail = useSelector(state => state.userReducer.userDetail);
   const { url } = useRouteMatch();
 
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 

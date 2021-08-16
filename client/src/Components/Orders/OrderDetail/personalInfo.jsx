@@ -145,6 +145,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                   onClick={handleClick}
                   startIcon={<Edit />}
                   disableElevation
+                  disabled={order.status === "pending"}
                 >
                   SET STATUS
                 </Button>
@@ -158,7 +159,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                 >
                   <MenuItem
                     id="created"
-                    disabled={orderStatus === "created"}
+                    disabled={order.status === "created" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -166,7 +167,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="processing"
-                    disabled={orderStatus === "processing"}
+                    disabled={order.status === "processing" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -174,7 +175,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="completed"
-                    disabled={orderStatus === "completed"}
+                    disabled={order.status === "completed" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >
@@ -182,7 +183,7 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                   </MenuItem>
                   <MenuItem
                     id="cancelled"
-                    disabled={orderStatus === "cancelled"}
+                    disabled={order.status === "cancelled" || order.status === "pending"}
                     onClick={handleStatusClick}
                     className={classes.menuItem}
                   >

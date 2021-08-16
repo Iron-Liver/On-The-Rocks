@@ -62,7 +62,7 @@ export default function DrawerList() {
   const classes = useStyles();
   const history = useHistory();
   const { url } = useRouteMatch();
-  const userDetail = useSelector(state => state.UserReducer.userDetail);
+  const userDetail = useSelector(state => state.userReducer.userDetail);
 
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 

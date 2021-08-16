@@ -8,9 +8,10 @@ import {
   AccordionDetails,
   Hidden,
   makeStyles,
-  Button
+  Button,
+  Tooltip
 } from "@material-ui/core";
-import { ExpandMore, Payment} from "@material-ui/icons";
+import { ExpandMore, Payment, Help, Message} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 
@@ -46,6 +47,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const message = {
+  processing: `Payment is being processed, we 
+    will receive your order when it is approved`,
+  cancelled: `The pay has been rejected, or we 
+    cancelled the order for problems with it, 
+    you can try to make it again.`,
+  pending: `This order is not finished, you can 
+    pay it now.`,
+  created: `We have your order and we are working 
+    on it, you will receive an email when it 
+    is finished.`,
+  completed: `The order has been finished, 
+    you can pick it at our shop.`
+};
+
 const Summary = ({ order, orderStatus }) => {
 
   const [summaryExpanded, setSummaryExpanded] = useState(false);
@@ -73,6 +89,9 @@ const Summary = ({ order, orderStatus }) => {
                     {orderStatus &&
                       orderStatus[0].toUpperCase() + orderStatus.slice(1)}
                   </Typography>
+                  <Tooltip title={message[orderStatus]}>
+                      <Help style={{width: "15px", position: "relative", top: "6px"}}/>
+                  </Tooltip>
                   {
                     orderStatus === 'pending' && currentUser.id === order.userId &&
                     <Link to={`/${order.paymentMethod.toLowerCase()}/${order.id}`}>
@@ -83,7 +102,11 @@ const Summary = ({ order, orderStatus }) => {
                 <br />
                 <div style={{ padding: "0 20px", display: "flex" }}>
                   <Typography style={{ flexGrow: "1" }}>Payment method:</Typography>
-                  <Typography>{order.paymentMethod}</Typography>
+                  <Typography>
+                    {order.paymentMethod && 
+                      `${order.paymentMethod[0].toUpperCase()}${order?.paymentMethod.slice(1)}`
+                    }
+                  </Typography>
                 </div>
                 <br />
                 <div>

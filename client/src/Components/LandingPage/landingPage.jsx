@@ -26,7 +26,7 @@ export const landingPage = () => {
         </div>
         <div className="vox"></div>
       
-        <div className="slider">
+        {/* <div className="slider">
         <Swiper navigation={true}>
           <SwiperSlide >
             <img src={image1} className="img1" alt='img1'></img>
@@ -36,7 +36,7 @@ export const landingPage = () => {
           </SwiperSlide>
         </Swiper>
 
-        </div>
+        </div> */}
 
         </div>
     )

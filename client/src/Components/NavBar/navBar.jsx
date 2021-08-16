@@ -17,8 +17,8 @@ import jwt from 'jsonwebtoken'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    outline: 'none'
-   
+    outline: 'none',
+    backgroundColor: "red"
   },
   appBar: {
     [theme.breakpoints.up("sm")]: {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
   toolbar: {
     width: '100%',
-    maxWidth: '1300px',
+    background: "#131313"
   },
   blank: theme.mixins.toolbar,
   drawerPaper: {
@@ -76,8 +76,6 @@ function NavBar(props) {
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
-  // const estado = useSelector(state => state.currentUser)
-  // const { id, isAdmin } = JSON.parse(localStorage.getItem('profile'));
 
   const handleLogOut = () => {
     dispatch(logOutUser());
@@ -152,16 +150,7 @@ function NavBar(props) {
               <ShoppingCart className={classes.icons}/>
             </IconButton>
 
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerMenu}
-              className={`${classes.menuButton} ${classes.mobile}`}
-            >
-              <Menu  />
-            </IconButton>
-              <Hidden smDown>  
+              <Hidden xsDown>  
                   <IconButton
                     color="inherit"
                     aria-label="open drawer"
@@ -174,7 +163,7 @@ function NavBar(props) {
               </Hidden>
 
            
-            <Hidden smDown>  
+            <Hidden xsDown>  
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
@@ -186,6 +175,15 @@ function NavBar(props) {
                 </IconButton>
             </Hidden>
 
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerMenu}
+              className={classes.menuButton}
+            >
+              <Menu  />
+            </IconButton>
           </Container>
         </Toolbar>
       </AppBar>
@@ -205,7 +203,7 @@ function NavBar(props) {
               keepMounted: true // Better open performance on mobile.
             }}
           >
-            <MenuList  />
+            <MenuList />
           </Drawer>
           <Drawer
             container={container}
@@ -235,9 +233,10 @@ function NavBar(props) {
               keepMounted: true // Better open performance on mobile.
             }}
           >
-            <CartList/>
+            <CartList handleDrawerCart={handleDrawerCart}/>
           </Drawer>
         </Hidden>
+      {/* <main> */}
         <div className={classes.blank} />
     </div>
 

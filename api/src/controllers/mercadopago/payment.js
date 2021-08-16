@@ -1,5 +1,6 @@
-const { Order, Payment_detail, Order_products, Product } = require("../../db");
-const { FRONT } = process.env;
+const { Order, Payment_detail, Order_products, Product, User } = require("../../db");
+const { FRONT, GMAIL_APP_EMAIL } = process.env;
+const { transporter } = require("../../utils/nodemailer");
 
 module.exports = async (req, res, next) => {
 
@@ -56,7 +57,7 @@ module.exports = async (req, res, next) => {
         where: {
           id: external_reference
         },
-        include: [Order_products]
+        include: [Order_products, User]
       });
       
       if(order.status === "processing") {
@@ -74,9 +75,19 @@ module.exports = async (req, res, next) => {
         //     }
         //   });
         // });
-        // order.status = "created";
-        // order.save();
+        order.status = "created";
+        order.save();
       }
+
+      console.log(order.user.email);
+      
+      transporter.sendMail({
+        from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
+        to: order.user.email, // list of receivers
+        subject: "Order successfully created", // Subject line
+        text: "The payment is done and we received your order, we will be working on it from now, Thank you!", // plain text body
+        html: `<b>click on the link to see your order: <a href="${FRONT}/order/${order.id}"> HERE </a> </b>`, // html body
+      });
     } else {
 
       const order = await Order.findOne({

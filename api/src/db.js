@@ -8,12 +8,12 @@ const path = require("path");
 let sequelize =
     process.env.NODE_ENV === "production"
     ? new Sequelize({
-        database: "none",
+        database: DB_NAME,
         dialect: "postgres",
-        host: "none",
+        host: DB_HOST,
         port: 5432,
-        username: "none",
-        password: "none",
+        username: DB_USER,
+        password: DB_PASSWORD,
         pool: {
             max: 3,
             min: 1,
@@ -56,20 +56,23 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Order, Category, Product, Order_products, Payment_detail } =
+const { User, Order, Category, Product, Order_products, Payment_detail, Review } =
   sequelize.models;
 
 User.hasMany(Order);
 Order.belongsTo(User);
 
+User.belongsToMany(Product, {through: Review});
+Product.belongsToMany(User, {through: Review});
+
 Product.hasMany(Order_products);
 Order_products.belongsTo(Product, {
-  foreignKey: "productId",
+    foreignKey: "productId",
 });
 
 Order.hasMany(Order_products);
 Order_products.belongsTo(Order, {
-  foreignKey: "orderId",
+    foreignKey: "orderId",
 });
 
 Order.hasOne(Payment_detail);
