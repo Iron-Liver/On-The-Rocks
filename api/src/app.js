@@ -28,8 +28,8 @@ server.use(
         maxAge: 24 * 60 * 60 * 1000,
         keys: [SECRET_KEY],
         path: '/',
-        // domain: 'https://on-the-rocks.vercel.app/',
-        // secure: true,
+        domain: '.on-the-rocks.vercel.app/',
+        secure: true,
         // secureProxy: true
     })
 );
