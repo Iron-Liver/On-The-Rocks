@@ -15,7 +15,7 @@ const UpdateProduct = ({ match }) => {
         name: "",
         description: "",
         size: "",
-        category: "",
+        categories: [],
         brand: "",
         sku: "",
         price: "",
@@ -35,7 +35,9 @@ const UpdateProduct = ({ match }) => {
     };
     useEffect(() => {
         async function setProduct() {
-            let product = Products.filter(e => e.id === Number(id))
+            let product = Products?.filter(e => e.id === Number(id))
+            let categoriesId = product[0].categories?.map( cat => cat.id)
+            product[0].categories = categoriesId;
             await setInput(product[0])
         }
         if (Products) setProduct();

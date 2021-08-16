@@ -1,9 +1,12 @@
-import { React, useState } from 'react'
-import { Grid, Button, TextField } from '@material-ui/core'
+import { React, useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Grid, Button, TextField, Chip, Select, FormControl, MenuItem, InputLabel, Input } from '@material-ui/core'
 import { Label, Description, Image, Crop, Dns, FormatListNumbered, MonetizationOn, Category } from '@material-ui/icons';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
+import { getAllCategories } from '../../Redux/Category/categoryActions'
+
 
 export const useStyles = makeStyles((theme) => ({
 	root: {
@@ -31,12 +34,36 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	last: {
 		padding: 8,
-	}
+	},
+	chips: {
+		display: 'flex',
+		flexWrap: 'wrap',
+	},
+	chip: {
+		margin: 2,
+	},
 }));
+
+function getStyles(id, category, theme) {
+	return {
+		fontWeight:
+			category.indexOf(id) === -1
+				? theme.typography.fontWeightRegular
+				: theme.typography.fontWeightMedium,
+	};
+}
 
 const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const { categories } = useSelector(state => state.categoryReducer);
+
+	useEffect(() => {
+		dispatch(getAllCategories())
+	},
+		// eslint-disable-next-line
+		[])
 
 	const [error, setError] = useState({//Control the error red border of the inputs
 		productName: false,
@@ -59,6 +86,14 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 		image: "Enter an image-url"
 	})
 
+	const MenuProps = {
+		PaperProps: {
+			style: {
+				maxHeight: 48 * 4.5 + 8,
+				width: 250,
+			},
+		},
+	};
 	const handleInputChange = async (e) => {
 		await setInput({
 			...input,
@@ -126,7 +161,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 								</Grid>
 							</Grid>
 
-							<Grid container spacing={1} alignItems="center">
+							{/* <Grid container spacing={1} alignItems="center">
 								<Grid item>
 									<Category />
 								</Grid>
@@ -141,6 +176,45 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 										onChange={handleInputChange}
 									/>
 								</Grid>
+							</Grid> */}
+							<Grid container spacing={1}>
+								<FormControl className={classes.formControl}>
+									<InputLabel id="demo-mutiple-chip-label">Category</InputLabel>
+									<Select
+										labelId="demo-mutiple-chip-label"
+										id="demo-mutiple-chip"
+										multiple
+										value={input.categories}
+										name='categories'
+										onChange={handleInputChange}
+										input={<Input id="select-multiple-chip" />}
+										renderValue={(selected) => (
+											<div className={classes.chips}>
+
+												{categories?.map((value) => (
+													selected.map(e => value.id === e ?
+
+														<Chip key={e} label={value.name} className={classes.chip} />
+
+														: null
+													)))}
+
+											</div>
+										)}
+										MenuProps={MenuProps}
+									>
+										{categories?.map((category) => (
+											<MenuItem
+												key={category.id}
+												value={category.id}
+												style={getStyles(category.id, input.categories, theme)}
+											>
+												{category.name}
+											</MenuItem>
+
+										))}
+									</Select>
+								</FormControl>
 							</Grid>
 
 							<Grid container spacing={1} alignItems="center">

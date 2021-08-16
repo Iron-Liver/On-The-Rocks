@@ -1,9 +1,11 @@
-import { React, useState } from 'react'
-import { Grid, Button, TextField } from '@material-ui/core'
+import { React, useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Grid, Button, TextField, Chip, Select,FormControl, MenuItem, InputLabel, Input  } from '@material-ui/core'
 import { Label, Description, Image, Crop, Dns, FormatListNumbered, MonetizationOn, Category } from '@material-ui/icons';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
+import { getAllCategories } from '../../Redux/Category/categoryActions'
 
 export const useStyles = makeStyles((theme) => ({
 	root: {
@@ -25,25 +27,60 @@ export const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(2),
 	},
 	formControl: {
+		display: 'flex',
 		margin: theme.spacing(1),
 		minWidth: 120,
-		width: 500,
+		maxWidth: 182,
 	},
 	last: {
 		padding: 8,
-	}
+	},
+	chips: {
+		display: 'flex',
+		flexWrap: 'wrap',
+	},
+	chip: {
+		margin: 2,
+	},
 }));
 
-const CreateProductForm = ({ input, setInput, handleSubmit, match, handleDelete }) => {
+const MenuProps = {
+	PaperProps: {
+		style: {
+			maxHeight: 48 * 4.5 + 8,
+			width: 250,
+		},
+	},
+};
+
+function getStyles(name, category, theme) {
+	return {
+		fontWeight:
+			category.indexOf(name) === -1
+				? theme.typography.fontWeightRegular
+				: theme.typography.fontWeightMedium,
+	};
+}
+
+const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const { categories } = useSelector(state => state.categoryReducer);
+
+	useEffect(() => {
+		dispatch(getAllCategories())
+	},
+		// eslint-disable-next-line
+		[])
+
 
 	const [error, setError] = useState({//Control the error red border of the inputs
 		productName: false,
 		description: false,
 		size: false,
 		brand: false,
-		category: false,
+		categories: false,
 		sku: false,
 		price: false,
 		image: false
@@ -52,18 +89,19 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match, handleDelete 
 		productName: "Enter a Name",
 		description: "Enter a description",
 		size: "Enter a size",
-		category: "Enter a category",
+		categories: "Enter a category",
 		brand: "Enter a brand",
 		sku: "Enter a sku",
 		price: "Enter the price",
 		image: "Enter an image-url"
-	})
+	});
 
 	const handleInputChange = async (e) => {
 		await setInput({
 			...input,
 			[e.target.name]: e.target.value,
 		});
+
 		Validate(e.target, error, setError, helperText, setHelperText)
 	};
 
@@ -125,23 +163,45 @@ const CreateProductForm = ({ input, setInput, handleSubmit, match, handleDelete 
 									/>
 								</Grid>
 							</Grid>
-
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<Category />
-								</Grid>
-								<Grid item>
-									<TextField
-										error={error["category"]}
-										helperText={[helperText["category"]]}
-										id="category"
-										label="Category"
-										name='category'
-										value={input.category}
+							
+							<Grid container spacing={1}>
+								<FormControl className={classes.formControl}>
+									<InputLabel id="demo-mutiple-chip-label">Category</InputLabel>
+									<Select
+										labelId="demo-mutiple-chip-label"
+										id="demo-mutiple-chip"
+										multiple
+										value={input.categories}
+										name='categories'
 										onChange={handleInputChange}
-									/>
-								</Grid>
+										input={<Input id="select-multiple-chip" />}
+										renderValue={(selected) => (
+											<div className={classes.chips}>																							
+												{categories?.map((value) => (
+													selected.map( e => value.id === e ?
+													
+													<Chip key={e} label={value.name} className={classes.chip} />
+													
+													: null
+												)))}
+											</div>
+										)}
+										MenuProps={MenuProps}
+									>
+										{categories?.map((category) => (
+											<MenuItem 
+												key={category.id}
+												value={category.id}
+												style={getStyles(category.id, input.categories, theme)}
+											>
+												{category.name}
+											</MenuItem>
+												
+										))}
+									</Select>
+								</FormControl>
 							</Grid>
+
 
 							<Grid container spacing={1} alignItems="center">
 								<Grid item>

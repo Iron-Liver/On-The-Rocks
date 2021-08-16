@@ -1,12 +1,18 @@
 const { Product } = require("../../db");
 
 module.exports = async (req, res, next) => {
-  let product = req.body;
+  const { name, description, size, stock, categories, image, brand, sku, price } = req.body;
+
+  console.log(req.body);
   try {
-    product = await Product.create({ ...product });
+    product = await Product.create({ name, description, size, image, stock, brand, sku, price });
+    console.log(product);
+    await product.setCategories(categories);
     return res.json(product);
-  } catch (err) {
-    res.send(['invalid inputs']).sendStatus(400), next();
-  }
+
+  } catch (error) {
+    next(error)
+    return res.send(['invalid inputs']).sendStatus(400)
+  };
 };
 
