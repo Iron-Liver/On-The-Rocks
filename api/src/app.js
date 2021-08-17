@@ -24,6 +24,7 @@ server.use(express.json({ limit: '50mb' }));
 server.set("trust proxy", 1);
 server.use(helmet())
 server.use(cors({ origin: CLIENT_DOMAIN, credentials: true }));
+
 // server.use(session({
 //     secret: SECRET_KEY,
 //     saveUninitialized: false,
@@ -32,13 +33,14 @@ server.use(cors({ origin: CLIENT_DOMAIN, credentials: true }));
 
 server.use(
     cookieSession({
+        // name: 'session',
         maxAge: 24 * 60 * 60 * 1000,
         secret: SECRET_KEY,
         // path: '/',
         // httpOnly: true,
-        domain: '.vercel.app',
-        secure: true,
-        sameSite: 'none'
+        // domain: '.vercel.com',
+        // secure: true,
+        // sameSite: 'none',
         // secureProxy: true
     })
 );
