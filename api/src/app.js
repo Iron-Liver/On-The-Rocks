@@ -38,7 +38,7 @@ server.use(
         secret: SECRET_KEY,
         path: '/',
         // httpOnly: true,
-        domain: '.vercel.com',
+        // domain: '.vercel.com',
         secure: true,
         sameSite: 'none',
         secureProxy: true
