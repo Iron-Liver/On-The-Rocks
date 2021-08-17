@@ -28,7 +28,7 @@ const Products = () => {
         <Filters/>
       </div>
             <div className="content">
-              {products.map(spirit => 
+              {products?.map(spirit => 
                   <ProductCard spirit={spirit} key={Math.random()}/>
               )}
             </div>

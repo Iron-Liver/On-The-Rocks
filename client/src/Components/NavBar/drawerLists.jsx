@@ -190,7 +190,7 @@ export const CartList = ({ handleDrawerCart }) => {
       <List component="nav">
         <ListItem button>
           <ListItemIcon>
-            <InboxIcon />
+            {/* <InboxIcon /> */}
           </ListItemIcon>
           <ListItemText primary="Should map cart" />
         </ListItem>

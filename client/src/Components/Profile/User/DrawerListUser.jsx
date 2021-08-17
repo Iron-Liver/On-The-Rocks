@@ -5,6 +5,7 @@ import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
 import theme from '../../../Utils/theme';
+import { jwt } from 'jsonwebtoken';
 
 const useStyles= makeStyles(theme => ({
   list: {
