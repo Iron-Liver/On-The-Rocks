@@ -22,7 +22,7 @@ const UserList = () => {
 		}
 	}));
 
-	const {users} = useSelector(state => state.UserReducer)
+	const {users} = useSelector(state => state.userReducer)
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	
@@ -35,7 +35,7 @@ const UserList = () => {
     const columns = [
         {field: 'id', headerName: '#', width: 90 },
 		{field: 'name', headerName: 'Name', width: 160},
-		{field: 'email', headerName: 'Email', width: 180},
+		{field: 'email', headerName: 'Email', width: 250},
 		{field: 'contact', headerName: 'Phone', width: 150 },
 		{
 			field: 'isDeleted', headerName: 'Status', width: 130, renderCell: params => {
@@ -59,23 +59,7 @@ const UserList = () => {
 					</ThemeProvider>
 				);
 			},
-		},
-		{
-			field: 'Detail',
-			headerName: 'DETAILS',
-			sortable: false,
-			width: 120,
-			disableClickEventBubbling: true,
-			renderCell: params => {
-				return (
-					<ThemeProvider theme={theme}>
-					<Link to={`/private/user/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">Details</Button>
-					</Link>
-					</ThemeProvider>
-				);
-			},
-		},
+		}
 	];
 
     return(

@@ -118,12 +118,6 @@ export function Cart() {
         state?.forEach((e) => (total = Number(total) + Number(e.price)));
     }
 
-    function removeProducts() {
-        localStorage.removeItem("data");
-        let data = JSON.parse(localStorage.getItem("data"));
-        setState(data);
-    }
-
     return (
         <CardContent className={classes.content}>
             {state?.map((e) => (

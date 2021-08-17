@@ -21,7 +21,6 @@ import {
   AccountCircle,
   Loyalty,
   ExitToApp,
-  ShoppingCart,
   ArrowForwardIos
 } from "@material-ui/icons";
 import Autocomplete from "@material-ui/lab/Autocomplete";

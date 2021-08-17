@@ -4,8 +4,7 @@ import { getProducts } from "../../Redux/Products/productsActions";
 import "./products.css";
 import ProductCard from "./productCard";
 import Filters from "./Filters";
-import { addProductCart } from "../../Redux/Cart/cartActions";
-import swal from "sweetalert";
+
 
 const Products = () => {
     const { FoundProds, Products } = useSelector(
@@ -31,23 +30,6 @@ const Products = () => {
         // eslint-disable-next-line
         []
     );
-
-    function onSubmit(e, id, image, name, price) {
-        let data = JSON.parse(localStorage.getItem("data"));
-        let filteredData = data?.filter((e) => e.id === id);
-        if (filteredData?.length > 0 && data?.length > 0) {
-            swal("The product is already in the cart!");
-        } else {
-            addProductCart({
-                units: 1,
-                id: id,
-                price: price,
-                image: image,
-                name: name,
-            });
-            swal("The product was added to the cart!");
-        }
-    }
 
     return (
         <div>
