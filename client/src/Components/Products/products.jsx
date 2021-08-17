@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { getProducts } from '../../Redux/Products/productsActions'
 import  './products.css';
-import Filters from './Filters';
 import ProductCard from './productCard';
+import Filters from './Filters';
 
 
 const Products = () => {
@@ -28,12 +28,16 @@ const Products = () => {
           <Filters/>
         </div>
         <div className="content">
-            {products.map(spirit => 
-                <ProductCard spirit={spirit} />
-            )}
+          {products.map(spirit => 
+          <ProductCard spirit={spirit} />
+          )}
+        </div>
+        <div className="content">
+          {products.map(spirit => 
+          <ProductCard spirit={spirit} key={Math.random()}/>
+          )}
         </div>
       </div>
-
     )
 }
 

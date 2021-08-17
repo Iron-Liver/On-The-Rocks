@@ -3,7 +3,6 @@ const initialState = {
     }
     
     const reducer = (state = initialState, action) =>{
-      console.log("entre al reducer")
       switch(action.type){
           case "GET_ITEMS":
              return {

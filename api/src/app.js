@@ -27,23 +27,15 @@ server.use(
     cookieSession({
         maxAge: 24 * 60 * 60 * 1000,
         keys: [SECRET_KEY],
+        path: '/',
+        domain: 'https://on-the-rocks.vercel.app/',
+        secure: true,
+        secureProxy: true
     })
 );
 
 server.use(passport.initialize());
 server.use(passport.session());
-
-// server.all('*', function (req, res, next) {
-//     passport.authenticate('bearer', function (err, user) {
-//       if (err) return next(err);
-//       if (user) {
-//         req.user = user;
-//       }
-//       return next();
-//     })(req, res, next);
-// });
-
-
 
 server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', `${CLIENT_DOMAIN}`);
