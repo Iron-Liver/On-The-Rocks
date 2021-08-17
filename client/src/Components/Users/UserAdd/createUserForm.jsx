@@ -55,7 +55,7 @@ const CreateUserForm = ({ input, setInput, handleSubmit}) => {
 
     return (
 		<ThemeProvider theme={theme}>
-        <div className= 'extContCAF'>
+        <div className= 'extContCAF' style={{color: "white"}}>
 			<form noValidate autoComplete="off" >
 			<h1 className={classes.title}>{window.location.href.includes("register") ? "Sign up" : "Create User"}</h1>
 			<Grid container direction="row" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>

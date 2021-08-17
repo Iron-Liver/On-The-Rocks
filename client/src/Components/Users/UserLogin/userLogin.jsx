@@ -8,8 +8,6 @@ import useFormStyles from '../../../Utils/formStyles'
 import GoogleButton from "react-google-button";
 import jwt from 'jsonwebtoken'
 import swal from 'sweetalert'
-import dotenv from 'dotenv';
-dotenv.config()
 
 export default function UserLogin() {
     const classes = useFormStyles()
@@ -46,7 +44,7 @@ export default function UserLogin() {
     const GoogleSSOHandler = async () => {
         let timer = null;
         const newWindow = window.open(
-            `${process.env.REACT_APP_API}/auth/login/google`,
+            `http://localhost:3001/auth/login/google`,
             "_blank",
             "width=500,height=600"
         );
@@ -75,7 +73,7 @@ export default function UserLogin() {
 	};
 
     return (
-        <div>
+        <div style={{color: "white"}}>
             {}
             <h1 className={classes.title}>Login</h1>
             <form noValidate autoComplete="off" > 
