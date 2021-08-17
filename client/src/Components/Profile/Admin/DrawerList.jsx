@@ -21,7 +21,7 @@ import {
   Dashboard  
 } from '@material-ui/icons';
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
-import { logOutUser, readUser } from '../../../Redux/Users/userActions';
+import { logOutUser, readUser } from '../../../Redux/Users/UserActions';
 import jwt from "jsonwebtoken";
 
 const useStyles= makeStyles(theme => ({

@@ -9,7 +9,7 @@ import {
   ListItem,
   ListItemText,
   TextField,
-  Button
+  Button,  
 } from "@material-ui/core";
 import {
   LocalBar,
@@ -27,9 +27,9 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {getProducts} from '../../Redux/Products/productsActions'
 import {FRONTEND} from '../../Utils/constants'
-
 import { makeStyles } from "@material-ui/core/styles";
 import { logOutUser } from '../../Redux/Users/UserActions';
+
 const useStyles = makeStyles((theme) => ({
     autocomplete:{
       '& .MuiAutocomplete-root':{
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom:'0',
       },
     },
-  },
+  
   root: {
     display: 'inline-flex',
     height: '75vh',

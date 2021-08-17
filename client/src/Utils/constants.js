@@ -25,3 +25,5 @@ export const FRONTEND = 'http://localhost:3000/';
 export const API_URL= 'http://localhost:3001/';
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
 export const UPDATE_STOCK = 'UPDATE_STOCK';
+export const GET_PRODUCT_REVIEWS = 'GET_PRODUCT_REVIEWS';
+
