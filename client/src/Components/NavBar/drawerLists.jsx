@@ -45,7 +45,74 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom:'0',
       },
     },
-    toolbar: theme.mixins.toolbar,
+  },
+  root: {
+    display: 'inline-flex',
+    height: '75vh',
+    width:'100%',
+    justifyContent: "space-evenly"
+
+},
+details: {
+    textAlign:'start',
+    width:'60%',
+    variant: "outlined",
+},
+content: {
+    width: '100%',
+    marginTop:'5%',
+    
+},
+
+cont1: {
+    marginBottom: 15,
+},
+
+cover: {
+    width: '100px',
+    height: '100px',
+      
+},
+divimage: {
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    width:'25%',
+},
+
+button: {
+    margin: theme.spacing(1),
+    width: 200,
+    height:55,
+},
+
+margin:{
+  position: "absolute", 
+  marginLeft: "70%"
+},
+review: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: "space-between",
+    paddingLeft: theme.spacing(2),
+    paddingBottom: theme.spacing(1),
+},
+formControl: {
+    margin: theme.spacing(1),
+    width: 110,
+},
+title:{
+  display: "flex",
+  marginLeft: '15px',
+  justifyContent: 'center',
+},
+selectEmpty: {
+    marginTop: theme.spacing(2),
+},
+  toolbar: theme.mixins.toolbar,
+icon:{
+  marginTop: "2%"
+}  
 }));
 
 export const MenuList = () => {   

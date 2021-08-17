@@ -149,12 +149,13 @@ export function UserUpdate({ input, setInput, handleSubmit }) {
 
     return(
             <>
+                
+                <form noValidate autoComplete="off" >
                 <h1 className={classes.title}>
                     {(adminAllowed && !window.location.href.includes("profile"))
                     ? "Update User"
                     : "My Profile"}
                     </h1>
-                <form noValidate autoComplete="off" >
                 <Grid container direction="row" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
                     <Grid item xs={6}>
                         <Grid container spacing={1} alignItems="center" justifyContent="center">

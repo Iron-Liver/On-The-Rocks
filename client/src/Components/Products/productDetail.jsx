@@ -51,6 +51,17 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 15,
         width: 200,
         height: 55,
+        backgroundColor: "black",
+        color: "white",
+            '&:hover': {
+                backgroundColor: "grey",
+                boxShadow: 'none',
+              },
+              '&:active': {
+                boxShadow: 'none',
+                backgroundColor: '#5dc1b9',
+              },
+            
     },
     review: {
         display: 'flex',
