@@ -6,11 +6,12 @@ import {
     Grid,
     ListItem,
     Button,
+    Box,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
-import CreateOrder from '../Orders/CreateOrder/createOrder'
+import CreateOrder from "../Orders/CreateOrder/createOrder";
 
 const useStyles = makeStyles((theme) => ({
     details: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
     cont1: {
         marginBottom: 15,
+        boxShadow: "",
     },
 
     cover: {
@@ -56,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     },
     sum: {
         display: "flex",
+    },
+    box: {
+        backgroundColor: "#5dc1b9",
+        justifyContent: "center",
     },
 }));
 
@@ -112,52 +118,76 @@ export function Cart() {
         state?.forEach((e) => (total = Number(total) + Number(e.price)));
     }
 
+    function removeProducts() {
+        localStorage.removeItem("data");
+        let data = JSON.parse(localStorage.getItem("data"));
+        setState(data);
+    }
+
     return (
         <CardContent className={classes.content}>
             {state?.map((e) => (
-                <ListItem button key={e.id}>
-                    <div className={classes.details}>
-                        <Grid item className={classes.cont1}>
-                            <IconButton
-                                aria-label="delete"
-                                className={classes.margin}
-                                onClick={() => removeProduct(e.id)}
-                            >
-                                <DeleteIcon fontSize="medium" />
-                            </IconButton>
-                            <CardMedia
-                                className={classes.cover}
-                                image={e.image}
-                            />
-                            <div className={classes.text}>
-                                <Typography>{e.name}</Typography>
-                                <div className={classes.sum}>
-                                    <Button
-                                        className={classes.button}
-                                        onClick={() => res(e.id)}
-                                    >
-                                        -
-                                    </Button>
-                                    <Grid>{e.units}</Grid>
-                                    <Button
-                                        className={classes.button}
-                                        onClick={() => sum(e.id)}
-                                    >
-                                        +
-                                    </Button>
+                <Box borderBottom={2}>
+                    <ListItem borderBottom={1} key={e.id}>
+                        <div className={classes.details}>
+                            <Grid item className={classes.cont1}>
+                                <IconButton
+                                    aria-label="delete"
+                                    className={classes.margin}
+                                    onClick={() => removeProduct(e.id)}
+                                >
+                                    <DeleteIcon fontSize="medium" />
+                                </IconButton>
+                                <CardMedia
+                                    className={classes.cover}
+                                    image={e.image}
+                                />
+                                <div className={classes.text}>
+                                    <Typography>{e.name}</Typography>
+                                    <div className={classes.sum}>
+                                        <Button
+                                            className={classes.button}
+                                            onClick={() => res(e.id)}
+                                        >
+                                            -
+                                        </Button>
+                                        <Grid>{e.units}</Grid>
+                                        <Button
+                                            className={classes.button}
+                                            onClick={() => sum(e.id)}
+                                        >
+                                            +
+                                        </Button>
+                                    </div>
+                                    <Typography component="h6" variant="h6">
+                                        SubTotal: ${e.price}
+                                    </Typography>
                                 </div>
-                                <Typography component="h6" variant="h6">
-                                    SubTotal: ${e.price}
-                                </Typography>
-                            </div>
-                        </Grid>
-                    </div>
-                </ListItem>
+                            </Grid>
+                        </div>
+                    </ListItem>
+                </Box>
             ))}
-            <Typography component="h5" variant="h5">
-                Total: ${total}
-            </Typography>
-            <CreateOrder/>
+            {total ? (
+                <Box className={classes.box}>
+                    <Typography
+                        className={classes.title}
+                        component="h5"
+                        variant="h5"
+                    >
+                        Total: ${total}
+                    </Typography>
+                </Box>
+            ) : (
+                <Typography
+                    className={classes.title}
+                    component="h5"
+                    variant="h5"
+                >
+                    There are no products in the cart.
+                </Typography>
+            )}
+            <CreateOrder />
         </CardContent>
     );
 }

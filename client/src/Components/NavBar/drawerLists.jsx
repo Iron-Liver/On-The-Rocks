@@ -21,6 +21,7 @@ import {
   AccountCircle,
   Loyalty,
   ExitToApp,
+  ShoppingCart,
   ArrowForwardIos
 } from "@material-ui/icons";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -108,6 +109,9 @@ selectEmpty: {
     marginTop: theme.spacing(2),
 },
   toolbar: theme.mixins.toolbar,
+icon:{
+  marginTop: "2%"
+}  
 }));
 
 
