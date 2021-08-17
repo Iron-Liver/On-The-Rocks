@@ -39,9 +39,9 @@ server.use(
         path: '/',
         // httpOnly: true,
         // domain: '.vercel.com',
-        secure: true,
-        sameSite: 'none',
-        secureProxy: true
+        // secure: true,
+        // sameSite: 'none',
+        // secureProxy: true
     })
 );
 
