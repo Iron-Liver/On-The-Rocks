@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './products.css';
-import { useDispatch } from 'react-redux';
 import { addProductCart } from '../../Redux/Cart/cartActions';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';

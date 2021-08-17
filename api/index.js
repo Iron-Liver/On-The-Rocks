@@ -16,8 +16,8 @@ conn.sync({ force: true })
 
     await adminMockUp();
     await userMockUp();
-    await productsMockUp();
     await categoriesMockUp();
+    await productsMockUp();
     await ordersMockUp();
     await reviewsMockUp();
     });
