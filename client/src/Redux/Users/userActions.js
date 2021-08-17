@@ -58,7 +58,7 @@ export function loginUser(login) {
 export function readUser(id) {
     return async function (dispatch) {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get(`${process.env.REACT_APP_API}user/getUser/${id}`, {
+        const { data } = await axios.get(`/user/getUser/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         dispatch({ type: READ_USER, payload: data });
@@ -69,7 +69,7 @@ export function updateUser(user) {
     return async function (dispatch) {
         const token = localStorage.getItem("token");
         const { data } = await axios.put(
-            `${process.env.REACT_APP_API}user/updateUser/${user.id}`,
+            `/user/updateUser/${user.id}`,
             user,
             { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -80,7 +80,7 @@ export function updateUser(user) {
 export function fetchAuthUser() {
     return async (dispatch) => {
         try {
-            const token = await axios.get(`auth/user`, {
+            const token = await axios.get(`/auth/user`, {
                 withCredentials: true,
             });
             if (token) {

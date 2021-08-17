@@ -47,11 +47,11 @@ export default function DrawerListUser() {
   const userDetail = useSelector(state => state.userReducer.userDetail);
   const { url } = useRouteMatch();
 
-  const userTemp = JSON.parse(localStorage.getItem('token')) ? 
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
 
-  const userId = userTemp?.id 
+  const userId = localProfile?.id 
 
   useEffect(() => {
     dispatch(readUser(userId));
@@ -110,7 +110,7 @@ export default function DrawerListUser() {
           </ListItem>
         </Link>
 
-        <Link className={classes.link} to={`${url}/notready`}>
+        {/* <Link className={classes.link}> */}
           <ListItem  button> 
             <ButtonBase>
               <ListItemIcon>
@@ -119,9 +119,9 @@ export default function DrawerListUser() {
               <ListItemText primary="***"/>
             </ButtonBase>
           </ListItem>
-        </Link>
+        {/* </Link> */}
 
-        <Link className={classes.link} to={`${url}/notready`}>
+        {/* <Link className={classes.link}> */}
           <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>
@@ -130,7 +130,7 @@ export default function DrawerListUser() {
             <ListItemText primary="***"/>
             </ButtonBase>
           </ListItem>
-        </Link>
+        {/* </Link> */}
 
         <ListItem  button> 
         <ButtonBase onClick={logOut}>

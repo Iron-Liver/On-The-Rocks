@@ -6,6 +6,7 @@ import { useParams, useHistory } from 'react-router';
 import Summary from './summary';
 import PersonalInfo from './personalInfo';
 import ProductsAccordion from './productsAccordion';
+import jwt from 'jsonwebtoken';
 
 const useStyles = makeStyles((theme) => ({
   loaderContainer: {
@@ -37,12 +38,15 @@ const OrderDetail = () => {
   useEffect(() => {
     (async () => {
       try {
-        const localProfile = localStorage.getItem("profile");
+        const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+        jwt.verify(JSON.parse(localStorage.getItem('token')), 
+        process.env.REACT_APP_SECRET_KEY) : null;
+
         if(!localProfile) {
           history.push("/");
         }
 
-        const { id: userId , isAdmin } = JSON.parse(localProfile);
+        const { id: userId , isAdmin } = localProfile;
         const response = await axios.get(`/order/getOrderById/${id}`);
         if (response.data.userId === userId || isAdmin) {
           return setOrder(response.data);
@@ -59,11 +63,22 @@ const OrderDetail = () => {
       {order && (
         <>
           <Grid container className={classes.gridContainer}>
-            <PersonalInfo order={order} id={id} setOrderStatus={setOrderStatus} orderStatus={orderStatus}/>
-            <Summary order={order} id={id} orderStatus={orderStatus} />
+            <PersonalInfo 
+              order={order} 
+              id={id} 
+              setOrderStatus={setOrderStatus} 
+              orderStatus={orderStatus}
+            />
+            <Summary 
+              order={order} 
+              id={id} 
+              orderStatus={orderStatus} 
+            />
           </Grid>
           <div className={classes.accordionContainer}>
-            <ProductsAccordion order={order} />
+            <ProductsAccordion 
+              order={order} 
+            />
           </div>
         </>
       )}

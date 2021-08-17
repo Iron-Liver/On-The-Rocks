@@ -1,0 +1,38 @@
+
+
+.landinghead {
+  width: 100%;
+  height: 62vh;
+  background: #0F2027;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, hsla(78, 44%, 17%, 0.61), hsla(194, 35%, 19%, 0.7), hsla(198, 43%, 11%, 0.405));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, hsla(78, 44%, 17%, 0.61), hsla(194, 35%, 19%, 0.631), hsla(198, 43%, 11%, 0.453)), url('../../assets/Fondo.jpg'); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: cover;
+  background-attachment: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow:0 0 0 5px rgba(9, 8, 8, 0.261)
+}
+.vox{
+  width: 100%;
+  margin-top: 50vh;
+  height: 100%;
+  background: black;
+}
+
+.img1{
+  width: 100%;
+  padding: 50px;
+  object-fit:scale-down;
+  height: 350px;
+}
+
+.slider{
+  align-content: center;
+  object-fit: cover;
+  display: flex;
+  width: 100%;
+}
+.imgslider{
+  width: 100%;
+}
