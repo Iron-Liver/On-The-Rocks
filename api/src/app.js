@@ -33,10 +33,10 @@ server.use(cors({ origin: CLIENT_DOMAIN, credentials: true }));
 
 server.use(
     cookieSession({
-        name: 'session',
+        // name: 'session',
         maxAge: 24 * 60 * 60 * 1000,
         secret: SECRET_KEY,
-        path: '/',
+        // path: '/',
         // httpOnly: true,
         // domain: '.vercel.com',
         // secure: true,
