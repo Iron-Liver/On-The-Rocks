@@ -36,9 +36,9 @@ server.use(
         name: 'session',
         maxAge: 24 * 60 * 60 * 1000,
         secret: SECRET_KEY,
-        path: `${CLIENT_DOMAIN}`,
+        path: '/',
         // httpOnly: true,
-        // domain: '.herokuapp.com',
+        domain: '.vercel.com',
         secure: true,
         sameSite: 'none',
         secureProxy: true
