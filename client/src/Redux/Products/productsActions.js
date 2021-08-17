@@ -57,7 +57,7 @@ export function deleteProduct(id) {
 
 export function filterByCategory(type){
     return async function(dispatch){        
-        dispatch({type: FILTER_BY_CATEGORY ,payload: type})
+        dispatch({type: FILTER_BY_CATEGORY, payload: type})
     }
 }
 
