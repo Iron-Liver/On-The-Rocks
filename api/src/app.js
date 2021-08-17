@@ -36,12 +36,12 @@ server.use(
         name: 'session',
         maxAge: 24 * 60 * 60 * 1000,
         secret: SECRET_KEY,
-        // path: '/',
+        path: `${CLIENT_DOMAIN}`,
         // httpOnly: true,
         // domain: '.herokuapp.com',
-        // secure: true,
-        // sameSite: 'none'
-        // secureProxy: true
+        secure: true,
+        sameSite: 'none',
+        secureProxy: true
     })
 );
 
