@@ -12,6 +12,7 @@ const productsMockUp = async () => {
             category: "Vodka",
             image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-absolut-1l_450x650.jpg?v=1559562467",
             
+            
         }),
         await  Product.create({
             name:"Kalashnikov Premium Vodka 700mL AK-47",

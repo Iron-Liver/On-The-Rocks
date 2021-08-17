@@ -48,7 +48,7 @@ module.exports = (sequelize) => {
     },
     stock:{
       type: DataTypes.INTEGER,
-      defaultValue: 1000
+      defaultValue: 10
     }
   });
 };
