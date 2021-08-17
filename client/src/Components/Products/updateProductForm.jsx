@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Grid, Button, TextField, Chip, Select, FormControl, MenuItem, InputLabel, Input } from '@material-ui/core'
-import { Label, Description, Image, Crop, Dns, FormatListNumbered, MonetizationOn, Category } from '@material-ui/icons';
+import { Label, Description, Image, Crop, Fingerprint, Assistant, Storage, MonetizationOn, Category } from '@material-ui/icons';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
