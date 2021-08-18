@@ -14,11 +14,12 @@ const useStyles= makeStyles(theme => ({
   Container: {
     display: 'flex',
     flexDirection: 'column',
-    width: '90%'  
+    width: '97%'  
   },
   imageContainer: {
-    textAlign: 'center', 
-    marginLeft: '10px'
+    margin: "10px 0",
+    display: "flex",
+    justifyContent: "center"
   },
   belowImage: {
     display: 'flex',

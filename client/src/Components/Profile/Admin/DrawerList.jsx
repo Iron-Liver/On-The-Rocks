@@ -26,16 +26,17 @@ import jwt from "jsonwebtoken";
 
 const useStyles= makeStyles(theme => ({
   list: {
- backgroundColor: ' #E9ECEF '
+ backgroundColor: ' #333333 '
   },
   Container: {
     display: 'flex',
     flexDirection: 'column',
-    width: '90%'  
+    width: '97%'  
   },
   imageContainer: {
-    textAlign: 'center', 
-    marginLeft: '10px'
+    margin: "10px 0",
+    display: "flex",
+    justifyContent: "center"
   },
   belowImage: {
     display: 'flex',
@@ -47,13 +48,13 @@ const useStyles= makeStyles(theme => ({
     border: '2px solid  #b7950b',
     borderRadius: '100px',
     backgroundColor: '#a7aaad',
-    width: 135,
-    height: 135,
+    width: 165,
+    height: 165,
     textAlign: 'center'
   },
   link: {
     textDecoration:'none',
-     color:'#1c2624'
+    color:'white'
   }
 }))
 
@@ -89,13 +90,11 @@ export default function DrawerList() {
 
           <Grid container className={classes.belowImage}>
             <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
-            <DnsOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
-          <ListItemText secondary={userDetail ? userDetail.name : ""} style={{width: '75%', display: "inline-block"}}/>
+          <ListItemText primary={userDetail ? userDetail.name : ""} style={{width: '75%', display: "inline-block", color: "white"}}/>
             </Grid>
           
             <Grid item xs={11} style={{ display: "flex", alignItems:'center'}}>
-          <AlternateEmailOutlined style={{ fontSize: 15, marginRight:'10px'}}/>
-          <ListItemText secondary={userDetail ? userDetail.email : ""} style={{width: '75%', display: "inline-block"}}/>
+          <ListItemText primary={userDetail ? userDetail.email : ""} style={{width: '75%', display: "inline-block", color: "white"}}/>
             </Grid>
           </Grid>
         </Grid>
@@ -105,7 +104,7 @@ export default function DrawerList() {
           <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>
-              <Dashboard />
+              <Dashboard style={{color: "white"}}/>
             </ListItemIcon>
             <ListItemText  primary="Dashboard" />
           </ButtonBase>
@@ -115,7 +114,7 @@ export default function DrawerList() {
           <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>
-              <AssignmentInd />
+              <AssignmentInd style={{color: "white"}} />
             </ListItemIcon>
             <ListItemText  primary="Users" />
           </ButtonBase>
@@ -125,7 +124,7 @@ export default function DrawerList() {
           <ListItem divider button> 
             <ButtonBase>
               <ListItemIcon>
-                <ShoppingCart />
+                <ShoppingCart style={{color: "white"}} />
               </ListItemIcon>
               <ListItemText primary="Orders"/>
             </ButtonBase>
@@ -135,7 +134,7 @@ export default function DrawerList() {
           <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>
-              <NoteAdd />
+              <NoteAdd style={{color: "white"}} />
             </ListItemIcon>
             <ListItemText primary="Categories"/>
           </ButtonBase>
@@ -145,7 +144,7 @@ export default function DrawerList() {
           <ListItem  button> 
           <ButtonBase>
             <ListItemIcon>
-              <AddShoppingCart />
+              <AddShoppingCart style={{color: "white"}} />
             </ListItemIcon>
             <ListItemText primary="Products"/>
             </ButtonBase>
@@ -154,7 +153,7 @@ export default function DrawerList() {
         <ListItem onClick={logOut} button> 
           <ButtonBase> 
             <ListItemIcon>
-              <ExitToApp/>
+              <ExitToApp style={{color: "white"}}/>
             </ListItemIcon>
             <ListItemText primary="Logout"/>
           </ButtonBase>

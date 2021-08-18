@@ -103,7 +103,6 @@ module.exports = async (req, res, next) => {
         include: [Order_products]
       });
 
-      //uncomment when products support stock count
       order.order_products.forEach(async (product) => {
         await Product.decrement({
           stock: product.units

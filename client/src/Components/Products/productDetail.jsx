@@ -26,15 +26,15 @@ import AddProductReview from "./ProductReview/addProductReview";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: "inline-flex",
+        display: "flex",
         // height: '75vh',
         width: "100%",
-        justifyContent: "space-evenly",
         marginBottom: theme.spacing(4),
+        marginTop: "40px"
     },
     details: {
         textAlign: "start",
-        width: "60%",
+        width: "70%",
     },
     content: {
         width: "100%",
@@ -43,17 +43,19 @@ const useStyles = makeStyles((theme) => ({
 
     cont1: {
         marginBottom: 15,
+        fontFamily: `'Heebo', sans-serif`,
+        fontWeight: "700"
     },
 
-    cover: {
-        width: "55%",
-        height: "300px",
-    },
     divimage: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "25%",
+      display: "flex",
+      justifyContent: "center",
+      width: "100%",
+      margin: "30px 0"
+    },
+    cover: {
+      width: "50%",
+      objectFit: "scale-down"
     },
 
     button: {
@@ -76,8 +78,8 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        paddingLeft: theme.spacing(2),
-        paddingBottom: theme.spacing(1),
+        // paddingLeft: theme.spacing(2),
+        // paddingBottom: theme.spacing(1),
     },
     noStars: {
         "& .MuiGrid-container": {
@@ -92,6 +94,15 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    //eslint-disable-next-line
+    ['@media (max-width: 800px)']: {
+      root: {
+        flexDirection: "column"
+      },
+      details: {
+        width: "100%"
+      }
+    } 
 }));
 
 const ProductDetail = () => {
@@ -156,21 +167,27 @@ const ProductDetail = () => {
                 <>
                     <Card className={classes.root}>
                         <div className={classes.divimage}>
-                            <CardMedia
+                            <img
                                 className={classes.cover}
-                                image={liqueur.image}
+                                src={liqueur.image}
+                                alt={liqueur.name}
                             />
                         </div>
                         <div className={classes.details}>
                             <CardContent className={classes.content}>
                                 <Grid item className={classes.cont1}>
-                                    <Typography variant="h4">
+                                    <Typography variant="h4" style={{
+                                      fontFamily: "'Heebo', sans-serif",
+                                      letterSpacing: "-0.5px"
+                                    }}>
                                         {liqueur.name}
                                     </Typography>
-                                    <div className={classes.review}>
+                                    <div className={classes.review} style={{
+                                      fontFamily: "'Montserrat', sans-serif",
+                                      letterSpacing: "-0.5px"
+                                    }}>
                                         <Box
                                             component="fieldset"
-                                            mb={3}
                                             borderColor="transparent"
                                         >
                                             <Rating
@@ -191,14 +208,25 @@ const ProductDetail = () => {
                                             />
                                         </Box>
                                     </div>
-                                    <Typography component="h5" variant="h5">
+                                    <Typography component="h5" variant="h5" style={{
+                                      fontFamily: "'Montserrat', sans-serif",
+                                      letterSpacing: "-0.5px"
+                                    }}>
                                         ${liqueur.price}
                                     </Typography>
-                                    <Typography component="h5" variant="h5">
-                                        {liqueur.brand}
+                                    <Typography component="h5" variant="h5" style={{
+                                      fontFamily: "'Montserrat', sans-serif",
+                                      letterSpacing: "-0.5px"
+                                    }}>
+                                        Brand: {liqueur.brand}
                                     </Typography>
                                 </Grid>
-                                <Typography variant="h6" color="textSecondary">
+                                <Typography variant="h6" style={{
+                                      fontFamily: "'Montserrat', sans-serif",
+                                      fontSize: "18px",
+                                      letterSpacing: "-0.5px",
+                                      fontWeight: "300",
+                                    }}>
                                     {liqueur.description}
                                 </Typography>
                             </CardContent>

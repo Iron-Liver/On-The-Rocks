@@ -34,7 +34,7 @@ const AppGlobal = () => {
 
 	
     return (
-		<ThemeProvider theme={theme}>
+		// <ThemeProvider theme={theme}>
 			<Router>
 				<NavBar/>
 				<Switch>
@@ -55,7 +55,7 @@ const AppGlobal = () => {
 					<Route path="*" component={Error404} /> 
 				</Switch>
 			</Router>
-		</ThemeProvider>
+		// </ThemeProvider>
 	)
 }
 

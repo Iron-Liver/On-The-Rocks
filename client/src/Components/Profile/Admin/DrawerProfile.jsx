@@ -10,10 +10,10 @@ const useStyle = makeStyles((theme) => ({
     
   },
   drawerPaper: {
-   backgroundColor: '#E9ECEF',
+   backgroundColor: '#333333',
    flexGrow: 1,
-   width: '292px'
-   
+   width: '292px',
+   color:'white'
   },
   toolbar: theme.mixins.toolbar,
 }))
@@ -31,9 +31,11 @@ export default function DrawerProfile() {
       }}
     >
       <div className={classes.toolbar}>
-        <Link to="/">
-          <IconButton style={{textDecoration: 'none', color: '#1c2624', marginTop:'5px', marginLeft:'51px'}}>On The Rocks</IconButton>
-        </Link>
+        <div style={{width: "100%", textAlign: "center"}}>
+          <Link to="/">
+          <img src="https://picsum.photos/200/85" alt="on-the-rocks-logo" width="200px"/>
+          </Link>
+        </div>
       </div>
       <Divider />
       <DrawerList />

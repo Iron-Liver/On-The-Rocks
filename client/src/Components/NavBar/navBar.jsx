@@ -18,15 +18,16 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     outline: 'none',
-    backgroundColor: "red"
+    backgroundColor: "d3d3d3"
   },
   appBar: {
     [theme.breakpoints.up("sm")]: {
       width: '100%',
-      backgroundColor: 'transparent',
+      background: "linear-gradient(0deg, rgba(19,19,19,0) 16%, rgba(19,19,19,0.5130251929873512) 41%, rgba(19,19,19,0.7819327560125613) 65%, rgba(19,19,19,0.9107842966288078) 85%, rgba(19,19,19,1) 100%)"
     }
   },
   menu: {
+    width: "100%",
     display: 'flex',
     justifyContent: 'flex-end',
 },
@@ -46,8 +47,9 @@ const useStyles = makeStyles((theme) => ({
   },
   // necessary for content to be below app bar
   toolbar: {
+    display: "flex",
     width: '100%',
-    background: "#131313"
+    background: "transparent"
   },
   blank: theme.mixins.toolbar,
   drawerPaper: {
@@ -119,11 +121,11 @@ function NavBar(props) {
       <AppBar elevation={0} position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
 
-          <Container>
-            <Typography variant="h6" noWrap>
-              <Link to="/" style={{textDecoration: 'none', color: 'white'}}>OnTheRocks</Link>
-            </Typography>
-          </Container>
+          <div style={{flexGrow: "1", width: "100%"}}>
+              <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
+                <img src="https://picsum.photos/200/85" alt="on-the-rocks-logo" width="200px"/>
+              </Link>
+          </div>
 
           <Hidden smDown>
             <NavBox/>

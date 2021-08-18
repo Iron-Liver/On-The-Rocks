@@ -1,4 +1,15 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+::-webkit-scrollbar-track {
+  background: #131313;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #877c59;
+  border-radius: 20px;
+}
 
 .landinghead {
   width: 100%;

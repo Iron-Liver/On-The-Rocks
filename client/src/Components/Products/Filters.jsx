@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 
     root: {
         display: "flex",
-        backgroundColor: '#131313',
+        backgroundColor: '#333232',
     },
 
     form: {
