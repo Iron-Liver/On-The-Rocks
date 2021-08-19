@@ -12,7 +12,7 @@ import { ExpandMore, VisibilityOff, ShoppingCart } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   accordion: {
     width: "100%",
-    background: "#e9ecef",
+    background: "#F7F5F3",
   },
   heading: {
     margin: "2px 0 0 6px",
@@ -102,6 +102,9 @@ const ProductsAccordion = ({ order }) => {
                       src={order.product.image}
                       width="150px"
                       alt="productimage"
+                      style={{
+                        border: "1px solid #493d3011"
+                      }}
                     />
                   </Link>
                 </div>

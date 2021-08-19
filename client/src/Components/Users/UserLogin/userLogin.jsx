@@ -73,7 +73,7 @@ export default function UserLogin() {
 	};
 
     return (
-        <div style={{color: "white"}}>
+        <div style={{background: "white"}}>
             {}
             <h1 className={classes.title}>Login</h1>
             <form noValidate autoComplete="off" > 
@@ -111,9 +111,22 @@ export default function UserLogin() {
                         </Grid>
                     </Grid>
                     <Grid container direction="column" justifyContent="center" alignItems="center">
-                            <Button style={{fontWeight: 1000, marginTop: 30}} color="primary" onClick={handleLogIn} variant="contained">Login</Button>
+                            <Button 
+                              className={classes.button} 
+                              color="primary" 
+                              onClick={handleLogIn} 
+                              variant="contained"
+                            >
+                              Login
+                            </Button>
                             <Link to="/verify/password">
-                                <Button style={{fontWeight: 1000, marginTop: 20}} color="primary" variant="contained">Recover password</Button>                  
+                              <Button 
+                                className={classes.button} 
+                                color="primary" 
+                                variant="contained"
+                              >
+                                Recover password
+                              </Button>                  
                             </Link>
                             <GoogleButton
                                 style={{fontWeight: 1000, marginTop: 20}}

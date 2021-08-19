@@ -37,7 +37,6 @@ export const landingPage = () => {
         </Swiper>
 
         </div> */}
-
         </div>
     )
 }

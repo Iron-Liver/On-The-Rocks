@@ -9,9 +9,9 @@ export function getProductReviews(id) {
     };
 }
 
-export function createReview(userId,productId,stars,description) {
+export function createReview(userId,productId,stars,description,anonymous) {
     return async function (dispatch) {
-        const { data } = await axios.post(`/review/add`,{productId,userId,stars,description})
+        const { data } = await axios.post(`/review/add`,{productId,userId,stars,description,anonymous})
         await dispatch(getProductReviews(productId))
         data.success? swal(data.success) : swal(data.error)
     }

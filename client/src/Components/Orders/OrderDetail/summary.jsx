@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   accordionSummary: {
     boxShadow: "0px 0px 0px",
     width: "100%",
-    background: "#ced4da",
+    background: "#F7F5F3",
   },
   paperContainer: {
     display: "flex",
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     height: "95%",
     width: "95%",
     margin: "auto",
-    background: "#ced4da"
+    background: "#F7F5F3"
   },
   product: {
     borderBottom: "1px solid #ddd"

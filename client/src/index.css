@@ -1,4 +1,21 @@
 body, html {
-  background: #333232 !important;
+  background: #F7F5F3 !important;
   font-family: 'Heebo', sans-serif;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: "Heebo", sans-serif;
+  letter-spacing: -0.5px;
+}
+
+h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -0.5px;
+}
+
+h4 {
+  margin: 15px 0;
+  font-size: 15px;
+  line-height: 16px;
 }
