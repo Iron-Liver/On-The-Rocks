@@ -23,22 +23,13 @@ export const landingPage = () => {
         <div>
         <header className="landinghead">
         </header>
-        </div>
+        </div>             
         <div className="vox"></div>
-      
-        {/* <div className="slider">
-        <Swiper navigation={true}>
-          <SwiperSlide >
-            <img src={image1} className="img1" alt='img1'></img>
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image2} className="img1" alt="img2"></img>
-          </SwiperSlide>
-        </Swiper>
-
-        </div> */}
-
         </div>
+      
+        
+
+        
     )
 }
 export default landingPage
