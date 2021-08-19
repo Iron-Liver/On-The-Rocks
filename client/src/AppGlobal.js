@@ -28,6 +28,7 @@ import AdminFeatures from './Components/Admin/AdminFeatures';
 import Error404 from './Components/Error404/Error404';
 import CreateOrder from './Components/Orders/CreateOrder/createOrder';
 import MercadoPago from './Components/Mercadopago/Mercadopago';
+import Footer from './Components/Footer/footer';
 
 
 const AppGlobal = () => {
@@ -54,6 +55,7 @@ const AppGlobal = () => {
 					<AdminRoute path="/private" component={AdminFeatures}/>
 					<Route path="*" component={Error404} /> 
 				</Switch>
+        <Footer/>
 			</Router>
 		// </ThemeProvider>
 	)

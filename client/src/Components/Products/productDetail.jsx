@@ -27,17 +27,16 @@ import AddProductReview from "./ProductReview/addProductReview";
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        // height: '75vh',
         width: "100%",
         marginBottom: theme.spacing(4),
-        marginTop: "40px"
+        boxShadow: "none"
     },
     details: {
         textAlign: "start",
         width: "70%",
     },
     content: {
-        width: "100%",
+        width: "80%",
         marginTop: "5%",
     },
 
@@ -62,15 +61,15 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: 200,
         height: 55,
-        backgroundColor: "black",
+        backgroundColor: "#493d30",
         color: "white",
             '&:hover': {
-                backgroundColor: "grey",
+                backgroundColor: "#30281f",
                 boxShadow: 'none',
               },
               '&:active': {
                 boxShadow: 'none',
-                backgroundColor: '#5dc1b9',
+                backgroundColor: '#1d1813',
               },
             
     },
@@ -101,7 +100,11 @@ const useStyles = makeStyles((theme) => ({
       },
       details: {
         width: "100%"
-      }
+      },
+      content: {
+        width: "100%",
+        marginTop: "5%",
+      } 
     } 
 }));
 
@@ -134,6 +137,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         (async function () {
+            window.scrollTo(0,0)
             await dispatch(getProductReviews(id));
         })();
     }, [Products, dispatch, id]);

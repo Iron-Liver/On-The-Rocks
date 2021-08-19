@@ -21,7 +21,8 @@ import {
   AccountCircle,
   Loyalty,
   ExitToApp,
-  ArrowForwardIos
+  ArrowForwardIos,
+  ArrowBackIos
 } from "@material-ui/icons";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -107,7 +108,9 @@ title:{
 selectEmpty: {
     marginTop: theme.spacing(2),
 },
-  toolbar: theme.mixins.toolbar,
+toolbar: {
+  height: "max-content"
+},
 icon:{
   marginTop: "2%"
 }  
@@ -115,7 +118,7 @@ icon:{
 
 
 
-export const MenuList = () => {
+export const MenuList = ({ handleDrawerMenu }) => {
   const dispatch = useDispatch();
 
   const logOut = () => {
@@ -125,7 +128,18 @@ export const MenuList = () => {
   const classes = useStyles();
   return (
     <div>
-      <div className={classes.toolbar}>OnTheRocks</div>
+      <div style={{
+        display: "flex", 
+        width: "100%", 
+        justifyContent: "flex-end",
+        height: "41px"
+      }}>
+        <Button 
+          onClick={handleDrawerMenu}
+        >
+          <ArrowBackIos/>
+        </Button>
+      </div>
       <Divider />
       <List component="nav">
         <Link to="/products" style={{ textDecoration: "none", color: "black" }}>

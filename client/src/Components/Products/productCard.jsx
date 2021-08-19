@@ -30,34 +30,43 @@ const ProductCard = ({ spirit }) => {
   }
 
   return (
-    <div>
-      <div className="containerproducts">
-          <div className="card">
-              <div className="imgBx">
-                <Link to={`/products/${spirit.id}`}>
-                  <img src={spirit.image} alt="Licorimage"/>
-                </Link>
-              </div>
-              <div className="contentBx">
-                <Link to={`/products/${spirit.id}`} style={{textDecoration: "none", background: "transparent"}}>
-                  <h4>{spirit.name}</h4>
-                </Link>
-                  <div className="size">
-                      <h5>{spirit.name}</h5>
+    <div className="containerproducts">
+        <div className="card">
+            <div className="imgBx">
+              <Link to={`/products/${spirit.id}`}>
+                <img src={spirit.image} alt="Licorimage"/>
+              </Link>
+            </div>
+            <div className="contentBx">
+              <Link to={`/products/${spirit.id}`} style={{textDecoration: "none", background: "transparent"}}>
+                <h4>{spirit.name}</h4>
+              </Link>
+                <div className="info-item">
+                  <div>
+                    <span>Categor{spirit.categories > 1 ? "ies" : "y"}: </span>
+                  {
+                    spirit.categories.map(category => 
+                      <span>{category.name} </span>
+                    )
+                  }
                   </div>
-                  <div className="color">
-                      <h5>${spirit.price}</h5>
-                      <button
-                        disabled={spirit.stock < 1} 
-                        onClick={handleAddToCart}
-                      >
-                        Add to cart
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                  <span style={{ margin: "3px" }}>Brand: {spirit.brand}</span>
+                </div>
+                <div className="color">
+                    <h5 style={{
+                      fontSize: "16px",
+                      fontWeight: "400"
+                    }}>${spirit.price}</h5>
+                    <button
+                      disabled={spirit.stock < 1} 
+                      onClick={handleAddToCart}
+                    >
+                      Add to cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
   )
 }
 

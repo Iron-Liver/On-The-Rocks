@@ -9,7 +9,7 @@ const UserProfile = () => {
   
   return (
     <div style= {{display: "flex", justifyContent: "space-evenly"}}>
-      <UserPanel id={userId}/>
+      {/* <UserPanel id={userId}/> */}
       <Switch>
         <Route exact path={path} component={UserOrders} />
         <Route exact path={`${path}/settings`} render={() => <h1>Settings</h1>} />

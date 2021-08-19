@@ -3,11 +3,8 @@
   display:inline-flex;
   flex-wrap: wrap;
   justify-content:space-evenly;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
-  background-color: #F7F5F3;
-  
-  flex-direction: row;
   width: 100%;
 }
 
@@ -22,24 +19,25 @@
 
 .title1 h1{
   width: 60%;
-
 }
 
 .containerproducts {
   position: relative;
   margin: 15px;
-  border-radius: 20px;
-  box-shadow:  2px 2px 10px #545153,
-              1px 1px 1px #838181;
-  border-radius: 20px;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow:  1px 1px 2px #757575,
+              -1px -1px 2px #aaaaaa;
 }
 
 
 .containerproducts .card {
-  width: 300px;
-  height: 440px;
+  width: 270px;
+  height: 430px;
   background: #fff;
-  border-radius: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -71,7 +69,7 @@
 .containerproducts .card .contentBx {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 95%;
   height: 110px;
   text-align: center;
   transition: 1s;
@@ -89,20 +87,19 @@
   color: #000;
 }
 
-.containerproducts .card .contentBx .size,
+.containerproducts .card .contentBx .info-item,
 .containerproducts .card .contentBx .color {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 20px;
+  padding: 0 20px;
   transition: 0.4s;
   opacity: 0;
   visibility: hidden;
   padding-top: 0;
-  padding-bottom: 0;
 }
 
-.containerproducts .card:hover .contentBx .size {
+.containerproducts .card:hover .contentBx .info-item {
   opacity: 1;
   visibility: visible;
   transition-delay: 0.4s;
@@ -112,6 +109,7 @@
   opacity: 1;
   visibility: visible;
   transition-delay: 0.6s;
+  flex-grow: 1;
 }
 
 
@@ -130,16 +128,18 @@
   cursor: pointer;
   display: inline-block;
   padding: 10px 20px;
-  background: #403233;
+  background: #493d30;
   border-radius: 4px;
   text-decoration: none;
   font-weight: 600;
   color: #fff;
   opacity: 0;
   transform: translateY(50px);
-  transition: 0.8s;
+  transition: 0.3s;
   margin-top: 0;
   border: none;
+  box-shadow:  1px 1px 1px #636363,
+  -1px -1px 1px #8f8f8f;
 }
 
 .containerproducts .card:hover .contentBx button {
@@ -148,9 +148,79 @@
   transition-delay: 350ms;
 }
 
+.contentBx {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
 .filters{
   display: flex;
-  justify-content:space-evenly;
-  background-color: #F7F5F3;
+  justify-content: space-evenly;
+  width: 30%;
+}
 
+.results {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filters-results {
+  display: flex;
+}
+
+.products-wrapper {
+  padding: 30px
+}
+
+.page-head { 
+  display: flex; 
+  align-items: center; 
+  margin-bottom: 18px;
+}
+
+@media (max-width: 860px) {
+  .filters-results {
+    flex-direction: column;
+  }
+
+  .page-head {
+    flex-wrap: wrap;
+  }
+
+  .filters {
+    width: 100%;
+  }
+
+  
+.containerproducts .card .imgBx {
+  top: 0%;
+  transform: translateY(0%);
+}
+.containerproducts .card .contentBx {
+  height: 210px;
+}
+.containerproducts .card .contentBx .info-item {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.4s;
+}
+
+.containerproducts .card .contentBx .color {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.6s;
+  flex-grow: 1;
+}
+.containerproducts .card .contentBx button {
+  opacity: 1;
+  transform: translateY(0px);
+  transition-delay: 350ms;
+}
 }

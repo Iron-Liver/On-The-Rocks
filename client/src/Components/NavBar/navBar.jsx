@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
@@ -7,7 +7,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import NavBox from './navBox'
 import { logOutUser } from "../../Redux/Users/userActions";
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import logoBrown from '../../assets/on-the-rocks-brown.png'
+import logoWhite from '../../assets/on-the-rocks-white.png'
 
 
 
@@ -22,23 +24,29 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "d3d3d3"
   },
   appBar: {
-    [theme.breakpoints.up("sm")]: {
-      width: '100%',
-      background: "linear-gradient(0deg, rgba(19,19,19,0) 16%, rgba(19,19,19,0.5130251929873512) 41%, rgba(19,19,19,0.7819327560125613) 65%, rgba(19,19,19,0.9107842966288078) 85%, rgba(19,19,19,1) 100%)"
-    }
+    width: '100%',
+    background: "transparent",
+    transition: 'background 300ms ease-out'
+  },
+  appBarSolid: {
+    width: '100%',
+    background: "#493d30ee",
+    transition: 'background 300ms ease-out'
   },
   menu: {
     width: "100%",
     display: 'flex',
     justifyContent: 'flex-end',
+    paddingRight: 0
 },
   menuButton: {
     marginRight: theme.spacing(0),
     marginLeft: theme.spacing(0),
   },
   icons: {
+    color:'#fff',
     '&:hover':{
-      color:'#99af9d',
+      color:'#fff',
     }
   },
   mobile: {
@@ -52,7 +60,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     background: "transparent"
   },
-  blank: theme.mixins.toolbar,
+  blank: {
+    marginTop: "90px"
+  },
   drawerPaper: {
     width: '70%',
     [theme.breakpoints.up("sm")]: {
@@ -68,17 +78,34 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3)
   },
-
+  navLogo: {
+    width: "120px",
+    marginTop: "12px"
+  },
+  blackColor: {
+    color: "#493d30"
+  }
 }));
 
 function NavBar(props) {
   const dispatch = useDispatch()
-  const { window } = props;
+  // const { window } = props;
   const classes = useStyles();
   const history = useHistory();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const [solid, setSolid] = useState(false);
+
+  const changeBackground = () => {
+    if(window.scrollY > 20) {
+      setSolid(true);
+    } else {
+      setSolid(false)
+    }
+  };
+
+  window.addEventListener('scroll', changeBackground);
 
   const handleLogOut = () => {
     dispatch(logOutUser());
@@ -112,25 +139,39 @@ function NavBar(props) {
     setCartDrawerOpen(!cartDrawerOpen);
   };
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  // const container =
+  //   window !== undefined ? () => window().document.body : undefined;
 
 
   return (
     <div>
     <div  className={classes.root}>
       <CssBaseline />
-      <AppBar elevation={0} position="fixed" className={classes.appBar}>
+      <AppBar elevation={0} position="fixed" className={solid ? classes.appBarSolid : classes.appBar}>
         <Toolbar className={classes.toolbar}>
 
           <div style={{flexGrow: "1", width: "100%"}}>
               <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
-                <img src="https://picsum.photos/200/85" alt="on-the-rocks-logo" width="200px"/>
+                {
+                  solid ? (
+                    <img 
+                      src={logoWhite} 
+                      alt="on-the-rocks-logo" 
+                      className={classes.navLogo}
+                    />
+                    ) : (
+                    <img 
+                      src={logoBrown} 
+                      alt="on-the-rocks-logo" 
+                      className={classes.navLogo}
+                    />
+                  )
+                }
               </Link>
           </div>
 
           <Hidden smDown>
-            <NavBox/>
+            <NavBox solid={solid}/>
           </Hidden>
 
           <Container className={classes.menu}>
@@ -141,7 +182,7 @@ function NavBar(props) {
               onClick={handleDrawerSearch}
               className={`${classes.menuButton} ${classes.search}`}
             >
-              <Search className={classes.icons}/>
+              <Search className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
             </IconButton>
 
             <IconButton
@@ -151,7 +192,7 @@ function NavBar(props) {
               onClick={handleDrawerCart}
               className={classes.menuButton}
             >
-              <ShoppingCart className={classes.icons}/>
+              <ShoppingCart className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
             </IconButton>
 
               <Hidden xsDown>  
@@ -162,7 +203,7 @@ function NavBar(props) {
                     className={classes.menuButton}
                     onClick={handleProfile}
                     >
-                    <AccountCircle className={classes.icons} />
+                    <AccountCircle className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
                   </IconButton>
               </Hidden>
 
@@ -175,7 +216,7 @@ function NavBar(props) {
                   className={classes.menuButton}
                   onClick={handleLogOut}
                 >
-                  <ExitToApp className={classes.icons}/>
+                  <ExitToApp className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
                 </IconButton>
             </Hidden>
 
@@ -186,7 +227,7 @@ function NavBar(props) {
               onClick={handleDrawerMenu}
               className={classes.menuButton}
             >
-              <Menu  />
+              <Menu className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
             </IconButton>
           </Container>
         </Toolbar>
@@ -195,7 +236,7 @@ function NavBar(props) {
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
-            container={container}
+            // container={container}
             variant="temporary"
             anchor="left"
             open={menuDrawerOpen}
@@ -207,10 +248,12 @@ function NavBar(props) {
               keepMounted: true // Better open performance on mobile.
             }}
           >
-            <MenuList />
+            <MenuList 
+              handleDrawerMenu={handleDrawerMenu}
+            />
           </Drawer>
           <Drawer
-            container={container}
+            // container={container}
             variant="temporary"
             anchor="top"
             open={searchDrawerOpen}
@@ -225,7 +268,7 @@ function NavBar(props) {
             <SearchList />
           </Drawer>
           <Drawer
-            container={container}
+            // container={container}
             variant="temporary"
             anchor="right"
             open={cartDrawerOpen}
@@ -240,7 +283,6 @@ function NavBar(props) {
             <CartList handleDrawerCart={handleDrawerCart}/>
           </Drawer>
         </Hidden>
-      {/* <main> */}
         <div className={classes.blank} />
     </div>
 
