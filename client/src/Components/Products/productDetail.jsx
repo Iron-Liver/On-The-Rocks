@@ -9,11 +9,7 @@ import {
     Typography,
     Button,
     Grid,
-    Box,
-    Select,
-    FormControl,
-    MenuItem,
-    InputLabel,
+    Box,    
 } from "@material-ui/core";
 import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart } from '@material-ui/icons';
 import Rating from "@material-ui/lab/Rating";
@@ -73,6 +69,14 @@ const useStyles = makeStyles((theme) => ({
         },
 
     },
+    sum2: {
+        display: "flex",
+        marginLeft: "5px",
+    },
+    sum1: {
+        display: "flex",
+        marginLeft: "45px",
+    },
     review: {
         display: "flex",
         alignItems: "center",
@@ -92,6 +96,14 @@ const useStyles = makeStyles((theme) => ({
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
+    },
+    button2: {
+        width: "10px",
+        height: "20px",
+        marginLeft: "5px",
+        marginRight: "5px",
+        marginBottom: "30px",
+
     },
 }));
 
@@ -252,6 +264,9 @@ const ProductDetail = () => {
                                     <Typography component="h5" variant="h5">
                                         {liqueur.brand}
                                     </Typography>
+                                    <div>
+                                        {stockText}
+                                    </div>
                                 </Grid>
                                 <Typography variant="h6" color="textSecondary">
                                     {liqueur.description}
@@ -259,39 +274,24 @@ const ProductDetail = () => {
                             </CardContent>
                             <div className={classes.controls}>
                                 {btncart}
-                                <div>
-                                    {stockText}
-                                    <span>{liqueur.stock}</span>
-                                </div>
-                                <div>
-                                    <button onClick={() => handleChangeQuant('-')} >-</button>
-                                    <span>{quant}</span>
-                                    <button onClick={() => handleChangeQuant('+')} >+</button>
-                                </div>
-                                {/* <FormControl
-                                    variant="outlined"
-                                    className={classes.formControl}
-                                >
-                                    <InputLabel id="Quantity">
-                                        Quantity
-                                    </InputLabel>
-                                    <Select
-                                        labelId="Quantity"
-                                        id="Quantity"
-                                        value={quant}
-                                        onChange={handleChange}
-                                        label="Quantity"
+                                <h3 className={classes.sum1}>QUANTITY</h3>
+                                <div className={classes.sum2}>
+                                    <Button
+                                        variant="contained"
+                                        className={classes.button2}
+                                        onClick={() => handleChangeQuant('-')}
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={1}>1</MenuItem>
-                                        <MenuItem value={2}>2</MenuItem>
-                                        <MenuItem value={3}>3</MenuItem>
-                                        <MenuItem value={4}>4</MenuItem>
-                                        <MenuItem value={5}>5</MenuItem>
-                                    </Select>
-                                </FormControl> */}
+                                        -
+                                    </Button>
+                                    <Grid>{quant}</Grid>
+                                    <Button
+                                        variant="contained"
+                                        className={classes.button2}
+                                        onClick={() => handleChangeQuant('+')}
+                                    >
+                                        +
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </Card>
