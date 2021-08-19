@@ -10,6 +10,7 @@ import { logOutUser } from "../../Redux/Users/userActions";
 import jwt from 'jsonwebtoken'
 
 
+
 // import { logOutUser } from "../../Redux/Users/UserActions";
 
 // const drawerWidth = 240;
@@ -114,9 +115,10 @@ function NavBar(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+
   return (
     <div>
-    <div className={classes.root}>
+    <div  className={classes.root}>
       <CssBaseline />
       <AppBar elevation={0} position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>

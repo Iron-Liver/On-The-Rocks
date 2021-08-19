@@ -23,7 +23,7 @@ import UserProfile from './Components/Profile/UserProfile';
 import AdminProfile from './Components/Profile/AdminProfile';
 //Misc imports
 import NavBar from './Components/NavBar/navBar';
-import landingPage from './Components/LandingPage/landingPage';
+import LandingPage from './Components/LandingPage/landingPage';
 import AdminFeatures from './Components/Admin/AdminFeatures';
 import Error404 from './Components/Error404/Error404';
 import CreateOrder from './Components/Orders/CreateOrder/createOrder';
@@ -38,7 +38,7 @@ const AppGlobal = () => {
 			<Router>
 				<NavBar/>
 				<Switch>
-					<Route exact path="/" component={landingPage} />
+					<Route exact path="/" component={LandingPage} />
 					<Route exact path="/login" component={LoginUser} />
 					<Route exact path="/register" component= {CreateUser} />
 					<Route path="/verify/password" component={ResetPassword} />

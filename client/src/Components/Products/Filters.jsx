@@ -1,28 +1,10 @@
 import { useEffect, React } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { filterByCategory, filterByPrice } from '../../Redux/Products/productsActions'
-import { Button, Grid } from '@material-ui/core';
-import { makeStyles } from "@material-ui/core/styles";
+import { Button } from '@material-ui/core';
 import { getAllCategories } from '../../Redux/Category/categoryActions';
+import './Filters.css'
 
-
-const useStyles = makeStyles({
-
-    button: {
-        marginRight: 7
-    },
-
-    root: {
-        display: "flex",
-        backgroundColor: '#333232',
-    },
-
-    form: {
-        display: "flex",
-        height: "100px",
-    }
-
-})
 
 const Filters = () => {
 
@@ -44,19 +26,12 @@ const Filters = () => {
     function orderByPrice(type) {
         dispatch(filterByPrice(type))
     }
-
-    const classes = useStyles();
-
     //------------------------------------    
 
     return (
-
-        <Grid container className={classes.root}>
-            <Grid item>
-            </Grid>
-            <Grid item >
+             <div className="filterContainer">
                 <div>
-                    <h4 style={{ color: "white" }}>Order by categories</h4>
+                    <h4 style={{ color: "#323031" }}>Order by categories</h4>
                     <select onChange={handleSelect}>
                         {
                             categories && categories.map(category =>
@@ -65,15 +40,16 @@ const Filters = () => {
                         }
                     </select>
                 </div>
-                <h4 style={{ color: "white" }}>Order by Price</h4>
-                <Button size="small" className={classes.button} variant="contained" color="primary" onClick={() => orderByPrice("MAX")}>
-                    HIGHER
-                </Button>
-                <Button size="small" variant="contained" color="primary" onClick={() => orderByPrice("MIN")}>
-                    LOWER
-                </Button>
-            </Grid>
-        </Grid>
+                <div>
+                <h4 style={{ color: "#323031" }} className="">Order by Price</h4>
+                    <Button size="small" className='' variant="contained" color="primary" onClick={() => orderByPrice("MAX")}>
+                        HIGHER
+                    </Button>
+                    <Button size="small" variant="contained" color="primary" onClick={() => orderByPrice("MIN")}>
+                        LOWER
+                    </Button>
+                </div>
+              </div>
     )
 }
 

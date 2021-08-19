@@ -31,6 +31,11 @@ const Products = () => {
         []
     );
 
+    window.addEventListener('scroll',function(){
+        let hight = window.innerHeight;
+        
+     })
+
     return (
         <div>
             <div className="filters">
