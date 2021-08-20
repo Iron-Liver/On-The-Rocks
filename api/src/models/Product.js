@@ -43,9 +43,6 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    category:{
-      type: DataTypes.STRING,
-    },
     stock:{
       type: DataTypes.INTEGER,
       defaultValue: 10
