@@ -167,8 +167,8 @@ const ProductDetail = () => {
 
     function onSubmitWishlist (){
         dispatch(addProductWishlist({
-            userId: currentUser.id,
-            productId: liqueur.id
+            userId: currentUser?.id,
+            productId: liqueur?.id
         }))
     }
 
@@ -238,7 +238,7 @@ const ProductDetail = () => {
                                 >
                                     <h3>ADD TO CART</h3>
                                 </Button>
-                                <Button
+                                {currentUser && (<Button
                                     variant="contained"
                                     color="primary"
                                     className={classes.buttonWish}
@@ -247,10 +247,10 @@ const ProductDetail = () => {
                                             className={classes.wishIcon}
                                         />
                                     }
-                                    onClick={onSubmitWishlist(currentUser.id, liqueur.id)}
+                                    onClick={onSubmitWishlist(currentUser?.id, liqueur?.id)}
                                 >
                                     
-                                </Button>
+                                </Button>)}
                                 <FormControl
                                     variant="outlined"
                                     className={classes.formControl}
