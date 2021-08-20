@@ -26,7 +26,7 @@ const productsMockUp = async () => {
             price:234.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-ak47_720x.jpg?v=1603236568",
             stock: 10,
-        }),    
+        })    
         kalashnikov.addCategories([5])
       
         const gangstarVodka = await  Product.create({
@@ -38,7 +38,7 @@ const productsMockUp = async () => {
             price:32.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-gangstar-vodka-1_720x.jpg?v=1575786461",
             stock: 10,
-        }),
+        })
         gangstarVodka.addCategories([5])
       
         const patronSilverTequila = await  Product.create({
@@ -49,7 +49,7 @@ const productsMockUp = async () => {
             sku:"a4",
             price:95.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-patron-silver_96205781-102c-4039-953e-b0471b3e4784_720x.jpg?v=1613033306",
-        }),
+        })
         patronSilverTequila.addCategories([6])
       
         const donJulioBlanco = await  Product.create({
@@ -61,7 +61,7 @@ const productsMockUp = async () => {
             price:79.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-don-julio-blanco_720x.jpg?v=1598687753",
             stock: 10,
-        }),
+        })
         donJulioBlanco.addCategories([6])
       
         const joseCuervoEspecial = await  Product.create({
@@ -73,7 +73,7 @@ const productsMockUp = async () => {
             price:43.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jose-cuevo-gold_720x.jpg?v=1559566583",
             stock: 10,
-        }),
+        })
         joseCuervoEspecial.addCategories([6])
       
         const bombaySapphireLondonDry = await  Product.create({
@@ -85,7 +85,7 @@ const productsMockUp = async () => {
             price:47.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-sapphire_720x.jpg?v=1607759796",
             stock: 10,
-        }),
+        })
         bombaySapphireLondonDry.addCategories([10])
       
         const bombaySapphireLondon = await  Product.create({
@@ -97,7 +97,7 @@ const productsMockUp = async () => {
             price:35.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-original-gin_720x.jpg?v=1576236940",
             stock: 10,
-        }),
+        })
         bombaySapphireLondon.addCategories([10])
       
         const hendricksGin = await  Product.create({
@@ -109,7 +109,7 @@ const productsMockUp = async () => {
             price:70.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hendricks-gin_720x.jpg?v=1567926371",
             stock: 10,
-        }),
+        })
         hendricksGin.addCategories([10])
       
         const glenfiddich = await  Product.create({
