@@ -21,4 +21,7 @@ router.use("/auth", auth)
 const mercadopago = require("./mercadopago");
 router.use("/mercadopago", mercadopago);
 
+const wishlist = require("./wishlist");
+router.use("/wishlist", wishlist);
+
 module.exports = router;

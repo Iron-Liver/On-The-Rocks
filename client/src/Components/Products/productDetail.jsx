@@ -15,7 +15,7 @@ import {
     MenuItem,
     InputLabel,
 } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
+import { FavoriteBorder, ShoppingCart } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
@@ -23,6 +23,7 @@ import { getProductReviews } from "../../Redux/Reviews/reviewActions";
 import jwt from "jsonwebtoken";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
+import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -72,6 +73,18 @@ const useStyles = makeStyles((theme) => ({
               },
             
     },
+    buttonWish: {
+        backgroundColor: "white",
+        margin: theme.spacing(1),
+        width: 60,
+        height: 55,
+    },
+    wishIcon: {
+        color: "red",
+        marginLeft: "10px",
+        width: 50,
+        height: 50,
+    },
     review: {
         display: "flex",
         alignItems: "center",
@@ -98,15 +111,17 @@ const ProductDetail = () => {
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
     const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
+    ? jwt.verify(
+        JSON.parse(localStorage.getItem("token")),
+        process.env.REACT_APP_SECRET_KEY
+        )
         : null;
+        console.log("current", currentUser)
     const { id } = useParams();
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
+    console.log("liq", liqueur)
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState("");
@@ -148,6 +163,13 @@ const ProductDetail = () => {
                 swal("Please enter a valid unit");
             }
         }
+    }
+
+    function onSubmitWishlist (){
+        dispatch(addProductWishlist({
+            userId: currentUser.id,
+            productId: liqueur.id
+        }))
     }
 
     return (
@@ -215,6 +237,19 @@ const ProductDetail = () => {
                                     onClick={(e) => onSubmit(e)}
                                 >
                                     <h3>ADD TO CART</h3>
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.buttonWish}
+                                    startIcon={
+                                        <FavoriteBorder
+                                            className={classes.wishIcon}
+                                        />
+                                    }
+                                    onClick={onSubmitWishlist(currentUser.id, liqueur.id)}
+                                >
+                                    
                                 </Button>
                                 <FormControl
                                     variant="outlined"
