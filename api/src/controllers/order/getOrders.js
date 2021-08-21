@@ -20,6 +20,7 @@ module.exports = async (req, res, next) => {
         "total",
         "createdAt",
         "status",
+        "date"
       ],
       order: [[sort, type]]
     }

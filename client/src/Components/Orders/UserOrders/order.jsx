@@ -1,58 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import { Box, Button, Hidden } from "@material-ui/core"; 
 import axios from 'axios';
+import './order.css';
+import { Button, Avatar, Menu, MenuItem, IconButton } from '@material-ui/core';
+import { AvatarGroup } from '@material-ui/lab';
+import { MoreVert } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css"
+import "swiper/components/pagination/pagination.min.css"
+
+// import Swiper core and required modules
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard
+} from 'swiper/core';
+
+// install Swiper modules
+SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard]);
 
 
-const useStyles = makeStyles((theme) => ({
-  orderContainer: {
-    width: "98%",
-    margin: "10px"
-  },
-  root: {
-    display: "flex",
-    height: "250px"
-  },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-    flexGrow: "1",
-  },
-  content: {
-    flex: "1 0 auto",
-  },
-  imgContainer: {
-    padding: "20px"
-  },
-  cover: {
-    objectFit: "fill",
-    width: "150px"
-  },
-  controls: {
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  buttons: {
-    marginRight: "10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-  },
-  moreIcon: {
-    marginRight: "5px"
-  }
-}));
+const Order = ({ order, handleSubmit }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
-const Order = ({ order, userId, handleSubmit }) => {
-  const classes = useStyles();
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleRemove = async (e) => {
     let doubleCheck = window.confirm(
@@ -70,57 +52,125 @@ const Order = ({ order, userId, handleSubmit }) => {
   };
 
   return (
-    <div className={classes.orderContainer}>
-      <Card className={classes.root}>
-        <Box className={classes.imgContainer}>
-          <img
-            className={classes.cover}
-            src={order.order_products 
-              ? order.order_products[0]?.product?.image 
-                ? order.order_products[0].product.image 
-                : "https://i.stack.imgur.com/y9DpT.jpg" 
-              : "https://i.stack.imgur.com/y9DpT.jpg"
-            }
-            alt="orderproduct"
-          />
-        </Box>
-        <Box component="div" className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography component="h6" variant="h6">
-              Order #{order.id}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-              Full name: {`${order.firstName} ${order.lastName}`}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-              Date: {order.createdAt.split("T")[0]}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-              Address: {order.address}
-            </Typography>
-          </CardContent>
-        </Box>
-        <Hidden xsDown>
-          <Box m={1} className={classes.buttons}>
-            <Button variant="contained" color="primary" onClick={handleRemove}>
-              Delete Order
-            </Button>
-            <Link to={`/order/${order.id}`}>
-              <Button variant="contained" color="primary">
-                Order Details
+    <>
+    {order && 
+      <div className="user-order-container">
+        <div className="user-order-inner">
+          <div className="user-order-info">
+            <div className="user-order-img-container">
+              <Swiper
+                pagination={order.order_products.length > 1}
+                mousewheel={true} 
+                keyboard={true}
+                style={{ height: "100%", display: "flex"}}
+              >
+                {order.order_products.map(({ product }) => 
+                  <SwiperSlide 
+                    key={Math.random() * 3}
+                    style={{ textAlign: "center"}}
+                  >
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      draggable={false}
+                      className="user-order-img"
+                      width="100px"
+                    />
+                  </SwiperSlide>
+                )}
+              </Swiper>
+            </div>
+            <div className="user-order-text-container">
+              <div className="user-order-header">
+                <h4 className="user-order-text-item user-order-grow">Order #{order.id}</h4>
+                <div className="user-order-actions-responsive">
+                  <IconButton
+                    aria-label="more"
+                    aria-controls="long-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                    style={{ margin: 0, padding: 0 }}
+                  >
+                    <MoreVert />
+                  </IconButton>
+                  <Menu
+                    id="long-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: {
+                        maxHeight: 40 * 4.5,
+                        width: '20ch',
+                      },
+                    }}
+                  >
+                    <Link 
+                      to={`/order/${order.id}`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      <MenuItem>
+                        Order details
+                      </MenuItem>
+                    </Link>
+                    <MenuItem  
+                      onClick={handleRemove}
+                    >
+                      Remove Order
+                    </MenuItem>
+                  </Menu>
+                </div>
+              </div>
+              <h4 className="user-order-text-item user-order-status">Status: {order.status}</h4>
+              <h4 className="user-order-text-item">{`${order.firstName} ${order.lastName}`}</h4>
+              <h4 className="user-order-text-item">{`${order.address}, ${order.city}`}</h4>
+              <div className="user-order-products-responsive user-order-grow">
+                <AvatarGroup max={4}>
+                  {order.order_products.map(({product}) => 
+                    <Avatar 
+                      style={{ width: "70px", height: "70px", border: "1px solid #d3d3d3bb" }} 
+                      alt={product.name} 
+                      src={product.image} 
+                      key={Math.random()}
+                    />
+                  )}
+                </AvatarGroup>
+              </div>
+              <h4 className="user-order-text-item">Total: $ {order.total}</h4>
+            </div>
+          </div>
+          <div className="user-order-actions">
+            <Link 
+              to={`/order/${order.id}`}
+              style={{ textDecoration: "none", color: "black" }}
+              draggable={false}
+            >
+              <Button 
+                variant="contained"
+                style={{ 
+                  background: "#3b3024dd",
+                  color: "white"
+                }}
+              >
+                ORDER DETAILS
               </Button>
             </Link>
-          </Box>
-        </Hidden>
-        <Hidden smUp>
-          <Box className={classes.moreIcon}>
-            <IconButton edge="end" color="inherit" aria-label="menu">
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Hidden>
-      </Card>
-    </div>
+            <Button
+              variant="contained"
+              style={{ 
+                background: "#3b3024dd",
+                color: "white",
+                marginTop: "15px"
+              }}
+              onClick={handleRemove}
+            >
+              REMOVE ORDER
+            </Button>
+          </div>
+        </div>
+      </div>}
+    </>
   );
 }
 

@@ -29,6 +29,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { getProducts } from "../../Redux/Products/productsActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { logOutUser } from '../../Redux/Users/userActions';
+import jwt from 'jsonwebtoken';
 
 const useStyles = makeStyles((theme) => ({
   autocomplete: {
@@ -121,6 +122,12 @@ icon:{
 export const MenuList = ({ handleDrawerMenu }) => {
   const dispatch = useDispatch();
 
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
+  const userId = localProfile?.id 
+
   const logOut = () => {
     dispatch(logOutUser());
   };
@@ -177,7 +184,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
         {localStorage.getItem("token") ? (
           <>
             <Link
-              to="/orders"
+              to={`/profile/${userId}/orders`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItem button>

@@ -57,7 +57,7 @@ const CreateOrder = () => {
       id: currentUser.id,
       paymentMethod: 'mercadopago' ,
       total: JSON.parse(localStorage.getItem('data')).reduce((acc, el) => {
-        return acc = acc + el.price * el.units
+        return acc = parseInt(acc) + parseInt(el.price)
       }, 0).toFixed(2), 
       cart: JSON.parse(localStorage.getItem('data')).map(({id, units, price}) => {
         return {

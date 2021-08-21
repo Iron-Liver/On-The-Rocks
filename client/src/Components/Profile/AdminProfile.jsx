@@ -1,10 +1,12 @@
+import './Profile.css';
 import React, { useEffect } from 'react'
 import { Route, Switch, useHistory, useParams, useRouteMatch } from 'react-router-dom'
 import CategoryList from '../Categories/CategoryList/categoryList';
-import AdminOrders from '../Orders/AdminOrders/AdminOrders';
+import AdminOrdersNew from '../Orders/AdminOrders/AdminOrdersNew';
 import ProductsList from '../Products/ProductsList/productsList';
 import UserList from '../Users/UserList/userList';
-import AdminPanel from './Admin/AdminPanel';
+import AdminSidePanel from './Admin/AdminSidePanel';
+import AdminTopPanel from './Admin/AdminTopPanel';
 import jwt from 'jsonwebtoken'
 
 const AdminProfile = () => {
@@ -28,15 +30,18 @@ const AdminProfile = () => {
   }, [id, history, localProfile]);
 
   return (
-    <div style= {{display: "flex", justifyContent: "space-evenly"}}>
-      <AdminPanel id={id}/>
+    <div className="profile-container">
+      <AdminSidePanel />
+      <AdminTopPanel />
       <Switch>
-        <Route exact path={path} children={<h1>Dashboard</h1>} />
-        <Route exact path={`${path}/dashboard`} children={<h1>Dashboard</h1>} />
-        <Route exact path={`${path}/orders`} component={AdminOrders} />
-        <Route exact path={`${path}/categories`} component={CategoryList} />
-        <Route exact path={`${path}/products`} component={ProductsList} />
-        <Route exact path={`${path}/users`} component={UserList} />
+        <div className="profile-tab-content">
+          <Route exact path={path} children={<h1>Dashboard</h1>} />
+          <Route exact path={`${path}/dashboard`} children={<h1>Dashboard</h1>} />
+          <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
+          <Route exact path={`${path}/categories`} component={CategoryList} />
+          <Route exact path={`${path}/products`} component={ProductsList} />
+          <Route exact path={`${path}/users`} component={UserList} />
+        </div>
       </Switch>
     </div>
   )

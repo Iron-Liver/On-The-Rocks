@@ -33,8 +33,15 @@ const ProductCard = ({ spirit }) => {
     <div className="containerproducts">
         <div className="card">
             <div className="imgBx">
-              <Link to={`/products/${spirit.id}`}>
-                <img src={spirit.image} alt="Licorimage"/>
+              <Link 
+                to={`/products/${spirit.id}`} 
+                draggable={false}
+              >
+                <img 
+                  src={spirit.image} 
+                  alt="Licorimage"
+                  draggable={false}
+                />
               </Link>
             </div>
             <div className="contentBx">
