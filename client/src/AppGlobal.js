@@ -1,6 +1,5 @@
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import theme from './Utils/theme';
 
 //User imports
 import LoginUser from './Components/Users/UserLogin/userLogin'
@@ -29,8 +28,7 @@ import Error404 from './Components/Error404/Error404';
 import CreateOrder from './Components/Orders/CreateOrder/createOrder';
 import MercadoPago from './Components/Mercadopago/Mercadopago';
 import Footer from './Components/Footer/footer';
-// import Brands from './Components/Brands/Brands';
-// import { CallReceived } from '@material-ui/icons';
+
 
 
 const AppGlobal = () => {
