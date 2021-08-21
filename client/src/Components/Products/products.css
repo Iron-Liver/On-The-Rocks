@@ -136,3 +136,12 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.price{
+  text-decoration: line-through;
+  
+}
+
+.hs{
+  color: red;
+}

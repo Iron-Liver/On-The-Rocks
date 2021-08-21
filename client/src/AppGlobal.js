@@ -12,6 +12,7 @@ import CategoryDetail from './Components/Categories/CategoryDetail/categoryDetai
 //Product imports
 import Products from './Components/Products/products';
 import ProductDetail from './Components/Products/productDetail';
+import onSale from './Components/OnSale/onSale'
 //Order imports
 import OrderDetail from './Components/Orders/OrderDetail/orderDetail';
 //Private routes imports
@@ -28,8 +29,8 @@ import AdminFeatures from './Components/Admin/AdminFeatures';
 import Error404 from './Components/Error404/Error404';
 import CreateOrder from './Components/Orders/CreateOrder/createOrder';
 import MercadoPago from './Components/Mercadopago/Mercadopago';
-import Stock from './Components/Products/Stock';
-
+/* import Stock from './Components/Products/Stock';
+ */
 
 const AppGlobal = () => {
 
@@ -40,7 +41,7 @@ const AppGlobal = () => {
 				<NavBar/>
 				<Switch>
 					<Route exact path="/" component={landingPage} />
-					<Route exact path="/stock" component={Stock} />
+					{/* <Route exact path="/stock" component={Stock} /> */}
 					<Route exact path="/login" component={LoginUser} />
 					<Route exact path="/register" component= {CreateUser} />
 					<Route path="/verify/password" component={ResetPassword} />
@@ -49,6 +50,7 @@ const AppGlobal = () => {
 					<Route exact path="/createOrder" component={CreateOrder} />
 					<Route exact path="/products/:id" component={ProductDetail} />
 					<Route exact path='/category/:id' component={CategoryDetail} />
+					<Route exact path = '/sale' component={onSale} />
 					<AuthRoute exact path="/order/:id" component={OrderDetail}/>
           <AuthRoute exact path="/mercadopago/:orderId" component={MercadoPago}/>
 					<UserRoute path="/profile/:userId" component={UserProfile} />

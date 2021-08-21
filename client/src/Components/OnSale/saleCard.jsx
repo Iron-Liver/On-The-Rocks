@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './products.css';
+import './onSale.css';
 import { addProductCart } from '../../Redux/Cart/cartActions';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ spirit }) => {
+const SaleCard = ({ spirit }) => {
 
   const [currentSpirit, setCurrentSpirit] = useState();
 
@@ -18,13 +18,24 @@ const ProductCard = ({ spirit }) => {
     if (date.length > 0 && data.length > 0){
          swal("The product is already in the cart!")
     } else {
-      addProductCart({
-        units: 1,
-        id: currentSpirit.id,
-        price: currentSpirit.price,
-        image: currentSpirit.image,
-        name: currentSpirit.name
-      });
+     if(!currentSpirit.onSale)
+     {
+         addProductCart({
+           units: 1,
+           id: currentSpirit.id,
+           price: currentSpirit.price,
+           image: currentSpirit.image,
+           name: currentSpirit.name
+         });
+     }else{
+        addProductCart({
+            units: 1,
+            id: currentSpirit.id,
+            price: currentSpirit.onSale,
+            image: currentSpirit.image,
+            name: currentSpirit.name
+          })
+     }
       swal("The product was added to the cart!")   
     }
   }
@@ -57,7 +68,7 @@ const ProductCard = ({ spirit }) => {
                         disabled={spirit.stock < 1} 
                         onClick={handleAddToCart}
                       >
-                        Add to cart
+                       Add to cart
                       </button>
                   </div>
               </div>
@@ -67,4 +78,4 @@ const ProductCard = ({ spirit }) => {
   )
 }
 
-export default ProductCard
+export default SaleCard
