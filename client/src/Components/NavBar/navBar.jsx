@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarSolid: {
     width: '100%',
-    background: "#493d30ee",
+    background: "#292F36ee",
     transition: 'background 300ms ease-out'
   },
   menu: {
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "12px"
   },
   blackColor: {
-    color: "#493d30"
+    color: "#292F36"
   }
 }));
 

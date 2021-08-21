@@ -31,7 +31,7 @@ const ProductCard = ({ spirit }) => {
 
   return (
     <div className="containerproducts">
-        <div className="card">
+        <div className="product-card">
             <div className="imgBx">
               <Link to={`/products/${spirit.id}`}>
                 <img src={spirit.image} alt="Licorimage"/>

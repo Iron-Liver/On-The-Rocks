@@ -18,6 +18,7 @@ import 'aos/dist/aos.css'
 import SwiperCore, {
   Navigation
 } from 'swiper/core';
+import Brands from '../Brands/Brands';
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -30,7 +31,7 @@ SwiperCore.use([Navigation]);
 export const LandingPage = () => {
 
     useEffect(() => {
-      Aos.init({duration:2500})
+      Aos.init({duration:2000})
     }, []);
 
 
@@ -49,18 +50,18 @@ export const LandingPage = () => {
               owned business providing premium and collectable ranges of spirits.
           </h1>
         </div>
-        {/* <div className="slider">
-        <Swiper navigation={true}>
+        <div className="slider">
+        {/* <Swiper navigation={true}>
           <SwiperSlide >
             <img src={image1} className="img1" alt='img1'></img>
           </SwiperSlide>
           <SwiperSlide>
             <img src={image2} className="img1" alt="img2"></img>
           </SwiperSlide>
-        </Swiper>
-
-        </div> */}
-        <div data-aos="zoom-out" className="AboutUsContainer">
+        </Swiper> */
+        }
+        </div>
+        <div data-aos="fade-up" className="AboutUsContainer">
           <h2 style={{color:'black'}}>About us</h2>
           <div class="container2">
             <div class="card">
@@ -93,12 +94,11 @@ export const LandingPage = () => {
               </figure>
             </div>
           </div>
-
         </div>
-            <div>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse nesciunt voluptate quis tenetur saepe ex reiciendis, quidem sapiente a beatae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse nesciunt voluptate quis tenetur saepe ex reiciendis, quidem sapiente a beatae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse nesciunt voluptate quis tenetur saepe ex reiciendis, quidem sapiente a beatae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse nesciunt voluptate quis tenetur saepe ex reiciendis, quidem sapiente a beatae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse  ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse nesciunt voluptate quis tenetur saepe ex reiciendis, quidem sapiente a beatae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse nesciunt voluptate quis tenetur saepe ex reiciendis, quidem sapiente a beatae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse nesciunt voluptate quis tenetur saepe ex reiciendis, quidem sapiente a beatae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolor eligendi nostrum recusandae accusantium ab suscipit obcaecati esse nesciunt voluptate quis tenetur saepe ex reiciendis, quidem sapiente a beatae maiores.</p>
-              
-            </div>
+          <div  className="containerBrands">
+        <h1>Shop By Type</h1>
+              <Brands />
+          </div>
         </div>
     )
 }

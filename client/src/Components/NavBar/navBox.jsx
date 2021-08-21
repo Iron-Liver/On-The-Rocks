@@ -40,10 +40,12 @@ const useStyles = makeStyles((theme) => ({
         transition: 'all 0.35s ease-out',
     },
     blackBack: {
-      backgroundColor: "#493d30"
+      backgroundColor: "#2E0F14"
     },
     blackColor: {
-      color: "#493d30"
+      color: "#292F36",
+      fontFamily: 'Montserrat',
+      fontWeight: '500'
     }
 
 

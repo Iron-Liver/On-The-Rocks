@@ -14,9 +14,7 @@
 .landinghead {
   width: 100%;
   height: 62vh;
-  background: #0F2027;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, hsla(78, 44%, 17%, 0.61), hsla(194, 35%, 19%, 0.7), hsla(198, 43%, 11%, 0.405));  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, hsla(78, 44%, 17%, 0.61), hsla(194, 35%, 19%, 0.631), hsla(198, 43%, 11%, 0.453)), url('../../assets/Fondo.jpg'); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to bottom, rgba(18, 18, 28, 0.426), rgba(51, 49, 49, 0.426), rgba(0, 0, 0, 0.597)),  url('../../assets/Fondo.jpg'); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   background-attachment: fixed;
   position: absolute;
@@ -53,7 +51,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 100px;
 }
 
 .AboutUsContainer h2 {
@@ -173,4 +171,18 @@
   .card__snippet {
     margin: 60px 0;
   }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.containerBrands{
+  margin-top: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
