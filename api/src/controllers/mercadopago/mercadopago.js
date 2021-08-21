@@ -39,6 +39,7 @@ module.exports = async (req, res, next) => {
         failure: `${FRONT}/status/mercadopago/failure`,
         pending: `${FRONT}/status/mercadopago/pending`
       },
+      auto_return: "all",
       notification_url: `${WEBHOOK_BACK}/mercadopago/webhook?source_news=webhooks`
     }
 
