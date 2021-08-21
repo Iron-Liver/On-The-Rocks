@@ -38,7 +38,7 @@ const AppGlobal = () => {
 	
     return (
 			<Router>
-				<div style={{minHeight:'calc(100vh - 167px)'}}>
+				<div style={{minHeight:'calc(100vh - 150px)'}}>
 				<NavBar/>
 				<Switch>
 					<Route exact path="/" component={LandingPage} />

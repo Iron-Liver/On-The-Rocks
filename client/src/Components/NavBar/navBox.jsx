@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: "nowrap",
         width: "100%",
         justifyContent: "space-around",
-        
+        fontFamily: 'Montserrat',
     },
     text: {
         position: "relative",

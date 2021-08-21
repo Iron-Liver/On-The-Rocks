@@ -1,5 +1,5 @@
 .containerShare {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -26,10 +26,8 @@
 
 .containerShare {
   display: flex;
-  justify-content: flex-end;
-  position: relative;
-  float: right;
-  margin: 0 0 80px;
+
+
 }
 
 .tip {
