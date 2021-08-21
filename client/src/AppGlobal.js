@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@material-ui/core'
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import theme from './Utils/theme';
 
@@ -29,15 +29,14 @@ import Error404 from './Components/Error404/Error404';
 import CreateOrder from './Components/Orders/CreateOrder/createOrder';
 import MercadoPago from './Components/Mercadopago/Mercadopago';
 import Footer from './Components/Footer/footer';
-import Brands from './Components/Brands/Brands';
-import { CallReceived } from '@material-ui/icons';
+// import Brands from './Components/Brands/Brands';
+// import { CallReceived } from '@material-ui/icons';
 
 
 const AppGlobal = () => {
 
 	
     return (
-		// <ThemeProvider theme={theme}>
 			<Router>
 				<div style={{minHeight:'calc(100vh - 167px)'}}>
 				<NavBar/>
@@ -59,7 +58,7 @@ const AppGlobal = () => {
 					<Route path="*" component={Error404} /> 
 				</Switch>
 				</div>
-        {/* <Footer/> */}
+        <Footer/>
 			</Router>
 		// </ThemeProvider>
 	)

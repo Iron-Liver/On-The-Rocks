@@ -2,6 +2,17 @@ const { Product } = require('../../db');
 
 const productsMockUp = async () => {
     try {
+        const test = await Product.create({
+          name: "test product",
+          description: "a test product",
+          price: 0.50,
+          sku: "n8",
+          size: "2 mL",
+          brand: "Test",
+          category: "Test",
+          image: "https://d1es63ffnb4bhv.cloudfront.net/easyarticles/images/users/6128/test.jpg"
+        })
+        test.addCategories([5]);
         const absolut = await Product.create({
             name: "Absolut Vodka 1L",
             description: "With 400 years of Swedish tradition behind it, this superb Vodka is extremely smooth. Using the purest Swedish water from the town of Åhus and wheat grown in the surrounding countryside Absolut have maintained the tradition of pure and perfect Swedish Vodka.",

@@ -1,0 +1,38 @@
+.admin-orders-filter-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.filters-basics-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  align-items: baseline;
+}
+
+.filters-basics-container div input[type=text], 
+.filters-basics-container select,
+.admin-order-filter-input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  margin: 0 0 5px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #493d30ee;
+  outline: none;
+}
+
+.admin-orders-sort-submit label {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0 0 5px 20px;
+  font-size: 15px;
+}
+
+.admin-orders-sort-submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}

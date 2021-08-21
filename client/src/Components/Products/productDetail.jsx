@@ -175,6 +175,7 @@ const ProductDetail = () => {
                                 className={classes.cover}
                                 src={liqueur.image}
                                 alt={liqueur.name}
+                                draggable={false}
                             />
                         </div>
                         <div className={classes.details}>

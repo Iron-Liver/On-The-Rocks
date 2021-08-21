@@ -1,0 +1,159 @@
+import './filters.css'
+import React from 'react';
+import { Button } from '@material-ui/core';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@material-ui/core";
+
+import { ExpandMore } from '@material-ui/icons'
+
+const Filters = ({ handleSubmit, handleChange, handleSort, form }) => {
+  return (
+    <form onSubmit={handleSubmit} className="admin-orders-filter-form">
+      <Accordion
+        className="filter-accordion"
+        elevation={false}
+        style={{
+          background: "transparent"
+        }}
+      >
+        <AccordionSummary
+          className="filter-accordion-summary"
+          expandIcon={<ExpandMore />}
+        >
+          <h4
+            style={{
+              margin: 0,
+              fontWeight: 300
+            }}
+          >
+            Basic filters
+          </h4>
+        </AccordionSummary>
+        <AccordionDetails style={{ margin: 0, padding: 0 }}>
+        <input
+            type="text"
+            placeholder="First name"
+            name="firstName"
+            onChange={handleChange}
+            value={form.filterBy.firstName || ""}
+            className="admin-order-filter-input"
+        />
+        </AccordionDetails>
+        <AccordionDetails style={{ margin: 0, padding: 0 }}>
+        <input
+            type="text"
+            placeholder="Total"
+            name="total"
+            onChange={handleChange}
+            value={form.filterBy.total || ""}
+            className="admin-order-filter-input"
+          />
+        </AccordionDetails>
+        <AccordionDetails style={{ margin: 0, padding: 0 }}>
+          <label htmlFor="status">
+            <select
+              id="status"
+              name="status"
+              defaultValue=""
+              onChange={handleChange}
+              className="admin-order-filter-input"
+            >
+              <option value="">
+                Status
+              </option>
+              <option value="pending">Pending</option>
+              <option value="created">Created</option>
+              <option value="processing">Processing</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </label>
+        </AccordionDetails>
+      </Accordion>
+      
+      <Accordion
+        className="filter-accordion"
+        elevation={false}
+        style={{
+          background: "transparent"
+        }}
+      >
+        <AccordionSummary
+          className="filter-accordion-summary"
+          expandIcon={<ExpandMore />}
+        >
+          <h4
+            style={{
+              margin: 0,
+              fontWeight: 300
+            }}
+          >
+            Advanced filters
+          </h4>
+        </AccordionSummary>
+        <AccordionDetails style={{ margin: 0, padding: 0 }}>
+          <input
+            type="text"
+            placeholder="Last name"
+            name="lastName"
+            onChange={handleChange}
+            value={form.filterBy.lastName || ""}
+            className="admin-order-filter-input"
+          />
+        </AccordionDetails>
+        <AccordionDetails style={{ margin: 0, padding: 0 }}>
+          <input
+            type="text"
+            placeholder="Address"
+            name="address"
+            onChange={handleChange}
+            value={form.filterBy.address || ""}
+            className="admin-order-filter-input"
+          />
+        </AccordionDetails>
+        <AccordionDetails style={{ margin: 0, padding: 0 }}>
+          <input
+            type="text"
+            placeholder="City"
+            name="city"
+            onChange={handleChange}
+            value={form.filterBy.city || ""}
+            className="admin-order-filter-input"
+          />
+        </AccordionDetails>
+      </Accordion>
+      <div className="admin-orders-sort-submit">
+        <label htmlFor="status"> Sort By:
+          <select
+            id="status"
+            name="status"
+            value={form.orderBy}
+            onChange={handleSort}
+            className="admin-order-filter-input"
+          >
+            <option value="id-DESC-">Order ID Desc</option>
+            <option value="id-ASC">Order ID Asc</option>
+            <option value="createdAt-DESC">Date Desc</option>
+            <option value="createdAt-ASC">Date Asc</option>
+            <option value="total-DESC">Total Desc</option>
+            <option value="total-ASC">Total Asc</option>
+            <option value="firstName-DESC">First Name Desc</option>
+            <option value="firstName-ASC">First Name Asc</option>
+          </select>
+        </label>
+        <Button 
+          type="submit"
+          variant="contained"
+          style={{ background: "#493d30ee", color: "white", margin: "5px 10px 0 0", alignSelf: "flex-end" }}
+        >
+          Filter
+        </Button>
+      </div>
+    </form>
+  )
+}
+
+export default Filters

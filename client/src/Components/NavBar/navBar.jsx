@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     outline: 'none',
-    backgroundColor: "d3d3d3"
+    backgroundColor: "d3d3d3",
+    borderBottom: "1px solid #d3d3d3"
   },
   appBar: {
     width: '100%',
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     background: "transparent"
   },
   blank: {
-    marginTop: "90px"
+    marginTop: "77.13px"
   },
   drawerPaper: {
     width: '70%',
@@ -79,8 +80,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3)
   },
   navLogo: {
-    width: "120px",
-    marginTop: "12px"
+    width: "100px",
+    marginTop: "8px"
   },
   blackColor: {
     color: "#292F36"
@@ -89,7 +90,6 @@ const useStyles = makeStyles((theme) => ({
 
 function NavBar(props) {
   const dispatch = useDispatch()
-  // const { window } = props;
   const classes = useStyles();
   const history = useHistory();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
@@ -139,10 +139,6 @@ function NavBar(props) {
     setCartDrawerOpen(!cartDrawerOpen);
   };
 
-  // const container =
-  //   window !== undefined ? () => window().document.body : undefined;
-
-
   return (
     <div>
     <div  className={classes.root}>
@@ -151,19 +147,25 @@ function NavBar(props) {
         <Toolbar className={classes.toolbar}>
 
           <div style={{flexGrow: "1", width: "100%"}}>
-              <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
+              <Link 
+                to="/" 
+                style={{textDecoration: 'none', color: 'white'}}
+                draggable={false}
+              >
                 {
                   solid ? (
                     <img 
                       src={logoWhite} 
                       alt="on-the-rocks-logo" 
                       className={classes.navLogo}
+                      draggable={false}
                     />
                     ) : (
                     <img 
                       src={logoBrown} 
                       alt="on-the-rocks-logo" 
                       className={classes.navLogo}
+                      draggable={false}
                     />
                   )
                 }

@@ -13,7 +13,7 @@ const useFormStyles = makeStyles((theme)=>({
 		display:'flex',
 		justifyContent: 'center',
     fontFamily: `"Heebo", sans-serif`,
-    color: '#493d30',
+    color: 'black',
     margin: 0,
     padding: "30px 0 0 0" 
 	},

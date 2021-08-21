@@ -75,6 +75,7 @@ const Products = () => {
                   count={Math.ceil(FoundProds.length / 6)} 
                   page={page}
                   onChange={(e, val) => setPage(val)}
+                  size="small"
                 />
                 <div className="content">
                     {
@@ -87,7 +88,8 @@ const Products = () => {
                   count={Math.ceil(FoundProds.length / 6)} 
                   page={page}
                   onChange={(e, val) => setPage(val)}
-                  />
+                  size="small"
+                />
               </div>
           </div>
       </div>

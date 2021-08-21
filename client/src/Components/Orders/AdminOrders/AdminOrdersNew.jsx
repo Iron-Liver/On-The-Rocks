@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Order from "./order";
+import OrderNew from "./orderNew";
 import axios from "axios";
 import jwt from 'jsonwebtoken'
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from '@material-ui/lab';
-import './userOrders.css'
 import Filters from "./filters";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +22,7 @@ const initialFilters = {
   itemsPerPage: 4
 };
 
-const UserOrders = () => {
+const AdminOrdersNew = () => {
   const [orders, setOrders] = useState({});
   const [form, setForm] = useState(initialFilters);
   const [page, setPage] = useState(1);
@@ -35,7 +34,7 @@ const UserOrders = () => {
 
 
   useEffect(() => {
-    (async () => {
+    (async () => {      
       try {
         const localProfile = JSON.parse(localStorage.getItem('token')) ? 
         jwt.verify(JSON.parse(localStorage.getItem('token')), 
@@ -45,8 +44,7 @@ const UserOrders = () => {
         }
         const response = await axios.post("/order/getOrders", {
           ...initialFilters,
-          page: 1,
-          userId
+          page: 1
         });
         setOrders(response.data);
       } catch (error) {
@@ -55,13 +53,13 @@ const UserOrders = () => {
     })();
   }, [history, userId]);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("/order/getOrders", {
         ...form,
-        page: 1,
-        userId
+        page: 1
       });
       setOrders(response.data);
       setPage(1);
@@ -101,8 +99,7 @@ const UserOrders = () => {
       try {
         const response = await axios.post("/order/getOrders", {
           ...form,
-          page,
-          userId
+          page
         });
         setOrders(response.data);
       } catch (error) {
@@ -110,61 +107,74 @@ const UserOrders = () => {
       }
     })()
   //eslint-disable-next-line
-  },[page, history, userId])
+  },[page, history])
 
   const handlePageChange = (e, val) => {
     setPage(val);
   };
 
+  const setOrderStatus = (status, id) => {
+    const order = orders.data.find(order => order.id === id);
+    const orderIndex = orders.data.findIndex(order => order.id === id);
+    order.status = status;
+
+    const newData = [...orders.data];
+    newData[orderIndex] = order;
+
+    setOrders({
+      ...orders,
+      data: newData
+    })
+  };
+
   return (
-    <div style={{ width: "100%" }}>
-      <Filters 
-        handleSort={handleSort}
-        handleSubmit={handleSubmit} 
-        handleChange={handleChange} 
-        form={form}
-      />
-      <div className={classes.paginationContainer}>
-        <div>
+    <main style={{ width: "100%" }}>
+      <header>
+        <Filters 
+          handleSort={handleSort}
+          handleSubmit={handleSubmit} 
+          handleChange={handleChange} 
+          form={form}
+        />
+      </header>
+        <nav className={classes.paginationContainer}>
           <Pagination
             count={orders.pages}
             page={page}
             onChange={handlePageChange}
             size="small"
           />
-        </div>
-      </div>
+        </nav>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           margin: "20px 0",
-          minHeight: "111.3vh"
+          minHeight: "83.6vh"
         }}
       >
         {orders.data &&
           orders.data.map(order => (
-            <Order 
+            <OrderNew 
               order={order} 
               key={Math.random()}
               handleSubmit={handleSubmit}
+              setOrderStatus={setOrderStatus}
             />
           ))
         }
       </div>
-      <div className={classes.paginationContainer}>
-        <div>
-          <Pagination
-            count={orders.pages}
-            page={page}
-            onChange={handlePageChange}
-            size="small"
-          />
-        </div>
-      </div>
-    </div>
+      <nav className={classes.paginationContainer}>
+        <Pagination
+          count={orders.pages}
+          page={page}
+          onChange={handlePageChange}
+          size="small"
+        />
+      </nav>
+    </main>
   );
 }
 
-export default UserOrders
+export default AdminOrdersNew

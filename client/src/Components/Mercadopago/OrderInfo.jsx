@@ -159,7 +159,7 @@ const OrderInfo = ({ order }) => {
                               <strong> ${order.unitPrice} </strong>
                             </>
                           ) : (
-                            <>${order.unitPrice} </>
+                            <>${order.unitPrice / order.units} </>
                           )}
                           x {order.units}
                         </Typography>
@@ -177,7 +177,7 @@ const OrderInfo = ({ order }) => {
                       </div>
                       <div>
                         <Typography variant="body2">
-                        <>${order.unitPrice} </>
+                        <>${order.unitPrice / order.units} </>
                         x {order.units}
                         </Typography>
                       </div>
