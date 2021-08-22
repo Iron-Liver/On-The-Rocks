@@ -216,13 +216,13 @@ const ProductDetail = () => {
         <h3>ADD TO CART</h3>
     </Button>
 
-    if (liqueur.stock <= 5) {
+    if (liqueur?.stock <= 5) {
         stockText = <div>
             <Info style={{ color: red[500] }} />
             <span>Low Stock</span>
         </div>
     }
-    if (liqueur.stock <= 0) {
+    if (liqueur?.stock <= 0) {
         stockText = <div>
             <Info color="disabled" />
             <span>No Stock</span>
