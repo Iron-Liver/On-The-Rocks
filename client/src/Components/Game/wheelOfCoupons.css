@@ -25,8 +25,5 @@
     width: 50%;
 }
 .button {
-    display: block;
-    width: 250px;
-    margin: 40px auto;
-    cursor: pointer;
+    margin-top:2vh
 }

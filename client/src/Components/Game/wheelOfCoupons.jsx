@@ -4,18 +4,19 @@ import { motion } from "framer-motion";
 import jwt from "jsonwebtoken";
 import "./wheelOfCoupons.css";
 import audio from "./Wheel_of_cupons.mp3";
+import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
 
 export const WheelOfCoupons = () => {
     const currentUser = JSON.parse(localStorage.getItem("token"))
         ? jwt.verify(
-            JSON.parse(localStorage.getItem("token")),
-            process.env.REACT_APP_SECRET_KEY
-        )
+              JSON.parse(localStorage.getItem("token")),
+              process.env.REACT_APP_SECRET_KEY
+          )
         : null;
 
     const dispatch = useDispatch();
-    const {coins} = useSelector((state) => state.userReducer)
+    const { coins } = useSelector((state) => state.userReducer);
     const [idle, setIdle] = React.useState(true);
     const [state, setState] = React.useState();
     const [degrees, setDegrees] = React.useState(0);
@@ -23,7 +24,7 @@ export const WheelOfCoupons = () => {
 
     React.useEffect(() => {
         dispatch(getCoins(currentUser?.id));
-    },[idle,dispatch]);
+    }, [idle, dispatch]);
 
     const variants = {
         idle: {},
@@ -95,22 +96,21 @@ export const WheelOfCoupons = () => {
         new Audio(audio).play();
     };
 
-
     const addCoupon = () => {
         //Here is where i would add a coupon to user but we dont have any coupon system yet
     };
 
     const spin = () => {
-        dispatch(removeCoin(currentUser?.id))
+        dispatch(removeCoin(currentUser?.id));
         playAudio();
         const discount = generateAward();
         setState(true);
         setIdle(false);
         setTimeout(async () => {
-            if(discount){
-                alert(`Congratulations! You got a %${discount} discount!`)
-                addCoupon()
-            }else{
+            if (discount) {
+                alert(`Congratulations! You got a %${discount} discount!`);
+                addCoupon();
+            } else {
                 alert("Thats so sad! Maybe you ll get it another time c:");
             }
             setState(false);
@@ -122,14 +122,14 @@ export const WheelOfCoupons = () => {
         <div className="game-container">
             <div>
                 <h2>How to play</h2>
-                <p>Just press Spin and close ur eyes!</p>
+                <p>Just press the button and close your eyes!</p>
                 <h2>How to get more coins</h2>
                 <p>You will get coins every $1000 spent.</p>
                 <p>¿Cool right?</p>
             </div>
             <div className="roulette-container">
                 <h1>Cupon Roulette</h1>
-                <div >
+                <div>
                     <motion.img
                         variants={variants}
                         animate={idle ? "idle" : state ? "start" : "end"}
@@ -148,13 +148,10 @@ export const WheelOfCoupons = () => {
                         alt="roulette_arrow"
                     />
                 </div>
-                <span>remaining coins: {coins}</span>
-                <input
-                    type="button"
-                    onClick={spin}
-                    className="button"
-                    value="Spin"
-                />
+                <span>Remaining coins: {coins}</span>
+                <Button classes="button" size="large" disabled={!idle} variant="outlined" color="primary" type="button" onClick={spin} className="button">
+                    Spin it!
+                </Button>
             </div>
         </div>
     );
