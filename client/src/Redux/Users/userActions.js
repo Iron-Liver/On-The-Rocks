@@ -48,7 +48,6 @@ export function loginUser(login) {
                 token.data,
                 process.env.REACT_APP_SECRET_KEY
             );
-            alert(email);
             localStorage.setItem("token", JSON.stringify(token.data));
             dispatch({ type: LOGIN, payload: { id, email, isAdmin } });
         } catch (e) {
@@ -78,7 +77,6 @@ export function updateUser(user) {
 }
 
 export const GLogin = (response) => {
-    console.log(response);
     return async function (dispatch) {
         try {
             const token = await axios.post(
@@ -88,8 +86,6 @@ export const GLogin = (response) => {
                     //
                 }
             );
-
-            console.log("status", decode(token.data).isDeleted);
             if (decode(token.data).isDeleted) {
                 swal("You are banned.", "Contact us if you have a question about it.", "error")
             } else {

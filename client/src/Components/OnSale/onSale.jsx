@@ -20,8 +20,6 @@ const Sale = () => {
     );
     var sale = Products.filter((spirit) => spirit.hasOwnProperty('onSale'))
 
-    console.log(sale)
-
     return (
         <div>
             <div className="content">

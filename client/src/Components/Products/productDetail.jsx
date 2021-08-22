@@ -134,12 +134,10 @@ const ProductDetail = () => {
             process.env.REACT_APP_SECRET_KEY
         )
         : null;
-        console.log("current", currentUser)
     const { id } = useParams();
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
-    console.log("liq", liqueur)
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
@@ -185,7 +183,6 @@ const ProductDetail = () => {
                     name: liqueur.name,
                     stock: liqueur.stock,
                 });
-                console.log(liqueur)
                 swal("The product was added to the cart!");
             } else {
                 swal("Please enter a valid unit");
@@ -242,7 +239,6 @@ const ProductDetail = () => {
         </Button>
     }
     //----------------------------------------------------------------------------//
-    console.log(liqueur)
     return (
         <>
             {liqueur ? (
