@@ -1,6 +1,6 @@
 const isLogedIn = (req,res,next) => {
     try {
-        if(req.isAuthenticated()){
+        if(req.user){
             next();
         } else{
             res.redirect("/auth/login");

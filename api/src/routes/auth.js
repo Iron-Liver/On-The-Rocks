@@ -10,24 +10,19 @@ const { SECRET_KEY, GMAIL_APP_EMAIL, FRONT } = process.env;
 
 router.use(express.json());
 
-
-router.post("/login", (req, res, next) => {
-  passport.authenticate("local", { session: true }, (err, user, done) => {
-    if (err) throw err;
-    if (!user) res.send("No user exist");
-    else {
-      // req.logIn(user, (err) => {
-      //   if (err) throw err;
-      //   res.send("Successfully Authenticated");
-      // });
-      req.login(user, function(err) {
-        if (err) { return next(err); }
-        return res.redirect(`/auth/user/${req.user.id}`);
-      });
+router.post("/login", function (req, res, next) {
+  passport.authenticate(
+    "local",
+    { session: false },
+    async function (err, user) {
+      if (err) return next(err);
+      else if (!user) return res.sendStatus(401);
+      else {
+        return res.send(await jwt.sign({ id:user.id, email:user.email, isAdmin:user.isAdmin}, SECRET_KEY, { expiresIn: "24hr" }));
+      }
     }
-  })(req, res, next);
+  )(req, res, next);
 });
-
 
 router.get(
   "/login/google",
@@ -38,9 +33,14 @@ router.get(
   "/google/redirect",
   passport.authenticate("google", {
     failureMessage: "Cannot login to Google, please try again later!",
+    failureRedirect: '/failure',
+    successRedirect: '/success'
   }),
-  (req, res) => {
-    res.send("Thank you for signing in!");
+  async (req, res) => {
+    const user = await User.findOne({
+      where:{id:req.session.passport.user}
+    });
+    res.send(await jwt.sign({ id:user.id, email:user.email, isAdmin:user.isAdmin}, SECRET_KEY, { expiresIn: "24hr" }));
   }
 );
 

@@ -39,15 +39,13 @@ export function createUser(user) {
 export function loginUser(login) {
     return async function (dispatch) {
         try {
-            await axios.post(
+            const token = await axios.post(
                 `/auth/login`,
                 { email: login.email.toLowerCase(), password: login.password },
                 { withCredentials: true }
             );
-            const token = await axios.get(`/auth/user`, {
-                withCredentials: true,
-            });
             const { id, email, isAdmin } = jwt.verify(token.data, process.env.REACT_APP_SECRET_KEY);
+            alert(email)
             localStorage.setItem("token", JSON.stringify(token.data));
             dispatch({ type: LOGIN, payload: { id, email, isAdmin } });
         } catch (e) {

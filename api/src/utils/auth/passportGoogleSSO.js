@@ -1,5 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const jwt = require("jsonwebtoken");
+const { SECRET_KEY} = process.env;
 
 const {User} = require("../../db");
 
@@ -12,23 +14,25 @@ passport.use(
       clientSecret: GOOGLE_SECRET_KEY,
       callbackURL: GOOGLE_CALLBACK_URL,
       passReqToCallback: true,
+      session: false
     },
     async (req, accessToken, refreshToken, profile, cb) => {
-      const defaultUser = {
-        name: `${profile.name.givenName} ${profile.name.familyName}`,
-        username: profile.emails[0].value.split("@")[0].replace(/([^A-Za-z0-9]+)/gi, ''),
-        email: profile.emails[0].value.toLowerCase(),
-        password: profile.id,
-        googleId: profile.id,
-      };
-      const user = await User.findOrCreate({
-        where: { email: defaultUser.email },
-        defaults: defaultUser,
-      }).catch((err) => {
-        cb(err, null);
-      });
-      console.log('user',user)
-      if (user && user[0]) return cb(null, user && user[0]);
+      try{
+        const defaultUser = {
+          name: `${profile.name.givenName} ${profile.name.familyName}`,
+          username: profile.emails[0].value.split("@")[0].replace(/([^A-Za-z0-9]+)/gi, ''),
+          email: profile.emails[0].value.toLowerCase(),
+          password: profile.id,
+          googleId: profile.id,
+        };
+        const user = await User.findOrCreate({
+          where: { email: defaultUser.email },
+          defaults: defaultUser,
+        })
+        if (user && user[0]) return cb(null, user && user[0]);
+      }catch (e) {
+        cb(e, null);
+      }
     }
   )
 );
