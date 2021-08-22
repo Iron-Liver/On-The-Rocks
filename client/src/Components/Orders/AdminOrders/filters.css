@@ -28,6 +28,8 @@
   font-family: 'Montserrat', sans-serif;
   margin: 0 0 5px 20px;
   font-size: 15px;
+  word-break: keep-all;
+  min-width: max-content;
 }
 
 .admin-orders-sort-submit {
@@ -35,4 +37,10 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+}
+
+@media (max-width: 350px) {
+  .admin-orders-sort-submit label {
+    margin: 0 0 5px 2px;
+  }
 }

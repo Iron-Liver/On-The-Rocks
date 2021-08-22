@@ -12,6 +12,7 @@ import logoBrown from '../../assets/on-the-rocks-brown.png'
 import logoWhite from '../../assets/on-the-rocks-white.png'
 
 
+
 // import { logOutUser } from "../../Redux/Users/UserActions";
 
 // const drawerWidth = 240;
@@ -21,12 +22,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     outline: 'none',
     backgroundColor: "d3d3d3",
-    borderBottom: "1px solid #d3d3d3"
+    borderBottom: '1px solid #d3d3d3'
   },
   appBar: {
     width: '100%',
     background: "transparent",
-    transition: 'background 300ms ease-out'
+    transition: 'background 300ms ease-out',
   },
   appBarSolid: {
     width: '100%',
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     background: "transparent"
   },
   blank: {
-    marginTop: "77.13px"
+    marginTop: "93.85px"
   },
   drawerPaper: {
     width: '70%',
@@ -79,16 +80,17 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3)
   },
   navLogo: {
-    width: "100px",
-    marginTop: "8px"
+    width: "120px",
+    marginTop: "12px"
   },
   blackColor: {
-    color: "#493d30"
+    color: "#292F36"
   }
 }));
 
 function NavBar(props) {
   const dispatch = useDispatch()
+  // const { window } = props;
   const classes = useStyles();
   const history = useHistory();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
@@ -138,33 +140,31 @@ function NavBar(props) {
     setCartDrawerOpen(!cartDrawerOpen);
   };
 
+  // const container =
+  //   window !== undefined ? () => window().document.body : undefined;
+
+
   return (
     <div>
-    <div className={classes.root}>
+    <div  className={classes.root}>
       <CssBaseline />
       <AppBar elevation={0} position="fixed" className={solid ? classes.appBarSolid : classes.appBar}>
         <Toolbar className={classes.toolbar}>
 
           <div style={{flexGrow: "1", width: "100%"}}>
-              <Link 
-                to="/" 
-                style={{textDecoration: 'none', color: 'white'}}
-                draggable={false}
-              >
+              <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
                 {
                   solid ? (
                     <img 
                       src={logoWhite} 
                       alt="on-the-rocks-logo" 
                       className={classes.navLogo}
-                      draggable={false}
                     />
                     ) : (
                     <img 
                       src={logoBrown} 
                       alt="on-the-rocks-logo" 
                       className={classes.navLogo}
-                      draggable={false}
                     />
                   )
                 }

@@ -19,7 +19,7 @@
 }
 
 
-.container {
+.containerpayment {
   position: relative;
   background-color: #fafafe;
   border-radius: 10px;
@@ -29,7 +29,7 @@
   width: 320px;
   box-sizing: border-box;
 }
-.container:before {
+.containerpayment:before {
   content: "";
   position: absolute;
   left: 0;
@@ -41,12 +41,12 @@
   z-index: 2;
 }
 
-.card {
+.card1 {
   position: relative;
   z-index: 2;
 }
 
-.card_title {
+.card1_title {
   margin-top: 0;
   font-size: 24px;
   margin-bottom: 20px;
@@ -60,7 +60,7 @@
 .divis {
   width: 50px;
 }
-.card_button {
+.card1_button {
   border-radius: 4px;
   border: none;
   outline: none;
@@ -82,7 +82,7 @@
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
-.card_button:hover {
+.card1_button:hover {
   opacity: 1;
   box-shadow: 0 2px 2px -3px #2e5e3fd4;
 }
@@ -90,7 +90,7 @@
 display:flex;
 justify-content: flex-end;
 }
-.card_info {
+.card1_info {
   font-size: 14px;
 }
 .p_color{

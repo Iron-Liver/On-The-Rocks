@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     cover: {
-        width: "120px",
+        width: "150px",
         height: "170px",
     },
     button: {
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
     },
     box: {
-        backgroundColor: "#5dc1b9",
+        marginTop: '20px',
         justifyContent: "center",
     },
 }));
@@ -84,7 +84,8 @@ export function Cart() {
 
     function sum(id) {
         state?.forEach((e) => {
-            if (e.id === id && e.units < 50) {
+            if (e.id === id && e.units < e.stock) {
+                console.log(e,"holi")
                 let sub = e.price / e.units;
                 e.units++;
                 sub = sub * e.units;
@@ -175,8 +176,8 @@ export function Cart() {
             ) : (
                 <Typography
                     className={classes.title}
-                    component="h5"
-                    variant="h5"
+                    component="body1"
+                    variant="body1"
                 >
                     There are no products in the cart.
                 </Typography>

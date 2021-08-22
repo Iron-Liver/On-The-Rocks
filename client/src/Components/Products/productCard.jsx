@@ -3,6 +3,7 @@ import './products.css';
 import { addProductCart } from '../../Redux/Cart/cartActions';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
+import CustomButton from '../Button/CustomButton'
 
 const ProductCard = ({ spirit }) => {
 
@@ -31,7 +32,7 @@ const ProductCard = ({ spirit }) => {
 
   return (
     <div className="containerproducts">
-        <div className="card">
+        <div className="product-card">
             <div className="imgBx">
               <Link 
                 to={`/products/${spirit.id}`} 
@@ -64,12 +65,12 @@ const ProductCard = ({ spirit }) => {
                       fontSize: "16px",
                       fontWeight: "400"
                     }}>${spirit.price}</h5>
-                    <button
+                    <CustomButton
                       disabled={spirit.stock < 1} 
                       onClick={handleAddToCart}
                     >
                       Add to cart
-                    </button>
+                    </CustomButton>
                 </div>
             </div>
         </div>

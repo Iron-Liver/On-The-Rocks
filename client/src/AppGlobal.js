@@ -1,6 +1,5 @@
-import { ThemeProvider } from '@material-ui/core'
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import theme from './Utils/theme';
 
 //User imports
 import LoginUser from './Components/Users/UserLogin/userLogin'
@@ -23,25 +22,24 @@ import UserProfile from './Components/Profile/UserProfile';
 import AdminProfile from './Components/Profile/AdminProfile';
 //Misc imports
 import NavBar from './Components/NavBar/navBar';
-import landingPage from './Components/LandingPage/landingPage';
+import LandingPage from './Components/LandingPage/landingPage';
 import AdminFeatures from './Components/Admin/AdminFeatures';
 import Error404 from './Components/Error404/Error404';
 import CreateOrder from './Components/Orders/CreateOrder/createOrder';
 import MercadoPago from './Components/Mercadopago/Mercadopago';
 import Footer from './Components/Footer/footer';
-import CheckoutV2 from './Components/Mercadopago/CheckoutV2';
+
 
 
 const AppGlobal = () => {
 
 	
     return (
-		// <ThemeProvider theme={theme}>
 			<Router>
+				<div style={{minHeight:'calc(100vh - 150px)'}}>
 				<NavBar/>
 				<Switch>
-					<Route exact path="/" component={landingPage} />
-          <Route path="/checkv2" component={CheckoutV2} />
+					<Route exact path="/" component={LandingPage} />
 					<Route exact path="/login" component={LoginUser} />
 					<Route exact path="/register" component= {CreateUser} />
 					<Route path="/verify/password" component={ResetPassword} />
@@ -57,6 +55,7 @@ const AppGlobal = () => {
 					<AdminRoute path="/private" component={AdminFeatures}/>
 					<Route path="*" component={Error404} /> 
 				</Switch>
+				</div>
         <Footer/>
 			</Router>
 		// </ThemeProvider>
