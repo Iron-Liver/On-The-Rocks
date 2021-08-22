@@ -6,6 +6,7 @@ import productReducer from './Products/productReducer';
 import cartReducer from './Cart/cartReducer'
 
 import reviewReducer from './Reviews/reviewReducer';
+import wishlistReducer from './Wishlist/wishlistReducer'
 
 
 export const reducers = combineReducers({
@@ -13,7 +14,8 @@ export const reducers = combineReducers({
     userReducer,
     productReducer,
     cartReducer,
-    reviewReducer
+    reviewReducer,
+    wishlistReducer
 
 });
 
