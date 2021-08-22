@@ -28,7 +28,7 @@ import AdminFeatures from './Components/Admin/AdminFeatures';
 import Error404 from './Components/Error404/Error404';
 import CreateOrder from './Components/Orders/CreateOrder/createOrder';
 import MercadoPago from './Components/Mercadopago/Mercadopago';
-import { CuponRoulette } from './Components/Roulette/cuponRoulette';
+import { WheelOfCoupons } from './Components/Game/wheelOfCoupons';
 
 
 const AppGlobal = () => {
@@ -40,7 +40,7 @@ const AppGlobal = () => {
 				<NavBar/>
 				<Switch>
 					<Route exact path="/" component={landingPage} />
-					<Route exact path="/roulette" component={CuponRoulette} />
+					<Route exact path="/roulette" component={WheelOfCoupons} />
 					<Route exact path="/login" component={LoginUser} />
 					<Route exact path="/register" component= {CreateUser} />
 					<Route path="/verify/password" component={ResetPassword} />

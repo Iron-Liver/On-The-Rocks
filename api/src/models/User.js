@@ -69,5 +69,9 @@ module.exports = sequelize =>{
             type: DataTypes.BOOLEAN,
             defaultValue: true,
         },
+        coins: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        }
     })
 }

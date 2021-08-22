@@ -23,3 +23,4 @@ export const FILTER_BY_NAME = 'FILTER_BY_NAME';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
 export const GET_PRODUCT_REVIEWS = 'GET_PRODUCT_REVIEWS';
+export const GET_COINS = 'GET_COINS';
