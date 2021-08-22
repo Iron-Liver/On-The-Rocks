@@ -21,6 +21,9 @@ router.use("/auth", auth)
 const mercadopago = require("./mercadopago");
 router.use("/mercadopago", mercadopago);
 
+const game = require("./game");
+router.use('/game',game)
+
 const wishlist = require("./wishlist");
 router.use("/wishlist", wishlist);
 

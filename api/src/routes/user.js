@@ -8,7 +8,6 @@ const getUserById = require('../controllers/user/getUserById');
 const updateUser = require('../controllers/user/updateUser');
 const deleteUser = require('../controllers/user/deleteUser');
 
-
 router.use(express.json());
 
 router.get('/getAll', getAllUsers);

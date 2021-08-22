@@ -30,6 +30,7 @@ import Error404 from "./Components/Error404/Error404";
 import CreateOrder from "./Components/Orders/CreateOrder/createOrder";
 import MercadoPago from "./Components/Mercadopago/Mercadopago";
 import Wishlist from "./Components/Wishlist/wishlist";
+import { WheelOfCoupons } from './Components/Game/wheelOfCoupons';
 
 const AppGlobal = () => {
   return (
@@ -60,6 +61,7 @@ const AppGlobal = () => {
           />
           <AdminRoute path="/private" component={AdminFeatures} />
           <Route exact path="/wishlist" component={Wishlist} />
+          <Route exact path="/roulette" component={WheelOfCoupons} />
           <Route path="*" component={Error404} />
         </Switch>
       </Router>

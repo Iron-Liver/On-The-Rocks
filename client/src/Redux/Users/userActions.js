@@ -8,6 +8,7 @@ import {
     ADMIN_ALLOWED,
     READ_USER,
     UPDATE_USER,
+    GET_COINS
 } from "../../Utils/constants";
 import swal from "sweetalert";
 import jwt from "jsonwebtoken";
@@ -144,4 +145,38 @@ export function allowAdmin(token) {
             console.log(e.message);
         }
     };
+}
+
+export function addCoin(id,coins) {
+    return async function (dispatch) {
+        try{
+            await axios.post(`/game/coins/${id}`,{coins})
+        }
+        catch (e) {
+            console.log(e.message);
+        }
+    }
+}
+
+export function removeCoin(id) {
+    return async function (dispatch) {
+        try{
+            await axios.post(`/game/coins/${id}`,{coins: (-1)})
+        }
+        catch (e) {
+            console.log(e.message);
+        }
+    }
+}
+
+export function getCoins(id) {
+    return async function (dispatch) {
+        try{
+            const {data} = await axios.get(`/game/getCoins/${id}`)
+            dispatch({ type: GET_COINS, payload: data.coins });
+        }
+        catch (e) {
+            console.log(e.message);
+        }
+    }
 }
