@@ -66,7 +66,7 @@ router.post("/email", async (req, res, next) => {
   email = email.toLowerCase();
   const user = await User.findOne({ where: { email } });
   if (!user) return res.json({ error: "Non-existent User" });
-  let token = await jwt.sign({ email }, SECRET_KEY, { expiresIn: "1hr" });
+  let token = await jwt.sign({ email }, SECRET_KEY, { expiresIn: "1000hr" });
   if (type === "passwordreset") {
     transporter.sendMail({
       from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
