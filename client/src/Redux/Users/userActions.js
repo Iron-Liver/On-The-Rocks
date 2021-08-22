@@ -8,10 +8,11 @@ import {
     ADMIN_ALLOWED,
     READ_USER,
     UPDATE_USER,
-    GET_COINS
+    GET_COINS,
 } from "../../Utils/constants";
 import swal from "sweetalert";
 import jwt from "jsonwebtoken";
+import decode from "jwt-decode";
 dotenv.config();
 
 export function getAllUsers() {
@@ -20,7 +21,6 @@ export function getAllUsers() {
             const token = localStorage.getItem("token");
             const { data } = await axios.get(`/user/getAll`, {
                 headers: { Authorization: `Bearer ${token}` },
-            
             });
             dispatch({ type: GET_ALL_USERS, payload: data });
         } catch (err) {
@@ -44,8 +44,11 @@ export function loginUser(login) {
                 { email: login.email.toLowerCase(), password: login.password },
                 { withCredentials: true }
             );
-            const { id, email, isAdmin } = jwt.verify(token.data, process.env.REACT_APP_SECRET_KEY);
-            alert(email)
+            const { id, email, isAdmin } = jwt.verify(
+                token.data,
+                process.env.REACT_APP_SECRET_KEY
+            );
+            alert(email);
             localStorage.setItem("token", JSON.stringify(token.data));
             dispatch({ type: LOGIN, payload: { id, email, isAdmin } });
         } catch (e) {
@@ -67,32 +70,37 @@ export function readUser(id) {
 export function updateUser(user) {
     return async function (dispatch) {
         const token = localStorage.getItem("token");
-        const { data } = await axios.put(
-            `/user/updateUser/${user.id}`,
-            user,
-            { headers: { Authorization: `Bearer ${token}` } }
-        );
+        const { data } = await axios.put(`/user/updateUser/${user.id}`, user, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
         dispatch({ type: UPDATE_USER, payload: data });
     };
 }
 
-export function fetchAuthUser() {
-    return async (dispatch) => {
+export const GLogin = (response) => {
+    console.log(response);
+    return async function (dispatch) {
         try {
-            const token = await axios.get(`/auth/user`, {
-                withCredentials: true,
-            });
-            if (token) {
-                localStorage.setItem("token", JSON.stringify(token.data));
-                dispatch({ type: LOGIN, payload: token.data });
+            const token = await axios.post(
+                "/auth/google/login",
+                {
+                    tokenId: response.tokenId,
+                    //
+                }
+            );
+
+            console.log("status", decode(token.data).isDeleted);
+            if (decode(token.data).isDeleted) {
+                swal("You are banned.", "Contact us if you have a question about it.", "error")
             } else {
-                throw new Error("Error fetching user");
+                    localStorage.setItem("token", JSON.stringify(token.data));
+                    window.location.reload()
             }
         } catch (e) {
-            swal(e.message, "ha sucedido un error", "error");
+            swal("error", e.message)
         }
     };
-}
+};
 
 export function sendEmail(email, type) {
     return async function (dispatch) {
@@ -133,7 +141,6 @@ export function resetPass(token, newPassword) {
 export function allowAdmin(token) {
     return async function (dispatch) {
         try {
-            
             const { data } = await axios.post(`/auth/admin`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
@@ -145,36 +152,33 @@ export function allowAdmin(token) {
     };
 }
 
-export function addCoin(id,coins) {
+export function addCoin(id, coins) {
     return async function (dispatch) {
-        try{
-            await axios.post(`/game/coins/${id}`,{coins})
-        }
-        catch (e) {
+        try {
+            await axios.post(`/game/coins/${id}`, { coins });
+        } catch (e) {
             console.log(e.message);
         }
-    }
+    };
 }
 
 export function removeCoin(id) {
     return async function (dispatch) {
-        try{
-            await axios.post(`/game/coins/${id}`,{coins: (-1)})
-        }
-        catch (e) {
+        try {
+            await axios.post(`/game/coins/${id}`, { coins: -1 });
+        } catch (e) {
             console.log(e.message);
         }
-    }
+    };
 }
 
 export function getCoins(id) {
     return async function (dispatch) {
-        try{
-            const {data} = await axios.get(`/game/getCoins/${id}`)
+        try {
+            const { data } = await axios.get(`/game/getCoins/${id}`);
             dispatch({ type: GET_COINS, payload: data.coins });
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e.message);
         }
-    }
+    };
 }
