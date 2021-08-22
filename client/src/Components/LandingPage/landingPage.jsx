@@ -8,6 +8,10 @@ import './landingPage.css';
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+import SwiperOS from '../OnSale/swiperOS';
+
 
 
 import SwiperCore, {
@@ -23,20 +27,25 @@ export const landingPage = () => {
         <div>
         <header className="landinghead">
         </header>
+        <body>
+        
+        </body>
         </div>
         <div className="vox"></div>
       
-        {/* <div className="slider">
-        <Swiper navigation={true}>
+        <div className="slider">
+
+         {/*<Swiper navigation={true}>
           <SwiperSlide >
             <img src={image1} className="img1" alt='img1'></img>
           </SwiperSlide>
           <SwiperSlide>
             <img src={image2} className="img1" alt="img2"></img>
           </SwiperSlide>
-        </Swiper>
+        </Swiper>*/}
 
-        </div> */}
+        <SwiperOS/>
+        </div> 
 
         </div>
     )

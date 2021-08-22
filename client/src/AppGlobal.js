@@ -10,8 +10,9 @@ import Admin2FA from "./Components/Users/Admin2FA/admin2FA";
 //Category imports
 import CategoryDetail from "./Components/Categories/CategoryDetail/categoryDetail";
 //Product imports
-import Products from "./Components/Products/products";
-import ProductDetail from "./Components/Products/productDetail";
+import Products from './Components/Products/products';
+import ProductDetail from './Components/Products/productDetail';
+import onSale from './Components/OnSale/onSale'
 //Order imports
 import OrderDetail from "./Components/Orders/OrderDetail/orderDetail";
 //Private routes imports
@@ -45,6 +46,7 @@ const AppGlobal = () => {
           <Route exact path="/createOrder" component={CreateOrder} />
           <Route exact path="/products/:id" component={ProductDetail} />
           <Route exact path="/category/:id" component={CategoryDetail} />
+          <Route exact path = '/sale' component={onSale} />
           <AuthRoute exact path="/order/:id" component={OrderDetail} />
           <AuthRoute
             exact
