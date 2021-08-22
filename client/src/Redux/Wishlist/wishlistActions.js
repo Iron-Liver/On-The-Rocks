@@ -17,7 +17,6 @@ export function addProductWishlist(obj) {
 export function getWishlist() {
     return async function(dispatch) { 
         const wishlist = await axios.get(`/wishlist/getwishlist`);
-        console.log("ACAA", wishlist)
         dispatch ({type: GET_WISHLIST,  payload: wishlist.data})
     };
 }

@@ -39,8 +39,7 @@ const SwiperCard = ({ spirit }) => {
       swal("The product was added to the cart!")   
     }
   }
-  
-  console.log(spirit)
+
   return (
     <div>
       <div >

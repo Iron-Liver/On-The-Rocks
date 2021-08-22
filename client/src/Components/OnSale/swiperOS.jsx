@@ -19,7 +19,7 @@ function SwiperOS(){
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
+          // onSwiper={(swiper) => {}}
         >
          
           {sale.map((spirit) => (
