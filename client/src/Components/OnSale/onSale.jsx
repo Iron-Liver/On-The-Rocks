@@ -18,12 +18,7 @@ const Sale = () => {
         // eslint-disable-next-line
         []
     );
-    var sale = [];
-    Products.map((spirit) => {
-        if(spirit.onSale){
-        sale.push(spirit)
-        }
-    })
+    var sale = Products.filter((spirit) => spirit.hasOwnProperty('onSale'))
 
     console.log(sale)
 

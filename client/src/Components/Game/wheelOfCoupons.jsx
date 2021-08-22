@@ -24,7 +24,8 @@ export const WheelOfCoupons = () => {
 
     React.useEffect(() => {
         dispatch(getCoins(currentUser?.id));
-    }, [idle, dispatch]);
+    }, // eslint-disable-next-line
+    [idle, dispatch]);
 
     const variants = {
         idle: {},

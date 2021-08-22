@@ -58,7 +58,7 @@ const Wishlist = () => {
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getWishlist());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     (async function () {

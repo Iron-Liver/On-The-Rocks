@@ -9,12 +9,7 @@ function SwiperOS(){
         (state) => state.productReducer
     );
 
-    var sale = [];
-    Products.map((spirit) => {
-        if(spirit.onSale){
-        sale.push(spirit)
-        }
-    })
+    var sale = Products.filter((spirit) => spirit.hasOwnProperty('onSale'))
 
     return (
         <Swiper
