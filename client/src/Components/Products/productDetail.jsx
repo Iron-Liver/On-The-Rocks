@@ -11,7 +11,8 @@ import {
     Grid,
     Box,    
 } from "@material-ui/core";
-import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart } from '@material-ui/icons';
+
+import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart, FavoriteBorder } from '@material-ui/icons';
 import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
@@ -19,6 +20,7 @@ import { getProductReviews } from "../../Redux/Reviews/reviewActions";
 import jwt from "jsonwebtoken";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
+import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { green, red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
@@ -77,6 +79,18 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         marginLeft: "45px",
     },
+    buttonWish: {
+        backgroundColor: "white",
+        margin: theme.spacing(1),
+        width: 60,
+        height: 55,
+    },
+    wishIcon: {
+        color: "red",
+        marginLeft: "10px",
+        width: 50,
+        height: 50,
+    },
     review: {
         display: "flex",
         alignItems: "center",
@@ -116,10 +130,12 @@ const ProductDetail = () => {
             process.env.REACT_APP_SECRET_KEY
         )
         : null;
+        console.log("current", currentUser)
     const { id } = useParams();
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
+    console.log("liq", liqueur)
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
@@ -173,6 +189,12 @@ const ProductDetail = () => {
         }
     }
 
+    function onSubmitWishlist (){
+        dispatch(addProductWishlist({
+            userId: currentUser?.id,
+            productId: liqueur?.id
+        }))
+    }
 
     //----------------------------------------------------------------------//
     let stockText = <div>
@@ -273,6 +295,18 @@ const ProductDetail = () => {
                                 </Typography>
                             </CardContent>
                             <div className={classes.controls}>
+                                {currentUser && (<Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.buttonWish}
+                                    startIcon={
+                                        <FavoriteBorder
+                                            className={classes.wishIcon}
+                                        />
+                                    }
+                                    onClick={onSubmitWishlist(currentUser?.id, liqueur?.id)}
+                                > 
+                                </Button>)}
                                 {btncart}
                                 <h3 className={classes.sum1}>QUANTITY</h3>
                                 <div className={classes.sum2}>
