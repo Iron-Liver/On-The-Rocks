@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const helmet = require('helmet')
 const cors = require("cors");
 const passport = require("passport");
-const cookieSession = require("cookie-session");
-// const session = require('express-session');
+const session = require('express-session');
+// const cookieSession = require("cookie-session");
 
 const routes = require('./routes/index.js');
 const { SECRET_KEY, CLIENT_DOMAIN } = process.env;
@@ -25,26 +25,26 @@ server.set("trust proxy", 1);
 server.use(helmet())
 server.use(cors({ origin: CLIENT_DOMAIN, credentials: true }));
 
-// server.use(session({
-//     secret: SECRET_KEY,
-//     saveUninitialized: false,
-//     resave: false
-//   }));
+server.use(session({
+    secret: SECRET_KEY,
+    saveUninitialized: false,
+    resave: false
+  }));
 
-server.use(
-    cookieSession({
-        // name: 'session',
-        maxAge: 24 * 60 * 60 * 1000,
-        secret: SECRET_KEY,
-        // path: '/',
-        // httpOnly: true,
-        // domain: '.vercel.com',
-        // secure: true,
-        // sameSite: 'none',
-        // secureProxy: true
-    })
-);
-
+// server.use(
+//     cookieSession({
+//         // name: 'session',
+//         maxAge: 24 * 60 * 60 * 1000,
+//         secret: SECRET_KEY,
+//         // path: '/',
+//         // httpOnly: true,
+//         // domain: '.vercel.com',
+//         // secure: true,
+//         // sameSite: 'none',
+//         // secureProxy: true
+//     })
+// );
+server.use(express.static('public'))
 server.use(passport.initialize());
 server.use(passport.session());
 

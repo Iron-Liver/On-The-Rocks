@@ -16,9 +16,13 @@ router.post("/login", (req, res, next) => {
     if (err) throw err;
     if (!user) res.send("No user exist");
     else {
-      req.logIn(user, (err) => {
-        if (err) throw err;
-        res.send("Successfully Authenticated");
+      // req.logIn(user, (err) => {
+      //   if (err) throw err;
+      //   res.send("Successfully Authenticated");
+      // });
+      req.login(user, function(err) {
+        if (err) { return next(err); }
+        return res.redirect(`/auth/user/${req.user.id}`);
       });
     }
   })(req, res, next);
