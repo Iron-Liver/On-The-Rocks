@@ -39,13 +39,16 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+    onSale:{
+      type: DataTypes.FLOAT,
+    },
     image: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
     stock:{
       type: DataTypes.INTEGER,
-      defaultValue: 1000
+      defaultValue: 10
     }
   });
 };

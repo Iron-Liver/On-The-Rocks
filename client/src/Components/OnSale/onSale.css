@@ -1,0 +1,147 @@
+
+.content {
+    display:inline-flex;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    align-items: center;
+    min-height: 100vh;
+    background: #131313;
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  
+  .containerproducts {
+    position: relative;
+    margin: 15px;
+    box-shadow: 0px 0px 3px 0px whitesmoke;
+    border-radius: 10px;
+  }
+  
+  
+  
+  .containerproducts .card {
+    width: 300px;
+    height: 440px;
+    background: #1a1a18;
+    border-radius: 20px;
+  }
+  
+  
+  
+  
+  .containerproducts .card .imgBx {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    width: 100%;
+    height: 250px;
+    transition: 0.5s;
+  }
+  
+  .containerproducts .card:hover .imgBx {
+    top: 0%;
+    transform: translateY(0%);
+  }
+  
+  .containerproducts .card .imgBx img {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+  }
+  
+  .containerproducts .card .contentBx {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 110px;
+    text-align: center;
+    transition: 1s;
+    z-index: 10;
+  }
+  
+  .containerproducts .card:hover .contentBx {
+    height: 210px;
+  }
+  
+  .containerproducts .card .contentBx h4 {
+    position: relative;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+  
+  .containerproducts .card .contentBx .size,
+  .containerproducts .card .contentBx .color {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 20px;
+    transition: 0.4s;
+    opacity: 0;
+    visibility: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .containerproducts .card:hover .contentBx .size {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.4s;
+  }
+  
+  .containerproducts .card:hover .contentBx .color {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.6s;
+  }
+  
+  
+  
+  .containerproducts .card .contentBx .size h5,
+  .containerproducts .card .contentBx .color h5 {
+    color: #fff;
+    font-weight: 300;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 10px;
+  }
+  
+  .containerproducts .card .contentBx button {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 20px;
+    background: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #111;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.5s;
+    margin-top: 0;
+  }
+  
+  .containerproducts .card:hover .contentBx button {
+    opacity: 1;
+    transform: translateY(0px);
+    transition-delay: 0.6s;
+  }
+  
+  .filters{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .price{
+    text-decoration: line-through;
+    
+  }
+  
+  .hs{
+    color: red;
+  }

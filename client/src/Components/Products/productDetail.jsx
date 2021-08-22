@@ -9,13 +9,10 @@ import {
     Typography,
     Button,
     Grid,
-    Box,
-    Select,
-    FormControl,
-    MenuItem,
-    InputLabel,
+    Box,    
 } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
+
+import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart, FavoriteBorder } from '@material-ui/icons';
 import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
@@ -23,6 +20,8 @@ import { getProductReviews } from "../../Redux/Reviews/reviewActions";
 import jwt from "jsonwebtoken";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
+import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
+import { green, red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,15 +61,35 @@ const useStyles = makeStyles((theme) => ({
         height: 55,
         backgroundColor: "black",
         color: "white",
-            '&:hover': {
-                backgroundColor: "grey",
-                boxShadow: 'none',
-              },
-              '&:active': {
-                boxShadow: 'none',
-                backgroundColor: '#5dc1b9',
-              },
-            
+        '&:hover': {
+            backgroundColor: "grey",
+            boxShadow: 'none',
+        },
+        '&:active': {
+            boxShadow: 'none',
+            backgroundColor: '#5dc1b9',
+        },
+
+    },
+    sum2: {
+        display: "flex",
+        marginLeft: "5px",
+    },
+    sum1: {
+        display: "flex",
+        marginLeft: "45px",
+    },
+    buttonWish: {
+        backgroundColor: "white",
+        margin: theme.spacing(1),
+        width: 60,
+        height: 55,
+    },
+    wishIcon: {
+        color: "red",
+        marginLeft: "10px",
+        width: 50,
+        height: 50,
     },
     review: {
         display: "flex",
@@ -92,6 +111,18 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    button2: {
+        width: "10px",
+        height: "20px",
+        marginLeft: "5px",
+        marginRight: "5px",
+        marginBottom: "30px",
+
+    },
+    price:{
+        textDecoration:"line-through 2px",
+        color: "red"
+    }
 }));
 
 const ProductDetail = () => {
@@ -99,21 +130,31 @@ const ProductDetail = () => {
     const [value, setValue] = React.useState(2);
     const currentUser = JSON.parse(localStorage.getItem("token"))
         ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
+            JSON.parse(localStorage.getItem("token")),
+            process.env.REACT_APP_SECRET_KEY
+        )
         : null;
+        console.log("current", currentUser)
     const { id } = useParams();
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
+    console.log("liq", liqueur)
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
-    const [quant, setQuant] = React.useState("");
+    const [quant, setQuant] = React.useState(1);
 
-    const handleChange = (event) => {
-        setQuant(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //     setQuant(event.target.value);
+    // };
+
+    const handleChangeQuant = (type) => {
+        if (type === '+') {
+            setQuant(quant === liqueur.stock ? liqueur.stock : quant + 1)
+        } else {
+            setQuant(quant === 1 ? 1 : quant - 1)
+        }
+    }
 
     const calculateStars = (r) => {
         let suma = 0;
@@ -127,7 +168,7 @@ const ProductDetail = () => {
         })();
     }, [Products, dispatch, id]);
 
-    useEffect(() => {}, [Products, reviews]);
+    useEffect(() => { }, [Products, reviews]);
 
     function onSubmit(e) {
         let data = JSON.parse(localStorage.getItem("data"));
@@ -142,7 +183,9 @@ const ProductDetail = () => {
                     price: liqueur.price * quant,
                     image: liqueur.image,
                     name: liqueur.name,
+                    stock: liqueur.stock,
                 });
+                console.log(liqueur)
                 swal("The product was added to the cart!");
             } else {
                 swal("Please enter a valid unit");
@@ -150,6 +193,56 @@ const ProductDetail = () => {
         }
     }
 
+    function onSubmitWishlist (){
+        dispatch(addProductWishlist({
+            userId: currentUser?.id,
+            productId: liqueur?.id
+        }))
+    }
+
+    //----------------------------------------------------------------------//
+    let stockText = <div>
+        <CheckCircle style={{ color: green[500] }} />
+        <span>On Stock</span>
+    </div>
+
+    let btncart = <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        startIcon={
+            <ShoppingCart
+                className={classes.cartIcon}
+            />
+        }
+        onClick={(e) => onSubmit(e)}
+    >
+        <h3>ADD TO CART</h3>
+    </Button>
+
+    if (liqueur?.stock <= 5) {
+        stockText = <div>
+            <Info style={{ color: red[500] }} />
+            <span>Low Stock</span>
+        </div>
+    }
+    if (liqueur?.stock <= 0) {
+        stockText = <div>
+            <Info color="disabled" />
+            <span>No Stock</span>
+        </div>;
+        btncart = <Button
+            disabled
+            variant="contained"
+            color="disabled"
+            className={classes.button}
+            startIcon={<RemoveShoppingCart className={classes.cartIcon} />}
+        >
+            <h3>ADD TO CART</h3>
+        </Button>
+    }
+    //----------------------------------------------------------------------------//
+    console.log(liqueur)
     return (
         <>
             {liqueur ? (
@@ -179,8 +272,8 @@ const ProductDetail = () => {
                                                 value={
                                                     reviews.length > 0
                                                         ? calculateStars(
-                                                              reviews
-                                                          )
+                                                            reviews
+                                                        )
                                                         : 0
                                                 }
                                                 precision={0.5}
@@ -191,55 +284,58 @@ const ProductDetail = () => {
                                             />
                                         </Box>
                                     </div>
+                                    {liqueur.onSale? 
                                     <Typography component="h5" variant="h5">
-                                        ${liqueur.price}
+                                     <h3> HOT SALE ${liqueur.onSale}</h3>
+                                     <h5 className={classes.price} >REGULAR PRICE ${liqueur.price}</h5>
                                     </Typography>
+                                    :                                 
+                                    <Typography component="h5" variant="h5">
+                                        ${liqueur.price} 
+                                    </Typography>}
                                     <Typography component="h5" variant="h5">
                                         {liqueur.brand}
                                     </Typography>
+                                    <div>
+                                        {stockText}
+                                    </div>
                                 </Grid>
                                 <Typography variant="h6" color="textSecondary">
                                     {liqueur.description}
                                 </Typography>
                             </CardContent>
                             <div className={classes.controls}>
-                                <Button
+                                {currentUser && (<Button
                                     variant="contained"
                                     color="primary"
-                                    className={classes.button}
+                                    className={classes.buttonWish}
                                     startIcon={
-                                        <ShoppingCart
-                                            className={classes.cartIcon}
+                                        <FavoriteBorder
+                                            className={classes.wishIcon}
                                         />
                                     }
-                                    onClick={(e) => onSubmit(e)}
-                                >
-                                    <h3>ADD TO CART</h3>
-                                </Button>
-                                <FormControl
-                                    variant="outlined"
-                                    className={classes.formControl}
-                                >
-                                    <InputLabel id="Quantity">
-                                        Quantity
-                                    </InputLabel>
-                                    <Select
-                                        labelId="Quantity"
-                                        id="Quantity"
-                                        value={quant}
-                                        onChange={handleChange}
-                                        label="Quantity"
+                                    onClick={onSubmitWishlist(currentUser?.id, liqueur?.id)}
+                                > 
+                                </Button>)}
+                                {btncart}
+                                <h3 className={classes.sum1}>QUANTITY</h3>
+                                <div className={classes.sum2}>
+                                    <Button
+                                        variant="contained"
+                                        className={classes.button2}
+                                        onClick={() => handleChangeQuant('-')}
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={1}>1</MenuItem>
-                                        <MenuItem value={2}>2</MenuItem>
-                                        <MenuItem value={3}>3</MenuItem>
-                                        <MenuItem value={4}>4</MenuItem>
-                                        <MenuItem value={5}>5</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                        -
+                                    </Button>
+                                    <Grid>{quant}</Grid>
+                                    <Button
+                                        variant="contained"
+                                        className={classes.button2}
+                                        onClick={() => handleChangeQuant('+')}
+                                    >
+                                        +
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </Card>
