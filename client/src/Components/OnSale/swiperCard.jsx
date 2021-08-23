@@ -12,6 +12,19 @@ const SwiperCard = ({ spirit }) => {
     setCurrentSpirit(spirit);
   }, [spirit])
   
+/*   let curr = []
+  currentSpirit?.map((e) =>{
+    if(currentSpirit.name){
+      curr.push({
+        id: e.id+900,
+        productId: e.id,
+
+      }
+
+      )
+    }
+  }) */
+  
   const handleAddToCart = () => {
     let date = JSON.parse(localStorage.getItem('data')) || []
     let data = date.filter(e => e.id === currentSpirit.id)
@@ -41,6 +54,7 @@ const SwiperCard = ({ spirit }) => {
     }
   }
 
+  console.log(spirit)
   return (
     <div>
       <div >
@@ -58,8 +72,10 @@ const SwiperCard = ({ spirit }) => {
                        <h2> SALE ${spirit.onSale}</h2>
 
                     </div>
-                  :                                                      
-                    <h5>${spirit.price}</h5>}
+                  : 
+                  <div className="noOferText">
+                    <h2>WISH ${spirit.price}</h2>
+                  </div>}
                      <div className="buton2">
                       <button
                       className="buton"
