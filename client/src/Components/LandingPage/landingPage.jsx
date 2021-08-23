@@ -9,6 +9,10 @@ import React, { useRef, useState, useEffect } from "react";
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+import SwiperOS from '../OnSale/swiperOS';
+
 
 //import aos  
 import Aos from 'aos';
@@ -24,10 +28,6 @@ import Brands from '../Brands/Brands';
 SwiperCore.use([Navigation]);
 
 
-
-
-
-
 export const LandingPage = () => {
 
     useEffect(() => {
@@ -41,6 +41,9 @@ export const LandingPage = () => {
         <div>
         <header className="landinghead">
         </header>
+        <body>
+        
+        </body>
         </div>
         <div className="vox"></div>
       
@@ -51,15 +54,9 @@ export const LandingPage = () => {
           </h1>
         </div>
         <div className="slider">
-        {/* <Swiper navigation={true}>
-          <SwiperSlide >
-            <img src={image1} className="img1" alt='img1'></img>
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image2} className="img1" alt="img2"></img>
-          </SwiperSlide>
-        </Swiper> */
-        }
+          
+                  <SwiperOS/>
+  
         </div>
         <div data-aos="fade-up" className="AboutUsContainer">
           <h2 style={{color:'black'}}>About us</h2>

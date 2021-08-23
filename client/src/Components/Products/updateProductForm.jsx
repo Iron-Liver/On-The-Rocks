@@ -75,7 +75,8 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 		sku: false,
 		price: false,
 		image: false,
-		stock: false
+		stock: false,
+		onSale: false
 	})
 	const [helperText, setHelperText] = useState({//Control the warning message
 		productName: "Enter a Name",
@@ -86,7 +87,8 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 		sku: "Enter a sku",
 		price: "Enter the price",
 		image: "Enter an image-url",
-		stock: "Enter product stock"
+		stock: "Enter product stock",
+		onSale: "Enter the offer price "
 	})
 
 	const MenuProps = {
@@ -253,6 +255,21 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 										label="Price"
 										name='price'
 										value={input.price}
+										onChange={handleInputChange}
+									/>
+								</Grid>
+							</Grid>
+							<Grid container spacing={1} alignItems="center">
+								<Grid item>
+									<MonetizationOn />
+								</Grid> 					
+								<Grid item>
+									<TextField
+										helperText={[helperText["onSale"]]}
+										id="onSale"
+										label="offer price"
+										name='onSale'
+										value={input.onSale}
 										onChange={handleInputChange}
 									/>
 								</Grid>

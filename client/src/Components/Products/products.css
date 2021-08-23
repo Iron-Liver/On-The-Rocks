@@ -219,3 +219,12 @@
     transition-delay: translateY 350ms;
   }
 }
+
+.price{
+  text-decoration: line-through;
+  
+}
+
+.hs{
+  color: red;
+}

@@ -70,7 +70,11 @@ module.exports = sequelize =>{
             defaultValue: true,
         },
         profilePicture: {
-            type: DataTypes.STRING,      
+            type: DataTypes.STRING,  
+        },    
+        coins: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         }
     })
 }

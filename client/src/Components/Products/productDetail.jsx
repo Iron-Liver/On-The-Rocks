@@ -11,7 +11,8 @@ import {
     Grid,
     Box,    
 } from "@material-ui/core";
-import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart } from '@material-ui/icons';
+
+import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart, FavoriteBorder } from '@material-ui/icons';
 import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
@@ -19,6 +20,7 @@ import { getProductReviews } from "../../Redux/Reviews/reviewActions";
 import jwt from "jsonwebtoken";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
+import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { green, red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
@@ -85,6 +87,18 @@ const useStyles = makeStyles((theme) => ({
     sum1: {
         display: "flex"
     },
+    buttonWish: {
+        backgroundColor: "white",
+        margin: theme.spacing(1),
+        width: 60,
+        height: 55,
+    },
+    wishIcon: {
+        color: "red",
+        marginLeft: "10px",
+        width: 50,
+        height: 50,
+    },
     review: {
         display: "flex",
         alignItems: "center",
@@ -136,6 +150,10 @@ const useStyles = makeStyles((theme) => ({
         marginRight: "5px",
         marginBottom: "30px",
     },
+    price:{
+        textDecoration:"line-through 2px",
+        color: "red"
+    }
 }));
 
 const ProductDetail = () => {
@@ -197,12 +215,18 @@ const ProductDetail = () => {
                     name: liqueur.name,
                     stock: liqueur.stock,
                 });
-                console.log(liqueur)
                 swal("The product was added to the cart!");
             } else {
                 swal("Please enter a valid unit");
             }
         }
+    }
+
+    function onSubmitWishlist (){
+        dispatch(addProductWishlist({
+            userId: currentUser?.id,
+            productId: liqueur?.id
+        }))
     }
 
     let stockText = <div className={classes.stockText}>
@@ -294,19 +318,26 @@ const ProductDetail = () => {
                                             />
                                         </Box>
                                     </div>
-                                    <Typography component="h5" variant="h5" style={{
-                                      fontFamily: "'Montserrat', sans-serif",
-                                      letterSpacing: "-0.5px"
-                                    }}>
-                                        ${liqueur.price}
+                                    {liqueur.onSale? 
+                                    <Typography component="h5" variant="h5">
+                                     <h3> HOT SALE ${liqueur.onSale}</h3>
+                                     <h5 className={classes.price} >REGULAR PRICE ${liqueur.price}</h5>
                                     </Typography>
-                                    <Typography component="h5" variant="h5" style={{
-                                      fontFamily: "'Montserrat', sans-serif",
-                                      letterSpacing: "-0.5px"
-                                    }}>
-                                        Brand: {liqueur.brand}
-                                    </Typography>
-                                    {stockText}
+                                    : <>
+                                        <Typography component="h5" variant="h5" style={{
+                                            fontFamily: "'Montserrat', sans-serif",
+                                            letterSpacing: "-0.5px"
+                                        }}>
+                                            ${liqueur.price}
+                                        </Typography>
+                                        <Typography component="h5" variant="h5" style={{
+                                            fontFamily: "'Montserrat', sans-serif",
+                                            letterSpacing: "-0.5px"
+                                        }}>
+                                            Brand: {liqueur.brand}
+                                        </Typography>
+                                        {stockText}
+                                    </>}
                                 </Grid>
                                 <Typography variant="h6" style={{
                                       fontFamily: "'Montserrat', sans-serif",
@@ -344,7 +375,21 @@ const ProductDetail = () => {
                                       </div>
                                     </div>
                                     {btncart}
-                                </div>
+                            <div className={classes.controls}>
+                                {currentUser && (<Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.buttonWish}
+                                    startIcon={
+                                        <FavoriteBorder
+                                            className={classes.wishIcon}
+                                        />
+                                    }
+                                    onClick={onSubmitWishlist(currentUser?.id, liqueur?.id)}
+                                > 
+                                </Button>)}
+                            </div>
+                            </div>
                             </CardContent>
                         </div>
                     </Card>

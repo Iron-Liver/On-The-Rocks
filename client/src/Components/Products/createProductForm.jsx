@@ -259,6 +259,21 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 									/>
 								</Grid>
 							</Grid>
+                            <Grid container spacing={1} alignItems="center">
+								<Grid item>
+									<MonetizationOn />
+								</Grid>
+								<Grid item>
+									<TextField
+										helperText={[helperText["onSale"]]}
+										id="onSale"
+										label="offer price"
+										name='onSale'
+										value={input.onSale}
+										onChange={handleInputChange}
+									/>
+								</Grid>
+							</Grid>
 
 							<Grid container spacing={1} alignItems="center">
 								<Grid item>

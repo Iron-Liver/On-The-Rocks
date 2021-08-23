@@ -37,7 +37,7 @@ const productsMockUp = async () => {
             price:234.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-ak47_720x.jpg?v=1603236568",
             stock: 10,
-        })    
+        })   
         kalashnikov.addCategories([5])
       
         const gangstarVodka = await  Product.create({

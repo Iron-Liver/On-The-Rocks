@@ -61,7 +61,12 @@ const ProductCard = ({ spirit }) => {
                   <span style={{ margin: "3px" }}>Brand: {spirit.brand}</span>
                 </div>
                 <div className="color">
-                    <h5 style={{
+                  {spirit.onSale? 
+                    <div className="color">
+                        <h3 className = "hs"> SALE ${spirit.onSale}</h3>
+                        <h5 className="price" >REGULAR ${spirit.price}</h5>
+                    </div>
+                  : (<><h5 style={{
                       fontSize: "16px",
                       fontWeight: "400"
                     }}>${spirit.price}</h5>
@@ -70,7 +75,8 @@ const ProductCard = ({ spirit }) => {
                       onClick={handleAddToCart}
                     >
                       Add to cart
-                    </CustomButton>
+                    </CustomButton></>)
+                  }
                 </div>
             </div>
         </div>

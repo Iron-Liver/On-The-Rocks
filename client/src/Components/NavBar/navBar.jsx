@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
-import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
+import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp, FavoriteBorder } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import NavBox from './navBox'
@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(0),
     marginLeft: theme.spacing(0),
+  },
+  wishButton: {
+    color:"white"
   },
   icons: {
     color:'#fff',
@@ -201,6 +204,15 @@ function NavBar(props) {
             >
               <ShoppingCart className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
             </IconButton>
+            
+              <Link to = "/wishlist">
+                <IconButton
+                  className={classes.wishButton}
+                >
+                  <FavoriteBorder/>
+                </IconButton>
+              </Link>
+            
 
               <Hidden xsDown>  
                   <IconButton

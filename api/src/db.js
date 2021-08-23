@@ -64,6 +64,7 @@ const {
     Order_products,
     Payment_detail,
     Review,
+    Wishlist
 } = sequelize.models;
 
 User.hasMany(Order);
@@ -91,6 +92,9 @@ Payment_detail.belongsTo(Order);
 Review.belongsTo(User, {
   foreignKey: 'userId'
 })
+User.belongsToMany(Product, { through: Wishlist });
+Product.belongsToMany(User, { through: Wishlist });
+
 
 module.exports = {
     ...sequelize.models,

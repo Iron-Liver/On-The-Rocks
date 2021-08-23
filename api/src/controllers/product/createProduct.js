@@ -1,11 +1,11 @@
 const { Product } = require("../../db");
 
 module.exports = async (req, res, next) => {
-  const { name, description, size, stock, categories, image, brand, sku, price } = req.body;
+  const { name, description, size, stock, categories, image, brand, sku, price, onSale } = req.body;
 
   console.log(req.body);
   try {
-    product = await Product.create({ name, description, size, image, stock, brand, sku, price });
+    product = await Product.create({ name, description, size, image, stock, brand, sku, price, onSale });
     console.log(product);
     await product.setCategories(categories);
     return res.json(product);
