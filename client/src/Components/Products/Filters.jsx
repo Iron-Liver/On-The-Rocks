@@ -92,6 +92,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             Under $100.00
@@ -102,6 +103,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             $100.00 - $250.00
@@ -112,6 +114,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             $250.00 - $500.00
@@ -122,6 +125,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             Above $500.00
@@ -205,6 +209,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             200ml and less
@@ -215,6 +220,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             200ml - 500ml
@@ -225,6 +231,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             500ml - 700ml
@@ -235,6 +242,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             700 - 750ml
@@ -245,6 +253,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             Above 750ml

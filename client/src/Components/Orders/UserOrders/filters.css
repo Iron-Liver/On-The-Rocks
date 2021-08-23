@@ -1,3 +1,7 @@
+.user-orders-filter-container {
+  margin-bottom: 20px;
+}
+
 .user-orders-filter-form {
   display: flex;
   flex-direction: column;
@@ -38,9 +42,24 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 350px) {
-  .admin-orders-sort-submit label {
-    margin: 0 0 5px 2px;
-    background: red;
+@media (max-width: 456px) {
+  .user-orders-sort-submit {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 325px) {
+  .user-orders-sort-submit div {
+    display: flex;
+    justify-content: center;
+  }
+
+  .user-orders-sort-submit div button {
+    margin: 0 2px;
+  }
+
+  .user-orders-sort-submit label,
+  .user-orders-sort-submit label select {
+    font-size: 10px;
   }
 }

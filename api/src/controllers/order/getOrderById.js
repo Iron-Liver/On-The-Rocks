@@ -17,7 +17,8 @@ module.exports = async (req, res, next) => {
       }, {
         model: Payment_detail
       }, {
-        model: User
+        model: User,
+        attributes: ['id', 'isAdmin', 'name', 'username', 'email']
       }]
     });
 

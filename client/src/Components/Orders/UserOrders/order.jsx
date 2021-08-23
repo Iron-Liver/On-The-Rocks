@@ -130,7 +130,12 @@ const Order = ({ order, handleSubmit }) => {
                 <AvatarGroup max={4}>
                   {order.order_products.map(({product}) => 
                     <Avatar 
-                      style={{ width: "70px", height: "70px", border: "1px solid #d3d3d3bb" }} 
+                      style={{ 
+                        width: "70px", 
+                        height: "70px", 
+                        border: "1px solid #d3d3d3bb",
+                        imageRendering: "-webkit-optimize-contrast"
+                      }} 
                       alt={product.name} 
                       src={product.image} 
                       key={Math.random()}

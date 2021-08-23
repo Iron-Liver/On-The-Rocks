@@ -159,12 +159,18 @@ function NavBar(props) {
                       src={logoWhite} 
                       alt="on-the-rocks-logo" 
                       className={classes.navLogo}
+                      style={{
+                        "imageRendering": "-webkit-optimize-contrast"
+                      }}
                     />
                     ) : (
                     <img 
                       src={logoBrown} 
                       alt="on-the-rocks-logo" 
                       className={classes.navLogo}
+                      style={{
+                        "imageRendering": "-webkit-optimize-contrast"
+                      }}
                     />
                   )
                 }
