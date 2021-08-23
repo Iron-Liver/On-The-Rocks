@@ -20,8 +20,6 @@ const Sale = () => {
     );
     var sale = Products.filter((spirit) => spirit.onSale > 0)
 
-    console.log(sale)
-
     return (
         <div>
             <div className="content">
