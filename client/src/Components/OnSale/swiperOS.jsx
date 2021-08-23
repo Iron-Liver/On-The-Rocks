@@ -9,8 +9,9 @@ function SwiperOS(){
         (state) => state.productReducer
     );
 
-    var sale = Products.filter((spirit) => spirit.hasOwnProperty('onSale'))
-
+    var sale = Products.filter((spirit) => spirit.onSale > 0)
+    console.log(sale)
+    
     return (
         <Swiper
           className = "swiper"
@@ -19,7 +20,6 @@ function SwiperOS(){
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          // onSwiper={(swiper) => {}}
         >
          
           {sale.map((spirit) => (

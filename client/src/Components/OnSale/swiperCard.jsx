@@ -11,13 +11,14 @@ const SwiperCard = ({ spirit }) => {
   useEffect(() => {
     setCurrentSpirit(spirit);
   }, [spirit])
-
+  
   const handleAddToCart = () => {
     let date = JSON.parse(localStorage.getItem('data')) || []
     let data = date.filter(e => e.id === currentSpirit.id)
     if (date.length > 0 && data.length > 0){
          swal("The product is already in the cart!")
     } else {
+
      if(!currentSpirit.onSale)
      {
          addProductCart({
