@@ -1,14 +1,14 @@
-const {DataTypes} = require('sequelize')
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize =>{
-    sequelize.define('user', {
+module.exports = (sequelize) => {
+    sequelize.define("user", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
         googleId: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         isAdmin: {
             type: DataTypes.BOOLEAN,
@@ -19,38 +19,38 @@ module.exports = sequelize =>{
             defaultValue: false,
         },
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
-                validate: {
+            validate: {
                 notEmpty: {
-                    msg: 'El campo Usuario no debe estar vacio',
-                    },
+                    msg: "El campo Usuario no debe estar vacio",
+                },
                 is: {
                     args: /^[A-Za-z0-9]{3,20}$/,
-                    msg: 'El campo Usuario contiene errores'
-                    }
+                    msg: "El campo Usuario contiene errores",
                 },
-                unique: {
-                    msg: 'Ese usuario ya existe',
-                }
             },
+            unique: {
+                msg: "Ese usuario ya existe",
+            },
+        },
 
         email: {
             type: DataTypes.STRING(60),
             unique: {
-                msg: 'Email ya registrado',
+                msg: "Email ya registrado",
             },
             allowNull: false,
             validate: {
                 isEmail: {
-                    msg: 'Email Invalido',
+                    msg: "Email Invalido",
                 },
                 notEmpty: {
-                    msg: 'El email no puede estar vacio',
-                }
+                    msg: "El email no puede estar vacio",
+                },
             },
         },
         password: {
@@ -58,7 +58,7 @@ module.exports = sequelize =>{
             allowNull: false,
             validate: {
                 notEmpty: {
-                    msg: 'La contraseña no puede estar vacia',
+                    msg: "La contraseña no puede estar vacia",
                 },
             },
         },
@@ -71,7 +71,7 @@ module.exports = sequelize =>{
         },
         coins: {
             type: DataTypes.INTEGER,
-            defaultValue: 0
-        }
-    })
-}
+            defaultValue: 0,
+        },
+    });
+};

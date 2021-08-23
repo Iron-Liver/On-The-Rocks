@@ -64,11 +64,15 @@ const {
     Order_products,
     Payment_detail,
     Review,
-    Wishlist
+    Wishlist,
+    Coupon
 } = sequelize.models;
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
+User.hasMany(Coupon)
+Coupon.belongsTo(User);
 
 User.belongsToMany(Product, { through: Review });
 Product.belongsToMany(User, { through: Review });
