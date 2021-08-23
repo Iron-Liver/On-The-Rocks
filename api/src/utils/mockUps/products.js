@@ -107,6 +107,7 @@ const productsMockUp = async () => {
             brand:"Hendrick's",
             sku:"a9",
             price:70.99,
+            onSale: 60.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hendricks-gin_720x.jpg?v=1567926371",
             stock: 10,
         })
@@ -119,6 +120,7 @@ const productsMockUp = async () => {
             brand:"Glenfiddich",
             sku:"a10",
             price:4699.99,
+            onSale: 4500.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-glenfiddich-40yo_720x.jpg?v=1614596002",
             stock: 10,
         })
@@ -164,6 +166,7 @@ const productsMockUp = async () => {
             brand:"Remy Martin",
             sku:"a14",
             price:679.99,
+            onSale: 650.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-remy-martin-shanghai_720x.jpg?v=1559369227",
             stock: 10,
         })
@@ -178,6 +181,7 @@ const productsMockUp = async () => {
             price:549.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-martel-chanteloup_720x.jpg?v=1592737654",
             stock: 10,
+            onSale: 500.99,
         })
         martellChanteloup.addCategories([7])
         const caffoVecchio = await  Product.create({

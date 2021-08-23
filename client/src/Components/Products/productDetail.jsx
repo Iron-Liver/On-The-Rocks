@@ -282,8 +282,8 @@ const ProductDetail = () => {
                                     </div>
                                     {liqueur.onSale? 
                                     <Typography component="h5" variant="h5">
-                                     <h3> HOT SALE ${liqueur.onSale}</h3>
-                                     <h5 className={classes.price} >REGULAR PRICE ${liqueur.price}</h5>
+                                     <h3>SALE ${liqueur.onSale}</h3>
+                                     <h5 className={classes.price} >PRICE ${liqueur.price}</h5>
                                     </Typography>
                                     :                                 
                                     <Typography component="h5" variant="h5">
