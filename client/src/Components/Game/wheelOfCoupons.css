@@ -1,29 +1,62 @@
-.game-container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-evenly;
-    margin-top: 2vh;
-}
-.roulette-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    margin: 0 0;
-    position: relative;
-}
-.roulette {
-    position: relative;
-    left: 25%;
-    width: 50%;
-}
-.marker {
-    position: absolute;
-    top: 20;
-    left: 25%;
-    width: 50%;
-}
-.button {
-    margin-top:2vh
-}
+.game-title {
+    text-align: center;
+    font-family: 'Heebo';
+    font-size: 35px;
+  }
+
+
+
+  .game-container {
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly;
+      margin-top: 2vh;
+  }
+  .roulette-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 45%;
+      margin: 0 0;
+      position: relative;
+  }
+  .roulette {
+      position: relative;
+      left: 25%;
+      width: 50%;
+  }
+  .roulette::selection {
+    background: transparent;
+  }
+  .marker {
+      position: absolute;
+      top: 20;
+      left: 25%;
+      width: 50%;
+  }
+  .marker::selection {
+    background: transparent;
+  }
+  .button {
+      margin-top:2vh
+  }
+  .game-instructions-head {
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.5rem;
+  }
+  .game-instructions-content {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+  }
+  @media (max-width: 860px) {
+    .game-container {
+      flex-direction: column-reverse;
+    }
+    .roulette-container {
+      width: 100%;
+    }
+    .game-instructions {
+      text-align: center;
+      margin-top: 5vh;
+    }
+  }

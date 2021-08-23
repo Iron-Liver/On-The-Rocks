@@ -29,6 +29,7 @@ import CreateOrder from "./Components/Orders/CreateOrder/createOrder";
 import MercadoPago from "./Components/Mercadopago/Mercadopago";
 import Wishlist from "./Components/Wishlist/wishlist";
 import { WheelOfCoupons } from './Components/Game/wheelOfCoupons';
+import Footer from './Components/Footer/footer';
 
 const AppGlobal = () => {
   return (
@@ -61,6 +62,7 @@ const AppGlobal = () => {
           <Route exact path="/roulette" component={WheelOfCoupons} />
           <Route path="*" component={Error404} />
         </Switch>
+        <Footer />
       </Router>
   );
 };

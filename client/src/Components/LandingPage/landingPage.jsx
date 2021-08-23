@@ -1,6 +1,7 @@
 import './landingPage.css';
-// import image1 from '../../assets/xd1.jpg'
-// import image2 from '../../assets/xd2.jpg'
+import im1 from '../../assets/au1.jpg'
+import im2 from '../../assets/au2.jpg'
+import im3 from '../../assets/au3.jpg'
 import React, { useRef, useState, useEffect } from "react";
 
 // Import Swiper React components
@@ -59,13 +60,17 @@ export const LandingPage = () => {
   
         </div>
         <div data-aos="fade-up" className="AboutUsContainer">
-          <h2 style={{color:'black'}}>About us</h2>
+          <div className="divider-page">
+          <div className="dividers"></div>
+          <h1 style={{color:'black'}}>About us</h1>
+          <div className="dividers"></div>
+          </div>
           <div class="container2">
             <div class="card">
               <figure class="card__thumb">
-                <img src="https://c0.wallpaperflare.com/preview/453/912/1005/alcohol-background-bar-beer.jpg" alt="by Kyle Cottrell" class="card__image"/>
+                <img src={im3} alt="by Kyle Cottrell" class="card__image"/>
                 <figcaption class="card__caption">
-                  <h2 class="card__title">ITEM</h2>
+                  <h2 class="card__title">STOCK</h2>
                   <p class="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt dolore quis pariatur voluptatum vitae totam id. Repellat delectus veritatis nesciunt illo voluptas voluptates vero culpa exercitationem officia aliquid. Eveniet.</p>
                 </figcaption>
               </figure>
@@ -73,9 +78,9 @@ export const LandingPage = () => {
 
             <div class="card">
               <figure class="card__thumb">
-                <img src="https://www.wallpapertip.com/wmimgs/25-257819_300197-title-food-liquor-alcohol-wallpaper-background-liquors.jpg" alt=" Nathan Dumlao" class="card__image"/>
+                <img src={im2} alt=" Nathan Dumlao" class="card__image"/>
                 <figcaption class="card__caption">
-                  <h2 class="card__title">ITEM</h2>
+                  <h2 class="card__title">PRODUCTS</h2>
                   <p class="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatem animi tenetur debitis! Reprehenderit, magnam amet quos inventore, aut minima eveniet, iste molestiae quo illum dicta corporis perferendis voluptates odio.</p>
                 </figcaption>
               </figure>
@@ -83,9 +88,9 @@ export const LandingPage = () => {
 
             <div class="card">
               <figure class="card__thumb">
-                <img src="https://c1.wallpaperflare.com/preview/704/706/404/food-drink-alcohol-drink-drinks.jpg" alt=" Daniel Lincoln" class="card__image"/>
+                <img src={im1} alt=" Daniel Lincoln" class="card__image"/>
                 <figcaption class="card__caption">
-                  <h2 class="card__title">ITEM</h2>
+                  <h2 class="card__title">aaaa </h2>
                   <p class="card__snippet">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore nemo deleniti provident iure tenetur totam sit reiciendis dolore obcaecati saepe, quisquam soluta sapiente nulla culpa veniam adipisci illum consequuntur assumenda.</p>
                 </figcaption>
               </figure>
@@ -93,7 +98,11 @@ export const LandingPage = () => {
           </div>
         </div>
           <div  className="containerBrands">
-        <h1>Shop By Type</h1>
+          <div className="divider-page">
+          <div className="dividers"></div>
+          <h1 style={{color:'black'}}>Shop by Tipe</h1>
+          <div className="dividers"></div>
+          </div>
               <Brands />
           </div>
         </div>

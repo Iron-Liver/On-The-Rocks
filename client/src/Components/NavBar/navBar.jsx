@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   appBarSolid: {
     width: '100%',
     background: "#372c2eee",
-    transition: 'background 300ms ease-out'
+    transition: 'background 300ms ease-out',
+    borderBottom: '1px solid gray'
   },
   menu: {
     width: "100%",
@@ -45,12 +46,15 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(0),
   },
   wishButton: {
-    color:"white"
+    color:"#372c2eee",
+    '&:hover':{
+      color:'black',
+    }
   },
   icons: {
-    color:'#fff',
+    color:'#372c2eee',
     '&:hover':{
-      color:'#fff',
+      color:'black',
     }
   },
   mobile: {
@@ -87,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "12px"
   },
   blackColor: {
-    color: "#292F36"
+    color: "#372c2eee"
   }
 }));
 
