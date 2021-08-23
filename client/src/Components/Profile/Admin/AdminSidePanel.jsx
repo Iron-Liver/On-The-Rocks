@@ -4,7 +4,6 @@ import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import { useDispatch, useSelector } from 'react-redux';
 import { readUser, logOutUser } from '../../../Redux/Users/userActions';
-import swal from 'sweetalert';
 
 const AdminSidePanel = () => {
   const { url } = useRouteMatch();

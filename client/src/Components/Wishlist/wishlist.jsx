@@ -6,7 +6,7 @@ import { getWishlist, deleteWish } from "../../Redux/Wishlist/wishlistActions";
 import { getProducts } from "../../Redux/Products/productsActions";
 import jwt from "jsonwebtoken";
 import swal from "sweetalert";
-import { IconButton, Paper, Grid, ButtonBase, Typography } from "@material-ui/core";
+import { IconButton, Paper } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import { NewReleases } from "@material-ui/icons";

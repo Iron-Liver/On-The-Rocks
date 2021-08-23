@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Grid, Paper, Typography, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
+import { Grid, Paper, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
 import { Delete, Info, Edit, Email } from "@material-ui/icons";
 import jwt from 'jsonwebtoken'
 

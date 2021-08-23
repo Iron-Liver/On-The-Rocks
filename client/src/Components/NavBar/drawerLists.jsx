@@ -131,8 +131,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
   const logOut = () => {
     dispatch(logOutUser());
   };
-
-  const classes = useStyles();
+  
   return (
     <div>
       <div style={{

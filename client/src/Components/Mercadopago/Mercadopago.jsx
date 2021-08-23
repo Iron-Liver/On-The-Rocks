@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Checkout from './Checkout';
 import CheckoutV2 from './CheckoutV2';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';

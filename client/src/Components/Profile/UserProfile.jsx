@@ -1,13 +1,12 @@
 import './Profile.css';
 import React from 'react';
-import { Route, Switch, useParams, useRouteMatch } from 'react-router-dom'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import UserOrders from '../Orders/UserOrders/userOrders';
 import UserSidePanel from './User/UserSidePanel';
 import UserTopPanel from './User/UserTopPanel';
 import Wishlist from '../Wishlist/wishlist';
 
 const UserProfile = () => {
-  const { userId } = useParams();
   const { path } = useRouteMatch();
   
   return (

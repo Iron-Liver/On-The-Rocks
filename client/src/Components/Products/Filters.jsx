@@ -1,47 +1,19 @@
 import './filters.css';
-import { useEffect, React, useState } from "react";
+import { useEffect, React } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterByCategory,
-  filterByPrice,
 } from "../../Redux/Products/productsActions";
 import {
-  Button,
-  Grid,
   Accordion,
   AccordionSummary,
   AccordionDetails,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { ExpandMore } from '@material-ui/icons'
 import { getAllCategories } from "../../Redux/Category/categoryActions";
 
-const useStyles = makeStyles({
-  button: {
-    marginRight: 7,
-  },
-
-  root: {
-    display: "flex",
-    background: "#F7F5F3",
-  },
-
-  form: {
-    display: "flex",
-    height: "100px",
-  },
-});
-
-const initialState = {
-  price: false,
-  brand: false,
-  size: false
-}
-
 const Filters = ({ setPage }) => {
   const { categories } = useSelector((state) => state.categoryReducer);
-  const { Products } = useSelector((state) => state.productReducer);
-  const [filtersExpanded, setFiltersExpanded] = useState(initialState);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,13 +25,6 @@ const Filters = ({ setPage }) => {
     console.log(id)
     dispatch(filterByCategory(id));
   }
-
-  function orderByPrice(type) {
-    setPage(1);
-    dispatch(filterByPrice(type));
-  }
-
-  const classes = useStyles();
 
   //------------------------------------
 

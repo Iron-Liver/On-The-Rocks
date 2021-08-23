@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
-import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
+import { AppBar, Toolbar, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
 import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp, FavoriteBorder } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
@@ -11,11 +11,6 @@ import jwt from 'jsonwebtoken';
 import logoBrown from '../../assets/on-the-rocks-brown.png'
 import logoWhite from '../../assets/on-the-rocks-white.png'
 
-
-
-// import { logOutUser } from "../../Redux/Users/UserActions";
-
-// const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {

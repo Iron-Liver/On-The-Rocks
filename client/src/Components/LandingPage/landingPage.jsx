@@ -2,31 +2,21 @@ import './landingPage.css';
 import im1 from '../../assets/au1.jpg'
 import im2 from '../../assets/au2.jpg'
 import im3 from '../../assets/au3.jpg'
-import React, { useRef, useState, useEffect } from "react";
-
-// Import Swiper React components
-// import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useEffect } from "react";
 import Locations from '../Maps/Locations'; 
-
-
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import SwiperOS from '../OnSale/swiperOS';
-
-
 //import aos  
 import Aos from 'aos';
 import 'aos/dist/aos.css'
-
-
 import SwiperCore, {
   Navigation
 } from 'swiper/core';
 import Brands from '../Brands/Brands';
-
 // install Swiper modules
 SwiperCore.use([Navigation]);
 
