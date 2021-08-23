@@ -103,7 +103,7 @@ const ProductsAccordion = ({ order }) => {
                       width="150px"
                       alt="productimage"
                       style={{
-                        border: "1px solid #493d3011"
+                        border: "1px solid #372c2e11"
                       }}
                     />
                   </Link>

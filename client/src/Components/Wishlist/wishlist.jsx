@@ -1,3 +1,4 @@
+import "./wishlist.css"
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,17 +9,24 @@ import swal from "sweetalert";
 import { IconButton, Paper, Grid, ButtonBase, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
+import { NewReleases } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    // flexGrow: 1,
+    width: "100%",
   },
   paper: {
     padding: theme.spacing(2),
-    marginLeft: '40px',
-    marginRight: '40px',
-    marginTop: '40px',
-    maxWidth: "auto",
+    marginBottom: "10px",
+    display: "flex"
+  },
+  onSalePaper: {
+    padding: theme.spacing(2),
+    marginBottom: "10px",
+    display: "flex",
+    background: "rgb(255, 244, 244)"
   },
   image: {
     width: 150,
@@ -29,12 +37,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     maxWidth: '100%',
     maxHeight: '100%',
+    marginTop: "5px"
   },
   name: {
     marginLeft: "40px"
   },
   price: {
-    marginLeft: "900px"
+    // marginLeft: "900px"
   },
 
 }));
@@ -71,16 +80,13 @@ const Wishlist = () => {
   const deleteWishh = (e, userId, productId) => {
     e.preventDefault();
     var res;
-    console.log("entre a la func", userId, productId);
 
     for (let i = 0; i < wishlists.length; i++) {
-      console.log("WP", wishlists[i].productId, wishlists[i].userId);
       if (
         wishlists[i].productId === productId &&
         wishlists[i].userId === userId
       ) {
         res = wishlists[i].id;
-        console.log("entre a la if");
 
         dispatch(deleteWish(res));
 
@@ -105,40 +111,68 @@ const Wishlist = () => {
 return (
   <div className={classes.root}>
   {filtProduct?.length > 0 ? (
-        filtProduct?.map((w) => (
-    <Paper className={classes.paper}>
-      <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase className={classes.image}>
-            <img className={classes.img} alt="complex" src={w[0]?.image} />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <Typography  className={classes.name} gutterBottom variant="subtitle1">
-              {w[0]?.name}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body2" style={{ cursor: 'pointer' }}>
-              <Typography variant="subtitle1" className={classes.price}>Price: ${w[0]?.price}</Typography>
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            
-            <IconButton
-              onClick={(e) => deleteWishh(e, currentUser?.id, w[0]?.id)}>
-              <DeleteIcon fontSize="medium" />
-            </IconButton>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Paper>
+    filtProduct?.map((w) => (
+      w[0] && 
+      <Paper className={w[0].onSale ? classes.onSalePaper : classes.paper}>
+        <div className="user-wishlist-imgsale-wrapper">
+          <div className="user-wishlist-img-container">
+            <Link to={`/products/${w[0].id}`}>
+              <img width="80px" className={classes.img} alt="complex" src={w[0]?.image}/>
+            </Link>
+            {
+              w[0].onSale && (
+                <div>
+                  <div className="user-wishlist-flag-shadow"/>
+                  <div className="user-wishlist-flag">
+                    <NewReleases id="user-wishlist-flag-icon"/>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+        </div>
+        <div className="user-wishlist-description">
+          <div style={{ flexGrow: 1 }}>
+            <Link to={`/products/${w[0].id}`} style={{ textDecoration: "none", color: "black"}}>
+              <h4 className="user-wishlist-item-title">{w[0]?.name}</h4>
+            </Link>
+            {
+              w[0].onSale ? (
+                <h4 className="user-wishlist-item-price">
+                  <span style={{
+                    color: "rgb(144, 0, 32)"
+                  }}>
+                    ${w[0].onSale}{" "}
+                  </span> 
+                  <del
+                    className="user-wishlist-item-regular"
+                    >${w[0]?.price}</del>
+                </h4>
+              ) : (
+                <h4 className="user-wishlist-item-price">
+                  ${w[0]?.price}
+                </h4>
+              )
+            }
+          </div>
+          <IconButton
+            onClick={(e) => deleteWishh(e, currentUser?.id, w[0]?.id)}
+            style={{ padding: "1px" }}
+          >
+            <DeleteIcon fontSize="medium" />
+          </IconButton>
+        </div>
+      </Paper>
     ))
       ) : (
-        <h1>Nothing to show...</h1>
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "55vh"
+        }}>
+          <h4 id="user-wishlist-empty-message">Nothing to show...</h4>
+        </div>
       )}
   </div>
 );

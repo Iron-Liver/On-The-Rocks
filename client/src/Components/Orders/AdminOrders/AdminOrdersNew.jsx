@@ -129,6 +129,11 @@ const AdminOrdersNew = () => {
   };
 
   const handleReset = () => {
+    setForm({ 
+      order: "id-DESC-",
+      filterBy: {},
+      limit: 4
+    })
     history.push(`${pathname}?page=${page}`);
   }
 

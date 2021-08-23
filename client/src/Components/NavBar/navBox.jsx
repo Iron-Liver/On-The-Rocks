@@ -28,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
         width: '70px',
         padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
             theme.spacing(1) + 2
-        }px`
+        }px`,
+        fontFamily: 'Montserrat',
+        fontWeight: '500'
     },
     imageMarked: {
         height: 2,
@@ -40,10 +42,10 @@ const useStyles = makeStyles((theme) => ({
         transition: 'all 0.35s ease-out',
     },
     blackBack: {
-      backgroundColor: "#2E0F14"
+      backgroundColor: "#372c2e"
     },
     blackColor: {
-      color: "#292F36",
+      color: "#372c2e",
       fontFamily: 'Montserrat',
       fontWeight: '500'
     }

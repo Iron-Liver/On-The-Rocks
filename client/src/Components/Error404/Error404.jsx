@@ -8,7 +8,7 @@ const Error404 = () => {
       display: "flex", 
       flexDirection: "column", 
       alignItems: "center", 
-      color: "#493d30",
+      color: "#372c2e",
       background: "white",
       padding: "28px 0"
     }}>
@@ -19,16 +19,16 @@ const Error404 = () => {
         </h3>
         <h4>Useful links: </h4>
         <Link to="/">
-          <Button style={{color: "#493d30"}}>Home</Button>
+          <Button style={{color: "#372c2e"}}>Home</Button>
         </Link>
         <Link to="/products">
-          <Button style={{color: "#493d30"}}>See products</Button>
+          <Button style={{color: "#372c2e"}}>See products</Button>
         </Link>
         <Link to="/login">
-          <Button style={{color: "#493d30"}}>Login</Button> 
+          <Button style={{color: "#372c2e"}}>Login</Button> 
         </Link>
         <Link to="/register">
-          <Button style={{color: "#493d30"}}>register</Button> 
+          <Button style={{color: "#372c2e"}}>register</Button> 
         </Link>
       </div>
     </div>

@@ -1,19 +1,12 @@
-/* .filter-accordion-summary {
-  margin: 0;
-  height: max-content;
-} */
-
 .filter-accordion-details-cat {
   cursor: pointer;
 }
-
 .filter-accordion-details-cat h4 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
 }
-
 .filter-accordion-details-cat:hover {
-  color: #d3d3d3;
-  background: #3b3024b9;
-  transition: all 200ms ease-in-out;
+  color: #D3D3D3;
+  background: #372c2eb9;
+  transition: all 100ms ease-in-out;
 }

@@ -44,9 +44,9 @@ export const AddProductReview = ({ prodId, userId }) => {
             >
                 <Grid item>
                     <h2 style={{
-                      fontFamily: `"Heebo", sans-serif`,
+                      fontFamily: `"Montserrat", sans-serif`,
                       fontSize: "25px",
-                      letterSpacing: "-0.5px"
+                      fontWeight: 400
                     }}>
                         Please give your opinion.
                     </h2>

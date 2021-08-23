@@ -1,5 +1,5 @@
 
-.content {
+.products-content {
   display:inline-flex;
   flex-wrap: wrap;
   justify-content:space-evenly;
@@ -21,17 +21,17 @@
   width: 60%;
 }
 
-.containerproducts {
+.products-containerproducts {
   position: relative;
   margin: 15px;
   border-radius: 5px;
   background: #fff;
-  box-shadow:  1px 1px 2px #757575,
-              -1px -1px 2px #aaaaaa;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+  max-width: 270px;
 }
 
 
-.containerproducts .product-card {
+.products-containerproducts .product-card {
   width: 270px;
   height: 430px;
   background: #fff;
@@ -44,7 +44,7 @@
 
 
 
-.containerproducts .product-card .imgBx {
+.products-containerproducts .product-card .imgBx {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -54,12 +54,12 @@
   transition: 0.5s;
 }
 
-.containerproducts .product-card:hover .imgBx {
+.products-containerproducts .product-card:hover .imgBx {
   top: 0%;
   transform: translateY(0%);
 }
 
-.containerproducts .product-card .imgBx img {
+.products-containerproducts .product-card .imgBx img {
   position: absolute;
   top: 45%;
   left: 50%;
@@ -68,7 +68,7 @@
 }
 
 
-.containerproducts .product-card .contentBx {
+.products-containerproducts .product-card .contentBx {
   position: absolute;
   bottom: 0;
   width: 95%;
@@ -78,19 +78,19 @@
   z-index: 10;
 }
 
-.containerproducts .product-card:hover .contentBx {
+.products-containerproducts .product-card:hover .contentBx {
   height: 210px;
 }
 
-.containerproducts .product-card .contentBx h4 {
+.products-containerproducts .product-card .contentBx h4 {
   position: relative;
   font-weight: 400;
   letter-spacing: 1px;
   color: #000;
 }
 
-.containerproducts .product-card .contentBx .info-item,
-.containerproducts .product-card .contentBx .color {
+.products-containerproducts .product-card .contentBx .info-item,
+.products-containerproducts .product-card .contentBx .color {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,13 +101,13 @@
   padding-top: 0;
 }
 
-.containerproducts .product-card:hover .contentBx .info-item {
+.products-containerproducts .product-card:hover .contentBx .info-item {
   opacity: 1;
   visibility: visible;
   transition-delay: 0.4s;
 }
 
-.containerproducts .product-card:hover .contentBx .color {
+.products-containerproducts .product-card:hover .contentBx .color {
   opacity: 1;
   visibility: visible;
   transition-delay: 0.6s;
@@ -116,8 +116,8 @@
 
 
 
-.containerproducts .product-card .contentBx .size h5,
-.containerproducts .product-card .contentBx .color h5 {
+.products-containerproducts .product-card .contentBx .size h5,
+.products-containerproducts .product-card .contentBx .color h5 {
   color: #000;
   font-weight: 300;
   font-size: 10px;
@@ -126,7 +126,7 @@
   margin-right: 10px;
 }
 
-.containerproducts .product-card .contentBx button {
+.products-containerproducts .product-card .contentBx button {
   cursor: pointer;
   display: inline-block;
   text-decoration: none;
@@ -138,7 +138,7 @@
   border: none;
 }
 
-.containerproducts .product-card:hover .contentBx button {
+.products-containerproducts .product-card:hover .contentBx button {
   opacity: 1;
   transform: translateY(0px);
   transition-delay: translateY 350ms;
@@ -194,26 +194,26 @@
     width: 100%;
   }
  
-  .containerproducts .product-card .imgBx {
+  .products-containerproducts .product-card .imgBx {
     top: 0%;
     transform: translateY(0%);
   }
-  .containerproducts .product-card .contentBx {
+  .products-containerproducts .product-card .contentBx {
     height: 210px;
   }
-  .containerproducts .product-card .contentBx .info-item {
+  .products-containerproducts .product-card .contentBx .info-item {
     opacity: 1;
     visibility: visible;
     transition-delay: 0.4s;
   }
 
-  .containerproducts .product-card .contentBx .color {
+  .products-containerproducts .product-card .contentBx .color {
     opacity: 1;
     visibility: visible;
     transition-delay: 0.6s;
     flex-grow: 1;
   }
-  .containerproducts .product-card .contentBx button {
+  .products-containerproducts .product-card .contentBx button {
     opacity: 1;
     transform: translateY(0px);
     transition-delay: translateY 350ms;
@@ -222,9 +222,35 @@
 
 .price{
   text-decoration: line-through;
-  
 }
 
-.hs{
-  color: red;
+.hs {
+  color: #900020;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  text-align: center;
+}
+
+.price-addcart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.price-addcart-wrapper div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-addcart-wrapper div h3,
+.price-addcart-wrapper div h5 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
 }

@@ -56,8 +56,12 @@ export const LandingPage = () => {
         </div>
         <div className="slider">
           
-                  <SwiperOS/>
-  
+        
+        <div>
+          <SwiperOS />
+        </div>
+
+
         </div>
         <div data-aos="fade-up" className="AboutUsContainer">
           <div className="divider-page">
@@ -76,6 +80,7 @@ export const LandingPage = () => {
               </figure>
             </div>
 
+                
             <div class="card">
               <figure class="card__thumb">
                 <img src={im2} alt=" Nathan Dumlao" class="card__image"/>
@@ -107,5 +112,5 @@ export const LandingPage = () => {
           </div>
         </div>
     )
-}
+  }
 export default LandingPage;

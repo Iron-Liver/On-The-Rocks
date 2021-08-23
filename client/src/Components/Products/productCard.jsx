@@ -31,7 +31,7 @@ const ProductCard = ({ spirit }) => {
   }
 
   return (
-    <div className="containerproducts">
+    <div className="products-containerproducts">
         <div className="product-card">
             <div className="imgBx">
               <Link 
@@ -62,9 +62,17 @@ const ProductCard = ({ spirit }) => {
                 </div>
                 <div className="color">
                   {spirit.onSale? 
-                    <div className="color">
-                        <h3 className = "hs"> SALE ${spirit.onSale}</h3>
-                        <h5 className="price" >REGULAR ${spirit.price}</h5>
+                    <div className="price-addcart-wrapper">
+                      <div>
+                        <h3 className="hs">${spirit.onSale}</h3>
+                        <h5 className="price">${spirit.price}</h5>
+                      </div>
+                        <CustomButton
+                          disabled={spirit.stock < 1} 
+                          onClick={handleAddToCart}
+                        >
+                          Add to cart
+                        </CustomButton>
                     </div>
                   : (<><h5 style={{
                       fontSize: "16px",
@@ -79,6 +87,17 @@ const ProductCard = ({ spirit }) => {
                   }
                 </div>
             </div>
+        </div>
+        <div style={{
+          background: "transparent",
+          width: "270px",
+          height: "40px",
+          position: "relative",
+          top: "29px",
+          zIndex: "99"
+        }}
+        >
+
         </div>
     </div>
   )

@@ -65,7 +65,7 @@ const Filters = ({ setPage }) => {
 
   return (
     <div style={{ width: "100%" }}>
-      <h2 style={{ marginTop: 0 }}>Filter:</h2>
+      <h2 style={{ marginTop: 0 }}>Filters</h2>
 
       <Accordion
         className="filter-accordion"

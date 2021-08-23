@@ -122,7 +122,7 @@ export const WheelOfCoupons = () => {
     };
     return (
       <div>
-        <h1 className="game-title">Cupon Roulette</h1>
+        <h1 className="game-title">Coupon Roulette</h1>
         <div className="game-container">
             <div className="game-instructions">
                 <h2 className="game-instructions-head">How to play</h2>

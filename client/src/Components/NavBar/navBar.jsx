@@ -22,12 +22,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     outline: 'none',
     backgroundColor: "d3d3d3",
-    borderBottom: '1px solid #d3d3d3'
   },
   appBar: {
     width: '100%',
-    background: "transparent",
-    transition: 'background 300ms ease-out',
+    background: "#f7f5f3",
+    transition: 'all 300ms ease-out',
+    borderBottom: '1px solid #d3d3d3'
   },
   appBarSolid: {
     width: '100%',
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "12px"
   },
   blackColor: {
-    color: "#372c2eee"
+    color: "#372c2e"
   }
 }));
 
@@ -132,6 +132,21 @@ function NavBar(props) {
       isAdmin 
         ? history.push(`/private/profile/${id}`)
         : history.push(`/profile/${id}`);
+    }
+  };
+
+  const handleWishlist = () => {
+    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+    jwt.verify(JSON.parse(localStorage.getItem('token')), 
+    process.env.REACT_APP_SECRET_KEY) : null;
+    if(!currentUser) {
+      return history.push("/login")
+    } else {
+      const { id, isAdmin } = currentUser;
+  
+      isAdmin 
+        ? history.push(`/private/profile/${id}/wishlist`)
+        : history.push(`/profile/${id}/wishlist`);
     }
   };
 
@@ -209,14 +224,18 @@ function NavBar(props) {
               <ShoppingCart className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
             </IconButton>
             
-              <Link to = "/wishlist">
-                <IconButton
-                  className={classes.wishButton}
-                >
-                  <FavoriteBorder/>
-                </IconButton>
-              </Link>
-            
+            <Hidden xsDown>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                className={classes.menuButton}
+                onClick={handleWishlist}
+              >
+                <FavoriteBorder className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
+              </IconButton>
+            </Hidden>
+          
 
               <Hidden xsDown>  
                   <IconButton

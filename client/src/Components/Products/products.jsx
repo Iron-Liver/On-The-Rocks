@@ -76,8 +76,13 @@ const Products = () => {
                   page={page}
                   onChange={(e, val) => setPage(val)}
                   size="small"
+                  style={{
+                    margin: "15px 0"
+                  }}
+                  shape="rounded"
+                  color="primary"
                 />
-                <div className="content">
+                <div className="products-content">
                     {
                       FoundProds.map((spirit) => (
                         <ProductCard spirit={spirit} key={Math.random()} />
@@ -89,6 +94,13 @@ const Products = () => {
                   page={page}
                   onChange={(e, val) => setPage(val)}
                   size="small"
+                  style={{
+                    position: "relative",
+                    zIndex: "999",
+                    margin: "15px 0"
+                  }}
+                  shape="rounded"
+                  color="primary"
                 />
               </div>
           </div>
