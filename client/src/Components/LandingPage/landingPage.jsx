@@ -27,8 +27,9 @@ export const landingPage = () => {
         <div>
         <header className="landinghead">
         </header>
-        </div>
+        </div>             
         <div className="vox"></div>
+        </div>
       
         <div className="slider">
 

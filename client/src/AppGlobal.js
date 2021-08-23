@@ -31,6 +31,7 @@ import CreateOrder from "./Components/Orders/CreateOrder/createOrder";
 import MercadoPago from "./Components/Mercadopago/Mercadopago";
 import Wishlist from "./Components/Wishlist/wishlist";
 import { WheelOfCoupons } from './Components/Game/wheelOfCoupons';
+import Locations from './Components/Maps/Locations';
 
 const AppGlobal = () => {
   return (
@@ -39,6 +40,7 @@ const AppGlobal = () => {
         <NavBar />
         <Switch>
           <Route exact path="/" component={landingPage} />
+          <Route exact path="/locations" component={Locations} />
           <Route exact path="/login" component={LoginUser} />
           <Route exact path="/register" component={CreateUser} />
           <Route path="/verify/password" component={ResetPassword} />
