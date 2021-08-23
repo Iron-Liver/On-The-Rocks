@@ -27,9 +27,6 @@ export const landingPage = () => {
         <div>
         <header className="landinghead">
         </header>
-        <body>
-        
-        </body>
         </div>
         <div className="vox"></div>
       

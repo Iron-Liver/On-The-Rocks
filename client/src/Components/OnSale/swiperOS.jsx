@@ -10,7 +10,6 @@ function SwiperOS(){
     );
 
     var sale = Products.filter((spirit) => spirit.onSale > 0)
-    console.log(sale)
     
     return (
         <Swiper
@@ -21,10 +20,9 @@ function SwiperOS(){
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
         >
-         
           {sale.map((spirit) => (
-              <SwiperSlide>
-                  <SwiperCard spirit={spirit} key={Math.random()} /> 
+              <SwiperSlide key={spirit.id}>
+                  <SwiperCard spirit={spirit}  /> 
               </SwiperSlide>
                 ))}
         </Swiper>

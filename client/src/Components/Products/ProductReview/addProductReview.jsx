@@ -9,8 +9,6 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import Rating from "@material-ui/lab/Rating";
-import jwt from "jsonwebtoken";
-
 import { useDispatch } from "react-redux";
 import { createReview } from "../../../Redux/Reviews/reviewActions";
 
@@ -40,19 +38,20 @@ export const AddProductReview = ({ prodId, userId }) => {
 
     const checkIfBought = async (e) => {
         let { data } = await axios.get(`/order/getUserOrders/${userId}`);
-        var aux = [];
+        var aux = [];//eslint-disable-next-line
         data = data.map((x) => {
             if (Array.isArray(x.order_products))
                 return x.order_products.map((x) => x.productId);
         });
-        data = data.forEach(function (subArray) {
+        data.forEach(function (subArray) {
             return (aux = aux.concat(subArray));
         });
         setBought(Array.from(new Set(aux)).includes(prodId)) 
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         checkIfBought();
+        // eslint-disable-next-line
     },[])
     
     return (

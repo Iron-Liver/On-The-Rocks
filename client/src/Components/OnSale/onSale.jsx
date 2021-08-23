@@ -24,7 +24,7 @@ const Sale = () => {
         <div>
             <div className="content">
                 {sale.map((spirit) => (
-                 <SaleCard spirit={spirit} key={Math.random()} /> 
+                    <SaleCard spirit={spirit} key={spirit.id} />                
                 ))}
             </div>
         </div>
