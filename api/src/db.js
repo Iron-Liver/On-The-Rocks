@@ -64,6 +64,7 @@ const {
     Order_products,
     Payment_detail,
     Review,
+    Wishlist
 } = sequelize.models;
 
 User.hasMany(Order);
@@ -82,8 +83,17 @@ Order_products.belongsTo(Order, {
     foreignKey: "orderId",
 });
 
+Product.belongsToMany(Category, {through: 'product_category'});
+Category.belongsToMany(Product, {through: 'product_category'});
+
+// Order.hasOne(Payment_detail, {
+//   foreignKey: 'paymentId'
+// });
 Order.hasOne(Payment_detail);
 Payment_detail.belongsTo(Order);
+
+User.belongsToMany(Product, { through: Wishlist });
+Product.belongsToMany(User, { through: Wishlist });
 
 
 module.exports = {

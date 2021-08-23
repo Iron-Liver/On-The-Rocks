@@ -1,12 +1,12 @@
-export function addProductCart({ id, units, price, image, name }) {
+export function addProductCart({ id, units, price, image, name, stock }) {
     let data = [];
     let date = JSON.parse(localStorage.getItem("data"));
 
     if (date) {
-        date.push({ id, units, price, image, name });
+        date.push({ id, units, price, image, name, stock });
         localStorage.setItem("data", JSON.stringify(date));
     } else {
-        data.push({ id, units, price, image, name });
+        data.push({ id, units, price, image, name, stock });
         localStorage.setItem("data", JSON.stringify(data));
     }
 }

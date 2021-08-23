@@ -10,7 +10,8 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: 'email', 
-      passwordField: 'password'
+      passwordField: 'password',
+      session: false
     },
     async (email, password, done) => {
       email = email.toLowerCase()
@@ -18,10 +19,10 @@ passport.use(
       if (!user) return done(null, false);
       bcrypt.compare(password, user.password, (err, result) => {
         if (err) {return done(err)};
-        if (result) {
-          return done(null, user);
-        } else {
+        if (!result || user.isDeleted) {
           return done(null, false);
+        } else {
+          return done(null, user);
         }
       });
     })
