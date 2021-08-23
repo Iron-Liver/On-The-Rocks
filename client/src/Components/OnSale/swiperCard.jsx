@@ -13,6 +13,19 @@ const SwiperCard = ({ spirit }) => {
     setCurrentSpirit(spirit);
   }, [spirit])
   
+/*   let curr = []
+  currentSpirit?.map((e) =>{
+    if(currentSpirit.name){
+      curr.push({
+        id: e.id+900,
+        productId: e.id,
+
+      }
+
+      )
+    }
+  }) */
+  
   const handleAddToCart = () => {
     let date = JSON.parse(localStorage.getItem('data')) || []
     let data = date.filter(e => e.id === currentSpirit.id)
@@ -42,6 +55,7 @@ const SwiperCard = ({ spirit }) => {
     }
   }
 
+  console.log(spirit)
   return (
     <div style={{
       width: "100%",
@@ -168,6 +182,20 @@ const SwiperCard = ({ spirit }) => {
                       </span>
                     </CustomButton>
                 </div>
+                  {/* : 
+                  <div className="noOferText">
+                    <h2>WISH ${spirit.price}</h2>
+                  </div>}
+                     <div className="buton2">
+                      <button
+                      className="buton"
+                        disabled={spirit.stock < 1} 
+                        onClick={handleAddToCart}
+                      >
+                        BUY NOW!
+                      </button>
+                     </div>
+                  </div> */}
               </div>
             </div>
         </div>
@@ -177,33 +205,3 @@ const SwiperCard = ({ spirit }) => {
 }
 
 export default SwiperCard
-{/* <div>
-    <div className="cards">
-        <div>
-            <img src={spirit.image} alt="Licorimage" className="image"/>  
-        </div>
-        <div>
-          <Link to={`/products/${spirit.id}`} className="text"style={{textDecoration: "none"}}>
-            <h3 className="text">{spirit.name}</h3>
-          </Link>
-            <div>
-            {spirit.onSale? 
-              <div className="oferText">
-                 <h2> SALE ${spirit.onSale}</h2>
-
-              </div>
-            :                                                      
-              <h5>${spirit.price}</h5>}
-               <div className="buton2">
-                <button
-                className="buton"
-                  disabled={spirit.stock < 1} 
-                  onClick={handleAddToCart}
-                >
-                  BUY NOW!
-                </button>
-               </div>
-            </div>
-        </div>
-    </div>
-</div> */}
