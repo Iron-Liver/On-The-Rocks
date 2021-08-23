@@ -18,7 +18,7 @@ const Sale = () => {
         // eslint-disable-next-line
         []
     );
-    var sale = Products.filter((spirit) => spirit.hasOwnProperty('onSale'))
+    var sale = Products.filter((spirit) => spirit.onSale > 0)
 
     console.log(sale)
 

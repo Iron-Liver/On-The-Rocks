@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     makeStyles,
     TextField,
@@ -7,7 +7,9 @@ import {
     Typography,
     Button,
 } from "@material-ui/core";
+import axios from "axios";
 import Rating from "@material-ui/lab/Rating";
+import jwt from "jsonwebtoken"
 
 import { useDispatch } from "react-redux";
 import {createReview} from '../../../Redux/Reviews/reviewActions'
@@ -24,15 +26,42 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const AddProductReview = ({ prodId, userId }) => {
-    const classes = useStyles();
+export const AddProductReview = ({ prodId, userId }) =>{
+    const classes = useStyles(); 
     const [stars, setStars] = useState();
     const [input, setInput] = useState();
+    const [order, setOrder] = useState();
+    const [coment, setComent] = useState(false);
     const dispatch = useDispatch()
+
+     const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+     jwt.verify(JSON.parse(localStorage.getItem('token')), 
+     process.env.REACT_APP_SECRET_KEY) : null 
 
     const handleInputChange = async (e) => {
         await setInput(e.target.value);
     };
+ 
+    if (!order){
+        (async function (){
+          const result = await axios.get(`/order/getOrderById/${userId}`)
+          setOrder(result.data);
+        })()
+    }
+    else{
+        let date = order.order_products
+        console.log(date)
+    
+         date.map((e) => {
+           
+            console.log("comparo", e.productId.toString(), prodId) 
+            if(e.productId.toString() === prodId){
+             console.log("comparo2", e.productId.toString(), prodId)   
+             return setComent(true);
+            }
+        }) 
+    }
+
     return (
         <Paper className={classes.paper}>
             <Grid
@@ -40,10 +69,13 @@ export const AddProductReview = ({ prodId, userId }) => {
                 spacing={2}
                 direction="column"
             >
-                <Grid item>
+                <div>
+                { (currentUser) && (coment) ?
+                 <div>
+                 <Grid item>
                     <Typography variant="h5">
                         Please give your opinion.
-                    </Typography>
+                    </Typography>  
                     <Rating
                         
                         name={`user review`}
@@ -72,6 +104,17 @@ export const AddProductReview = ({ prodId, userId }) => {
                 <Grid item container alignContent='flex-end'>
                     <Button onClick={() => {dispatch(createReview(userId,prodId,stars,input))}}>Submit</Button>
                 </Grid>
+                </div>
+                :
+            
+                <Grid item>
+                   <h3>
+                   Please login to leave your opinion.
+                   </h3>  
+               </Grid>
+           
+                }
+            </div>
             </Grid>
         </Paper>
     );
