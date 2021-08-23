@@ -14,12 +14,13 @@ const CreateProduct = (props) => {
 		name: "",
 		description: "",
 		size: "",
-		category: "",
+		categories: [],
 		brand: "",
 		sku: "",
 		price: "",
 		image: "",
-		stock: ""
+		stock: "", 
+		onSale: ""
 	}
 
 	const [input, setInput] = useState(wipedInput);

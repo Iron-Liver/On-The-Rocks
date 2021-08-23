@@ -1,4 +1,4 @@
-import {useEffect, React} from 'react'
+import { useEffect, React } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { filterByCategory, filterByPrice } from '../../Redux/Products/productsActions'
 import { Button, Grid } from '@material-ui/core';
@@ -12,12 +12,12 @@ const useStyles = makeStyles({
         marginRight: 7
     },
 
-    root:{
+    root: {
         display: "flex",
         backgroundColor: '#131313',
     },
 
-    form:{
+    form: {
         display: "flex",
         height: "100px",
     }
@@ -25,17 +25,20 @@ const useStyles = makeStyles({
 })
 
 const Filters = () => {
-    
-    const categoryes = useSelector(state => state.categoryReducer.categories)
+
+    const { categories } = useSelector(state => state.categoryReducer)
+    const { Products } = useSelector(state => state.productReducer)
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
-    dispatch(getAllCategories())
-   }, [dispatch])
+        dispatch(getAllCategories())
+    }, [dispatch])
 
 
     function handleSelect(e) {
         dispatch(filterByCategory(e.target.value))
+        console.log(e.target.value)
+        console.log(Products)
     }
 
     function orderByPrice(type) {
@@ -53,21 +56,21 @@ const Filters = () => {
             </Grid>
             <Grid item >
                 <div>
-                        <h4 style={{color: "white"}}>Order by categories</h4>
+                    <h4 style={{ color: "white" }}>Order by categories</h4>
                     <select onChange={handleSelect}>
                         {
-                            categoryes && categoryes.map(category => 
-                                <option value={category.name} key={category.name}>{category.name}</option>
+                            categories && categories.map(category =>
+                                <option value={category.id} key={category.name}>{category.name}</option>
                             )
                         }
                     </select>
                 </div>
-                <h4 style={{color: "white"}}>Order by Price</h4>
+                <h4 style={{ color: "white" }}>Order by Price</h4>
                 <Button size="small" className={classes.button} variant="contained" color="primary" onClick={() => orderByPrice("MAX")}>
-                    HIGHER 
+                    HIGHER
                 </Button>
                 <Button size="small" variant="contained" color="primary" onClick={() => orderByPrice("MIN")}>
-                    LOWER 
+                    LOWER
                 </Button>
             </Grid>
         </Grid>

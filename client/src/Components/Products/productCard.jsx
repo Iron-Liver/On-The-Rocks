@@ -46,7 +46,13 @@ const ProductCard = ({ spirit }) => {
                       <h5>{spirit.name}</h5>
                   </div>
                   <div className="color">
-                      <h5>${spirit.price}</h5>
+                  {spirit.onSale? 
+                    <div className="color">
+                       <h3 className = "hs"> SALE ${spirit.onSale}</h3>
+                       <h5 className="price" >REGULAR ${spirit.price}</h5>
+                    </div>
+                  :                                                      
+                    <h5>${spirit.price}</h5>}
                       <button
                         disabled={spirit.stock < 1} 
                         onClick={handleAddToCart}
