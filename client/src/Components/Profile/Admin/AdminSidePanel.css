@@ -35,7 +35,7 @@
 }
 
 .panel-nav-item:active {
-  background: #3b3024a6;
+  background: #372c2ea6;
 }
 
 .panel-nav-item h4 {
@@ -60,7 +60,7 @@
 .admin-nav-container a:hover, 
 .panel-admin-logout:hover {
   color: #d3d3d3;
-  background: #3b3024b9;
+  background: #372c2eb9;
   transition: all 300ms linear;
 }
 

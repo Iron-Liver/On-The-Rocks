@@ -1,0 +1,47 @@
+.user-orders-item-limit {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  word-break: keep-all;
+  min-width: max-content;
+  margin: 0 10px;
+}
+
+.user-orders-item-limit select {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  margin: 0 0 5px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #372c2eee;
+  outline: none;
+}
+
+.user-pagination-pos {
+  display: flex;
+  width: 100%;
+  justify-content: space-between
+}
+
+@media(max-width: 943px) {
+  .user-pagination-pos {
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 10vh;
+  }
+}
+
+@media(max-width: 860px) {
+  .user-pagination-pos {
+    flex-direction: row;
+    align-items: stretch;
+    height: 10vh;
+  }
+}
+
+@media(max-width: 650px) {
+  .user-pagination-pos {
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 10vh;
+  }
+}

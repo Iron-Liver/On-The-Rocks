@@ -55,8 +55,12 @@ export const LandingPage = () => {
         </div>
         <div className="slider">
           
-                  <SwiperOS/>
-  
+        
+        <div>
+          <SwiperOS />
+        </div>
+
+
         </div>
         <div data-aos="fade-up" className="AboutUsContainer">
           <h2 style={{color:'black'}}>About us</h2>
@@ -71,6 +75,7 @@ export const LandingPage = () => {
               </figure>
             </div>
 
+                
             <div class="card">
               <figure class="card__thumb">
                 <img src="https://www.wallpapertip.com/wmimgs/25-257819_300197-title-food-liquor-alcohol-wallpaper-background-liquors.jpg" alt=" Nathan Dumlao" class="card__image"/>
@@ -98,5 +103,5 @@ export const LandingPage = () => {
           </div>
         </div>
     )
-}
+  }
 export default LandingPage;

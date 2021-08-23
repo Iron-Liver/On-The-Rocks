@@ -84,6 +84,7 @@ const productsMockUp = async () => {
             price:43.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jose-cuevo-gold_720x.jpg?v=1559566583",
             stock: 10,
+            onSale: 40.99
         })
         joseCuervoEspecial.addCategories([6])
       
@@ -96,6 +97,7 @@ const productsMockUp = async () => {
             price:47.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-sapphire_720x.jpg?v=1607759796",
             stock: 10,
+            onSale: 35.99
         })
         bombaySapphireLondonDry.addCategories([10])
       
@@ -144,6 +146,7 @@ const productsMockUp = async () => {
             price:8999.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hibiki-30-kacho-fugestu_720x.jpg?v=1615167006",
             stock: 10,
+            onSale:8499.99
         })
         hibiki.addCategories([4])
         const macallan = await  Product.create({

@@ -9,10 +9,12 @@ import {
     Typography,
     Button,
     Grid,
-    Box,    
+    Box,
+    CircularProgress,
+    IconButton,    
 } from "@material-ui/core";
 
-import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart, FavoriteBorder } from '@material-ui/icons';
+import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart, FavoriteBorder, Add, Remove } from '@material-ui/icons';
 import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
@@ -22,6 +24,8 @@ import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
 import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { green, red } from "@material-ui/core/colors";
+import { getProducts } from "../../Redux/Products/productsActions";
+import CustomButton from "../Button/CustomButton";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: 200,
         height: 55,
-        backgroundColor: "#493d30",
+        backgroundColor: "#372c2e",
         color: "white",
             '&:hover': {
                 backgroundColor: "#30281f",
@@ -82,22 +86,30 @@ const useStyles = makeStyles((theme) => ({
 
     },
     sum2: {
-        display: "flex"
+        display: "flex",
+        alignItems: "center",
+        width: "95px",
+        justifyContent: "space-between"
     },
     sum1: {
-        display: "flex"
+      margin: "0 0 5px 0",
+      textAlign: "center",
+      fontFamily: `"Montserrat", sans-serif`,
+      fontWeight: 400
     },
     buttonWish: {
         backgroundColor: "white",
-        margin: theme.spacing(1),
-        width: 60,
-        height: 55,
+        width: "max-content",
+        height: "max-content",
+        marginTop: 4,
+        padding: 3
+    },
+    cartIcon: {
+      paddingTop: "3px"
     },
     wishIcon: {
-        color: "red",
-        marginLeft: "10px",
-        width: 50,
-        height: 50,
+        color: "#372c2e",
+        fontSize: "25px"
     },
     review: {
         display: "flex",
@@ -126,6 +138,14 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "17px",
       marginTop: "6px"
     },
+    controls: {
+      display: "flex",
+      justifyContent: "space-around",
+      width: "100%",
+      marginTop: "40px",
+      alignItems: "center",
+      minWidth: "284px"
+    },
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
@@ -140,7 +160,11 @@ const useStyles = makeStyles((theme) => ({
       content: {
         width: "100%",
         marginTop: "5%",
-      } 
+      },
+      controls: {
+        width: "50%",
+        minWidth: "284px"
+      }
     },
     button2: {
         padding: 0,
@@ -192,6 +216,10 @@ const ProductDetail = () => {
     };
 
     useEffect(() => {
+      dispatch(getProducts());
+    }, [dispatch])
+
+    useEffect(() => {
         (async function () {
             window.scrollTo(0,0)
             await dispatch(getProductReviews(id));
@@ -234,27 +262,34 @@ const ProductDetail = () => {
         <span className={classes.stockStatus}>On Stock</span>
     </div>
 
-    let btncart = <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        startIcon={
-            <ShoppingCart
-                className={classes.cartIcon}
-            />
-        }
+    let btncart = <CustomButton
         onClick={(e) => onSubmit(e)}
+        height="max-content"
+        style={{
+          borderRadius: "3%"
+        }}
     >
-        <h3>ADD TO CART</h3>
-    </Button>
+        <ShoppingCart
+          className={classes.cartIcon}
+        />
+        <h3
+          style={{
+            display: "inline",
+            margin: "10px",
+            verticalAlign: "bottom"
+          }}
+        >
+          ADD TO CART
+        </h3>
+    </CustomButton>
 
-    if (liqueur.stock <= 5) {
+    if (liqueur && liqueur.stock <= 5) {
         stockText = <div className={classes.stockText}>
             <Info style={{ color: red[500] }} />
             <span className={classes.stockStatus}>Low Stock</span>
         </div>
     }
-    if (liqueur.stock <= 0) {
+    if (liqueur && liqueur.stock <= 0) {
         stockText = <div className={classes.stockText}>
             <Info color="disabled" />
             <span className={classes.stockStatus}>No Stock</span>
@@ -286,12 +321,28 @@ const ProductDetail = () => {
                         <div className={classes.details}>
                             <CardContent className={classes.content}>
                                 <Grid item className={classes.cont1}>
-                                    <Typography variant="h4" style={{
-                                      fontFamily: "'Heebo', sans-serif",
-                                      letterSpacing: "-0.5px"
+                                    <div style={{
+                                      display: "flex"
                                     }}>
-                                        {liqueur.name}
-                                    </Typography>
+                                      <Typography variant="h4" style={{
+                                        fontFamily: "'Heebo', sans-serif",
+                                        letterSpacing: "-0.5px",
+                                        flexGrow: 1
+                                      }}>
+                                          {liqueur.name}
+                                      </Typography>
+                                      {currentUser && (<IconButton
+                                          variant="contained"
+                                          elevation={false}
+                                          color="primary"
+                                          className={classes.buttonWish}
+                                          onClick={() => onSubmitWishlist(currentUser?.id, liqueur?.id)}
+                                      > 
+                                          <FavoriteBorder
+                                              className={classes.wishIcon}
+                                          />
+                                      </IconButton>)}
+                                    </div>
                                     <div className={classes.review} style={{
                                       fontFamily: "'Montserrat', sans-serif",
                                       letterSpacing: "-0.5px"
@@ -299,6 +350,12 @@ const ProductDetail = () => {
                                         <Box
                                             component="fieldset"
                                             borderColor="transparent"
+                                            style={{
+                                              display: "flex",
+                                              alignItems: "center",
+                                              width: "160px",
+                                              justifyContent: "space-between"
+                                            }}
                                         >
                                             <Rating
                                                 readOnly
@@ -319,10 +376,33 @@ const ProductDetail = () => {
                                         </Box>
                                     </div>
                                     {liqueur.onSale? 
-                                    <Typography component="h5" variant="h5">
-                                     <h3> HOT SALE ${liqueur.onSale}</h3>
-                                     <h5 className={classes.price} >REGULAR PRICE ${liqueur.price}</h5>
-                                    </Typography>
+                                    <>
+                                      <h2 style={{
+                                          fontFamily: "'Montserrat', sans-serif",
+                                          letterSpacing: "-0.5px",
+                                          color: "#900020",
+                                          margin: "4px 0"
+                                      }}>
+                                          Hot sale ${liqueur.onSale}{" "} 
+                                          <del
+                                            style={{ 
+                                              color: "black", 
+                                              fontSize: "15px", 
+                                              fontFamily: `"Montserrat", sans-serif`,
+                                              fontWeight: 300
+                                            }}
+                                          >
+                                            {" "}${liqueur.price}
+                                          </del>
+                                      </h2>
+                                      <h3 style={{
+                                        fontFamily: "'Montserrat', sans-serif",
+                                        letterSpacing: "-0.5px",
+                                        margin: "1px"
+                                      }}>
+                                          
+                                      </h3>
+                                    </>
                                     : <>
                                         <Typography component="h5" variant="h5" style={{
                                             fontFamily: "'Montserrat', sans-serif",
@@ -330,14 +410,14 @@ const ProductDetail = () => {
                                         }}>
                                             ${liqueur.price}
                                         </Typography>
-                                        <Typography component="h5" variant="h5" style={{
-                                            fontFamily: "'Montserrat', sans-serif",
-                                            letterSpacing: "-0.5px"
-                                        }}>
-                                            Brand: {liqueur.brand}
-                                        </Typography>
-                                        {stockText}
                                     </>}
+                                <Typography component="h5" variant="h5" style={{
+                                    fontFamily: "'Montserrat', sans-serif",
+                                    letterSpacing: "-0.5px"
+                                }}>
+                                    Brand: {liqueur.brand}
+                                </Typography>
+                                {stockText}
                                 </Grid>
                                 <Typography variant="h6" style={{
                                       fontFamily: "'Montserrat', sans-serif",
@@ -348,47 +428,27 @@ const ProductDetail = () => {
                                     {liqueur.description}
                                 </Typography>
                                 <div className={classes.controls}>
-                                    <div style={{
-                                      display: "flex",
-                                      flexDirection: "column",
-                                      alignItems: "center",
-                                      width: "max-content"
-                                    }}>
+                                    {btncart} 
+                                    <div>
                                       <h3 className={classes.sum1}>Quantity</h3>
                                       <div className={classes.sum2}>
-                                          <Button
-                                              variant="contained"
-                                              size="small"
-                                              className={classes.button2}
-                                              onClick={() => handleChangeQuant('-')}
+                                            <IconButton
+                                            onClick={() => handleChangeQuant('-')}
+                                            >
+                                            <Remove />
+                                          </IconButton>
+                                          <Grid
+                                            style={{
+                                              fontFamily: `"Montserrat", san-serif`
+                                            }}
+                                          >{quant}</Grid>
+                                          <IconButton
+                                            onClick={() => handleChangeQuant('+')}
                                           >
-                                              -
-                                          </Button>
-                                          <Grid>{quant}</Grid>
-                                          <Button
-                                              variant="contained"
-                                              className={classes.button2}
-                                              onClick={() => handleChangeQuant('+')}
-                                          >
-                                              +
-                                          </Button>
+                                            <Add />
+                                          </IconButton>
                                       </div>
-                                    </div>
-                                    {btncart}
-                            <div className={classes.controls}>
-                                {currentUser && (<Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.buttonWish}
-                                    startIcon={
-                                        <FavoriteBorder
-                                            className={classes.wishIcon}
-                                        />
-                                    }
-                                    onClick={onSubmitWishlist(currentUser?.id, liqueur?.id)}
-                                > 
-                                </Button>)}
-                            </div>
+                                  </div>
                             </div>
                             </CardContent>
                         </div>
@@ -398,10 +458,15 @@ const ProductDetail = () => {
                     <ProductReviewCard reviews={reviews} prodId={id} />
                 </>
             ) : (
-                <Typography variant="h1" align="center">
-                    {" "}
-                    Loading{" "}
-                </Typography>
+              <div style={{
+                display: "flex",
+                width: "100%",
+                height: "85vh",
+                justifyContent: "center",
+                alignItems: "center"
+              }}>
+                <CircularProgress style={{ color: "#372c2e" }}/>
+              </div>
             )}
         </>
     );

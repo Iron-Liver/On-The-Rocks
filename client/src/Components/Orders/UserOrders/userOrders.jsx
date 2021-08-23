@@ -24,7 +24,7 @@ const UserOrders = () => {
   const initialFilters = {
     order: query?.get('order') ? query?.get('order').toString() : "id-DESC-",
     filterBy: {},
-    limit: 4
+    limit: query?.get('limit') ? parseInt(query?.get('limit').toString()) : 4
   };
 
   (() => {
@@ -68,17 +68,15 @@ const UserOrders = () => {
           userId
         }
 
-        setPage(query?.get('page')
-        ? parseInt(query.get('page').toString()) || 1
-        : 1)
-
+        
         for(const entry of query.entries()) {
           if(!body[entry[0]]) {
             body.filterBy[entry[0]] = entry[1];
           };
         }
-
+        
         const response = await axios.post("/order/getOrders", body);
+        setPage(response.data.page)
         setOrders(response.data);
       } catch (error) {
         history.push("/");
@@ -131,6 +129,11 @@ const UserOrders = () => {
   };
 
   const handleReset = () => {
+    setForm({ 
+      order: "id-DESC-",
+      filterBy: {},
+      limit: 4
+    })
     history.push(`${pathname}?page=${page}`);
   }
 
@@ -140,6 +143,15 @@ const UserOrders = () => {
       order: e.target.value
     })
   };
+
+  const handleLimitChange = (e) => {
+    query.set('limit', e.target.value);
+    setForm({
+      ...form,
+      limit: e.target.value
+    })
+    history.push({ search: query.toString() })
+  }
 
   const handlePageChange = (_e, val) => {
     setPage(val);
@@ -157,13 +169,28 @@ const UserOrders = () => {
         form={form}
       />
       <div className={classes.paginationContainer}>
-        <div>
+        <div className="user-pagination-pos">
+          <div style={{width: "152px"}}/>
           <Pagination
             count={orders.pages}
             page={page}
             onChange={handlePageChange}
             size="small"
           />
+          <div>
+          <label htmlFor="limit" className="user-orders-item-limit">
+            per page:
+            <select 
+              name="limit" 
+              value={form.limit} 
+              onChange={handleLimitChange}
+            >
+              <option value={4}>4</option>
+              <option value={8}>8</option>
+              <option value={12}>12</option>
+            </select>
+          </label>
+          </div>
         </div>
       </div>
       <div

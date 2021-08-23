@@ -133,8 +133,7 @@ const Order = ({ order, handleSubmit }) => {
                       style={{ 
                         width: "70px", 
                         height: "70px", 
-                        border: "1px solid #d3d3d3bb",
-                        imageRendering: "-webkit-optimize-contrast"
+                        border: "1px solid #d3d3d3bb"
                       }} 
                       alt={product.name} 
                       src={product.image} 

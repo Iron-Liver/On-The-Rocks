@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     height: "max-content",
     width: "95%",
     margin: "auto",
-    background: "#493d30",
+    background: "#372c2e",
     color: "whitesmoke"
   },
   paperPosition: {

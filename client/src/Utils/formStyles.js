@@ -6,7 +6,7 @@ const useFormStyles = makeStyles((theme)=>({
 		marginBottom: 30,
 		border:5,
 		display:'flex',
-    color: '#493d30',
+    color: '#372c2e',
     width: "100%"
 	},
 	title: {
@@ -26,7 +26,7 @@ const useFormStyles = makeStyles((theme)=>({
 		padding: 8,
 	},
   button: {
-    background: '#493d30',
+    background: '#372c2e',
     fontWeight: 1000, 
     marginTop: 20
   }

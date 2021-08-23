@@ -111,43 +111,52 @@ export const WheelOfCoupons = () => {
             if (discount) {
                 alert(`Congratulations! You got a %${discount} discount!`);
                 addCoupon();
+                setState(false);
+                setDegrees(0);
+                setTimeout(() => {
+                  setIdle(true);
+                }, 2000)
             } else {
                 alert("Thats so sad! Maybe you ll get it another time c:");
+                setState(false);
+                setDegrees(0);
+                setTimeout(() => {
+                  setIdle(true);
+                }, 2000)
             }
-            setState(false);
-            setIdle(true);
         }, 10000);
     };
 
     return (
+      <div>
+        <h1 className="game-title">Coupon Roulette</h1>
         <div className="game-container">
-            <div>
-                <h2>How to play</h2>
-                <p>Just press the button and close your eyes!</p>
-                <h2>How to get more coins</h2>
-                <p>You will get coins every $1000 spent.</p>
-                <p>¿Cool right?</p>
+            <div className="game-instructions">
+                <h2 className="game-instructions-head">How to play</h2>
+                <p className="game-instructions-content">Just press the button and close your eyes!</p>
+                <h2 className="game-instructions-head">How to get more coins</h2>
+                <p className="game-instructions-content">You will get coins every $1000 spent.</p>
+                <p className="game-instructions-content">¿Cool right?</p>
             </div>
             <div className="roulette-container">
-                <h1>Cupon Roulette</h1>
-                <div>
+                <div className="spinner-container">
                     <motion.img
                         variants={variants}
                         animate={idle ? "idle" : state ? "start" : "end"}
                         transition={
-                            state
-                                ? { duration: 8.897, ease: "easeOut" }
-                                : { duration: 2, ease: "easeOut" }
+                          state
+                          ? { duration: 8.897, ease: "easeOut" }
+                          : { duration: 2, ease: "easeOut" }
                         }
                         className="roulette"
                         src="https://res.cloudinary.com/dpw5docvm/image/upload/v1629446175/Roulette_cuwthy.png"
                         alt="roulette"
-                    />
+                        />
                     <img
                         className="marker"
                         src="https://res.cloudinary.com/dpw5docvm/image/upload/v1629446169/Roulette_Arrow_xnecnv.png"
                         alt="roulette_arrow"
-                    />
+                        />
                 </div>
                 <span>Remaining coins: {coins}</span>
                 <Button classes="button" size="large" disabled={!idle} variant="outlined" color="primary" type="button" onClick={spin} className="button">
@@ -155,6 +164,7 @@ export const WheelOfCoupons = () => {
                 </Button>
             </div>
         </div>
+      </div>  
     );
 };
 export default WheelOfCoupons;
