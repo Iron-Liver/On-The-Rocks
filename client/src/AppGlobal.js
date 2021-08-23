@@ -28,7 +28,7 @@ import Error404 from './Components/Error404/Error404';
 import CreateOrder from './Components/Orders/CreateOrder/createOrder';
 import MercadoPago from './Components/Mercadopago/Mercadopago';
 import Footer from './Components/Footer/footer';
-
+import Settings from './Components/Settings/Settings';
 
 
 const AppGlobal = () => {
@@ -39,6 +39,7 @@ const AppGlobal = () => {
 				<div style={{minHeight:'calc(100vh - 150px)'}}>
 				<NavBar/>
 				<Switch>
+					<Route exact path="/chuleta" component={Settings} />
 					<Route exact path="/" component={LandingPage} />
 					<Route exact path="/login" component={LoginUser} />
 					<Route exact path="/register" component= {CreateUser} />

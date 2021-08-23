@@ -66,7 +66,7 @@ export const LandingPage = () => {
           <div class="container2">
             <div class="card">
               <figure class="card__thumb">
-                <img src="https://www.animalgourmet.com/wp-content/uploads/2020/07/licor-licores.jpg" alt="by Kyle Cottrell" class="card__image"/>
+                <img src="https://c0.wallpaperflare.com/preview/453/912/1005/alcohol-background-bar-beer.jpg" alt="by Kyle Cottrell" class="card__image"/>
                 <figcaption class="card__caption">
                   <h2 class="card__title">ITEM</h2>
                   <p class="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt dolore quis pariatur voluptatum vitae totam id. Repellat delectus veritatis nesciunt illo voluptas voluptates vero culpa exercitationem officia aliquid. Eveniet.</p>
@@ -86,7 +86,7 @@ export const LandingPage = () => {
 
             <div class="card">
               <figure class="card__thumb">
-                <img src="https://i.pinimg.com/originals/14/39/34/143934a7d48b57b3433448c418082a11.png" alt=" Daniel Lincoln" class="card__image"/>
+                <img src="https://c1.wallpaperflare.com/preview/704/706/404/food-drink-alcohol-drink-drinks.jpg" alt=" Daniel Lincoln" class="card__image"/>
                 <figcaption class="card__caption">
                   <h2 class="card__title">ITEM</h2>
                   <p class="card__snippet">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore nemo deleniti provident iure tenetur totam sit reiciendis dolore obcaecati saepe, quisquam soluta sapiente nulla culpa veniam adipisci illum consequuntur assumenda.</p>

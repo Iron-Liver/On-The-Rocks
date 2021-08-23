@@ -21,16 +21,20 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     outline: 'none',
-    backgroundColor: "d3d3d3"
+    backgroundColor: "d3d3d3",
+    borderBottom: '1px solid #d3d3d3',
+    
   },
   appBar: {
     width: '100%',
     background: "transparent",
+
     transition: 'background 300ms ease-out'
   },
   appBarSolid: {
     width: '100%',
     background: "#372c2E",
+    borderBottom: '1px solid gray',
     transition: 'background 300ms ease-out'
   },
   menu: {
