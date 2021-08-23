@@ -6,7 +6,9 @@ import React, { useRef, useState, useEffect } from "react";
 
 // Import Swiper React components
 // import { Swiper, SwiperSlide } from "swiper/react";
- 
+import Locations from '../Maps/Locations'; 
+
+
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
@@ -39,11 +41,13 @@ export const LandingPage = () => {
 
     return (
       <div>
+      <div>
         <div>
-        <header className="landinghead">
-        </header>
-        </div>
+          <header className="landinghead">
+          </header>
+        </div>             
         <div className="vox"></div>
+      </div>
       
 
         <div data-aos="fade-right" className="title1">
@@ -51,9 +55,9 @@ export const LandingPage = () => {
               owned business providing premium and collectable ranges of spirits.
           </h1>
         </div>
-        <div className="slider">
+
+      <div className="slider">
           
-        
         <div style={{
           marginTop: "150px"
         }}>
@@ -64,16 +68,23 @@ export const LandingPage = () => {
           </div>
           <SwiperOS />
         </div>
+      </div>
+      
 
 
-        </div>
+
         <div data-aos="fade-up" className="AboutUsContainer">
           <div className="divider-page">
-          <div className="dividers"></div>
-          <h1 style={{color:'black'}}>About us</h1>
-          <div className="dividers"></div>
+            <div className="dividers"></div>
+            <h1 style={{color:'black'}}>About us</h1>
+            <div className="dividers"></div>
           </div>
+        </div>
+
+
+
           <div class="container2">
+
             <div class="card">
               <figure class="card__thumb">
                 <img src={im3} alt="by Kyle Cottrell" class="card__image"/>
@@ -105,16 +116,29 @@ export const LandingPage = () => {
               </figure>
             </div>
           </div>
-        </div>
+
+
+
+        
           <div  className="containerBrands">
-          <div className="divider-page">
-          <div className="dividers"></div>
-          <h1 style={{color:'black'}}>Shop by Tipe</h1>
-          <div className="dividers"></div>
+            <div className="divider-page">
+              <div className="dividers"></div>
+              <h1 style={{color:'black'}}>Shop by Tipe</h1>
+              <div className="dividers"></div>
+            </div>
           </div>
-              <Brands />
+          <div className="brandsss">
+          <Brands />
           </div>
-        </div>
+          <div className="location">
+              <Locations />
+          </div>
+
+    </div>
+
+
+      
     )
   }
+
 export default LandingPage;

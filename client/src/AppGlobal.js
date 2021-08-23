@@ -33,6 +33,7 @@ import { ThemeProvider } from '@material-ui/core';
 import theme from './Utils/theme';
 import Footer from './Components/Footer/footer';
 
+
 const AppGlobal = () => {
   return (
       <Router>
