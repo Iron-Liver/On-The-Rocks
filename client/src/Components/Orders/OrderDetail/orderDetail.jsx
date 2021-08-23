@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
   },
   gridContainer: { 
-    alignItems: "flex-start" 
+    alignItems: "flex-start"
   }
 }));
 
@@ -59,7 +59,7 @@ const OrderDetail = () => {
   }, [id, history, user]);
 
   return (
-    <div>
+    <div style={{ background: "white", padding: "28px 0"}}>
       {order && (
         <>
           <Grid container className={classes.gridContainer}>

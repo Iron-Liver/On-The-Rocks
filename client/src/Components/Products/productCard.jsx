@@ -3,6 +3,7 @@ import './products.css';
 import { addProductCart } from '../../Redux/Cart/cartActions';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
+import CustomButton from '../Button/CustomButton'
 
 const ProductCard = ({ spirit }) => {
 
@@ -30,40 +31,75 @@ const ProductCard = ({ spirit }) => {
   }
 
   return (
-    <div>
-      <div className="containerproducts">
-          <div className="card">
-              <div className="imgBx">
-                <Link to={`/products/${spirit.id}`}>
-                  <img src={spirit.image} alt="Licorimage"/>
-                </Link>
-              </div>
-              <div className="contentBx">
-                <Link to={`/products/${spirit.id}`} style={{textDecoration: "none"}}>
-                  <h4>{spirit.name}</h4>
-                </Link>
-                  <div className="size">
-                      <h5>{spirit.name}</h5>
+    <div className="products-containerproducts">
+        <div className="product-card">
+            <div className="imgBx">
+              <Link 
+                to={`/products/${spirit.id}`} 
+                draggable={false}
+              >
+                <img 
+                  src={spirit.image} 
+                  alt="Licorimage"
+                  draggable={false}
+                />
+              </Link>
+            </div>
+            <div className="contentBx">
+              <Link to={`/products/${spirit.id}`} style={{textDecoration: "none", background: "transparent"}}>
+                <h4>{spirit.name}</h4>
+              </Link>
+                <div className="info-item">
+                  <div>
+                    <span>Categor{spirit.categories > 1 ? "ies" : "y"}: </span>
+                  {
+                    spirit.categories.map(category => 
+                      <span>{category.name} </span>
+                    )
+                  }
                   </div>
-                  <div className="color">
+                  <span style={{ margin: "3px" }}>Brand: {spirit.brand}</span>
+                </div>
+                <div className="color">
                   {spirit.onSale? 
-                    <div className="color">
-                       <h3 className = "hs"> SALE ${spirit.onSale}</h3>
-                       <h5 className="price" >REGULAR ${spirit.price}</h5>
+                    <div className="price-addcart-wrapper">
+                      <div>
+                        <h3 className="hs">${spirit.onSale}</h3>
+                        <h5 className="price">${spirit.price}</h5>
+                      </div>
+                        <CustomButton
+                          disabled={spirit.stock < 1} 
+                          onClick={handleAddToCart}
+                        >
+                          Add to cart
+                        </CustomButton>
                     </div>
-                  :                                                      
-                    <h5>${spirit.price}</h5>}
-                      <button
-                        disabled={spirit.stock < 1} 
-                        onClick={handleAddToCart}
-                      >
-                        Add to cart
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                  : (<><h5 style={{
+                      fontSize: "16px",
+                      fontWeight: "400"
+                    }}>${spirit.price}</h5>
+                    <CustomButton
+                      disabled={spirit.stock < 1} 
+                      onClick={handleAddToCart}
+                    >
+                      Add to cart
+                    </CustomButton></>)
+                  }
+                </div>
+            </div>
+        </div>
+        <div style={{
+          background: "transparent",
+          width: "270px",
+          height: "40px",
+          position: "relative",
+          top: "29px",
+          zIndex: "99"
+        }}
+        >
+
+        </div>
+    </div>
   )
 }
 

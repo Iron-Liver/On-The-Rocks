@@ -57,7 +57,7 @@ const CreateOrder = () => {
       id: currentUser.id,
       paymentMethod: 'mercadopago' ,
       total: JSON.parse(localStorage.getItem('data')).reduce((acc, el) => {
-        return acc = acc + el.price * el.units
+        return acc = parseInt(acc) + parseInt(el.price)
       }, 0).toFixed(2), 
       cart: JSON.parse(localStorage.getItem('data')).map(({id, units, price}) => {
         return {
@@ -135,16 +135,16 @@ const CreateOrder = () => {
     
           { count === 1 ? (
                      <div className="Full_card">
-                     <div className="container">
+                     <div className="containerpayment">
                        <div className="exit">
                        <button onClick={openCloseModal}> X </button>
                        </div>
-                      <div className="card">
-                        <h1 className="card_title">Personal Details  <i class="fas fa-address-book"></i></h1>
+                      <div className="card1">
+                        <h1 className="card1_title">Personal Details  <i class="fas fa-address-book"></i></h1>
                         <div className="subtitle_form">
-                        <p className="card_title-info">Step 1: Basic info</p>          
+                        <p className="card1_title-info">Step 1: Basic info</p>          
                         </div>
-                        <form className="card_form">
+                        <form className="card1_form">
                           <div className="input">
                             <input type="text"   name="firstName" className={state1.firstName? 'input_field' : 'input_fieldw'} onChange={handleInputChange1} value={state1.firstName} required  />
                             <label id="firstname" className="input_label" label='First Name'>First Name - <i class="fas fa-user"></i> {state1.firstName?.length >= 3 ? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> } </label>
@@ -158,7 +158,7 @@ const CreateOrder = () => {
                             <label className="input_label">Phone Number - <i class="fas fa-mobile-alt"></i> {state1.phone?.length >= 6 && !isNaN(state1.phone) ? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> } </label>
                           </div>
                           <div className="btn_cont1">
-                          <button className="card_button" style={{width:"46%"}} onClick={nextPage1}>Next</button>
+                          <button className="card1_button" style={{width:"46%"}} onClick={nextPage1}>Next</button>
                           </div>
                           <p className="p_color">Need help? <Link to="/help" className="help"> click here! </Link></p>
                         </form>
@@ -170,14 +170,14 @@ const CreateOrder = () => {
 
           { count === 2 ? (
              <div className="Full_card">
-             <div className="container">
+             <div className="containerpayment">
              <div className="exit">
                 <button onClick={openCloseModal}> X </button>
                 </div>
-              <div className="card">
-                <h1 className="card_title">Personal Details <i class="fas fa-thumbtack"></i></h1>
-                <p className="card_title-info">Step 2: Locate </p>               
-                <form className="card_form">
+              <div className="card1">
+                <h1 className="card1_title">Personal Details <i class="fas fa-thumbtack"></i></h1>
+                <p className="card1_title-info">Step 2: Locate </p>               
+                <form className="card1_form">
                   <div className="input">
                     <input type="text" className={state2.address ? 'input_field' : 'input_fieldw'} name="address" value={state2.address} onChange={handleInputChange2} required />
                     <label className="input_label">Address - {<i class="fas fa-address-card"></i>} {state2.address?.length >= 6? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
@@ -191,9 +191,9 @@ const CreateOrder = () => {
                     <label className="input_label">Zip Code - <i class="fas fa-map-marker-alt"></i>  {state2.zipCode?.length >= 3? <i class="fas fa-check" style={{color:'green'}}></i> : <i style={{color:'red'}} class="fas fa-times"></i> }</label>
                   </div>
                   <div className="btn_group">
-                  <button className="card_button" onClick={() => setCount(count - 1)} >Back</button>
+                  <button className="card1_button" onClick={() => setCount(count - 1)} >Back</button>
                   <div className="divis"></div>
-                  <button className="card_button" onClick={nextPage2}>Next</button>
+                  <button className="card1_button" onClick={nextPage2}>Next</button>
                   </div>
                      <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
                 </form>
@@ -204,13 +204,13 @@ const CreateOrder = () => {
 
           { count === 3 ? (
                <div className="Full_card">
-               <div className="container">
+               <div className="containerpayment">
                <div className="exit">
                 <button onClick={openCloseModal}> X </button>
                 </div>
-                <div className="card">
-                  <h1 className="card_title" style={{marginTop:'20px', marginBottom:'25px'}}>Payment method <i class="fas fa-money-check-alt"></i></h1>
-                  <form className="card_form">
+                <div className="card1">
+                  <h1 className="card1_title" style={{marginTop:'20px', marginBottom:'25px'}}>Payment method <i class="fas fa-money-check-alt"></i></h1>
+                  <form className="card1_form">
                   <div class="mercadoPagoCont">
                     <input type="radio"  id="mercadopago" name="mercadopago" value={state2.mercadopago} />
                     <label  for="mercadopago"><img className="imgmercadopago" src={mercadopagoimg} alt="mercadopago"></img></label>
@@ -220,7 +220,7 @@ const CreateOrder = () => {
                     </div>
                      <p>Need help? <Link to="/help" className="help"> click here! </Link></p>
                   </form>
-                    <button className="card_button" onClick={SubmitForm}>Pay</button>
+                    <button className="card1_button" onClick={SubmitForm}>Pay</button>
                   </div>
                  </div>
             </div>  

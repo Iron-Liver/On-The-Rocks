@@ -3,25 +3,25 @@ import { createTheme } from "@material-ui/core"
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#1a2b28',
+            main: '#372c2e',
         },
         secondary: {
-            main: '#1c2624',
-            light: '#D5D977'
+            main: '#372c2e',
+            light: '#372c2e'
         },
         info: {
-            main: '#D97925',
-            light: '#fd6604',
-            dark: '#BF4124'
+            main: '#372c2e',
+            light: '#372c2e',
+            dark: '#372c2e'
         },
         error: {
-            main: '#fa3b08'
+            main: '#372c2e'
         },
         disabled: {
-            main: '#f4fbfe'
+            main: '#372c2e'
         },
         success: {
-            main: '#26d333'
+            main: '#372c2e'
         }
     }
 })

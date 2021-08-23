@@ -1,10 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useEffect, useState } from 'react';
 import './swiperOS.css';
 import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
 import { getProducts } from '../../Redux/Products/productsActions';
 import SwiperCard from "./swiperCard";
-import { useEffect, useState } from 'react';
+import ProductCard from '../Products/productCard';
+// Import Swiper styles
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css"
+import "swiper/components/pagination/pagination.min.css"
+
+// import Swiper core and required modules
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard,
+  Autoplay
+} from 'swiper/core';
+
+// install Swiper modules
+SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
 
 function SwiperOS(){
 
@@ -12,27 +29,29 @@ function SwiperOS(){
     const { wishlists } = useSelector((state) => state.wishlistReducer);
   
 
-    const dispatch = useDispatch();
+    var sale = Products.filter((spirit) => spirit.onSale)
 
-    useEffect(() => {
-      dispatch(getWishlist());
-      dispatch(getProducts());
-    }, [])
+    // const dispatch = useDispatch();
 
-    var sale = Products?.filter((spirit) => spirit.onSale > 0)
+    // useEffect(() => {
+    //   dispatch(getWishlist());
+    //   dispatch(getProducts());
+    // }, [])
 
-    var res = []
+    // var sale = Products?.filter((spirit) => spirit.onSale > 0)
 
-     wishlists?.map((e) =>{
-        Products?.map((f) =>{
-         if(e.productId === f.id && !sale.includes(f))
-         {
-           console.log("f",f)
-            sale = sale.concat(f)
-            console.log("sale", sale)
-         }
-         })
-    })
+    // var res = []
+
+    //  wishlists?.map((e) =>{
+    //     Products?.map((f) =>{
+    //      if(e.productId === f.id && !sale.includes(f))
+    //      {
+    //        console.log("f",f)
+    //         sale = sale.concat(f)
+    //         console.log("sale", sale)
+    //      }
+    //      })
+    // })
 
 
    console.log("sale", sale)
@@ -40,17 +59,20 @@ function SwiperOS(){
     return (
         <Swiper
           className = "swiper"
-          spaceBetween={50}
-          slidesPerView={4}
+          slidesPerView={1}
           navigation
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
+          spaceBetween={5}
+          pagination={true}
+          autoplay={{
+            delay: 6000
+          }}
+          loop={true}
         >
           {sale.map((spirit) => (
-              <SwiperSlide key={spirit.id}>
-                  <SwiperCard spirit={spirit}  /> 
+              <SwiperSlide>
+                  <SwiperCard spirit={spirit} />
               </SwiperSlide>
-                ))}
+          ))}
         </Swiper>
       );
 

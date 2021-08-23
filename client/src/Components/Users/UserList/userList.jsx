@@ -3,7 +3,6 @@ import { useDispatch, useSelector} from 'react-redux';
 import { makeStyles,  Button,  Container } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
-import theme from '../../../Utils/theme';
 import {Link} from 'react-router-dom';
 import { getAllUsers } from '../../../Redux/Users/userActions'
 
@@ -40,7 +39,7 @@ const UserList = () => {
 		{
 			field: 'isDeleted', headerName: 'Status', width: 130, renderCell: params => {
 				return (
-					<ThemeProvider theme={theme}>
+					<ThemeProvider>
 					{params.row.isDeleted ? 'Deleted' : 'Allowed'}
 					</ThemeProvider>
 		)} },
@@ -52,7 +51,7 @@ const UserList = () => {
 			disableClickEventBubbling: true,
 			renderCell: params => {
 				return (
-					<ThemeProvider theme={theme}>
+					<ThemeProvider>
 					<Link to={`/private/user/update/${params.id}`} style={{textDecoration:'none'}}>
 						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">EDIT</Button>
 					</Link>
@@ -64,10 +63,10 @@ const UserList = () => {
 
     return(
         <div className={classes.root}>  
-            <ThemeProvider theme={theme}>
+            <ThemeProvider>
 
 					<Container style={{display: 'flex',height:50 , marginBottom:'20px',justifyContent: 'space-around', alignItems: 'center'}}>
-						<h1 >
+						<h1>
 							Users:
 						</h1>
 						<Link to="/private/user/add" style={{textDecoration:'none'}}>

@@ -89,7 +89,7 @@ export default function UserLogin() {
     };
 
     return (
-        <div>
+        <div style={{background: "white"}}>
             {}
             <h1 className={classes.title}>Login</h1>
             <form noValidate autoComplete="off">

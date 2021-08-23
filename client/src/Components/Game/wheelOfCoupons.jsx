@@ -4,9 +4,8 @@ import { motion } from "framer-motion";
 import jwt from "jsonwebtoken";
 import "./wheelOfCoupons.css";
 import audio from "./Wheel_of_cupons.mp3";
-import { Button } from "@material-ui/core";
+import { Button, Checkbox } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
-
 export const WheelOfCoupons = () => {
     const currentUser = JSON.parse(localStorage.getItem("token"))
         ? jwt.verify(
@@ -14,19 +13,17 @@ export const WheelOfCoupons = () => {
               process.env.REACT_APP_SECRET_KEY
           )
         : null;
-
     const dispatch = useDispatch();
     const { coins } = useSelector((state) => state.userReducer);
+    const [muted, setMuted] = React.useState(false);
     const [idle, setIdle] = React.useState(true);
     const [state, setState] = React.useState();
     const [degrees, setDegrees] = React.useState(0);
     const cycles = 15 * 360;
-
     React.useEffect(() => {
         dispatch(getCoins(currentUser?.id));
     }, // eslint-disable-next-line
     [idle, dispatch]);
-
     const variants = {
         idle: {},
         start: {
@@ -92,18 +89,15 @@ export const WheelOfCoupons = () => {
         }
         return discount;
     };
-
     const playAudio = () => {
         new Audio(audio).play();
     };
-
     const addCoupon = () => {
         //Here is where i would add a coupon to user but we dont have any coupon system yet
     };
-
     const spin = () => {
         dispatch(removeCoin(currentUser?.id));
-        playAudio();
+        if(!muted) playAudio(); 
         const discount = generateAward();
         setState(true);
         setIdle(false);
@@ -111,50 +105,62 @@ export const WheelOfCoupons = () => {
             if (discount) {
                 alert(`Congratulations! You got a %${discount} discount!`);
                 addCoupon();
+                setState(false);
+                setDegrees(0);
+                setTimeout(() => {
+                  setIdle(true);
+                }, 2000)
             } else {
                 alert("Thats so sad! Maybe you ll get it another time c:");
+                setState(false);
+                setDegrees(0);
+                setTimeout(() => {
+                  setIdle(true);
+                }, 2000)
             }
-            setState(false);
-            setIdle(true);
         }, 10000);
     };
-
     return (
+      <div>
+        <h1 className="game-title">Coupon Roulette</h1>
         <div className="game-container">
-            <div>
-                <h2>How to play</h2>
-                <p>Just press the button and close your eyes!</p>
-                <h2>How to get more coins</h2>
-                <p>You will get coins every $1000 spent.</p>
-                <p>¿Cool right?</p>
+            <div className="game-instructions">
+                <h2 className="game-instructions-head">How to play</h2>
+                <p className="game-instructions-content">Just press the button and close your eyes!</p>
+                <h2 className="game-instructions-head">How to get more coins</h2>
+                <p className="game-instructions-content">You will get coins every $1000 spent.</p>
+                <p className="game-instructions-content">¿Cool right?</p>
             </div>
             <div className="roulette-container">
-                <h1>Cupon Roulette</h1>
-                <div>
+                <div className="spinner-container">
                     <motion.img
                         variants={variants}
                         animate={idle ? "idle" : state ? "start" : "end"}
                         transition={
-                            state
-                                ? { duration: 8.897, ease: "easeOut" }
-                                : { duration: 2, ease: "easeOut" }
+                          state
+                          ? { duration: 8.897, ease: "easeOut" }
+                          : { duration: 2, ease: "easeOut" }
                         }
                         className="roulette"
                         src="https://res.cloudinary.com/dpw5docvm/image/upload/v1629446175/Roulette_cuwthy.png"
                         alt="roulette"
-                    />
+                        />
                     <img
                         className="marker"
                         src="https://res.cloudinary.com/dpw5docvm/image/upload/v1629446169/Roulette_Arrow_xnecnv.png"
                         alt="roulette_arrow"
-                    />
+                        />
                 </div>
                 <span>Remaining coins: {coins}</span>
+                <div>
+                <input type="checkbox" value={muted} name="mute" onChange={(e)=> setMuted(e.target.checked)}/>  <i class= { muted ? "fas fa-volume-mute" : "fas fa-volume-off" }/>
+                </div>
                 <Button classes="button" size="large" disabled={!idle} variant="outlined" color="primary" type="button" onClick={spin} className="button">
                     Spin it!
                 </Button>
             </div>
         </div>
+      </div>  
     );
 };
 export default WheelOfCoupons;

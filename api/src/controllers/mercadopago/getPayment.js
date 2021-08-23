@@ -1,8 +1,5 @@
 const { Payment_detail } = require("../../db");
-const mercadopago = require("mercadopago");
-const { ACCESS_TOKEN_MERCADOPAGO } = process.env;
-
-const mp = new mercadopago(ACCESS_TOKEN_MERCADOPAGO);
+const mercadopago = require("../../utils/mercadopago/configure");
 
 module.exports = async (req, res, next) => {
   try {
@@ -14,7 +11,7 @@ module.exports = async (req, res, next) => {
       }
     })
 
-    const response = await mp.get(`/v1/payments/${payment.id}`);
+    const response = await mercadopago.get(`/v1/payments/${payment.id}`);
 
     return res.status(200).send(response);
   } catch (err) {

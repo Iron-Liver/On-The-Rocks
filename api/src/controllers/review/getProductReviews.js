@@ -1,11 +1,15 @@
-const { Review } = require("../../db");
+const { Review, User } = require("../../db");
 
 module.exports = async (req, res, next) => {
     const { id } = req.params;
     try {
         if (id){
             const review = await Review.findAll({
-                where: { productId: id }, 
+                where: { productId: id },
+                include: {
+                  model: User,
+                  attributes: ['username']
+                } 
             });
             res.json(review);
         } else{

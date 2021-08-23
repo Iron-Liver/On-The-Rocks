@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Checkout from './Checkout';
+import CheckoutV2 from './CheckoutV2';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
@@ -50,7 +51,8 @@ const MercadoPago = () => {
       { 
         !data
           ? <CircularProgress />
-          : <Checkout order={orderInfo} data={data} stock={stock}/>
+          // : <Checkout order={orderInfo} data={data} stock={stock}/>
+          : <CheckoutV2 order={orderInfo} data={data} stock={stock}/>
       }
     </div>
   );

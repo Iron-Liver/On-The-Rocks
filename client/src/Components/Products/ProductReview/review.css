@@ -1,0 +1,21 @@
+.check-anon:checked {
+  background-color: #372c2e;
+}
+
+.check-anon:checked:after {
+  content: 'X';
+  color:white;
+}
+
+.check-anon {
+  background:#fff;
+  text-align: center;
+  vertical-align: middle;
+  width: 14px !important;
+  height: 14px !important;
+  appearance:none;
+  border-radius:15%;
+  border: 1px solid rgb(60,69,77,0.9);
+  box-shadow: 0.02px 0.02px 1px rgb(56, 56, 56);
+  font-size: 10px;
+}
