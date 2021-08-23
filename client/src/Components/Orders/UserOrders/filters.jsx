@@ -1,6 +1,5 @@
 import './filters.css'
 import React from 'react';
-import { Button } from '@material-ui/core';
 import {
   Accordion,
   AccordionSummary,
@@ -8,10 +7,11 @@ import {
 } from "@material-ui/core";
 
 import { ExpandMore } from '@material-ui/icons'
+import CustomButton from '../../Button/CustomButton';
 
-const Filters = ({ handleSubmit, handleChange, handleSort, form }) => {
+const Filters = ({ handleSubmit, handleChange, handleSort, handleReset, form }) => {
   return (
-    <div>
+    <div className="user-orders-filter-container">
       <form onSubmit={handleSubmit} className="user-orders-filter-form">
         <Accordion
           className="filter-accordion"
@@ -137,21 +137,31 @@ const Filters = ({ handleSubmit, handleChange, handleSort, form }) => {
             >
               <option value="id-DESC-">Order ID Desc</option>
               <option value="id-ASC">Order ID Asc</option>
-              <option value="createdAt-DESC">Date Desc</option>
-              <option value="createdAt-ASC">Date Asc</option>
+              <option value="date-DESC">Date Desc</option>
+              <option value="date-ASC">Date Asc</option>
               <option value="total-DESC">Total Desc</option>
               <option value="total-ASC">Total Asc</option>
               <option value="firstName-DESC">First Name Desc</option>
               <option value="firstName-ASC">First Name Asc</option>
             </select>
           </label>
-          <Button 
-            type="submit"
-            variant="contained"
-            style={{ background: "#493d30ee", color: "white", margin: "5px 10px 0 0", alignSelf: "flex-end" }}
-          >
-            Filter
-          </Button>
+          <div>
+            <CustomButton
+              type="button"
+              margin= "5px 10px 0 0"
+              style={{  }}
+              onClick={handleReset}
+            >
+              RESET
+            </CustomButton>
+            <CustomButton 
+              type="submit"
+              margin= "5px 10px 0 0"
+              style={{ alignSelf: "flex-end" }}
+            >
+              FILTER
+            </CustomButton>
+          </div>
         </div>
       </form>
     </div>

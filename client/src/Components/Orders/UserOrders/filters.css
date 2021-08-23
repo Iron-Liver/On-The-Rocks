@@ -1,3 +1,7 @@
+.user-orders-filter-container {
+  margin-bottom: 20px;
+}
+
 .user-orders-filter-form {
   display: flex;
   flex-direction: column;
@@ -27,10 +31,35 @@
   font-family: 'Montserrat', sans-serif;
   margin: 0 0 5px 20px;
   font-size: 15px;
+  word-break: keep-all;
+  min-width: max-content;
 }
 
 .user-orders-sort-submit {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 456px) {
+  .user-orders-sort-submit {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 325px) {
+  .user-orders-sort-submit div {
+    display: flex;
+    justify-content: center;
+  }
+
+  .user-orders-sort-submit div button {
+    margin: 0 2px;
+  }
+
+  .user-orders-sort-submit label,
+  .user-orders-sort-submit label select {
+    font-size: 10px;
+  }
 }

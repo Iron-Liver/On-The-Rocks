@@ -80,12 +80,10 @@ const useStyles = makeStyles((theme) => ({
 
     },
     sum2: {
-        display: "flex",
-        marginLeft: "5px",
+        display: "flex"
     },
     sum1: {
-        display: "flex",
-        marginLeft: "45px",
+        display: "flex"
     },
     review: {
         display: "flex",
@@ -104,6 +102,16 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: 110,
     },
+    stockText: {
+      display: "flex",
+      alignItems: "center",
+      marginTop: "8px"
+    },
+    stockStatus: {
+      fontFamily: `"Montserrat", sans-serif`,
+      fontSize: "17px",
+      marginTop: "6px"
+    },
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
@@ -121,6 +129,7 @@ const useStyles = makeStyles((theme) => ({
       } 
     },
     button2: {
+        padding: 0,
         width: "10px",
         height: "20px",
         marginLeft: "5px",
@@ -196,11 +205,9 @@ const ProductDetail = () => {
         }
     }
 
-
-    //----------------------------------------------------------------------//
-    let stockText = <div>
+    let stockText = <div className={classes.stockText}>
         <CheckCircle style={{ color: green[500] }} />
-        <span>On Stock</span>
+        <span className={classes.stockStatus}>On Stock</span>
     </div>
 
     let btncart = <Button
@@ -218,15 +225,15 @@ const ProductDetail = () => {
     </Button>
 
     if (liqueur.stock <= 5) {
-        stockText = <div>
+        stockText = <div className={classes.stockText}>
             <Info style={{ color: red[500] }} />
-            <span>Low Stock</span>
+            <span className={classes.stockStatus}>Low Stock</span>
         </div>
     }
     if (liqueur.stock <= 0) {
-        stockText = <div>
+        stockText = <div className={classes.stockText}>
             <Info color="disabled" />
-            <span>No Stock</span>
+            <span className={classes.stockStatus}>No Stock</span>
         </div>;
         btncart = <Button
             disabled
@@ -238,7 +245,6 @@ const ProductDetail = () => {
             <h3>ADD TO CART</h3>
         </Button>
     }
-    //----------------------------------------------------------------------------//
 
     return (
         <>
@@ -300,9 +306,7 @@ const ProductDetail = () => {
                                     }}>
                                         Brand: {liqueur.brand}
                                     </Typography>
-                                    <div>
-                                        {stockText}
-                                    </div>
+                                    {stockText}
                                 </Grid>
                                 <Typography variant="h6" style={{
                                       fontFamily: "'Montserrat', sans-serif",
@@ -312,28 +316,36 @@ const ProductDetail = () => {
                                     }}>
                                     {liqueur.description}
                                 </Typography>
-                            </CardContent>
-                            <div className={classes.controls}>
-                                {btncart}
-                                <h3 className={classes.sum1}>QUANTITY</h3>
-                                <div className={classes.sum2}>
-                                    <Button
-                                        variant="contained"
-                                        className={classes.button2}
-                                        onClick={() => handleChangeQuant('-')}
-                                    >
-                                        -
-                                    </Button>
-                                    <Grid>{quant}</Grid>
-                                    <Button
-                                        variant="contained"
-                                        className={classes.button2}
-                                        onClick={() => handleChangeQuant('+')}
-                                    >
-                                        +
-                                    </Button>
+                                <div className={classes.controls}>
+                                    <div style={{
+                                      display: "flex",
+                                      flexDirection: "column",
+                                      alignItems: "center",
+                                      width: "max-content"
+                                    }}>
+                                      <h3 className={classes.sum1}>Quantity</h3>
+                                      <div className={classes.sum2}>
+                                          <Button
+                                              variant="contained"
+                                              size="small"
+                                              className={classes.button2}
+                                              onClick={() => handleChangeQuant('-')}
+                                          >
+                                              -
+                                          </Button>
+                                          <Grid>{quant}</Grid>
+                                          <Button
+                                              variant="contained"
+                                              className={classes.button2}
+                                              onClick={() => handleChangeQuant('+')}
+                                          >
+                                              +
+                                          </Button>
+                                      </div>
+                                    </div>
+                                    {btncart}
                                 </div>
-                            </div>
+                            </CardContent>
                         </div>
                     </Card>
 

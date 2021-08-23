@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import './order.css';
-import { Button, Avatar, Menu, MenuItem, IconButton } from '@material-ui/core';
+import { Avatar, Menu, MenuItem, IconButton } from '@material-ui/core';
 import { AvatarGroup } from '@material-ui/lab';
 import { MoreVert } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
+import CustomButton from '../../Button/CustomButton';
 
 // Import Swiper styles
 import "swiper/swiper.min.css";
@@ -129,7 +130,12 @@ const Order = ({ order, handleSubmit }) => {
                 <AvatarGroup max={4}>
                   {order.order_products.map(({product}) => 
                     <Avatar 
-                      style={{ width: "70px", height: "70px", border: "1px solid #d3d3d3bb" }} 
+                      style={{ 
+                        width: "70px", 
+                        height: "70px", 
+                        border: "1px solid #d3d3d3bb",
+                        imageRendering: "-webkit-optimize-contrast"
+                      }} 
                       alt={product.name} 
                       src={product.image} 
                       key={Math.random()}
@@ -146,27 +152,18 @@ const Order = ({ order, handleSubmit }) => {
               style={{ textDecoration: "none", color: "black" }}
               draggable={false}
             >
-              <Button 
-                variant="contained"
-                style={{ 
-                  background: "#3b3024dd",
-                  color: "white"
-                }}
+              <CustomButton
+                width="135px"
               >
                 ORDER DETAILS
-              </Button>
+              </CustomButton>
             </Link>
-            <Button
-              variant="contained"
-              style={{ 
-                background: "#3b3024dd",
-                color: "white",
-                marginTop: "15px"
-              }}
+            <CustomButton
+              width="135px"
               onClick={handleRemove}
             >
               REMOVE ORDER
-            </Button>
+            </CustomButton>
           </div>
         </div>
       </div>}

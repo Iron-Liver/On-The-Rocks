@@ -48,7 +48,7 @@ const Products = () => {
     return (
       <div className="products-wrapper">
           <div className="page-head">
-            <h1 style={{ flexGrow: "1"}}>Products</h1>
+            <h1 style={{ flexGrow: "1", marginTop: 0}}>Products</h1>
             <select name="" id="" style={{
               height: "max-content",
               background: "#F7F5F3",

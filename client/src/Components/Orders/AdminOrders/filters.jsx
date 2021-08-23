@@ -1,6 +1,6 @@
 import './filters.css'
 import React from 'react';
-import { Button } from '@material-ui/core';
+import CustomButton from '../../Button/CustomButton';
 import {
   Accordion,
   AccordionSummary,
@@ -9,7 +9,7 @@ import {
 
 import { ExpandMore } from '@material-ui/icons'
 
-const Filters = ({ handleSubmit, handleChange, handleSort, form }) => {
+const Filters = ({ handleSubmit, handleChange, handleSort, handleReset, form }) => {
   return (
     <form onSubmit={handleSubmit} className="admin-orders-filter-form">
       <Accordion
@@ -144,13 +144,23 @@ const Filters = ({ handleSubmit, handleChange, handleSort, form }) => {
             <option value="firstName-ASC">First Name Asc</option>
           </select>
         </label>
-        <Button 
-          type="submit"
-          variant="contained"
-          style={{ background: "#493d30ee", color: "white", margin: "5px 10px 0 0", alignSelf: "flex-end" }}
-        >
-          Filter
-        </Button>
+        <div>
+            <CustomButton
+              type="button"
+              margin= "5px 10px 0 0"
+              style={{  }}
+              onClick={handleReset}
+            >
+              RESET
+            </CustomButton>
+            <CustomButton 
+              type="submit"
+              margin= "5px 10px 0 0"
+              style={{ alignSelf: "flex-end" }}
+            >
+              FILTER
+            </CustomButton>
+          </div>
       </div>
     </form>
   )

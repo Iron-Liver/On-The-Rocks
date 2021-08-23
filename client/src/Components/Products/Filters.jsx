@@ -1,3 +1,4 @@
+import './filters.css';
 import { useEffect, React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,7 +15,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { ExpandMore } from '@material-ui/icons'
 import { getAllCategories } from "../../Redux/Category/categoryActions";
-import './filters.css';
 
 const useStyles = makeStyles({
   button: {
@@ -48,11 +48,10 @@ const Filters = ({ setPage }) => {
     dispatch(getAllCategories());
   }, [dispatch]);
 
-  function handleSelect(e) {
+  function handleSelect(id) {
     setPage(1);
-    dispatch(filterByCategory(e.target.value));
-    console.log(e.target.value);
-    console.log(Products);
+    console.log(id)
+    dispatch(filterByCategory(id));
   }
 
   function orderByPrice(type) {
@@ -93,6 +92,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             Under $100.00
@@ -103,6 +103,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             $100.00 - $250.00
@@ -113,6 +114,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             $250.00 - $500.00
@@ -123,6 +125,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             Above $500.00
@@ -147,36 +150,38 @@ const Filters = ({ setPage }) => {
               margin: 0,
             }}
           >
-            BRAND
+            TYPE
           </h3>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails 
+          key={Math.random()}
+          onClick={() => handleSelect('all')}
+          className="filter-accordion-details-cat"
+        >
           <h4
             style={{
               margin: 0,
             }}
           >
-            1
+            All
           </h4>
         </AccordionDetails>
-        <AccordionDetails>
-          <h4
-            style={{
-              margin: 0,
-            }}
+        {categories && 
+        categories.map(({ name, id }) => (
+          <AccordionDetails 
+            key={Math.random()}
+            onClick={() => handleSelect(id)}
+            className="filter-accordion-details-cat"
           >
-            2
-          </h4>
-        </AccordionDetails>
-        <AccordionDetails>
-          <h4
-            style={{
-              margin: 0,
-            }}
-          >
-            3
-          </h4>
-        </AccordionDetails>
+            <h4
+              style={{
+                margin: 0,
+              }}
+            >
+              {name}
+            </h4>
+          </AccordionDetails>
+        ))}
       </Accordion>
 
       <Accordion
@@ -204,6 +209,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             200ml and less
@@ -214,6 +220,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             200ml - 500ml
@@ -224,6 +231,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             500ml - 700ml
@@ -234,6 +242,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             700 - 750ml
@@ -244,6 +253,7 @@ const Filters = ({ setPage }) => {
           <h4
             style={{
               margin: 0,
+              fontWeight: 300
             }}
           >
             Above 750ml

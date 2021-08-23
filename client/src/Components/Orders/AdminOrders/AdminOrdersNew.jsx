@@ -3,7 +3,7 @@ import OrderNew from "./orderNew";
 import axios from "axios";
 import jwt from 'jsonwebtoken'
 import { useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from '@material-ui/lab';
 import Filters from "./filters";
@@ -16,13 +16,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const initialFilters = {
-  orderBy: "id-DESC-",
-  filterBy: {},
-  itemsPerPage: 4
-};
-
 const AdminOrdersNew = () => {
+  const { search, pathname } = useLocation();
+  const query = new URLSearchParams(search);
+  
+  const initialFilters = {
+    order: query?.get('order') ? query?.get('order').toString() : "id-DESC-",
+    filterBy: {},
+    limit: 4
+  };
+
+  (() => {
+    for(const entry of query.entries()) {
+      if(!["page", "order", "limit"].includes(entry[0])) {
+        initialFilters.filterBy[entry[0]] = entry[1];
+      };
+    }
+  })()
+
   const [orders, setOrders] = useState({});
   const [form, setForm] = useState(initialFilters);
   const [page, setPage] = useState(1);
@@ -32,40 +43,70 @@ const AdminOrdersNew = () => {
   userId = parseInt(userId);
   const classes = useStyles();
 
-
   useEffect(() => {
     (async () => {      
       try {
         const localProfile = JSON.parse(localStorage.getItem('token')) ? 
         jwt.verify(JSON.parse(localStorage.getItem('token')), 
         process.env.REACT_APP_SECRET_KEY) : null
-        if(localProfile.id !== userId) {
+        if(localProfile.id !== userId || !localProfile.isAdmin) {
           history.push("/");
         }
-        const response = await axios.post("/order/getOrders", {
-          ...initialFilters,
-          page: 1
-        });
+        const body = {
+          orderBy: query?.get('order') 
+            ? query.get('order').toString()
+            : "id-DESC",
+          page: query?.get('page')
+            ? parseInt(query.get('page').toString()) || 1
+            : 1,
+          itemsPerPage: query?.get('limit')
+            ? parseInt(query.get('limit').toString()) || 4
+            : 4,
+          filterBy: {}
+        }
+
+        setPage(query?.get('page')
+        ? parseInt(query.get('page').toString()) || 1
+        : 1)
+
+        for(const entry of query.entries()) {
+          if(!body[entry[0]]) {
+            body.filterBy[entry[0]] = entry[1];
+          };
+        }
+
+        const response = await axios.post("/order/getOrders", body);
         setOrders(response.data);
       } catch (error) {
         history.push("/");
       }
     })();
-  }, [history, userId]);
+    //eslint-disable-next-line
+  }, [history, userId, search])
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("/order/getOrders", {
-        ...form,
-        page: 1
-      });
-      setOrders(response.data);
-      setPage(1);
-    } catch (error) {
-      history.push("/");
+
+    query.forEach((_value, key) => {
+      query.delete(key);
+    })
+    
+    Object.entries(form.filterBy).forEach(param => {
+      query.set(param[0], param[1])
+    });
+
+    if(form.order !== "id-DESC-") {
+      query.set('order', form.order);
     }
+
+    if(form.limit !== 4) {
+      query.set('limit', form.limit)
+    }
+
+    query.set('page', 1)
+
+    history.push({search: query.toString()});
   };
 
   const handleChange = (e) => {
@@ -87,6 +128,10 @@ const AdminOrdersNew = () => {
     });
   };
 
+  const handleReset = () => {
+    history.push(`${pathname}?page=${page}`);
+  }
+
   const handleSort = (e) => {
     setForm({
       ...form,
@@ -94,23 +139,10 @@ const AdminOrdersNew = () => {
     })
   };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.post("/order/getOrders", {
-          ...form,
-          page
-        });
-        setOrders(response.data);
-      } catch (error) {
-        history.push("/"); 
-      }
-    })()
-  //eslint-disable-next-line
-  },[page, history])
-
   const handlePageChange = (e, val) => {
     setPage(val);
+    query.set('page', val);
+    history.push({search: query.toString()})
   };
 
   const setOrderStatus = (status, id) => {
@@ -134,6 +166,7 @@ const AdminOrdersNew = () => {
           handleSort={handleSort}
           handleSubmit={handleSubmit} 
           handleChange={handleChange} 
+          handleReset={handleReset}
           form={form}
         />
       </header>
@@ -170,6 +203,7 @@ const AdminOrdersNew = () => {
           count={orders.pages}
           page={page}
           onChange={handlePageChange}
+          handleReset={handleReset}
           size="small"
         />
       </nav>

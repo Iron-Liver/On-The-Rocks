@@ -1,12 +1,12 @@
+import './userOrders.css'
 import React, { useState, useEffect } from "react";
 import Order from "./order";
 import axios from "axios";
 import jwt from 'jsonwebtoken'
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { Pagination } from '@material-ui/lab';
-import './userOrders.css'
 import Filters from "./filters";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,13 +17,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const initialFilters = {
-  orderBy: "id-DESC-",
-  filterBy: {},
-  itemsPerPage: 4
-};
-
 const UserOrders = () => {
+  const { search, pathname } = useLocation();
+  const query = new URLSearchParams(search);
+  
+  const initialFilters = {
+    order: query?.get('order') ? query?.get('order').toString() : "id-DESC-",
+    filterBy: {},
+    limit: 4
+  };
+
+  (() => {
+    for(const entry of query.entries()) {
+      if(!["page", "order", "limit"].includes(entry[0])) {
+        initialFilters.filterBy[entry[0]] = entry[1];
+      };
+    }
+  })()
+
   const [orders, setOrders] = useState({});
   const [form, setForm] = useState(initialFilters);
   const [page, setPage] = useState(1);
@@ -32,7 +43,6 @@ const UserOrders = () => {
   let { userId } = useParams();
   userId = parseInt(userId);
   const classes = useStyles();
-
 
   useEffect(() => {
     (async () => {
@@ -43,31 +53,62 @@ const UserOrders = () => {
         if(localProfile.id !== userId) {
           history.push("/");
         }
-        const response = await axios.post("/order/getOrders", {
-          ...initialFilters,
-          page: 1,
+
+        const body = {
+          orderBy: query?.get('order') 
+            ? query.get('order').toString()
+            : "id-DESC",
+          page: query?.get('page')
+            ? parseInt(query.get('page').toString()) || 1
+            : 1,
+          itemsPerPage: query?.get('limit')
+            ? parseInt(query.get('limit').toString()) || 4
+            : 4,
+          filterBy: {},
           userId
-        });
+        }
+
+        setPage(query?.get('page')
+        ? parseInt(query.get('page').toString()) || 1
+        : 1)
+
+        for(const entry of query.entries()) {
+          if(!body[entry[0]]) {
+            body.filterBy[entry[0]] = entry[1];
+          };
+        }
+
+        const response = await axios.post("/order/getOrders", body);
         setOrders(response.data);
       } catch (error) {
         history.push("/");
       }
     })();
-  }, [history, userId]);
+    //eslint-disable-next-line
+  }, [history, userId, search])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("/order/getOrders", {
-        ...form,
-        page: 1,
-        userId
-      });
-      setOrders(response.data);
-      setPage(1);
-    } catch (error) {
-      history.push("/");
+
+    query.forEach((_value, key) => {
+      query.delete(key);
+    })
+    
+    Object.entries(form.filterBy).forEach(param => {
+      query.set(param[0], param[1])
+    });
+
+    if(form.order !== "id-DESC-") {
+      query.set('order', form.order);
     }
+
+    if(form.limit !== 4) {
+      query.set('limit', form.limit)
+    }
+
+    query.set('page', 1)
+
+    history.push({search: query.toString()});
   };
 
   const handleChange = (e) => {
@@ -89,31 +130,21 @@ const UserOrders = () => {
     });
   };
 
+  const handleReset = () => {
+    history.push(`${pathname}?page=${page}`);
+  }
+
   const handleSort = (e) => {
     setForm({
       ...form,
-      orderBy: e.target.value
+      order: e.target.value
     })
   };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.post("/order/getOrders", {
-          ...form,
-          page,
-          userId
-        });
-        setOrders(response.data);
-      } catch (error) {
-        history.push("/"); 
-      }
-    })()
-  //eslint-disable-next-line
-  },[page, history, userId])
-
-  const handlePageChange = (e, val) => {
+  const handlePageChange = (_e, val) => {
     setPage(val);
+    query.set('page', val);
+    history.push({search: query.toString()})
   };
 
   return (
@@ -121,7 +152,8 @@ const UserOrders = () => {
       <Filters 
         handleSort={handleSort}
         handleSubmit={handleSubmit} 
-        handleChange={handleChange} 
+        handleChange={handleChange}
+        handleReset={handleReset}
         form={form}
       />
       <div className={classes.paginationContainer}>

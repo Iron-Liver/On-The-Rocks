@@ -59,6 +59,10 @@ module.exports = async (req, res, next) => {
     if(page > pages) {
       page = pages;
     }
+
+    if(page < 1) {
+      page = 1
+    }
     
     const from = itemsPerPage * page - itemsPerPage;
     const to = page * itemsPerPage;
@@ -71,6 +75,7 @@ module.exports = async (req, res, next) => {
       page,
       pages,
       total,
+      itemsPerPage,
       data: pageOrders,
       orderBy: {
         [sort]: type

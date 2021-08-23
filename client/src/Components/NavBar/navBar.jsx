@@ -22,19 +22,16 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     outline: 'none',
     backgroundColor: "d3d3d3",
-    borderBottom: '1px solid #d3d3d3',
-    
+    borderBottom: '1px solid #d3d3d3'
   },
   appBar: {
     width: '100%',
     background: "transparent",
-
-    transition: 'background 300ms ease-out'
+    transition: 'background 300ms ease-out',
   },
   appBarSolid: {
     width: '100%',
-    background: "#372c2E",
-    borderBottom: '1px solid gray',
+    background: "#372c2eee",
     transition: 'background 300ms ease-out'
   },
   menu: {
@@ -65,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     background: "transparent"
   },
   blank: {
-    marginTop: "90px"
+    marginTop: "93.85px"
   },
   drawerPaper: {
     width: '70%',
@@ -162,12 +159,18 @@ function NavBar(props) {
                       src={logoWhite} 
                       alt="on-the-rocks-logo" 
                       className={classes.navLogo}
+                      style={{
+                        "imageRendering": "-webkit-optimize-contrast"
+                      }}
                     />
                     ) : (
                     <img 
                       src={logoBrown} 
                       alt="on-the-rocks-logo" 
                       className={classes.navLogo}
+                      style={{
+                        "imageRendering": "-webkit-optimize-contrast"
+                      }}
                     />
                   )
                 }

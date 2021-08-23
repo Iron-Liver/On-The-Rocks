@@ -85,9 +85,6 @@ Order_products.belongsTo(Order, {
 Product.belongsToMany(Category, {through: 'product_category'});
 Category.belongsToMany(Product, {through: 'product_category'});
 
-// Order.hasOne(Payment_detail, {
-//   foreignKey: 'paymentId'
-// });
 Order.hasOne(Payment_detail);
 Payment_detail.belongsTo(Order);
 
