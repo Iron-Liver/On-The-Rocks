@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   icons: {
-    color:'#372c2eee',
+    color:'#fff',
     '&:hover':{
       color:'black',
     }

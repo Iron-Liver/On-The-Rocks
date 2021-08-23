@@ -5,6 +5,7 @@ import {
     Typography
 } from "@material-ui/core";
 import Rating from '@material-ui/lab/Rating';
+import jwt from "jsonwebtoken";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
 
 export const ProductReviewCard = ({ reviews }) => {
     const classes = useStyles();
+
+    const currentUser = JSON.parse(localStorage.getItem("token"))
+        ? jwt.verify(
+            JSON.parse(localStorage.getItem("token")),
+            process.env.REACT_APP_SECRET_KEY
+        )
+        : null;
+    
     return (
         <Grid container spacing={4} style={{width:'90%',margin: "auto"}}>
             {reviews.length ? (
@@ -72,6 +81,7 @@ export const ProductReviewCard = ({ reviews }) => {
                     );
                 })
             ) : (
+                currentUser ?
                 <h2 
                   style={{
                     fontFamily: `"Montserrat", sans-serif`, 
@@ -81,6 +91,11 @@ export const ProductReviewCard = ({ reviews }) => {
                 >
                   No reviews registered yet
                 </h2>
+                : (<h2 style={{
+                    fontFamily: `"Montserrat", sans-serif`, 
+                    fontWeight: "300",
+                    margin: "50px 0"
+                  }} >You must login in order to leave an opinion</h2>)
             )}
             </Grid>
     );

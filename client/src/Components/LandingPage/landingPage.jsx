@@ -42,9 +42,6 @@ export const LandingPage = () => {
         <div>
         <header className="landinghead">
         </header>
-        <body>
-        
-        </body>
         </div>
         <div className="vox"></div>
       
@@ -57,7 +54,14 @@ export const LandingPage = () => {
         <div className="slider">
           
         
-        <div>
+        <div style={{
+          marginTop: "150px"
+        }}>
+          <div className="divider-page">
+            <div className="dividers"></div>
+            <h1 style={{color:'black', wordBreak: "keep-all", minWidth: "max-content"}}>On sale</h1>
+            <div className="dividers"></div>
+          </div>
           <SwiperOS />
         </div>
 
