@@ -8,7 +8,7 @@ import './CreateOrder.css'
 import jwt from "jsonwebtoken"
 import axios from 'axios'
 import mercadopagoimg from '../../../assets/mercado-pago.png';
-
+import {useSelector } from "react-redux";
 
 
 let initialForm1 = {
@@ -46,7 +46,9 @@ const CreateOrder = () => {
     const isValid2 = await userSchema2.isValid(state2);
     if(isValid2) setCount(count + 1);
   }
-
+  
+  const {Desc} = useSelector(state => state.couponReducer)
+  console.log(Desc)
   const currentUser = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
@@ -67,7 +69,9 @@ const CreateOrder = () => {
         }
       })
     }
+
     try {
+      console.log("hola")
       const { data } = await axios.post('/order/addOrder', order);
       if(data) {
         localStorage.removeItem("data");

@@ -47,85 +47,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Coupons = () => {
-  const [coupons, setCoupons] = useState();
-
+  const classes = useStyles();
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
-  
   const userId = localProfile?.id;
+  const { Coupons } = useSelector((state) => state.couponReducer);  
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+     dispatch(getCoupons(userId));
+    }, []);
 
 
- /*  (async function(){
-      let coup = await getCoupons(userId)
-      setCoupons(coup)
-  })() 
+ console.log(Coupons)
 
-  console.log(coupons)
-
-  if(coup)   */
-
-  
-
-return (
-    <div><h1>Coupons</h1></div>);
-}
-  {/* <div className={classes.root}>
-  {coupons?.length > 0 ? (
-    coupons?.map((w) => (
-      w[0] && 
-      <Paper className={w[0].onSale ? classes.onSalePaper : classes.paper}>
-        <div className="user-coupons-imgsale-wrapper">
-          <div className="usercoupons-img-container">
-            <Link to={`/products/${w[0].id}`}>
-              <img width="80px" className={classes.img} alt="complex" src={w[0]?.image}/>
-            </Link>
-            {
-              w[0].onSale && (
-                <div>
-                  <div className="user-coupons-flag-shadow"/>
-                  <div className="user-coupons-flag">
-                    <NewReleases id="user-coupons-flag-icon"/>
-                  </div>
-                </div>
-              )
-            }
-          </div>
-        </div>
+ return (
+  <div className={classes.root}>
+  {Coupons?.length > 0 ? (
+    Coupons?.map((w) => (
+      <Paper className={classes.paper}>
         <div className="user-coupons-description">
           <div style={{ flexGrow: 1 }}>
-            <Link to={`/products/${w[0].id}`} style={{ textDecoration: "none", color: "black"}}>
-              <h4 className="user-coupons-item-title">{w[0]?.name}</h4>
-            </Link>
-            {
-              w[0].onSale ? (
-                <h4 className="user-coupons-item-price">
-                  <span style={{
-                    color: "rgb(144, 0, 32)"
-                  }}>
-                    ${w[0].onSale}{" "}
-                  </span> 
-                  <del
-                    className="user-coupons-item-regular"
-                    >${w[0]?.price}</del>
-                </h4>
-              ) : (
-                <h4 className="user-coupons-item-price">
-                  ${w[0]?.price}
-                </h4>
-              )
-            }
-          </div>
-          <IconButton
-            onClick={(e) => deleteWishh(e, currentUser?.id, w[0]?.id)}
-            style={{ padding: "1px" }}
-          >
-            <DeleteIcon fontSize="medium" />
-          </IconButton>
-        </div>
+              <h2 className="user-coupons-item-title">Coupon code: {w.code}</h2>
+              <h2 className="user-coupons-item-price">Discount amount: {w.discount * 100}%</h2>
+          </div>   
+         </div>
       </Paper>
     ))
-      ) : (
+    ) : (
         <div style={{
           display: "flex",
           justifyContent: "center",
@@ -135,7 +85,8 @@ return (
           <h4 id="user-coupons-empty-message">Nothing to show...</h4>
         </div>
       )}
-  </div> */}
-
+  </div> 
+  );
+}
 
 export default Coupons;
