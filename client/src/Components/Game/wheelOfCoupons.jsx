@@ -6,6 +6,8 @@ import "./wheelOfCoupons.css";
 import audio from "./Wheel_of_cupons.mp3";
 import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
+import {createCoupon} from "../../Redux/Coupon/couponActions"
+
 export const WheelOfCoupons = () => {
     const currentUser = JSON.parse(localStorage.getItem("token"))
         ? jwt.verify(
@@ -37,6 +39,7 @@ export const WheelOfCoupons = () => {
             transform: `rotate(${degrees}deg)`,
         },
     };
+
     const generateAward = () => {
         const percent = Math.ceil(Math.random() * 100);
         let discount;
@@ -94,8 +97,15 @@ export const WheelOfCoupons = () => {
     const playAudio = () => {
         new Audio(audio).play();
     };
-    const addCoupon = () => {
+    const addCoupon = (discount) => {
         //Here is where i would add a coupon to user but we dont have any coupon system yet
+        const coupon = {
+            code: `WHEEL${discount}`,
+            discount: discount / 100,
+            global: false,
+            userId: currentUser.id
+        }
+        dispatch(createCoupon(coupon))
     };
     const spin = () => {
         dispatch(removeCoin(currentUser?.id));
@@ -106,7 +116,7 @@ export const WheelOfCoupons = () => {
         setTimeout(async () => {
             if (discount) {
                 alert(`Congratulations! You got a %${discount} discount!`);
-                addCoupon();
+                addCoupon(discount);
                 setState(false);
                 setDegrees(0);
                 setTimeout(() => {

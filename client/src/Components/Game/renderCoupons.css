@@ -1,0 +1,86 @@
+.user-couponscouponstle {
+    font-weight: 400;
+  }
+  
+  .user-coupons-item-price {
+    font-weight: 400;
+    font-size: 20px
+  }
+  
+  .user-coupons-item-regular {
+    font-weight: 400;
+    font-size: 15px;
+  }
+  
+  .user-coupons-imgsale-wrapper { 
+    display: flex; 
+    width: 110px; 
+    min-width: 110px;
+    justify-content: center; 
+    margin-right: 10px
+  }
+  
+  .user-coupons-img-container { 
+    width: 110px;
+    height: 115px;
+    min-width: 110px;
+    background: white;
+    border: 1px solid #e9e7e6;
+  }
+  
+  .user-coupons-flag-shadow {
+    position: relative;
+    top: -129px;
+    left: 5px;
+    width: 0;
+    height: 35px;
+    border: 18px solid rgba(128, 128, 128, 0.548);
+    border-bottom: 10px solid transparent;
+  }
+  
+  .user-coupons-flag {
+    position: relative;
+    top: -166px;
+    left: 3px;
+    width: 0;
+    height: 35px;
+    border: 18px solid rgb(144, 0, 32);
+    border-bottom: 10px solid transparent;
+  }
+  
+  #user-coupons-flag-icon { 
+    color: white; 
+    position: relative;
+    left: -10px;
+    top: -17px;
+    width: 20px;
+  }
+  
+  .user-coupons-description {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+  }
+  
+  #user-coupons-empty-message {
+    font-size: 22px;
+    font-weight: 400;
+  }
+  
+  @media (max-width: 650px) {
+    .user-coupons-item-title {
+      font-weight: 400;
+      font-size: 12px;
+    }
+  
+    .user-coupons-item-price {
+      font-weight: 400;
+      font-size: 16px
+    }
+  }
+  
+  @media (max-width: 344px) {
+    .user-wishlist-imgsale-wrapper { 
+      display: none;
+    }
+  }

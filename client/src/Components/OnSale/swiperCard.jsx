@@ -13,18 +13,6 @@ const SwiperCard = ({ spirit }) => {
     setCurrentSpirit(spirit);
   }, [spirit])
   
-/*   let curr = []
-  currentSpirit?.map((e) =>{
-    if(currentSpirit.name){
-      curr.push({
-        id: e.id+900,
-        productId: e.id,
-
-      }
-
-      )
-    }
-  }) */
   
   const handleAddToCart = () => {
     let date = JSON.parse(localStorage.getItem('data')) || []
@@ -153,23 +141,38 @@ const SwiperCard = ({ spirit }) => {
                       justifyContent: "center",
                       alignItems: "baseline"
                     }}>
-                      <h3 style={{
+                      {spirit.onSale? 
+                      <div>
+                        <h3 style={{
                         fontFamily: `"Montserrat", sans-serif`,
                         fontWeight: 400,
                         fontSize: "30px",
-                        color: "white",
-                        margin: "0 5px"
-                      }}>
-                        ${spirit.onSale}
-                      </h3>
-                      <h4 style={{
+                          color: "white",
+                          margin: "0 5px"
+                        }}>
+                          ${spirit.onSale}
+                        </h3>
+                        <h4 style={{
+                          fontFamily: `"Montserrat", sans-serif`,
+                          margin: "0 5px",
+                          fontSize: "20px",
+                          fontWeight: 300,
+                          color: "#333",
+                        }}><del>${spirit.price}</del></h4>
+                        </div>
+                        :
+                        <div>
+                        <h3 style={{
                         fontFamily: `"Montserrat", sans-serif`,
-                        margin: "0 5px",
-                        fontSize: "20px",
-                        fontWeight: 300,
-                        color: "#333",
-                      }}><del>${spirit.price}</del></h4>
-                    </div>
+                        fontWeight: 400,
+                        fontSize: "30px",
+                          color: "white",
+                          margin: "0 5px"
+                        }}>
+                          ${spirit.price}
+                        </h3>
+                       </div>}
+                   </div>
 
                     <CustomButton 
                       elevation={false} 

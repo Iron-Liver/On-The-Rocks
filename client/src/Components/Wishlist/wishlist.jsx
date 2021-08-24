@@ -55,6 +55,8 @@ const Wishlist = () => {
   const { Products } = useSelector((state) => state.productReducer);
   const { wishlists } = useSelector((state) => state.wishlistReducer);
   const [state, setState] = useState(wishlists);
+  const [filt, setFilt] = useState();
+
   var filtUser,
     filtProduct = [];
   const currentUser = JSON.parse(localStorage.getItem("token"))
@@ -75,6 +77,7 @@ const Wishlist = () => {
       if (!state || wishlists.length !== state.length)
         await setState(wishlists);
     })();
+    setFilt(filtProduct)
   }, [state, wishlists, Products]);
 
   const deleteWishh = (e, userId, productId) => {
@@ -95,9 +98,9 @@ const Wishlist = () => {
       }
     }
     swal("The product is being deleted");
-    setTimeout(() => {
+   /*  setTimeout(() => {
       window.location.reload();
-    }, 1000);
+    }, 1000); */
   };
 
   if (Products && state.length > 0) {
@@ -106,12 +109,16 @@ const Wishlist = () => {
     filtProduct = filtUser.map((x) => {
       return Products?.filter((e) => e.id === x.productId);
     });
+ 
   }
+
+  console.log(filt)
+
 
 return (
   <div className={classes.root}>
-  {filtProduct?.length > 0 ? (
-    filtProduct?.map((w) => (
+  {filt?.length > 0 ? (
+    filt?.map((w) => (
       w[0] && 
       <Paper className={w[0].onSale ? classes.onSalePaper : classes.paper}>
         <div className="user-wishlist-imgsale-wrapper">

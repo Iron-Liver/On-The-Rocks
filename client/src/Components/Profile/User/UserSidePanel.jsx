@@ -71,6 +71,14 @@ const UserSidePanel = () => {
               <h4>Wishlist</h4>
             </div>
           </NavLink>
+          <NavLink 
+            to={`${url}/coupons`} 
+            activeClassName="user-nav-active"
+          >
+          <div className="panel-nav-item">
+              <h4>Coupons</h4>
+            </div>
+          </NavLink> 
           <div className="panel-nav-item panel-user-logout" onClick={logOut}>
             <h4>Logout</h4>
           </div>
