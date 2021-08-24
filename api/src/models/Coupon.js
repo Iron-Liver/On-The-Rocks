@@ -18,10 +18,7 @@ module.exports = (sequelize) => {
                     args: /^[A-Za-z0-9]{3,20}$/,
                     msg: "CODE contains errors",
                 },
-            },
-            unique: {
-                msg: "This CODE is already registered",
-            },
+            }
         },
         discount: {
             type: DataTypes.FLOAT,

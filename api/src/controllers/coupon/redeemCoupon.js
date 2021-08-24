@@ -1,12 +1,11 @@
 const { Coupon } = require("../../db");
 
 module.exports = async (req, res, next) => {
-    const { id, userId } = req.params;
+    const { id } = req.params;
     try {
         await Coupon.destroy({
             where: {
                 id,
-                userId,
                 global: false
             },
         });

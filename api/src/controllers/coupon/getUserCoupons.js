@@ -1,16 +1,22 @@
 const { Coupon } = require("../../db");
 
 module.exports = async (req, res, next) => {
-    const { id, userId } = req.params;
+    const { userId } = req.params;
 
     try {
-        const coupons = await Coupon.findAll({
+        var coupons = await Coupon.findAll({
             where: { userId },
         });
 
-        coupons = coupons.filter((coupon) => coupon.id === id);
+        const globals = await Coupon.findAll({
+            where: { global: true },
+        });
 
-        console.log(coupons);
+        coupons = Array.isArray(globals)
+            ? globals.length > 0
+                ? coupons.concat(globals)
+                : coupons
+            : coupons;
 
         if (!coupons[0]) {
             throw new Error(`User has no coupons`);
