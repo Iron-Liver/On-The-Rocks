@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWishlist, deleteWish } from "../../Redux/Wishlist/wishlistActions";
 import { getProducts } from "../../Redux/Products/productsActions";
-import verifyUser from '../../Utils/verifyUser'
+import verifyUser from "../../Utils/verifyUser";
 import swal from "sweetalert";
 import { IconButton, Paper } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import { NewReleases } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { logOutUser } from "../../Redux/Users/userActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,7 +58,11 @@ const Wishlist = () => {
     var filtUser,
         filtProduct = [];
     const currentUser = verifyUser();
-
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
     useEffect(() => {
         dispatch(getProducts());
         dispatch(getWishlist());

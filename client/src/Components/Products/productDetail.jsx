@@ -26,13 +26,14 @@ import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
 import { getProductReviews } from "../../Redux/Reviews/reviewActions";
-import verifyUser from '../../Utils/verifyUser'
+import verifyUser from "../../Utils/verifyUser";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
 import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { green, red } from "@material-ui/core/colors";
 import { getProducts } from "../../Redux/Products/productsActions";
 import CustomButton from "../Button/CustomButton";
+import { logOutUser } from "../../Redux/Users/userActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -178,11 +179,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetail = () => {
-    const currentUser = verifyUser()
+    const dispatch = useDispatch();
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
     const { id } = useParams();
-    const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
