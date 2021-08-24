@@ -2,11 +2,17 @@ import React, { Component } from "react";
 
 class FullProduct extends Component {
     componentDidMount() {
+        
         const myWidget = window.cloudinary.galleryWidget({
             cloudName: "on-the-rocks",
             container: "#my-gallery",
-            mediaAssets: [{ publicId: '123' }, 'PostgreSQL', 'fede', {tag:'pp'}],
-            "displayProps": {
+            displayProps: {
+                mode: "classic",
+                topOffset: 70 // to account for the menu element at the top of this documentation page
+            },
+            aspectRatio: "4:3",
+            mediaAssets: ['hola', 'hola-2', 'Pedro', {tag: "pp"}],
+            /*"displayProps": {
                 "mode": "classic",
                 "spacing": 15
             },
@@ -48,7 +54,7 @@ class FullProduct extends Component {
             "secure": true,
             "transition": "slide",
             "carouselStyle": "thumbnails"
-            /*displayProps: {
+            displayProps: {
                 mode: "classic"
             },            
             transition: "slide",

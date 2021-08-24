@@ -3,7 +3,8 @@ import './products.css';
 import { addProductCart } from '../../Redux/Cart/cartActions';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
-import FullProduct from "./product-gallery.jsx"
+//import FullProduct from "./product-gallery.jsx"
+import ProductsImages from './productGalleryCards';
 
 const ProductCard = ({ spirit }) => {
 
@@ -41,7 +42,7 @@ const ProductCard = ({ spirit }) => {
           </div> */}
 
           <div>
-            {<FullProduct product={spirit.name}/>}
+            {<ProductsImages product={spirit.name}/>}
           </div>
           <div className="contentBx">
             <Link to={`/products/${spirit.id}`} style={{ textDecoration: "none" }}>
