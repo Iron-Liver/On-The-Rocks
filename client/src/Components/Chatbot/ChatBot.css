@@ -1,0 +1,50 @@
+.Chatbot {
+    
+    background: transparent;
+    position: fixed;    
+    right: 0;
+    top: 20%;
+    bottom: 0;          
+    justify-content: center;
+    align-items: center;
+    margin: auto;       
+    display: flex;    
+    height: fit-content;
+    width: fit-content;
+    z-index: 9999;
+        
+  }
+
+  .chatDeploy{
+    background: transparent;
+    position:fixed;
+    left: 55%;    
+    right:0;
+    margin:auto;
+    top:0;
+    bottom:50%;   
+    box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.55); 
+    display:block;
+    height: 50px;
+    width: 50px;
+    z-index: 9999;
+  }
+
+  .logoBot{
+    width: 90px;
+    height: 90px;
+    border-radius: 110px;
+    box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.55);
+    z-index: 9999;    
+  }
+  .botonBot{       
+    background-color: transparent;    
+    cursor: pointer;
+    border-radius: 100px;
+    border-color: transparent;
+    z-index: 9999;
+          
+  }
+  .inputbotdep{
+    z-index: 9999;    
+  }
