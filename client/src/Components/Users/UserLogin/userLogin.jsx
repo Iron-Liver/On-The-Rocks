@@ -6,7 +6,7 @@ import { Email, VpnKey } from "@material-ui/icons";
 import { loginUser, sendEmail, GLogin } from "../../../Redux/Users/userActions";
 import useFormStyles from "../../../Utils/formStyles";
 import { GoogleLogin } from "react-google-login";
-import jwt from "jsonwebtoken";
+import verifyUser from '../../../Utils/verifyUser'
 import swal from "sweetalert";
 import Swal from 'sweetalert2';
 import dotenv from "dotenv";
@@ -16,14 +16,7 @@ export default function UserLogin() {
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
-
+    const currentUser = verifyUser()
     const [input, setInput] = useState({
         email: "",
         password: "",

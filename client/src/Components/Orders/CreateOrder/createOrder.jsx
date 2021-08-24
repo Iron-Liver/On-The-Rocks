@@ -5,7 +5,7 @@ import { useForm } from './useForm';
 import { Link, useHistory } from 'react-router-dom';
 import { userSchema1, userSchema2 } from './ValidationOrder'
 import './CreateOrder.css'
-import jwt from "jsonwebtoken"
+import verifyUser from '../../../Utils/verifyUser'
 import axios from 'axios'
 import mercadopagoimg from '../../../assets/mercado-pago.png';
 
@@ -47,9 +47,7 @@ const CreateOrder = () => {
     if(isValid2) setCount(count + 1);
   }
 
-  const currentUser = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null
+  const currentUser = verifyUser()
 
   const SubmitForm = async () => { 
     const order = {

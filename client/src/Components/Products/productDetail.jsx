@@ -26,7 +26,7 @@ import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
 import { getProductReviews } from "../../Redux/Reviews/reviewActions";
-import jwt from "jsonwebtoken";
+import verifyUser from '../../Utils/verifyUser'
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
 import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
@@ -178,14 +178,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetail = () => {
+    const currentUser = verifyUser()
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
-    const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
     const { id } = useParams();
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);

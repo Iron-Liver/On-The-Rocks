@@ -1,6 +1,6 @@
 import { makeStyles, Grid, Paper } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import jwt from "jsonwebtoken";
+import verifyUser from '../../../Utils/verifyUser'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,12 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export const ProductReviewCard = ({ reviews }) => {
     const classes = useStyles();
 
-    const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
+    const currentUser = verifyUser()
 
     return (
         <Grid container spacing={4} style={{ width: "90%", margin: "auto" }}>
