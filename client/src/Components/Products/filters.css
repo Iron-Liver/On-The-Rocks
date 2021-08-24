@@ -1,12 +1,7 @@
-.filter-accordion-details-cat {
-  cursor: pointer;
-}
-.filter-accordion-details-cat h4 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-}
-.filter-accordion-details-cat:hover {
-  color: #D3D3D3;
-  background: #372c2eb9;
-  transition: all 100ms ease-in-out;
+.filterContainer {
+  display: flex;
+  margin:20px;
+  flex-wrap: wrap;
+  flex-direction: row;
+
 }
