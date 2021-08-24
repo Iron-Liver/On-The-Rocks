@@ -2,15 +2,13 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
 import {allowAdmin} from '../../../Redux/Users/userActions'
-import jwt from 'jsonwebtoken'
+import verifyUser from '../../../Utils/verifyUser'
 import swal from 'sweetalert'
 
 export const Admin2FA = () => {
    const token = new URLSearchParams(window.location.search).get('token')
    localStorage.setItem('token', JSON.stringify(token))
-   const currentUser = JSON.parse(localStorage.getItem('token')) 
-                        ? jwt.verify(JSON.parse(localStorage.getItem('token')), process.env.REACT_APP_SECRET_KEY) 
-                        : null
+   const currentUser = verifyUser()
    const dispatch = useDispatch();
    const history = useHistory();
 

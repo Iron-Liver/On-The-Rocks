@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CheckoutV2 from './CheckoutV2';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
+import verifyUser from '../../Utils/verifyUser'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const MercadoPago = () => {
@@ -28,10 +28,7 @@ const MercadoPago = () => {
           data: dataMP 
         }] = await Promise.all([order, mercadopago]);
 
-        const currentUser = JSON.parse(localStorage.getItem('token')) 
-          ? jwt.verify(JSON.parse(localStorage.getItem('token')), 
-            process.env.REACT_APP_SECRET_KEY) 
-          : null
+        const currentUser = verifyUser()
 
         if(currentUser.id !== dataOrder.userId) {
           history.push("/");

@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { ExpandMore, Payment, Help} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
+import verifyUser from '../../../Utils/verifyUser'
 
 const useStyles = makeStyles((theme) => ({
   accordionSummary: {
@@ -66,9 +66,7 @@ const Summary = ({ order, orderStatus }) => {
 
   const [summaryExpanded, setSummaryExpanded] = useState(false);
 
-  const currentUser = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null
+  const currentUser = verifyUser()
 
   const toggleAccordionSummary = () => {
     setSummaryExpanded(!summaryExpanded);

@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import NavBox from './navBox'
 import { logOutUser } from "../../Redux/Users/userActions";
-import jwt from 'jsonwebtoken';
+import verifyUser from '../../Utils/verifyUser'
 import logoBrown from '../../assets/on-the-rocks-brown.png'
 import logoWhite from '../../assets/on-the-rocks-white.png'
 
@@ -116,9 +116,7 @@ function NavBar(props) {
   };
 
   const handleProfile = () => {
-    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
-    jwt.verify(JSON.parse(localStorage.getItem('token')), 
-    process.env.REACT_APP_SECRET_KEY) : null;
+    const currentUser = verifyUser()
     if(!currentUser) {
       return history.push("/login")
     } else {
@@ -131,9 +129,7 @@ function NavBar(props) {
   };
 
   const handleWishlist = () => {
-    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
-    jwt.verify(JSON.parse(localStorage.getItem('token')), 
-    process.env.REACT_APP_SECRET_KEY) : null;
+    const currentUser = verifyUser()
     if(!currentUser) {
       return history.push("/login")
     } else {

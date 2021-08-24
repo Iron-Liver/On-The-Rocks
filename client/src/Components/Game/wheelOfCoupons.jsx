@@ -1,18 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import jwt from "jsonwebtoken";
 import "./wheelOfCoupons.css";
 import audio from "./Wheel_of_cupons.mp3";
 import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
+import verifyUser from '../../Utils/verifyUser'
 export const WheelOfCoupons = () => {
-    const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
+    const currentUser = verifyUser()
     const dispatch = useDispatch();
     const { coins } = useSelector((state) => state.userReducer);
     const [muted, setMuted] = React.useState(false);
