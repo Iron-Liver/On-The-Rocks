@@ -273,11 +273,21 @@ export const SearchList = () => {
     }
   };
 
+  const handleClick = () => {
+    var link = document.getElementById('Search');
+    window.location.replace(
+      `${window.location.origin}/products?search=${link.value
+        .split(" ")
+        .join("-")
+        .toLowerCase()}`
+    );
+  }
+
   return (
     <div className={classes.autocomplete}>
       <ListItem>
         <ListItemIcon>
-          <Search />
+          <Search onClick={handleClick}/>
         </ListItemIcon>
         <Autocomplete
           id="Search"

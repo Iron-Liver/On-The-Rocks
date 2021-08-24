@@ -100,7 +100,6 @@ const Wishlist = () => {
     };
 
     if (Products && state.length > 0) {
-        console.log(state, "statestatus");
         filtUser = state.filter((x) => x.userId === currentUser.id);
         filtProduct = filtUser.map((x) => {
             return Products?.filter((e) => e.id === x.productId);

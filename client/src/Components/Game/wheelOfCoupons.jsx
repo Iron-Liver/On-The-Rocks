@@ -42,7 +42,6 @@ export const WheelOfCoupons = () => {
     const generateAward = () => {
         const percent = Math.ceil(Math.random() * 100);
         let discount;
-        console.log(percent);
         switch (true) {
             case percent <= 1:
                 discount = 50;

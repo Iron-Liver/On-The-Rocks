@@ -85,7 +85,6 @@ export function Cart() {
     function sum(id) {
         state?.forEach((e) => {
             if (e.id === id && e.units < e.stock) {
-                console.log(e,"holi")
                 let sub = e.price / e.units;
                 e.units++;
                 sub = sub * e.units;

@@ -6,10 +6,8 @@ import {
 } from "../../Utils/constants";
 
 export function addProductWishlist(obj) {
-    console.log("obj",obj)
     return async function(dispatch) { 
         const favorite = await axios.post(`/wishlist/createwishlist`, obj);
-        console.log("fav", favorite)
         dispatch ({type: ADD_PRODUCT_WISHLIST,  payload: obj})
     };
 }

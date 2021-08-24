@@ -23,8 +23,6 @@ function SwiperOS(){
     const { Products } = useSelector((state) => state.productReducer); 
 
     var sale = Products.filter((spirit) => spirit.onSale)
-
-    console.log("sale", sale)
     
     return (
         <Swiper
