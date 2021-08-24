@@ -9,31 +9,34 @@ import { useState } from 'react';
 
 const ChatBotApp = () => {
 
-const [robot, setRobot] = useState(false)
-const handleClick = ()=>{
-    setRobot(robot === false? true : false)
-}
-
-if(robot === false){
-    var robotshow = null
-}else{
-    robotshow = <Chatbot
-    config={config}
-    messageParser={MessageParser}
-    actionProvider={ActionProvider}
-    />
-    
-}
-
-    return (
-      <div className="Chatbot">
-          <button className="botonBot" onClick={()=>handleClick()}><img className="logoBot" src={Bot} alt="ChatBot" /></button>
-        {robotshow}
-      </div>
-    );
+  const [robot, setRobot] = useState(false)
+  const handleClick = () => {
+    setRobot(robot === false ? true : false)
   }
-  
-  export default ChatBotApp;
+
+  if (robot === false) {
+    var robotshow = null
+  } else {
+    robotshow = <div className="chatDeploy">
+      <Chatbot
+        className="inputbotdep"
+        config={config}
+        messageParser={MessageParser}
+        actionProvider={ActionProvider} />
+    </div>
+
+
+  }
+
+  return (
+    <div className="Chatbot">
+      {robotshow}
+      <button className="botonBot" onClick={() => handleClick()}><img className="logoBot" src={Bot} alt="ChatBot" /></button>
+    </div>
+  );
+}
+
+export default ChatBotApp;
 
 
 

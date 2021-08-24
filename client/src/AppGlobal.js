@@ -40,9 +40,9 @@ const AppGlobal = () => {
       <Router>
         <ThemeProvider theme={theme}>
           <NavBar />
+          <ChatBotApp/>
           <Switch>
-            <Route exact path="/" component={landingPage} />
-            <Route exact path="/chatbot" component={ChatBotApp} />
+            <Route exact path="/" component={landingPage} />            
             <Route exact path="/login" component={LoginUser} />
             <Route exact path="/register" component={CreateUser} />
             <Route path="/verify/password" component={ResetPassword} />

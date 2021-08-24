@@ -49,6 +49,11 @@ class ActionProvider {
     this.addMessageToState(message);
   };
 
+  handleHenry = () => {
+    const message = this.createChatBotMessage("thanks for everything you taught us");
+    this.addMessageToState(message);
+  };
+
   handleSquad = () => {
     const message = this.createChatBotMessage(`Best team ever Agus Luca Mati Fede Nico Hilber David`);
     this.addMessageToState(message);
