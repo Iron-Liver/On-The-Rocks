@@ -1,45 +1,55 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
-import { AppBar, Toolbar, Typography, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
+import { AppBar, Toolbar, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
 import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp, FavoriteBorder } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList,CartList } from "./drawerLists"
 import NavBox from './navBox'
 import { logOutUser } from "../../Redux/Users/userActions";
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import logoBrown from '../../assets/on-the-rocks-brown.png'
+import logoWhite from '../../assets/on-the-rocks-white.png'
 
-
-// import { logOutUser } from "../../Redux/Users/UserActions";
-
-// const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     outline: 'none',
-    backgroundColor: "red"
+    backgroundColor: "d3d3d3",
   },
   appBar: {
-    [theme.breakpoints.up("sm")]: {
-      width: '100%',
-      backgroundColor: 'transparent',
-    }
+    width: '100%',
+    background: "#f7f5f3",
+    transition: 'all 300ms ease-out',
+    borderBottom: '1px solid #d3d3d3'
+  },
+  appBarSolid: {
+    width: '100%',
+    background: "#372c2eee",
+    transition: 'background 300ms ease-out',
+    borderBottom: '1px solid gray'
   },
   menu: {
+    width: "100%",
     display: 'flex',
     justifyContent: 'flex-end',
+    paddingRight: 0
 },
   menuButton: {
     marginRight: theme.spacing(0),
     marginLeft: theme.spacing(0),
   },
   wishButton: {
-    color:"white"
+    color:"#372c2eee",
+    '&:hover':{
+      color:'black',
+    }
   },
   icons: {
+    color:'#fff',
     '&:hover':{
-      color:'#99af9d',
+      color:'black',
     }
   },
   mobile: {
@@ -49,10 +59,13 @@ const useStyles = makeStyles((theme) => ({
   },
   // necessary for content to be below app bar
   toolbar: {
+    display: "flex",
     width: '100%',
-    background: "#131313"
+    background: "transparent"
   },
-  blank: theme.mixins.toolbar,
+  blank: {
+    marginTop: "93.85px"
+  },
   drawerPaper: {
     width: '70%',
     [theme.breakpoints.up("sm")]: {
@@ -68,17 +81,34 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3)
   },
-
+  navLogo: {
+    width: "120px",
+    marginTop: "12px"
+  },
+  blackColor: {
+    color: "#372c2e"
+  }
 }));
 
 function NavBar(props) {
   const dispatch = useDispatch()
-  const { window } = props;
+  // const { window } = props;
   const classes = useStyles();
   const history = useHistory();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const [solid, setSolid] = useState(false);
+
+  const changeBackground = () => {
+    if(window.scrollY > 20) {
+      setSolid(true);
+    } else {
+      setSolid(false)
+    }
+  };
+
+  window.addEventListener('scroll', changeBackground);
 
   const handleLogOut = () => {
     dispatch(logOutUser());
@@ -100,6 +130,21 @@ function NavBar(props) {
     }
   };
 
+  const handleWishlist = () => {
+    const currentUser = JSON.parse(localStorage.getItem('token')) ? 
+    jwt.verify(JSON.parse(localStorage.getItem('token')), 
+    process.env.REACT_APP_SECRET_KEY) : null;
+    if(!currentUser) {
+      return history.push("/login")
+    } else {
+      const { id, isAdmin } = currentUser;
+  
+      isAdmin 
+        ? history.push(`/private/profile/${id}/wishlist`)
+        : history.push(`/profile/${id}/wishlist`);
+    }
+  };
+
   const handleDrawerMenu = () => {
     setMenuDrawerOpen(!menuDrawerOpen);
   };
@@ -112,24 +157,45 @@ function NavBar(props) {
     setCartDrawerOpen(!cartDrawerOpen);
   };
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  // const container =
+  //   window !== undefined ? () => window().document.body : undefined;
+
 
   return (
     <div>
-    <div className={classes.root}>
+    <div  className={classes.root}>
       <CssBaseline />
-      <AppBar elevation={0} position="fixed" className={classes.appBar}>
+      <AppBar elevation={0} position="fixed" className={solid ? classes.appBarSolid : classes.appBar}>
         <Toolbar className={classes.toolbar}>
 
-          <Container>
-            <Typography variant="h6" noWrap>
-              <Link to="/" style={{textDecoration: 'none', color: 'white'}}>OnTheRocks</Link>
-            </Typography>
-          </Container>
+          <div style={{flexGrow: "1", width: "100%"}}>
+              <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
+                {
+                  solid ? (
+                    <img 
+                      src={logoWhite} 
+                      alt="on-the-rocks-logo" 
+                      className={classes.navLogo}
+                      style={{
+                        "imageRendering": "-webkit-optimize-contrast"
+                      }}
+                    />
+                    ) : (
+                    <img 
+                      src={logoBrown} 
+                      alt="on-the-rocks-logo" 
+                      className={classes.navLogo}
+                      style={{
+                        "imageRendering": "-webkit-optimize-contrast"
+                      }}
+                    />
+                  )
+                }
+              </Link>
+          </div>
 
           <Hidden smDown>
-            <NavBox/>
+            <NavBox solid={solid}/>
           </Hidden>
 
           <Container className={classes.menu}>
@@ -140,7 +206,7 @@ function NavBar(props) {
               onClick={handleDrawerSearch}
               className={`${classes.menuButton} ${classes.search}`}
             >
-              <Search className={classes.icons}/>
+              <Search className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
             </IconButton>
 
             <IconButton
@@ -150,17 +216,21 @@ function NavBar(props) {
               onClick={handleDrawerCart}
               className={classes.menuButton}
             >
-              <ShoppingCart className={classes.icons}/>
+              <ShoppingCart className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
             </IconButton>
             
-              <Link to = "/wishlist">
-                <IconButton
-                  className={classes.wishButton}
-                >
-                  <FavoriteBorder/>
-                </IconButton>
-              </Link>
-            
+            <Hidden xsDown>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                className={classes.menuButton}
+                onClick={handleWishlist}
+              >
+                <FavoriteBorder className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
+              </IconButton>
+            </Hidden>
+          
 
               <Hidden xsDown>  
                   <IconButton
@@ -170,7 +240,7 @@ function NavBar(props) {
                     className={classes.menuButton}
                     onClick={handleProfile}
                     >
-                    <AccountCircle className={classes.icons} />
+                    <AccountCircle className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
                   </IconButton>
               </Hidden>
 
@@ -183,7 +253,7 @@ function NavBar(props) {
                   className={classes.menuButton}
                   onClick={handleLogOut}
                 >
-                  <ExitToApp className={classes.icons}/>
+                  <ExitToApp className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
                 </IconButton>
             </Hidden>
 
@@ -194,7 +264,7 @@ function NavBar(props) {
               onClick={handleDrawerMenu}
               className={classes.menuButton}
             >
-              <Menu  />
+              <Menu className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
             </IconButton>
           </Container>
         </Toolbar>
@@ -203,7 +273,7 @@ function NavBar(props) {
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
-            container={container}
+            // container={container}
             variant="temporary"
             anchor="left"
             open={menuDrawerOpen}
@@ -215,10 +285,12 @@ function NavBar(props) {
               keepMounted: true // Better open performance on mobile.
             }}
           >
-            <MenuList />
+            <MenuList 
+              handleDrawerMenu={handleDrawerMenu}
+            />
           </Drawer>
           <Drawer
-            container={container}
+            // container={container}
             variant="temporary"
             anchor="top"
             open={searchDrawerOpen}
@@ -233,7 +305,7 @@ function NavBar(props) {
             <SearchList />
           </Drawer>
           <Drawer
-            container={container}
+            // container={container}
             variant="temporary"
             anchor="right"
             open={cartDrawerOpen}
@@ -248,7 +320,6 @@ function NavBar(props) {
             <CartList handleDrawerCart={handleDrawerCart}/>
           </Drawer>
         </Hidden>
-      {/* <main> */}
         <div className={classes.blank} />
     </div>
 

@@ -21,13 +21,15 @@ import {
   AccountCircle,
   Loyalty,
   ExitToApp,
-  ArrowForwardIos
+  ArrowForwardIos,
+  ArrowBackIos
 } from "@material-ui/icons";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { getProducts } from "../../Redux/Products/productsActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { logOutUser } from '../../Redux/Users/userActions';
+import jwt from 'jsonwebtoken';
 
 const useStyles = makeStyles((theme) => ({
   autocomplete: {
@@ -107,7 +109,9 @@ title:{
 selectEmpty: {
     marginTop: theme.spacing(2),
 },
-  toolbar: theme.mixins.toolbar,
+toolbar: {
+  height: "max-content"
+},
 icon:{
   marginTop: "2%"
 }  
@@ -115,17 +119,33 @@ icon:{
 
 
 
-export const MenuList = () => {
+export const MenuList = ({ handleDrawerMenu }) => {
   const dispatch = useDispatch();
+
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
+  const userId = localProfile?.id 
 
   const logOut = () => {
     dispatch(logOutUser());
   };
-
-  const classes = useStyles();
+  
   return (
     <div>
-      <div className={classes.toolbar}>OnTheRocks</div>
+      <div style={{
+        display: "flex", 
+        width: "100%", 
+        justifyContent: "flex-end",
+        height: "41px"
+      }}>
+        <Button 
+          onClick={handleDrawerMenu}
+        >
+          <ArrowBackIos/>
+        </Button>
+      </div>
       <Divider />
       <List component="nav">
         <Link to="/products" style={{ textDecoration: "none", color: "black" }}>
@@ -163,7 +183,7 @@ export const MenuList = () => {
         {localStorage.getItem("token") ? (
           <>
             <Link
-              to="/orders"
+              to={`/profile/${userId}/orders`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItem button>

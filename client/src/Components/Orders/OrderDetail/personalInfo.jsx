@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Grid, Paper, Typography, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
+import { Grid, Paper, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
 import { Delete, Info, Edit, Email } from "@material-ui/icons";
 import jwt from 'jsonwebtoken'
 
@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
     height: "max-content",
     width: "95%",
     margin: "auto",
-    background: "#e9ecef",
+    background: "#372c2e",
+    color: "whitesmoke"
   },
   paperPosition: {
     width: "100%",
@@ -36,15 +37,24 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
   },
   personalItem: { 
-    padding: "20px 20px 0px", 
+    padding: "5px 20px 0px", 
     display: "flex" 
   },
   typoGrow: {
-    flexGrow: "1"
+    flexGrow: "1",
+    fontWeight: "300"
   },
   actionsContainer: {
     display: "flex", 
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    // eslint-disable-next-line
+    ['& button']: {
+      color: "whitesmoke"
+    },
+    // eslint-disable-next-line
+    ['& button:disabled']: {
+      color: "#ffffff33"
+    }
   }
 }));
 
@@ -112,29 +122,29 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
               />
             </Box>
             <Box className={classes.personalItem}>
-              <Typography className={classes.typoGrow}>
-                Order#{order.id}
-              </Typography>
+              <h2 className={classes.typoGrow}>
+                Order #{order.id}
+              </h2>
             </Box>
             <Box className={classes.personalItem}>
-              <Typography className={classes.typoGrow}>First name:</Typography>
-              <Typography>{order.firstName}</Typography>
+              <h4 className={classes.typoGrow}>FIRST NAME:</h4>
+              <h4>{order.firstName}</h4>
             </Box>
             <Box className={classes.personalItem}>
-              <Typography className={classes.typoGrow}>Last name:</Typography>
-              <Typography>{order.lastName}</Typography>
+              <h4 className={classes.typoGrow}>LAST NAME:</h4>
+              <h4>{order.lastName}</h4>
             </Box>
             <Box className={classes.personalItem}>
-              <Typography className={classes.typoGrow}>Address:</Typography>
-              <Typography>{order.address}</Typography>
+              <h4 className={classes.typoGrow}>ADDRESS:</h4>
+              <h4>{order.address}</h4>
             </Box>
             <Box className={classes.personalItem}>
-              <Typography className={classes.typoGrow}>City:</Typography>
-              <Typography>{order.city}</Typography>
+              <h4 className={classes.typoGrow}>CITY:</h4>
+              <h4>{order.city}</h4>
             </Box>
             <Box className={classes.personalItem}>
-              <Typography className={classes.typoGrow}>Zip code:</Typography>
-              <Typography>{order.zipCode}</Typography>
+              <h4 className={classes.typoGrow}>ZIP CODE:</h4>
+              <h4>{order.zipCode}</h4>
             </Box>
             <br />
             {localProfile.isAdmin ? (

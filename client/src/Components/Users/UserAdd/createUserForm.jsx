@@ -1,34 +1,14 @@
 import {useState} from 'react'
-import {makeStyles, Grid, Button, TextField} from '@material-ui/core'
+import { Grid, Button, TextField} from '@material-ui/core'
 import { Fingerprint, Person, Email, VpnKey, Phone } from '@material-ui/icons';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../../../Utils/theme';
 import Validate from '../../../Utils/validate'
-
-const useStyles = makeStyles((theme)=>({
-    root: {
-		marginTop: 50,
-		marginBottom: 30,
-		border:5,
-		display:'flex'
-	},
-	title: {
-		display:'flex',
-		justifyContent: 'center'
-	},
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120,
-		width:500,
-	},
-	last: {
-		padding: 8,
-	}
-}));
+import useFormStyles from '../../../Utils/formStyles';
 
 const CreateUserForm = ({ input, setInput, handleSubmit}) => {
 	
-	const classes = useStyles();
+	const classes = useFormStyles();
 
 	const [error, setError] = useState({//Control the error red border of the inputs
 		name: false,
@@ -55,7 +35,7 @@ const CreateUserForm = ({ input, setInput, handleSubmit}) => {
 
     return (
 		<ThemeProvider theme={theme}>
-        <div className= 'extContCAF'>
+        <div className= 'extContCAF' style={{background: "white"}}>
 			<form noValidate autoComplete="off" >
 			<h1 className={classes.title}>{window.location.href.includes("register") ? "Sign up" : "Create User"}</h1>
 			<Grid container direction="row" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>

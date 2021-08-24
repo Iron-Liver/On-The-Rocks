@@ -1,10 +1,7 @@
 const { Order, Order_products, Product } = require('../../db');
-const mercadopago = require ('mercadopago');
-const { ACCESS_TOKEN_MERCADOPAGO, BACK, FRONT } = process.env;
+const mercadopago = require('../../utils/mercadopago/configure');
+const { BACK, FRONT } = process.env;
 
-mercadopago.configure({
-  access_token: ACCESS_TOKEN_MERCADOPAGO
-});
 
 module.exports = async (req, res, next) => {
   const { orderId } = req.params;
@@ -38,10 +35,12 @@ module.exports = async (req, res, next) => {
         installments: 3
       },
       back_urls: {
-        success: `${BACK}/mercadopago/payment`,
-        failure: `${BACK}/mercadopago/payment`,
-        pending: `${BACK}/mercadopago/payment`
-      }
+        success: `${FRONT}/status/mercadopago/success`,
+        failure: `${FRONT}/status/mercadopago/failure`,
+        pending: `${FRONT}/status/mercadopago/pending`
+      },
+      auto_return: "all",
+      notification_url: `${BACK}/mercadopago/webhook?source_news=webhooks`
     }
 
     const response = await mercadopago.preferences.create(preference)
