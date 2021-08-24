@@ -36,3 +36,22 @@
 .imgslider{
   width: 100%;
 }
+
+.logoBot{
+  width: 90px;
+  height: 90px;
+}
+.botonBot{ 
+
+  width: 300px;
+  font-size: 30px;
+  justify-content: center;
+  color: white; 
+  height: 70px;
+  border-radius: 5px;
+  border: 0px transparent;
+  background-color: transparent;    
+  cursor: pointer;
+  text-align:center;
+  /* margin-right: 600px;      */
+}

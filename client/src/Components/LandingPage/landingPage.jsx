@@ -22,7 +22,7 @@ export const landingPage = () => {
       <div>
         <div>
         <header className="landinghead">
-        </header>
+        </header>        
         </div>
         <div className="vox"></div>
       
