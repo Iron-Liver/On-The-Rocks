@@ -1,0 +1,26 @@
+.Chatbot {
+    text-align: center;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logoBot{
+    width: 90px;
+    height: 90px;
+  }
+  .botonBot{ 
+  
+    width: 90px;
+    font-size: 30px;
+    justify-content: center;     
+    height: 70px;
+    border-radius: 5px;
+    border: 0px transparent;
+    background-color: transparent;    
+    cursor: pointer;
+    text-align:center;
+    /* margin-right: 600px;      */
+  }
