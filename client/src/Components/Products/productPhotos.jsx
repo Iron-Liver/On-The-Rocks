@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 class CloudinaryUploadWidget extends Component {
   componentDidMount() {
-    
+
     var myWidget = window.cloudinary.createUploadWidget(
       {
         cloudName: "on-the-rocks",
-        uploadPreset: "fassjakc"
+        uploadPreset: "fassjakc",
+        showAdvancedOptions: true,
       },
       (error, result) => {
         if (!error && result && result.event === "success") {

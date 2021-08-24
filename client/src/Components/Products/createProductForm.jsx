@@ -5,7 +5,7 @@ import { Label, Description, Image, Crop, Fingerprint, Assistant, Storage, Monet
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
-import CloudinaryUploadWidget from "./productPhotos";
+import CloudinaryUploadWidget from "./productPhotos.jsx";
 import { getAllCategories } from '../../Redux/Category/categoryActions'
 
 export const useStyles = makeStyles((theme) => ({
@@ -258,17 +258,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 												/>
 											</Grid>
 										</Grid>
-										<Grid item>
-											<TextField
-												error={error["price"]}
-												helperText={[helperText["price"]]}
-												id="price"
-												label="Price"
-												name='price'
-												value={input.price}
-												onChange={handleInputChange}
-											/>
-										</Grid>
+
 									</Grid>
 									<Grid container spacing={1} alignItems="center">
 										<Grid item>
@@ -334,11 +324,12 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 				</div>
 			</ThemeProvider>
 
-				<div className="App">
-					<h1>Cloudinary</h1>
-					<h2>Upload Widget</h2>
-					<CloudinaryUploadWidget />
-				</div>
+			<div className="App">
+				<h1>Cloudinary</h1>
+				<h2>Upload Widget</h2>
+				<CloudinaryUploadWidget />
+			</div>
+				
 		</>
 	)
 }

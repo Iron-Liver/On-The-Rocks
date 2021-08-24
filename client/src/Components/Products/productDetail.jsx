@@ -9,9 +9,9 @@ import {
     Typography,
     Button,
     Grid,
-    Box,    
+    Box,
 } from "@material-ui/core";
-
+import FullProduct from "./product-gallery";
 import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart, FavoriteBorder } from '@material-ui/icons';
 import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
@@ -119,8 +119,8 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: "30px",
 
     },
-    price:{
-        textDecoration:"line-through 2px",
+    price: {
+        textDecoration: "line-through 2px",
         color: "red"
     }
 }));
@@ -190,7 +190,7 @@ const ProductDetail = () => {
         }
     }
 
-    function onSubmitWishlist (){
+    function onSubmitWishlist() {
         dispatch(addProductWishlist({
             userId: currentUser?.id,
             productId: liqueur?.id
@@ -241,15 +241,22 @@ const ProductDetail = () => {
     //----------------------------------------------------------------------------//
     return (
         <>
+
+
             {liqueur ? (
                 <>
+                    <div>
+                        <FullProduct name={liqueur.name}/>
+                    </div>
                     <Card className={classes.root}>
+
                         <div className={classes.divimage}>
                             <CardMedia
                                 className={classes.cover}
                                 image={liqueur.image}
                             />
                         </div>
+
                         <div className={classes.details}>
                             <CardContent className={classes.content}>
                                 <Grid item className={classes.cont1}>
@@ -280,15 +287,15 @@ const ProductDetail = () => {
                                             />
                                         </Box>
                                     </div>
-                                    {liqueur.onSale? 
-                                    <Typography component="h5" variant="h5">
-                                     <h3> HOT SALE ${liqueur.onSale}</h3>
-                                     <h5 className={classes.price} >REGULAR PRICE ${liqueur.price}</h5>
-                                    </Typography>
-                                    :                                 
-                                    <Typography component="h5" variant="h5">
-                                        ${liqueur.price} 
-                                    </Typography>}
+                                    {liqueur.onSale ?
+                                        <Typography component="h5" variant="h5">
+                                            <h3> HOT SALE ${liqueur.onSale}</h3>
+                                            <h5 className={classes.price} >REGULAR PRICE ${liqueur.price}</h5>
+                                        </Typography>
+                                        :
+                                        <Typography component="h5" variant="h5">
+                                            ${liqueur.price}
+                                        </Typography>}
                                     <Typography component="h5" variant="h5">
                                         {liqueur.brand}
                                     </Typography>
@@ -311,7 +318,7 @@ const ProductDetail = () => {
                                         />
                                     }
                                     onClick={onSubmitWishlist(currentUser?.id, liqueur?.id)}
-                                > 
+                                >
                                 </Button>)}
                                 {btncart}
                                 <h3 className={classes.sum1}>QUANTITY</h3>
