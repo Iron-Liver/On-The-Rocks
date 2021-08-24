@@ -1,23 +1,30 @@
-import { Redirect, Route } from 'react-router-dom';
-import verifyUser from '../../Utils/verifyUser'
+import { Redirect, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOutUser } from "../../Redux/Users/userActions";
+import verifyUser from "../../Utils/verifyUser";
 
 const UserRoute = ({ component: Component, ...props }) => {
+    const dispatch = useDispatch();
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
 
-  const currentUser = verifyUser()
-
-  return (
-    <Route {...props}>
-      {currentUser ? (
-        currentUser.isAdmin && currentUser?.Authenticated? (
-          <Redirect to="/"/>
-        ) : (            
-          <Component />
-        )
-      ) : (            
-        <Redirect to="/login"/> 
-      )}
-    </Route>
-  )
+    return (
+        <Route {...props}>
+            {currentUser ? (
+                currentUser.isAdmin && currentUser?.Authenticated ? (
+                    <Redirect to="/" />
+                ) : (
+                    <Component />
+                )
+            ) : (
+                <Redirect to="/login" />
+            )}
+        </Route>
+    );
 };
 
 export default UserRoute;

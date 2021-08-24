@@ -5,10 +5,17 @@ import "./wheelOfCoupons.css";
 import audio from "./Wheel_of_cupons.mp3";
 import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
-import verifyUser from '../../Utils/verifyUser'
+import verifyUser from "../../Utils/verifyUser";
+import { logOutUser } from "../../Redux/Users/userActions";
+
 export const WheelOfCoupons = () => {
-    const currentUser = verifyUser()
     const dispatch = useDispatch();
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
     const { coins } = useSelector((state) => state.userReducer);
     const [muted, setMuted] = React.useState(false);
     const [idle, setIdle] = React.useState(true);
