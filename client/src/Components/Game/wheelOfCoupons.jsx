@@ -169,7 +169,7 @@ export const WheelOfCoupons = () => {
                             alt="roulette_arrow"
                         />
                     </div>
-                    <span>Remaining coins: {coins}</span>
+                    <span>Remaining coins: {currentUser ? coins : 0}</span>
                     <div>
                         <input
                             type="checkbox"
@@ -188,14 +188,14 @@ export const WheelOfCoupons = () => {
                     <Button
                         classes="button"
                         size="large"
-                        disabled={!idle}
+                        disabled={!idle || !currentUser}
                         variant="outlined"
                         color="primary"
                         type="button"
                         onClick={spin}
                         className="button"
                     >
-                        Spin it!
+                        {currentUser ? 'Spin it!' : 'Login to play!'}
                     </Button>
                 </div>
             </div>
