@@ -11,7 +11,7 @@ import {
     Grid,
     Box,
 } from "@material-ui/core";
-import FullProduct from "./product-gallery";
+// import FullProduct from "./product-gallery";
 import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart, FavoriteBorder } from '@material-ui/icons';
 import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
@@ -22,6 +22,7 @@ import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
 import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { green, red } from "@material-ui/core/colors";
+import ProductsImages from './productGalleryCards.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -245,9 +246,9 @@ const ProductDetail = () => {
 
             {liqueur ? (
                 <>
-                    <div>
+                    {/* <div>
                         <FullProduct name={liqueur.name}/>
-                    </div>
+                    </div> */}
                     <Card className={classes.root}>
 
                         <div className={classes.divimage}>
@@ -256,6 +257,10 @@ const ProductDetail = () => {
                                 image={liqueur.image}
                             />
                         </div>
+
+                        {/* <div className={classes.divimage}>
+                            <ProductsImages product={liqueur.name}/>
+                        </div> */}
 
                         <div className={classes.details}>
                             <CardContent className={classes.content}>
