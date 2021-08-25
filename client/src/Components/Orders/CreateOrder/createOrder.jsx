@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { useState } from 'react';
-import { Button, Modal } from '@material-ui/core';
-import { useForm } from './useForm';
-import { Link, useHistory } from 'react-router-dom';
-import { userSchema1, userSchema2 } from './ValidationOrder'
-import './CreateOrder.css'
-import jwt from "jsonwebtoken"
-import axios from 'axios'
-import mercadopagoimg from '../../../assets/mercado-pago.png';
-import {useSelector } from "react-redux";
-
-=======
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Modal } from "@material-ui/core";
@@ -23,7 +9,6 @@ import verifyUser from "../../../Utils/verifyUser";
 import axios from "axios";
 import mercadopagoimg from "../../../assets/mercado-pago.png";
 import { logOutUser } from "../../../Redux/Users/userActions";
->>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
 
 let initialForm1 = {
     firstName: "",
@@ -55,7 +40,7 @@ const CreateOrder = () => {
         if (isValid1) setCount(count + 1);
     };
 
-<<<<<<< HEAD
+
   const nextPage2 = async (e) => {
     e.preventDefault()
     const isValid2 = await userSchema2.isValid(state2);
@@ -67,53 +52,14 @@ const CreateOrder = () => {
   const currentUser = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
-=======
-    const nextPage2 = async (e) => {
-        e.preventDefault();
-        const isValid2 = await userSchema2.isValid(state2);
-        if (isValid2) setCount(count + 1);
-    };
 
-<<<<<<< Updated upstream
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
         dispatch(logOutUser());
         window.location.replace(`${window.location.origin}/login`);
         alert("please login");
     }
->>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
 
-    const SubmitForm = async () => {
-        const order = {
-            ...state1,
-            ...state2,
-            id: currentUser.id,
-            paymentMethod: "mercadopago",
-            total: JSON.parse(localStorage.getItem("data"))
-                .reduce((acc, el) => {
-                    return (acc = parseInt(acc) + parseInt(el.price));
-                }, 0)
-                .toFixed(2),
-            cart: JSON.parse(localStorage.getItem("data")).map(
-                ({ id, units, price }) => {
-                    return {
-                        id,
-                        units,
-                        price,
-                    };
-                }
-            ),
-        };
-        try {
-            const { data } = await axios.post("/order/addOrder", order);
-            if (data) {
-                localStorage.removeItem("data");
-            }
-            openCloseModal();
-            history.push(`/mercadopago/${data.orderId}`);
-        } catch (err) {
-            console.error(err);
-=======
   const SubmitForm = async () => { 
     const order = {
        ...state1, ...state2,
@@ -125,9 +71,7 @@ const CreateOrder = () => {
           id, 
           units, 
           price
->>>>>>> Stashed changes
         }
-<<<<<<< HEAD
       })
     }
 
@@ -151,9 +95,6 @@ const CreateOrder = () => {
       console.error(err) 
     }
   }
-=======
-    };
->>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
 
     const {
         state1,

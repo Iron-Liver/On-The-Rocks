@@ -120,11 +120,7 @@ export function Cart() {
         state?.forEach((e) => {
             
             if (e.id === id && e.units < e.stock) {
-<<<<<<< Updated upstream
-                let sub = e.price / e.units;
-=======
                 let sub = Number(e.price) / Number(e.units);
->>>>>>> Stashed changes
                 e.units++;
                 sub = Number(sub) * e.units;
                 e.price = sub.toFixed(2);
@@ -296,16 +292,10 @@ export function Cart() {
                 </Box>
             ) : (
                 <Typography
-<<<<<<< Updated upstream
-                    className={classes.title}
-                    component="h6"
-                    variant="h6"
-=======
                       className={classes.title}
                       component="h4"
                       variant="h4"
                       align= "center"
->>>>>>> Stashed changes
                 >
                     Total: ${subTotal}
                 </Typography>
