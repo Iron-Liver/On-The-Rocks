@@ -15,7 +15,11 @@ const Products = () => {
         search = search.substring(8).replace(/-/g," ").toLowerCase()
         FoundProds = FoundProds.filter(found => found.name.toLowerCase() === search)
     }
-
+    
+    useEffect(() => {
+        window.scrollTo(0,0)
+      }, []) 
+      
     useEffect(
         () => {
             window.scrollTo(0, 0);

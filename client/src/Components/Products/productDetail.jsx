@@ -187,6 +187,7 @@ const ProductDetail = () => {
         alert("please login");
     }
     // eslint-disable-next-line
+    const [heartIcon, setHeartIcon] = React.useState(false)
     const [value, setValue] = React.useState(2);
     const { id } = useParams();
     const { Products } = useSelector((state) => state.productReducer);
@@ -255,6 +256,7 @@ const ProductDetail = () => {
                 productId: liqueur?.id,
             })
         );
+        setHeartIcon( heartIcon ? false : true);
     }
 
     let stockText = (
@@ -358,9 +360,16 @@ const ProductDetail = () => {
                                                     )
                                                 }
                                             >
-                                                <FavoriteBorder
-                                                    className={classes.wishIcon}
-                                                />
+                                                {
+                                                    heartIcon ?  (
+                                                        <i class="fas fa-heart"></i>
+                                                    ) : (
+
+                                                        <i class="far fa-heart"></i>
+                                                    )
+
+                                                }
+                                                
                                             </IconButton>
                                         )}
                                     </div>

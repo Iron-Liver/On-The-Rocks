@@ -19,7 +19,7 @@ const AdminProfile = () => {
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
-  
+
   useEffect(() => {
     if(!id) {
       history.push("/login");
