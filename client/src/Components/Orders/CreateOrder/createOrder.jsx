@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, Modal } from "@material-ui/core";
 import { useForm } from "./useForm";
 import { Link, useHistory } from "react-router-dom";
@@ -40,14 +40,11 @@ const CreateOrder = () => {
         if (isValid1) setCount(count + 1);
     };
 
-
-  const nextPage2 = async (e) => {
-    e.preventDefault()
-    const isValid2 = await userSchema2.isValid(state2);
-    if(isValid2) setCount(count + 1);
-  }
-  
-  const {Desc} = useSelector(state => state.couponReducer)
+    const nextPage2 = async (e) => {
+        e.preventDefault();
+        const isValid2 = await userSchema2.isValid(state2);
+        if (isValid2) setCount(count + 1);
+    };
 
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
@@ -56,37 +53,42 @@ const CreateOrder = () => {
         alert("please login");
     }
 
-  const SubmitForm = async () => { 
-    const order = {
-       ...state1, ...state2,
-      id: currentUser.id,
-      paymentMethod: 'mercadopago' ,
-      total: JSON.parse(localStorage.getItem('total')),
-      cart: JSON.parse(localStorage.getItem('data')).map(({id, units, price}) => {
-        return {
-          id, 
-          units, 
-          price
+    const SubmitForm = async () => {
+        const order = {
+            ...state1,
+            ...state2,
+            id: currentUser.id,
+            paymentMethod: "mercadopago",
+            total: JSON.parse(localStorage.getItem("total")),
+            cart: JSON.parse(localStorage.getItem("data")).map(
+                ({ id, units, price }) => {
+                    return {
+                        id,
+                        units,
+                        price,
+                    };
+                }
+            ),
+        };
+
+        try {
+            var coup = JSON.parse(localStorage.getItem("coup"));
+            if (coup > 0) {
+                axios.delete(`/coupon/delete/${coup}`);
+            }
+            localStorage.removeItem("coup");
+            localStorage.setItem("coup", null);
+
+            const { data } = await axios.post("/order/addOrder", order);
+            if (data) {
+                localStorage.removeItem("data");
+            }
+            openCloseModal();
+            history.push(`/mercadopago/${data.orderId}`);
+        } catch (err) {
+            console.error(err);
         }
-      })
-    }
-
-    try {
-      var coup = JSON.parse(localStorage.getItem('coup'))
-      if(coup > 0){ axios.delete(`/coupon/delete/${coup}`)}
-      localStorage.removeItem("coup");
-      localStorage.setItem("coup", null)
-
-      const { data } = await axios.post('/order/addOrder', order);
-      if(data) {
-        localStorage.removeItem("data");
-      }
-      openCloseModal()
-      history.push(`/mercadopago/${data.orderId}`);
-    } catch (err) {
-      console.error(err) 
-    }
-  }
+    };
 
     const {
         state1,
