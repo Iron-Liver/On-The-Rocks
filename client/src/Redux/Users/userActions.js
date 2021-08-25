@@ -117,6 +117,7 @@ export function logOutUser() {
             await localStorage.removeItem("shippingAddress");
             await localStorage.removeItem("wishListItems");
             await axios.get(`/auth/logout`, { withCredentials: true });
+            window.location.replace(`${window.location.origin}`);
             dispatch({ type: LOGOUT });
         } catch (e) {
             console.log(e.message);
