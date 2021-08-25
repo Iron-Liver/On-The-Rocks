@@ -20,9 +20,10 @@ function ProductImages({ sku }) {
 
     console.log(sku)
     console.log('file out', file)
-    /* Axios.post("/product/addPhotos", data)
+    
+    Axios.post("/product/addPhotos", data)
       .then(res => console.log(res))
-      .catch(err => console.log(err)); */
+      .catch(err => console.log(err));
   };
   console.log('file', file)
   return (
