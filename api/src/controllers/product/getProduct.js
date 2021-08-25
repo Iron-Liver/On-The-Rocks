@@ -1,5 +1,4 @@
 const { Product, Category } = require("../../db");
-const { Op } = require('sequelize');
 
 module.exports = async (req, res, next) => {
 
@@ -73,7 +72,13 @@ module.exports = async (req, res, next) => {
         return product.onSale !== null
       })
     }
-    
+
+    if(filterBy.name) {
+      filtered = filtered.filter(product => {
+        const string = filterBy.name.toLowerCase().replace(/-/g, ' ');
+        return product.name.toLowerCase().includes(string);
+      })
+    }
  
     const pages = Math.ceil(filtered.length / itemsPerPage);
     

@@ -112,9 +112,15 @@ const Products = () => {
                         color="primary"
                         />
                     <div className="products-content">
-                        {products && products.data.map((spirit) => (
-                          <ProductCard spirit={spirit} key={Math.random()} />
-                        ))}
+                        {products &&
+                          products.data.length ? (
+                            products.data.map((spirit) => (
+                              <ProductCard spirit={spirit} key={Math.random()} />
+                            ))
+                          ) : (
+                            <h4>No results found</h4>
+                          )
+                        }
                     </div>
                     <Pagination
                         count={products && products.pages}

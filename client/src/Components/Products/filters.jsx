@@ -12,7 +12,6 @@ const Filters = () => {
   const { search } = useLocation();
   const query = new URLSearchParams(search);
   const history = useHistory();
-  const [onSale, setOnSale] = useState(Boolean(query.get('onSale')))
 
   useEffect(() => {
     dispatch(getAllCategories());
@@ -24,7 +23,6 @@ const Filters = () => {
   };
 
   const handleOnSale = (e) => {
-    setOnSale(!onSale);
     if(!e.target.checked) {
       query.delete('onSale');
       query.delete('page');
@@ -51,7 +49,7 @@ const Filters = () => {
         <input 
           type="checkbox" 
           name="on_sale"
-          checked={onSale} 
+          checked={Boolean(query.get('onSale') && query.get('onSale') === "_")} 
           onChange={handleOnSale}
           className="check-anon"
           style={{ marginBottom: "7px" }}
@@ -130,7 +128,11 @@ const Filters = () => {
         <AccordionDetails 
           key={Math.random()}
           onClick={() => handleCategory('all')}
-          className="filter-accordion-details-cat"
+          className={
+            !query.get('category') || query.get('category') === "all" 
+                ? "filter-accordion-details-cat-active" 
+                : "filter-accordion-details-cat"
+          }
         >
           <h4 style={{ margin: 0 }}>
             All
