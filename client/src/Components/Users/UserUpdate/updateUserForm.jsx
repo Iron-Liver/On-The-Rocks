@@ -5,7 +5,7 @@ import { Button, TextField, makeStyles,Grid, Radio, RadioGroup, FormControlLabel
 import { Person, Email, VpnKey, Phone } from '@material-ui/icons';
 import { readUser } from '../../../Redux/Users/userActions';
 import Validate from '../../../Utils/validate'
-import jwt from "jsonwebtoken"
+import verifyAdmin from '../../../Utils/verifyAdmin'
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -30,11 +30,11 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 export function UserUpdate({ input, setInput, handleSubmit }) {
-    var {userId} = useParams();
+    var {userId, id} = useParams();
+    if(!userId) { userId = id}
+
     const {userDetail} = useSelector(state => state.userReducer);
-	const adminAllowed = JSON.parse(localStorage.getItem('token')) ? 
-    jwt.verify(JSON.parse(localStorage.getItem('token')), 
-    process.env.REACT_APP_SECRET_KEY) : null
+	const adminAllowed = verifyAdmin()
 
     if(typeof(userId) === 'undefined' && window.location.href.includes("profile")){
         userId = (JSON.parse(localStorage.getItem('token'))).id;
@@ -222,11 +222,6 @@ export function UserUpdate({ input, setInput, handleSubmit }) {
                             <Button style={{fontWeight: 1000, marginTop: 30}} color="primary" onClick={handleSubmit} variant="contained">Save Changes</Button>
                         </Grid>
                     </Grid>
-                    {/* <Grid container direction="row" justifyContent="center" alignItems="center">
-                        <Grid item>
-                            {(adminAllowed && window.location.href.includes("profile")) && (<Button style={{fontWeight: 1000, marginTop: 30}} href='private/panel' color="primary" onClick={handleSubmit} variant="contained">Admin Panel</Button>)}
-                        </Grid>
-                    </Grid> */}
                 </Grid>
                 </form>
             </div>
