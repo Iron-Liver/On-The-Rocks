@@ -56,7 +56,6 @@
 
  }
 
-
 .social-test li {
   color: rgba(255, 255, 255, 0.6);
   list-style-type: none;
@@ -126,4 +125,13 @@ height: max-content;
 
 .ContactContainer li {
   font-size: 13px;
+}
+
+.divisorFooter {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 60px;
+  width: 100%;
+  background-color: rgb(220, 208, 192);
 }

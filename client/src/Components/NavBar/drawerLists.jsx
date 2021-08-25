@@ -30,6 +30,7 @@ import { getProducts } from "../../Redux/Products/productsActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { logOutUser } from '../../Redux/Users/userActions';
 import jwt from 'jsonwebtoken';
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
   autocomplete: {
@@ -132,7 +133,19 @@ export const MenuList = ({ handleDrawerMenu }) => {
     dispatch(logOutUser());
   };
 
-  const classes = useStyles();
+  const logOutAlert = () => {
+    swal({
+      title: 'LogOut',
+      text: 'Want to logout?',
+      icon: 'warning',
+      buttons: ['Cancel', 'Yes']
+    }).then(answer => {
+      if(answer){
+        logOut();
+      }
+    })
+  }
+
   return (
     <div>
       <div style={{
@@ -208,7 +221,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
             </Link>
 
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-              <ListItem button onClick={logOut}>
+              <ListItem button onClick={logOutAlert}>
                 <ListItemIcon>
                   <ExitToApp />
                 </ListItemIcon>

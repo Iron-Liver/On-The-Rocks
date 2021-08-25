@@ -1,5 +1,7 @@
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { useLocation, useRouteMatch } from 'react-router';
+
 //User imports
 import LoginUser from "./Components/Users/UserLogin/userLogin";
 import CreateUser from "./Components/Users/UserAdd/createUser";
@@ -35,10 +37,13 @@ import Footer from './Components/Footer/footer';
 
 
 const AppGlobal = () => {
+
+  
   return (
       <Router>
         <ThemeProvider theme={theme}>
-          <NavBar />
+      
+              <NavBar />
           <Switch>
             <Route exact path="/" component={landingPage} />
             <Route exact path="/login" component={LoginUser} />

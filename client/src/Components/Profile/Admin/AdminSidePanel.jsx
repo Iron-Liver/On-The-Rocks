@@ -27,6 +27,19 @@ const AdminSidePanel = () => {
     history.push("/");
   }
 
+  const logOutAlert = () => {
+    swal({
+      title: 'LogOut',
+      text: 'Want to logout?',
+      icon: 'warning',
+      buttons: ['Cancel', 'Yes']
+    }).then(answer => {
+      if(answer){
+        logOut();
+      }
+    })
+  }
+
   return (
     <>
       <aside className="admin-side-panel-container">
@@ -95,7 +108,7 @@ const AdminSidePanel = () => {
           </NavLink>
           <div 
             className="panel-nav-item panel-admin-logout" 
-            onClick={logOut}
+            onClick={logOutAlert}
             draggable={false}
           >
             <h4 draggable={false}>Logout</h4>

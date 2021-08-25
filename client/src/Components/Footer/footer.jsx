@@ -3,6 +3,7 @@ import './footer.css'
 
 const Footer = () => {
   return (
+    <div>
     <div className="footerContainer1">
 
 <div className="center1">
@@ -27,9 +28,14 @@ const Footer = () => {
 </div>
  
   </div>
-  
-  <div className="divisorFooter">
-  </div>
+
+    </div>
+    <div className="divisorFooter">
+      <p style={{fontFamily:"Montserrat", fontSize: '11px', margin: '0', padding:'10px', width:'75%'}}>
+      <b>© 2021 On The Rocks Pty Ltd</b> - Packaged Liquor Licence - 32057045 On the Rocks supports the responsible service of alcohol.  
+      Under the Liquor Control Reform Act 1998 it is an offence to supply alcohol to a person under the age of<b> 18 </b> years.
+      </p>
+     </div>
     </div>
   )
 }

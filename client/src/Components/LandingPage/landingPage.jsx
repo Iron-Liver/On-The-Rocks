@@ -34,7 +34,7 @@ SwiperCore.use([Navigation]);
 export const LandingPage = () => {
 
     useEffect(() => {
-      Aos.init({duration:2000})
+      Aos.init({duration:3000})
     }, []);
 
 
@@ -50,7 +50,7 @@ export const LandingPage = () => {
       </div>
       
 
-        <div data-aos="fade-right" className="title1">
+        <div className="title1">
           <h1> On the Rocks is an independent self-made Argentinian family
               owned business providing premium and collectable ranges of spirits.
           </h1>
@@ -59,15 +59,22 @@ export const LandingPage = () => {
       <div className="slider">
           
         <div style={{
-          marginTop: "150px"
+          marginTop: "150px",
+          marginBottom: "60px",
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems:'center',
         }}>
           <div className="divider-page">
             <div className="dividers"></div>
             <h1 style={{color:'black', wordBreak: "keep-all", minWidth: "max-content"}}>On sale</h1>
             <div className="dividers"></div>
           </div>
-          <SwiperOS />
         </div>
+      </div> 
+      <div data-aos="fade-down" >
+          <SwiperOS />
       </div>
       
 
@@ -83,7 +90,7 @@ export const LandingPage = () => {
 
 
 
-          <div class="container2">
+          <div data-aos="fade-up" class="container2">
 
             <div class="card">
               <figure class="card__thumb">
@@ -130,7 +137,13 @@ export const LandingPage = () => {
           <div className="brandsss">
           <Brands />
           </div>
+          
           <div className="location">
+          <div className="divider-page">
+            <div className="dividers"></div>
+            <h1 style={{color:'black'}}>Branch Offices</h1>
+            <div className="dividers"></div>
+          </div>     
               <Locations />
           </div>
 

@@ -2,60 +2,64 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Container, ButtonBase } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "nowrap",
-        width: "100%",
-        justifyContent: "space-around",
-        fontFamily: 'Montserrat',
-    },
-    text: {
-        position: "relative",
-        "&:hover": {
-            zIndex: 1,
-            "& $imageMarked": {
-            width: "calc(80%)",
-            left: "calc(10%)",
-            transition: 'all 0.35s ease-out',
-            },
-        }
-    },
-    imageTitle: {
-        position: "relative",
-        width: '70px',
-        padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
-            theme.spacing(1) + 2
-        }px`,
-        fontFamily: 'Montserrat',
-        fontWeight: '500'
-    },
-    imageMarked: {
-        height: 2,
-        width: "calc(20%)",
-        backgroundColor: theme.palette.common.white,
-        position: "absolute",
-        bottom: 1,
-        left: "calc(40%)",
-        transition: 'all 0.35s ease-out',
-    },
-    blackBack: {
-      backgroundColor: "#372c2e"
-    },
-    blackColor: {
-      color: "#372c2e",
-      fontFamily: 'Montserrat',
-      fontWeight: '500'
-    }
+import { useLocation } from 'react-router'
 
 
-}))
 
 export const NavBox = ({ solid }) => {
+    
+    
+    const location = useLocation();
+    const path = location.pathname === '/' ?  '#fff': '#372c2e';
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            width: "100%",
+            justifyContent: "space-around",
+            fontFamily: 'Montserrat',
+        },
+        text: {
+            position: "relative",
+            "&:hover": {
+                zIndex: 1,
+                "& $imageMarked": {
+                    width: "calc(80%)",
+                    left: "calc(10%)",
+                    transition: 'all 0.35s ease-out',
+                },
+            }
+        },
+        imageTitle: {
+            position: "relative",
+            width: '70px',
+            padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
+                theme.spacing(1) + 2
+            }px`,
+            fontFamily: 'Montserrat',
+            fontWeight: '500'
+        },
+        imageMarked: {
+            height: 2,
+            width: "calc(20%)",
+            backgroundColor: theme.palette.common.white,
+            position: "absolute",
+            bottom: 1,
+            left: "calc(40%)",
+            transition: 'all 0.35s ease-out',
+        },
+        blackBack: {
+            backgroundColor: path,
+        },
+        blackColor: {
+            color: path,
+            fontFamily: 'Montserrat',
+            fontWeight: '500'
+        }
+    }))
+    
     const classes = useStyles();
-
     return (
         <Container className={classes.root}>
             <Link to='/sale' className="linkNav" style={{textDecoration: 'none', color: 'white'}}>
