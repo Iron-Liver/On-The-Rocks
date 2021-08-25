@@ -21,7 +21,7 @@
   }
 }
 
-@media (max-width: 45em){ 
+@media (max-width: 42em){ 
   .footerContainer1 {
     height: 280px;
   }
@@ -52,7 +52,9 @@
     margin-right: 35px;
     margin-bottom: 5px;
   }
-
+  .footerfat .divisorFooter{
+    height: 110px;
+  }
 
  }
 

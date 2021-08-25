@@ -54,7 +54,7 @@ const ProductCard = ({ spirit }) => {
                     <span>Categor{spirit.categories > 1 ? "ies" : "y"}: </span>
                   {
                     spirit.categories.map(category => 
-                      <span>{category.name} </span>
+                      <span key={category.id}>{category.name} </span>
                     )
                   }
                   </div>

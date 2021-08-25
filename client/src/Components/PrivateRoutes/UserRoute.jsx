@@ -1,25 +1,30 @@
-import { Redirect, Route } from 'react-router-dom';
-import jwt from "jsonwebtoken"
+import { Redirect, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOutUser } from "../../Redux/Users/userActions";
+import verifyUser from "../../Utils/verifyUser";
 
 const UserRoute = ({ component: Component, ...props }) => {
+    const dispatch = useDispatch();
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
 
-  const currentUser = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null
-
-  return (
-    <Route {...props}>
-      {currentUser ? (
-        currentUser.isAdmin && currentUser?.Authenticated? (
-          <Redirect to="/"/>
-        ) : (            
-          <Component />
-        )
-      ) : (            
-        <Redirect to="/login"/> 
-      )}
-    </Route>
-  )
+    return (
+        <Route {...props}>
+            {currentUser ? (
+                currentUser.isAdmin && currentUser?.Authenticated ? (
+                    <Redirect to="/" />
+                ) : (
+                    <Component />
+                )
+            ) : (
+                <Redirect to="/login" />
+            )}
+        </Route>
+    );
 };
 
 export default UserRoute;

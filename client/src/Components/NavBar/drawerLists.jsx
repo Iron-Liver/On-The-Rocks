@@ -15,7 +15,8 @@ import {
   LocalBar,
   Receipt,
   Star,
-  ListAlt,
+  PersonAdd,
+  Casino,
   Business,
   Search,
   AccountCircle,
@@ -146,6 +147,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
     })
   }
 
+  
   return (
     <div>
       <div style={{
@@ -180,18 +182,6 @@ export const MenuList = ({ handleDrawerMenu }) => {
           </ListItem>
         </Link>
 
-        <Link
-          to="/categories"
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <ListAlt />
-            </ListItemIcon>
-            <ListItemText primary="Categories" />
-          </ListItem>
-        </Link>
-
         <Divider />
 
         {localStorage.getItem("token") ? (
@@ -220,6 +210,18 @@ export const MenuList = ({ handleDrawerMenu }) => {
               </ListItem>
             </Link>
 
+            <Link
+              to="/roulette"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <Casino />
+                </ListItemIcon>
+                <ListItemText primary="Gamble" />
+              </ListItem>
+            </Link>
+
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
               <ListItem button onClick={logOutAlert}>
                 <ListItemIcon>
@@ -231,7 +233,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
           </>
         ) : (
           <>
-            <Link
+          <Link
               to="/login"
               style={{ textDecoration: "none", color: "black" }}
             >
@@ -243,6 +245,19 @@ export const MenuList = ({ handleDrawerMenu }) => {
                   primary={`${
                     localStorage.getItem("token") ? "My Profile" : "Login"
                   }`}
+                />
+              </ListItem>
+            </Link>
+            <Link
+              to="/register"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <PersonAdd />
+                </ListItemIcon>
+                <ListItemText
+                  primary='Register'
                 />
               </ListItem>
             </Link>
@@ -287,11 +302,21 @@ export const SearchList = () => {
     }
   };
 
+  const handleClick = () => {
+    var link = document.getElementById('Search');
+    window.location.replace(
+      `${window.location.origin}/products?search=${link.value
+        .split(" ")
+        .join("-")
+        .toLowerCase()}`
+    );
+  }
+
   return (
     <div className={classes.autocomplete}>
       <ListItem>
         <ListItemIcon>
-          <Search />
+          <Search onClick={handleClick}/>
         </ListItemIcon>
         <Autocomplete
           id="Search"

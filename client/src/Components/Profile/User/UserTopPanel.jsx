@@ -2,14 +2,13 @@ import './UserTopPanel.css';
 import React, { useEffect } from 'react';
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { readUser, logOutUser } from '../../../Redux/Users/userActions';
 
 const UserTopPanel = () => {
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const history = useHistory();
-  const user = useSelector(state => state.userReducer?.userDetail);
 
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
