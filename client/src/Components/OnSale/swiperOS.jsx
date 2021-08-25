@@ -23,8 +23,6 @@ function SwiperOS(){
     const { Products } = useSelector((state) => state.productReducer); 
 
     var sale = Products.filter((spirit) => spirit.onSale)
-
-    console.log("sale", sale)
     
     return (
         <Swiper
@@ -39,7 +37,7 @@ function SwiperOS(){
           loop={true}
         >
           {sale.map((spirit) => (
-              <SwiperSlide>
+              <SwiperSlide key={spirit.id}>
                   <SwiperCard spirit={spirit} />
               </SwiperSlide>
           ))}
