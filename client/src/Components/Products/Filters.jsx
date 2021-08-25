@@ -1,4 +1,4 @@
-import './Filters.css';
+// import './Filters.css';
 import { useEffect, React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -56,8 +56,6 @@ const Filters = ({ setPage }) => {
     setPage(1);
     dispatch(filterByPrice(type));
   }
-
-  const classes = useStyles();
 
   //------------------------------------
 
