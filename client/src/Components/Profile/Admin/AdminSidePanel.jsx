@@ -19,6 +19,10 @@ const AdminSidePanel = () => {
   const userId = localProfile?.id 
 
   useEffect(() => {
+    window.scrollTo(0,0)
+  }, []) 
+
+  useEffect(() => {
     dispatch(readUser(userId));
   }, [dispatch, userId]);
 

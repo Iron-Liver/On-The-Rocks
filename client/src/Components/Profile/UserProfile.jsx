@@ -14,12 +14,12 @@ const UserProfile = () => {
       <UserSidePanel />
       <UserTopPanel />
       <Switch >
-        <div className="profile-tab-content">
+        {/* <div className="profile-tab-content"> */}
           <Route exact path={path} component={UserOrders} />
           <Route exact path={`${path}/settings`} render={() => <h1 style={{ width: "100%", margin: 0}}>Settings</h1>} />
           <Route exact path={`${path}/wishlist`} component={Wishlist} />
           <Route exact path={`${path}/orders`} component={UserOrders} />
-        </div>
+        {/* </div> */}
       </Switch>
     </div>
   )

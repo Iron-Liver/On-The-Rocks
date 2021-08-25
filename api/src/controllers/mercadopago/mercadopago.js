@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
         installments: 3
       },
       back_urls: {
-        success: `${FRONT}/status/mercadopago/success`,
+        success: `${FRONT}/roulette`,
         failure: `${FRONT}/status/mercadopago/failure`,
         pending: `${FRONT}/status/mercadopago/pending`
       },

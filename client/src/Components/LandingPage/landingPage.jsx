@@ -29,6 +29,11 @@ export const LandingPage = () => {
 
     const dispatch = useDispatch();
 
+
+    useEffect(() => {
+      window.scrollTo(0,0)
+    }, [])
+
     useEffect(() => {
       Aos.init({duration:3000})
     }, []);
@@ -49,17 +54,16 @@ export const LandingPage = () => {
         <div className="vox"></div>
       </div>
       
-
-        <div className="title1">
-          <h1> On the Rocks is an independent self-made Argentinian family
-              owned business providing premium and collectable ranges of spirits.
-          </h1>
-        </div>
+      <div className="title-landing">
+        <h1> On the Rocks is an independent self-made Argentinian family
+            owned business providing premium and collectable ranges of spirits.
+        </h1>
+      </div>
 
       <div className="slider">
           
         <div style={{
-          marginTop: "150px",
+          marginTop: "80px",
           marginBottom: "60px",
           display: 'flex',
           flexDirection: 'column',
@@ -73,7 +77,7 @@ export const LandingPage = () => {
           </div>
         </div>
       </div> 
-      <div data-aos="fade-down" >
+      <div>
           <SwiperOS />
       </div>
 
@@ -135,7 +139,7 @@ export const LandingPage = () => {
           <div  className="containerBrands">
             <div className="divider-page">
               <div className="dividers"></div>
-              <h1 style={{color:'black'}}>Shop by Tipe</h1>
+              <h1 style={{color:'black'}}>Shop by Type</h1>
               <div className="dividers"></div>
             </div>
           </div>

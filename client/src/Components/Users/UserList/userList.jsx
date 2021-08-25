@@ -1,3 +1,4 @@
+import './user.css';
 import { useEffect } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { makeStyles,  Button,  Container } from '@material-ui/core'
@@ -62,6 +63,7 @@ const UserList = () => {
 	];
 
     return(
+      <div className="admin-users-tab-container">
         <div className={classes.root}>  
             <ThemeProvider>
 
@@ -84,6 +86,7 @@ const UserList = () => {
 
 			</ThemeProvider>
         </div>
+      </div>
     )
 
 }

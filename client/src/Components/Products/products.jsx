@@ -15,7 +15,7 @@ const Products = () => {
 
     useEffect(() => {
       (async () => {
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         const body = {
           orderBy: query?.get('order') 
             ? query.get('order').toString()
@@ -44,10 +44,6 @@ const Products = () => {
       })()
       //eslint-disable-next-line
     },[history, search]);
-
-    // window.addEventListener("scroll", function () {
-    //     let hight = window.innerHeight;
-    // });
 
     const handlePageChange = (_e, val) => {
       setPage(val);
