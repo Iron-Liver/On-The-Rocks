@@ -160,66 +160,68 @@ const UserOrders = () => {
   };
 
   return (
-    <div style={{ width: "100%" }}>
-      <Filters 
-        handleSort={handleSort}
-        handleSubmit={handleSubmit} 
-        handleChange={handleChange}
-        handleReset={handleReset}
-        form={form}
-      />
-      <div className={classes.paginationContainer}>
-        <div className="user-pagination-pos">
-          <div style={{width: "152px"}}/>
-          <Pagination
-            count={orders.pages}
-            page={page}
-            onChange={handlePageChange}
-            size="small"
-          />
-          <div>
-          <label htmlFor="limit" className="user-orders-item-limit">
-            per page:
-            <select 
-              name="limit" 
-              value={form.limit} 
-              onChange={handleLimitChange}
-            >
-              <option value={4}>4</option>
-              <option value={8}>8</option>
-              <option value={12}>12</option>
-            </select>
-          </label>
+    <div className="user-orders-tab-container">
+      <div style={{ width: "100%" }}>
+        <Filters 
+          handleSort={handleSort}
+          handleSubmit={handleSubmit} 
+          handleChange={handleChange}
+          handleReset={handleReset}
+          form={form}
+        />
+        <div className={classes.paginationContainer}>
+          <div className="user-pagination-pos">
+            <div style={{width: "152px"}}/>
+            <Pagination
+              count={orders.pages}
+              page={page}
+              onChange={handlePageChange}
+              size="small"
+            />
+            <div>
+            <label htmlFor="limit" className="user-orders-item-limit">
+              per page:
+              <select 
+                name="limit" 
+                value={form.limit} 
+                onChange={handleLimitChange}
+              >
+                <option value={4}>4</option>
+                <option value={8}>8</option>
+                <option value={12}>12</option>
+              </select>
+            </label>
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          margin: "20px 0",
-          minHeight: "111.3vh"
-        }}
-      >
-        {orders.data &&
-          orders.data.map(order => (
-            <Order 
-              order={order} 
-              key={Math.random()}
-              handleSubmit={handleSubmit}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            margin: "20px 0",
+            minHeight: "111.3vh"
+          }}
+        >
+          {orders.data &&
+            orders.data.map(order => (
+              <Order 
+                order={order} 
+                key={Math.random()}
+                handleSubmit={handleSubmit}
+              />
+            ))
+          }
+        </div>
+        <div className={classes.paginationContainer}>
+          <div>
+            <Pagination
+              count={orders.pages}
+              page={page}
+              onChange={handlePageChange}
+              size="small"
             />
-          ))
-        }
-      </div>
-      <div className={classes.paginationContainer}>
-        <div>
-          <Pagination
-            count={orders.pages}
-            page={page}
-            onChange={handlePageChange}
-            size="small"
-          />
+          </div>
         </div>
       </div>
     </div>

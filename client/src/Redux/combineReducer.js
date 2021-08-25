@@ -8,6 +8,8 @@ import cartReducer from './Cart/cartReducer'
 import reviewReducer from './Reviews/reviewReducer';
 import wishlistReducer from './Wishlist/wishlistReducer'
 
+import couponReducer from './Coupon/couponReducer'
+
 
 export const reducers = combineReducers({
     categoryReducer,
@@ -15,7 +17,8 @@ export const reducers = combineReducers({
     productReducer,
     cartReducer,
     reviewReducer,
-    wishlistReducer
+    wishlistReducer,
+    couponReducer
 
 });
 

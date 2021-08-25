@@ -1,0 +1,12 @@
+.divLocation { 
+  display: flex;
+  justify-content: space-between; 
+  width: 90vw;  
+}
+
+.divMaps{
+  width: 44vw;
+  margin-top:45px;
+  margin-bottom:  150px;
+  box-shadow: 0 10px 20px 0 black;
+}

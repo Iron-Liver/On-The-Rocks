@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
             ],
         });
 
-        console.log(order);
+        // console.log(order);
 
         if (!order[0]) {
             throw new Error(`Order with id: ${orderId} not found`);

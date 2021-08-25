@@ -24,7 +24,8 @@ const ProductCard = ({ spirit }) => {
         id: currentSpirit.id,
         price: currentSpirit.price,
         image: currentSpirit.image,
-        name: currentSpirit.name
+        name: currentSpirit.name,
+        stock: currentSpirit.stock,
       });
       swal("The product was added to the cart!")   
     }

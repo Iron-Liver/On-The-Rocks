@@ -18,7 +18,6 @@ import {
     Info,
     RemoveShoppingCart,
     ShoppingCart,
-    FavoriteBorder,
     Add,
     Remove,
 } from "@material-ui/icons";
@@ -186,6 +185,7 @@ const ProductDetail = () => {
         window.location.replace(`${window.location.origin}/login`);
         alert("please login");
     }
+    const [heartIcon, setHeartIcon] = React.useState(false)
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
     const { id } = useParams();
@@ -194,11 +194,7 @@ const ProductDetail = () => {
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
-
-    // const handleChange = (event) => {
-    //     setQuant(event.target.value);
-    // };
-
+    
     const handleChangeQuant = (type) => {
         if (type === "+") {
             setQuant(quant === liqueur.stock ? liqueur.stock : quant + 1);
@@ -255,6 +251,7 @@ const ProductDetail = () => {
                 productId: liqueur?.id,
             })
         );
+        setHeartIcon( heartIcon ? false : true);
     }
 
     let stockText = (
@@ -358,9 +355,16 @@ const ProductDetail = () => {
                                                     )
                                                 }
                                             >
-                                                <FavoriteBorder
-                                                    className={classes.wishIcon}
-                                                />
+                                                {
+                                                    heartIcon ?  (
+                                                        <i class="fas fa-heart"></i>
+                                                    ) : (
+
+                                                        <i class="far fa-heart"></i>
+                                                    )
+
+                                                }
+                                                
                                             </IconButton>
                                         )}
                                     </div>

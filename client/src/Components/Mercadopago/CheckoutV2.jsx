@@ -31,6 +31,7 @@ const CheckoutV2 = ({ data, order, stock }) => {
       locale: 'es-AR'
     });
 
+
     mp.checkout({
       preference: {
         id: data.id

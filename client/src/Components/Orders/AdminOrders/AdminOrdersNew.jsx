@@ -1,3 +1,4 @@
+import './AdminOrders.css';
 import React, { useState, useEffect } from "react";
 import OrderNew from "./orderNew";
 import axios from "axios";
@@ -165,54 +166,56 @@ const AdminOrdersNew = () => {
   };
 
   return (
-    <main style={{ width: "100%" }}>
-      <header>
-        <Filters 
-          handleSort={handleSort}
-          handleSubmit={handleSubmit} 
-          handleChange={handleChange} 
-          handleReset={handleReset}
-          form={form}
-        />
-      </header>
+    <div className="admin-orders-tab-container">
+      <main style={{ width: "100%" }}>
+        <header>
+          <Filters 
+            handleSort={handleSort}
+            handleSubmit={handleSubmit} 
+            handleChange={handleChange} 
+            handleReset={handleReset}
+            form={form}
+          />
+        </header>
+          <nav className={classes.paginationContainer}>
+            <Pagination
+              count={orders.pages}
+              page={page}
+              onChange={handlePageChange}
+              size="small"
+            />
+          </nav>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            margin: "20px 0",
+            minHeight: "83.6vh"
+          }}
+        >
+          {orders.data &&
+            orders.data.map(order => (
+              <OrderNew 
+                order={order} 
+                key={Math.random()}
+                handleSubmit={handleSubmit}
+                setOrderStatus={setOrderStatus}
+              />
+            ))
+          }
+        </div>
         <nav className={classes.paginationContainer}>
           <Pagination
             count={orders.pages}
             page={page}
             onChange={handlePageChange}
+            handleReset={handleReset}
             size="small"
           />
         </nav>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          margin: "20px 0",
-          minHeight: "83.6vh"
-        }}
-      >
-        {orders.data &&
-          orders.data.map(order => (
-            <OrderNew 
-              order={order} 
-              key={Math.random()}
-              handleSubmit={handleSubmit}
-              setOrderStatus={setOrderStatus}
-            />
-          ))
-        }
-      </div>
-      <nav className={classes.paginationContainer}>
-        <Pagination
-          count={orders.pages}
-          page={page}
-          onChange={handlePageChange}
-          handleReset={handleReset}
-          size="small"
-        />
-      </nav>
-    </main>
+      </main>
+    </div>
   );
 }
 

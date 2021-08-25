@@ -10,7 +10,8 @@ const Error404 = () => {
       alignItems: "center", 
       color: "#372c2e",
       background: "white",
-      padding: "28px 0"
+      padding: "28px 0",
+      height: "65vh"
     }}>
       <div>
         <h1 style={{margin: 0}}>Error code: 404</h1>
