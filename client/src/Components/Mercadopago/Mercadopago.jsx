@@ -29,7 +29,7 @@ const MercadoPago = () => {
                 const mercadopago = axios.get(`/mercadopago/${orderId}`);
                 const [{ data: dataOrder }, { data: dataMP }] =
                     await Promise.all([order, mercadopago]);
-
+               
                 const currentUser = verifyUser();
                 if (currentUser?.hasOwnProperty("logout")) {
                     dispatch(logOutUser());

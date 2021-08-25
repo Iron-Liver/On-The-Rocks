@@ -80,12 +80,18 @@ export function Cart() {
 
     const classes = useStyles();
     let data = JSON.parse(localStorage.getItem("data"));
+    let ver = localStorage.getItem("coup")
     var total = 0;
     var subTotal = 0;
    
     const [state, setState] = useState();
-    const [cupon, setCupon] = useState("");
-    
+    const [cupon, setCupon] = useState();
+
+    if (ver === "null" && cupon > 0){
+        console.log("dentro")
+        setCupon(0)
+        localStorage.removeItem("coup");
+    }
     
     if (JSON.stringify(state) !== JSON.stringify(data)) setState(data);
     
@@ -108,7 +114,12 @@ export function Cart() {
         localStorage.removeItem("data");
         localStorage.setItem("data", JSON.stringify(data));
         setState(data);
+        if(data.length < 1){
+            setCupon(0)
+        }
+    
     }
+
     if(subTotal === 0){
       state?.forEach((e) => (subTotal = Number(subTotal) + Number(e.price)));
       localStorage.removeItem("total");
@@ -169,17 +180,11 @@ export function Cart() {
     }
 
      if(cupon){ 
-       console.log("cupon", cupon)
        total = subTotal.toFixed(2) - subTotal.toFixed(2) * cupon
         total = Number(total).toFixed(2)
        localStorage.removeItem("total");
        localStorage.setItem("total", JSON.stringify(total))
-      
-      }       
-     
-    console.log("tot", total)
-    console.log("sub", subTotal)
-    
+      }      
     
     return (
         <CardContent className={classes.content}>
@@ -260,7 +265,7 @@ export function Cart() {
          </Box>
             {total < subTotal? (
                 <Box className={classes.box}>
-                    {cupon?(  
+                    {cupon > 0 ?(  
                     <div>
                     <Typography
                         className={classes.antPrice}
@@ -284,7 +289,7 @@ export function Cart() {
                           className={classes.title}
                           component="h4"
                           variant="h4"> 
-                          No coupons
+                          Total: ${subTotal}
                         </Typography>
                         </div>
                     )

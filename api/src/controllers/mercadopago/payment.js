@@ -66,13 +66,14 @@ module.exports = async (req, res, next) => {
       order.save();
 
     } else if(payment_status === "approved") {
-
+      
       const order = await Order.findOne({
         where: {
           id: external_reference
         },
         include: [Order_products, User]
       });
+      
       if(order.status !== "created" && order.status !== "completed") {
         transporter.sendMail({
           from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address
