@@ -4,6 +4,7 @@ import im2 from '../../assets/au2.jpg'
 import im3 from '../../assets/au3.jpg'
 import React, { useEffect } from "react";
 import Locations from '../Maps/Locations'; 
+import verifyUser from '../../Utils/verifyUser';
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
@@ -17,17 +18,28 @@ import SwiperCore, {
   Navigation
 } from 'swiper/core';
 import Brands from '../Brands/Brands';
+import SwiperWishlist from '../Wishlist/SwiperWishlist';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
 // install Swiper modules
 SwiperCore.use([Navigation]);
 
 
 export const LandingPage = () => {
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
       Aos.init({duration:3000})
     }, []);
 
+    useEffect(() => {
+      dispatch(getWishlist());
+    }, [dispatch])
 
+    const wishList = useSelector(state => state.wishlistReducer?.wishlists);
+
+    const currentUser = verifyUser();
 
     return (
       <div>
@@ -66,11 +78,16 @@ export const LandingPage = () => {
       <div data-aos="fade-down" >
           <SwiperOS />
       </div>
+
+      {
+        currentUser && 
+          <SwiperWishlist />
+      }
       
 
 
 
-        <div data-aos="fade-up" className="AboutUsContainer">
+        <div className="AboutUsContainer">
           <div className="divider-page">
             <div className="dividers"></div>
             <h1 style={{color:'black'}}>About us</h1>

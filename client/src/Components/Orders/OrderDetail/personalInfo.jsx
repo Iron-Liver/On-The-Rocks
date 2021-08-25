@@ -4,6 +4,22 @@ import axios from 'axios';
 import { Grid, Paper, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
 import { Delete, Info, Edit, Email } from "@material-ui/icons";
 import jwt from 'jsonwebtoken'
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css"
+import "swiper/components/pagination/pagination.min.css"
+// import Swiper core and required modules
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard,
+  Autoplay
+} from 'swiper/core';
+
+// install Swiper modules
+SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
 
 const useStyles = makeStyles((theme) => ({
   paperContainer: {
@@ -110,16 +126,35 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
         <Paper className={classes.paperInfo} square>
           <Box className={classes.paperPosition}>
             <Box className={classes.imgContainer}>
-              <img
-                src={order.order_products 
-                  ? order.order_products[0]?.product?.image 
-                    ? order.order_products[0].product.image 
-                    : "https://i.stack.imgur.com/y9DpT.jpg" 
-                  : "https://i.stack.imgur.com/y9DpT.jpg"
+              <Swiper
+                pagination={true}
+                navigation={true}
+              >
+                {
+                  order.order_products && 
+                  order.order_products.map(product => (
+                    <SwiperSlide style={{
+                      textAlign: "center"
+                      }}>
+                      {
+                        product.product?.image ? (
+                          <img
+                            src={product.product.image}
+                            alt="order_product"
+                            width="200px"
+                          />
+                        ) : (
+                          <img
+                            src="https://i.stack.imgur.com/y9DpT.jpg" 
+                            alt="order_product"
+                            width="200px"
+                          />
+                        )
+                      }
+                    </SwiperSlide>
+                  ))
                 }
-                alt="order_product"
-                width="200px"
-              />
+              </Swiper>
             </Box>
             <Box className={classes.personalItem}>
               <h2 className={classes.typoGrow}>
