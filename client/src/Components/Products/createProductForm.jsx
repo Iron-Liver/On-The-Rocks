@@ -260,7 +260,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 									/>
 								</Grid>
 							</Grid>
-                            <Grid container spacing={1} alignItems="center">
+							<Grid container spacing={1} alignItems="center">
 								<Grid item>
 									<MonetizationOn />
 								</Grid>
@@ -311,7 +311,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 							</Grid>
 
 							<div>
-								<ProductImages id={input.sku} />
+								<ProductImages sku={input.sku} />
 							</div>
 
 						</Grid>
