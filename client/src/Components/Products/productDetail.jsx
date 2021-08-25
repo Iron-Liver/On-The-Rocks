@@ -348,7 +348,7 @@ const ProductDetail = () => {
                                         {currentUser && (
                                             <IconButton
                                                 variant="contained"
-                                                elevation={false}
+                                                elevation={0}
                                                 color="primary"
                                                 className={classes.buttonWish}
                                                 onClick={() =>

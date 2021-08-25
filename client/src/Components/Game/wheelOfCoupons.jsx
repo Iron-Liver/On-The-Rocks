@@ -170,7 +170,7 @@ export const WheelOfCoupons = () => {
                             onChange={(e) => setMuted(e.target.checked)}
                         />{" "}
                         <i
-                            class={
+                            className={
                                 muted
                                     ? "fas fa-volume-mute"
                                     : "fas fa-volume-off"
@@ -178,7 +178,6 @@ export const WheelOfCoupons = () => {
                         />
                     </div>
                     <Button
-                        classes="button"
                         size="large"
                         disabled={!idle}
                         variant="outlined"

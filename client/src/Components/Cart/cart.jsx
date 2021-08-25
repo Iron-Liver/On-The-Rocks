@@ -175,8 +175,8 @@ export function Cart() {
             ) : (
                 <Typography
                     className={classes.title}
-                    component="body"
-                    variant="body"
+                    component="h6"
+                    variant="h6"
                 >
                     There are no products in the cart.
                 </Typography>

@@ -20,9 +20,9 @@ const Footer = () => {
 <div className="ContactContainer">
 <h4>Contact us</h4>
 <ul>
-  <li><i class="fas fa-phone-alt"> </i> +54 1153058082</li>
-  <li><i class="fas fa-envelope-open"></i> drinks@hotmail.com </li>
-  <li><i class="fas fa-map-marker-alt"></i> Argentina, Buenos Aires</li>
+  <li><i className="fas fa-phone-alt"> </i> +54 1153058082</li>
+  <li><i className="fas fa-envelope-open"></i> drinks@hotmail.com </li>
+  <li><i className="fas fa-map-marker-alt"></i> Argentina, Buenos Aires</li>
 </ul>
 </div>
  

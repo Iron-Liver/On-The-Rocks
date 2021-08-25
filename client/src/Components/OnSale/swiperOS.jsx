@@ -37,7 +37,7 @@ function SwiperOS(){
           loop={true}
         >
           {sale.map((spirit) => (
-              <SwiperSlide>
+              <SwiperSlide key={spirit.id}>
                   <SwiperCard spirit={spirit} />
               </SwiperSlide>
           ))}
