@@ -387,29 +387,21 @@ export const SearchList = () => {
 };
 
 export const CartList = ({ handleDrawerCart }) => {
-    const classes = useStyles();
-    return (
-        <div>
-            <div
-                style={{
-                    display: "flex",
-                    width: "58%",
-                    justifyContent: "space-between",
-                }}
-            >
-                <Button onClick={handleDrawerCart}>
-                    <ArrowForwardIos />
-                </Button>
-                <Typography className={classes.title} variant="h4">
-                    Cart
-                </Typography>
-            </div>
-            <Divider />
-            <List component="nav">
-                <Cart />
-            </List>
-        </div>
-    );
+  const classes = useStyles();
+  return (
+    <div style={{ zIndex: "9999"}}>
+      <div style={{display: "flex", width: "58%", justifyContent: "space-between",  zIndex: "9999"}}>
+        <Button onClick={handleDrawerCart}><ArrowForwardIos/></Button>
+        <Typography className={classes.title} variant="h4">
+          Cart
+        </Typography>
+      </div>
+      <Divider />
+      <List component="nav">
+        <Cart/>   
+      </List>
+    </div>
+  );
 };
 // eslint-disable-next-line
 export default {

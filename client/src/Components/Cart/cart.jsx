@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     content: {
         width: "100%",
         marginTop: "5%",
+        zIndex: "9999"
     },
 
     cont1: {
