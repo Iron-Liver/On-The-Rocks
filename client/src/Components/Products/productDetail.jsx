@@ -194,10 +194,7 @@ const ProductDetail = () => {
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
-
-    const handleChange = (event) => {
-        setQuant(event.target.value);
-    };
+    
     
     const handleChangeQuant = (type) => {
         if (type === "+") {

@@ -355,8 +355,8 @@ export const SearchList = () => {
 export const CartList = ({ handleDrawerCart }) => {
   const classes = useStyles();
   return (
-    <div>
-      <div style={{display: "flex", width: "58%", justifyContent: "space-between"}}>
+    <div style={{ zIndex: "9999"}}>
+      <div style={{display: "flex", width: "58%", justifyContent: "space-between",  zIndex: "9999"}}>
         <Button onClick={handleDrawerCart}><ArrowForwardIos/></Button>
         <Typography className={classes.title} variant="h4">
           Cart
