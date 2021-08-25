@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal } from "@material-ui/core";
 import { useForm } from "./useForm";
 import { Link, useHistory } from "react-router-dom";
@@ -49,9 +49,7 @@ const CreateOrder = () => {
   
   const {Desc} = useSelector(state => state.couponReducer)
   console.log(Desc)
-  const currentUser = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null
+
 
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
@@ -79,11 +77,6 @@ const CreateOrder = () => {
       var coup = JSON.parse(localStorage.getItem('coup'))
       if(coup > 0){ axios.delete(`/coupon/delete/${coup}`)}
       localStorage.removeItem("coup");
-
-      var total = JSON.parse(localStorage.getItem('total'))
-      total = Number(total)
-           
-      if(total > 1000){ axios.post(`/game/coins/${currentUser.id}`);}
 
       const { data } = await axios.post('/order/addOrder', order);
       if(data) {

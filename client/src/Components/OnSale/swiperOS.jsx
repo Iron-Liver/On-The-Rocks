@@ -26,7 +26,6 @@ function SwiperOS(){
   const { Products } = useSelector((state) => state.productReducer);
   const { wishlists } = useSelector((state) => state.wishlistReducer);
 
-<<<<<<< HEAD
 
   const dispatch = useDispatch();
 
@@ -55,9 +54,6 @@ function SwiperOS(){
    })
   }
 
-=======
-    var sale = Products.filter((spirit) => spirit.onSale)
->>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
     
     return (
         <Swiper

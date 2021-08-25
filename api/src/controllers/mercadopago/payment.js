@@ -73,7 +73,6 @@ module.exports = async (req, res, next) => {
         },
         include: [Order_products, User]
       });
-      
       if(order.status !== "created" && order.status !== "completed") {
         transporter.sendMail({
           from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address

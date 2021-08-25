@@ -52,24 +52,11 @@ const Wishlist = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-<<<<<<< HEAD
-  const { Products } = useSelector((state) => state.productReducer);
-  const { wishlists } = useSelector((state) => state.wishlistReducer);
-  const [state, setState] = useState(wishlists);
-  const [filt, setFilt] = useState();
-
-  var filtUser,
-    filtProduct = [];
-  const currentUser = JSON.parse(localStorage.getItem("token"))
-    ? jwt.verify(
-        JSON.parse(localStorage.getItem("token")),
-        process.env.REACT_APP_SECRET_KEY
-      )
-    : null;
-=======
     const { Products } = useSelector((state) => state.productReducer);
     const { wishlists } = useSelector((state) => state.wishlistReducer);
     const [state, setState] = useState(wishlists);
+    const [filt, setFilt] = useState();
+    
     var filtUser,
         filtProduct = [];
     const currentUser = verifyUser();
@@ -82,7 +69,6 @@ const Wishlist = () => {
         dispatch(getProducts());
         dispatch(getWishlist());
     }, [dispatch]);
->>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
 
     useEffect(() => {
         (async function () {
@@ -92,7 +78,6 @@ const Wishlist = () => {
         })();
     }, [state, wishlists, Products]);
 
-<<<<<<< HEAD
   useEffect(() => {
     (async function () {
       wishlists.length !== state.length && (await setState(wishlists));
@@ -101,11 +86,10 @@ const Wishlist = () => {
     })();
     setFilt(filtProduct)
   }, [state, wishlists, Products]);
-=======
+  
     const deleteWishh = (e, userId, productId) => {
         e.preventDefault();
         var res;
->>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
 
         for (let i = 0; i < wishlists.length; i++) {
             if (
@@ -132,44 +116,6 @@ const Wishlist = () => {
             return Products?.filter((e) => e.id === x.productId);
         });
     }
-<<<<<<< HEAD
-    swal("The product is being deleted");
-   /*  setTimeout(() => {
-      window.location.reload();
-    }, 1000); */
-  };
-
-  if (Products && state.length > 0) {
-    console.log(state, "statestatus");
-    filtUser = state.filter((x) => x.userId === currentUser.id);
-    filtProduct = filtUser.map((x) => {
-      return Products?.filter((e) => e.id === x.productId);
-    });
- 
-  }
-
-  console.log(filt)
-
-
-return (
-  <div className={classes.root}>
-  {filt?.length > 0 ? (
-    filt?.map((w) => (
-      w[0] && 
-      <Paper className={w[0].onSale ? classes.onSalePaper : classes.paper}>
-        <div className="user-wishlist-imgsale-wrapper">
-          <div className="user-wishlist-img-container">
-            <Link to={`/products/${w[0].id}`}>
-              <img width="80px" className={classes.img} alt="complex" src={w[0]?.image}/>
-            </Link>
-            {
-              w[0].onSale && (
-                <div>
-                  <div className="user-wishlist-flag-shadow"/>
-                  <div className="user-wishlist-flag">
-                    <NewReleases id="user-wishlist-flag-icon"/>
-                  </div>
-=======
 
     return (
         <div className={classes.root}>
@@ -262,7 +208,6 @@ return (
                     }}
                 >
                     <h4 id="user-wishlist-empty-message">Nothing to show...</h4>
->>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
                 </div>
             )}
         </div>

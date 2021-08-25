@@ -19,11 +19,7 @@ const UserProfile = () => {
           <Route exact path={`${path}/settings`} render={() => <h1 style={{ width: "100%", margin: 0}}>Settings</h1>} />
           <Route exact path={`${path}/wishlist`} component={Wishlist} />
           <Route exact path={`${path}/orders`} component={UserOrders} />
-<<<<<<< HEAD
           <Route exact path={`${path}/coupons`} component={Coupons}/>
-        </div>
-=======
->>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
       </Switch>
     </div>
   )
