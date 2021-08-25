@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import "./wheelOfCoupons.css";
-import audio from "./Wheel_of_cupons.mp3";
+import win_audio from "./Wheel_Win.mp3";
+import lose_audio from "./Wheel_Lose.mp3";
 import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
 import verifyUser from "../../Utils/verifyUser";
@@ -92,16 +93,16 @@ export const WheelOfCoupons = () => {
         }
         return discount;
     };
-    const playAudio = () => {
-        new Audio(audio).play();
+    const playAudio = (luck) => {
+        luck <= 95 ? new Audio(win_audio).play() : new Audio(lose_audio).play()
     };
     const addCoupon = () => {
         //Here is where i would add a coupon to user but we dont have any coupon system yet
     };
     const spin = () => {
         dispatch(removeCoin(currentUser?.id));
-        if (!muted) playAudio();
         const discount = generateAward();
+        if (!muted) playAudio(discount);
         setState(true);
         setIdle(false);
         setTimeout(async () => {
