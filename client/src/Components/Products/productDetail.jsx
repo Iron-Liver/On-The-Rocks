@@ -185,8 +185,8 @@ const ProductDetail = () => {
         window.location.replace(`${window.location.origin}/login`);
         alert("please login");
     }
-    // eslint-disable-next-line
     const [heartIcon, setHeartIcon] = React.useState(false)
+    // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
     const { id } = useParams();
     const { Products } = useSelector((state) => state.productReducer);
@@ -194,7 +194,6 @@ const ProductDetail = () => {
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
-    
     
     const handleChangeQuant = (type) => {
         if (type === "+") {

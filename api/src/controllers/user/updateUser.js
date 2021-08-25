@@ -5,8 +5,8 @@ module.exports = async (req, res, next) => {
 	let user = req.body;
 	let {id} = req.params;
 	try {
-		if(user.password) {	user.password = await bcrypt.hash(user.password, 12);}
 		if(user.email) { user.email = user.email.toLowerCase();}
+		if(user.password) {	user.password = await bcrypt.hash(user.password, 12);}
 		else{
 			const old = await User.findOne({
 				where: {id}
