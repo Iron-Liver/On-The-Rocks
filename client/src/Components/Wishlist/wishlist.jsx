@@ -55,6 +55,7 @@ const Wishlist = () => {
     const { Products } = useSelector((state) => state.productReducer);
     const { wishlists } = useSelector((state) => state.wishlistReducer);
     const [state, setState] = useState(wishlists);
+    
     var filtUser,
         filtProduct = [];
     const currentUser = verifyUser();
@@ -76,6 +77,14 @@ const Wishlist = () => {
         })();
     }, [state, wishlists, Products]);
 
+  useEffect(() => {
+    (async function () {
+      wishlists.length !== state.length && (await setState(wishlists));
+      if (!state || wishlists.length !== state.length)
+        await setState(wishlists);
+    })();
+  }, [state, wishlists, Products]);
+  
     const deleteWishh = (e, userId, productId) => {
         e.preventDefault();
         var res;

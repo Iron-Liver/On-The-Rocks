@@ -1,0 +1,17 @@
+.form-control-Cart{
+   width:200px;
+   border: solid 2px;
+   font-size: larger;
+   margin: 0 auto; 
+}
+
+.form-group{
+ display: flex;   
+ justify-content: center;  
+
+}
+
+.antPrice{
+    text-decoration: line-through;
+    color: grey;
+}

@@ -6,6 +6,7 @@ import win_audio from "./Wheel_Win.mp3";
 import lose_audio from "./Wheel_Lose.mp3";
 import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
+import {createCoupon} from "../../Redux/Coupon/couponActions"
 import verifyUser from "../../Utils/verifyUser";
 import { logOutUser } from "../../Redux/Users/userActions";
 
@@ -40,6 +41,7 @@ export const WheelOfCoupons = () => {
             transform: `rotate(${degrees}deg)`,
         },
     };
+
     const generateAward = () => {
         const percent = Math.ceil(Math.random() * 100);
         let discount;
@@ -96,8 +98,15 @@ export const WheelOfCoupons = () => {
     const playAudio = (luck) => {
         luck <= 95 ? new Audio(win_audio).play() : new Audio(lose_audio).play()
     };
-    const addCoupon = () => {
+    const addCoupon = (discount) => {
         //Here is where i would add a coupon to user but we dont have any coupon system yet
+        const coupon = {
+            code: `WHEEL${discount}`,
+            discount: discount / 100,
+            global: false,
+            userId: currentUser.id
+        }
+        dispatch(createCoupon(coupon))
     };
     const spin = () => {
         dispatch(removeCoin(currentUser?.id));
@@ -108,7 +117,7 @@ export const WheelOfCoupons = () => {
         setTimeout(async () => {
             if (discount) {
                 alert(`Congratulations! You got a %${discount} discount!`);
-                addCoupon();
+                addCoupon(discount);
                 setState(false);
                 setDegrees(0);
                 setTimeout(() => {
@@ -161,7 +170,7 @@ export const WheelOfCoupons = () => {
                             alt="roulette_arrow"
                         />
                     </div>
-                    <span>Remaining coins: {coins}</span>
+                    <span>Remaining coins: {currentUser ? coins : 0}</span>
                     <div>
                         <input
                             type="checkbox"
@@ -179,14 +188,14 @@ export const WheelOfCoupons = () => {
                     </div>
                     <Button
                         size="large"
-                        disabled={!idle}
+                        disabled={!idle || !currentUser}
                         variant="outlined"
                         color="primary"
                         type="button"
                         onClick={spin}
                         className="button"
                     >
-                        Spin it!
+                        {currentUser ? 'Spin it!' : 'Login to play!'}
                     </Button>
                 </div>
             </div>
