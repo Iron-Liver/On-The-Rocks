@@ -16,3 +16,6 @@ export function createReview(userId,productId,stars,description,anonymous) {
         data.success? swal(data.success) : swal(data.error)
     }
 }
+
+
+

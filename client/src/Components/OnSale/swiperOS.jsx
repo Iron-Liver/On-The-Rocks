@@ -2,12 +2,10 @@ import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './swiperOS.css';
 import SwiperCard from "./swiperCard";
-import ProductCard from '../Products/productCard';
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
 import "swiper/components/pagination/pagination.min.css"
-
 // import Swiper core and required modules
 import SwiperCore, {
   Navigation,
@@ -22,12 +20,10 @@ SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
 
 function SwiperOS(){
 
-    const { Products } = useSelector(
-        (state) => state.productReducer
-    );
+    const { Products } = useSelector((state) => state.productReducer); 
 
     var sale = Products.filter((spirit) => spirit.onSale)
-
+    
     return (
         <Swiper
           className = "swiper"
@@ -41,7 +37,7 @@ function SwiperOS(){
           loop={true}
         >
           {sale.map((spirit) => (
-              <SwiperSlide>
+              <SwiperSlide key={spirit.id}>
                   <SwiperCard spirit={spirit} />
               </SwiperSlide>
           ))}

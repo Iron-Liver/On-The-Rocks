@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
         var { email_verified, sub, given_name, family_name, email } =
             ticket.getPayload();
         email = email.toLocaleLowerCase();
-        console.log(email_verified, email);
         if (email_verified) {
             const find = await User.findOne({
                 where: {

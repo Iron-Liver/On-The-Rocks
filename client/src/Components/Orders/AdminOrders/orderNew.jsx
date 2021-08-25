@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './order.css';
-import { Button, Avatar, Menu, MenuItem, IconButton } from '@material-ui/core';
-import { AvatarGroup } from '@material-ui/lab';
+import { Menu, MenuItem, IconButton } from '@material-ui/core';
 import { MoreVert, Edit } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
 import "swiper/components/pagination/pagination.min.css"
-
 // import Swiper core and required modules
 import SwiperCore, {
   Navigation,
@@ -19,7 +15,6 @@ import SwiperCore, {
   Mousewheel,
   Keyboard
 } from 'swiper/core';
-
 // install Swiper modules
 SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard]);
 

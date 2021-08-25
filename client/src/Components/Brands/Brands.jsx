@@ -28,37 +28,37 @@ export default function Brands() {
             <span className="description">Red Wines</span>
           </li> */}
           <li>
-            <a href="#">
+            <a href="/products">
               <img src="https://images.alphacoders.com/109/thumb-1920-1093028.jpg" data-aos="" className="imege3" alt=""/>
               <span className="description">Whisky</span>
             </a>      
           </li>
           <li>
-          <a href="#">
+          <a href="/products">
               <img src="https://wallpaperaccess.com/full/2728194.jpg" data-aos="" className="imege4" alt=""/>
               <span className="description">Vodka</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/products">
               <img src="https://lh5.googleusercontent.com/-yPvuOQ-NAKk/TYw2nn8iI4I/AAAAAAAAACU/6LuxAJDCefo/s1600/jose-cuervo-black1.jpg" data-aos="" alt=""/>
               <span className="description">Tequila</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/products">
               <img data-aos="" src="https://c1.wallpaperflare.com/preview/647/327/753/rum-alcohol-alcoholic-beverage-drink.jpg" alt=""/>
               <span className="description">Ron</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/products">
               <img  data-aos="" src="https://beffshuff.com/wp-content/uploads/2019/12/DSC_0687.jpg" alt=""/>
               <span className="description">Gin</span>
             </a>
           </li>    
           <li>
-            <a href="#">
+            <a href="/products">
               <img data-aos="" src="https://wallpapercave.com/wp/wp3346116.jpg" alt="" />
               <span className="description">Brandy</span>
             </a>

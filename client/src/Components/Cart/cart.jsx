@@ -85,7 +85,6 @@ export function Cart() {
     function sum(id) {
         state?.forEach((e) => {
             if (e.id === id && e.units < e.stock) {
-                console.log(e,"holi")
                 let sub = e.price / e.units;
                 e.units++;
                 sub = sub * e.units;
@@ -176,8 +175,8 @@ export function Cart() {
             ) : (
                 <Typography
                     className={classes.title}
-                    component="body"
-                    variant="body"
+                    component="h6"
+                    variant="h6"
                 >
                     There are no products in the cart.
                 </Typography>
