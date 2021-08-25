@@ -1,13 +1,10 @@
 import "./renderCoupons.css"
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoupons } from "../../Redux/Coupon/couponActions"
-import { IconButton, Paper } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { NewReleases } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 import jwt from "jsonwebtoken";
 
 const useStyles = makeStyles((theme) => ({

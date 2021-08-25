@@ -4,6 +4,7 @@ import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import { useDispatch, useSelector } from 'react-redux';
 import { readUser, logOutUser } from '../../../Redux/Users/userActions';
+import swal from 'sweetalert';
 
 const UserSidePanel = () => {
   const { url } = useRouteMatch();
@@ -20,6 +21,24 @@ const UserSidePanel = () => {
   useEffect(() => {
     dispatch(readUser(userId));
   }, [dispatch, userId]);
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+
+  const logOutAlert = () => {
+    swal({
+      title: 'LogOut',
+      text: 'Want to logout?',
+      icon: 'warning',
+      buttons: ['Cancel', 'Yes']
+    }).then(answer => {
+      if(answer){
+        logOut();
+      }
+    })
+  }
+
 
   const logOut = () => {
     dispatch(logOutUser());

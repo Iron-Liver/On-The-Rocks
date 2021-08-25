@@ -3,8 +3,9 @@
 }
 
 .check-anon:checked:after {
-  content: 'X';
-  color:white;
+  content: '✔';
+  color:rgb(199, 199, 199);
+  font-family: "Montserrat";
 }
 
 .check-anon {

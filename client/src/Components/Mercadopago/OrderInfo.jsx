@@ -1,7 +1,6 @@
 
 import './Checkout.css';
 import {  useState } from "react";
-import { useDispatch} from "react-redux";
 import { 
   Accordion, 
   AccordionSummary, 
@@ -84,11 +83,7 @@ const useStyles = makeStyles((theme) => ({
                 
 }));
 
-const OrderInfo = ({ order }) => {
-  const userId = order.userId; 
-  const dispatch = useDispatch();
-
- 
+const OrderInfo = ({ order }) => { 
 
   const [summaryExpanded, setSummaryExpanded] = useState(false);
 

@@ -6,6 +6,7 @@ import UserSidePanel from './User/UserSidePanel';
 import UserTopPanel from './User/UserTopPanel';
 import Wishlist from '../Wishlist/wishlist';
 import Coupons from '../Game/renderCoupons';
+import UserUpdate from '../Users/UserUpdate/updateUser'
 
 const UserProfile = () => {
   const { path } = useRouteMatch();
@@ -16,10 +17,10 @@ const UserProfile = () => {
       <UserTopPanel />
       <Switch >
           <Route exact path={path} component={UserOrders} />
-          <Route exact path={`${path}/settings`} render={() => <h1 style={{ width: "100%", margin: 0}}>Settings</h1>} />
+          <Route exact path={`${path}/settings`} component={UserUpdate} />
           <Route exact path={`${path}/wishlist`} component={Wishlist} />
           <Route exact path={`${path}/orders`} component={UserOrders} />
-          <Route exact path={`${path}/coupons`} component={Coupons}/>
+          <Route exact path={`${path}/coupons`} component={Coupons}/> 
       </Switch>
     </div>
   )

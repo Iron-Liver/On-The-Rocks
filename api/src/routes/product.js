@@ -8,7 +8,7 @@ const getAllProducts = require("../controllers/product/getProduct");
 const getProductById = require("../controllers/product/getProductById");
 
 router.use(express.json());
-router.get('/', getAllProducts);
+router.post('/', getAllProducts);
 router.get('/:id', getProductById);
 router.post('/add', createProduct);
 router.put('/:id', putProduct);

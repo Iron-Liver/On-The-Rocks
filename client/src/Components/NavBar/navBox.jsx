@@ -1,63 +1,70 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { Container, ButtonBase } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import verifyUser from "../../Utils/verifyUser";
-import { logOutUser } from "../../Redux/Users/userActions";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Container, ButtonBase } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { useLocation } from 'react-router'
+import { logOutUser } from '../../Redux/Users/userActions'
+import { VerifiedUser } from '@material-ui/icons'
+import { useDispatch } from 'react-redux'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "nowrap",
-        width: "100%",
-        justifyContent: "space-around",
-        fontFamily: "Montserrat",
-    },
-    text: {
-        position: "relative",
-        "&:hover": {
-            zIndex: 1,
-            "& $imageMarked": {
-                width: "calc(80%)",
-                left: "calc(10%)",
-                transition: "all 0.35s ease-out",
-            },
-        },
-    },
-    imageTitle: {
-        position: "relative",
-        width: "70px",
-        padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
-            theme.spacing(1) + 2
-        }px`,
-        fontFamily: "Montserrat",
-        fontWeight: "500",
-    },
-    imageMarked: {
-        height: 2,
-        width: "calc(20%)",
-        backgroundColor: theme.palette.common.white,
-        position: "absolute",
-        bottom: 1,
-        left: "calc(40%)",
-        transition: "all 0.35s ease-out",
-    },
-    blackBack: {
-        backgroundColor: "#372c2e",
-    },
-    blackColor: {
-        color: "#372c2e",
-        fontFamily: "Montserrat",
-        fontWeight: "500",
-    },
-}));
+
 
 export const NavBox = ({ solid }) => {
+    
+    
+    const location = useLocation();
+    const path = location.pathname === '/' ?  '#fff': '#372c2e';
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            width: "100%",
+            justifyContent: "space-around",
+            fontFamily: 'Montserrat',
+        },
+        text: {
+            position: "relative",
+            "&:hover": {
+                zIndex: 1,
+                "& $imageMarked": {
+                    width: "calc(80%)",
+                    left: "calc(10%)",
+                    transition: 'all 0.35s ease-out',
+                },
+            }
+        },
+        imageTitle: {
+            position: "relative",
+            width: '70px',
+            padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
+                theme.spacing(1) + 2
+            }px`,
+            fontFamily: 'Montserrat',
+            fontWeight: '500'
+        },
+        imageMarked: {
+            height: 2,
+            width: "calc(20%)",
+            backgroundColor: theme.palette.common.white,
+            position: "absolute",
+            bottom: 1,
+            left: "calc(40%)",
+            transition: 'all 0.35s ease-out',
+        },
+        blackBack: {
+            backgroundColor: path,
+        },
+        blackColor: {
+            color: path,
+            fontFamily: 'Montserrat',
+            fontWeight: '500'
+        }
+    }))
+    
     const classes = useStyles();
     const dispatch = useDispatch();
-    const currentUser = verifyUser();
+    const currentUser = VerifiedUser
     if (currentUser?.hasOwnProperty("logout")) {
         dispatch(logOutUser());
         window.location.replace(`${window.location.origin}/login`);
@@ -67,7 +74,7 @@ export const NavBox = ({ solid }) => {
     return (
         <Container className={classes.root}>
             <Link
-                to="/sale"
+                to="/products?onSale=_"
                 className="linkNav"
                 style={{ textDecoration: "none", color: "white" }}
             >

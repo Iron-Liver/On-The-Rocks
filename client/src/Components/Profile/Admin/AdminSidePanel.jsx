@@ -4,6 +4,7 @@ import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import { useDispatch, useSelector } from 'react-redux';
 import { readUser, logOutUser } from '../../../Redux/Users/userActions';
+import swal from 'sweetalert';
 
 const AdminSidePanel = () => {
   const { url } = useRouteMatch();
@@ -18,12 +19,29 @@ const AdminSidePanel = () => {
   const userId = localProfile?.id 
 
   useEffect(() => {
+    window.scrollTo(0,0)
+  }, []) 
+
+  useEffect(() => {
     dispatch(readUser(userId));
   }, [dispatch, userId]);
 
   const logOut = () => {
     dispatch(logOutUser());
     history.push("/");
+  }
+
+  const logOutAlert = () => {
+    swal({
+      title: 'LogOut',
+      text: 'Want to logout?',
+      icon: 'warning',
+      buttons: ['Cancel', 'Yes']
+    }).then(answer => {
+      if(answer){
+        logOut();
+      }
+    })
   }
 
   return (
@@ -94,7 +112,7 @@ const AdminSidePanel = () => {
           </NavLink>
           <div 
             className="panel-nav-item panel-admin-logout" 
-            onClick={logOut}
+            onClick={logOutAlert}
             draggable={false}
           >
             <h4 draggable={false}>Logout</h4>

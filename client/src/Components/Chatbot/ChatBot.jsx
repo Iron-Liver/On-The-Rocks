@@ -4,7 +4,7 @@ import './ChatBot.css';
 import config from "../Chatbot/CB-Components/config"
 import MessageParser from "../Chatbot/CB-Components/MessageParser"
 import ActionProvider from "../Chatbot/CB-Components/ActionProvider"
-import Bot from "../../ImagesBot/bot.png"
+import Bot1 from "../../ImagesBot/bot1.png"
 import { useState } from 'react';
 
 const ChatBotApp = () => {
@@ -31,7 +31,7 @@ const ChatBotApp = () => {
   return (
     <div className="Chatbot">
       {robotshow}
-      <button className="botonBot" onClick={() => handleClick()}><img className="logoBot" src={Bot} alt="ChatBot" /></button>
+      <button className="botonBot" onClick={() => handleClick()}><img className="logoBot" src={Bot1} alt="ChatBot" /></button>
     </div>
   );
 }

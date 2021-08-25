@@ -16,7 +16,7 @@ import SwiperCore, {
 } from 'swiper/core';
 import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
 import { getProducts } from '../../Redux/Products/productsActions';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 
 // install Swiper modules
 SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
@@ -40,7 +40,6 @@ function SwiperOS(){
 
   var sale = Products?.filter((spirit) => spirit.onSale > 0)
 
-  var res = []
 
 
   if(wishlists.length > 0){
