@@ -174,7 +174,7 @@ const SwiperCard = ({ spirit }) => {
                    </div>
 
                     <CustomButton 
-                      elevation={false} 
+                      elevation={0} 
                       width="150px" 
                       height="40px"
                       onClick={handleAddToCart}

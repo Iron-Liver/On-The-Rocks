@@ -1,8 +1,7 @@
 
 import './Checkout.css';
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCoupons, desAction } from "../../Redux/Coupon/couponActions"
+import {  useState } from "react";
+import { useDispatch} from "react-redux";
 import { 
   Accordion, 
   AccordionSummary, 
@@ -10,7 +9,6 @@ import {
   AccordionDetails, 
   Hidden, 
   makeStyles,
-  ButtonBase
 } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 
@@ -87,30 +85,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const OrderInfo = ({ order }) => {
-  const userId = order.userId;
-  const { Coupons } = useSelector((state) => state.couponReducer);  
+  const userId = order.userId; 
   const dispatch = useDispatch();
-  useEffect(() => {
-     dispatch(getCoupons(userId));
-    }, []);
+
+ 
 
   const [summaryExpanded, setSummaryExpanded] = useState(false);
-  const [summaryExpanded2, setSummaryExpanded2] = useState(false)
-  const [desc, setDesc] = useState()
 
   const toggleAccordionSummary = () => {
     setSummaryExpanded(!summaryExpanded);
   }; 
 
-  const toggleAccordionSummary2 = () => {
-    setSummaryExpanded2(!summaryExpanded2);
-  }; 
-  
-  function descuento(porc,code, e) {
-    e.preventDefault()
-    setDesc(porc)  
-    dispatch(desAction(porc,code))
-  } 
   const classes = useStyles();
 
   return (
@@ -176,91 +161,6 @@ const OrderInfo = ({ order }) => {
           </li>
         </ul>
       </div>
-      <div className="order-products-info">
-        <div>
-          <Accordion
-            expanded={summaryExpanded2}
-            onChange={toggleAccordionSummary2}
-            className={classes.accordionSummary}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMore />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              {summaryExpanded2 ? (
-                <Typography variant="body2" className={classes.heading}>
-                  Hide coupons
-                </Typography>
-              ) : (
-                <Typography variant="body2" className={classes.heading}>
-                  Coupons ({Coupons.length})
-                </Typography>
-              )}
-            </AccordionSummary>
-          
-            {Coupons &&
-              Coupons.map((coupon) => (
-                <ButtonBase
-                focusRipple
-                key={coupon.id}
-                className={classes.text}
-                 onClick = {(e) => descuento(coupon.discount, coupon.code, e) } 
-                >
-                <div key={coupon.id}>
-                    <AccordionDetails
-                      className={classes.product}
-                    >
-                    <p
-                       component="span"
-                       variant="subtitle1"
-                       color="inherit"
-                       className={classes.imageTitle}
-                    >
-                     <div style={{ flexGrow: "1" }}>
-                        <Typography variant="body2">
-                          {coupon.code}
-                        </Typography>
-                        <Typography variant="body2">
-                          {coupon.discount * 100}%
-                        </Typography>
-                     </div>
-                   <span className={classes.imageMarked}/>
-                  </p>
-                    </AccordionDetails>
-                  </div>
-              </ButtonBase> 
-                  ))}
-               <ButtonBase
-                focusRipple
-                key="0"
-                className={classes.text}
-                 onClick = {(e) => descuento(0, e) } 
-                >
-                <div key="0">
-                    <AccordionDetails
-                      className={classes.product}
-                    >
-                    <p
-                       component="span"
-                       variant="subtitle1"
-                       color="inherit"
-                       className={classes.imageTitle}
-                    >
-                     <div style={{ flexGrow: "1" }}>
-                        <Typography variant="body2">
-                          Remove discount
-                        </Typography>
-                     </div>
-                   <span className={classes.imageMarked}/>
-                  </p>
-                    </AccordionDetails>
-                  </div>
-                </ButtonBase>    
-          </Accordion>
-        </div>
-      </div>
-
       <div className="order-products-info">
         <div>
           <Accordion
@@ -335,16 +235,9 @@ const OrderInfo = ({ order }) => {
           </Accordion>
         </div>
         <div className="info-total">
-        {desc ?
-        (
-          <div className="info-item-title">Total: 
-           ${order.total-(order.total*desc)}
-          </div>
-        ):(
           <div className="info-item-title">Total:
           $ {order.total}
           </div>
-         )}
          </div>
       </div>   
     </div>

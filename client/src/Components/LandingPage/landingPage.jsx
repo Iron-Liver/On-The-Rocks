@@ -73,35 +73,35 @@ export const LandingPage = () => {
 
 
 
-          <div class="container2">
+          <div className="container2">
 
-            <div class="card">
-              <figure class="card__thumb">
-                <img src={im3} alt="by Kyle Cottrell" class="card__image"/>
-                <figcaption class="card__caption">
-                  <h2 class="card__title">STOCK</h2>
-                  <p class="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt dolore quis pariatur voluptatum vitae totam id. Repellat delectus veritatis nesciunt illo voluptas voluptates vero culpa exercitationem officia aliquid. Eveniet.</p>
+            <div className="card">
+              <figure className="card__thumb">
+                <img src={im3} alt="by Kyle Cottrell" className="card__image"/>
+                <figcaption className="card__caption">
+                  <h2 className="card__title">STOCK</h2>
+                  <p className="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt dolore quis pariatur voluptatum vitae totam id. Repellat delectus veritatis nesciunt illo voluptas voluptates vero culpa exercitationem officia aliquid. Eveniet.</p>
                 </figcaption>
               </figure>
             </div>
 
                 
-            <div class="card">
-              <figure class="card__thumb">
-                <img src={im2} alt=" Nathan Dumlao" class="card__image"/>
-                <figcaption class="card__caption">
-                  <h2 class="card__title">PRODUCTS</h2>
-                  <p class="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatem animi tenetur debitis! Reprehenderit, magnam amet quos inventore, aut minima eveniet, iste molestiae quo illum dicta corporis perferendis voluptates odio.</p>
+            <div className="card">
+              <figure className="card__thumb">
+                <img src={im2} alt=" Nathan Dumlao" className="card__image"/>
+                <figcaption className="card__caption">
+                  <h2 className="card__title">PRODUCTS</h2>
+                  <p className="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatem animi tenetur debitis! Reprehenderit, magnam amet quos inventore, aut minima eveniet, iste molestiae quo illum dicta corporis perferendis voluptates odio.</p>
                 </figcaption>
               </figure>
             </div>
 
-            <div class="card">
-              <figure class="card__thumb">
-                <img src={im1} alt=" Daniel Lincoln" class="card__image"/>
-                <figcaption class="card__caption">
-                  <h2 class="card__title">aaaa </h2>
-                  <p class="card__snippet">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore nemo deleniti provident iure tenetur totam sit reiciendis dolore obcaecati saepe, quisquam soluta sapiente nulla culpa veniam adipisci illum consequuntur assumenda.</p>
+            <div className="card">
+              <figure className="card__thumb">
+                <img src={im1} alt=" Daniel Lincoln" className="card__image"/>
+                <figcaption className="card__caption">
+                  <h2 className="card__title">aaaa </h2>
+                  <p className="card__snippet">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore nemo deleniti provident iure tenetur totam sit reiciendis dolore obcaecati saepe, quisquam soluta sapiente nulla culpa veniam adipisci illum consequuntur assumenda.</p>
                 </figcaption>
               </figure>
             </div>

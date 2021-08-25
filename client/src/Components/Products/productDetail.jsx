@@ -26,13 +26,14 @@ import Rating from "@material-ui/lab/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
 import { getProductReviews } from "../../Redux/Reviews/reviewActions";
-import jwt from "jsonwebtoken";
+import verifyUser from "../../Utils/verifyUser";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
 import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { green, red } from "@material-ui/core/colors";
 import { getProducts } from "../../Redux/Products/productsActions";
 import CustomButton from "../Button/CustomButton";
+import { logOutUser } from "../../Redux/Users/userActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -178,16 +179,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetail = () => {
+    const dispatch = useDispatch();
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
-    const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
     const { id } = useParams();
-    const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
@@ -347,7 +348,7 @@ const ProductDetail = () => {
                                         {currentUser && (
                                             <IconButton
                                                 variant="contained"
-                                                elevation={false}
+                                                elevation={0}
                                                 color="primary"
                                                 className={classes.buttonWish}
                                                 onClick={() =>

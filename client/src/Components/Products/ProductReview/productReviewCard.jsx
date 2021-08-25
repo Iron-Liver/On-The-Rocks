@@ -1,6 +1,8 @@
+import { useDispatch } from "react-redux";
 import { makeStyles, Grid, Paper } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import jwt from "jsonwebtoken";
+import verifyUser from "../../../Utils/verifyUser";
+import { logOutUser } from "../../../Redux/Users/userActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,13 +27,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const ProductReviewCard = ({ reviews }) => {
     const classes = useStyles();
-
-    const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
+    const dispatch = useDispatch();
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
 
     return (
         <Grid container spacing={4} style={{ width: "90%", margin: "auto" }}>

@@ -1,21 +1,26 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import jwt from "jsonwebtoken";
 import "./wheelOfCoupons.css";
-import audio from "./Wheel_of_cupons.mp3";
+import win_audio from "./Wheel_Win.mp3";
+import lose_audio from "./Wheel_Lose.mp3";
 import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
+<<<<<<< HEAD
 import {createCoupon} from "../../Redux/Coupon/couponActions"
+=======
+import verifyUser from "../../Utils/verifyUser";
+import { logOutUser } from "../../Redux/Users/userActions";
+>>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
 
 export const WheelOfCoupons = () => {
-    const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
     const dispatch = useDispatch();
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
     const { coins } = useSelector((state) => state.userReducer);
     const [muted, setMuted] = React.useState(false);
     const [idle, setIdle] = React.useState(true);
@@ -43,7 +48,6 @@ export const WheelOfCoupons = () => {
     const generateAward = () => {
         const percent = Math.ceil(Math.random() * 100);
         let discount;
-        console.log(percent);
         switch (true) {
             case percent <= 1:
                 discount = 50;
@@ -94,8 +98,8 @@ export const WheelOfCoupons = () => {
         }
         return discount;
     };
-    const playAudio = () => {
-        new Audio(audio).play();
+    const playAudio = (luck) => {
+        luck <= 95 ? new Audio(win_audio).play() : new Audio(lose_audio).play()
     };
     const addCoupon = (discount) => {
         //Here is where i would add a coupon to user but we dont have any coupon system yet
@@ -109,8 +113,8 @@ export const WheelOfCoupons = () => {
     };
     const spin = () => {
         dispatch(removeCoin(currentUser?.id));
-        if (!muted) playAudio();
         const discount = generateAward();
+        if (!muted) playAudio(discount);
         setState(true);
         setIdle(false);
         setTimeout(async () => {
@@ -178,7 +182,7 @@ export const WheelOfCoupons = () => {
                             onChange={(e) => setMuted(e.target.checked)}
                         />{" "}
                         <i
-                            class={
+                            className={
                                 muted
                                     ? "fas fa-volume-mute"
                                     : "fas fa-volume-off"
@@ -186,7 +190,6 @@ export const WheelOfCoupons = () => {
                         />
                     </div>
                     <Button
-                        classes="button"
                         size="large"
                         disabled={!idle || !currentUser}
                         variant="outlined"

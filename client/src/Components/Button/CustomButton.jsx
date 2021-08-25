@@ -43,7 +43,7 @@ const CustomButton = (props) => {
       margin: margin || "2px",
       boxShadow: elevation === undefined 
         ? "1px 1px 2px grey, -1px -1px 1px #aaaaaa" 
-        : elevation === false 
+        : elevation === 0 
           ? ""
           : "1px 1px 2px grey, -1px -1px 1px #aaaaaa",
       transition: "background 200ms ease-in",
@@ -57,7 +57,7 @@ const CustomButton = (props) => {
         boxShadow: elevation === undefined 
         ? `1px 1px 2px grey, -1px -1px 2px #aaaaaa, 
             1px 1px 2px grey, -1px -1px 2px #aaaaaa` 
-        : elevation === false 
+        : elevation === 0 
           ? ""
           : `1px 1px 2px grey, -1px -1px 2px #aaaaaa, 
               1px 1px 2px grey, -1px -1px 2px #aaaaaa`
@@ -73,7 +73,7 @@ const CustomButton = (props) => {
         ? `1px 1px 2px grey, -1px -1px 2px #aaaaaa, 
             1px 1px 2px grey, -1px -1px 2px #aaaaaa,
               1px 1px 2px grey, -1px -1px 2px #aaaaaa` 
-        : elevation === false 
+        : elevation === 0 
           ? ""
           : `1px 1px 2px grey, -1px -1px 2px #aaaaaa, 
               1px 1px 2px grey, -1px -1px 2px #aaaaaa,

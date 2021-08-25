@@ -7,7 +7,11 @@ import {
 
 export function addProductWishlist(obj) {
     return async function(dispatch) { 
+<<<<<<< HEAD
         const favorite = await axios.post(`/wishlist/createwishlist`, obj);
+=======
+        await axios.post(`/wishlist/createwishlist`, obj);
+>>>>>>> 91b5e8480191f66e6578834098c6f6f09f33a2f0
         dispatch ({type: ADD_PRODUCT_WISHLIST,  payload: obj})
     };
 }

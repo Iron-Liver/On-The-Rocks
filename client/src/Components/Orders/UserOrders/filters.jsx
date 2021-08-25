@@ -15,7 +15,7 @@ const Filters = ({ handleSubmit, handleChange, handleSort, handleReset, form }) 
       <form onSubmit={handleSubmit} className="user-orders-filter-form">
         <Accordion
           className="filter-accordion"
-          elevation={false}
+          elevation={0}
           style={{
             background: "transparent"
           }}
@@ -77,7 +77,7 @@ const Filters = ({ handleSubmit, handleChange, handleSort, handleReset, form }) 
         
         <Accordion
           className="filter-accordion"
-          elevation={false}
+          elevation={0}
           style={{
             background: "transparent"
           }}
@@ -127,10 +127,10 @@ const Filters = ({ handleSubmit, handleChange, handleSort, handleReset, form }) 
           </AccordionDetails>
         </Accordion>
         <div className="user-orders-sort-submit">
-          <label htmlFor="status"> Sort By:
+          <label htmlFor="status-sort"> Sort By:
             <select
-              id="status"
-              name="status"
+              id="status-sort"
+              name="status-sort"
               value={form.orderBy}
               onChange={handleSort}
               className="user-order-filter-input"
