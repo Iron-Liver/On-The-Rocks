@@ -6,6 +6,7 @@ import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
 import { getAllCategories } from '../../Redux/Category/categoryActions'
+import ProductImages from './productImages';
 
 export const useStyles = makeStyles((theme) => ({
 	root: {
@@ -308,6 +309,10 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 									/>
 								</Grid>
 							</Grid>
+
+							<div>
+								<ProductImages id={input.sku} />
+							</div>
 
 						</Grid>
 						<Grid container direction="row" justifyContent="center" alignItems="center">
