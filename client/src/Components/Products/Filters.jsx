@@ -1,4 +1,4 @@
-import './filters.css';
+import './Filters.css';
 import { useEffect, React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,8 +6,6 @@ import {
   filterByPrice,
 } from "../../Redux/Products/productsActions";
 import {
-  Button,
-  Grid,
   Accordion,
   AccordionSummary,
   AccordionDetails,
