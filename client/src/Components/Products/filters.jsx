@@ -1,40 +1,63 @@
 import './filters.css';
 import { useEffect, React } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  filterByCategory,
-} from "../../Redux/Products/productsActions";
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@material-ui/core";
+import { Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 import { ExpandMore } from '@material-ui/icons'
 import { getAllCategories } from "../../Redux/Category/categoryActions";
+import { useLocation, useHistory } from 'react-router';
 
-const Filters = ({ setPage }) => {
+const Filters = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
   const dispatch = useDispatch();
+  const { search } = useLocation();
+  const query = new URLSearchParams(search);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getAllCategories());
   }, [dispatch]);
 
-  function handleSelect(id) {
-    setPage(1);
-    console.log(id)
-    dispatch(filterByCategory(id));
-  }
+  const handleCategory = (name) => {
+    query.set('category', name);
+    history.push({search: query.toString()})
+  };
 
-  //------------------------------------
+  const handleOnSale = (e) => {
+    if(!e.target.checked) {
+      query.delete('onSale');
+      query.delete('page');
+      history.push({search: query.toString()});
+      return;
+    }
+    query.set('onSale', "_");
+    query.delete('page');
+    history.push({search: query.toString()});
+  };
 
   return (
     <div style={{ width: "100%" }}>
-      <h2 style={{ marginTop: 0 }}>Filters</h2>
-
+      <h2 style={{ marginTop: 0, fontFamily: `"Montserrat", sans-serif`, fontWeight: 400 }}>Filters</h2>
+      <div style={{ margin: "0 0 15px 15px"}}>
+        <label htmlFor="on_sale">
+          <h3 style={{
+            margin: 0,
+            display: "inline"
+          }}>
+            ON SALE
+          </h3>
+          </label>
+        <input 
+          type="checkbox" 
+          name="on_sale"
+          checked={Boolean(query.get('onSale') && query.get('onSale') === "_")} 
+          onChange={handleOnSale}
+          className="check-anon"
+          style={{ marginBottom: "7px" }}
+        />
+      </div>
       <Accordion
         className="filter-accordion"
-        elevation={0}
+        elevation={false}
         style={{
           background: "transparent",
           borderTop: "1px solid #1d1813"
@@ -44,55 +67,43 @@ const Filters = ({ setPage }) => {
           className="filter-accordion-summary"
           expandIcon={<ExpandMore />}
         >
-          <h3
-            style={{
-              margin: 0,
-            }}
-          >
+          <h3 style={{margin: 0}}>
             PRICE
           </h3>
         </AccordionSummary>
         <AccordionDetails>
           <input type="checkbox" />
-          <h4
-            style={{
-              margin: 0,
-              fontWeight: 300
-            }}
-          >
+          <h4 style={{
+            margin: 0,
+            fontWeight: 300
+          }}>
             Under $100.00
           </h4>
         </AccordionDetails>
         <AccordionDetails>
           <input type="checkbox" />
-          <h4
-            style={{
-              margin: 0,
-              fontWeight: 300
-            }}
-          >
+          <h4 style={{
+            margin: 0,
+            fontWeight: 300
+          }}>
             $100.00 - $250.00
           </h4>
         </AccordionDetails>
         <AccordionDetails>
           <input type="checkbox" />
-          <h4
-            style={{
-              margin: 0,
-              fontWeight: 300
-            }}
-          >
+          <h4 style={{
+            margin: 0,
+            fontWeight: 300
+          }}>
             $250.00 - $500.00
           </h4>
         </AccordionDetails>
         <AccordionDetails>
           <input type="checkbox" />
-          <h4
-            style={{
-              margin: 0,
-              fontWeight: 300
-            }}
-          >
+          <h4 style={{
+            margin: 0,
+            fontWeight: 300
+          }}>
             Above $500.00
           </h4>
         </AccordionDetails>
@@ -100,7 +111,7 @@ const Filters = ({ setPage }) => {
 
       <Accordion
         className="filter-accordion"
-        elevation={0}
+        elevation={false}
         style={{
           background: "transparent",
           borderTop: "1px solid #1d1813"
@@ -110,40 +121,40 @@ const Filters = ({ setPage }) => {
           className="filter-accordion-summary"
           expandIcon={<ExpandMore />}
         >
-          <h3
-            style={{
-              margin: 0,
-            }}
-          >
-            TYPE
+          <h3 style={{ margin: 0 }}>
+            TYPE  
           </h3>
         </AccordionSummary>
         <AccordionDetails 
           key={Math.random()}
-          onClick={() => handleSelect('all')}
-          className="filter-accordion-details-cat"
+          onClick={() => handleCategory('all')}
+          className={
+            !query.get('category') || query.get('category') === "all" 
+                ? "filter-accordion-details-cat-active" 
+                : "filter-accordion-details-cat"
+          }
         >
-          <h4
-            style={{
-              margin: 0,
-            }}
-          >
+          <h4 style={{ margin: 0 }}>
             All
           </h4>
         </AccordionDetails>
         {categories && 
-        categories.map(({ name, id }) => (
+        categories.map(({ name }) => (
           <AccordionDetails 
             key={Math.random()}
-            onClick={() => handleSelect(id)}
-            className="filter-accordion-details-cat"
+            onClick={() => handleCategory(name)}
+            className={
+              query.get('category') === name 
+                ? "filter-accordion-details-cat-active" 
+                : "filter-accordion-details-cat"
+            }
           >
             <h4
               style={{
                 margin: 0,
               }}
             >
-              {name}
+              {name[0].toUpperCase() + name.slice(1)}
             </h4>
           </AccordionDetails>
         ))}
@@ -151,7 +162,7 @@ const Filters = ({ setPage }) => {
 
       <Accordion
         className="filter-accordion"
-        elevation={0}
+        elevation={false}
         style={{
           background: "transparent",
           borderTop: "1px solid #1d1813"
@@ -230,15 +241,3 @@ const Filters = ({ setPage }) => {
 };
 
 export default Filters;
-
-// <FormControl component="fieldset">
-//     <h4>Order By Category</h4>
-//     <RadioGroup className={classes.form} aria-label="gender" name="category" onChange={handleSelect}>
-//         <FormControlLabel value="Vodka" control={<Radio />} label="Vodka" />
-//         <FormControlLabel value="Tequila" control={<Radio />} label="Tequila" />
-//         <FormControlLabel value="Whisky" control={<Radio />} label="Whisky" />
-//         <FormControlLabel value="Gin" control={<Radio />} label="Gin" />
-//         <FormControlLabel value="Liqueur" control={<Radio />} label="Liqueur" />
-//         <FormControlLabel value="Brandy" control={<Radio />} label="Brandy" />
-//     </RadioGroup>
-// </FormControl>

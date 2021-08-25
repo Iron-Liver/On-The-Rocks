@@ -2,6 +2,7 @@ import {React, useEffect }from "react"
 import './Brands.css'
 import Aos from 'aos';
 import 'aos/dist/aos.css'
+import { Link } from "react-router-dom";
 
 
 
@@ -28,40 +29,40 @@ export default function Brands() {
             <span className="description">Red Wines</span>
           </li> */}
           <li>
-            <a href="/products">
+            <Link to="/products?category=whisky">
               <img src="https://images.alphacoders.com/109/thumb-1920-1093028.jpg" data-aos="" className="imege3" alt=""/>
               <span className="description">Whisky</span>
-            </a>      
+            </Link>      
           </li>
           <li>
-          <a href="/products">
-              <img src="https://wallpaperaccess.com/full/2728194.jpg" data-aos="" className="imege4" alt=""/>
-              <span className="description">Vodka</span>
-            </a>
+          <Link to="/products?category=Vodka">
+            <img src="https://wallpaperaccess.com/full/2728194.jpg" data-aos="" className="imege4" alt=""/>
+            <span className="description">Vodka</span>
+          </Link>
           </li>
           <li>
-            <a href="/products">
+            <Link to="/products?category=Tequila">
               <img src="https://lh5.googleusercontent.com/-yPvuOQ-NAKk/TYw2nn8iI4I/AAAAAAAAACU/6LuxAJDCefo/s1600/jose-cuervo-black1.jpg" data-aos="" alt=""/>
               <span className="description">Tequila</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/products">
+            <Link to="/products?category=Ron">
               <img data-aos="" src="https://c1.wallpaperflare.com/preview/647/327/753/rum-alcohol-alcoholic-beverage-drink.jpg" alt=""/>
               <span className="description">Ron</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/products">
+            <Link to="/products?category=Gin">
               <img  data-aos="" src="https://beffshuff.com/wp-content/uploads/2019/12/DSC_0687.jpg" alt=""/>
               <span className="description">Gin</span>
-            </a>
+            </Link>
           </li>    
           <li>
-            <a href="/products">
+            <Link to="/products?category=Brandy">
               <img data-aos="" src="https://wallpapercave.com/wp/wp3346116.jpg" alt="" />
               <span className="description">Brandy</span>
-            </a>
+            </Link>
           </li>
           {/* <li>
             <a href="#">

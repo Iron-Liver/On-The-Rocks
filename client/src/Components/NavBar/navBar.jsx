@@ -1,118 +1,108 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import {
-    AppBar,
-    Toolbar,
-    CssBaseline,
-    Drawer,
-    Hidden,
-    IconButton,
-    Container,
-} from "@material-ui/core";
-import {
-    Menu,
-    ShoppingCart,
-    Search,
-    AccountCircle,
-    ExitToApp,
-    FavoriteBorder,
-} from "@material-ui/icons";
+import { Link, useHistory } from 'react-router-dom'
+import { AppBar, Toolbar, CssBaseline, Drawer, Hidden, IconButton, Container } from '@material-ui/core'
+import { Menu, ShoppingCart, Search, AccountCircle, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList, CartList } from "./drawerLists";
 import NavBox from "./navBox";
 import { logOutUser } from "../../Redux/Users/userActions";
-import verifyUser from "../../Utils/verifyUser";
-import logoBrown from "../../assets/on-the-rocks-brown.png";
-import logoWhite from "../../assets/on-the-rocks-white.png";
+import logoBrown from '../../assets/on-the-rocks-brown.png'
+import logoWhite from '../../assets/on-the-rocks-white.png'
+import { useLocation } from "react-router";
+import swal from "sweetalert";
+import verifyUser from '../../Utils/verifyUser';
 
-const useStyles = makeStyles((theme) => ({
+function NavBar(props) {
+  const dispatch = useDispatch()
+  const location = useLocation();
+  const path = location.pathname === '/' ? '#fff': '#372c2eee'
+  const path1 = location.pathname === '/' ? '': '1px solid #d3d3d3'
+  const path2 = location.pathname === '/' ? logoWhite: logoBrown
+  const useStyles = makeStyles((theme) => ({
     root: {
-        display: "flex",
-        outline: "none",
-        backgroundColor: "d3d3d3",
+      display: "flex",
+      outline: 'none',
+      backgroundColor: "d3d3d3",
     },
     appBar: {
-        width: "100%",
-        background: "#f7f5f3",
-        transition: "all 300ms ease-out",
-        borderBottom: "1px solid #d3d3d3",
+      width: '100%',
+      background: "transparent",
+      transition: 'all 300ms ease-out',
+      borderBottom: path1,
     },
     appBarSolid: {
-        width: "100%",
-        background: "#372c2eee",
-        transition: "background 300ms ease-out",
-        borderBottom: "1px solid gray",
+      width: '100%',
+      background: '#372c2eee',
+      transition: 'background 300ms ease-out',
+      borderBottom: '1px solid gray'
     },
     menu: {
-        width: "100%",
-        display: "flex",
-        justifyContent: "flex-end",
-        paddingRight: 0,
-    },
+      width: "100%",
+      display: 'flex',
+      justifyContent: 'flex-end',
+      paddingRight: 0
+  },
     menuButton: {
-        marginRight: theme.spacing(0),
-        marginLeft: theme.spacing(0),
+      marginRight: theme.spacing(0),
+      marginLeft: theme.spacing(0),
     },
     wishButton: {
-        color: "#372c2eee",
-        "&:hover": {
-            color: "black",
-        },
+      color:path,
+      '&:hover':{
+        color:'black',
+      }
     },
     icons: {
-        color: "#fff",
-        "&:hover": {
-            color: "black",
-        },
+      color:'#fff',
+      '&:hover':{
+        color:'black',
+      }
     },
     mobile: {
-        [theme.breakpoints.up("sm")]: {
-            display: "none",
-        },
+      [theme.breakpoints.up("sm")]: {
+        display: "none"
+      }
     },
     // necessary for content to be below app bar
     toolbar: {
-        display: "flex",
-        width: "100%",
-        background: "transparent",
+      display: "flex",
+      width: '100%',
+      background: "transparent"
     },
     blank: {
-        marginTop: "93.85px",
+      marginTop: "93.85px"
     },
     drawerPaper: {
-        width: "70%",
-        [theme.breakpoints.up("sm")]: {
-            width: "30%",
-            flexShrink: 0,
-        },
+      width: '70%',
+      [theme.breakpoints.up("sm")]: {
+        width: '30%',
+        flexShrink: 0
+      }
     },
     drawerPaperTop: {
-        width: "100%",
-        height: theme.mixins.toolbar.minHeight,
+      width: "100%",
+      height: theme.mixins.toolbar.minHeight
     },
     content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
+      flexGrow: 1,
+      padding: theme.spacing(3)
     },
     navLogo: {
-        width: "120px",
-        marginTop: "12px",
+      width: "120px",
+      marginTop: "12px",
     },
     blackColor: {
-        color: "#372c2e",
-    },
-}));
-
-function NavBar(props) {
-    const dispatch = useDispatch();
-    // const { window } = props;
-    const classes = useStyles();
-    const history = useHistory();
-    const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
-    const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
-    const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
-    const [solid, setSolid] = useState(false);
+      color: path
+    }
+  }));
+  // const { window } = props;
+  const classes = useStyles();
+  const history = useHistory();
+  const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
+  const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const [solid, setSolid] = useState(false);
 
     const changeBackground = () => {
         if (window.scrollY > 20) {
@@ -124,10 +114,24 @@ function NavBar(props) {
 
     window.addEventListener("scroll", changeBackground);
 
-    const handleLogOut = () => {
-        dispatch(logOutUser());
-        history.push("/");
-    };
+  const logOutAlert = () => {
+    swal({
+      title: 'LogOut',
+      text: 'Want to logout?',
+      icon: 'warning',
+      buttons: ['Cancel', 'Yes']
+    }).then(answer => {
+      if(answer){
+        handleLogOut();
+      }
+    })
+  }
+
+
+  const handleLogOut = () => {
+    dispatch(logOutUser());
+    history.push("/")
+  };
 
     const handleProfile = () => {
         const currentUser = verifyUser();
@@ -144,24 +148,6 @@ function NavBar(props) {
             isAdmin
                 ? history.push(`/private/profile/${id}`)
                 : history.push(`/profile/${id}`);
-        }
-    };
-
-    const handleWishlist = () => {
-        const currentUser = verifyUser();
-        if (currentUser?.hasOwnProperty("logout")) {
-            dispatch(logOutUser());
-            window.location.replace(`${window.location.origin}/login`);
-            alert("please login");
-        }
-        if (!currentUser) {
-            return history.push("/login");
-        } else {
-            const { id, isAdmin } = currentUser;
-
-            isAdmin
-                ? history.push(`/private/profile/${id}/wishlist`)
-                : history.push(`/profile/${id}/wishlist`);
         }
     };
 
@@ -190,7 +176,7 @@ function NavBar(props) {
                     className={solid ? classes.appBarSolid : classes.appBar}
                 >
                     <Toolbar className={classes.toolbar}>
-                        <div style={{ flexGrow: "1", width: "100%" }}>
+                        <div style={{ flexGrow: "1", width: "100%", color: 'white' }}>
                             <Link
                                 to="/"
                                 style={{
@@ -210,7 +196,7 @@ function NavBar(props) {
                                     />
                                 ) : (
                                     <img
-                                        src={logoBrown}
+                                        src={path2}
                                         alt="on-the-rocks-logo"
                                         className={classes.navLogo}
                                         style={{
@@ -241,67 +227,40 @@ function NavBar(props) {
                                 />
                             </IconButton>
 
-                            <IconButton
-                                color="inherit"
-                                aria-label="open drawer"
-                                edge="start"
-                                onClick={handleDrawerCart}
-                                className={classes.menuButton}
-                            >
-                                <ShoppingCart
-                                    className={`${classes.icons} ${
-                                        solid ? "" : classes.blackColor
-                                    }`}
-                                />
-                            </IconButton>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerCart}
+              className={classes.menuButton}
+            >
+              <ShoppingCart className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
+            </IconButton>
+            
+              <Hidden xsDown>  
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    className={classes.menuButton}
+                    onClick={handleProfile}
+                    >
+                    <AccountCircle className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
+                  </IconButton>
+              </Hidden>
 
-                            <Hidden xsDown>
-                                <IconButton
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    edge="start"
-                                    className={classes.menuButton}
-                                    onClick={handleWishlist}
-                                >
-                                    <FavoriteBorder
-                                        className={`${classes.icons} ${
-                                            solid ? "" : classes.blackColor
-                                        }`}
-                                    />
-                                </IconButton>
-                            </Hidden>
-
-                            <Hidden xsDown>
-                                <IconButton
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    edge="start"
-                                    className={classes.menuButton}
-                                    onClick={handleProfile}
-                                >
-                                    <AccountCircle
-                                        className={`${classes.icons} ${
-                                            solid ? "" : classes.blackColor
-                                        }`}
-                                    />
-                                </IconButton>
-                            </Hidden>
-
-                            <Hidden xsDown>
-                                <IconButton
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    edge="start"
-                                    className={classes.menuButton}
-                                    onClick={handleLogOut}
-                                >
-                                    <ExitToApp
-                                        className={`${classes.icons} ${
-                                            solid ? "" : classes.blackColor
-                                        }`}
-                                    />
-                                </IconButton>
-                            </Hidden>
+           
+            <Hidden xsDown>  
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  className={classes.menuButton}
+                  onClick={logOutAlert}
+                >
+                  <ExitToApp className={`${classes.icons} ${solid ? "" : classes.blackColor}`}/>
+                </IconButton>
+            </Hidden>
 
                             <IconButton
                                 color="inherit"

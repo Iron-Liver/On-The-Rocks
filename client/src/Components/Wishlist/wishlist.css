@@ -1,3 +1,9 @@
+.user-wishlist-tab-container {
+  width: 100%;
+  padding: 30px 30px; 
+  min-height: 90vh
+}
+
 .user-wishlist-item-title {
   font-weight: 400;
 }
@@ -53,6 +59,24 @@
   position: relative;
   left: -10px;
   top: -17px;
+  width: 20px;
+}
+
+.landing-flag {
+  top: -417px;
+  left: 195px;
+}
+
+.landing-flag-shadow {
+  top: -350px;
+  left: 198px;
+}
+
+#landing-flag-icon {
+  color: white; 
+  position: relative;
+  left: -10px;
+  top: -1px;
   width: 20px;
 }
 

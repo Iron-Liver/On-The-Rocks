@@ -1,3 +1,4 @@
+import './products.css';
 import { useEffect } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { makeStyles,  Button,  Container } from '@material-ui/core'
@@ -71,6 +72,7 @@ const ProductsList = () => {
 	];
 
     return(
+      <div className="admin-products-tab-container">
         <div className={classes.root}>  
             <ThemeProvider theme={theme}>
 
@@ -94,6 +96,7 @@ const ProductsList = () => {
 
 			</ThemeProvider>
         </div>
+      </div>
     )
 
 }
