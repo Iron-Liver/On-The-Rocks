@@ -1,6 +1,5 @@
 
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { useLocation, useRouteMatch } from 'react-router';
 
 //User imports
 import LoginUser from "./Components/Users/UserLogin/userLogin";
