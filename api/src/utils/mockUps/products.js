@@ -2,6 +2,17 @@ const { Product } = require('../../db');
 
 const productsMockUp = async () => {
     try {
+        // const test = await Product.create({
+        //   name: "test product",
+        //   description: "a test product",
+        //   price: 0.50,
+        //   sku: "n8",
+        //   size: "2 mL",
+        //   brand: "Test",
+        //   category: "Test",
+        //   image: "https://d1es63ffnb4bhv.cloudfront.net/easyarticles/images/users/6128/test.jpg"
+        // })
+        // test.addCategories([5]);
         const absolut = await Product.create({
             name: "Absolut Vodka 1L",
             description: "With 400 years of Swedish tradition behind it, this superb Vodka is extremely smooth. Using the purest Swedish water from the town of Åhus and wheat grown in the surrounding countryside Absolut have maintained the tradition of pure and perfect Swedish Vodka.",
@@ -11,8 +22,7 @@ const productsMockUp = async () => {
             brand: "Absolut",
             category: "Vodka",
             image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-absolut-1l_450x650.jpg?v=1559562467",
-            stock: 10,
-            
+            stock: 10
             
         })
         absolut.addCategories([5])
@@ -73,6 +83,7 @@ const productsMockUp = async () => {
             price:43.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jose-cuevo-gold_720x.jpg?v=1559566583",
             stock: 10,
+            onSale: 34.99
         })
         joseCuervoEspecial.addCategories([6])
       
@@ -85,6 +96,7 @@ const productsMockUp = async () => {
             price:47.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-sapphire_720x.jpg?v=1607759796",
             stock: 10,
+            onSale: 35.99
         })
         bombaySapphireLondonDry.addCategories([10])
       
@@ -107,6 +119,7 @@ const productsMockUp = async () => {
             brand:"Hendrick's",
             sku:"a9",
             price:70.99,
+            onSale: 60.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hendricks-gin_720x.jpg?v=1567926371",
             stock: 10,
         })
@@ -119,6 +132,7 @@ const productsMockUp = async () => {
             brand:"Glenfiddich",
             sku:"a10",
             price:4699.99,
+            onSale: 4500.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-glenfiddich-40yo_720x.jpg?v=1614596002",
             stock: 10,
         })
@@ -133,6 +147,7 @@ const productsMockUp = async () => {
             price:8999.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hibiki-30-kacho-fugestu_720x.jpg?v=1615167006",
             stock: 10,
+            onSale:8499.99
         })
         hibiki.addCategories([4])
         const macallan = await  Product.create({
@@ -164,6 +179,7 @@ const productsMockUp = async () => {
             brand:"Remy Martin",
             sku:"a14",
             price:679.99,
+            onSale: 650.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-remy-martin-shanghai_720x.jpg?v=1559369227",
             stock: 10,
         })
@@ -177,7 +193,7 @@ const productsMockUp = async () => {
             sku:"a15",
             price:549.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-martel-chanteloup_720x.jpg?v=1592737654",
-            stock: 10,
+            stock: 10
         })
         martellChanteloup.addCategories([7])
         const caffoVecchio = await  Product.create({
@@ -189,6 +205,7 @@ const productsMockUp = async () => {
             price:549.99,
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-vecchio-amaro-capo-riserva_900x.jpg?v=1625615358",
             stock: 10,
+            onSale: 499.99
         })
         caffoVecchio.addCategories([11,12])
         const jagermeister = await  Product.create({

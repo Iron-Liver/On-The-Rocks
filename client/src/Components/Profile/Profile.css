@@ -1,0 +1,17 @@
+.profile-container {
+  display: flex; 
+  justify-content: space-evenly; 
+  height: 100%;
+}
+
+.profile-tab-content { 
+  width: 100%;
+  padding: 30px 30px; 
+  min-height: 90vh
+}
+
+@media (max-width: 860px) {
+  .profile-container {
+    flex-direction: column;
+  }
+}

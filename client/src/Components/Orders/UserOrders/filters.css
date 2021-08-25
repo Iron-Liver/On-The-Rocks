@@ -1,0 +1,65 @@
+.user-orders-filter-container {
+  margin-bottom: 20px;
+}
+
+.user-orders-filter-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters-basics-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  align-items: baseline;
+}
+
+.filters-basics-container div input[type=text], 
+.filters-basics-container select,
+.user-order-filter-input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  margin: 0 0 5px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #372c2eee;
+  outline: none;
+}
+
+.user-orders-sort-submit label {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0 0 5px 20px;
+  font-size: 15px;
+  word-break: keep-all;
+  min-width: max-content;
+}
+
+.user-orders-sort-submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 456px) {
+  .user-orders-sort-submit {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 325px) {
+  .user-orders-sort-submit div {
+    display: flex;
+    justify-content: center;
+  }
+
+  .user-orders-sort-submit div button {
+    margin: 0 2px;
+  }
+
+  .user-orders-sort-submit label,
+  .user-orders-sort-submit label select {
+    font-size: 11px;
+  }
+}

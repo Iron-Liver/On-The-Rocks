@@ -50,6 +50,13 @@ const productReducer = (state = initialState, action) => {
             }
 
         case FILTER_BY_CATEGORY:
+            if(action.payload === "all") {
+              return {
+                ...state,
+                FoundProds: state.Products
+              }
+            }
+
             let prods = state.Products?.map((e) => e.categories?.filter(e => e.id === Number(action.payload)).length !== 0 ? e : null).filter(e => e !== null)
             return {
                 ...state,

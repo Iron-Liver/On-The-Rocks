@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './Checkout.css';
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Hidden } from "@material-ui/core"
 
 // Import Swiper styles
 import "swiper/swiper.min.css";
@@ -9,10 +10,14 @@ import "swiper/components/pagination/pagination.min.css"
 
 // import Swiper core and required modules
 import SwiperCore, {
-  Navigation,Pagination,Mousewheel,Keyboard
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard
 } from 'swiper/core';
 import ProductSlide from './ProductSlide';
 import OrderInfo from './OrderInfo';
+import ProductSlideResponsive from './ProductSlideResponsive';
 
 // install Swiper modules
 SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard]);
@@ -34,7 +39,6 @@ const Checkout = ({ order, data, stock }) => {
     }
    },[data, stock])
 
-  useEffect(() => {})
   return (
     <div className="checkout-wrapper">
       <div style={{width: "100%", height: "100%", display: "flex", justifyContent: "center"}}>
@@ -52,17 +56,35 @@ const Checkout = ({ order, data, stock }) => {
       </div>
       <div className="productview-wrapper">
         <div className="swiper-wrap">
-          <Swiper 
-            navigation={order.order_products.length > 1}
-            mousewheel={true} 
-            keyboard={true}
-          >
-            {order.order_products.map(product => 
-              <SwiperSlide key={Math.random() * 3}>
-                <ProductSlide product={product} />
-              </SwiperSlide>
-            )}
-          </Swiper>
+          <Hidden smDown>
+            <Swiper 
+              navigation={order.order_products.length > 1}
+              mousewheel={true} 
+              keyboard={true}
+            >
+              {order.order_products.map(product => 
+                <SwiperSlide key={Math.random() * 3}>
+                    <ProductSlide product={product} />
+                </SwiperSlide>
+              )}
+            </Swiper>
+          </Hidden>
+          <Hidden mdUp>
+            <h2 style={{textAlign: "center", fontFamily: `"Heebo", sans-serif`}}>PRODUCTS</h2>
+            <Swiper
+              slidesPerView={2} 
+              spaceBetween={30} 
+              slidesPerGroup={2}
+              loopFillGroupWithBlank={true} 
+              pagination={true}
+            >
+              {order.order_products.map(product => 
+                <SwiperSlide key={Math.random() * 3}>
+                    <ProductSlideResponsive product={product} />
+                </SwiperSlide>
+              )}
+            </Swiper>
+          </Hidden>
         </div>
       </div>
     </div>

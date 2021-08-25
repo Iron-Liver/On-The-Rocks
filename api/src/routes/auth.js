@@ -85,7 +85,7 @@ router.post("/email", async (req, res, next) => {
                 Authenticated: true,
             },
             SECRET_KEY,
-            { expiresIn: "1hr" }
+            { expiresIn: 60 * 10 } // 10 min
         );
         await transporter.sendMail({
             from: `"On The Rocks" <${GMAIL_APP_EMAIL}>`, // sender address

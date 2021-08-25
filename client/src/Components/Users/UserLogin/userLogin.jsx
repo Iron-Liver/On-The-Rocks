@@ -3,12 +3,17 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Grid, Button, TextField } from "@material-ui/core";
 import { Email, VpnKey } from "@material-ui/icons";
-import { loginUser, sendEmail, GLogin } from "../../../Redux/Users/userActions";
+import {
+    loginUser,
+    sendEmail,
+    GLogin,
+    logOutUser,
+} from "../../../Redux/Users/userActions";
 import useFormStyles from "../../../Utils/formStyles";
 import { GoogleLogin } from "react-google-login";
-import jwt from "jsonwebtoken";
+import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -16,14 +21,12 @@ export default function UserLogin() {
     const classes = useFormStyles();
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const currentUser = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
-
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
     const [input, setInput] = useState({
         email: "",
         password: "",
@@ -53,7 +56,7 @@ export default function UserLogin() {
     );
 
     const responseSuccessGoogle = (response) => {
-        console.log('success',response);
+        console.log("success", response);
         try {
             dispatch(GLogin(response));
         } catch (e) {
@@ -67,7 +70,7 @@ export default function UserLogin() {
     };
 
     const responseRejectGoogle = (response) => {
-        console.log('error',response);
+        console.log("error", response);
         Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -89,7 +92,7 @@ export default function UserLogin() {
     };
 
     return (
-        <div>
+        <div style={{ background: "white" }}>
             {}
             <h1 className={classes.title}>Login</h1>
             <form noValidate autoComplete="off">
@@ -156,9 +159,11 @@ export default function UserLogin() {
                                     Recover password
                                 </Button>
                             </Link>
-                            <br/>
+                            <br />
                             <GoogleLogin
-                                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                clientId={
+                                    process.env.REACT_APP_GOOGLE_CLIENT_ID
+                                }
                                 buttonText="Google"
                                 onSuccess={responseSuccessGoogle}
                                 onFailure={responseRejectGoogle}

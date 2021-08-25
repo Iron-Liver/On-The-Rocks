@@ -78,6 +78,10 @@ module.exports = (sequelize) => {
         values: ["pending", "processing", "created", "cancelled", "completed"],
       }),
       allowNull: false
+    },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     paranoid: true

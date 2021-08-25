@@ -1,7 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Container, ButtonBase } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { Container, ButtonBase } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import verifyUser from "../../Utils/verifyUser";
+import { logOutUser } from "../../Redux/Users/userActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,28 +13,27 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: "nowrap",
         width: "100%",
         justifyContent: "space-around",
-        
+        fontFamily: "Montserrat",
     },
     text: {
         position: "relative",
         "&:hover": {
             zIndex: 1,
             "& $imageMarked": {
-            width: "calc(80%)",
-            left: "calc(10%)",
-            transition: 'all 0.35s ease-out',
+                width: "calc(80%)",
+                left: "calc(10%)",
+                transition: "all 0.35s ease-out",
             },
-        }
+        },
     },
     imageTitle: {
         position: "relative",
-        width: '70px',
+        width: "70px",
         padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
             theme.spacing(1) + 2
         }px`,
-        '&:hover': {
-            color: '#bcd8c3',
-          }
+        fontFamily: "Montserrat",
+        fontWeight: "500",
     },
     imageMarked: {
         height: 2,
@@ -40,17 +42,35 @@ const useStyles = makeStyles((theme) => ({
         position: "absolute",
         bottom: 1,
         left: "calc(40%)",
-        transition: 'all 0.35s ease-out',
+        transition: "all 0.35s ease-out",
     },
+    blackBack: {
+        backgroundColor: "#372c2e",
+    },
+    blackColor: {
+        color: "#372c2e",
+        fontFamily: "Montserrat",
+        fontWeight: "500",
+    },
+}));
 
-}))
-
-export const NavBox = () => {
+export const NavBox = ({ solid }) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const currentUser = verifyUser();
+    if (currentUser?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        window.location.replace(`${window.location.origin}/login`);
+        alert("please login");
+    }
 
     return (
         <Container className={classes.root}>
-            <Link to='/sale' className="linkNav" style={{textDecoration: 'none', color: 'white'}}>
+            <Link
+                to="/sale"
+                className="linkNav"
+                style={{ textDecoration: "none", color: "white" }}
+            >
                 <ButtonBase
                     focusRipple
                     key={"On Sale"}
@@ -60,33 +80,55 @@ export const NavBox = () => {
                         component="span"
                         variant="subtitle1"
                         color="inherit"
-                        className={classes.imageTitle}
+                        className={`${classes.imageTitle} ${
+                            solid ? "" : classes.blackColor
+                        }`}
                     >
-                        {"On Sale"}
-                        <span className={classes.imageMarked} />
+                        {"ON SALE"}
+                        <span
+                            className={`${classes.imageMarked} ${
+                                solid ? "" : classes.blackBack
+                            }`}
+                        />
                     </p>
                 </ButtonBase>
             </Link>
 
-            <Link to='/register' className="linkNav" style={{textDecoration: 'none', color: 'white'}}>
-                <ButtonBase
-                    focusRipple
-                    key={"Categories"}
-                    className={classes.text}
+            {!currentUser && (
+                <Link
+                    to="/register"
+                    className="linkNav"
+                    style={{ textDecoration: "none", color: "white" }}
                 >
-                    <p
-                        component="span"
-                        variant="subtitle1"
-                        color="inherit"
-                        className={classes.imageTitle}
+                    <ButtonBase
+                        focusRipple
+                        key={"Categories"}
+                        className={classes.text}
                     >
-                        {"Register"}
-                        <span className={classes.imageMarked} />
-                    </p>
-                </ButtonBase>
-            </Link>
-            
-            <Link to='/products' className="linkNav" style={{textDecoration: 'none', color: 'white'}}>
+                        <p
+                            component="span"
+                            variant="subtitle1"
+                            color="inherit"
+                            className={`${classes.imageTitle}  ${
+                                solid ? "" : classes.blackColor
+                            }`}
+                        >
+                            {"REGISTER"}
+                            <span
+                                className={`${classes.imageMarked} ${
+                                    solid ? "" : classes.blackBack
+                                }`}
+                            />
+                        </p>
+                    </ButtonBase>
+                </Link>
+            )}
+
+            <Link
+                to="/products"
+                className="linkNav"
+                style={{ textDecoration: "none", color: "white" }}
+            >
                 <ButtonBase
                     focusRipple
                     key={"View All"}
@@ -96,15 +138,20 @@ export const NavBox = () => {
                         component="span"
                         variant="subtitle1"
                         color="inherit"
-                        className={classes.imageTitle}
+                        className={`${classes.imageTitle}  ${
+                            solid ? "" : classes.blackColor
+                        }`}
                     >
-                        {"View All"}
-                        <span className={classes.imageMarked} />
+                        {"VIEW ALL"}
+                        <span
+                            className={`${classes.imageMarked} ${
+                                solid ? "" : classes.blackBack
+                            }`}
+                        />
                     </p>
                 </ButtonBase>
             </Link>
-
         </Container>
-    )
-}
+    );
+};
 export default NavBox;

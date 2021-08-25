@@ -15,19 +15,22 @@ import {
   LocalBar,
   Receipt,
   Star,
-  ListAlt,
+  PersonAdd,
+  Casino,
   Business,
   Search,
   AccountCircle,
   Loyalty,
   ExitToApp,
-  ArrowForwardIos
+  ArrowForwardIos,
+  ArrowBackIos
 } from "@material-ui/icons";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { getProducts } from "../../Redux/Products/productsActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { logOutUser } from '../../Redux/Users/userActions';
+import jwt from 'jsonwebtoken';
 
 const useStyles = makeStyles((theme) => ({
   autocomplete: {
@@ -107,7 +110,9 @@ title:{
 selectEmpty: {
     marginTop: theme.spacing(2),
 },
-  toolbar: theme.mixins.toolbar,
+toolbar: {
+  height: "max-content"
+},
 icon:{
   marginTop: "2%"
 }  
@@ -115,17 +120,33 @@ icon:{
 
 
 
-export const MenuList = () => {
+export const MenuList = ({ handleDrawerMenu }) => {
   const dispatch = useDispatch();
+
+  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
+  jwt.verify(JSON.parse(localStorage.getItem('token')), 
+  process.env.REACT_APP_SECRET_KEY) : null
+
+  const userId = localProfile?.id 
 
   const logOut = () => {
     dispatch(logOutUser());
   };
-
-  const classes = useStyles();
+  
   return (
     <div>
-      <div className={classes.toolbar}>OnTheRocks</div>
+      <div style={{
+        display: "flex", 
+        width: "100%", 
+        justifyContent: "flex-end",
+        height: "41px"
+      }}>
+        <Button 
+          onClick={handleDrawerMenu}
+        >
+          <ArrowBackIos/>
+        </Button>
+      </div>
       <Divider />
       <List component="nav">
         <Link to="/products" style={{ textDecoration: "none", color: "black" }}>
@@ -146,24 +167,12 @@ export const MenuList = () => {
           </ListItem>
         </Link>
 
-        <Link
-          to="/categories"
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <ListAlt />
-            </ListItemIcon>
-            <ListItemText primary="Categories" />
-          </ListItem>
-        </Link>
-
         <Divider />
 
         {localStorage.getItem("token") ? (
           <>
             <Link
-              to="/orders"
+              to={`/profile/${userId}/orders`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItem button>
@@ -186,6 +195,18 @@ export const MenuList = () => {
               </ListItem>
             </Link>
 
+            <Link
+              to="/roulette"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <Casino />
+                </ListItemIcon>
+                <ListItemText primary="Gamble" />
+              </ListItem>
+            </Link>
+
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
               <ListItem button onClick={logOut}>
                 <ListItemIcon>
@@ -197,7 +218,7 @@ export const MenuList = () => {
           </>
         ) : (
           <>
-            <Link
+          <Link
               to="/login"
               style={{ textDecoration: "none", color: "black" }}
             >
@@ -209,6 +230,19 @@ export const MenuList = () => {
                   primary={`${
                     localStorage.getItem("token") ? "My Profile" : "Login"
                   }`}
+                />
+              </ListItem>
+            </Link>
+            <Link
+              to="/register"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <PersonAdd />
+                </ListItemIcon>
+                <ListItemText
+                  primary='Register'
                 />
               </ListItem>
             </Link>
@@ -253,11 +287,21 @@ export const SearchList = () => {
     }
   };
 
+  const handleClick = () => {
+    var link = document.getElementById('Search');
+    window.location.replace(
+      `${window.location.origin}/products?search=${link.value
+        .split(" ")
+        .join("-")
+        .toLowerCase()}`
+    );
+  }
+
   return (
     <div className={classes.autocomplete}>
       <ListItem>
         <ListItemIcon>
-          <Search />
+          <Search onClick={handleClick}/>
         </ListItemIcon>
         <Autocomplete
           id="Search"

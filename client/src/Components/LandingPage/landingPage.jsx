@@ -1,53 +1,134 @@
 import './landingPage.css';
-// import image1 from '../../assets/xd1.jpg'
-// import image2 from '../../assets/xd2.jpg'
-// import React, { useRef, useState } from "react";
-// Import Swiper React components
-// import { Swiper, SwiperSlide } from "swiper/react";
-
+import im1 from '../../assets/au1.jpg'
+import im2 from '../../assets/au2.jpg'
+import im3 from '../../assets/au3.jpg'
+import React, { useEffect } from "react";
+import Locations from '../Maps/Locations'; 
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import SwiperOS from '../OnSale/swiperOS';
-
-
-
+//import aos  
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 import SwiperCore, {
   Navigation
 } from 'swiper/core';
-
+import Brands from '../Brands/Brands';
 // install Swiper modules
 SwiperCore.use([Navigation]);
 
-export const landingPage = () => {
+
+export const LandingPage = () => {
+
+    useEffect(() => {
+      Aos.init({duration:2000})
+    }, []);
+
+
+
     return (
       <div>
+      <div>
         <div>
-        <header className="landinghead">
-        </header>
-        <body>
-        
-        </body>
-        </div>
+          <header className="landinghead">
+          </header>
+        </div>             
         <div className="vox"></div>
+      </div>
       
-        <div className="slider">
 
-         {/*<Swiper navigation={true}>
-          <SwiperSlide >
-            <img src={image1} className="img1" alt='img1'></img>
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image2} className="img1" alt="img2"></img>
-          </SwiperSlide>
-        </Swiper>*/}
-
-        <SwiperOS/>
-        </div> 
-
+        <div data-aos="fade-right" className="title1">
+          <h1> On the Rocks is an independent self-made Argentinian family
+              owned business providing premium and collectable ranges of spirits.
+          </h1>
         </div>
+
+      <div className="slider">
+          
+        <div style={{
+          marginTop: "150px"
+        }}>
+          <div className="divider-page">
+            <div className="dividers"></div>
+            <h1 style={{color:'black', wordBreak: "keep-all", minWidth: "max-content"}}>On sale</h1>
+            <div className="dividers"></div>
+          </div>
+          <SwiperOS />
+        </div>
+      </div>
+      
+
+
+
+        <div data-aos="fade-up" className="AboutUsContainer">
+          <div className="divider-page">
+            <div className="dividers"></div>
+            <h1 style={{color:'black'}}>About us</h1>
+            <div className="dividers"></div>
+          </div>
+        </div>
+
+
+
+          <div className="container2">
+
+            <div className="card">
+              <figure className="card__thumb">
+                <img src={im3} alt="by Kyle Cottrell" className="card__image"/>
+                <figcaption className="card__caption">
+                  <h2 className="card__title">STOCK</h2>
+                  <p className="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt dolore quis pariatur voluptatum vitae totam id. Repellat delectus veritatis nesciunt illo voluptas voluptates vero culpa exercitationem officia aliquid. Eveniet.</p>
+                </figcaption>
+              </figure>
+            </div>
+
+                
+            <div className="card">
+              <figure className="card__thumb">
+                <img src={im2} alt=" Nathan Dumlao" className="card__image"/>
+                <figcaption className="card__caption">
+                  <h2 className="card__title">PRODUCTS</h2>
+                  <p className="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatem animi tenetur debitis! Reprehenderit, magnam amet quos inventore, aut minima eveniet, iste molestiae quo illum dicta corporis perferendis voluptates odio.</p>
+                </figcaption>
+              </figure>
+            </div>
+
+            <div className="card">
+              <figure className="card__thumb">
+                <img src={im1} alt=" Daniel Lincoln" className="card__image"/>
+                <figcaption className="card__caption">
+                  <h2 className="card__title">aaaa </h2>
+                  <p className="card__snippet">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore nemo deleniti provident iure tenetur totam sit reiciendis dolore obcaecati saepe, quisquam soluta sapiente nulla culpa veniam adipisci illum consequuntur assumenda.</p>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+
+
+
+        
+          <div  className="containerBrands">
+            <div className="divider-page">
+              <div className="dividers"></div>
+              <h1 style={{color:'black'}}>Shop by Tipe</h1>
+              <div className="dividers"></div>
+            </div>
+          </div>
+          <div className="brandsss">
+          <Brands />
+          </div>
+          <div className="location">
+              <Locations />
+          </div>
+
+    </div>
+
+
+      
     )
-}
-export default landingPage
+  }
+
+export default LandingPage;

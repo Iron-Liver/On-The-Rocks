@@ -1,14 +1,16 @@
 const { Review } = require("../../db.js");
 
 module.exports = async (req, res, next) => {
-	let {stars, description} = req.body;
+	let {stars, description, anonymous} = req.body;
 	let { id } = req.params;
 	try {
         if(id){
             const old = await Review.findOne({where: {id}})
-            if(old.stars === stars && old.description === description ) throw new Error("No changes were made")
+            if(old.stars === stars && old.description === description && old.anonymous == anonymous) {
+              throw new Error("No changes were made")
+            } 
             const result = await Review.update(
-                { ...stars, description},
+                { ...stars, description, anonymous},
                 {
                     where: { id }
                 })

@@ -10,6 +10,7 @@ module.exports = async (req, res, next) => {
     paymentMethod,
     zipCode,
     total,
+    status,
     cart
   } = req.body;
 
@@ -28,7 +29,8 @@ module.exports = async (req, res, next) => {
       paymentMethod,
       zipCode,
       total,
-      status: "pending"
+      status: status || "pending",
+      date: new Date().toLocaleString()
     };
 
     const order = await Order.create(newOrder);
