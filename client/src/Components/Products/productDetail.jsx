@@ -185,8 +185,8 @@ const ProductDetail = () => {
         window.location.replace(`${window.location.origin}/login`);
         alert("please login");
     }
-    // eslint-disable-next-line
     const [heartIcon, setHeartIcon] = React.useState(false)
+    // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
     const { id } = useParams();
     const { Products } = useSelector((state) => state.productReducer);
@@ -195,9 +195,9 @@ const ProductDetail = () => {
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
 
-    const handleChange = (event) => {
-        setQuant(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //     setQuant(event.target.value);
+    // };
     
     const handleChangeQuant = (type) => {
         if (type === "+") {
