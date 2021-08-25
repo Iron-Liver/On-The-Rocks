@@ -9,8 +9,9 @@ import jwt from "jsonwebtoken"
 
 const useStyles = makeStyles((theme)=>({
     root: {
-		marginTop: 100,
-		marginBottom: 30,
+        width: '100%',
+        padding: '30px 30px', 
+        minHeight: '70vh'
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -29,13 +30,14 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 export function UserUpdate({ input, setInput, handleSubmit }) {
-    var {id} = useParams();
+    var {userId} = useParams();
     const {userDetail} = useSelector(state => state.userReducer);
 	const adminAllowed = JSON.parse(localStorage.getItem('token')) ? 
     jwt.verify(JSON.parse(localStorage.getItem('token')), 
     process.env.REACT_APP_SECRET_KEY) : null
-    if(typeof(id) === 'undefined' && window.location.href.includes("profile")){
-        id = (JSON.parse(localStorage.getItem('profile'))).id;
+
+    if(typeof(userId) === 'undefined' && window.location.href.includes("profile")){
+        userId = (JSON.parse(localStorage.getItem('token'))).id;
     }
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -43,7 +45,7 @@ export function UserUpdate({ input, setInput, handleSubmit }) {
     useEffect(() => {
         if(userDetail !== undefined){
             setInput({
-                id: id,
+                id: userId,
 				isAdmin: userDetail.isAdmin,
 				isReseller: userDetail.isReseller,
 				isDeleted : userDetail.isDeleted,
@@ -53,14 +55,14 @@ export function UserUpdate({ input, setInput, handleSubmit }) {
                 contact : userDetail.contact,
             })
         }else{
-            dispatch(readUser(id))
+            dispatch(readUser(userId))
 		}	
     },
     // eslint-disable-next-line
-    [dispatch, id, userDetail])
+    [dispatch, userId, userDetail])
 
 	useEffect(() => {
-		dispatch(readUser(id))
+		dispatch(readUser(userId))
 	},
     // eslint-disable-next-line
     [])
@@ -151,7 +153,7 @@ export function UserUpdate({ input, setInput, handleSubmit }) {
     }
 
     return(
-            <>
+            <div className={classes.root}>
                 
                 <form noValidate autoComplete="off" >
                 <h1 className={classes.title}>
@@ -220,14 +222,14 @@ export function UserUpdate({ input, setInput, handleSubmit }) {
                             <Button style={{fontWeight: 1000, marginTop: 30}} color="primary" onClick={handleSubmit} variant="contained">Save Changes</Button>
                         </Grid>
                     </Grid>
-                    <Grid container direction="row" justifyContent="center" alignItems="center">
+                    {/* <Grid container direction="row" justifyContent="center" alignItems="center">
                         <Grid item>
                             {(adminAllowed && window.location.href.includes("profile")) && (<Button style={{fontWeight: 1000, marginTop: 30}} href='private/panel' color="primary" onClick={handleSubmit} variant="contained">Admin Panel</Button>)}
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 </form>
-            </>
+            </div>
     )
 }
 export default UserUpdate;
