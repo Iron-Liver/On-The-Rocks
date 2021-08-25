@@ -5,12 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWishlist, deleteWish } from "../../Redux/Wishlist/wishlistActions";
 import { getProducts } from "../../Redux/Products/productsActions";
 import verifyUser from "../../Utils/verifyUser";
-import swal from "sweetalert";
-import { IconButton, Paper } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { makeStyles } from "@material-ui/core/styles";
-import { NewReleases } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 import { logOutUser } from "../../Redux/Users/userActions";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCard from "./SwiperCard";
@@ -33,10 +27,18 @@ SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
 const SwiperWishlist = () => {
   const dispatch = useDispatch();
 
+  const initialState = window.innerWidth < 580 ? 
+    1
+  : window.innerWidth < 950 ?
+    2
+  : window.innerWidth < 1200 ?
+    3
+  : 4;
+
   const { Products } = useSelector((state) => state.productReducer);
   const { wishlists } = useSelector((state) => state.wishlistReducer);
   const [state, setState] = useState(wishlists);
-  const [views, setViews] = useState(window.innerWidth < 680 ? 1 : 3)
+  const [views, setViews] = useState(initialState);
   var filtUser,
       filtProduct = [];
   const currentUser = verifyUser();
@@ -61,8 +63,18 @@ const SwiperWishlist = () => {
   if (Products && state.length > 0) {
       filtUser = state.filter((x) => x.userId === currentUser.id);
       filtProduct = filtUser.map((x) => {
-          return Products?.filter((e) => e.id === x.productId);
+        return Products?.filter((e) => e.id === x.productId);
+      }).sort((a, b) => {
+        if(a[0]?.onSale < b[0]?.onSale) {
+          return 1
+        } 
+        if(a[0]?.onSale > b[0]?.onSale) {
+          return -1
+        }
+        return 0
       });
+      // filtProduct = [...preSort.filter(product => product[0].onSale !== null),
+      //    ...preSort.filter(product => product[0].onSale === null)]
   }
 
   const handleResize = () => {
@@ -70,8 +82,10 @@ const SwiperWishlist = () => {
       setViews(1);
     } else if (window.innerWidth < 950) {
       setViews(2);
-    } else {
+    } else if (window.innerWidth < 1200) {
       setViews(3);
+    } else {
+      setViews(4)
     }
   };
 
@@ -84,7 +98,11 @@ const SwiperWishlist = () => {
         filtProduct?.length > 0 && 
             <div className="slider">
               <div style={{
-                marginTop: "150px"
+                marginTop: "150px",
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                alignItems: "center"
               }}>
                 <div className="divider-page">
                   <div className="dividers"></div>
@@ -97,16 +115,23 @@ const SwiperWishlist = () => {
               marginTop: "40px"
             }}>
               <Swiper
-                 slidesPerView={views} spaceBetween={30} pagination={{
-                  "clickable": true
-                }} className="mySwiper"
+                slidesPerView={views} 
+                spaceBetween={2} 
+                pagination={{
+                "clickable": true
+                }}
+                style={{
+                  width: "92%",
+                  height: "415px"
+                }}
               >
                 {
                   filtProduct.map((wishItem) =>
                   wishItem[0] && (
                       <SwiperSlide style={{
                         display: "flex",
-                        justifyContent: "center"
+                        justifyContent: "center",
+                        width: "max-content"
                       }}>
                         <SwiperCard wishItem={wishItem[0]}/>
                       </SwiperSlide>
