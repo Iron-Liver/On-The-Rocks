@@ -123,6 +123,10 @@ export const MenuList = ({ handleDrawerMenu }) => {
 
     const userId = localProfile?.id;
 
+    const logOut = () => {
+        dispatch(logOutUser());
+    };
+
     const logOutAlert = () => {
         swal({
             title: "LogOut",
@@ -200,21 +204,39 @@ export const MenuList = ({ handleDrawerMenu }) => {
                             </ListItem>
                         </Link>
 
-                        <Link
-                            to={
-                                localProfile.isAdmin
-                                    ? `/wishlist`
-                                    : `/profile/${userId}/wishlist`
-                            }
-                            style={{ textDecoration: "none", color: "black" }}
-                        >
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <Star />
-                                </ListItemIcon>
-                                <ListItemText primary="My Wishlist" />
-                            </ListItem>
-                        </Link>
+                        {!localProfile.isAdmin && (
+                            <Link
+                                to={`/profile/${userId}/wishlist`}
+                                style={{
+                                    textDecoration: "none",
+                                    color: "black",
+                                }}
+                            >
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <Star />
+                                    </ListItemIcon>
+                                    <ListItemText primary="My Wishlist" />
+                                </ListItem>
+                            </Link>
+                        )}
+
+                        {!localProfile.isAdmin && (
+                            <Link
+                                to="/roulette"
+                                style={{
+                                    textDecoration: "none",
+                                    color: "black",
+                                }}
+                            >
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <Casino />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Gamble" />
+                                </ListItem>
+                            </Link>
+                        )}
 
                         <Link
                             to="/login"
@@ -226,9 +248,9 @@ export const MenuList = ({ handleDrawerMenu }) => {
                                 </ListItemIcon>
                                 <ListItemText
                                     primary={`${
-                                        localStorage.getItem("token")
-                                            ? "Profile"
-                                            : "Login"
+                                        localProfile.isAdmin
+                                            ? "Panel"
+                                            : "Profile"
                                     }`}
                                 />
                             </ListItem>
