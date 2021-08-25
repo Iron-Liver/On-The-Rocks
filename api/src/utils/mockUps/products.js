@@ -153,7 +153,7 @@ const productsMockUp = async () => {
         const macallan = await  Product.create({
             name:"The Macallan M Decanter Single Malt Scotch Whisky 700mL",
             description:"Part of The Macallan Masters Decanter Series created to showcase the beautiful range of The Macallan’s natural colour, M is born of a collaboration between three masters of their crafts to create a completely individual spirit.",
-            size:"7899.99",
+            size:"700 mL",
             brand:"Macallan",
             sku:"a12",
             price:8999.99,

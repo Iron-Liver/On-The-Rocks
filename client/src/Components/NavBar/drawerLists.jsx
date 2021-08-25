@@ -173,7 +173,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
           </ListItem>
         </Link>
 
-        <Link to="/sale" style={{ textDecoration: "none", color: "black" }}>
+        <Link to="/products?onSale=_" style={{ textDecoration: "none", color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <Loyalty />
@@ -187,19 +187,28 @@ export const MenuList = ({ handleDrawerMenu }) => {
         {localStorage.getItem("token") ? (
           <>
             <Link
-              to={`/profile/${userId}/orders`}
+              to={localProfile.isAdmin
+                ? `/private/profile/${userId}/orders`
+                : `/profile/${userId}/orders`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItem button>
                 <ListItemIcon>
                   <Receipt />
                 </ListItemIcon>
-                <ListItemText primary="My Orders" />
+                <ListItemText primary={localProfile.isAdmin 
+                  ? "Orders"
+                  : "My Orders"
+                }/>
               </ListItem>
             </Link>
 
             <Link
-              to="/wishlist"
+              to={
+                localProfile.isAdmin 
+                ? `/wishlist`
+                : `/profile/${userId}/wishlist` 
+              }
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItem button>
