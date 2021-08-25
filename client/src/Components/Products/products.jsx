@@ -8,8 +8,13 @@ import { Pagination } from "@material-ui/lab";
 
 const Products = () => {
     const [page, setPage] = useState(1);
-    const { FoundProds } = useSelector((state) => state.productReducer);
+    var { FoundProds } = useSelector((state) => state.productReducer);
     const dispatch = useDispatch();
+    var {search} = window.location
+    if(search?.length > 8){
+        search = search.substring(8).replace(/-/g," ").toLowerCase()
+        FoundProds = FoundProds.filter(found => found.name.toLowerCase() === search)
+    }
 
     useEffect(
         () => {
