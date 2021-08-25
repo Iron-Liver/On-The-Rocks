@@ -1,5 +1,5 @@
 import './filters.css';
-import { useEffect, React, useState } from "react";
+import { useEffect, React } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 import { ExpandMore } from '@material-ui/icons'

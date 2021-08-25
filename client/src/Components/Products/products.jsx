@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "../../Redux/Products/productsActions";
 import "./products.css";
 import ProductCard from "./productCard";
 import Filters from "./filters";
@@ -9,11 +7,10 @@ import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 
 const Products = () => {
-    const { search, pathname } = useLocation();
+    const { search } = useLocation();
     const query = new URLSearchParams(search);
     const [page, setPage] = useState(1);
     const [products, setProducts] = useState();
-    const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {

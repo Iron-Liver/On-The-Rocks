@@ -19,7 +19,7 @@ import SwiperCore, {
 } from 'swiper/core';
 import Brands from '../Brands/Brands';
 import SwiperWishlist from '../Wishlist/SwiperWishlist';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -36,8 +36,6 @@ export const LandingPage = () => {
     useEffect(() => {
       dispatch(getWishlist());
     }, [dispatch])
-
-    const wishList = useSelector(state => state.wishlistReducer?.wishlists);
 
     const currentUser = verifyUser();
 

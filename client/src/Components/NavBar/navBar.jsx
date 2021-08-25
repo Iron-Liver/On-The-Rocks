@@ -7,16 +7,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MenuList, SearchList, CartList } from "./drawerLists";
 import NavBox from "./navBox";
 import { logOutUser } from "../../Redux/Users/userActions";
-import jwt from 'jsonwebtoken';
 import logoBrown from '../../assets/on-the-rocks-brown.png'
 import logoWhite from '../../assets/on-the-rocks-white.png'
 import { useLocation } from "react-router";
 import swal from "sweetalert";
 import verifyUser from '../../Utils/verifyUser';
-
-// import { logOutUser } from "../../Redux/Users/UserActions";
-
-// const drawerWidth = 240;
 
 function NavBar(props) {
   const dispatch = useDispatch()

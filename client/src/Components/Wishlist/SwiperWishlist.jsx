@@ -2,7 +2,7 @@ import "./wishlist.css";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWishlist, deleteWish } from "../../Redux/Wishlist/wishlistActions";
+import { getWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { getProducts } from "../../Redux/Products/productsActions";
 import verifyUser from "../../Utils/verifyUser";
 import { logOutUser } from "../../Redux/Users/userActions";
