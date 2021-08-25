@@ -127,7 +127,11 @@ export const AddProductReview = ({ prodId, userId }) => {
                     </>
                 )
                 : (<Grid item>
-                        <h3>
+                        <h3 style={{
+                          fontFamily: `"Montserrat", sans-serif`,
+                          fontWeight: "300",
+                          margin: "10px 0",
+                        }}>
                             You have to buy this item in order to leave an
                             opinion.
                         </h3>

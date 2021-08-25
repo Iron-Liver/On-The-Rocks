@@ -2,7 +2,7 @@
     
     background: transparent;
     position: fixed;    
-    right: 0;
+    left: 0;
     top: 20%;
     bottom: 0;          
     justify-content: center;
@@ -15,11 +15,12 @@
         
   }
 
+
   .chatDeploy{
     background: transparent;
     position:fixed;
     left: 55%;    
-    right:0;
+    left:100px;
     margin:auto;
     top:0;
     bottom:50%;   
@@ -29,6 +30,22 @@
     width: 50px;
     z-index: 9999;
   }
+
+  @media (max-width: 55em ) { 
+  .Chatbot .logoBot {
+    width: 65px;
+    height: 65px;
+  }
+  }
+
+  @media (max-width: 45em ) { 
+    .Chatbot .logoBot {
+      width: 50px;
+      height: 50px;
+    }
+    }
+  
+
 
   .logoBot{
     width: 90px;

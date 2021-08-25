@@ -4,6 +4,7 @@ import im2 from '../../assets/au2.jpg'
 import im3 from '../../assets/au3.jpg'
 import React, { useEffect } from "react";
 import Locations from '../Maps/Locations'; 
+import verifyUser from '../../Utils/verifyUser';
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
@@ -17,17 +18,31 @@ import SwiperCore, {
   Navigation
 } from 'swiper/core';
 import Brands from '../Brands/Brands';
+import SwiperWishlist from '../Wishlist/SwiperWishlist';
+import { useDispatch } from 'react-redux';
+import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
 // install Swiper modules
 SwiperCore.use([Navigation]);
 
 
 export const LandingPage = () => {
 
+    const dispatch = useDispatch();
+
+
     useEffect(() => {
-      Aos.init({duration:2000})
+      window.scrollTo(0,0)
+    }, [])
+
+    useEffect(() => {
+      Aos.init({duration:3000})
     }, []);
 
+    useEffect(() => {
+      dispatch(getWishlist());
+    }, [dispatch])
 
+    const currentUser = verifyUser();
 
     return (
       <div>
@@ -39,31 +54,42 @@ export const LandingPage = () => {
         <div className="vox"></div>
       </div>
       
-
-        <div data-aos="fade-right" className="title1">
-          <h1> On the Rocks is an independent self-made Argentinian family
-              owned business providing premium and collectable ranges of spirits.
-          </h1>
-        </div>
+      <div className="title-landing">
+        <h1> On the Rocks is an independent self-made Argentinian family
+            owned business providing premium and collectable ranges of spirits.
+        </h1>
+      </div>
 
       <div className="slider">
           
         <div style={{
-          marginTop: "150px"
+          marginTop: "80px",
+          marginBottom: "60px",
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems:'center',
         }}>
           <div className="divider-page">
             <div className="dividers"></div>
             <h1 style={{color:'black', wordBreak: "keep-all", minWidth: "max-content"}}>On sale</h1>
             <div className="dividers"></div>
           </div>
-          <SwiperOS />
         </div>
+      </div> 
+      <div>
+          <SwiperOS />
       </div>
+
+      {
+        currentUser && 
+          <SwiperWishlist />
+      }
       
 
 
 
-        <div data-aos="fade-up" className="AboutUsContainer">
+        <div className="AboutUsContainer">
           <div className="divider-page">
             <div className="dividers"></div>
             <h1 style={{color:'black'}}>About us</h1>
@@ -113,14 +139,20 @@ export const LandingPage = () => {
           <div  className="containerBrands">
             <div className="divider-page">
               <div className="dividers"></div>
-              <h1 style={{color:'black'}}>Shop by Tipe</h1>
+              <h1 style={{color:'black'}}>Shop by Type</h1>
               <div className="dividers"></div>
             </div>
           </div>
           <div className="brandsss">
           <Brands />
           </div>
+          
           <div className="location">
+          <div className="divider-page">
+            <div className="dividers"></div>
+            <h1 style={{color:'black'}}>Branch Offices</h1>
+            <div className="dividers"></div>
+          </div>     
               <Locations />
           </div>
 

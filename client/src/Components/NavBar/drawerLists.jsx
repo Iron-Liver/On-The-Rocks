@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Cart } from "../Cart/cart";
 import {
     Typography,
@@ -30,7 +30,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { getProducts } from "../../Redux/Products/productsActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { logOutUser } from "../../Redux/Users/userActions";
-import jwt from "jsonwebtoken";
+import verifyUser from "../../Utils/verifyUser";
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
     autocomplete: {
@@ -118,17 +119,21 @@ const useStyles = makeStyles((theme) => ({
 export const MenuList = ({ handleDrawerMenu }) => {
     const dispatch = useDispatch();
 
-    const localProfile = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
+    const localProfile = verifyUser();
 
     const userId = localProfile?.id;
 
-    const logOut = () => {
-        dispatch(logOutUser());
+    const logOutAlert = () => {
+        swal({
+            title: "LogOut",
+            text: "Want to logout?",
+            icon: "warning",
+            buttons: ["Cancel", "Yes"],
+        }).then((answer) => {
+            if (answer) {
+                logOut();
+            }
+        });
     };
 
     return (
@@ -160,7 +165,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
                 </Link>
 
                 <Link
-                    to="/sale"
+                    to="/products?onSale=_"
                     style={{ textDecoration: "none", color: "black" }}
                 >
                     <ListItem button>
@@ -171,43 +176,43 @@ export const MenuList = ({ handleDrawerMenu }) => {
                     </ListItem>
                 </Link>
 
-                <Divider />
-
                 {localStorage.getItem("token") ? (
                     <>
                         <Link
-                            to={`/profile/${userId}/orders`}
+                            to={
+                                localProfile.isAdmin
+                                    ? `/private/profile/${userId}/orders`
+                                    : `/profile/${userId}/orders`
+                            }
                             style={{ textDecoration: "none", color: "black" }}
                         >
                             <ListItem button>
                                 <ListItemIcon>
                                     <Receipt />
                                 </ListItemIcon>
-                                <ListItemText primary="Orders" />
+                                <ListItemText
+                                    primary={
+                                        localProfile.isAdmin
+                                            ? "Orders"
+                                            : "My Orders"
+                                    }
+                                />
                             </ListItem>
                         </Link>
 
                         <Link
-                            to="/wishlist"
+                            to={
+                                localProfile.isAdmin
+                                    ? `/wishlist`
+                                    : `/profile/${userId}/wishlist`
+                            }
                             style={{ textDecoration: "none", color: "black" }}
                         >
                             <ListItem button>
                                 <ListItemIcon>
                                     <Star />
                                 </ListItemIcon>
-                                <ListItemText primary="Wishlist" />
-                            </ListItem>
-                        </Link>
-
-                        <Link
-                            to="/roulette"
-                            style={{ textDecoration: "none", color: "black" }}
-                        >
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <Casino />
-                                </ListItemIcon>
-                                <ListItemText primary="Gamble" />
+                                <ListItemText primary="My Wishlist" />
                             </ListItem>
                         </Link>
 
@@ -233,7 +238,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
                             to="/"
                             style={{ textDecoration: "none", color: "black" }}
                         >
-                            <ListItem button onClick={logOut}>
+                            <ListItem button onClick={logOutAlert}>
                                 <ListItemIcon>
                                     <ExitToApp />
                                 </ListItemIcon>
@@ -254,7 +259,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
                                 <ListItemText
                                     primary={`${
                                         localStorage.getItem("token")
-                                            ? "Profile"
+                                            ? "My Profile"
                                             : "Login"
                                     }`}
                                 />
@@ -296,6 +301,7 @@ export const SearchList = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(getProducts());
@@ -303,23 +309,27 @@ export const SearchList = () => {
 
     const handleKeyPress = (e) => {
         if (e.key === "Enter") {
-            window.location.replace(
-                `${window.location.origin}/products?search=${e.target.value
-                    .split(" ")
-                    .join("-")
-                    .toLowerCase()}`
-            );
+            if (e.target.value !== "") {
+                history.push(
+                    `/products?name=${e.target.value
+                        .split(" ")
+                        .join("-")
+                        .toLowerCase()}`
+                );
+            }
         }
     };
 
     const handleClick = () => {
         var link = document.getElementById("Search");
-        window.location.replace(
-            `${window.location.origin}/products?search=${link.value
-                .split(" ")
-                .join("-")
-                .toLowerCase()}`
-        );
+        if (link.value !== "") {
+            history.push(
+                `/products?name=${link.value
+                    .split(" ")
+                    .join("-")
+                    .toLowerCase()}`
+            );
+        }
     };
 
     return (

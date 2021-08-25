@@ -19,7 +19,7 @@ const AdminProfile = () => {
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
-  
+
   useEffect(() => {
     if(!id) {
       history.push("/login");
@@ -34,14 +34,12 @@ const AdminProfile = () => {
       <AdminSidePanel />
       <AdminTopPanel />
       <Switch>
-        <div className="profile-tab-content">
-          <Route exact path={path} children={<h1>Dashboard</h1>} />
-          <Route exact path={`${path}/dashboard`} children={<h1>Dashboard</h1>} />
-          <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
-          <Route exact path={`${path}/categories`} component={CategoryList} />
-          <Route exact path={`${path}/products`} component={ProductsList} />
-          <Route exact path={`${path}/users`} component={UserList} />
-        </div>
+        <Route exact path={path} children={<h1 style={{ width: "100%" }}>Dashboard</h1>} />
+        <Route exact path={`${path}/dashboard`} children={<h1 style={{ width: "100%" }}>Dashboard</h1>} />
+        <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
+        <Route exact path={`${path}/categories`} component={CategoryList} />
+        <Route exact path={`${path}/products`} component={ProductsList} />
+        <Route exact path={`${path}/users`} component={UserList} />
       </Switch>
     </div>
   )

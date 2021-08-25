@@ -21,7 +21,7 @@
   }
 }
 
-@media (max-width: 45em){ 
+@media (max-width: 42em){ 
   .footerContainer1 {
     height: 280px;
   }
@@ -29,7 +29,6 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-   
   }
 }
 
@@ -52,10 +51,11 @@
     margin-right: 35px;
     margin-bottom: 5px;
   }
-
+  .footerfat .divisorFooter{
+    height: 110px;
+  }
 
  }
-
 
 .social-test li {
   color: rgba(255, 255, 255, 0.6);
@@ -126,4 +126,13 @@ height: max-content;
 
 .ContactContainer li {
   font-size: 13px;
+}
+
+.divisorFooter {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 60px;
+  width: 100%;
+  background-color: rgb(220, 208, 192);
 }

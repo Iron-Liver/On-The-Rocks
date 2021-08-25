@@ -1,3 +1,4 @@
+import './category.css';
 import { useEffect } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { makeStyles,  Button,  Container } from '@material-ui/core'
@@ -70,6 +71,7 @@ const CategoryList = () => {
 	];
 
     return(
+      <div className="admin-category-tab-container">
         <div className={classes.root}>  
             <ThemeProvider theme={theme}>
 
@@ -92,6 +94,7 @@ const CategoryList = () => {
 
 			</ThemeProvider>
         </div>
+      </div>
     )
 
 }

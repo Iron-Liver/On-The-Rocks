@@ -1,5 +1,6 @@
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
 //User imports
 import LoginUser from "./Components/Users/UserLogin/userLogin";
 import CreateUser from "./Components/Users/UserAdd/createUser";
@@ -36,6 +37,8 @@ import ChatBotApp from './Components/Chatbot/ChatBot';
 
 
 const AppGlobal = () => {
+
+  
   return (
       <Router>
         <ThemeProvider theme={theme}>
