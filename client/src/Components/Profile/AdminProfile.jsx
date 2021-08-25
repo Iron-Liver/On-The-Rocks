@@ -8,6 +8,7 @@ import UserList from '../Users/UserList/userList';
 import AdminSidePanel from './Admin/AdminSidePanel';
 import AdminTopPanel from './Admin/AdminTopPanel';
 import jwt from 'jsonwebtoken'
+import Wishlist from '../Wishlist/wishlist';
 
 const AdminProfile = () => {
   const { path } = useRouteMatch();
@@ -41,6 +42,7 @@ const AdminProfile = () => {
           <Route exact path={`${path}/categories`} component={CategoryList} />
           <Route exact path={`${path}/products`} component={ProductsList} />
           <Route exact path={`${path}/users`} component={UserList} />
+          <Route exact path={`${path}/wishlist`} component={Wishlist} />
         </div>
       </Switch>
     </div>

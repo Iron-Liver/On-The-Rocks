@@ -55,6 +55,7 @@ const Wishlist = () => {
     const { Products } = useSelector((state) => state.productReducer);
     const { wishlists } = useSelector((state) => state.wishlistReducer);
     const [state, setState] = useState(wishlists);
+    
     var filtUser,
         filtProduct = [];
     const currentUser = verifyUser();
@@ -66,7 +67,9 @@ const Wishlist = () => {
     useEffect(() => {
         dispatch(getProducts());
         dispatch(getWishlist());
-    }, [dispatch]);
+    }, [dispatch, wishlists]);
+
+    
 
     useEffect(() => {
         (async function () {
@@ -75,6 +78,7 @@ const Wishlist = () => {
                 await setState(wishlists);
         })();
     }, [state, wishlists, Products]);
+
 
     const deleteWishh = (e, userId, productId) => {
         e.preventDefault();
@@ -86,17 +90,16 @@ const Wishlist = () => {
                 wishlists[i].userId === userId
             ) {
                 res = wishlists[i].id;
-
                 dispatch(deleteWish(res));
-
                 dispatch(getWishlist());
                 setState(wishlists);
             }
         }
-        swal("The product is being deleted");
-        setTimeout(() => {
+        /* swal("The product is being deleted"); */
+        
+        /* setTimeout(() => {
             window.location.reload();
-        }, 1000);
+        }, 1000);  */ 
     };
 
     if (Products && state.length > 0) {

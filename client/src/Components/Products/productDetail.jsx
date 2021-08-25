@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,6 +19,7 @@ import {
     RemoveShoppingCart,
     ShoppingCart,
     FavoriteBorder,
+    Favorite,
     Add,
     Remove,
 } from "@material-ui/icons";
@@ -29,7 +30,7 @@ import { getProductReviews } from "../../Redux/Reviews/reviewActions";
 import verifyUser from "../../Utils/verifyUser";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
-import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
+import { addProductWishlist, getWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { green, red } from "@material-ui/core/colors";
 import { getProducts } from "../../Redux/Products/productsActions";
 import CustomButton from "../Button/CustomButton";
@@ -101,6 +102,14 @@ const useStyles = makeStyles((theme) => ({
         height: "max-content",
         marginTop: 4,
         padding: 3,
+    },
+    buttonRedWish: {
+        backgroundColor: "white",
+        width: "max-content",
+        height: "max-content",
+        marginTop: 4,
+        padding: 3,
+        color: "red",
     },
     cartIcon: {
         paddingTop: "3px",
@@ -186,18 +195,25 @@ const ProductDetail = () => {
         window.location.replace(`${window.location.origin}/login`);
         alert("please login");
     }
-    // eslint-disable-next-line
+    
     const [value, setValue] = React.useState(2);
     const { id } = useParams();
     const { Products } = useSelector((state) => state.productReducer);
+    
+    const { wishlists } = useSelector((state) => state.wishlistReducer);
+    
+
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
+    
 
     // const handleChange = (event) => {
     //     setQuant(event.target.value);
     // };
+
+    console.log("wish", wishlists )
 
     const handleChangeQuant = (type) => {
         if (type === "+") {
@@ -216,6 +232,11 @@ const ProductDetail = () => {
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(getWishlist());
+    }, [dispatch]);
+
 
     useEffect(() => {
         (async function () {
@@ -248,7 +269,8 @@ const ProductDetail = () => {
         }
     }
 
-    function onSubmitWishlist() {
+    function onSubmitWishlist(e) {
+        
         dispatch(
             addProductWishlist({
                 userId: currentUser?.id,
@@ -353,14 +375,15 @@ const ProductDetail = () => {
                                                 className={classes.buttonWish}
                                                 onClick={() =>
                                                     onSubmitWishlist(
+                                                        
                                                         currentUser?.id,
                                                         liqueur?.id
                                                     )
                                                 }
                                             >
-                                                <FavoriteBorder
-                                                    className={classes.wishIcon}
-                                                />
+                                                 {  
+                                                    (wishlists?.productId  !== Products.id ? (<FavoriteBorder/>) : (<Favorite/>))
+                                                } 
                                             </IconButton>
                                         )}
                                     </div>

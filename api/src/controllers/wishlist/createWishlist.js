@@ -6,8 +6,8 @@ module.exports = async (req, res, next) => {
   console.log(userId, productId)
   
   try {
-      if (productId && userId) {
-          await Wishlist.create({productId, userId});
+      if (userId && productId) {
+          await Wishlist.create({userId, productId});
           
           return res.json({ success: "Product added successfully" });
       } else {
