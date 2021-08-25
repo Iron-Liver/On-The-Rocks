@@ -107,7 +107,8 @@ export function Cart() {
 
     useEffect(() => {
        dispatch(getCoupons(userId));
-      }, []);
+      }, // eslint-disable-next-line
+      []);
 
     function removeProduct(id) {
         let data = JSON.parse(localStorage.getItem("data"));
@@ -173,7 +174,7 @@ export function Cart() {
 
     function handleSelect(e){
         let id = 0;
-        Coupons.map(cop => { 
+        Coupons.forEach(cop => { 
             if (cop.discount === Number(e.target.value)) return id = cop.id} )
         localStorage.removeItem("coup");
         localStorage.setItem("coup", JSON.stringify(id))

@@ -98,7 +98,7 @@ const UserSidePanel = () => {
               <h4>Coupons</h4>
             </div>
           </NavLink> 
-          <div className="panel-nav-item panel-user-logout" onClick={logOut}>
+          <div className="panel-nav-item panel-user-logout" onClick={logOutAlert}>
             <h4>Logout</h4>
           </div>
         </div>
