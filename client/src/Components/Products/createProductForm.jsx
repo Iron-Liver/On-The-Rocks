@@ -311,7 +311,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 							</Grid>
 
 							<div>
-								<ProductImages id={input.sku} />
+								<ProductImages sku={input.sku} />
 							</div>
 
 						</Grid>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./productImages.css";
 import Axios from "axios";
 
-function ProductImages() {
+function ProductImages({sku}) {
   const [name, setName] = useState();
   const [file, setFile] = useState();
 
