@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "nodemon": "^2.0.12",
-    "react-select": "^4.3.1"
+    "react-chatbot-kit": "^1.1.20"
+  },
+  "devDependencies": {
+    "webpack": "^4.44.2"
   }
 }

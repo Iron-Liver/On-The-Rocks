@@ -27,12 +27,16 @@ const wishlistReducer = (state = initialState, action) => {
       case ADD_PRODUCT_WISHLIST:
       return {
         ...state,
-        wishlists: action.payload
+        wishlists: state.wishlists
       };
       case DELETE_WISHLIST:
+        console.log(state.wishlists,'test')
+        console.log(state.wishlists.filter(e => e.id !== action.payload))
+        console.log(state.wishlists[0].id)
+        console.log(action.payload)
       return {
         ...state,
-        wishlist: state.wishlists.filter(e => e.id !== action.payload)
+        wishlist: state.wishlists
       };
     default:
       return state;

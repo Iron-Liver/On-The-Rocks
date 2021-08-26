@@ -20,6 +20,6 @@ export function getCoupons(idUser) {
 
 export function desAction(desc,code) {
     return async function (dispatch) {
-           dispatch({ type: SET_DESC, payload: desc,code })
+            dispatch({ type: SET_DESC, payload: desc,code })
     };
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
@@ -29,7 +29,11 @@ import { getProductReviews } from "../../Redux/Reviews/reviewActions";
 import verifyUser from "../../Utils/verifyUser";
 import ProductReviewCard from "./ProductReview/productReviewCard";
 import AddProductReview from "./ProductReview/addProductReview";
-import { addProductWishlist } from "../../Redux/Wishlist/wishlistActions";
+import {
+    addProductWishlist,
+    // getWishlist,
+    deleteWish,
+} from "../../Redux/Wishlist/wishlistActions";
 import { green, red } from "@material-ui/core/colors";
 import { getProducts } from "../../Redux/Products/productsActions";
 import CustomButton from "../Button/CustomButton";
@@ -182,22 +186,30 @@ const useStyles = makeStyles((theme) => ({
 const ProductDetail = () => {
     const dispatch = useDispatch();
     const currentUser = verifyUser();
+    const { wishlists } = useSelector((state) => state.wishlistReducer);
+    const { id } = useParams();
+    const [wished, setWished] = useState(
+        wishlists
+            ?.filter((prod) => prod.productId === Number(id))[0]
+            ?.hasOwnProperty("productId")
+    );
     if (currentUser?.hasOwnProperty("logout")) {
         dispatch(logOutUser());
         window.location.replace(`${window.location.origin}/login`);
         alert("please login");
     }
-    const [heartIcon, setHeartIcon] = React.useState(false)
+  
+    const [heartIcon, setHeartIcon] = React.useState(false);
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
-    const { id } = useParams();
     const { Products } = useSelector((state) => state.productReducer);
    
+
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
-    
+  
     const handleChangeQuant = (type) => {
         if (type === "+") {
             setQuant(quant === liqueur.stock ? liqueur.stock : quant + 1);
@@ -223,7 +235,10 @@ const ProductDetail = () => {
         })();
     }, [Products, dispatch, id]);
 
-    useEffect(() => {}, [Products, reviews]);
+    useEffect(() => {}, [Products]);
+    useEffect(() => {}, [reviews]);
+    useEffect(() => {}, [wishlists]);
+    useEffect(() => {}, [wished]);
 
     console.log(Products)
     
@@ -249,14 +264,30 @@ const ProductDetail = () => {
         }
     }
 
-    function onSubmitWishlist() {
+    function handleWishClick() {
+        if (!wished) {
+            addToWishlist();
+        } else {
+            removeFromWishlist();
+        }
+        setWished(!wished);
+    }
+
+    function addToWishlist() {
         dispatch(
             addProductWishlist({
                 userId: currentUser?.id,
                 productId: liqueur?.id,
             })
         );
-        setHeartIcon( heartIcon ? false : true);
+        setHeartIcon(heartIcon ? false : true);
+    }
+
+    function removeFromWishlist() {
+        let toBeRemoved = wishlists?.filter(
+            (prod) => prod.productId === Number(id)
+        )[0];
+        dispatch(deleteWish(toBeRemoved?.id));
     }
 
     let stockText = (
@@ -373,23 +404,13 @@ const ProductDetail = () => {
                                                 elevation={0}
                                                 color="primary"
                                                 className={classes.buttonWish}
-                                                onClick={() =>
-                                                    onSubmitWishlist(
-                                                        currentUser?.id,
-                                                        liqueur?.id
-                                                    )
-                                                }
+                                                onClick={handleWishClick}
                                             >
-                                                {
-                                                    heartIcon ?  (
-                                                        <i class="fas fa-heart"></i>
-                                                    ) : (
-
-                                                        <i class="far fa-heart"></i>
-                                                    )
-
-                                                }
-                                                
+                                                {wished ? (
+                                                    <i class="fas fa-heart"></i>
+                                                ) : (
+                                                    <i class="far fa-heart"></i>
+                                                )}
                                             </IconButton>
                                         )}
                                     </div>

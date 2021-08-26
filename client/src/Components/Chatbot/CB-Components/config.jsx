@@ -36,7 +36,7 @@ const config = {
     },
     {
       widgetName: "wishlist",
-      widgetFunc: () => <NavLink to="/wishlist">Wishlist</NavLink>,      
+      widgetFunc: () => <NavLink to="/profile/:id/wishlist">Wishlist</NavLink>,      
     },
     {
       widgetName: "signUp",
@@ -44,15 +44,15 @@ const config = {
     },
     {
       widgetName: "about",
-      widgetFunc: () => <NavLink to="/about">About Us</NavLink>,      
+      widgetFunc: () => <NavLink to="/aboutus">About Us</NavLink>,      
     },  
     {
       widgetName: "office",
-      widgetFunc: () => <NavLink to="/office">About Us</NavLink>,      
+      widgetFunc: () => <NavLink to="/shipping">Shipping</NavLink>,      
     },
     {
       widgetName: "onSale",
-      widgetFunc: () => <NavLink to="/sale">OnSale</NavLink>,      
+      widgetFunc: () => <NavLink to="/products?onSale=_">OnSale</NavLink>,      
     },
     {
       widgetName: "allProds",
