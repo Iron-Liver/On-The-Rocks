@@ -7,7 +7,7 @@ function shipping() {
             <h1 className="Title">Shipping information</h1>
             <br/>
             <br/>
-<h2 className="Subtitle">COVID-19 <i className="fas fa-virus" style={{color: "green"}}></i></h2>
+<h2 className="SubtitleS">COVID-19 <i className="fas fa-virus" style={{color: "green"}}></i></h2>
 
 <br/>
 <br/>
@@ -23,7 +23,7 @@ We strongly recommend monitoring your tracking information to ensure someone is 
 Please read the terms and conditions of delivery on the couriers website for the latest and most up-to-date information. </span>
 <br/>
 <br/>
-<h2 className="Subtitle">INSURANCE</h2>
+<h2 className="SubtitleS">INSURANCE</h2>
 <br/>
 <br/>
 <span className="Text">We always insure your orders at no extra cost to you which means you are always covered for any loss or damage.
@@ -32,7 +32,7 @@ Please read the terms and conditions of delivery on the couriers website for the
 If your parcel is taking too long or hasn't been updated and you think something has gone wrong or for any delivery assistance just contact us and we'll help you sort it out toot sweet.</span>
 <br/>
 <br/>
-<h2 className="Subtitle">FREE SHIPPING & NATIONAL FLAT RATE</h2>
+<h2 className="SubtitleS">FREE SHIPPING & NATIONAL FLAT RATE</h2>
 <br/>
 <br/>
 <span className="Text">The free shipping promotion for 2 bottles is currently eligible for up to 25KG in weight, a minimum order amount of $199.00 and areas that are listed inside the link below.
@@ -50,7 +50,7 @@ Please note the free shipping promotion is not eligible for PO boxes or parcel l
 View areas eligible for free shipping and national flat rate.</span>
 <br/>
 <br/>
-<h2 className="Subtitle">SHIPPING TERMS </h2>
+<h2 className="SubtitleS">SHIPPING TERMS </h2>
 <br/>
 <br/><span className="Text">
 Usually we dispatch your order the following business day however, please allow for up to 3 business days for handling (unless your product is stock on demand in which case it'll be dispatched according to the timeline specified on the product).
@@ -71,7 +71,7 @@ May be affected by factors out of our control.
 If you have paid via PayPal e-cheque, your order will not be shipped until the payment has been approved from PayPal.</span>
 <br/>
 <br/>
-<h2 className="Subtitle">AUTHORITY TO LEAVE</h2>
+<h2 className="SubtitleS">AUTHORITY TO LEAVE</h2>
 <br/>
 <br/>
 <span className="Text">Alcohol deliveries with our couriers can have either a Signature on Delivery or be given Authority to Leave (ATL), and be delivered without a signature.
@@ -85,7 +85,7 @@ Parcels with Signature on Delivery require a signature from someone over the age
 <br/>
 Drivers reserve the right to refuse delivery at any time.</span>
 <br/>
-<h2 className="Subtitle">RETURNS </h2>
+<h2 className="SubtitleS">RETURNS </h2>
 <br/>
 <br/>
 <span className="Text">To return your product, please contact us at ontherockscompanydrinks@gmail.com
