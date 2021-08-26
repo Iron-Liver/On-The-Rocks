@@ -6,6 +6,7 @@ import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
 import { getAllCategories } from '../../Redux/Category/categoryActions'
+import ProductImages from './productImages';
 
 export const useStyles = makeStyles((theme) => ({
 	root: {
@@ -84,7 +85,6 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 		categories: false,
 		sku: false,
 		price: false,
-		image: false,
 		stock: false
 	})
 	const [helperText, setHelperText] = useState({//Control the warning message
@@ -95,7 +95,6 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 		brand: "Enter a brand",
 		sku: "Enter a sku",
 		price: "Enter the price",
-		image: "Enter an image-url",
 		stock: "Enter product stock"
 	})
 
@@ -259,22 +258,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 									/>
 								</Grid>
 							</Grid>
-                            <Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<MonetizationOn />
-								</Grid>
-								<Grid item>
-									<TextField
-										helperText={[helperText["onSale"]]}
-										id="onSale"
-										label="offer price"
-										name='onSale'
-										value={input.onSale}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
-
+					
 							<Grid container spacing={1} alignItems="center">
 								<Grid item>
 									<Storage />
@@ -309,10 +293,14 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 								</Grid>
 							</Grid>
 
+							<div>
+								<ProductImages sku={input.sku} name={input.name} />
+							</div>
+
 						</Grid>
 						<Grid container direction="row" justifyContent="center" alignItems="center">
 							<Grid item>
-								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
+								<Button style={{ fontWeight: 1000, marginTop: 20 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
 
 							</Grid>
 						</Grid>
