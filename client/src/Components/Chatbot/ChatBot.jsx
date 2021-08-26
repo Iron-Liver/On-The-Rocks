@@ -19,10 +19,12 @@ const ChatBotApp = () => {
      
   }
 
+  var bot;
+
   if(logo === true){
-    var bot = <button className="botonBot" onClick={() => handleClick()}><img className="logoBot" src={Bot1} alt="ChatBot" /></button>
+    bot = <button className="botonBot" onClick={() => handleClick()}><img className="logoBot" src={Bot1} alt="ChatBot" /></button>
   }else{
-    var bot = <button style={{display:"none"}} onClick={() => handleClick()}><img className="logoBot" src={Bot1} alt="ChatBot" /></button>
+    bot = <button style={{display:"none"}} onClick={() => handleClick()}><img className="logoBot" src={Bot1} alt="ChatBot" /></button>
   } 
 
   if (robot === false) {
