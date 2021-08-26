@@ -34,6 +34,8 @@ import { ThemeProvider } from '@material-ui/core';
 import theme from './Utils/theme';
 import Footer from './Components/Footer/footer';
 import ChatBotApp from "./Components/Chatbot/ChatBot"
+import { aboutUs } from './Components/AboutUs/aboutUs';
+import shipping from './Components/Shipping/shipping';
 
 const AppGlobal = () => {
 
@@ -53,7 +55,6 @@ const AppGlobal = () => {
             <Route exact path="/createOrder" component={CreateOrder} />
             <Route exact path="/products/:id" component={ProductDetail} />
             <Route exact path="/category/:id" component={CategoryDetail} />
-            <Route exact path = '/sale' component={onSale} />
             <AuthRoute exact path="/order/:id" component={OrderDetail} />
             <AuthRoute
               exact
@@ -66,8 +67,9 @@ const AppGlobal = () => {
               component={AdminProfile}
               />
             <AdminRoute path="/private" component={AdminFeatures} />
-            <AuthRoute exact path="/wishlist" component={Wishlist} />
             <Route exact path="/roulette" component={WheelOfCoupons} />
+            <Route exact path="/aboutus" component={aboutUs} />
+            <Route exact path="/shipping" component={shipping} />
             <Route path="*" component={Error404} />
           </Switch>
           <Footer />
