@@ -1,58 +1,62 @@
 import React, { useState } from "react";
 // import "./productImages.css";
 import Axios from "axios";
-import swal from "sweetalert"
-
+import swal from "sweetalert";
+import Button from "@material-ui/core/Button";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 function ProductImages({ sku, name }) {
-  // eslint-disable-next-line
-  const [state, setState] = useState();
-  console.log("skuname", sku, name)
+    // eslint-disable-next-line
+    const [state, setState] = useState();
 
-  function handleChange(file){
+    const hiddenFileInput = React.useRef(null);
 
-    if(sku.length > 0){
-      console.log("skuname2", sku, name)
-      setState({sku: sku, name:name})
+    const handleClick = (event) => {
+        hiddenFileInput.current.click();
+    };
 
-      const data = new FormData();
-      for (const aFile of file) {
-        data.append("file", aFile)
-      }
-      for(const a of data){
-        console.log(a)
-      }
-      Axios.post(`/product/addPhotos/${name}?sku=${sku}`, data)
-        .then(res => console.log(res))
-        .catch(err => console.log(err)); 
-    }else{
-      swal("Please insert a valid SKU")
+    async function handleChange(file) {
+        if (sku.length > 0) {
+            setState({ sku: sku, name: name });
+            const data = new FormData();
+            for (const aFile of file) {
+                data.append("file", aFile);
+            }
+            try {
+              await Axios.post(`/product/addPhotos/${name}?sku=${sku}`, data)
+            }catch (e) {
+              console.log(e)
+            }
+        } else {
+            swal("Please insert a valid SKU");
+        }
     }
-  };
-  
 
-
- 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <form action="#">
-          <div className="flex">
-            <label className="product-input" htmlFor="file">File</label>
-            <input
-              className="product-input"
-              type="file"
-              id="file"
-              accept=".jpg"
-              multiple
-              onChange={event => {
-                handleChange(event.target.files)
-              }}
-            />
-          </div>
-        </form>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <div className="flex">
+                <Button
+                    style={{margin: '20px', width: '80%'}}
+                    variant="contained"
+                    color="default"
+                    startIcon={<CloudUploadIcon />}
+                    onClick={handleClick}
+                >
+                    Upload
+                </Button>
+                <input
+                    style={{ display: "none" }}
+                    ref={hiddenFileInput}
+                    type="file"
+                    id="file"
+                    accept=".jpg"
+                    multiple
+                    onChange={(event) => {
+                        handleChange(event.target.files);
+                    }}
+                />
+            </div>
+        </div>
+    );
 }
 
 export default ProductImages;

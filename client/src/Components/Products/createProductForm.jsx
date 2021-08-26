@@ -300,7 +300,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 						</Grid>
 						<Grid container direction="row" justifyContent="center" alignItems="center">
 							<Grid item>
-								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
+								<Button style={{ fontWeight: 1000, marginTop: 20 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
 
 							</Grid>
 						</Grid>
