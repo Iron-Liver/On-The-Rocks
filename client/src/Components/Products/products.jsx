@@ -7,6 +7,7 @@ import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 
+
 const Products = () => {
     const { search } = useLocation();
     const query = new URLSearchParams(search);
@@ -16,6 +17,8 @@ const Products = () => {
     const [limit, setLimit] = useState(query?.get('limit')
     ? parseInt(query.get('limit').toString()) || 6
     : 6)
+
+ 
 
     useEffect(() => {
       (async () => {
@@ -68,6 +71,8 @@ const Products = () => {
       query.set('order', e.target.value);
       history.push({search: query.toString()})
     }
+    
+  
 
     const handleLimitChange = (e) => {
       setLimit(e.target.value)

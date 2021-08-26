@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
+import { Swiper, SwiperSlide } from "swiper/react";
 import {
     Card,
     CardContent,
@@ -37,6 +38,7 @@ import { green, red } from "@material-ui/core/colors";
 import { getProducts } from "../../Redux/Products/productsActions";
 import CustomButton from "../Button/CustomButton";
 import { logOutUser } from "../../Redux/Users/userActions";
+import "./productDetail.css";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -201,12 +203,14 @@ const ProductDetail = () => {
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
     const { Products } = useSelector((state) => state.productReducer);
+   
 
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
   
+
     const handleChangeQuant = (type) => {
         if (type === "+") {
             setQuant(quant === liqueur.stock ? liqueur.stock : quant + 1);
@@ -264,11 +268,19 @@ const ProductDetail = () => {
             })
           }
           swal("The product was added to the cart!")   
-        } else {
-          swal("Please enter a valid unit");
+    // console.log(Products);
         }
-      }
-    }
+      }}
+
+    // function onSubmit(e) {
+    //     let data = JSON.parse(localStorage.getItem("data"));
+    //     let filteredData = data?.filter((e) => e.id === liqueur.id);
+    //     if (filteredData?.length > 0 && data?.length > 0) {
+    //         swal("The product is already in the cart!");
+    //     } else {
+    //       swal("Please enter a valid unit");
+    //     }
+    //   }
 
     function handleWishClick() {
         if (!wished) {
@@ -358,12 +370,39 @@ const ProductDetail = () => {
                 <>
                     <Card className={classes.root}>
                         <div className={classes.divimage}>
-                            <img
-                                className={classes.cover}
-                                src={liqueur.image}
-                                alt={liqueur.name}
-                                draggable={false}
-                            />
+                            {!liqueur.img ? (
+                                <img
+                                    className={classes.cover}
+                                    src={liqueur.image}
+                                    alt={liqueur.name}
+                                    draggable={false}
+                                />
+                            ) : (
+                                <Swiper
+                                    className="swipperDetailH"
+                                    slidesPerView={1}
+                                    navigation
+                                    spaceBetween={3}
+                                    pagination={true}
+                                    autoplay={{
+                                        delay: 6000,
+                                    }}
+                                    loop={true}
+                                >
+                                    {liqueur?.img.map((spirit) => (
+                                        <SwiperSlide
+                                            key={spirit.id}
+                                            className="swipperDetailH"
+                                        >
+                                            <img
+                                                src={`/img/${spirit}`}
+                                                alt={spirit.name}
+                                                className="imageH"
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            )}
                         </div>
                         <div className={classes.details}>
                             <CardContent className={classes.content}>

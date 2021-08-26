@@ -137,7 +137,7 @@ height: max-content;
   background-color: rgb(220, 208, 192);
 }
 
-.FMenu{
+/* .FMenu{
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -172,6 +172,6 @@ height: max-content;
   margin-left: 120px;
   height: max-content;
   text-decoration: none;
-  /* margin-top: 1%; */
+  margin-top: 1%;
   
-}
+} */

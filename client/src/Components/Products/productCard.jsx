@@ -5,10 +5,12 @@ import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import CustomButton from '../Button/CustomButton'
 
+
 const ProductCard = ({ spirit }) => {
 
   const [currentSpirit, setCurrentSpirit] = useState();
-
+  
+  
   useEffect(() => {
     setCurrentSpirit(spirit);
   }, [spirit])
@@ -42,34 +44,6 @@ const ProductCard = ({ spirit }) => {
       swal("The product was added to the cart!")   
     }
   }
-
-  // const handleAddToCart = () => {
-  //   let date = JSON.parse(localStorage.getItem('data')) || []
-  //   let data = date.filter(e => e.id === currentSpirit.id)
-  //   if (date.length > 0 && data.length > 0){
-  //        swal("The product is already in the cart!")
-  //   } else {
-  //    if(!currentSpirit.onSale)
-  //    {
-  //        addProductCart({
-  //          units: 1,
-  //          id: currentSpirit.id,
-  //          price: currentSpirit.price,
-  //          image: currentSpirit.image,
-  //          name: currentSpirit.name
-  //        });
-  //    }else{
-  //       addProductCart({
-  //           units: 1,
-  //           id: currentSpirit.id,
-  //           price: currentSpirit.onSale,
-  //           image: currentSpirit.image,
-  //           name: currentSpirit.name
-  //         })
-  //    }
-  //     swal("The product was added to the cart!")   
-  //   }
-  // }
 
   return (
     <div className="products-containerproducts">

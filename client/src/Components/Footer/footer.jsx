@@ -27,13 +27,13 @@ const Footer = () => {
                 </ul>
             </div>
           </div>
-            <div>
+            {/* <div>
               <h4 className="FMenu">Footer Menu</h4>
                 
                   <Link to ="/aboutus" className="Aboutus" >About Us</Link>
                   <Link to ="/shipping" className="Shipping" >Shipping</Link>
                 
-            </div>
+            </div> */}
             
         </div>
 
