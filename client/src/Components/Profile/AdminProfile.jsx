@@ -7,7 +7,7 @@ import ProductsList from '../Products/ProductsList/productsList';
 import UserList from '../Users/UserList/userList';
 import AdminSidePanel from './Admin/AdminSidePanel';
 import AdminTopPanel from './Admin/AdminTopPanel';
-import Dashboard from '../Dashboard/Dashboard';
+// import Dashboard from '../Dashboard/Dashboard';
 import jwt from 'jsonwebtoken'
 
 
@@ -23,6 +23,7 @@ const AdminProfile = () => {
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
 
+
   useEffect(() => {
     if(!id) {
       history.push("/login");
@@ -37,8 +38,8 @@ const AdminProfile = () => {
       <AdminSidePanel />
       <AdminTopPanel />
       <Switch>
-        <Route exact path={path} children={<Dashboard style={{ width: "100%" }}/>} />
-        <Route exact path={`${path}/dashboard`} children={<Dashboard style={{ width: "100%" }}/>} />
+        <Route exact path={path} children={<h1 style={{ width: "100%" }}>{`Welcome to the admin panel`} </h1>} />
+        <Route exact path={`${path}/dashboard`} children={<h1 style={{ width: "100%" }}>{`Welcome to the admin panel`} </h1>} />
         <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
         <Route exact path={`${path}/categories`} component={CategoryList} />
         <Route exact path={`${path}/products`} component={ProductsList} />
