@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
+
 import './Checkout.css';
+import {  useState } from "react";
 import { 
   Accordion, 
   AccordionSummary, 
   Typography, 
   AccordionDetails, 
   Hidden, 
-  makeStyles 
+  makeStyles,
 } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
+
+
 
 const useStyles = makeStyles((theme) => ({
   accordionSummary: {
     boxShadow: "0px 0px 0px",
     width: "100%",
     background: "#ced4da",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    marginBottom: "10px",
+    display: "flex"
   },
   paperContainer: {
     display: "flex",
@@ -39,10 +47,43 @@ const useStyles = makeStyles((theme) => ({
     margin: "2px 0 0 6px",
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular
-  }
+  },
+  text: {
+    position: "relative",
+    "&:hover": {
+        zIndex: 1,
+        "& $imageMarked": {
+        width: "calc(80%)",
+        left: "calc(10%)",
+        transition: 'all 0.35s ease-out',
+        },
+    }
+    },
+  imageTitle: {
+    position: "relative",
+    width: '70px',
+    padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
+        theme.spacing(1) + 2
+    }px`,
+    fontFamily: 'Montserrat',
+    fontWeight: '500'
+    },
+    imageMarked: {
+       height: 2,
+       width: "calc(20%)",
+       backgroundColor: theme.palette.common.white,
+       position: "absolute",
+       bottom: 1,
+       left: "calc(40%)",
+       transition: 'all 0.35s ease-out',
+    },
+      blackBack: {
+      backgroundColor: "#372c2e"
+    },
+                
 }));
 
-const OrderInfo = ({ order }) => {
+const OrderInfo = ({ order }) => { 
 
   const [summaryExpanded, setSummaryExpanded] = useState(false);
 
@@ -189,10 +230,11 @@ const OrderInfo = ({ order }) => {
           </Accordion>
         </div>
         <div className="info-total">
-          <div className="info-item-title">Total: </div>
+          <div className="info-item-title">Total:
           $ {order.total}
-        </div>
-      </div>
+          </div>
+         </div>
+      </div>   
     </div>
   )
 }

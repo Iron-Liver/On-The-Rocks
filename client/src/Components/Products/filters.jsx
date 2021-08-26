@@ -55,7 +55,7 @@ const Filters = () => {
       </div>
       <Accordion
         className="filter-accordion"
-        elevation={false}
+        elevation={0}
         style={{
           background: "transparent",
           borderTop: "1px solid #1d1813"
@@ -109,7 +109,7 @@ const Filters = () => {
 
       <Accordion
         className="filter-accordion"
-        elevation={false}
+        elevation={0}
         style={{
           background: "transparent",
           borderTop: "1px solid #1d1813"
@@ -160,7 +160,7 @@ const Filters = () => {
 
       <Accordion
         className="filter-accordion"
-        elevation={false}
+        elevation={0}
         style={{
           background: "transparent",
           borderTop: "1px solid #1d1813"

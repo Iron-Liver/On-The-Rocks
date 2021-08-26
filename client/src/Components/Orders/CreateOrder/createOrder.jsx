@@ -59,11 +59,7 @@ const CreateOrder = () => {
             ...state2,
             id: currentUser.id,
             paymentMethod: "mercadopago",
-            total: JSON.parse(localStorage.getItem("data"))
-                .reduce((acc, el) => {
-                    return (acc = parseInt(acc) + parseInt(el.price));
-                }, 0)
-                .toFixed(2),
+            total: JSON.parse(localStorage.getItem("total")),
             cart: JSON.parse(localStorage.getItem("data")).map(
                 ({ id, units, price }) => {
                     return {
@@ -74,7 +70,15 @@ const CreateOrder = () => {
                 }
             ),
         };
+
         try {
+            var coup = JSON.parse(localStorage.getItem("coup"));
+            if (coup > 0) {
+                axios.delete(`/coupon/delete/${coup}`);
+            }
+            localStorage.removeItem("coup");
+            localStorage.setItem("coup", null);
+
             const { data } = await axios.post("/order/addOrder", order);
             if (data) {
                 localStorage.removeItem("data");

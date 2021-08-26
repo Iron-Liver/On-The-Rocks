@@ -10,9 +10,22 @@ import { useState } from 'react';
 const ChatBotApp = () => {
 
   const [robot, setRobot] = useState(false)
+  const [logo, setLogo] = useState(true)
   const handleClick = () => {
     setRobot(robot === false ? true : false)
   }
+  const handleClickX = () => {
+    setLogo(logo === false);
+     
+  }
+
+  var bot;
+
+  if(logo === true){
+    bot = <button className="botonBot" onClick={() => handleClick()}><img className="logoBot" src={Bot1} alt="ChatBot" /></button>
+  }else{
+    bot = <button style={{display:"none"}} onClick={() => handleClick()}><img className="logoBot" src={Bot1} alt="ChatBot" /></button>
+  } 
 
   if (robot === false) {
     var robotshow = null
@@ -24,14 +37,13 @@ const ChatBotApp = () => {
         messageParser={MessageParser}
         actionProvider={ActionProvider} />
     </div>
-
-
   }
 
   return (
     <div className="Chatbot">
       {robotshow}
-      <button className="botonBot" onClick={() => handleClick()}><img className="logoBot" src={Bot1} alt="ChatBot" /></button>
+      <button className="btnCloseBot" onClick={()=>handleClickX()}>B</button>
+      {bot}
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import axios from "axios";
 import {
-    ADD_PRODUCT_WISHLIST,
+    // ADD_PRODUCT_WISHLIST,
     GET_WISHLIST,
     DELETE_WISHLIST
 } from "../../Utils/constants";
 
 export function addProductWishlist(obj) {
-    return async function(dispatch) { 
+    console.log('objeto',obj)
+    return async function() { 
         await axios.post(`/wishlist/createwishlist`, obj);
-        dispatch ({type: ADD_PRODUCT_WISHLIST,  payload: obj})
     };
 }
 
@@ -21,7 +21,7 @@ export function getWishlist() {
 
 
 export function deleteWish(id) {
-    console.log("ESTE",id)
+
     return async function (dispatch) {
         await axios.delete(`/wishlist/delete/${id}`);
         dispatch({ type: DELETE_WISHLIST, payload: id });

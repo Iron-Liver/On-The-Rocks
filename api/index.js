@@ -8,6 +8,7 @@ const {productsMockUp} = require('./src/utils/mockUps/products')
 const {categoriesMockUp} = require('./src/utils/mockUps/categories')
 const {ordersMockUp} = require('./src/utils/mockUps/orders')
 const {reviewsMockUp} = require('./src/utils/mockUps/reviews')
+const {couponMockUp} = require('./src/utils/mockUps/coupon')
 
 conn.sync({ force: true })
 .then(async() => {
@@ -20,6 +21,7 @@ conn.sync({ force: true })
     await productsMockUp();
     await ordersMockUp();
     await reviewsMockUp();
+    await couponMockUp();
     });
 })
 .catch(e => console.log(e.message))

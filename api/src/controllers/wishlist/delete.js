@@ -10,8 +10,6 @@ module.exports = async (req, res, next) => {
             id: id
         }
     })
-    
-    
 
     return res.json("Delete success").status(200);
 
