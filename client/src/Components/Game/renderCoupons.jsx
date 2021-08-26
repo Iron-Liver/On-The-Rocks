@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         // flexGrow: 1,
         width: "100%",
+        display: "flex",
+        flexWrap: "wrap",
+        padding: "30px 30px",  
+        minHeight: "85vh",
     },
     paper: {
         padding: theme.spacing(2),
@@ -42,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+function addcupDesc(id){
+    localStorage.removeItem("coup")
+    localStorage.setItem("coup", JSON.stringify(id))
+}
+
 const Coupons = () => {
     const classes = useStyles();
     const localProfile = JSON.parse(localStorage.getItem("token"))
@@ -52,7 +62,6 @@ const Coupons = () => {
         : null;
     const userId = localProfile?.id;
     const { Coupons } = useSelector((state) => state.couponReducer);
-
     const dispatch = useDispatch();
     useEffect(
         () => {
@@ -61,23 +70,58 @@ const Coupons = () => {
         []
     );
 
+
     return (
       <div className="user-coupons-tab-container">
         <div className={classes.root}>
             {Coupons?.length > 0 ? (
                 Coupons?.map((w) => (
-                    <Paper className={classes.paper} key={w.id}>
-                        <div className="user-coupons-description">
-                            <div style={{ flexGrow: 1 }}>
-                                <h2 className="user-coupons-item-title">
-                                    Coupon code: {w.code}
-                                </h2>
-                                <h2 className="user-coupons-item-price">
-                                    Discount amount: {w.discount * 100}%
-                                </h2>
-                            </div>
+                    <div className = "user-coupons-order" key={w.id}>
+                        {w.discount === 0.02? (
+                         <div className="user-coupons-description">                      
+                                    <div>
+                                      <img src={"/images/Coupon2.png"}/>
+                                    </div>
+                    
                         </div>
-                    </Paper>
+                        ):
+                        w.discount === 0.05? (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img src={"/images/Coupon5.png"}/>
+                                </div>
+                            </div>):
+                        w.discount === 0.10? (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img src={"/images/Coupon10.png"}/>
+                                </div>
+                            </div>):
+                        w.discount === 0.15? (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img src={"/images/Coupon15.png"}/>
+                                </div>
+                            </div>): 
+                        w.discount === 0.20? (
+                                <div className="user-coupons-description">
+                                    <div>
+                                      <img src={"/images/Coupon20.png"}/>
+                                    </div>
+                                </div>):  
+                        w.discount === 0.25? (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img src={"/images/Coupon25.png"}/>
+                                </div>
+                            </div>):     
+                     (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img src={"/images/Coupon50.png"}/>
+                                </div>
+                            </div>)   
+                    }</div>
                 ))
             ) : (
                 <div

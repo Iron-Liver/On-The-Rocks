@@ -17,6 +17,11 @@
     font-weight: 400;
     font-size: 15px;
   }
+
+  .user-coupons-order{
+    display: flex;
+    margin: auto;
+  }
   
   .user-coupons-imgsale-wrapper { 
     display: flex; 
