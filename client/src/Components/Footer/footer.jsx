@@ -12,8 +12,8 @@ const Footer = () => {
               <h4>Socials</h4>
                 <ul className="social">
                   <li><i className="fa fa-facebook" aria-hidden="true"></i></li>
-                  <li><i className="fa fa-twitter" aria-hidden="true"></i></li>
-                  <li><i className="fa fa-instagram" aria-hidden="true"></i></li>
+                  <li><i className="fa fa-twitter" aria-hidden="true"></i> </li>
+                  <li ><a href="https://www.instagram.com/ontherockspremiumdrinks" target="_blank" className="Link"><i className="fa fa-instagram" aria-hidden="true"></i></a></li>
                   <li><i className="fa fa-github" aria-hidden="true"></i></li>
                 </ul>
           </div>

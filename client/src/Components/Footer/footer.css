@@ -76,6 +76,7 @@
   
   margin-bottom: 20px;
   padding-left: 15px;
+  text-decoration: none;
 }
 
 .center1 {
@@ -174,4 +175,9 @@ height: max-content;
   text-decoration: none;
   /* margin-top: 1%; */
   
+}
+
+.Link {
+  color: rgb(230, 230, 216);
+  text-decoration: none;
 }
