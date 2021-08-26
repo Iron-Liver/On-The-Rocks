@@ -2,142 +2,8 @@ const { Product } = require('../../db');
 
 const productsMockUp = async () => {
     try {
-        // const test = await Product.create({
-        //   name: "test product",
-        //   description: "a test product",
-        //   price: 0.50,
-        //   sku: "n8",
-        //   size: "2 mL",
-        //   brand: "Test",
-        //   category: "Test",
-        //   image: "https://d1es63ffnb4bhv.cloudfront.net/easyarticles/images/users/6128/test.jpg"
-        // })
-        // test.addCategories([5]);
-        const absolut = await Product.create({
-            name: "Absolut Vodka 1L",
-            description: "With 400 years of Swedish tradition behind it, this superb Vodka is extremely smooth. Using the purest Swedish water from the town of Åhus and wheat grown in the surrounding countryside Absolut have maintained the tradition of pure and perfect Swedish Vodka.",
-            price: 52.99,
-            sku: "a1",            
-            size: "1000 mL",
-            brand: "Absolut",
-            category: "Vodka",
-            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-absolut-1l_450x650.jpg?v=1559562467",
-            stock: 10
-            
-        })
-        absolut.addCategories([5])
-      
-        const kalashnikov = await  Product.create({
-            name:"Kalashnikov Premium Vodka 700mL AK-47",
-            description:"The bottle itself is in the shape of the AK47 Kalashnikov machine gun and has a capacity of 700ml of Vodka.  The main section of the bottle is made of one piece clear glass and the labelling is black ink printed onto the butt of the bottle.  The ‘bottle top’ as such is made from black plastic or metal and incorporates a front sight, the same as the AK 47 machine gun.",
-            size:"700 mL",
-            brand:"KALASHNIKOV",
-            sku:"a2",
-            price:234.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-ak47_720x.jpg?v=1603236568",
-            stock: 10,
-        })   
-        kalashnikov.addCategories([5])
-      
-        const gangstarVodka = await  Product.create({
-            name:"Gangstar Vodka 175mL Pistol Gun",
-            description:"Gangstar is an Australian vodka and has created a bottle shaped like an automatic pistol or handgun.",
-            size:"175 mL",
-            brand:"Gangstar",
-            sku:"a3",
-            price:32.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-gangstar-vodka-1_720x.jpg?v=1575786461",
-            stock: 10,
-        })
-        gangstarVodka.addCategories([5])
-      
-        const patronSilverTequila = await  Product.create({
-            name:"Patron Silver Tequila 1L",
-            description:"Perhaps the worlds finest producer of Tequila, Patrón is as desirable as any and both beautifully packaged and produced. As opposed to Gold Tequila, Silver Tequila doesn't spend any time in oak barrels and as such it has a lighter, fresher taste",
-            size:"1000 mL",
-            brand:"Patron",
-            sku:"a4",
-            price:95.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-patron-silver_96205781-102c-4039-953e-b0471b3e4784_720x.jpg?v=1613033306",
-        })
-        patronSilverTequila.addCategories([6])
-      
-        const donJulioBlanco = await  Product.create({
-            name:"Don Julio Blanco Tequila 700mL",
-            description:"Using the finest raw agave and a time honoured distillation process, Don Julio Blanco is tequila in its truest form. A crisp agave flavour and clean, dry finish that is best enjoyed in a Tommy’s margarita.",
-            size:"700 mL",
-            brand:"DonJulio",
-            sku:"a5",
-            price:79.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-don-julio-blanco_720x.jpg?v=1598687753",
-            stock: 10,
-        })
-        donJulioBlanco.addCategories([6])
-      
-        const joseCuervoEspecial = await  Product.create({
-            name:"Jose Cuervo Especial Gold Tequila 700mL",
-            description:"Jose Cuervo Reposado Tequila was the first ever Tequila made after José Maria Guadalupe de Cuervo was granted land by the King of Spain in 1758 to grow the now famous Agave plant.",
-            size:"700 mL",
-            brand:"Jose Cuervo",
-            sku:"a6",
-            price:43.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jose-cuevo-gold_720x.jpg?v=1559566583",
-            stock: 10,
-            onSale: 34.99
-        })
-        joseCuervoEspecial.addCategories([6])
-      
-        const bombaySapphireLondonDry = await  Product.create({
-            name:"Bombay Sapphire 47% London Dry Gin 750mL",
-            description:"Shaken, not stirred, Bombay Sapphire is the classic gin for an ideal martini. The proprietary herbs and botanicals (hint, they're engraved on each bottle) meld to create a delicate gin, without the overly pungent juniper note that other gins have.",
-            size:"750 mL",
-            brand:"Bombay",
-            sku:"a7",
-            price:47.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-sapphire_720x.jpg?v=1607759796",
-            stock: 10,
-            onSale: 35.99
-        })
-        bombaySapphireLondonDry.addCategories([10])
-      
-        const bombaySapphireLondon = await  Product.create({
-            name:"Bombay Original London Dry Gin 700mL",
-            description:"One of the great old-school style London Gins, Bombay Original was first introduced in 1959 and is the precursor of the now more famous Bombay Sapphire. Now at a new strength.",
-            size:"700 mL",
-            brand:"Bombay",
-            sku:"a8",
-            price:35.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-original-gin_720x.jpg?v=1576236940",
-            stock: 10,
-        })
-        bombaySapphireLondon.addCategories([10])
-      
-        const hendricksGin = await  Product.create({
-            name:"Hendrick's Gin 44% Import Strength 750mL",
-            description:"The iconic medicine bottle shape of the Hendrick's Gin lets you know that you're in for a quality Gin experience and with Hendrick's you get an unexpected infusion of cucumber & rose petals that results in a most iconic Gin.",
-            size:"750 mL",
-            brand:"Hendrick's",
-            sku:"a9",
-            price:70.99,
-            onSale: 60.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hendricks-gin_720x.jpg?v=1567926371",
-            stock: 10,
-        })
-        hendricksGin.addCategories([10])
-      
-        const glenfiddich = await  Product.create({
-            name:"Glenfiddich 40 Year Old Rare Collection Single Malt Scotch Whisky 700mL",
-            description:"Each bottle is individually numbered and wrapped in hand-stitched calf leather. Each is accompanied by a leather bound book telling its 40 year old story, with certification hand-signed by our longest-serving craftsmen.",
-            size:"700 mL",
-            brand:"Glenfiddich",
-            sku:"a10",
-            price:4699.99,
-            onSale: 4500.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-glenfiddich-40yo_720x.jpg?v=1614596002",
-            stock: 10,
-        })
-        glenfiddich.addCategories([4])
-      
+        
+        
         const hibiki = await  Product.create({
             name:"Hibiki 30 Year Old Kacho Fugetsu Limited Edition Japanese Suntory Whisky 700mL",
             description:"The 2015 'Kacho Fugetsu' edition is a design that embodies the beauty of Japanese nature. This whisky inside is a meld of grain and malt whiskies aged for 30 years on average.",
@@ -150,6 +16,7 @@ const productsMockUp = async () => {
             onSale:8499.99
         })
         hibiki.addCategories([4])
+
         const macallan = await  Product.create({
             name:"The Macallan M Decanter Single Malt Scotch Whisky 700mL",
             description:"Part of The Macallan Masters Decanter Series created to showcase the beautiful range of The Macallan’s natural colour, M is born of a collaboration between three masters of their crafts to create a completely individual spirit.",
@@ -161,6 +28,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         macallan.addCategories([4])
+
         const martell = await  Product.create({
             name:"Martell L'Or de Jean Martell Cognac 700mL",
             description:"Part of The Macallan Masters Decanter Series created to showcase the beautiful range of The Macallan’s natural colour, M is born of a collaboration between three masters of their crafts to create a completely individual spirit.",
@@ -196,6 +64,147 @@ const productsMockUp = async () => {
             stock: 10
         })
         martellChanteloup.addCategories([11])
+        const royalDragon = await Product.create({
+            name: "Royal Dragon Imperial With Gift Box Superior Vodka 700mL",
+            description: "A small batch vodka, exclusively distilled with a Russian formula from the finest winter harvest rye. To achieve elemental softness and purity, Royal Dragon is five times distilled, using a century old copper pot still.",
+            price: 124.99,
+            sku: "a38",            
+            size: "700 mL",
+            brand: "RoyalDragon",            
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-royal-dragon-imperial-gb_720x.jpg?v=1613531735",
+            stock: 10
+            
+        })
+        royalDragon.addCategories([5])
+
+        const greyGoose = await Product.create({
+            name: "Grey Goose Ducasse With Gift Box Limited Edition Vodka 750mL",
+            description: "Grey Goose Ducasse the world’s first 'Vodka Gastonomique' created to take you from dinner into the rest of the night. Collaboration between Michelin – starred master chef, Alain Ducasse & Grey Goose ´Maitre de chai`, Francois Thibault.",
+            price: 99.99,
+            sku: "a39",            
+            size: "750 mL",
+            brand: "Grey Goose",            
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-grey-goose-ducasse_720x.jpg?v=1626415116",
+            stock: 10
+            
+        })
+        greyGoose.addCategories([5])
+
+        const greyGooseVX = await Product.create({
+            name: "Grey Goose VX Vodka 1L",
+            description: "Grey Goose VX its crafted with a hint of cognac, which gives it a truly distinctive aroma and flavour profile without interfering with the vodka experience. Masterfully finished with a hint of precious cognac.",
+            price: 189.99,
+            sku: "a40",            
+            size: "1000 mL",
+            brand: "Grey Goose",            
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-grey-goose-vx-gb-2_720x.jpg?v=1615359652",
+            stock: 10
+            
+        })
+        greyGooseVX.addCategories([5])        
+        
+        const glenfiddich = await  Product.create({
+            name:"Glenfiddich 40 Year Old Rare Collection Single Malt Scotch Whisky 700mL",
+            description:"Each bottle is individually numbered and wrapped in hand-stitched calf leather. Each is accompanied by a leather bound book telling its 40 year old story, with certification hand-signed by our longest-serving craftsmen.",
+            size:"700 mL",
+            brand:"Glenfiddich",
+            sku:"a10",
+            price:4699.99,
+            onSale: 4500.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-glenfiddich-40yo_720x.jpg?v=1614596002",
+            stock: 10,
+        })
+        glenfiddich.addCategories([4])
+
+        const absolut = await Product.create({
+            name: "Absolut Vodka 1L",
+            description: "With 400 years of Swedish tradition behind it, this superb Vodka is extremely smooth. Using the purest Swedish water from the town of Åhus and wheat grown in the surrounding countryside Absolut have maintained the tradition of pure and perfect Swedish Vodka.",
+            price: 52.99,
+            sku: "a1",            
+            size: "1000 mL",
+            brand: "Absolut",
+            category: "Vodka",
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-absolut-1l_450x650.jpg?v=1559562467",
+            stock: 10
+            
+        })
+        absolut.addCategories([5])
+        
+        
+        const patronSilverTequila = await  Product.create({
+            name:"Patron Silver Tequila 1L",
+            description:"Perhaps the worlds finest producer of Tequila, Patrón is as desirable as any and both beautifully packaged and produced. As opposed to Gold Tequila, Silver Tequila doesn't spend any time in oak barrels and as such it has a lighter, fresher taste",
+            size:"1000 mL",
+            brand:"Patron",
+            sku:"a4",
+            price:95.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-patron-silver_96205781-102c-4039-953e-b0471b3e4784_720x.jpg?v=1613033306",
+        })
+        patronSilverTequila.addCategories([6])
+        
+        const donJulioBlanco = await  Product.create({
+            name:"Don Julio Blanco Tequila 700mL",
+            description:"Using the finest raw agave and a time honoured distillation process, Don Julio Blanco is tequila in its truest form. A crisp agave flavour and clean, dry finish that is best enjoyed in a Tommy’s margarita.",
+            size:"700 mL",
+            brand:"DonJulio",
+            sku:"a5",
+            price:79.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-don-julio-blanco_720x.jpg?v=1598687753",
+            stock: 10,
+        })
+        donJulioBlanco.addCategories([6])
+        
+        const joseCuervoEspecial = await  Product.create({
+            name:"Jose Cuervo Especial Gold Tequila 700mL",
+            description:"Jose Cuervo Reposado Tequila was the first ever Tequila made after José Maria Guadalupe de Cuervo was granted land by the King of Spain in 1758 to grow the now famous Agave plant.",
+            size:"700 mL",
+            brand:"Jose Cuervo",
+            sku:"a6",
+            price:43.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jose-cuevo-gold_720x.jpg?v=1559566583",
+            stock: 10,
+            onSale: 34.99
+        })
+        joseCuervoEspecial.addCategories([6])
+        
+        const bombaySapphireLondonDry = await  Product.create({
+            name:"Bombay Sapphire 47% London Dry Gin 750mL",
+            description:"Shaken, not stirred, Bombay Sapphire is the classic gin for an ideal martini. The proprietary herbs and botanicals (hint, they're engraved on each bottle) meld to create a delicate gin, without the overly pungent juniper note that other gins have.",
+            size:"750 mL",
+            brand:"Bombay",
+            sku:"a7",
+            price:47.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-sapphire_720x.jpg?v=1607759796",
+            stock: 10,
+            onSale: 35.99
+        })
+        bombaySapphireLondonDry.addCategories([10])
+        
+        const bombaySapphireLondon = await  Product.create({
+            name:"Bombay Original London Dry Gin 700mL",
+            description:"One of the great old-school style London Gins, Bombay Original was first introduced in 1959 and is the precursor of the now more famous Bombay Sapphire. Now at a new strength.",
+            size:"700 mL",
+            brand:"Bombay",
+            sku:"a8",
+            price:35.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bombay-original-gin_720x.jpg?v=1576236940",
+            stock: 10,
+        })
+        bombaySapphireLondon.addCategories([10])
+        
+        const hendricksGin = await  Product.create({
+            name:"Hendrick's Gin 44% Import Strength 750mL",
+            description:"The iconic medicine bottle shape of the Hendrick's Gin lets you know that you're in for a quality Gin experience and with Hendrick's you get an unexpected infusion of cucumber & rose petals that results in a most iconic Gin.",
+            size:"750 mL",
+            brand:"Hendrick's",
+            sku:"a9",
+            price:70.99,
+            onSale: 60.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hendricks-gin_720x.jpg?v=1567926371",
+            stock: 10,
+        })
+        hendricksGin.addCategories([10])
+        
         const caffoVecchio = await  Product.create({
             name:"Caffo Vecchio Amaro del Capo Riserva 100th Anniversary Herb Liqueur 700mL",
             description:"A rare combination of Amaro & Brandy. Made with the same ingredients of Amaro del Capo but using an Italian brandy of very high quality, aged in oak barrels.",
@@ -242,7 +251,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         cecchi.addCategories([2])
-
+        
         const masi = await  Product.create({
             name:"Masi Bonacosta Valpolicella Classico Dry Red Wine 750mL",
             description:"Valpolicella Classico, praised by Hemingway as a light, dry red wine, as friendly as the house of a favourite brother, is made here by Masi in an elegant style full of simplicity and freshness.",
@@ -254,7 +263,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         masi.addCategories([2])
-
+        
         const cockburn = await  Product.create({
             name:"Cockburn's Special Reserve Port Wine 1L Special Reserve Port Wine 1L",
             description:"Valpolicella Classico, praised by Hemingway as a light, dry red wine, as friendly as the house of a favourite brother, is made here by Masi in an elegant style full of simplicity and freshness.",
@@ -278,7 +287,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         alize.addCategories([7])
-
+        
         const cointreau = await  Product.create({
             name:"Cointreau Noir Orange Liqueur & Cognac 750mL",
             description:"Cointreau Noir is a blend of Cointreau orange liqueur and cognac. Walnuts and almonds are also included. It was created by Bernadette Langlais, master distiller for Cointreau from 1978-2016. Cointreau Noir was inspired by Majestic, a liqueur created by Édouard Cointreau in the early 1900s.",
@@ -290,7 +299,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         cointreau.addCategories([7])
-
+        
         const chamboard = await  Product.create({
             name:"Chambord Black Raspberry Liqueur 200mL",
             description:"Chambord Liqueur is a super premium black raspberry liqueur with a fine French heritage, recognised around the world for its unique flavour and versatility in transforming cocktails into something grand. It’s an infusion of the world’s finest red and black raspberries, Madagascan vanilla, black currant and XO cognac creating a unique taste profile for a more extraordinary cocktail.",
@@ -302,7 +311,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         chamboard.addCategories([7])
-
+        
         const goldcschlager = await  Product.create({
             name:"Goldschlager Cinnamon Schnapps Liqueur 1L",
             description:"Goldschlager is the authentic hot cinnamon schnapps with floating flakes of real 24 carat gold.",
@@ -314,7 +323,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         goldcschlager.addCategories([12])
-
+        
         const SantaTeresa = await  Product.create({
             name:"Santa Teresa 1796 Ron Antiguo de Solera Rum 700mL",
             description:"Santa Teresa 1796 is a premium, single estate Venezuelan rum, distilled, aged and blended at the Hacienda Santa Teresa. It is a family-owned rum distillery built on over 200 years of tradition, but the exceptional care and attention to their craft hasn't changed either, despite the challenges and adversities they've faced in that time.",
@@ -326,7 +335,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         SantaTeresa.addCategories([8])
-
+        
         const oldMonk = await  Product.create({
             name:"Old Monk The Legend Indian Rum 1L",
             description:"From the Old Monk range produced by Mohan Meakin in India comes The Legend, a well-aged blended rum presented in a bottle supposedly shaped like the head of H.G. Meakin, the company's founder.",
@@ -338,7 +347,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         oldMonk.addCategories([8])
-
+        
         const zacapa = await  Product.create({
             name:"Zacapa Centenario XO Solera Gran Reserva Especial Rum 750mL",
             description:"Ron Zacapa Centenario XO Rum containing a blend of rums from 6 to 25 years old with an extra ageing stage in French oak barrels that previously held cognac.",
@@ -362,7 +371,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         krug.addCategories([1])
-
+        
         const bollinger = await  Product.create({
             name:"Bollinger La Grande Annee 2012 With Gift Box Champagne 750mL",
             description:"At Bollinger, only very high quality harvests become a vintage: the exceptional 2012 vintage led to Bollinger creating expressive wines that were simultaneously full, fresh and complex.",
@@ -374,7 +383,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         bollinger.addCategories([1])
-
+        
         const mumm = await  Product.create({
             name:"Mumm Cordon Rouge + 2 Flute Glasses Gift Pack Brut Champagne NV 750mL",
             description:"An explosion of freshness in the mouth, followed by strong persistence. The complex aromas of fresh fruit and caramel perpetuate the intensity..",
@@ -398,7 +407,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         cinzano.addCategories([3])
-
+        
         const cinzano1757 = await  Product.create({
             name:"Cinzano 1757 Rosso Vermouth 1L",
             description:"This unique premium vermouth has been bottled to celebrate and pay homage to Cinzano’s founding fathers, Giovanni Giacomo and Carlo Stefano, who in 1757 started their business in Turin.",
@@ -410,7 +419,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         cinzano1757.addCategories([3])
-
+        
         const cinzanoRosso = await  Product.create({
             name:"Cinzano Rosso Vermouth 1L",
             description:"Cinzano Rosso is a blend of high quality red wine and essences of herbs and spices, creating a delicate and balanced refreshing drink, a slight sweetness balances with herbal bitterness.",
@@ -422,7 +431,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         cinzanoRosso.addCategories([3])
-
+        
         const kah = await  Product.create({
             name:"KAH Anejo Ceramic Skull Tequila 700mL",
             description:"Apart from the standard traditions of shrine building and gift giving, things are taken a step further and rather than going home after the graveside celebrations, many people stay and sleep in the grave yard. They believe that this act re-enforces the emotional connection between them and the deceased.",
@@ -434,7 +443,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         kah.addCategories([9])
-
+        
         const cristalHead = await  Product.create({
             name:"Crystal Head Skull Decanter Aurora Limited Edition Vodka 700mL",
             description:"Aurora uses the highest-quality English wheat and pristine water from Newfoundland, Canada to craft an additive-free vodka. The vodka's purity is maintained by way of five distillations and seven filtrations. And as our final distinctive touch, three of these filtrations are passed through layers of Herkimer diamonds.",
@@ -446,7 +455,7 @@ const productsMockUp = async () => {
             stock: 10,
         })
         cristalHead.addCategories([9])
-
+        
         const cristalHead2 = await  Product.create({
             name:"Crystal Head Skull Decanter John Alexander Artist Limited Edition Vodka 700mL",
             description:"Known as a painter of environmentally conscious landscapes and satirical figurative work, this evocative design is derived from John Alexander’s expressive paintings.",
@@ -458,6 +467,31 @@ const productsMockUp = async () => {
             stock: 10,
         })
         cristalHead2.addCategories([9])
+        
+        const kalashnikov = await  Product.create({
+            name:"Kalashnikov Premium Vodka 700mL AK47",
+            description:"The bottle itself is in the shape of the AK47 Kalashnikov machine gun and has a capacity of 700ml of Vodka.  The main section of the bottle is made of one piece clear glass and the labelling is black ink printed onto the butt of the bottle.  The ‘bottle top’ as such is made from black plastic or metal and incorporates a front sight, the same as the AK 47 machine gun.",
+            size:"700 mL",
+            brand:"Kalashnikov",
+            sku:"a2",
+            price:234.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-ak47_720x.jpg?v=1603236568",
+            stock: 10,
+        })   
+        kalashnikov.addCategories([9])
+        
+        const gangstarVodka = await  Product.create({
+            name:"Gangstar Vodka 175mL Pistol Gun",
+            description:"Gangstar is an Australian vodka and has created a bottle shaped like an automatic pistol or handgun.",
+            size:"175 mL",
+            brand:"Gangstar",
+            sku:"a3",
+            price:32.99,
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-gangstar-vodka-1_720x.jpg?v=1575786461",
+            stock: 10,
+        })
+        gangstarVodka.addCategories([9])
+
 
     }catch (e) {
         console.log(e)

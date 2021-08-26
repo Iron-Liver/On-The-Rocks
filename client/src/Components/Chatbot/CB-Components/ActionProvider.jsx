@@ -55,7 +55,7 @@ class ActionProvider {
   };
 
   handleSquad = () => {
-    const message = this.createChatBotMessage(`Best team ever Agus Luca Mati Fede Nico Hilber David`);
+    const message = this.createChatBotMessage(`Best team ever Agus Luca Mati Fede Nico Hilber Tonga David`);
     this.addMessageToState(message);
   };
 
