@@ -1,31 +1,37 @@
 import React, { useState } from "react";
 import "./productImages.css";
 import Axios from "axios";
+import swal from "sweetalert"
 
-function ProductImages({ sku }) {
+function ProductImages({ sku, name }) {
   //const [name, setName] = useState();
-  const [file, setFile] = useState();
+  const [state, setState] = useState();
+  console.log("skuname", sku, name)
 
-  const send = event => {
-    const data = new FormData();
+  function handleChange(file){
 
-    for (const aFile of file) {
-      data.append('file', aFile)
-      aFile.sku = sku
+    if(sku.length > 0){
+      console.log("skuname2", sku, name)
+      setState({sku: sku, name:name})
+
+      const data = new FormData();
+      for (const aFile of file) {
+        data.append("file", aFile)
+      }
+      for(const a of data){
+        console.log(a)
+      }
+      Axios.post(`/product/addPhotos/${name}?sku=${sku}`, data)
+        .then(res => console.log(res))
+        .catch(err => console.log(err)); 
+    }else{
+      swal("Please insert a valid SKU")
     }
-
-    for (var p of data) {
-      console.log(p);
-    }
-
-    console.log(sku)
-    console.log('file out', file)
-    
-    Axios.post("/product/addPhotos", data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
   };
-  console.log('file', file)
+  
+
+
+ 
   return (
     <div className="App">
       <header className="App-header">
@@ -38,13 +44,11 @@ function ProductImages({ sku }) {
               accept=".jpg"
               multiple
               onChange={event => {
-                const file = event.target.files;
-                setFile(file);
+                handleChange(event.target.files)
               }}
             />
           </div>
         </form>
-        <button onClick={send}>Send</button>
       </header>
     </div>
   );

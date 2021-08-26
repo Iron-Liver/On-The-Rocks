@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
+import { Swiper, SwiperSlide } from "swiper/react";
 import {
     Card,
     CardContent,
@@ -33,6 +34,7 @@ import { green, red } from "@material-ui/core/colors";
 import { getProducts } from "../../Redux/Products/productsActions";
 import CustomButton from "../Button/CustomButton";
 import { logOutUser } from "../../Redux/Users/userActions";
+import "./productDetail.css"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -190,6 +192,7 @@ const ProductDetail = () => {
     const [value, setValue] = React.useState(2);
     const { id } = useParams();
     const { Products } = useSelector((state) => state.productReducer);
+   
     const liqueur = Products?.filter((p) => p.id === Number(id))[0];
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
@@ -222,6 +225,8 @@ const ProductDetail = () => {
 
     useEffect(() => {}, [Products, reviews]);
 
+    console.log(Products)
+    
     function onSubmit(e) {
         let data = JSON.parse(localStorage.getItem("data"));
         let filteredData = data?.filter((e) => e.id === liqueur.id);
@@ -313,15 +318,35 @@ const ProductDetail = () => {
     return (
         <>
             {liqueur ? (
-                <>
+                <> 
                     <Card className={classes.root}>
                         <div className={classes.divimage}>
+                         { ! liqueur.img ? (
                             <img
                                 className={classes.cover}
                                 src={liqueur.image}
                                 alt={liqueur.name}
                                 draggable={false}
-                            />
+                            />):(
+                          <Swiper
+                          className="swipperDetailH"
+                             slidesPerView={1}
+                             navigation
+                             spaceBetween={3}
+                             pagination={true}
+                             autoplay={{
+                              delay: 6000,
+                                }}
+                             loop={true}
+                             >
+                          {liqueur?.img.map((spirit) => (
+                           <SwiperSlide key={spirit.id} className="swipperDetailH">
+                             <img src={`/img/${spirit}`} className="imageH"/>
+                            </SwiperSlide>
+                          ))}
+                       </Swiper>
+
+                            )}
                         </div>
                         <div className={classes.details}>
                             <CardContent className={classes.content}>

@@ -5,10 +5,12 @@ import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import CustomButton from '../Button/CustomButton'
 
+
 const ProductCard = ({ spirit }) => {
 
   const [currentSpirit, setCurrentSpirit] = useState();
-
+  
+  
   useEffect(() => {
     setCurrentSpirit(spirit);
   }, [spirit])
@@ -30,7 +32,7 @@ const ProductCard = ({ spirit }) => {
       swal("The product was added to the cart!")   
     }
   }
-
+ 
   return (
     <div className="products-containerproducts">
         <div className="product-card">

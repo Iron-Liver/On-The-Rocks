@@ -5,6 +5,8 @@ import Filters from "./filters";
 import { Pagination } from "@material-ui/lab";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 
 const Products = () => {
     const { search } = useLocation();
@@ -12,6 +14,8 @@ const Products = () => {
     const [page, setPage] = useState(1);
     const [products, setProducts] = useState();
     const history = useHistory();
+
+ 
 
     useEffect(() => {
       (async () => {
@@ -60,6 +64,8 @@ const Products = () => {
       query.set('order', e.target.value);
       history.push({search: query.toString()})
     }
+    
+  
 
     return (
       <div className="products-wrapper">
