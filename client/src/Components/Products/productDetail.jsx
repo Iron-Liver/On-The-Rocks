@@ -198,7 +198,7 @@ const ProductDetail = () => {
     const handleChange = (event) => {
         setQuant(event.target.value);
     };
-    
+
     const handleChangeQuant = (type) => {
         if (type === "+") {
             setQuant(quant === liqueur.stock ? liqueur.stock : quant + 1);
@@ -448,7 +448,7 @@ const ProductDetail = () => {
                                             </Typography>
                                         </>
                                     )}
-                                    <Typography
+                                    {/* <Typography
                                         component="h5"
                                         variant="h5"
                                         style={{
@@ -458,7 +458,7 @@ const ProductDetail = () => {
                                         }}
                                     >
                                         Brand: {liqueur.brand}
-                                    </Typography>
+                                    </Typography> */}
                                     {stockText}
                                 </Grid>
                                 <Typography

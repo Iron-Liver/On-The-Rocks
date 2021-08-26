@@ -23,7 +23,7 @@ const Filters = () => {
   };
 
   const handleOnSale = (e) => {
-    if(!e.target.checked) {
+    if(query.get('onSale')) {
       query.delete('onSale');
       query.delete('page');
       history.push({search: query.toString()});
@@ -36,24 +36,22 @@ const Filters = () => {
 
   return (
     <div style={{ width: "100%" }}>
-      <h2 style={{ marginTop: 0, fontFamily: `"Montserrat", sans-serif`, fontWeight: 400 }}>Filters</h2>
-      <div style={{ margin: "0 0 15px 15px"}}>
-        <label htmlFor="on_sale">
-          <h3 style={{
-            margin: 0,
-            display: "inline"
-          }}>
-            ON SALE
-          </h3>
-          </label>
-        <input 
-          type="checkbox" 
-          name="on_sale"
-          checked={Boolean(query.get('onSale') && query.get('onSale') === "_")} 
-          onChange={handleOnSale}
-          className="check-anon"
-          style={{ marginBottom: "7px" }}
-        />
+      <h2 style={{ margin: "0 0 3px 0", fontFamily: `"Montserrat", sans-serif`, fontWeight: 400 }}>Filters</h2>
+      <div 
+        style={{ padding: "10px 0 10px 15px", marginBottom: "3px", cursor: "pointer"}} 
+        className={
+          query.get('onSale') 
+              ? "filter-accordion-details-cat-active" 
+              : "filter-accordion-details-cat"
+        }
+        onClick={handleOnSale}
+      >
+        <h3 style={{
+          margin: 0,
+          display: "inline"
+        }}>
+          ON SALE
+        </h3>
       </div>
       <Accordion
         className="filter-accordion"
