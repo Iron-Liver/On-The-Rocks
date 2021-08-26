@@ -4,23 +4,27 @@ import { addProductCart } from '../../Redux/Cart/cartActions';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import CustomButton from '../Button/CustomButton';
-
 const SwiperCard = ({ spirit }) => {
-
   const [currentSpirit, setCurrentSpirit] = useState();
-
   useEffect(() => {
     setCurrentSpirit(spirit);
   }, [spirit])
-  
-  
+/*   let curr = []
+  currentSpirit?.map((e) =>{
+    if(currentSpirit.name){
+      curr.push({
+        id: e.id+900,
+        productId: e.id,
+      }
+      )
+    }
+  }) */
   const handleAddToCart = () => {
     let date = JSON.parse(localStorage.getItem('data')) || []
     let data = date.filter(e => e.id === currentSpirit.id)
     if (date.length > 0 && data.length > 0){
          swal("The product is already in the cart!")
     } else {
-
      if(!currentSpirit.onSale)
      {
          addProductCart({
@@ -42,7 +46,6 @@ const SwiperCard = ({ spirit }) => {
       swal("The product was added to the cart!")   
     }
   }
-
   return (
     <div className="swiper-card-container">
       <div className="aaa">
@@ -62,53 +65,13 @@ const SwiperCard = ({ spirit }) => {
                     </h1>
                   </Link>
                 </div>
-                <div style={{
-                  display: "flex",
-                  width: "max-content",
-                  height: "100px",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  flexDirection: "column"
-                }}>
-                    <div style={{
-                      display: "flex",
-                      width: "max-content",
-                      justifyContent: "center",
-                      alignItems: "baseline"
-                    }}>
-                      {spirit.onSale? 
-                      <div>
-                        <h3 style={{
-                        fontFamily: `"Montserrat", sans-serif`,
-                        fontWeight: 400,
-                        fontSize: "30px",
-                          color: "white",
-                          margin: "0 5px"
-                        }}>
-                          ${spirit.onSale}
-                        </h3>
-                        <h4 style={{
-                          fontFamily: `"Montserrat", sans-serif`,
-                          margin: "0 5px",
-                          fontSize: "20px",
-                          fontWeight: 300,
-                          color: "#333",
-                        }}><del>${spirit.price}</del></h4>
-                        </div>
-                        :
-                        <div>
-                        <h3 style={{
-                        fontFamily: `"Montserrat", sans-serif`,
-                        fontWeight: 400,
-                        fontSize: "30px",
-                          color: "white",
-                          margin: "0 5px"
-                        }}>
-                          ${spirit.price}
-                        </h3>
-                       </div>}
-                   </div>
-
+                <div className="ggg">
+                    <div className="hhh">
+                      <h3 className="iii">
+                        ${spirit.onSale}
+                      </h3>
+                      <h4 className="jjj"><del>${spirit.price}</del></h4>
+                    </div>
                     <CustomButton 
                       elevation={0} 
                       width="150px" 
@@ -141,5 +104,4 @@ const SwiperCard = ({ spirit }) => {
   </div>
   )
 }
-
 export default SwiperCard
