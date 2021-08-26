@@ -11,7 +11,7 @@
 
 .landinghead {
   width: 100%;
-  height: 82vh;
+  height: 65vh;
   background: linear-gradient(to bottom, rgba(18, 18, 28, 0.426), rgba(51, 49, 49, 0.426), rgba(0, 0, 0, 0.597)),  url('../../assets/Fondo.jpg'); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   background-attachment: fixed;
@@ -33,16 +33,17 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 150px;
+  margin-top: 80px;
   width: 100%;
 }
 
 .AboutUsContainer h2 {
-  color: rgb(255, 255, 255)
+  color: rgb(255, 255, 255);
 }
 
 
 .container2 {
+  
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -61,9 +62,11 @@
 .card:hover .card__caption {
   top: 30%;
   transform: translateY(-50%);
+ 
 }
 .card:hover .card__image {
   transform: translateY(-10px);
+  opacity: 0.4;
 }
 .card:hover .card__thumb::after {
   top: 0;
@@ -74,6 +77,7 @@
 
 .card:hover .card__snippet {
   margin: 20px 0;
+  height: 500px;
 }
 .card__thumb {
   position: relative;
@@ -88,18 +92,56 @@
 
 @media (max-width: 55em) { 
   .card__thumb .card__image{
-   opacity: 0.3;
-   width: 100%;
-   height: 100%;
- }
- 
- .card__thumb{
-   max-height: 200px;
- }
- .card__caption h2 {
-  margin-bottom: 0px;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+  }
+  .card__thumb{
+    max-height: 200px;
+    
+  }
+  .card__caption h2 {
+    margin: 0;
+    
+  }
+  .card__thumb .card__snippet {
+    font-size: 10px;
+    margin: 0;
+    height: 200px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; */
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  
 }
+
+
+@media (max-width: 320px) { 
+  .card__thumb .card__snippet{
+    font-size: 8px;
+    margin: 0;
+    height: 200px;
+  }
 }
+@media (max-width: 75em) { 
+  .card__thumb .card__image{
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+  }
+  .card__thumb{
+    max-height: 200px;
+  }
+  .card__caption h2 {
+    margin-bottom: 0px;
+  }
+}
+
 
 @media (max-width: 70em) { 
   .card__thumb{
@@ -127,10 +169,11 @@
   width: 29.5vw;
 }
 .card__caption {
+  
   position: absolute;
   top: 50%;
   z-index: 1;
-  padding: 0 20px;
+  
   color: white;
   transform: translateY(-50%);
   text-align: center;
@@ -138,7 +181,7 @@
 }
 @media (min-width: 1024px) {
   .card__caption {
-    top: calc(100% - 150px);
+    top: calc(100% - 160px);
     transform: unset;
   }
   .card__caption h2 {
@@ -147,13 +190,15 @@
 }
 
 .card__title {
+  width: 100%;
   display: flex;
   text-align: center;
   justify-content: center;
   max-height:100px;
   overflow: hidden;
-  font-family: "Montserrat", serif;
+  font-family: "Heebo", serif;
   font-size: 20px;
+
   line-height: 28px;
   text-shadow: 1px 2px 5px #b5b5b533;
   text-overflow: ellipsis;
@@ -162,13 +207,15 @@
 }
 
 .card__snippet {
+  text-shadow: 1px 1px 3px #ffffff60;
   display: -webkit-box;
-  max-height: 150px;
+  padding: 0 20px;
+  max-height: 160px;
   margin: 20px 0;
   overflow: hidden;
-  font-family: "Heebo", sans-serif;
-  font-size: 11px;
-  line-height: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  line-height: 19px;
   text-overflow: ellipsis;
   transition: 0.5s ease-in-out;
   -webkit-line-clamp: 5;
@@ -187,7 +234,7 @@
 }
 
 .containerBrands{
-  margin-top: 200px;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -223,11 +270,35 @@
   justify-content: center;
   align-items: center;
 
-  margin-top: 150px;
+  margin-top: 80px;
 }
 
 
-.title1 {
-  font-size: 12px;
+.title-landing {
+  height: calc(100vh - 93.8px - 48.8vh - 50px);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 88%;
+  margin: 0 auto;
+}
+
+.title-landing h1 {
   font-family: "Montserrat";
+  font-size: 26px;
+  font-weight: 400; 
+}
+
+@media (max-width: 860px) {
+  .title-landing {
+    margin: 0px auto;
+    text-align: center;
+    width: 88%;
+  }
+
+  .title-landing h1 {
+    font-family: "Montserrat";
+    font-size: 15px;
+    font-weight: 400; 
+  }
 }

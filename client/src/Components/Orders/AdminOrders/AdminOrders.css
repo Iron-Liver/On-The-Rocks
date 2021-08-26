@@ -1,0 +1,11 @@
+.admin-orders-tab-container {
+  width: 100%;
+  padding: 30px 30px; 
+  min-height: 85vh
+}
+
+.dashboard-content{
+  width: 600px;
+  margin: 0;
+  
+}

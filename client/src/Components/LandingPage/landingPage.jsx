@@ -19,7 +19,7 @@ import SwiperCore, {
 } from 'swiper/core';
 import Brands from '../Brands/Brands';
 import SwiperWishlist from '../Wishlist/SwiperWishlist';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -42,8 +42,6 @@ export const LandingPage = () => {
       dispatch(getWishlist());
     }, [dispatch])
 
-    const wishList = useSelector(state => state.wishlistReducer?.wishlists);
-
     const currentUser = verifyUser();
 
     return (
@@ -56,11 +54,16 @@ export const LandingPage = () => {
         <div className="vox"></div>
       </div>
       
+      <div className="title-landing">
+        <h1> On the Rocks is an independent self-made Argentinian family
+            owned business providing premium and collectable ranges of spirits.
+        </h1>
+      </div>
 
       <div className="slider">
           
         <div style={{
-          marginTop: "150px",
+          marginTop: "80px",
           marginBottom: "60px",
           display: 'flex',
           flexDirection: 'column',
@@ -68,13 +71,13 @@ export const LandingPage = () => {
           alignItems:'center',
         }}>
           <div className="divider-page">
-            {/* <div className="dividers"></div>
+            <div className="dividers"></div>
             <h1 style={{color:'black', wordBreak: "keep-all", minWidth: "max-content"}}>On sale</h1>
-            <div className="dividers"></div> */}
+            <div className="dividers"></div>
           </div>
         </div>
       </div> 
-      <div  >
+      <div>
           <SwiperOS />
       </div>
 
@@ -103,7 +106,7 @@ export const LandingPage = () => {
                 <img src={im3} alt="by Kyle Cottrell" className="card__image"/>
                 <figcaption className="card__caption">
                   <h2 className="card__title">STOCK</h2>
-                  <p className="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt dolore quis pariatur voluptatum vitae totam id. Repellat delectus veritatis nesciunt illo voluptas voluptates vero culpa exercitationem officia aliquid. Eveniet.</p>
+                  <p className="card__snippet"><b>We have access </b> to a vast array of liquor, please do not hesitate to contact us via email on <b>ontherockscompanydrinks@gmail.com</b> if there is a particular bottle you have in mind but cannot locate on our website. We are confident that if you want it, we can get it. Put us to the test. </p>
                 </figcaption>
               </figure>
             </div>
@@ -111,20 +114,27 @@ export const LandingPage = () => {
                 
             <div className="card">
               <figure className="card__thumb">
-                <img src={im2} alt=" Nathan Dumlao" className="card__image"/>
+                <img  src={im2} alt=" Nathan Dumlao" className="card__image"/>
                 <figcaption className="card__caption">
                   <h2 className="card__title">PRODUCTS</h2>
-                  <p className="card__snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatem animi tenetur debitis! Reprehenderit, magnam amet quos inventore, aut minima eveniet, iste molestiae quo illum dicta corporis perferendis voluptates odio.</p>
+                  <p className="card__snippet"> <b>We strive </b> to provide liquor enthusiasts spirits that they can enjoy for the cheapest price.
+
+Our business philosophy is to <b>continuously source new products</b> to add to our extensive range of liquor to make your online shopping experience easy and continue to deliver great service.
+So if you have a special occasion to purchase for, we believe we will have that bottle that will give you that wow factor.
+</p>
                 </figcaption>
               </figure>
             </div>
 
             <div className="card">
               <figure className="card__thumb">
-                <img src={im1} alt=" Daniel Lincoln" className="card__image"/>
+                <img   src={im1} alt=" Daniel Lincoln" className="card__image"/>
                 <figcaption className="card__caption">
-                  <h2 className="card__title">aaaa </h2>
-                  <p className="card__snippet">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore nemo deleniti provident iure tenetur totam sit reiciendis dolore obcaecati saepe, quisquam soluta sapiente nulla culpa veniam adipisci illum consequuntur assumenda.</p>
+                  <h2 className="card__title">About Us</h2>
+                  <p className="card__snippet">
+<b>On The Rocks</b> is an independent self-made Argentinian family owned business providing premium and collectable ranges of spirits.
+
+With over 30 years in the industry, our recent venture of going online was ignited by our passion for sourcing <b>premium range spirits</b>, because here at On The Rocks, we love to drink.</p>
                 </figcaption>
               </figure>
             </div>
@@ -136,7 +146,7 @@ export const LandingPage = () => {
           <div  className="containerBrands">
             <div className="divider-page">
               <div className="dividers"></div>
-              <h1 style={{color:'black'}}>Shop by Tipe</h1>
+              <h1 style={{color:'black'}}>Shop by Type</h1>
               <div className="dividers"></div>
             </div>
           </div>

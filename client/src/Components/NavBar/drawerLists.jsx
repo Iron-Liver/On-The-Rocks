@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {Cart} from "../Cart/cart"
 import {
   Typography, 
@@ -173,7 +173,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
           </ListItem>
         </Link>
 
-        <Link to="/sale" style={{ textDecoration: "none", color: "black" }}>
+        <Link to="/products?onSale=_" style={{ textDecoration: "none", color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <Loyalty />
@@ -187,19 +187,28 @@ export const MenuList = ({ handleDrawerMenu }) => {
         {localStorage.getItem("token") ? (
           <>
             <Link
-              to={`/profile/${userId}/orders`}
+              to={localProfile.isAdmin
+                ? `/private/profile/${userId}/orders`
+                : `/profile/${userId}/orders`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItem button>
                 <ListItemIcon>
                   <Receipt />
                 </ListItemIcon>
-                <ListItemText primary="My Orders" />
+                <ListItemText primary={localProfile.isAdmin 
+                  ? "Orders"
+                  : "My Orders"
+                }/>
               </ListItem>
             </Link>
 
             <Link
-              to="/wishlist"
+              to={
+                localProfile.isAdmin 
+                ? `/wishlist`
+                : `/profile/${userId}/wishlist` 
+              }
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItem button>
@@ -286,6 +295,7 @@ export const SearchList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { Products } = useSelector((state) => state.productReducer);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getProducts());
@@ -293,23 +303,23 @@ export const SearchList = () => {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      window.location.replace(
-        `${window.location.origin}/products?search=${e.target.value
+      if(e.target.value !== "") {
+        history.push(`/products?name=${e.target.value
           .split(" ")
           .join("-")
-          .toLowerCase()}`
-      );
+          .toLowerCase()}`);
+      }
     }
   };
 
   const handleClick = () => {
     var link = document.getElementById('Search');
-    window.location.replace(
-      `${window.location.origin}/products?search=${link.value
-        .split(" ")
-        .join("-")
-        .toLowerCase()}`
-    );
+      if(link.value !== "") {
+        history.push(`/products?name=${link.value
+          .split(" ")
+          .join("-")
+          .toLowerCase()}`);
+      }
   }
 
   return (

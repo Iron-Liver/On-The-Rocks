@@ -37,14 +37,12 @@ const AdminProfile = () => {
       <AdminSidePanel />
       <AdminTopPanel />
       <Switch>
-        <div className="profile-tab-content">
-          <Route exact path={path} children={Dashboard} />
-          <Route exact path={`${path}/dashboard`} children={Dashboard} />
-          <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
-          <Route exact path={`${path}/categories`} component={CategoryList} />
-          <Route exact path={`${path}/products`} component={ProductsList} />
-          <Route exact path={`${path}/users`} component={UserList} />
-        </div>
+        <Route exact path={path} children={<Dashboard style={{ width: "100%" }}/>} />
+        <Route exact path={`${path}/dashboard`} children={<Dashboard style={{ width: "100%" }}/>} />
+        <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
+        <Route exact path={`${path}/categories`} component={CategoryList} />
+        <Route exact path={`${path}/products`} component={ProductsList} />
+        <Route exact path={`${path}/users`} component={UserList} />
       </Switch>
     </div>
   )

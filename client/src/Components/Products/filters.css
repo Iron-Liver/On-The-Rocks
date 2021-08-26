@@ -10,3 +10,14 @@
   background: #372c2eb9;
   transition: all 100ms ease-in-out;
 }
+
+.filter-accordion-details-cat-active {
+  font-family: 'Montserrat', sans-serif;
+  color: #e4e4e4;
+  background: #372c2e6c;
+  transition: all 100ms ease-in-out;
+}
+
+.filter-accordion-details-cat-active h4 {
+  font-weight: 300;
+}

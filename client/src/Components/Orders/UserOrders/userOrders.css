@@ -1,3 +1,9 @@
+.user-orders-tab-container {
+  width: 100%;
+  padding: 30px 30px; 
+  min-height: 85vh;
+}
+
 .user-orders-item-limit {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;

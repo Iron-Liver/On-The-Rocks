@@ -74,7 +74,7 @@ export const NavBox = ({ solid }) => {
     return (
         <Container className={classes.root}>
             <Link
-                to="/sale"
+                to="/products?onSale=_"
                 className="linkNav"
                 style={{ textDecoration: "none", color: "white" }}
             >

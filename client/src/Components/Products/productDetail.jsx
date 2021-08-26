@@ -18,7 +18,6 @@ import {
     Info,
     RemoveShoppingCart,
     ShoppingCart,
-    FavoriteBorder,
     Add,
     Remove,
 } from "@material-ui/icons";
@@ -196,10 +195,10 @@ const ProductDetail = () => {
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
 
-    // const handleChange = (event) => {
-    //     setQuant(event.target.value);
-    // };
-
+    const handleChange = (event) => {
+        setQuant(event.target.value);
+    };
+    
     const handleChangeQuant = (type) => {
         if (type === "+") {
             setQuant(quant === liqueur.stock ? liqueur.stock : quant + 1);
