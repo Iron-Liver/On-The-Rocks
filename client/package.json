@@ -20,7 +20,7 @@
     "jwt-decode": "^3.1.2",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
-    "react-chatbot-kit": "^1.1.20",
+    "react-chatbot-kit": "^1.0.0",
     "react-dom": "^17.0.2",
     "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2",
@@ -36,7 +36,6 @@
     "sweetalert2": "^11.1.4",
     "swiper": "^6.8.3",
     "web-vitals": "^1.0.1",
-    "webpack": "^5.51.1",
     "yup": "^0.32.9"
   },
   "scripts": {
