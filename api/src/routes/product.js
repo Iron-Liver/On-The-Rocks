@@ -3,17 +3,21 @@ const express = require("express");
 const multer  = require('multer')
 
 const storage = multer.diskStorage({
+   
     destination: function (req, file, cb) {
-        cb(null, './client/public/images/products')
+        cb(null, './src/routes/img')
     },
     filename: 
     function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.name + '-' + uniqueSuffix)
+        const {sku} = req.query;
+        const {name} = req.params
+        console.log("aca",name, sku)
+        cb(null, sku + '-' + name + ".jpg")
     }
 });
 
-const upload = multer(storage).array('file', 12)
+
+const upload = multer({storage:storage}).array('file', 12)
 
 const createProduct = require("../controllers/product/createProduct");
 const putProduct = require("../controllers/product/updateProduct");
@@ -26,8 +30,9 @@ router.use(express.json());
 router.post('/', getAllProducts);
 router.get('/:id', getProductById);
 router.post('/add', createProduct);
-router.post('/addPhotos', upload, productPhotos);
+router.post('/addPhotos/:name', upload, productPhotos);
 router.put('/:id', putProduct);
 router.delete('/:id', deleteProduct); 
+
 
 module.exports = router;
