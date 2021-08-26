@@ -5,14 +5,14 @@ const multer  = require('multer')
 const storage = multer.diskStorage({
    
     destination: function (req, file, cb) {
-        cb(null, './src/routes/img')
+        cb(null, '../client/public/img')
     },
     filename: 
     function (req, file, cb) {
         const {sku} = req.query;
-        const {name} = req.params
+        const {name} = req.params;
         console.log("aca",name, sku)
-        cb(null, sku + '-' + name + ".jpg")
+        cb(null, sku + '-' + Date.now() + ".jpg")
     }
 });
 
