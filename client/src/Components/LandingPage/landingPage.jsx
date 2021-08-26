@@ -45,7 +45,7 @@ export const LandingPage = () => {
         <div className="vox"></div>
       </div>
       <div className="title-landing">
-        <h1> On the Rocks is an independent self-made Argentinian family
+        <h1 style={{margin: '0 auto'}}> On the Rocks is an independent self-made Argentinian family
             owned business providing premium and collectable ranges of spirits.
         </h1>
       </div>
