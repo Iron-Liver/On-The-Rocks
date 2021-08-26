@@ -1,0 +1,21 @@
+.admin-dashboard-tab-container{
+  display: flex;
+  width: 100%;
+  padding: 30px 30px; 
+  min-height: 85vh
+}
+
+.baar1{
+  margin-bottom: 40px;
+}
+
+.Piee {
+  width: 250px;
+  height: 250px;
+  margin-left: 40px;
+
+}
+
+.pie1 {
+  margin-bottom: 40px;
+}

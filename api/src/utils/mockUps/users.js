@@ -15,13 +15,6 @@ const userMockUp = async () => {
           contact: '02201236969',
           coins: 10
         })
-        await User.create({
-          name: 'Agustin Moroni',
-          username: 'Moroni82',
-          email: 'agus-234@hotmail.com',
-          password: hashedPasswordA,
-          contact: '2314610603'
-        });
       }catch (e) {
         console.log(e.message);
       }
@@ -33,6 +26,14 @@ const userMockUp = async () => {
       const hashedPasswordB = await bcrypt.hash('321', 12);
       
       try{
+        await User.create({
+          name: 'Agustin Moroni',
+          username: 'Moroni82',
+          email: 'agus-234@hotmail.com',
+          password: hashedPasswordB,
+          contact: '2314610603',
+          isAdmin: true
+        });
         await User.create({
             name: 'Fede Fleitas',
             username: 'FedeFleitas',

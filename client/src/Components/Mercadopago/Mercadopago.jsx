@@ -58,7 +58,9 @@ const MercadoPago = () => {
             }}
         >
             {!data ? (
+              <div style={{width: "100%", height: "68vh", display: "flex", justifyContent: "center", alignItems: "center"}}>
                 <CircularProgress />
+              </div>
             ) : (
                 // : <Checkout order={orderInfo} data={data} stock={stock}/>
                 <CheckoutV2 order={orderInfo} data={data} stock={stock} />

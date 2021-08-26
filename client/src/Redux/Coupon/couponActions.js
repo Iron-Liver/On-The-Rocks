@@ -12,8 +12,12 @@ export function createCoupon(coupon){
 export function getCoupons(idUser) {
     return async function (dispatch) {
         if(idUser) {
-            const { data } = await axios.get(`/coupon/user/${idUser}`);
-            dispatch({ type: GET_COUPONS, payload: data })
+            try {
+              const { data } = await axios.get(`/coupon/user/${idUser}`);
+              dispatch({ type: GET_COUPONS, payload: data })
+            } catch (error) {
+              dispatch({ type: GET_COUPONS, payload: [] })
+            }
         }
     };
 }

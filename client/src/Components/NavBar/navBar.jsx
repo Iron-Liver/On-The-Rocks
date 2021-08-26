@@ -88,11 +88,13 @@ function NavBar(props) {
             marginTop: "93.85px",
         },
         drawerPaper: {
-            width: "70%",
-            [theme.breakpoints.up("sm")]: {
-                width: "30%",
-                flexShrink: 0,
-            },
+            width: "40%",
+            minWidth: "250px",
+            maxWidth: "380px"
+            // [theme.breakpoints.up("sm")]: {
+            //     width: "30%",
+            //     flexShrink: 0,
+            // },
         },
         drawerPaperTop: {
             width: "100%",

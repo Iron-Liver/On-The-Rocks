@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal } from "@material-ui/core";
 import { useForm } from "./useForm";
 import { Link, useHistory } from "react-router-dom";
@@ -26,6 +26,7 @@ const CreateOrder = () => {
     const [modal, setModal] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
+    const coupons = useSelector(state => state.couponReducer?.Coupons);
 
     const openCloseModal = () => {
         setModal(!modal);
@@ -54,6 +55,13 @@ const CreateOrder = () => {
     }
 
     const SubmitForm = async () => {
+        const id = JSON.parse(localStorage.getItem('coup')) || null;
+        let discount;
+        if(id) {
+          discount = coupons.find(coupon => coupon.id === id).discount;
+          discount = discount * 100;
+        }
+        
         const order = {
             ...state1,
             ...state2,
@@ -65,7 +73,9 @@ const CreateOrder = () => {
                     return {
                         id,
                         units,
-                        price,
+                        price: discount 
+                        ? (((parseFloat(price) - (parseFloat(price) * discount / 100)) / parseInt(units))) 
+                        : (parseFloat(price) / parseInt(units))
                     };
                 }
             ),

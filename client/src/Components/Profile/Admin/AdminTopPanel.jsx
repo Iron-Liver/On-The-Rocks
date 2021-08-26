@@ -4,6 +4,7 @@ import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import { useDispatch } from 'react-redux';
 import { readUser, logOutUser } from '../../../Redux/Users/userActions';
+import swal from 'sweetalert';
 
 const AdminTopPanel = () => {
   const { url } = useRouteMatch();
@@ -20,6 +21,19 @@ const AdminTopPanel = () => {
     dispatch(readUser(userId));
   }, [dispatch, userId]);
 
+  const logOutAlert = () => {
+    swal({
+      title: 'LogOut',
+      text: 'Want to logout?',
+      icon: 'warning',
+      buttons: ['Cancel', 'Yes']
+    }).then(answer => {
+      if(answer){
+        logOut();
+      }
+    })
+  }
+  
   const logOut = () => {
     dispatch(logOutUser());
     history.push("/");
@@ -77,7 +91,7 @@ const AdminTopPanel = () => {
             <h4 className="panel-top-nav-text">Users</h4>
           </div>
         </NavLink>
-        <div className="panel-top-nav-link" onClick={logOut}>
+        <div className="panel-top-nav-link" onClick={logOutAlert}>
           <div className="panel-top-nav-item">
             <h4 className="panel-top-nav-text">Logout</h4>
           </div>

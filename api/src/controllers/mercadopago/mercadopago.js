@@ -22,11 +22,15 @@ module.exports = async (req, res, next) => {
       }]
     });
 
-    const items_mp = items.map(item => ({
+    const items_mp = items.map(item => {
+    console.log(item)
+    
+    return {
       title: item.product.name,
       unit_price: item.unitPrice,
       quantity: item.units
-    }));
+    }
+    });
 
     const preference = {
       items: items_mp,

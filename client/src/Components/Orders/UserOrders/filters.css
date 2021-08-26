@@ -35,6 +35,10 @@
   min-width: max-content;
 }
 
+.user-orders-filters-actions {
+  display: flex;
+}
+
 .user-orders-sort-submit {
   display: flex;
   justify-content: space-between;
@@ -42,7 +46,7 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 456px) {
+@media (max-width: 457px) {
   .user-orders-sort-submit {
     flex-direction: column;
   }

@@ -13,9 +13,9 @@ export const useStyles = makeStyles((theme) => ({
 		marginTop: 5,
 		marginBottom: 10,
 		display: 'flex',
-		border: '1px solid grey',
+		// border: '1px solid grey',
 		borderRadius: '5px',
-		boxShadow: ' 0px 0 1px 1px grey',
+		// boxShadow: ' 0px 0 1px 1px grey',
 		padding: '0 90px',
 		paddingBottom: '30px'
 	},
@@ -109,7 +109,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<div className='extContCAF'>
+			<div style={{margin: 0, padding: 0}}>
 				<form noValidate autoComplete="off" >
 					<Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
 						<Grid >
@@ -131,7 +131,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 								</Grid>
 							</Grid>
 
-							<Grid container spacing={1} alignItems="center">
+							<Grid container spacing={1} alignItems="center" style={{minWidth: "max-content"}}>
 								<Grid item >
 									<Description />
 								</Grid>
@@ -300,7 +300,7 @@ const CreateProductForm = ({ input, setInput, handleSubmit }) => {
 						</Grid>
 						<Grid container direction="row" justifyContent="center" alignItems="center">
 							<Grid item>
-								<Button style={{ fontWeight: 1000, marginTop: 20 }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
+								<Button style={{ fontWeight: 1000, margin: "20px 0" }} color="secondary" onClick={handleSubmit} variant="contained">Add Product</Button>
 
 							</Grid>
 						</Grid>

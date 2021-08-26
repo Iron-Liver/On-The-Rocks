@@ -25,7 +25,8 @@ const SaleCard = ({ spirit }) => {
            id: currentSpirit.id,
            price: currentSpirit.price,
            image: currentSpirit.image,
-           name: currentSpirit.name
+           name: currentSpirit.name,
+           stock: currentSpirit.stock,
          });
      }else{
         addProductCart({
@@ -33,7 +34,8 @@ const SaleCard = ({ spirit }) => {
             id: currentSpirit.id,
             price: currentSpirit.onSale,
             image: currentSpirit.image,
-            name: currentSpirit.name
+            name: currentSpirit.name,
+            stock: currentSpirit.stock,
           })
      }
       swal("The product was added to the cart!")   

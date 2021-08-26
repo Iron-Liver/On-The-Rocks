@@ -21,18 +21,30 @@ const ProductCard = ({ spirit }) => {
     if (date.length > 0 && data.length > 0){
          swal("The product is already in the cart!")
     } else {
-      addProductCart({
-        units: 1,
-        id: currentSpirit.id,
-        price: currentSpirit.price,
-        image: currentSpirit.image,
-        name: currentSpirit.name,
-        stock: currentSpirit.stock,
-      });
+      if(!currentSpirit.onSale)
+     {
+         addProductCart({
+           units: 1,
+           id: currentSpirit.id,
+           price: currentSpirit.price,
+           image: currentSpirit.image,
+           name: currentSpirit.name,
+           stock: currentSpirit.stock
+         });
+     }else{
+        addProductCart({
+            units: 1,
+            id: currentSpirit.id,
+            price: currentSpirit.onSale,
+            image: currentSpirit.image,
+            name: currentSpirit.name,
+            stock: currentSpirit.stock
+          })
+     }
       swal("The product was added to the cart!")   
     }
   }
- 
+
   return (
     <div className="products-containerproducts">
         <div className="product-card">
