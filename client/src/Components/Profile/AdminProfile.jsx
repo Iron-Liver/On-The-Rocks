@@ -7,7 +7,10 @@ import ProductsList from '../Products/ProductsList/productsList';
 import UserList from '../Users/UserList/userList';
 import AdminSidePanel from './Admin/AdminSidePanel';
 import AdminTopPanel from './Admin/AdminTopPanel';
+import Dashboard from '../Dashboard/Dashboard';
 import jwt from 'jsonwebtoken'
+
+
 
 const AdminProfile = () => {
   const { path } = useRouteMatch();
@@ -35,8 +38,8 @@ const AdminProfile = () => {
       <AdminTopPanel />
       <Switch>
         <div className="profile-tab-content">
-          <Route exact path={path} children={<h1>Dashboard</h1>} />
-          <Route exact path={`${path}/dashboard`} children={<h1>Dashboard</h1>} />
+          <Route exact path={path} children={Dashboard} />
+          <Route exact path={`${path}/dashboard`} children={Dashboard} />
           <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
           <Route exact path={`${path}/categories`} component={CategoryList} />
           <Route exact path={`${path}/products`} component={ProductsList} />
