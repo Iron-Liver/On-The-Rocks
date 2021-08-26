@@ -1,0 +1,24 @@
+.Title {
+    display: flex;
+    justify-content: center; 
+    font-size: 40px;
+}
+
+.Subtitle {
+    font-size: 35px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.Text {
+    font-size: 14px;
+    margin-left: 80px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.Font {
+    font-family: "Montserrat";
+} 

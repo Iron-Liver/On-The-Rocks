@@ -123,7 +123,9 @@ export function Cart() {
        localStorage.removeItem("total");
        localStorage.setItem("total", JSON.stringify(total))
       
-      }       
+      } else {
+        total = subTotal.toFixed(2)
+      }      
      
     console.log("tot", total)
     console.log("sub", subTotal)
@@ -201,7 +203,7 @@ export function Cart() {
               )}  
               </div>
          </div>
-            {parseFloat(total).toFixed(2) < parseFloat(subTotal).toFixed(2)? (
+            {parseFloat(total) < parseFloat(subTotal) ? (
                 <div className={classes.box}>
                     {cupon?(  
                     <div>

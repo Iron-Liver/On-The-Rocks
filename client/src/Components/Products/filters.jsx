@@ -125,6 +125,7 @@ const Filters = () => {
             } 
             onChange={handlePriceChange}
             name="U100"
+            className="check-anon"
           />
           <h4 style={{
             margin: 0,
@@ -143,6 +144,7 @@ const Filters = () => {
             } 
             onChange={handlePriceChange}
             name="U250"
+            className="check-anon"
           />
           <h4 style={{
             margin: 0,
@@ -161,6 +163,7 @@ const Filters = () => {
             } 
             onChange={handlePriceChange}
             name="U500"
+            className="check-anon"
           />
           <h4 style={{
             margin: 0,
@@ -179,6 +182,7 @@ const Filters = () => {
             } 
             onChange={handlePriceChange}
             name="A500"
+            className="check-anon"
           />
           <h4 style={{
             margin: 0,
@@ -270,6 +274,7 @@ const Filters = () => {
             } 
             onChange={handleSizeChange}
             name="U200ml"
+            className="check-anon"
           />
           <h4
             style={{
@@ -290,6 +295,7 @@ const Filters = () => {
             } 
             onChange={handleSizeChange}
             name="U500ml"
+            className="check-anon"
           />
           <h4
             style={{
@@ -310,6 +316,7 @@ const Filters = () => {
             } 
             onChange={handleSizeChange}
             name="U700ml"
+            className="check-anon"
           />
           <h4
             style={{
@@ -330,6 +337,7 @@ const Filters = () => {
             } 
             onChange={handleSizeChange}
             name="U750ml"
+            className="check-anon"
           />
           <h4
             style={{
@@ -350,6 +358,7 @@ const Filters = () => {
             } 
             onChange={handleSizeChange}
             name="A750ml"
+            className="check-anon"
           />
           <h4
             style={{

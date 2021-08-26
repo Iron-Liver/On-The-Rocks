@@ -27,12 +27,15 @@ import AdminFeatures from "./Components/Admin/AdminFeatures";
 import Error404 from "./Components/Error404/Error404";
 import CreateOrder from "./Components/Orders/CreateOrder/createOrder";
 import MercadoPago from "./Components/Mercadopago/Mercadopago";
+// import Wishlist from "./Components/Wishlist/wishlist";
 import { WheelOfCoupons } from './Components/Game/wheelOfCoupons';
 import { ThemeProvider } from '@material-ui/core';
 import theme from './Utils/theme';
 import Footer from './Components/Footer/footer';
 import ChatBotApp from "./Components/Chatbot/ChatBot";
 import MercadopagoHelp from "./Components/Mercadopago/MercadopagoHelp";
+import { aboutUs } from './Components/AboutUs/aboutUs';
+import shipping from './Components/Shipping/shipping';
 
 const AppGlobal = () => {
 
@@ -65,6 +68,8 @@ const AppGlobal = () => {
               />
             <AdminRoute path="/private" component={AdminFeatures} />
             <Route exact path="/roulette" component={WheelOfCoupons} />
+            <Route exact path="/aboutus" component={aboutUs} />
+            <Route exact path="/shipping" component={shipping} />
             <Route path="*" component={Error404} />
           </Switch>
           <Footer />
