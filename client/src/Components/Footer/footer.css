@@ -136,3 +136,42 @@ height: max-content;
   width: 100%;
   background-color: rgb(220, 208, 192);
 }
+
+.FMenu{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(230, 230, 216);
+  font-size: 15px;
+  margin-left: 120px;
+  height: max-content;
+  text-decoration: none;
+  margin-top: 7.5%;
+  
+}
+
+.Aboutus{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(230, 230, 216);
+  font-size: 15px;
+  margin-left: 120px;
+  height: max-content;
+  text-decoration: none;
+  margin-top: 13%;
+  
+}
+
+.Shipping{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(230, 230, 216);
+  font-size: 15px;
+  margin-left: 120px;
+  height: max-content;
+  text-decoration: none;
+  /* margin-top: 1%; */
+  
+}
