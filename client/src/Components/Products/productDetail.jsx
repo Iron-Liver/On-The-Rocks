@@ -38,7 +38,7 @@ import { green, red } from "@material-ui/core/colors";
 import { getProducts } from "../../Redux/Products/productsActions";
 import CustomButton from "../Button/CustomButton";
 import { logOutUser } from "../../Redux/Users/userActions";
-import "./productDetail.css"
+import "./productDetail.css";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -210,6 +210,7 @@ const ProductDetail = () => {
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
   
+
     const handleChangeQuant = (type) => {
         if (type === "+") {
             setQuant(quant === liqueur.stock ? liqueur.stock : quant + 1);
@@ -240,8 +241,8 @@ const ProductDetail = () => {
     useEffect(() => {}, [wishlists]);
     useEffect(() => {}, [wished]);
 
-    console.log(Products)
-    
+    console.log(Products);
+
     function onSubmit(e) {
         let data = JSON.parse(localStorage.getItem("data"));
         let filteredData = data?.filter((e) => e.id === liqueur.id);
@@ -349,34 +350,41 @@ const ProductDetail = () => {
     return (
         <>
             {liqueur ? (
-                <> 
+                <>
                     <Card className={classes.root}>
                         <div className={classes.divimage}>
-                         { ! liqueur.img ? (
-                            <img
-                                className={classes.cover}
-                                src={liqueur.image}
-                                alt={liqueur.name}
-                                draggable={false}
-                            />):(
-                          <Swiper
-                          className="swipperDetailH"
-                             slidesPerView={1}
-                             navigation
-                             spaceBetween={3}
-                             pagination={true}
-                             autoplay={{
-                              delay: 6000,
-                                }}
-                             loop={true}
-                             >
-                          {liqueur?.img.map((spirit) => (
-                           <SwiperSlide key={spirit.id} className="swipperDetailH">
-                             <img src={`/img/${spirit}`} className="imageH"/>
-                            </SwiperSlide>
-                          ))}
-                       </Swiper>
-
+                            {!liqueur.img ? (
+                                <img
+                                    className={classes.cover}
+                                    src={liqueur.image}
+                                    alt={liqueur.name}
+                                    draggable={false}
+                                />
+                            ) : (
+                                <Swiper
+                                    className="swipperDetailH"
+                                    slidesPerView={1}
+                                    navigation
+                                    spaceBetween={3}
+                                    pagination={true}
+                                    autoplay={{
+                                        delay: 6000,
+                                    }}
+                                    loop={true}
+                                >
+                                    {liqueur?.img.map((spirit) => (
+                                        <SwiperSlide
+                                            key={spirit.id}
+                                            className="swipperDetailH"
+                                        >
+                                            <img
+                                                src={`/img/${spirit}`}
+                                                alt={spirit.name}
+                                                className="imageH"
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
                             )}
                         </div>
                         <div className={classes.details}>

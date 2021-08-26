@@ -1,10 +1,10 @@
-input {
+.product-input {
     font-size: 16px;
     padding: 5px;
     margin: 10px;
   }
   
-  label {
+  .product-input {
     font-size: 18px;
     width: 100px;
     text-align: left;
@@ -13,10 +13,4 @@ input {
   .flex {
     display: flex;
     align-items: center;
-  }
-  
-  button {
-    padding: 5px;
-    width: 100px;
-    border-radius: 2px;
   }

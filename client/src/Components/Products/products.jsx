@@ -5,7 +5,6 @@ import Filters from "./filters";
 import { Pagination } from "@material-ui/lab";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 
 const Products = () => {

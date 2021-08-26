@@ -23,7 +23,6 @@ export function createProduct(product) {
 export function getProducts() {
     return async function (dispatch) {
         const products = await axios.post(`/product`);
-        console.log(products)
         dispatch({ type: GET_PRODUCTS, payload: products.data });
     };
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./productImages.css";
+// import "./productImages.css";
 import Axios from "axios";
 import swal from "sweetalert"
 
 function ProductImages({ sku, name }) {
-  //const [name, setName] = useState();
+  // eslint-disable-next-line
   const [state, setState] = useState();
   console.log("skuname", sku, name)
 
@@ -37,8 +37,9 @@ function ProductImages({ sku, name }) {
       <header className="App-header">
         <form action="#">
           <div className="flex">
-            <label htmlFor="file">File</label>
+            <label className="product-input" htmlFor="file">File</label>
             <input
+              className="product-input"
               type="file"
               id="file"
               accept=".jpg"
