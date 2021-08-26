@@ -186,19 +186,17 @@ const ProductDetail = () => {
     const currentUser = verifyUser();
     const { wishlists } = useSelector((state) => state.wishlistReducer);
     const { id } = useParams();
-    console.log(Array.isArray(wishlists), "es wishlist array?");
-    console.log(wishlists);
     const [wished, setWished] = useState(
         wishlists
             ?.filter((prod) => prod.productId === Number(id))[0]
             ?.hasOwnProperty("productId")
     );
-    console.log(wished, "wished");
     if (currentUser?.hasOwnProperty("logout")) {
         dispatch(logOutUser());
         window.location.replace(`${window.location.origin}/login`);
         alert("please login");
     }
+  
     const [heartIcon, setHeartIcon] = React.useState(false);
     // eslint-disable-next-line
     const [value, setValue] = React.useState(2);
@@ -208,11 +206,7 @@ const ProductDetail = () => {
     const reviews = useSelector((state) => state.reviewReducer.productReviews);
     const classes = useStyles();
     const [quant, setQuant] = React.useState(1);
-
-    // const handleChange = (event) => {
-    //     setQuant(event.target.value);
-    // };
-
+  
     const handleChangeQuant = (type) => {
         if (type === "+") {
             setQuant(quant === liqueur.stock ? liqueur.stock : quant + 1);
@@ -288,7 +282,6 @@ const ProductDetail = () => {
         let toBeRemoved = wishlists?.filter(
             (prod) => prod.productId === Number(id)
         )[0];
-        console.log('id',toBeRemoved)
         dispatch(deleteWish(toBeRemoved?.id));
     }
 

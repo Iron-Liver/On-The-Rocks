@@ -77,8 +77,6 @@ const Wishlist = () => {
         })();
     }, [state, wishlists, Products]);
 
-    
-
     const deleteWishh = (e, userId, productId) => {
         e.preventDefault();        
         setTrigger([

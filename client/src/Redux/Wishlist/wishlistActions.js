@@ -21,7 +21,7 @@ export function getWishlist() {
 
 
 export function deleteWish(id) {
-    console.log("ESTE",id)
+
     return async function (dispatch) {
         await axios.delete(`/wishlist/delete/${id}`);
         dispatch({ type: DELETE_WISHLIST, payload: id });

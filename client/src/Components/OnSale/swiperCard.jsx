@@ -13,18 +13,6 @@ const SwiperCard = ({ spirit }) => {
     setCurrentSpirit(spirit);
   }, [spirit])
   
-/*   let curr = []
-  currentSpirit?.map((e) =>{
-    if(currentSpirit.name){
-      curr.push({
-        id: e.id+900,
-        productId: e.id,
-
-      }
-
-      )
-    }
-  }) */
   
   const handleAddToCart = () => {
     let date = JSON.parse(localStorage.getItem('data')) || []
@@ -74,13 +62,52 @@ const SwiperCard = ({ spirit }) => {
                     </h1>
                   </Link>
                 </div>
-                <div className="ggg">
-                    <div className="hhh">
-                      <h3 className="iii">
-                        ${spirit.onSale}
-                      </h3>
-                      <h4 className="jjj"><del>${spirit.price}</del></h4>
-                    </div>
+                <div style={{
+                  display: "flex",
+                  width: "max-content",
+                  height: "100px",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  flexDirection: "column"
+                }}>
+                    <div style={{
+                      display: "flex",
+                      width: "max-content",
+                      justifyContent: "center",
+                      alignItems: "baseline"
+                    }}>
+                      {spirit.onSale? 
+                      <div>
+                        <h3 style={{
+                        fontFamily: `"Montserrat", sans-serif`,
+                        fontWeight: 400,
+                        fontSize: "30px",
+                          color: "white",
+                          margin: "0 5px"
+                        }}>
+                          ${spirit.onSale}
+                        </h3>
+                        <h4 style={{
+                          fontFamily: `"Montserrat", sans-serif`,
+                          margin: "0 5px",
+                          fontSize: "20px",
+                          fontWeight: 300,
+                          color: "#333",
+                        }}><del>${spirit.price}</del></h4>
+                        </div>
+                        :
+                        <div>
+                        <h3 style={{
+                        fontFamily: `"Montserrat", sans-serif`,
+                        fontWeight: 400,
+                        fontSize: "30px",
+                          color: "white",
+                          margin: "0 5px"
+                        }}>
+                          ${spirit.price}
+                        </h3>
+                       </div>}
+                   </div>
 
                     <CustomButton 
                       elevation={0} 

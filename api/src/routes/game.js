@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const express = require('express');
 
-const addCoin = require('../controllers/Game/addCoin');
-const getCoins = require('../controllers/Game/getCoins');
+const addCoin = require('../controllers/game/addCoin');
+const getCoins = require('../controllers/game/getCoins');
 
 router.use(express.json());
 

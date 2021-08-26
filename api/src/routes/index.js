@@ -27,4 +27,7 @@ router.use('/game',game)
 const wishlist = require("./wishlist");
 router.use("/wishlist", wishlist);
 
+const coupon = require("./coupon");
+router.use("/coupon", coupon);
+
 module.exports = router;

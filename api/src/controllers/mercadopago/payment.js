@@ -66,7 +66,7 @@ module.exports = async (req, res, next) => {
       order.save();
 
     } else if(payment_status === "approved") {
-
+      
       const order = await Order.findOne({
         where: {
           id: external_reference
