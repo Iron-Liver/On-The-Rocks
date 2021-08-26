@@ -33,8 +33,6 @@ import { WheelOfCoupons } from './Components/Game/wheelOfCoupons';
 import { ThemeProvider } from '@material-ui/core';
 import theme from './Utils/theme';
 import Footer from './Components/Footer/footer';
-import ChatBotApp from './Components/Chatbot/ChatBot';
-
 
 const AppGlobal = () => {
 
@@ -42,8 +40,7 @@ const AppGlobal = () => {
   return (
       <Router>
         <ThemeProvider theme={theme}>
-          <NavBar />
-          <ChatBotApp/>
+          <NavBar />          
           <Switch>
             <Route exact path="/" component={landingPage} />            
             <Route exact path="/login" component={LoginUser} />
