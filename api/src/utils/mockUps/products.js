@@ -171,7 +171,7 @@ const productsMockUp = async () => {
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jean-martell-cognac-2_720x.jpg?v=1580703500",
             stock: 10,
         })
-        martell.addCategories([7])
+        martell.addCategories([11])
         const remyMartin = await  Product.create({
             name:"Remy Martin Coupe Shanghai 700mL",
             description:"In 1903, Remy Martin’s Cellar Master Paul Emile Rémy Martin II creates the first cognac especially developed for a specific market: the Coupe Shanghai designed for Asia. In 2013, in honor of the original Coupe Shanghai, Pierrette Trichet unveiled a reinterpretation of his creation. This new blend marks our dedication to history and tradition, and is proof of the heritage spanning centuries at the house of Rémy Martin.",
@@ -183,7 +183,7 @@ const productsMockUp = async () => {
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-remy-martin-shanghai_720x.jpg?v=1559369227",
             stock: 10,
         })
-        remyMartin.addCategories([7])
+        remyMartin.addCategories([11])
         const martellChanteloup = await  Product.create({
             name:"Martell Chanteloup Perspective Extra Cognac 700mL",
             description:"Martell Chanteloup Perspective is an invitation into the secret of the Chanteloup estate, the historic home of the Martell family. It is also home to countless bottles of eau-de-vie selected with utmost care, some of which have matured for many years in the Chanteloup cellars.",
@@ -195,7 +195,7 @@ const productsMockUp = async () => {
             image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-martel-chanteloup_720x.jpg?v=1592737654",
             stock: 10
         })
-        martellChanteloup.addCategories([7])
+        martellChanteloup.addCategories([11])
         const caffoVecchio = await  Product.create({
             name:"Caffo Vecchio Amaro del Capo Riserva 100th Anniversary Herb Liqueur 700mL",
             description:"A rare combination of Amaro & Brandy. Made with the same ingredients of Amaro del Capo but using an Italian brandy of very high quality, aged in oak barrels.",
@@ -230,7 +230,235 @@ const productsMockUp = async () => {
             stock: 10,
         })
         smirnoff.addCategories([5])
+        //-------------------------------------------------------------------
+        const cecchi = await  Product.create({
+            name:"Cecchi Chianti Governo All'Uso Toscano DOCG Blended Red Wine 750mL",
+            description:"Result of a two-step vinification process: must be handpicked, overripe grapes is added to fruity wine to give it a pleasant structure rich in sugar residues, with a unique and inviting personality.",
+            size:"750 mL",
+            brand:"Cecchi",
+            sku:"a19",
+            price:19.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-chianti-governo-toscano_450x650.jpg?v=1628144868",
+            stock: 10,
+        })
+        cecchi.addCategories([2])
+
+        const masi = await  Product.create({
+            name:"Masi Bonacosta Valpolicella Classico Dry Red Wine 750mL",
+            description:"Valpolicella Classico, praised by Hemingway as a light, dry red wine, as friendly as the house of a favourite brother, is made here by Masi in an elegant style full of simplicity and freshness.",
+            size:"750 mL",
+            brand:"Masi",
+            sku:"a20",
+            price:24.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-masi-bonacosta-classico_450x650.jpg?v=1628580426",
+            stock: 10,
+        })
+        masi.addCategories([2])
+
+        const cockburn = await  Product.create({
+            name:"Cockburn's Special Reserve Port Wine 1L Special Reserve Port Wine 1L",
+            description:"Valpolicella Classico, praised by Hemingway as a light, dry red wine, as friendly as the house of a favourite brother, is made here by Masi in an elegant style full of simplicity and freshness.",
+            size:"1000 mL",
+            brand:"cockburn",
+            sku:"a21",
+            price:54.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-cockburns-port-1l_450x650.jpg?v=1626160169",
+            stock: 10,
+        })
+        cockburn.addCategories([2])
         
+        const alize = await  Product.create({
+            name:"Alizé Bleu Vodka & Cognac Liqueur 700mL",
+            description:"Alize Bleu blends Premium French Vodka with Alizé V.S. Cognac, then adds some magic",
+            size:"700 mL",
+            brand:"Alizé",
+            sku:"a22",
+            price: 39.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-alize-bleu_450x650.jpg?v=1585127446",
+            stock: 10,
+        })
+        alize.addCategories([7])
+
+        const cointreau = await  Product.create({
+            name:"Cointreau Noir Orange Liqueur & Cognac 750mL",
+            description:"Cointreau Noir is a blend of Cointreau orange liqueur and cognac. Walnuts and almonds are also included. It was created by Bernadette Langlais, master distiller for Cointreau from 1978-2016. Cointreau Noir was inspired by Majestic, a liqueur created by Édouard Cointreau in the early 1900s.",
+            size:"750 mL",
+            brand:"Cointreau",
+            sku:"a23",
+            price: 78.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-cointreau-noir_450x650.jpg?v=1626160983",
+            stock: 10,
+        })
+        cointreau.addCategories([7])
+
+        const chamboard = await  Product.create({
+            name:"Chambord Black Raspberry Liqueur 200mL",
+            description:"Chambord Liqueur is a super premium black raspberry liqueur with a fine French heritage, recognised around the world for its unique flavour and versatility in transforming cocktails into something grand. It’s an infusion of the world’s finest red and black raspberries, Madagascan vanilla, black currant and XO cognac creating a unique taste profile for a more extraordinary cocktail.",
+            size:"200 mL",
+            brand:"Chamboard",
+            sku:"a24",
+            price: 19.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-chambord-200ml_450x650.jpg?v=1601553666",
+            stock: 10,
+        })
+        chamboard.addCategories([7])
+
+        const goldcschlager = await  Product.create({
+            name:"Goldschlager Cinnamon Schnapps Liqueur 1L",
+            description:"Goldschlager is the authentic hot cinnamon schnapps with floating flakes of real 24 carat gold.",
+            size:"1000 mL",
+            brand:"Goldcschlager",
+            sku:"a25",
+            price: 68.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-goldschlager-cinamon-schnapps_450x650.jpg?v=1602449879",
+            stock: 10,
+        })
+        goldcschlager.addCategories([12])
+
+        const SantaTeresa = await  Product.create({
+            name:"Santa Teresa 1796 Ron Antiguo de Solera Rum 700mL",
+            description:"Santa Teresa 1796 is a premium, single estate Venezuelan rum, distilled, aged and blended at the Hacienda Santa Teresa. It is a family-owned rum distillery built on over 200 years of tradition, but the exceptional care and attention to their craft hasn't changed either, despite the challenges and adversities they've faced in that time.",
+            size:"700 mL",
+            brand:"Santa Teresa",
+            sku:"a26",
+            price: 79.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/st-teresa-1796-rum_450x650.jpg?v=1625553386",
+            stock: 10,
+        })
+        SantaTeresa.addCategories([8])
+
+        const oldMonk = await  Product.create({
+            name:"Old Monk The Legend Indian Rum 1L",
+            description:"From the Old Monk range produced by Mohan Meakin in India comes The Legend, a well-aged blended rum presented in a bottle supposedly shaped like the head of H.G. Meakin, the company's founder.",
+            size:"1000 mL",
+            brand:"Old Monk",
+            sku:"a27",
+            price: 83.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-old-monk-legend_450x650.jpg?v=1626417782",
+            stock: 10,
+        })
+        oldMonk.addCategories([8])
+
+        const zacapa = await  Product.create({
+            name:"Zacapa Centenario XO Solera Gran Reserva Especial Rum 750mL",
+            description:"Ron Zacapa Centenario XO Rum containing a blend of rums from 6 to 25 years old with an extra ageing stage in French oak barrels that previously held cognac.",
+            size:"750 mL",
+            brand:"Zacapa",
+            sku:"a28",
+            price: 159.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-zacapa-xo_450x650.jpg?v=1626416605",
+            stock: 10,
+        })
+        zacapa.addCategories([8])
+        
+        const krug = await  Product.create({
+            name:"Krug Grande Cuvee Brut M.V. Half Bottle Champagne 375mL",
+            description:"Krug Grande cuvée as a half bottle size of champagne is as a symphony in total harmony. The Krug Champagne half bottle of 375ml gives you a half bottle, approximately 3 to 4 glasses (depending on the glass size) of a stunning champagne to try. The composition of the Cuvée is a stunning mosaic of flavours where the three champagne grapes, 20-25 growths and 6-10 different years, combine to give Grande cuvée its complexity, elegance and consistency year after year, blend after blend.",
+            size:"375 mL",
+            brand:"Krug",
+            sku:"a29",
+            price: 200.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-krug-grande-cuvee-375_450x650.jpg?v=1628911809",
+            stock: 10,
+        })
+        krug.addCategories([1])
+
+        const bollinger = await  Product.create({
+            name:"Bollinger La Grande Annee 2012 With Gift Box Champagne 750mL",
+            description:"At Bollinger, only very high quality harvests become a vintage: the exceptional 2012 vintage led to Bollinger creating expressive wines that were simultaneously full, fresh and complex.",
+            size:"750 mL",
+            brand:"Bollinger",
+            sku:"a30",
+            price: 229.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-bollinger-grande-2012-gb_450x650.jpg?v=1628664553",
+            stock: 10,
+        })
+        bollinger.addCategories([1])
+
+        const mumm = await  Product.create({
+            name:"Mumm Cordon Rouge + 2 Flute Glasses Gift Pack Brut Champagne NV 750mL",
+            description:"An explosion of freshness in the mouth, followed by strong persistence. The complex aromas of fresh fruit and caramel perpetuate the intensity..",
+            size:"750 mL",
+            brand:"Mumm",
+            sku:"a31",
+            price: 59.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-mumm-2-flute-gift-set_450x650.jpg?v=1623225597",
+            stock: 10,
+        })
+        mumm.addCategories([1])
+        
+        const cinzano = await  Product.create({
+            name:"Cinzano Extra Dry Vermouth 1L",
+            description:"Cinzano Extra Dry is a blend of high quality white wine and essences of herbs and spices, creating a delicate and balanced crisp refreshing drink.",
+            size:"1000 mL",
+            brand:"Cinzano",
+            sku:"a32",
+            price: 13.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-cinzano-extra-dry_450x650.jpg?v=1579168251",
+            stock: 10,
+        })
+        cinzano.addCategories([3])
+
+        const cinzano1757 = await  Product.create({
+            name:"Cinzano 1757 Rosso Vermouth 1L",
+            description:"This unique premium vermouth has been bottled to celebrate and pay homage to Cinzano’s founding fathers, Giovanni Giacomo and Carlo Stefano, who in 1757 started their business in Turin.",
+            size:"1000 mL",
+            brand:"Cinzano 1757",
+            sku:"a33",
+            price: 29.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-cinzano-1757-rosso_450x650.jpg?v=1623225756",
+            stock: 10,
+        })
+        cinzano1757.addCategories([3])
+
+        const cinzanoRosso = await  Product.create({
+            name:"Cinzano Rosso Vermouth 1L",
+            description:"Cinzano Rosso is a blend of high quality red wine and essences of herbs and spices, creating a delicate and balanced refreshing drink, a slight sweetness balances with herbal bitterness.",
+            size:"1000 mL",
+            brand:"Cinzano Rosso",
+            sku:"a34",
+            price: 11.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-cinzano-rosso_450x650.jpg?v=1579167947",
+            stock: 10,
+        })
+        cinzanoRosso.addCategories([3])
+
+        const kah = await  Product.create({
+            name:"KAH Anejo Ceramic Skull Tequila 700mL",
+            description:"Apart from the standard traditions of shrine building and gift giving, things are taken a step further and rather than going home after the graveside celebrations, many people stay and sleep in the grave yard. They believe that this act re-enforces the emotional connection between them and the deceased.",
+            size:"700 mL",
+            brand:"Kah",
+            sku:"a35",
+            price: 138.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-kah-anejo-tequila_450x650.jpg?v=1629512230",
+            stock: 10,
+        })
+        kah.addCategories([9])
+
+        const cristalHead = await  Product.create({
+            name:"Crystal Head Skull Decanter Aurora Limited Edition Vodka 700mL",
+            description:"Aurora uses the highest-quality English wheat and pristine water from Newfoundland, Canada to craft an additive-free vodka. The vodka's purity is maintained by way of five distillations and seven filtrations. And as our final distinctive touch, three of these filtrations are passed through layers of Herkimer diamonds.",
+            size:"700 mL",
+            brand:"Cristal Head",
+            sku:"a36",
+            price: 101.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-crystal-head-aurora_450x650.jpg?v=1629507826",
+            stock: 10,
+        })
+        cristalHead.addCategories([9])
+
+        const cristalHead2 = await  Product.create({
+            name:"Crystal Head Skull Decanter John Alexander Artist Limited Edition Vodka 700mL",
+            description:"Known as a painter of environmentally conscious landscapes and satirical figurative work, this evocative design is derived from John Alexander’s expressive paintings.",
+            size:"700 mL",
+            brand:"Cristal Head",
+            sku:"a37",
+            price: 179.99,            
+            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-crystal-head-john-alexander_720x.jpg?v=1629189316",
+            stock: 10,
+        })
+        cristalHead2.addCategories([9])
+
     }catch (e) {
         console.log(e)
     }

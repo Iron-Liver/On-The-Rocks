@@ -3,8 +3,8 @@ const { Category } = require('../../db')
 const categoriesMockUp = async () => {
     try {
         await Category.create({
-            name: "White wines",
-            description: "Fine wines made from white grapes etc etc",
+            name: "Champagne",
+            description: "Delicius champagne made with eternal youth elixir",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Aligote_wine.jpg/250px-Aligote_wine.jpg"
 
         })
@@ -14,7 +14,7 @@ const categoriesMockUp = async () => {
             image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Tempranillowine.jpg"
         })
         await Category.create({
-            name: "Sparkling wines",
+            name: "Vermouth",
             description: "high wines made with very fine grapes from the valley of the rose of guadeloupe, BUT, sparkling hehe",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Bouteillemontagecordeliers.jpg/350px-Bouteillemontagecordeliers.jpg" 
         })
@@ -44,7 +44,7 @@ const categoriesMockUp = async () => {
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Appleton_Estate_V-X_Jamaica_Rum-with_glass.jpg/270px-Appleton_Estate_V-X_Jamaica_Rum-with_glass.jpg"
         })
         await Category.create({
-            name: "Singani",
+            name: "Gifts",
             description: "Singani is a Bolivian alcoholic drink, with a protected designation of origin, from the grape brandy family.",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Singani_major_brands.png/245px-Singani_major_brands.png"
         })
