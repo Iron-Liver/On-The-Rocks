@@ -23,7 +23,6 @@ SwiperCore.use([Navigation, Pagination, Mousewheel, Keyboard, Autoplay]);
 
 function SwiperOS() {
     const { Products } = useSelector((state) => state.productReducer);
-    const { wishlists } = useSelector((state) => state.wishlistReducer);
 
     const dispatch = useDispatch();
 
@@ -32,19 +31,7 @@ function SwiperOS() {
         dispatch(getProducts());
     }, [dispatch]);
 
-    useEffect(() => {}, [wishlists]);
-
-    var sale = Products?.filter((spirit) => spirit.onSale > 0);
-
-    if (wishlists.length > 0) {
-        wishlists?.forEach((e) => {
-            Products?.forEach((f) => {
-                if (e.productId === f.id && !sale.includes(f)) {
-                    sale = sale.concat(f);
-                }
-            });
-        });
-    }
+    var sale = Products?.filter((spirit) => spirit.onSale !== null);
 
     return (
         <Swiper

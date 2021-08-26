@@ -105,7 +105,7 @@ So if you have a special occasion to purchase for, we believe we will have that 
               <figure className="card__thumb">
                 <img   src={im1} alt=" Daniel Lincoln" className="card__image"/>
                 <figcaption className="card__caption">
-                  <h2 className="card__title">About Us</h2>
+                  <h2 className="card__title">ABOUT US</h2>
                   <p className="card__snippet">
 <b>On The Rocks</b> is an independent self-made Argentinian family owned business providing premium and collectable ranges of spirits.
 With over 30 years in the industry, our recent venture of going online was ignited by our passion for sourcing <b>premium range spirits</b>, because here at On The Rocks, we love to drink.</p>

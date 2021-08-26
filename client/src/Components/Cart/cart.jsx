@@ -1,12 +1,6 @@
 import {
     IconButton,
     CardContent,
-    CardMedia,
-    Typography,
-    Grid,
-    ListItem,
-    Button,
-    Box,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,63 +11,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCoupons } from "../../Redux/Coupon/couponActions"
 import "./cart.css"
 import jwt from "jsonwebtoken";
-
-
+import CustomButton from "../Button/CustomButton";
 
 const useStyles = makeStyles((theme) => ({
-    details: {
-        textAlign: "start",
-        width: "60%",
-        variant: "outlined",
-    },
-    content: {
-        width: "100%",
-        marginTop: "5%",
-        zIndex: "9999"
-    },
-
-    cont1: {
-        marginBottom: 15,
-        boxShadow: "",
-    },
-
-    cover: {
-        width: "150px",
-        height: "170px",
-    },
-    button: {
-        width: "10px",
-        height: "20px",
-        marginLeft: "5px",
-        marginRight: "5px",
-    },
-    text: {
-        position: "absolute",
-        marginTop: "-30%",
-        marginLeft: "50%",
-        display: "column",
-    },
-
-    margin: {
-        position: "absolute",
-        marginLeft: "70%",
-    },
-
-    title: {
-        display: "flex",
-        marginLeft: "15px",
-        justifyContent: "center",
-    },
-    antPrice:{
-       textDecoration: "line-through",
-       color: "grey",
+    actions: {
+      display: "flex",
+      alignItems: "baseline"
     },
     sum: {
         display: "flex",
-    },
-    box: {
-        marginTop: '20px',
-        justifyContent: "center",
+        alignItems: "center"
     },
 }));
 
@@ -81,18 +28,12 @@ export function Cart() {
 
     const classes = useStyles();
     let data = JSON.parse(localStorage.getItem("data"));
-    let ver = localStorage.getItem("coup")
     var total = 0;
     var subTotal = 0;
    
     const [state, setState] = useState();
-    const [cupon, setCupon] = useState();
-
-    if (ver === "null" && cupon > 0){
-        console.log("dentro")
-        setCupon(0)
-        localStorage.removeItem("coup");
-    }
+    const [cupon, setCupon] = useState("");
+    
     
     if (JSON.stringify(state) !== JSON.stringify(data)) setState(data);
     
@@ -107,8 +48,7 @@ export function Cart() {
 
     useEffect(() => {
        dispatch(getCoupons(userId));
-      }, // eslint-disable-next-line
-      []);
+    }, [dispatch, userId]);
 
     function removeProduct(id) {
         let data = JSON.parse(localStorage.getItem("data"));
@@ -116,12 +56,7 @@ export function Cart() {
         localStorage.removeItem("data");
         localStorage.setItem("data", JSON.stringify(data));
         setState(data);
-        if(data.length < 1){
-            setCupon(0)
-        }
-    
     }
-
     if(subTotal === 0){
       state?.forEach((e) => (subTotal = Number(subTotal) + Number(e.price)));
       localStorage.removeItem("total");
@@ -182,143 +117,132 @@ export function Cart() {
     }
 
      if(cupon){ 
+       console.log("cupon", cupon)
        total = subTotal.toFixed(2) - subTotal.toFixed(2) * cupon
         total = Number(total).toFixed(2)
        localStorage.removeItem("total");
        localStorage.setItem("total", JSON.stringify(total))
-      }      
+      
+      }       
+     
+    console.log("tot", total)
+    console.log("sub", subTotal)
+    
     
     return (
         <CardContent className={classes.content}>
          {(state?.length > 0) ?( 
-            <div>   
+            <div>
             {state?.map((e) => (
-                <Box borderBottom={2}>
-                    <ListItem borderBottom={1} key={e.id}>
-                        <div className={classes.details}>
-                            <Grid item className={classes.cont1}>
-                                <IconButton
-                                    aria-label="delete"
-                                    className={classes.margin}
-                                    onClick={() => removeProduct(e.id)}
-                                >
-                                    <DeleteIcon fontSize="medium" />
-                                </IconButton>
-                                <CardMedia
-                                    className={classes.cover}
-                                    image={e.image}
-                                />
-                                <div className={classes.text}>
-                                    <Typography>{e.name}</Typography>
-                                    <div className={classes.sum}>
-                                        <Button
-                                            className={classes.button}
-                                            onClick={() => res(e.id)}
-                                        >
-                                            -
-                                        </Button>
-                                        <Grid>{e.units}</Grid>
-                                        <Button
-                                            className={classes.button}
-                                            onClick={() => sum(e.id)}
-                                        >
-                                            +
-                                        </Button>
-                                    </div>
-                                    <Typography component="h6" variant="h6">
-                                        SubTotal: ${e.price}
-                                    </Typography>
-                                </div>
-                            </Grid>
+              <div style={{display: "flex", flexDirection: "column", paddingBottom: "15px", borderBottom: "1px solid #d3d3d3"}} key={e.id}>
+                    <div style={{display: "flex"}}>
+                      <h4 style={{flexGrow: 1}}>{e.name}</h4>
+                      <IconButton
+                        aria-label="delete"
+                        className={classes.margin}
+                        onClick={() => removeProduct(e.id)}
+                        >
+                        <DeleteIcon fontSize="medium" />
+                      </IconButton>
+                    </div>
+                    <div style={{display: "flex", justifyContent: "flex-start"}}>
+                      <div style={{flexGrow: 1}}>
+                        <div style={{width: "90px", height: "90px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", background: "white", overflow: "hidden", border: "1px solid #d3d3d3"}}>
+                          <img src={e.image} alt={e.name} width="75px"/>
                         </div>
-                    </ListItem>
-                  
-                </Box>))}
-            <Box className={classes.box}>
-                    <Typography
-                        className={classes.title}
-                        component="h5"
-                        variant="h5"
-                        align= "center"
-                    >
-                        Coupons: 
-                    </Typography>
-             <div>
-            {Coupons?.length > 0 ? (
-             <div className="form-group">
-                <select name="coupons" className="form-control-Cart" onChange={(e) => handleSelect(e)}>
-                  <option key = "999" value = "0" selected> Select coupon </option> 
-                 {Coupons.map(coup =>(
-                    <option key = {coup.id} value = {coup.discount}>Coupon for: {coup.discount*100} %</option>
-                 ))}
-                </select>
-             </div>
-            ) : (
-                 <div style={{
-                     display: "flex",
-                     justifyContent: "center",
-                     alignItems: "center",
-                     height: "55vh"}}>             
-                     <h4 id="user-coupons-empty-message">Nothing coupons...</h4>
-                 </div>
-            )
-            }  
-            </div>
-         </Box>
-            {total < subTotal? (
-                <Box className={classes.box}>
-                    {cupon > 0 ?(  
+                      </div>
+                      <div style={{display: "flex", flexDirection: "column", alignItems: "center", width: "138px"}}>
+                        <h4 style={{ fontWeight: 400}}>
+                          <span style={{fontSize: "12px"}}>SubTotal: </span>${e.price}
+                        </h4>
+                        <div className={classes.sum}>
+                          <CustomButton
+                            width="30px"
+                            height="30px"
+                            onClick={() => res(e.id)}
+                            rounded
+                            inner="-"
+                          />
+                          <h4 style={{width: "20px", textAlign: "center"}}>{e.units}</h4>
+                          <CustomButton
+                            width="30px"
+                            height="30px"
+                            onClick={() => sum(e.id)}
+                            rounded
+                            inner="+"
+                          />
+                        </div>
+                      </div>  
+                    </div>   
+                  </div>
+                ))} 
+            <div className={classes.box}>
+              <div style={{width: "max-content", margin: "0 auto 15px", display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+              <h4 style={{marginBottom: "0", fontFamily: `"Montserrat", sans-serif`, fontWeight: 400}}>Coupons:</h4>
+              {Coupons?.length > 0 ? (
+                <div className="form-group">
+                  <select name="coupons" className="form-control-Cart" onChange={(e) => handleSelect(e)} style={{fontFamily: `"Montserrat", sans-serif`, fontWeight: 400}}>
+                    <option key = "999" value = "0" selected> Select coupon </option> 
+                  {Coupons.map(coup =>(
+                      <option key = {coup.id} value = {coup.discount}>Coupon for: {coup.discount*100}%</option>
+                  ))}
+                  </select>
+                </div>
+              ) : (
+                  <div 
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >             
+                      <h4 id="user-coupons-empty-message">No coupons...</h4>
+                  </div>
+              )}  
+              </div>
+         </div>
+            {parseFloat(total).toFixed(2) < parseFloat(subTotal).toFixed(2)? (
+                <div className={classes.box}>
+                    {cupon?(  
                     <div>
-                    <Typography
-                        className={classes.antPrice}
-                        component="h6"
-                        variant="h6"
-                        align= "center"
-                    >  Before: $ {subTotal} 
-                    </Typography>
-                      <Typography
-                      className={classes.title}
-                      component="h4"
-                      variant="h4"
-                      align= "center"
-                  > 
-                      Total: ${total}
-                  </Typography>
+                      <h4 style={{ textAlign: "center", fontWeight: 300}}>  
+                        Before: <del>${parseFloat(subTotal).toFixed(2)}</del> 
+                      </h4>
+                      <h2 style={{ textAlign: "center", fontFamily: `"Montserrat", sans-serif`, fontWeight: 400}}> 
+                        Total: ${parseFloat(total).toFixed(2)}
+                      </h2>
                     </div>    
                     ):(
                         <div>
-                        <Typography
-                          className={classes.title}
-                          component="h4"
-                          variant="h4"> 
-                          Total: ${subTotal}
-                        </Typography>
+                          <h4 style={{ textAlign: "center", fontWeight: 300}}>  
+                            No coupons 
+                          </h4>
                         </div>
                     )
                     }
-                </Box>
+                </div>
             ) : (
-                <Typography
-                      className={classes.title}
-                      component="h4"
-                      variant="h4"
-                      align= "center"
-                >
-                    Total: ${subTotal}
-                </Typography>
+              <h2 style={{ textAlign: "center", fontFamily: `"Montserrat", sans-serif`, fontWeight: 400}}> 
+                Total: ${parseFloat(subTotal).toFixed(2)}
+              </h2>
             )}
-            <CreateOrder/>
-            </div>):(
-                <div>
-                <Typography
-                className={classes.title}
-                component="h4"
-                variant="h4"
-                align= "center">
+            <div style={{ textAlign: "center" }}>
+              <CreateOrder/>
+            </div>
+            </div>
+            ) : (
+              <h4 
+                style={{ 
+                  textAlign: "center", 
+                  fontWeight: 400,
+                  fontSize: "20px",
+                  lineHeight: "30px"
+                }}
+              >
                 There are no items in the cart
-            </Typography>
-                </div>)
-            }
-        </CardContent>
+              </h4>
+            )
+          }
+      </CardContent>
     );
 }

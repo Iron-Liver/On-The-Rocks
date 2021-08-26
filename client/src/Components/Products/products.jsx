@@ -35,7 +35,11 @@ const Products = () => {
 
         for(const entry of query.entries()) {
           if(!body[entry[0]]) {
-            body.filterBy[entry[0]] = entry[1];
+            if(entry[0] === 'price' || entry[0] === 'size') {
+              body.filterBy[entry[0]] = JSON.parse(query.get(entry[0]))
+            } else {
+              body.filterBy[entry[0]] = entry[1];
+            }
           };
         }
         try {

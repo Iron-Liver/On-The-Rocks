@@ -18,12 +18,17 @@ const CustomButton = (props) => {
     padding,
     children,
     color,
+    rounded,
     ...rest
   } = props;
   
   const useStyles = makeStyles({
     customButton: {
       cursor: "pointer",
+      borderRadius: rounded ? "50%" : 0,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       height: height === undefined 
         ? "" 
         : height,

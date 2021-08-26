@@ -34,6 +34,52 @@ const Filters = () => {
     history.push({search: query.toString()});
   };
 
+  const handlePriceChange = (e) => {
+    if(query.get('price')) {
+      let filters = JSON.parse(query.get('price'));
+      if(filters.some(filter => filter === e.target.name)) {
+        filters.splice(filters.indexOf(e.target.name), 1);
+        if(!filters.length) {
+          query.delete('price');
+          return history.push({search: query.toString()});
+        }
+        
+        query.set('price', JSON.stringify(filters));
+        history.push({search: query.toString()});
+      } else {
+        filters.push(e.target.name);
+        query.set('price', JSON.stringify(filters));
+        history.push({search: query.toString()});
+      }
+    } else {
+      query.set('price', JSON.stringify([e.target.name]))
+      history.push({search: query.toString()})
+    }
+  }
+
+  const handleSizeChange = (e) => {
+    if(query.get('size')) {
+      let filters = JSON.parse(query.get('size'));
+      if(filters.some(filter => filter === e.target.name)) {
+        filters.splice(filters.indexOf(e.target.name), 1);
+        if(!filters.length) {
+          query.delete('size');
+          return history.push({search: query.toString()});
+        }
+        
+        query.set('size', JSON.stringify(filters));
+        history.push({search: query.toString()});
+      } else {
+        filters.push(e.target.name);
+        query.set('size', JSON.stringify(filters));
+        history.push({search: query.toString()});
+      }
+    } else {
+      query.set('size', JSON.stringify([e.target.name]))
+      history.push({search: query.toString()})
+    }
+  }
+
   return (
     <div style={{ width: "100%" }}>
       <h2 style={{ margin: "0 0 3px 0", fontFamily: `"Montserrat", sans-serif`, fontWeight: 400 }}>Filters</h2>
@@ -70,7 +116,16 @@ const Filters = () => {
           </h3>
         </AccordionSummary>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input 
+            type="checkbox" 
+            checked={
+              query.get('price') ?
+                JSON.parse(query.get('price')).some(filter => filter === 'U100')
+                : false
+            } 
+            onChange={handlePriceChange}
+            name="U100"
+          />
           <h4 style={{
             margin: 0,
             fontWeight: 300
@@ -79,7 +134,16 @@ const Filters = () => {
           </h4>
         </AccordionDetails>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input 
+            type="checkbox"
+            checked={
+              query.get('price') ?
+                JSON.parse(query.get('price')).some(filter => filter === 'U250')
+                : false
+            } 
+            onChange={handlePriceChange}
+            name="U250"
+          />
           <h4 style={{
             margin: 0,
             fontWeight: 300
@@ -88,7 +152,16 @@ const Filters = () => {
           </h4>
         </AccordionDetails>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input 
+            type="checkbox" 
+            checked={
+              query.get('price') ?
+                JSON.parse(query.get('price')).some(filter => filter === 'U500')
+                : false
+            } 
+            onChange={handlePriceChange}
+            name="U500"
+          />
           <h4 style={{
             margin: 0,
             fontWeight: 300
@@ -97,7 +170,16 @@ const Filters = () => {
           </h4>
         </AccordionDetails>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input
+            type="checkbox" 
+            checked={
+              query.get('price') ?
+                JSON.parse(query.get('price')).some(filter => filter === 'A500')
+                : false
+            } 
+            onChange={handlePriceChange}
+            name="A500"
+          />
           <h4 style={{
             margin: 0,
             fontWeight: 300
@@ -179,7 +261,16 @@ const Filters = () => {
           </h3>
         </AccordionSummary>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input 
+            type="checkbox" 
+            checked={
+              query.get('size') ?
+                JSON.parse(query.get('size')).some(filter => filter === 'U200ml')
+                : false
+            } 
+            onChange={handleSizeChange}
+            name="U200ml"
+          />
           <h4
             style={{
               margin: 0,
@@ -190,7 +281,16 @@ const Filters = () => {
           </h4>
         </AccordionDetails>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input 
+            type="checkbox" 
+            checked={
+              query.get('size') ?
+                JSON.parse(query.get('size')).some(filter => filter === 'U500ml')
+                : false
+            } 
+            onChange={handleSizeChange}
+            name="U500ml"
+          />
           <h4
             style={{
               margin: 0,
@@ -201,7 +301,16 @@ const Filters = () => {
           </h4>
         </AccordionDetails>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input 
+            type="checkbox" 
+            checked={
+              query.get('size') ?
+                JSON.parse(query.get('size')).some(filter => filter === 'U700ml')
+                : false
+            } 
+            onChange={handleSizeChange}
+            name="U700ml"
+          />
           <h4
             style={{
               margin: 0,
@@ -212,7 +321,16 @@ const Filters = () => {
           </h4>
         </AccordionDetails>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input 
+            type="checkbox" 
+            checked={
+              query.get('size') ?
+                JSON.parse(query.get('size')).some(filter => filter === 'U750ml')
+                : false
+            } 
+            onChange={handleSizeChange}
+            name="U750ml"
+          />
           <h4
             style={{
               margin: 0,
@@ -223,7 +341,16 @@ const Filters = () => {
           </h4>
         </AccordionDetails>
         <AccordionDetails>
-          <input type="checkbox" />
+          <input 
+            type="checkbox" 
+            checked={
+              query.get('size') ?
+                JSON.parse(query.get('size')).some(filter => filter === 'A750ml')
+                : false
+            } 
+            onChange={handleSizeChange}
+            name="A750ml"
+          />
           <h4
             style={{
               margin: 0,

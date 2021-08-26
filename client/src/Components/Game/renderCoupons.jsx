@@ -62,6 +62,7 @@ const Coupons = () => {
     );
 
     return (
+      <div className="user-coupons-tab-container">
         <div className={classes.root}>
             {Coupons?.length > 0 ? (
                 Coupons?.map((w) => (
@@ -91,6 +92,7 @@ const Coupons = () => {
                 </div>
             )}
         </div>
+      </div>
     );
 };
 

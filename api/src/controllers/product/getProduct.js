@@ -1,4 +1,5 @@
 const { Product, Category } = require("../../db");
+const getFilterCallback = require("./utils/getFilterCallback");
 
 module.exports = async (req, res, next) => {
 
@@ -77,6 +78,24 @@ module.exports = async (req, res, next) => {
       filtered = filtered.filter(product => {
         const string = filterBy.name.toLowerCase().replace(/-/g, ' ');
         return product.name.toLowerCase().includes(string);
+      })
+    }
+
+    if(filterBy.price && filterBy.price.length) {
+      filtered = filtered.filter(product => {
+        for(filter of filterBy.price) {
+          if(getFilterCallback(filter)(product) === true) return true
+        }
+        return false;
+      })
+    }
+
+    if(filterBy.size && filterBy.size.length) {
+      filtered = filtered.filter(product => {
+        for(filter of filterBy.size) {
+          if(getFilterCallback(filter)(product) === true) return true
+        }
+        return false;
       })
     }
  

@@ -237,26 +237,37 @@ const ProductDetail = () => {
     useEffect(() => {}, [wishlists]);
     useEffect(() => {}, [wished]);
 
-    function onSubmit(e) {
-        let data = JSON.parse(localStorage.getItem("data"));
-        let filteredData = data?.filter((e) => e.id === liqueur.id);
-        if (filteredData?.length > 0 && data?.length > 0) {
-            swal("The product is already in the cart!");
+    const onSubmit = () => {
+      let date = JSON.parse(localStorage.getItem('data')) || []
+      let data = date.filter(e => e.id === liqueur.id)
+      if (date.length > 0 && data.length > 0){
+           swal("The product is already in the cart!")
+      } else {
+        if (quant > 0) {
+          if(!liqueur.onSale) {
+            addProductCart({
+              units: quant,
+              id: liqueur.id,
+              price: liqueur.price * quant,
+              image: liqueur.image,
+              name: liqueur.name,
+              stock: liqueur.stock
+            });
+          } else {
+            addProductCart({
+              units: quant,
+              id: liqueur.id,
+              price: liqueur.onSale * quant,
+              image: liqueur.image,
+              name: liqueur.name,
+              stock: liqueur.stock
+            })
+          }
+          swal("The product was added to the cart!")   
         } else {
-            if (quant > 0) {
-                addProductCart({
-                    units: quant,
-                    id: liqueur.id,
-                    price: liqueur.price * quant,
-                    image: liqueur.image,
-                    name: liqueur.name,
-                    stock: liqueur.stock,
-                });
-                swal("The product was added to the cart!");
-            } else {
-                swal("Please enter a valid unit");
-            }
+          swal("Please enter a valid unit");
         }
+      }
     }
 
     function handleWishClick() {

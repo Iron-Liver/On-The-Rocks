@@ -59,6 +59,15 @@ const UserTopPanel = () => {
             <h4 className="panel-top-nav-text">Wishlist</h4>
           </div>
         </NavLink>
+        <NavLink 
+          to={`${url}/coupons`} 
+          activeClassName="user-top-nav-active"
+          className="panel-top-nav-link"
+        >
+          <div className="panel-top-nav-item">
+            <h4 className="panel-top-nav-text">Coupons</h4>
+          </div>
+        </NavLink>
         <div className="panel-top-nav-link" onClick={logOut}>
           <div className="panel-top-nav-item">
             <h4 className="panel-top-nav-text">Logout</h4>
