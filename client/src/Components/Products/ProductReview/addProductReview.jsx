@@ -51,6 +51,11 @@ export const AddProductReview = ({ prodId, userId }) => {
         setBought(Array.from(new Set(aux)).includes(prodId)) 
     };
 
+    // const createdRev = (userId,prodId,stars,input,anonymous)=>{        
+    //         console.log("ENTROOO")
+    //         dispatch(createReview(userId,prodId,stars,input,anonymous))        
+    // }
+
     useEffect(() => {
         checkIfBought();
         // eslint-disable-next-line
@@ -122,7 +127,7 @@ export const AddProductReview = ({ prodId, userId }) => {
                         />
                     </Grid>
                     <Grid item container alignItems="baseline">
-                        <Button onClick={() => {dispatch(createReview(userId,prodId,stars,input,anonymous))}}>Submit</Button>
+                        <Button onClick={() => dispatch(createReview(userId,prodId,stars,input,anonymous))}>Submit</Button>
                     </Grid>
                     </>
                 )

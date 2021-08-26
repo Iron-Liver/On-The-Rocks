@@ -38,7 +38,6 @@
     "sweetalert2": "^11.1.4",
     "swiper": "^6.8.3",
     "web-vitals": "^1.0.1",
-    "webpack": "4.44.2",
     "yup": "^0.32.9"
   },
   "scripts": {

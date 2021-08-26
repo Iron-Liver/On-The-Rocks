@@ -13,7 +13,8 @@ class MessageParser {
         if (lowercase.includes("product") || lowercase.includes("liqueur")
             || lowercase.includes("spirits") || lowercase.includes("vodka") ||
             lowercase.includes("whisky") || lowercase.includes("tequila")
-            || lowercase.includes("brandy") || lowercase.includes("vodka")) {
+            || lowercase.includes("brandy") || lowercase.includes("champagne")
+            || lowercase.includes("wines")) {
             return this.actionProvider.handleProducts();
         }
         if (lowercase.includes("user") || lowercase.includes("login")
@@ -39,7 +40,7 @@ class MessageParser {
             || lowercase.includes("gaston")) {
             return this.actionProvider.handleSquad();
         }
-        if (lowercase.includes("henry") || lowercase.includes("tony") || lowercase.includes("franco")
+        if (lowercase.includes("henry") || lowercase.includes("toni") || lowercase.includes("franco")
             || lowercase.includes("diego") || lowercase.includes("martu")) {
             return this.actionProvider.handleHenry();
         }
