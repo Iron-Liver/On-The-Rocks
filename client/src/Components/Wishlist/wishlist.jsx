@@ -55,6 +55,7 @@ const Wishlist = () => {
     const { Products } = useSelector((state) => state.productReducer);
     const { wishlists } = useSelector((state) => state.wishlistReducer);
     const [state, setState] = useState(wishlists);
+    const [trigger, setTrigger] = useState([])
     var filtUser,
         filtProduct = [];
     const currentUser = verifyUser();
@@ -66,7 +67,7 @@ const Wishlist = () => {
     useEffect(() => {
         dispatch(getProducts());
         dispatch(getWishlist());
-    }, [dispatch]);
+    }, [dispatch, trigger]);
 
     useEffect(() => {
         (async function () {
@@ -76,27 +77,33 @@ const Wishlist = () => {
         })();
     }, [state, wishlists, Products]);
 
+    
+
     const deleteWishh = (e, userId, productId) => {
-        e.preventDefault();
-        var res;
+        e.preventDefault();        
+        setTrigger([
+            ...trigger,
+            1
+          ])          
 
         for (let i = 0; i < wishlists.length; i++) {
             if (
                 wishlists[i].productId === productId &&
                 wishlists[i].userId === userId
             ) {
-                res = wishlists[i].id;
-
+                let res = wishlists[i].id;
                 dispatch(deleteWish(res));
+                console.log(res, "RESS")
 
                 dispatch(getWishlist());
-                setState(wishlists);
+                setState(wishlists);                
             }
         }
         swal("The product is being deleted");
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
+           
+        // setTimeout(() => {
+        //     window.location.reload();
+        // }, 1000);
     };
 
     if (Products && state.length > 0) {
