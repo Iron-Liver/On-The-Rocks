@@ -7,8 +7,6 @@ import ProductsList from '../Products/ProductsList/productsList';
 import UserList from '../Users/UserList/userList';
 import AdminSidePanel from './Admin/AdminSidePanel';
 import AdminTopPanel from './Admin/AdminTopPanel';
-// import Dashboard from '../Dashboard/Dashboard';
-import Dashboard from '../Dashboard/Dashboard'
 import { useDispatch } from "react-redux";
 import verifyUser from "../../Utils/verifyUser";
 import swal from "sweetalert";
