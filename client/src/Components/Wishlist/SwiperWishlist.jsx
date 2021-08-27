@@ -2,9 +2,11 @@ import "./wishlist.css";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom"
 import { getWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { getProducts } from "../../Redux/Products/productsActions";
 import verifyUser from "../../Utils/verifyUser";
+import swal from "sweetalert";
 import { logOutUser } from "../../Redux/Users/userActions";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCard from "./SwiperCard";
@@ -25,6 +27,7 @@ import SwiperCore, {
 SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
 
 const SwiperWishlist = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const initialState = window.innerWidth < 580 ? 
@@ -43,9 +46,9 @@ const SwiperWishlist = () => {
       filtProduct = [];
   const currentUser = verifyUser();
   if (currentUser?.hasOwnProperty("logout")) {
-      dispatch(logOutUser());
-      window.location.replace(`${window.location.origin}/login`);
-      alert("Session expired. Please login");
+      dispatch(logOutUser())
+      history.push('/')
+      swal("Session expired","Please login","warning")
   }
   useEffect(() => {
       dispatch(getProducts());

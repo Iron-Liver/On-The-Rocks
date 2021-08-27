@@ -47,7 +47,7 @@ const UserSidePanel = () => {
   }
 
   const logOut = () => {
-    dispatch(logOutUser());
+    dispatch(logOutUser())
     history.push("/");
   }
 

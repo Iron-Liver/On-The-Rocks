@@ -27,7 +27,7 @@ const AdminSidePanel = () => {
   }, [dispatch, userId]);
 
   const logOut = () => {
-    dispatch(logOutUser());
+    dispatch(logOutUser())
     history.push("/");
   }
 

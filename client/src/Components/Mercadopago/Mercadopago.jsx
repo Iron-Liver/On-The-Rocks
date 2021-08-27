@@ -4,6 +4,7 @@ import CheckoutV2 from "./CheckoutV2";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 import verifyUser from "../../Utils/verifyUser";
+import swal from "sweetalert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { logOutUser } from "../../Redux/Users/userActions";
 
@@ -32,9 +33,9 @@ const MercadoPago = () => {
                
                 const currentUser = verifyUser();
                 if (currentUser?.hasOwnProperty("logout")) {
-                    dispatch(logOutUser());
-                    window.location.replace(`${window.location.origin}/login`);
-                    alert("Session expired. Please login");
+                    dispatch(logOutUser())
+                    history.push('/')
+                    swal("Session expired","Please login","warning")
                 }
 
                 if (currentUser.id !== dataOrder.userId) {

@@ -2,6 +2,7 @@ import "./wishlist.css";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom"
 import { getWishlist, deleteWish } from "../../Redux/Wishlist/wishlistActions";
 import { getProducts } from "../../Redux/Products/productsActions";
 import verifyUser from "../../Utils/verifyUser";
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Wishlist = () => {
     const classes = useStyles();
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const { Products } = useSelector((state) => state.productReducer);
@@ -60,9 +62,9 @@ const Wishlist = () => {
         filtProduct = [];
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("Session expired. Please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
     useEffect(() => {
         dispatch(getProducts());

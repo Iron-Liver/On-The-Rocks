@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { userSchema1, userSchema2 } from "./ValidationOrder";
 import "./CreateOrder.css";
 import verifyUser from "../../../Utils/verifyUser";
+import swal from "sweetalert";
 import axios from "axios";
 import mercadopagoimg from "../../../assets/mercado-pago.png";
 import { logOutUser } from "../../../Redux/Users/userActions";
@@ -49,9 +50,9 @@ const CreateOrder = () => {
 
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("Session expired. Please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
 
     const SubmitForm = async () => {

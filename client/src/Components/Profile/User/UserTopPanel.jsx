@@ -35,7 +35,7 @@ const UserTopPanel = () => {
   }
   
   const logOut = () => {
-    dispatch(logOutUser());
+    dispatch(logOutUser())
     history.push("/");
   }
 
