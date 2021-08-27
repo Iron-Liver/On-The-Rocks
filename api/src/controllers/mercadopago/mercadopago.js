@@ -1,6 +1,6 @@
 const { Order, Order_products, Product } = require('../../db');
 const mercadopago = require('../../utils/mercadopago/configure');
-const { BACK, FRONT } = process.env;
+const { BACK, FRONT, WEBHOOK_BACK } = process.env;
 
 
 module.exports = async (req, res, next) => {
@@ -44,7 +44,7 @@ module.exports = async (req, res, next) => {
         pending: `${FRONT}/status/mercadopago/pending`
       },
       auto_return: "all",
-      notification_url: `${BACK}/mercadopago/webhook?source_news=webhooks`
+      notification_url: `${WEBHOOK_BACK}/mercadopago/webhook?source_news=webhooks`
     }
 
     const response = await mercadopago.preferences.create(preference)
