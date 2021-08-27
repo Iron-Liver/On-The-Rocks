@@ -5,7 +5,7 @@
   margin: 0 auto;
   display: flex;
   padding: 5px;
-  justify-content:baseline;
+  justify-content:space-evenly;
 }
 
 @media (max-width: 55em){
@@ -23,7 +23,7 @@
 
 @media (max-width: 42em){ 
   .footerContainer1 {
-    height: 280px;
+    height: max-content;
   }
   .footerContainer1 .center1{
     display: flex;
@@ -32,7 +32,25 @@
   }
 }
 
-@media (max-width: 45em){
+.about-icon{
+  display: flex;
+  flex-direction: row;
+}
+
+.iconfooter{
+  margin-left: 200px;
+}
+
+@media (max-width: 800px){
+  .footerContainer1 {
+    height: max-content;
+  }
+  .footerContainer1 .center1{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+  }
   .footerContainer1 .social{
     width: max-content;
   }
@@ -41,8 +59,24 @@
     margin-left: 50px;
   }
   .footerContainer1 .ContactContainer{
+    display: flex;
+    align-content: flex-start;
+    padding:0;
     width: max-content;
     margin-left: 25px;
+    align-items: flex-start;
+  }
+  .footerContainer1 .about-us-footer {
+    display: flex;
+    align-content: flex-start;
+    padding:0;
+    width: max-content;
+    margin-left: 25px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .footerContainer1 .about-us-footer h4{
+    margin-left: 18px;
   }
   .footerContainer1 .ContactContainer ul{
     padding: 0;
@@ -52,7 +86,7 @@
     margin-bottom: 5px;
   }
   .footerfat .divisorFooter{
-    height: 110px;
+    height: max-content;
   }
 
  }
@@ -104,6 +138,14 @@
 
 }
 
+.center1{
+  width: 100%;
+  display: flex;
+  justify-content:flex-start;
+  flex-direction: row;
+  align-items: center;
+}
+
 .social:hover > li {
   opacity: 0.5;
 }
@@ -120,7 +162,7 @@ align-items: center;
 flex-direction: column;
 color: rgb(230, 230, 216);
 font-size: 15px;
-margin-left: 120px;
+padding:0 80px;
 height: max-content;
 
 }
@@ -137,47 +179,33 @@ height: max-content;
   width: 100%;
   background-color: rgb(220, 208, 192);
 }
-
-/* .FMenu{
+.FMenu{
+  margin-top: 30px;
+  margin-bottom: 25px;
   display: flex;
   align-items: center;
   flex-direction: column;
   color: rgb(230, 230, 216);
   font-size: 15px;
-  margin-left: 120px;
   height: max-content;
-  text-decoration: none;
-  margin-top: 7.5%;
-  
+
 }
 
-.Aboutus{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: rgb(230, 230, 216);
-  font-size: 15px;
-  margin-left: 120px;
-  height: max-content;
-  text-decoration: none;
-  margin-top: 13%;
-  
+.links-footer {
+  text-align: center;
 }
 
-.Shipping{
+.about-us-footer{
+  width: 200px;
+  height: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  color: rgb(230, 230, 216);
-  font-size: 15px;
-  margin-left: 120px;
-  height: max-content;
-  text-decoration: none;
-  margin-top: 1%;
-  
-/* } */
-/* 
-.Link {
-  color: rgb(255, 255, 255);
-  text-decoration: none;
-} */
+}
+
+.footerlinks-container{
+  display: flex;
+  flex-direction: column;
+}
+
+
+

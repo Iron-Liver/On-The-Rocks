@@ -34,8 +34,8 @@ import theme from './Utils/theme';
 import Footer from './Components/Footer/footer';
 import ChatBotApp from "./Components/Chatbot/ChatBot";
 import MercadopagoHelp from "./Components/Mercadopago/MercadopagoHelp";
-import { aboutUs } from './Components/AboutUs/aboutUs';
-import shipping from './Components/Shipping/shipping';
+import { AboutUs } from './Components/AboutUs/aboutUs';
+import Shipping from './Components/Shipping/shipping';
 
 const AppGlobal = () => {
 
@@ -68,8 +68,8 @@ const AppGlobal = () => {
               />
             <AdminRoute path="/private" component={AdminFeatures} />
             <Route exact path="/roulette" component={WheelOfCoupons} />
-            <Route exact path="/aboutus" component={aboutUs} />
-            <Route exact path="/shipping" component={shipping} />
+            <Route exact path="/aboutus" component={AboutUs} />
+            <Route exact path="/shipping" component={Shipping} />
             <Route path="*" component={Error404} />
           </Switch>
           <Footer />

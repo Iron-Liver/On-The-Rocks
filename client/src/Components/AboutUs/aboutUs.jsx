@@ -1,7 +1,12 @@
-import React from 'react'
 import "./aboutus.css";
+import { useEffect, React } from 'react';
 
-export const aboutUs = () => {
+export const AboutUs = () => {
+
+    useEffect(() => {
+      window.scrollTo(0,0)
+    }, [])
+    
     return (
         <div className="Font">
             <h1 className="Title"> About Us </h1>

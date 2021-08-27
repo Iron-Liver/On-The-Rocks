@@ -1,6 +1,8 @@
 import React from 'react'
 import './footer.css'
-import { Link } from '@material-ui/core';
+import iconfooter1 from '../../assets/iconfooter.png'
+import iconfooter2 from '../../assets/iconfooter2.png'
+import { Link }from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -13,7 +15,7 @@ const Footer = () => {
                 <ul className="social">
                   <li><i className="fa fa-facebook" aria-hidden="true"></i></li>
                   <li><i className="fa fa-twitter" aria-hidden="true"></i> </li>
-                  <li><Link href="https://www.instagram.com/ontherockspremiumdrinks" target="_blank" className="Link"><i className="fa fa-instagram" aria-hidden="true"></i></Link></li>
+                  <li><a  rel="noreferrer" href="https://www.instagram.com/ontherockspremiumdrinks" target="_BLANK" className="Link"> <i className="fa fa-instagram" aria-hidden="true"></i></a></li>
                   <li><i className="fa fa-github" aria-hidden="true"></i></li>
                 </ul>
           </div>
@@ -26,16 +28,22 @@ const Footer = () => {
                   <li><i className="fas fa-map-marker-alt"></i> Argentina, Buenos Aires</li>
                 </ul>
             </div>
-          </div>
-            {/* <div>
-              <h4 className="FMenu">Footer Menu</h4>
+            <div className="about-icon">
+            <div className="about-us-footer">
+              <h4 className="FMenu">Info</h4>
+                  <div className="footerlinks-container">
+                   <Link style={{textDecoration:'none', color:'#e6e6d8', fontSize:'15px', marginBottom:'5px'}} to="/aboutus" className="links-footer" >About Us</Link>
+                   <Link to="/shipping" style={{textDecoration:'none',fontSize:'15px', color:'#e6e6d8'}} className="links-footer" >Shipping</Link> 
+                  </div>
                 
-                  <Link to ="/aboutus" className="Aboutus" >About Us</Link>
-                  <Link to ="/shipping" className="Shipping" >Shipping</Link>
-                
-            </div> */}
-            
+            </div> 
+              <div className="iconfooter">
+                <img alt="iconfooterOnTheRocks" src={iconfooter2}></img>
+
+              </div> 
+              </div>
         </div>
+          </div>
 
      <div className="divisorFooter">
         <p style={{fontFamily:"Montserrat", fontSize: '11px', margin: '0', padding:'10px', width:'75%'}}>

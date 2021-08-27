@@ -35,6 +35,7 @@ export default function Dashboard() {
           height={400}
           width={600}
           options={{
+            responsive: true,
             maintanAspectRatio: false,
           }}
         />
@@ -72,7 +73,8 @@ export default function Dashboard() {
           }}
           />
           </div>
-        <div className="Piee">
+     
+         <div className="Piee">
           <Pie
           className="pie1"
           data= {{
@@ -137,7 +139,7 @@ export default function Dashboard() {
             maintanAspectRatio: false,
           }}
         />
-      </div>
+        </div>
     </div>
   )
 }
