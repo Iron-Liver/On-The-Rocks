@@ -44,12 +44,16 @@ export function loginUser(login) {
                 { email: login.email.toLowerCase(), password: login.password },
                 { withCredentials: true }
             );
-            const { id, email, isAdmin } = jwt.verify(
+            const { id, email, isAdmin, isDeleted} = jwt.verify(
                 token.data,
                 process.env.REACT_APP_SECRET_KEY
             );
-            localStorage.setItem("token", JSON.stringify(token.data));
-            dispatch({ type: LOGIN, payload: { id, email, isAdmin } });
+            if (decode(token.data).isDeleted) {
+                swal("You are banned.", "Contact us if you have a question about it.", "error")
+            }else{
+                localStorage.setItem("token", JSON.stringify(token.data));
+                dispatch({ type: LOGIN, payload: { id, email, isAdmin, isDeleted } });
+            }
         } catch (e) {
             swal(e.message, "An error has occurred", "error");
         }
@@ -129,7 +133,9 @@ export function logOutUser() {
 export function resetPass(token, newPassword) {
     return async function (dispatch) {
         try {
-            await axios.post(`/auth/passwordreset`, { token, newPassword });
+            await axios.post(`/auth/passwordreset`, { token, newPassword }, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
         } catch (e) {
             console.log(e.message);
         }
