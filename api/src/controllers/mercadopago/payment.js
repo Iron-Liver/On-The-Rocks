@@ -77,7 +77,7 @@ module.exports = async (req, res, next) => {
       });
 
       const user = await User.findOne({
-        where: { id : userId },
+        where: { id : order.userId },
       });
       console.log('COIN TEST ---------------')
       console.log(user);
