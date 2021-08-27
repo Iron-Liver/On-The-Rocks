@@ -42,8 +42,8 @@ export const AddProductReview = ({ prodId, userId }) => {
         data.forEach(function (subArray) {
             return (aux = aux.concat(subArray));
         });
-        // setBought(Array.from(new Set(aux)).includes(prodId));
-        setBought(true)
+        setBought(Array.from(new Set(aux)).includes(prodId));
+        // setBought(true)
     };
 
     // const createdRev = (userId,prodId,stars,input,anonymous)=>{
