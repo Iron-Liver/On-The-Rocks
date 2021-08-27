@@ -70,7 +70,7 @@ function NavBar(props) {
         icons: {
             color: "#fff",
             "&:hover": {
-                color: "black",
+                color: "#dcd0c0",
             },
         },
         mobile: {
@@ -261,6 +261,8 @@ function NavBar(props) {
                                     }`}
                                 />
                             </IconButton>
+
+                            
 
                             <Hidden xsDown>
                                 <IconButton

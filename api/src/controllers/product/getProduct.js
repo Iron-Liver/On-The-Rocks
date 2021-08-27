@@ -76,7 +76,7 @@ module.exports = async (req, res, next) => {
 
     if(filterBy.name) {
       filtered = filtered.filter(product => {
-        const string = filterBy.name.toLowerCase().replace(/-/g, ' ');
+        const string = filterBy.name.toLowerCase();
         return product.name.toLowerCase().includes(string);
       })
     }
@@ -128,41 +128,9 @@ module.exports = async (req, res, next) => {
       filters: filterBy ? filterBy : false
     }; 
 
-    return res.status(200).send(response)
+    return res.status(200).send(response);
   } catch (error) {
-    next(error)
+    next(error);
+    return res.status(409).send();
   }
 };
-
-// const { product } = req.query;
-// if (!product) {
-//   const product = await Product.findAll({
-//     include: {
-//       model: Category,
-//       attributes: {
-//           include: ['name'],
-//           exclude: ['createdAt', 'updatedAt']
-//       },
-//       through: {
-//           attributes: []
-//       }
-//   }
-//   })
-//   res.send(product).status(200)
-// } else {
-//   const product = await Product.findAll({
-//     where: {
-//       name: { [Op.iLike]: `%${product}%` }
-//     },
-//     include: {
-//       model: Category,
-//       attributes: {
-//           include: ['name'],
-//           exclude: ['createdAt', 'updatedAt']
-//       },
-//       through: {
-//           attributes: []
-//       }
-//   }
-//   })
-//   res.send(product).status(200)

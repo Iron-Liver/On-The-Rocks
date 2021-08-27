@@ -1,7 +1,13 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import "./shipping.css";
 
-function shipping() {
+function Shipping() {
+
+    useEffect(() => {
+        window.scrollTo(0,0)
+      }, [])
+      
+
     return (
         <div className="Font">
             <h1 className="Title">Shipping information</h1>
@@ -101,4 +107,4 @@ Depending on where you live, the time it may take for your exchanged product to 
     )
 }
 
-export default shipping
+export default Shipping

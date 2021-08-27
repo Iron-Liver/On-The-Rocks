@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   box-shadow: 0px 2px 3px 0.5px gray;
 }
 
@@ -29,19 +29,20 @@
 
 .order-info h1 {
   margin: 10px 0;
-  font-family: "Heebo", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 22px;
   letter-spacing: -0.5px;
   text-transform: uppercase;
+  font-weight: 400;
 }
 
 .order-personal-info {
-  padding-top: 20px;
+  /* padding-top: 20px; */
   width: 98%;
   height: max-content;
   background: rgb(235, 235, 235); 
-  margin-top: 20px;
-  border-radius: 10px;
+  margin-top: 22px;
+  /* border-radius: 10px; */
   /* box-shadow: 0px 1px 3px 1px rgb(165, 165, 165); */
   display: flex;
   justify-content: center;
@@ -51,7 +52,7 @@
   width: 98%;
   height: 100%;
   margin-top: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   background: rgb(235, 235, 235); 
   box-shadow: 0px 2px 3px 0.5px gray;
   display: flex;
@@ -61,6 +62,16 @@
 
 .payment-button {
   margin: 10px 0;
+}
+
+.payment-button button {
+  background: #372c2e;
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  line-height: 38px;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 .productview-wrapper {
@@ -74,40 +85,112 @@
 }
 
 .swiper-wrap {
-  width: 360px;
+  width: 300px;
   height: 100%;
-  background: rgb(235, 235, 235);
+  background: #372c2e;
   box-shadow: 0px 2px 3px 0.5px gray;
-  border-radius: 13px;
+  /* border-radius: 13px; */
+  color: white;
+}
+
+.swiper-wrap-responsive {
+  width: 100%;
+  background: #372c2e25;
+  /* height: 100%; */
+  box-shadow: 0px 2px 3px 0.5px gray;
 }
 
 .slide-product {
   display: flex;
-  width: 100%;
+  width: 300px;
+  height: 550px;
   flex-direction: column;
   align-items: center;
 }
 
 .slide-product h2 {
   text-align: center;
+  width: 80%;
   min-height: 60px;
   margin: 11px 5px;
-  font-family: "Heebo", sans-serif;
-  font-size: 22px;
-  letter-spacing: -0.5px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.slide-product-responsive {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image-background {
-  width: 75%;
-  margin-top: 5%;
+  width: 90%;
+  margin: 5% auto 0;
   text-align: center;
   background: white;
   box-shadow: 0px 1px 1px 0.2px gray;
 }
 
 .image-background img {
-  padding: 2%;
-  width: 85%;
+  /* padding: 2%; */
+  width: 150px;
+}
+
+.slide-info-grow {
+  width: 100%;
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slide-product-img-name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 90%;
+  margin-bottom: 18px;
+}
+
+.slide-product-img-circle {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: white;
+  min-width: 120px;
+  border: 1px solid #d3d3d3;
+}
+
+
+.slide-product-info-text {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  align-self: stretch;
+}
+
+.slide-product-img-name h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0 20px;
+  flex-grow: 0.1;
+}
+
+.slide-product-img-name h4 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0px 20px 0;
 }
 
 .order-info-ul {
@@ -117,10 +200,8 @@
   padding: 0;
   width: 98%;
   font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  line-height: 2.66;
-  letter-spacing: 0.083em;
-  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 2;
 }
 
 .product-info-ul {
@@ -130,10 +211,8 @@
   padding: 0;
   width: 90%;
   font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  line-height: 2.66;
-  letter-spacing: 0.083em;
-  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 2;
 }
 
 .info-item-li {
@@ -151,11 +230,9 @@
   align-self: center;
   justify-content: center;
   align-items: center;
-  font-family: "Roboto";
-  font-weight: 400;
-  font-size: 1.3rem;
-  line-height: 2.66;
-  letter-spacing: 0.083em;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
   text-transform: uppercase;
 }
 

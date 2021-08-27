@@ -11,23 +11,22 @@ export default function Dashboard() {
           data= {{
             labels: ['August', 'September', 'October', 'November', 'December'],
             datasets: [{
-              label: 'Users per month 1 - 6 2021',
-              data: [12, 19, 3, 5, 2, 3],
+              label: 'Users per month 2021',
+              data: [12, 19, 3, 5, 2],
             backgroundColor: [
-                'rgba(230, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+              'rgba(140, 45, 27, 0.5)',
+              'rgba(128, 81, 24, 0.5)',
+              'rgba(128, 116, 24, 0.5)',
+              'rgba(83, 95, 187, 0.51)',
+              'rgba(177, 26, 26, 0.51)',
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+              'rgba(140, 45, 27, 0.8)',
+              'rgba(128, 81, 24, 0.8)',
+              'rgba(128, 116, 24, 0.8)',
+              'rgba(83, 95, 187, 0.8)',
+              'rgba(177, 26, 26, 0.8)',
+                
             ],
             borderWidth: 1
             }],
@@ -44,23 +43,21 @@ export default function Dashboard() {
           data= {{
             labels: ['August', 'September', 'October', 'November', 'December'],
             datasets: [{
-              label: 'Users per month 1 - 6 2021',
-              data: [12, 19, 3, 5, 2, 3],
+              label: 'Users per month 2021',
+              data: [12, 19, 3, 5, 3],
             backgroundColor: [
-                'rgba(230, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+              'rgba(140, 45, 27, 0.5)',
+              'rgba(128, 81, 24, 0.5)',
+              'rgba(128, 116, 24, 0.5)',
+              'rgba(83, 95, 187, 0.51)',
+              'rgba(177, 26, 26, 0.51)',
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+              'rgba(140, 45, 27, 0.8)',
+              'rgba(128, 81, 24, 0.8)',
+              'rgba(128, 116, 24, 0.8)',
+              'rgba(83, 95, 187, 0.8)',
+              'rgba(177, 26, 26, 0.8)',
               ],
               borderWidth: 1
             }],
@@ -79,22 +76,20 @@ export default function Dashboard() {
             labels: ['Users'],
             datasets: [{
               label: 'Users per month 1 - 6 2021',
-              data: [12, 19, 3, 5, 2, 3],
+              data: [12, 19, 3, 5, 2],
             backgroundColor: [
-                'rgba(230, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+              'rgba(140, 45, 27, 0.5)',
+              'rgba(128, 81, 24, 0.5)',
+              'rgba(128, 116, 24, 0.5)',
+              'rgba(83, 95, 187, 0.51)',
+              'rgba(177, 26, 26, 0.51)',
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+              'rgba(140, 45, 27, 0.8)',
+              'rgba(128, 81, 24, 0.8)',
+              'rgba(128, 116, 24, 0.8)',
+              'rgba(83, 95, 187, 0.8)',
+              'rgba(177, 26, 26, 0.8)',
             ],
             borderWidth: 1
             }],
@@ -111,22 +106,20 @@ export default function Dashboard() {
             labels: ['Users'],
             datasets: [{
               label: 'Users per month 1 - 6 2021',
-              data: [12, 22, 50, 10, 5, 120],
+              data: [12, 22, 50, 10, 5],
             backgroundColor: [
-                'rgba(230, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+              'rgba(140, 45, 27, 0.5)',
+              'rgba(128, 81, 24, 0.5)',
+              'rgba(128, 116, 24, 0.5)',
+              'rgba(83, 95, 187, 0.51)',
+              'rgba(177, 26, 26, 0.51)',
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+              'rgba(140, 45, 27, 0.8)',
+              'rgba(128, 81, 24, 0.8)',
+              'rgba(128, 116, 24, 0.8)',
+              'rgba(83, 95, 187, 0.8)',
+              'rgba(177, 26, 26, 0.8)',
             ],
             borderWidth: 1
             }],

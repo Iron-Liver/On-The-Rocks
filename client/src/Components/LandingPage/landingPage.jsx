@@ -96,7 +96,7 @@ export const LandingPage = () => {
                   <h2 className="card__title">PRODUCTS</h2>
                   <p className="card__snippet"> <b>We strive </b> to provide liquor enthusiasts spirits that they can enjoy for the cheapest price.
 Our business philosophy is to <b>continuously source new products</b> to add to our extensive range of liquor to make your online shopping experience easy and continue to deliver great service.
-So if you have a special occasion to purchase for, we believe we will have that bottle that will give you that wow factor.
+
 </p>
                 </figcaption>
               </figure>

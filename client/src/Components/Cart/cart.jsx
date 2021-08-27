@@ -59,7 +59,7 @@ export function Cart() {
         setState(data);
     }
     if (subTotal === 0) {
-        state?.forEach((e) => (subTotal = Number(subTotal) + Number(e.price)));
+        state?.forEach((e) => (subTotal = parseFloat(subTotal) + parseFloat(e.price)));
         localStorage.removeItem("total");
         localStorage.setItem("total", JSON.stringify(subTotal));
     }
@@ -67,10 +67,10 @@ export function Cart() {
     function sum(id) {
         state?.forEach((e) => {
             if (e.id === id && e.units < e.stock) {
-                let sub = Number(e.price) / Number(e.units);
+                let sub = parseFloat(e.price) / parseInt(e.units);
                 e.units++;
-                sub = Number(sub) * e.units;
-                e.price = sub.toFixed(2);
+                sub = parseFloat(sub) * e.units;
+                e.price = parseFloat(sub).toFixed(2);
             }
         });
 
@@ -79,24 +79,24 @@ export function Cart() {
         let data = JSON.parse(localStorage.getItem("data"));
         setState(data);
 
-        state?.forEach((e) => (subTotal = Number(subTotal) + Number(e.price)));
+        state?.forEach((e) => (subTotal = parseFloat(subTotal) + parseFloat(e.price)));
         subTotal = subTotal.toFixed(2);
     }
 
     function res(id) {
         state?.forEach((e) => {
             if (e.id === id && e.units > 1) {
-                let sub = Number(e.price) / Number(e.units);
+                let sub = parseFloat(e.price) / parseInt(e.units);
                 e.units--;
-                sub = Number(sub) * e.units;
+                sub = parseFloat(sub) * e.units;
                 e.price = sub.toFixed(2);
             }
         });
         localStorage.removeItem("data");
         localStorage.setItem("data", JSON.stringify(state));
         let data = JSON.parse(localStorage.getItem("data"));
-        state?.forEach((e) => (subTotal = Number(subTotal) + Number(e.price)));
-        subTotal = subTotal.toFixed(2);
+        state?.forEach((e) => (subTotal = parseFloat(subTotal) + parseFloat(e.price)));
+        subTotal = parseFloat(subTotal).toFixed(2);
         localStorage.removeItem("total");
         localStorage.setItem("total", JSON.stringify(subTotal));
         setState(data);
@@ -105,7 +105,7 @@ export function Cart() {
     function handleSelect(e) {
         let id = 0;
         Coupons.forEach((cop) => {
-            if (cop.discount === Number(e.target.value)) return (id = cop.id);
+            if (cop.discount === parseFloat(e.target.value)) return (id = cop.id);
         });
         localStorage.removeItem("coup");
         localStorage.setItem("coup", JSON.stringify(id));
@@ -114,12 +114,12 @@ export function Cart() {
 
     if (cupon) {
         console.log("cupon", cupon);
-        total = subTotal.toFixed(2) - subTotal.toFixed(2) * cupon;
-        total = Number(total).toFixed(2);
+        total = parseFloat(subTotal).toFixed(2) - parseFloat(subTotal).toFixed(2) * cupon;
+        total = parseFloat(total).toFixed(2);
         localStorage.removeItem("total");
         localStorage.setItem("total", JSON.stringify(total));
     } else {
-        total = subTotal.toFixed(2);
+        total = parseFloat(subTotal).toFixed(2);
     }
 
     return (
@@ -136,7 +136,7 @@ export function Cart() {
                             }}
                             key={e.id}
                         >
-                            <div style={{ display: "flex" }}>
+                            <div style={{ display: "flex", alignItems: "flex-start" }}>
                                 <h4 style={{ flexGrow: 1 }}>{e.name}</h4>
                                 <IconButton
                                     aria-label="delete"
@@ -185,7 +185,7 @@ export function Cart() {
                                         <span style={{ fontSize: "12px" }}>
                                             SubTotal:{" "}
                                         </span>
-                                        ${e.price}
+                                        ${parseFloat(e.price).toFixed(2)}
                                     </h4>
                                     <div className={classes.sum}>
                                         <CustomButton
@@ -275,7 +275,7 @@ export function Cart() {
                             )}
                         </div>
                     </div>
-                    {parseFloat(total) < parseFloat(subTotal) ? (
+                    {parseFloat(total).toFixed(2) < parseFloat(subTotal).toFixed(2) ? (
                         <div className={classes.box}>
                             {cupon ? (
                                 <div>

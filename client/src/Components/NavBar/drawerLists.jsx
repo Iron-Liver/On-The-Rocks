@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { Cart } from "../Cart/cart";
 import {
     Typography,
@@ -324,6 +324,8 @@ export const SearchList = () => {
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.productReducer);
     const history = useHistory();
+    const { search } = useLocation();
+    const query = new URLSearchParams(search);
 
     useEffect(() => {
         dispatch(getProducts());
@@ -332,12 +334,12 @@ export const SearchList = () => {
     const handleKeyPress = (e) => {
         if (e.key === "Enter") {
             if (e.target.value !== "") {
-                history.push(
-                    `/products?name=${e.target.value
-                        .split(" ")
-                        .join("-")
-                        .toLowerCase()}`
-                );
+                query.set('search', e.target.value);
+
+                history.push({
+                  pathname: "/products",
+                  search: query.toString()
+                });
             }
         }
     };
@@ -345,12 +347,11 @@ export const SearchList = () => {
     const handleClick = () => {
         var link = document.getElementById("Search");
         if (link.value !== "") {
-            history.push(
-                `/products?name=${link.value
-                    .split(" ")
-                    .join("-")
-                    .toLowerCase()}`
-            );
+            query.set('search', link.value);
+            history.push({
+              pathname: "/products",
+              search: query.toString()
+            });
         }
     };
 

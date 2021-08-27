@@ -131,6 +131,36 @@ export const NavBox = ({ solid }) => {
                     </ButtonBase>
                 </Link>
             )}
+            {currentUser && (
+                <Link
+                    to="/aboutus"
+                    className="linkNav"
+                    style={{ textDecoration: "none", color: "white" }}
+                >
+                    <ButtonBase
+                        focusRipple
+                        key={"About Us"}
+                        className={classes.text}
+                    >
+                        <p
+                            style={{width:'max-content'}}
+                            component="span"
+                            variant="subtitle1"
+                            color="inherit"
+                            className={`${classes.imageTitle}  ${
+                                solid ? "" : classes.blackColor
+                            }`}
+                        >
+                            {"ABOUT US"}
+                            <span
+                                className={`${classes.imageMarked} ${
+                                    solid ? "" : classes.blackBack
+                                }`}
+                            />
+                        </p>
+                    </ButtonBase>
+                </Link>
+            )}
 
             <Link
                 to="/products"

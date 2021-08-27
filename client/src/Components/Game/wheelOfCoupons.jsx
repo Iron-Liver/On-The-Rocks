@@ -111,6 +111,8 @@ export const WheelOfCoupons = () => {
         }
         dispatch(createCoupon(coupon))
     };
+
+    
     const spin = () => {
         dispatch(removeCoin(currentUser?.id));
         const discount = generateAward();
@@ -119,7 +121,13 @@ export const WheelOfCoupons = () => {
         setIdle(false);
         setTimeout(async () => {
             if (discount) {
-                alert(`Congratulations! You got a %${discount} discount!`);
+                // swal(`Congratulations! You got a %${discount} discount!`);
+                swal({
+                    title: "Congratulations!",
+                    text: `You got a %${discount} coupon discount! 🎟️ `,
+                    icon: 'success',
+                    buttons:"Continue",
+                })
                 addCoupon(discount);
                 setState(false);
                 setDegrees(0);
@@ -127,7 +135,7 @@ export const WheelOfCoupons = () => {
                     setIdle(true);
                 }, 2000);
             } else {
-                alert("Thats so sad! Maybe you ll get it another time c:");
+                alert("Thats so sad! Maybe you ll get it another time");
                 setState(false);
                 setDegrees(0);
                 setTimeout(() => {
@@ -138,13 +146,15 @@ export const WheelOfCoupons = () => {
     };
     return (
         <div>
-            <h1 className="game-title">Coupon Roulette</h1>
+            <h1 className="game-title">Coupon Roulette <i class="fas fa-dice"></i></h1>
+            <div className="divroulette1"></div>
             <div className="game-container">
                 <div className="game-instructions">
                     <h2 className="game-instructions-head">How to play</h2>
                     <p className="game-instructions-content">
                         Just press the button and close your eyes!
                     </p>
+                    <div className="divroulette2"></div>
                     <h2 className="game-instructions-head">
                         How to get more coins
                     </h2>
@@ -173,9 +183,10 @@ export const WheelOfCoupons = () => {
                             alt="roulette_arrow"
                         />
                     </div>
-                    <span>Remaining coins: {currentUser ? coins : 0}</span>
-                    <div>
-                        <input
+                    <span  style={{color: '#e6e6d8', borderColor:'#e6e6d8', width:'max-content', margin:'10px'}}>Remaining coins: {currentUser ? coins : 0} 🎟️ </span>
+                    <div className="button-sound">
+                    <div className="soundcheck">
+                        <input                 
                             type="checkbox"
                             value={muted}
                             name="mute"
@@ -189,19 +200,24 @@ export const WheelOfCoupons = () => {
                             }
                         />
                     </div>
+                    <div className="buttonroullete">
                     <Button
+                    style={{color: (!idle || !currentUser || coins < 1) ? 'grey' : '#e6e6d8', borderColor: (!idle || !currentUser || coins < 1) ? 'grey' : '#e6e6d8', width:'max-content'}}
+                        className="button"
                         size="large"
-                        disabled={!idle || !currentUser}
+                        disabled={!idle || !currentUser || coins < 1}
                         variant="outlined"
-                        color="primary"
                         type="button"
                         onClick={spin}
-                        className="button"
                     >
                         {currentUser ? 'Spin it!' : 'Login to play!'}
                     </Button>
+                    </div>
+                </div>
+                
                 </div>
             </div>
+            <div className="divroulette3"></div>
         </div>
     );
 };

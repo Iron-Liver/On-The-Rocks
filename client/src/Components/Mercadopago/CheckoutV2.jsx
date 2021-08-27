@@ -31,7 +31,6 @@ const CheckoutV2 = ({ data, order, stock }) => {
       locale: 'es-AR'
     });
 
-
     mp.checkout({
       preference: {
         id: data.id
@@ -59,37 +58,37 @@ const CheckoutV2 = ({ data, order, stock }) => {
         </div>
       </div>
       <div className="productview-wrapper">
-        <div className="swiper-wrap">
           <Hidden smDown>
-            <Swiper 
-              navigation={order.order_products.length > 1}
-              mousewheel={true} 
-              keyboard={true}
-            >
-              {order.order_products.map(product => 
-                <SwiperSlide key={Math.random() * 3}>
-                    <ProductSlide product={product} />
-                </SwiperSlide>
-              )}
-            </Swiper>
+            <div className="swiper-wrap">
+              <Swiper 
+                navigation={order.order_products.length > 1}
+                mousewheel={true} 
+                keyboard={true}
+              >
+                {order.order_products.map(product => 
+                  <SwiperSlide key={Math.random() * 3}>
+                      <ProductSlide product={product} />
+                  </SwiperSlide>
+                )}
+              </Swiper>
+            </div>
           </Hidden>
           <Hidden mdUp>
-            <h2 style={{textAlign: "center", fontFamily: `"Heebo", sans-serif`}}>PRODUCTS</h2>
-            <Swiper
-              slidesPerView={2} 
-              spaceBetween={30} 
-              slidesPerGroup={2}
-              loopFillGroupWithBlank={true} 
-              pagination={true}
-            >
-              {order.order_products.map(product => 
-                <SwiperSlide key={Math.random() * 3}>
-                    <ProductSlideResponsive product={product} />
-                </SwiperSlide>
-              )}
-            </Swiper>
+          <div className="swiper-wrap-responsive">
+            <h2 style={{textAlign: "center", fontFamily: `"Montserrat", sans-serif`, fontWeight: 300}}>PRODUCTS</h2>
+              <Swiper
+                slidesPerView={1} 
+                spaceBetween={30}
+                pagination={true}
+              >
+                {order.order_products.map(product => 
+                  <SwiperSlide key={Math.random() * 3}>
+                      <ProductSlideResponsive product={product} />
+                  </SwiperSlide>
+                )}
+              </Swiper>
+            </div>
           </Hidden>
-        </div>
       </div>
     </div>
   )
