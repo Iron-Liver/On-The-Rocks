@@ -51,7 +51,7 @@ const CreateOrder = () => {
     if (currentUser?.hasOwnProperty("logout")) {
         dispatch(logOutUser());
         window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        alert("Session expired. Please login");
     }
 
     const SubmitForm = async () => {

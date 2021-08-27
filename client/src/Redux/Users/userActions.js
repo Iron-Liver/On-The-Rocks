@@ -116,6 +116,8 @@ export function logOutUser() {
             await localStorage.removeItem("cartItems");
             await localStorage.removeItem("shippingAddress");
             await localStorage.removeItem("wishListItems");
+            await localStorage.removeItem("coup")
+            await localStorage.removeItem("total")
             await axios.get(`/auth/logout`, { withCredentials: true });
             window.location.replace(`${window.location.origin}`);
             dispatch({ type: LOGOUT });
