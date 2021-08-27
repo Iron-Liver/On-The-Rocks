@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom"
 import { makeStyles, Grid, Paper } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import verifyUser from "../../../Utils/verifyUser";
+import swal from "sweetalert";
 import { logOutUser } from "../../../Redux/Users/userActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,12 +29,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const ProductReviewCard = ({ reviews }) => {
     const classes = useStyles();
+    const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
 
     return (

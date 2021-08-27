@@ -1,9 +1,6 @@
 import React from "react";
-import { Hidden } from "@material-ui/core";
 
 const ProductSlideResponsive = ({ product }) => {
-
-  console.log(product)
 
   return (
     <div className="slide-product-responsive">

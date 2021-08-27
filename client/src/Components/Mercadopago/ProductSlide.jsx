@@ -2,7 +2,6 @@ import React from 'react';
 import './Checkout.css';
 
 const ProductSlide = ({ product }) => {
-  console.log(product)
 
   return (
     <div className="slide-product">

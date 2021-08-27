@@ -5,8 +5,7 @@ import {
   Accordion, 
   AccordionSummary, 
   Typography, 
-  AccordionDetails, 
-  Hidden, 
+  AccordionDetails,
   makeStyles,
 } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';

@@ -44,11 +44,6 @@ const couponMockUp = async () => {
             global: false,
             userId: 8,
         });
-        await Coupon.create({
-            code: "FRIDAY10",
-            discount: 0.1,
-            global: true
-        })
     } catch (e) {
         console.log(e.message);
     }

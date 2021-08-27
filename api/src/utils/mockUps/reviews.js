@@ -6,7 +6,7 @@ const reviewsMockUp = async () => {
             stars: 5,
             description: "Very fine vodka. Bottle is a nice detail.",
             userId: 1,
-            productId: 2,
+            productId: 39,
             anonymous: false
 
         })
@@ -14,7 +14,7 @@ const reviewsMockUp = async () => {
             stars: 2,
             description: "Vodka tastes like wc water and doesn't shoot.",
             userId: 2,
-            productId: 2,
+            productId: 39,
             anonymous: false
         })
         await Review.create({

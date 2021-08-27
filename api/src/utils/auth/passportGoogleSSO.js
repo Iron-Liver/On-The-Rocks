@@ -31,6 +31,7 @@ module.exports = async (req, res) => {
                         id: find.id,
                         email: find.email,
                         isAdmin: find.isAdmin,
+                        isDeleted: find.isDeleted,
                     },
                     SECRET_KEY,
                     { expiresIn: "24hr" }
@@ -49,6 +50,7 @@ module.exports = async (req, res) => {
                         id: newUser.id,
                         email: newUser.email,
                         isAdmin: newUser.isAdmin,
+                        isDeleted: newUser.isDeleted,
                     },
                     SECRET_KEY,
                     { expiresIn: "24hr" }

@@ -23,8 +23,6 @@ module.exports = async (req, res, next) => {
     });
 
     const items_mp = items.map(item => {
-    console.log(item)
-    
     return {
       title: item.product.name,
       unit_price: item.unitPrice,

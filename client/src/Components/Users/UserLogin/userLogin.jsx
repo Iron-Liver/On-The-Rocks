@@ -23,9 +23,9 @@ export default function UserLogin() {
     const history = useHistory();
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
     const [input, setInput] = useState({
         email: "",
@@ -39,8 +39,8 @@ export default function UserLogin() {
                         dispatch(sendEmail(currentUser.email, "verifyadmin"));
                         history.push(`/`);
                         swal(
-                            "Hemos enviado un link a tu correo para que verifiques tu identidad",
-                            "Disculpa las molestias",
+                            "We have sent a link to your email so that you can verify your identity",
+                            "Sorry for the disturbances",
                             "success"
                         );
                     } else {

@@ -89,6 +89,7 @@
 #user-wishlist-empty-message {
   font-size: 22px;
   font-weight: 400;
+  margin: 0 auto;
 }
 
 @media (max-width: 650px) {

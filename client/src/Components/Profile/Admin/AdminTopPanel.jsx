@@ -1,7 +1,7 @@
 import './AdminTopPanel.css';
 import React, { useEffect } from 'react';
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
+import verifyUser from '../../../Utils/verifyUser'
 import { useDispatch } from 'react-redux';
 import { readUser, logOutUser } from '../../../Redux/Users/userActions';
 import swal from 'sweetalert';
@@ -11,9 +11,12 @@ const AdminTopPanel = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null
+  const localProfile = verifyUser();
+  if (localProfile?.hasOwnProperty("logout")) {
+      dispatch(logOutUser());
+      history.push("/");
+      swal("Session expired", "Please login", "warning");
+  }
 
   const userId = localProfile?.id 
 
@@ -35,7 +38,7 @@ const AdminTopPanel = () => {
   }
   
   const logOut = () => {
-    dispatch(logOutUser());
+    dispatch(logOutUser())
     history.push("/");
   }
 

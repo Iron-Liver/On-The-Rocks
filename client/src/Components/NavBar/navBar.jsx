@@ -144,16 +144,16 @@ function NavBar(props) {
     };
 
     const handleLogOut = () => {
-        dispatch(logOutUser());
+        dispatch(logOutUser())
         history.push("/");
     };
 
     const handleProfile = () => {
         const currentUser = verifyUser();
         if (currentUser?.hasOwnProperty("logout")) {
-            dispatch(logOutUser());
-            window.location.replace(`${window.location.origin}/login`);
-            alert("please login");
+            dispatch(logOutUser())
+            history.push('/')
+            swal("Session expired","Please login","warning")
         }
         if (!currentUser) {
             return history.push("/login");
