@@ -83,6 +83,7 @@ module.exports = async (req, res, next) => {
       console.log(user);
       user.coins += 1;
       console.log(user.coins);
+      user.save();
       
       if(order.status !== "created" && order.status !== "completed") {
         transporter.sendMail({
