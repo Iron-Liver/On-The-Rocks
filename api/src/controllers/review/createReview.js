@@ -7,12 +7,13 @@ module.exports = async (req, res, next) => {
             let review = await Review.findOne({ where: { userId, productId } });
             review
                 ? review = await Review.update(
-                    { ...stars, description, anonymous },
+                    { ...review, description, anonymous, stars },
                     {
                         where: { userId, productId },
                     }
                 )
                 : review = await Review.create({productId, userId, stars, description, anonymous});
+            
             return res.json({ success: "Review added successfully" });
         } else {
             throw new Error("Insufficient data");

@@ -19,7 +19,7 @@ passport.use(
       if (!user) return done(null, false);
       bcrypt.compare(password, user.password, (err, result) => {
         if (err) {return done(err)};
-        if (!result || user.isDeleted) {
+        if (!result) {
           return done(null, false);
         } else {
           return done(null, user);

@@ -39,14 +39,27 @@ export const ResetPassword = ({location}) => {
          [e.target.name]: e.target.value,
       })
    }
-
-   const handleReset = () => {
+   const sendReset = () => {
       dispatch(sendEmail(input.email,"passwordreset"))
       swal('In the next 10 min you will receive the link.','Please check your email','success')
    }
-
-   const handleChange = () => {
+   const sendChange = () => {
       dispatch(resetPass(token,input.password))
+      swal('Great!','You password has been reset','success')
+   }
+   const handleReset = () => {
+      if (!/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(input.email)){
+         swal('Sorry', 'That doesnt look like a valid email address', 'error')
+      }else{
+         sendReset()
+      }
+   }
+   const handleChange = () => {
+      if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,60}$/.test(input.password)){
+         swal('Sorry', 'You need:\n\ta number\n\ta uppercase letter\n\ta lowercase letter\n\ta minimum of 8 characters', 'error')
+      }else{
+         sendChange()
+      }
    }
 
    const renderReset = () => {
@@ -70,7 +83,7 @@ export const ResetPassword = ({location}) => {
                </Grid>
                <Grid container direction="row" justifyContent="center" alignItems="center">
                   <Grid item>
-                     <Button style={{fontWeight: 1000, marginTop: 50}} color="secondary" onClick={handleReset} variant="contained">Solicitar</Button>
+                     <Button style={{fontWeight: 1000, marginTop: 50}} color="secondary" onClick={handleReset} variant="contained">Request</Button>
                   </Grid>
                </Grid>
             </Grid>

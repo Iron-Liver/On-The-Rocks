@@ -2,9 +2,12 @@ import "./renderCoupons.css";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom"
 import { getCoupons } from "../../Redux/Coupon/couponActions";
 import { makeStyles } from "@material-ui/core/styles";
-import jwt from "jsonwebtoken";
+import { logOutUser } from "../../Redux/Users/userActions";
+import verifyUser from "../../Utils/verifyUser";
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,16 +50,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Coupons = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
     const classes = useStyles();
-    const localProfile = JSON.parse(localStorage.getItem("token"))
-        ? jwt.verify(
-              JSON.parse(localStorage.getItem("token")),
-              process.env.REACT_APP_SECRET_KEY
-          )
-        : null;
+    const localProfile = verifyUser();
+    if (localProfile?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        history.push("/");
+        swal("Session expired", "Please login", "warning");
+    }
     const userId = localProfile?.id;
     const { Coupons } = useSelector((state) => state.couponReducer);
-    const dispatch = useDispatch();
     useEffect(
         () => {
             dispatch(getCoupons(userId));

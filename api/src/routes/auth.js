@@ -25,6 +25,7 @@ router.post("/login", function (req, res, next) {
                             id: user.id,
                             email: user.email,
                             isAdmin: user.isAdmin,
+                            isDeleted: user.isDeleted,
                         },
                         SECRET_KEY,
                         { expiresIn: "24hr" }
@@ -49,8 +50,8 @@ router.get("/user", async (req, res) => {
             where: { id: req.user.id },
         });
 
-        const { id, email, isAdmin } = user;
-        let token = await jwt.sign({ id, email, isAdmin }, SECRET_KEY, {
+        const { id, email, isAdmin, isDeleted } = user;
+        let token = await jwt.sign({ id, email, isAdmin, isDeleted }, SECRET_KEY, {
             expiresIn: "24hr",
         });
 
@@ -82,6 +83,7 @@ router.post("/email", async (req, res, next) => {
                 id: user.id,
                 email: user.email,
                 isAdmin: user.isAdmin,
+                isDeleted: user.isDeleted,
                 Authenticated: true,
             },
             SECRET_KEY,
