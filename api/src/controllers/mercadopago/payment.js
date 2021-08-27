@@ -66,6 +66,8 @@ module.exports = async (req, res, next) => {
       order.save();
 
     } else if(payment_status === "approved") {
+
+
       
       const order = await Order.findOne({
         where: {
@@ -73,6 +75,15 @@ module.exports = async (req, res, next) => {
         },
         include: [Order_products, User]
       });
+
+      const user = await User.findOne({
+        where: { id : order.userId },
+      });
+      console.log('COIN TEST ---------------')
+      console.log(user);
+      user.coins += 1;
+      console.log(user.coins);
+      user.save();
       
       if(order.status !== "created" && order.status !== "completed") {
         transporter.sendMail({

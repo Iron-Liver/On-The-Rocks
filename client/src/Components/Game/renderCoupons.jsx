@@ -3,7 +3,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoupons } from "../../Redux/Coupon/couponActions";
-import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import jwt from "jsonwebtoken";
 
@@ -11,6 +10,11 @@ const useStyles = makeStyles((theme) => ({
     root: {
         // flexGrow: 1,
         width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        padding: "30px 30px",  
+        minHeight: "85vh",
     },
     paper: {
         padding: theme.spacing(2),
@@ -52,7 +56,6 @@ const Coupons = () => {
         : null;
     const userId = localProfile?.id;
     const { Coupons } = useSelector((state) => state.couponReducer);
-
     const dispatch = useDispatch();
     useEffect(
         () => {
@@ -61,23 +64,58 @@ const Coupons = () => {
         []
     );
 
+
     return (
       <div className="user-coupons-tab-container">
         <div className={classes.root}>
             {Coupons?.length > 0 ? (
                 Coupons?.map((w) => (
-                    <Paper className={classes.paper} key={w.id}>
-                        <div className="user-coupons-description">
-                            <div style={{ flexGrow: 1 }}>
-                                <h2 className="user-coupons-item-title">
-                                    Coupon code: {w.code}
-                                </h2>
-                                <h2 className="user-coupons-item-price">
-                                    Discount amount: {w.discount * 100}%
-                                </h2>
-                            </div>
+                    <div className = "user-coupons-order" key={w.id}>
+                        {w.discount === 0.02? (
+                         <div className="user-coupons-description">                      
+                                    <div>
+                                      <img alt="coupon2%" src={"/images/Coupon2.png"}/>
+                                    </div>
+                    
                         </div>
-                    </Paper>
+                        ):
+                        w.discount === 0.05? (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img alt="coupon5%" src={"/images/Coupon5.png"}/>
+                                </div>
+                            </div>):
+                        w.discount === 0.10? (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img alt="coupon10%" src={"/images/Coupon10.png"}/>
+                                </div>
+                            </div>):
+                        w.discount === 0.15? (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img alt="coupon15%" src={"/images/Coupon15.png"}/>
+                                </div>
+                            </div>): 
+                        w.discount === 0.20? (
+                                <div className="user-coupons-description">
+                                    <div>
+                                      <img alt="coupon20%" src={"/images/Coupon20.png"}/>
+                                    </div>
+                                </div>):  
+                        w.discount === 0.25? (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img alt="coupon25%" src={"/images/Coupon25.png"}/>
+                                </div>
+                            </div>):     
+                     (
+                            <div className="user-coupons-description">
+                                <div>
+                                  <img alt="coupon50%" src={"/images/Coupon50.png"}/>
+                                </div>
+                            </div>)   
+                    }</div>
                 ))
             ) : (
                 <div

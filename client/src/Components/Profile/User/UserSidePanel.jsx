@@ -11,16 +11,23 @@ const UserSidePanel = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.userReducer?.userDetail);
-
+  
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
-
+  
   const userId = localProfile?.id 
+  
+  const updateUser = (userId) => {
+    dispatch(readUser(userId));
+  } 
+  
+  if(user?.hasOwnProperty('success') || user?.hasOwnProperty('error')) {updateUser(userId)}
 
   useEffect(() => {
-    dispatch(readUser(userId));
-  }, [dispatch, userId]);
+    updateUser(userId)
+  }, // eslint-disable-next-line
+  [userId]);
 
   useEffect(() => {
     window.scrollTo(0,0)
@@ -38,7 +45,6 @@ const UserSidePanel = () => {
       }
     })
   }
-
 
   const logOut = () => {
     dispatch(logOutUser());

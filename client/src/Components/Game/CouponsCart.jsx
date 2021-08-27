@@ -39,7 +39,7 @@ const CouponsCart = () => {
           alignItems: "center",
           height: "55vh"
         }}>
-          <h4 id="user-coupons-empty-message">Nothing coupons...</h4>
+          <h4 id="user-coupons-empty-message">Nothing to show...</h4>
         </div>
       )}
   </div> 

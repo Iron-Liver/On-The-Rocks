@@ -25,7 +25,10 @@ const CreateUser = (props) => {
 	const [input, setInput] = useState(wipedInput);
 
 	const handleSubmit = e => {
-		dispatch(createUser(input))
+		if (dispatch(createUser(input))){
+			swal('Welcome!', 'User created successfully',  'success')
+		}
+		swal('We are sorry!', 'The email is already in use', 'error')
 	};
 
 	useEffect(() => {
@@ -37,8 +40,10 @@ const CreateUser = (props) => {
 				swal( 'We are sorry!', aux, 'error')
 			}
 		} else {
-			typeof(userDetail) !== 'undefined' && swal('Welcome!', 'User created successfully',  'success')
-			setInput(wipedInput)
+			if (typeof(userDetail) !== 'undefined') {
+				setInput(wipedInput)
+			}
+			
 			// if(Boolean(next)) { console.log('redirect') }
 		}
 	},

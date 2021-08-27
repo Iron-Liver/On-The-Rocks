@@ -7,8 +7,9 @@ import ProductsList from '../Products/ProductsList/productsList';
 import UserList from '../Users/UserList/userList';
 import AdminSidePanel from './Admin/AdminSidePanel';
 import AdminTopPanel from './Admin/AdminTopPanel';
-import Dashboard from '../Dashboard/Dashboard';
+// import Dashboard from '../Dashboard/Dashboard';
 import jwt from 'jsonwebtoken'
+import Dashboard from '../Dashboard/Dashboard'
 
 
 
@@ -22,6 +23,7 @@ const AdminProfile = () => {
   const localProfile = JSON.parse(localStorage.getItem('token')) ? 
   jwt.verify(JSON.parse(localStorage.getItem('token')), 
   process.env.REACT_APP_SECRET_KEY) : null
+
 
   useEffect(() => {
     if(!id) {
@@ -37,8 +39,8 @@ const AdminProfile = () => {
       <AdminSidePanel />
       <AdminTopPanel />
       <Switch>
-        <Route exact path={path} children={<Dashboard style={{ width: "100%" }}/>} />
-        <Route exact path={`${path}/dashboard`} children={<Dashboard style={{ width: "100%" }}/>} />
+        <Route exact path={path} children={Dashboard} />
+        <Route exact path={`${path}/dashboard`} children={Dashboard} />
         <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
         <Route exact path={`${path}/categories`} component={CategoryList} />
         <Route exact path={`${path}/products`} component={ProductsList} />

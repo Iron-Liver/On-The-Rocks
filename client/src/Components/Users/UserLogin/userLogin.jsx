@@ -39,8 +39,8 @@ export default function UserLogin() {
                         dispatch(sendEmail(currentUser.email, "verifyadmin"));
                         history.push(`/`);
                         swal(
-                            "Hemos enviado un link a tu correo para que verifiques tu identidad",
-                            "Disculpa las molestias",
+                            "We have sent a link to your email so that you can verify your identity",
+                            "Sorry for the disturbances",
                             "success"
                         );
                     } else {

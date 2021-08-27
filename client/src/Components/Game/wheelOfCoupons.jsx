@@ -157,7 +157,7 @@ export const WheelOfCoupons = () => {
                         How to get more coins
                     </h2>
                     <p className="game-instructions-content">
-                        You will get coins every $500 spent.
+                        You will earn coins with every purchase over $500.
                     </p>
                     <p className="game-instructions-content">¿Cool right?</p>
                 </div>
