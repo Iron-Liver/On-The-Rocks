@@ -47,7 +47,7 @@ const UpdateProduct = ({ match }) => {
 
     const handleDelete = async e => {
         dispatch(deleteProduct(id));
-        alert('Product has been deleted!')
+        swal('Congratulations!', 'Product successfully deleted' , 'success')
     }
 
     useEffect(() => {
