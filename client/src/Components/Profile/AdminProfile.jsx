@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import verifyUser from "../../Utils/verifyUser";
 import swal from "sweetalert";
 import { logOutUser } from "../../Redux/Users/userActions";
+import Dashboard from '../Dashboard/Dashboard';
 
 
 
@@ -43,8 +44,8 @@ const AdminProfile = () => {
       <AdminSidePanel />
       <AdminTopPanel />
       <Switch>
-        <Route exact path={path} children={<div style={{padding: "30px", width: "100%"}}><h2 style={{margin: 0}}>Welcome to the admin panel</h2></div>} />
-        <Route exact path={`${path}/dashboard`} children={<div style={{padding: "30px", width: "100%"}}><h2 style={{margin: 0}}>Welcome to the admin panel</h2></div>} />
+        <Route exact path={path} children={Dashboard} />
+        <Route exact path={`${path}/dashboard`} children={Dashboard} />
         <Route exact path={`${path}/orders`} component={AdminOrdersNew} />
         <Route exact path={`${path}/categories`} component={CategoryList} />
         <Route exact path={`${path}/products`} component={ProductsList} />
