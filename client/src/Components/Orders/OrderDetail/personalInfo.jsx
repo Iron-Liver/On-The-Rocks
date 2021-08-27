@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, Paper, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
 import { Delete, Info, Edit, Email } from "@material-ui/icons";
-import jwt from 'jsonwebtoken'
+import { logOutUser } from "../../../Redux/Users/userActions";
+import verifyUser from "../../../Utils/verifyUser";
+import swal from "sweetalert";
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import "swiper/swiper.min.css";
@@ -76,11 +79,15 @@ const useStyles = makeStyles((theme) => ({
 
 const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
   const classes = useStyles();
+  const dispatch = useDispatch()
   const history = useHistory();
 
-  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null;
+  const localProfile = verifyUser();
+    if (localProfile?.hasOwnProperty("logout")) {
+        dispatch(logOutUser());
+        history.push("/");
+        swal("Session expired", "Please login", "warning");
+    }
 
   const [anchorEl, setAnchorEl] = useState(null);
 

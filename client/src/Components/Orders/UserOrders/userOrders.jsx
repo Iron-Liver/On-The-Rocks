@@ -2,7 +2,10 @@ import './userOrders.css'
 import React, { useState, useEffect } from "react";
 import Order from "./order";
 import axios from "axios";
-import jwt from 'jsonwebtoken'
+import { useDispatch } from "react-redux";
+import verifyUser from "../../../Utils/verifyUser";
+import swal from "sweetalert";
+import { logOutUser } from "../../../Redux/Users/userActions";
 import { useLocation, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
@@ -39,17 +42,25 @@ const UserOrders = () => {
   const [form, setForm] = useState(initialFilters);
   const [page, setPage] = useState(1);
 
+  const dispatch = useDispatch();
   const history = useHistory();
   let { userId } = useParams();
-  userId = parseInt(userId);
   const classes = useStyles();
+  userId = parseInt(userId);
+
+  const kick = () => {
+    dispatch(logOutUser());
+    history.push("/");
+    swal("Session expired", "Please login", "warning");
+};
 
   useEffect(() => {
     (async () => {
       try {
-        const localProfile = JSON.parse(localStorage.getItem('token')) ? 
-        jwt.verify(JSON.parse(localStorage.getItem('token')), 
-        process.env.REACT_APP_SECRET_KEY) : null
+        const localProfile = verifyUser();
+                if (localProfile?.hasOwnProperty("logout")) {
+                    kick();
+                }
         if(localProfile.id !== userId) {
           history.push("/");
         }
