@@ -345,7 +345,7 @@ const Filters = () => {
               fontWeight: 300
             }}
           >
-            700 - 750ml
+            700ml - 750ml
           </h4>
         </AccordionDetails>
         <AccordionDetails>

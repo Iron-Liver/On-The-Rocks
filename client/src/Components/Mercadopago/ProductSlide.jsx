@@ -2,21 +2,17 @@ import React from 'react';
 import './Checkout.css';
 
 const ProductSlide = ({ product }) => {
+  console.log(product)
+
   return (
     <div className="slide-product">
-      <div className="image-background">
-        <img src={product.product.image} alt={product.product.name} />
+      <div className="slide-info-grow">
+        <div className="image-background">
+          <img src={product.product.image} alt={product.product.name} />
+        </div>
+        <h2>{product.product.name}</h2>
       </div>
-      <h2>{product.product.name}</h2>
       <ul className="product-info-ul">
-        <li className="info-item-li">
-          <div className="info-item-title">
-            Category: 
-          </div>
-          <div>
-            {product.product.category}
-          </div>
-        </li>
         <li className="info-item-li">
           <div className="info-item-title">
             Brand: 
@@ -38,7 +34,16 @@ const ProductSlide = ({ product }) => {
             Price: 
           </div>
           <div>
-            $ {product.product.price.toFixed(2)} x {product.units}
+            {parseFloat(product.product.price).toFixed(2) > parseFloat(product.unitPrice).toFixed(2) ?
+              ( 
+                <>
+                  <del> ${parseFloat(product.product.price).toFixed(2)} </del>
+                  <strong> ${parseFloat(product.unitPrice).toFixed(2)}</strong> x {product.units}
+                </>
+              ) : (
+                <>${parseFloat(product.unitPrice).toFixed(2)} x {product.units}</>
+              )
+            }
           </div>
         </li>
         <li className="info-item-li">
@@ -46,7 +51,7 @@ const ProductSlide = ({ product }) => {
             Total:
           </div>
           <div>
-            $ {(product.product.price * product.units).toFixed(2)}
+            $ {(parseFloat(product.unitPrice) * parseInt(product.units)).toFixed(2)}
           </div>
         </li>
       </ul>

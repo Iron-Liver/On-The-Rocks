@@ -111,7 +111,7 @@ const OrderInfo = ({ order }) => {
               Payment method:
             </div>
             <div>
-              {order.paymentMethod}
+              {order.paymentMethod[0].toUpperCase() + order.paymentMethod.slice(1)}
             </div>
           </li>
           <li className="info-item-li">
@@ -169,13 +169,13 @@ const OrderInfo = ({ order }) => {
               id="panel1a-header"
             >
               {summaryExpanded ? (
-                <Typography variant="body2" className={classes.heading}>
+                <h4 className={classes.heading}>
                   Hide summary
-                </Typography>
+                </h4>
               ) : (
-                <Typography variant="body2" className={classes.heading}>
+                <h4 variant="body2" className={classes.heading}>
                   Summary ({order.order_products.length} products)
-                </Typography>
+                </h4>
               )}
             </AccordionSummary>
             {order.order_products &&
@@ -186,29 +186,27 @@ const OrderInfo = ({ order }) => {
                       className={classes.product}
                     >
                       <div style={{ flexGrow: "1" }}>
-                        <Typography variant="body2">
+                        <h4 className={classes.heading}>
                           {order.product.name}
-                        </Typography>
+                        </h4>
                       </div>
                       <div>
-                        <Typography variant="body2">
-                          {order.product.price > order.unitPrice ? (
+                        <Typography variant="body2" style={{paddingLeft: "2px", fontSize: "12px"}}>
+                          {parseFloat(order.product.price).toFixed(2) > parseFloat(order.unitPrice).toFixed(2) ? (
                             <>
-                              <Hidden smDown>
-                                <del> ${order.product.price} </del>
-                              </Hidden>
-                              <strong> ${order.unitPrice} </strong>
+                              <del style={{display: "inline-block"}}> ${parseFloat(order.product.price).toFixed(2)} </del>{" "}
+                              <strong style={{display: "inline-block"}}> ${parseFloat(order.unitPrice).toFixed(2)} </strong>
                             </>
                           ) : (
-                            <>${order.unitPrice / order.units} </>
+                            <span style={{display: "inline-block"}}>${(parseFloat(order.unitPrice)).toFixed(2)}</span>
                           )}
-                          x {order.units}
+                          {" "}<span style={{display: "inline-block"}}>x {order.units}</span>
                         </Typography>
                       </div>
                     </AccordionDetails>
                   ) : (
                     <AccordionDetails
-                      key={`${Math.random() * 9999}`}
+                      key={Math.random()}
                       className={classes.product}
                     >
                       <div style={{ flexGrow: "1" }}>

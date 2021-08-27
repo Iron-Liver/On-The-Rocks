@@ -87,6 +87,7 @@
 .admin-order-header {
   display: flex;
   width: 100%;
+  align-items: flex-start;
 }
 
 .admin-order-actions-responsive {
@@ -96,47 +97,3 @@
 .swiper-pagination-bullet {
   background: #372c2eb9 !important;
 }
-
-/* @media (max-width: 780px){
-  .admin-order-actions-responsive {
-    display: block;
-  }
-
-  .admin-order-info {
-    width: 100%;
-  }
-
-  .admin-order-products-responsive {
-    display: block
-  }
-
-  .admin-order-img-container {
-    display: none;
-  }
-
-  .admin-order-actions {
-    display: none;
-  }
-}
-
-@media (max-width: 1020px) and (min-width: 860px){
-  .admin-order-actions-responsive {
-    display: block;
-  }
-
-  .admin-order-info {
-    width: 100%;
-  }
-
-  .admin-order-products-responsive {
-    display: block
-  }
-
-  .admin-order-img-container {
-    display: none;
-  }
-
-  .admin-order-actions {
-    display: none;
-  }
-} */

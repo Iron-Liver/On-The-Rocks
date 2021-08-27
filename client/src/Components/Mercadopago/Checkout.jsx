@@ -55,8 +55,8 @@ const Checkout = ({ order, data, stock }) => {
         </div>
       </div>
       <div className="productview-wrapper">
-        <div className="swiper-wrap">
-          <Hidden smDown>
+        <Hidden smDown>
+          <div className="swiper-wrap">
             <Swiper 
               navigation={order.order_products.length > 1}
               mousewheel={true} 
@@ -68,24 +68,24 @@ const Checkout = ({ order, data, stock }) => {
                 </SwiperSlide>
               )}
             </Swiper>
-          </Hidden>
-          <Hidden mdUp>
-            <h2 style={{textAlign: "center", fontFamily: `"Heebo", sans-serif`}}>PRODUCTS</h2>
-            <Swiper
-              slidesPerView={2} 
-              spaceBetween={30} 
-              slidesPerGroup={2}
-              loopFillGroupWithBlank={true} 
-              pagination={true}
-            >
-              {order.order_products.map(product => 
-                <SwiperSlide key={Math.random() * 3}>
-                    <ProductSlideResponsive product={product} />
-                </SwiperSlide>
-              )}
-            </Swiper>
-          </Hidden>
-        </div>
+          </div>
+        </Hidden>
+        <Hidden mdUp>
+          <h2 style={{textAlign: "center", fontFamily: `"Heebo", sans-serif`}}>PRODUCTS</h2>
+          <Swiper
+            slidesPerView={2} 
+            spaceBetween={30} 
+            slidesPerGroup={2}
+            loopFillGroupWithBlank={true} 
+            pagination={true}
+          >
+            {order.order_products.map(product => 
+              <SwiperSlide key={Math.random() * 3}>
+                  <ProductSlideResponsive product={product} />
+              </SwiperSlide>
+            )}
+          </Swiper>
+        </Hidden>
       </div>
     </div>
   )
