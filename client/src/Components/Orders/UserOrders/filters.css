@@ -46,7 +46,7 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 457px) {
+@media (max-width: 468px) {
   .user-orders-sort-submit {
     flex-direction: column;
   }

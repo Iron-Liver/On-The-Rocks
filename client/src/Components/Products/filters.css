@@ -21,3 +21,11 @@
 .filter-accordion-details-cat-active h4 {
   font-weight: 300;
 }
+
+@media (max-width: 860px) {
+  .filter-accordion-details-cat:hover {
+    color: inherit;
+    background: inherit;
+    transition: all 100ms ease-in-out;
+  }
+}

@@ -44,12 +44,16 @@ export function loginUser(login) {
                 { email: login.email.toLowerCase(), password: login.password },
                 { withCredentials: true }
             );
-            const { id, email, isAdmin } = jwt.verify(
+            const { id, email, isAdmin, isDeleted} = jwt.verify(
                 token.data,
                 process.env.REACT_APP_SECRET_KEY
             );
-            localStorage.setItem("token", JSON.stringify(token.data));
-            dispatch({ type: LOGIN, payload: { id, email, isAdmin } });
+            if (decode(token.data).isDeleted) {
+                swal("You are banned.", "Contact us if you have a question about it.", "error")
+            }else{
+                localStorage.setItem("token", JSON.stringify(token.data));
+                dispatch({ type: LOGIN, payload: { id, email, isAdmin, isDeleted } });
+            }
         } catch (e) {
             swal(e.message, "An error has occurred", "error");
         }
@@ -116,8 +120,9 @@ export function logOutUser() {
             await localStorage.removeItem("cartItems");
             await localStorage.removeItem("shippingAddress");
             await localStorage.removeItem("wishListItems");
+            await localStorage.removeItem("coup")
+            await localStorage.removeItem("total")
             await axios.get(`/auth/logout`, { withCredentials: true });
-            window.location.replace(`${window.location.origin}`);
             dispatch({ type: LOGOUT });
         } catch (e) {
             console.log(e.message);
@@ -128,7 +133,9 @@ export function logOutUser() {
 export function resetPass(token, newPassword) {
     return async function (dispatch) {
         try {
-            await axios.post(`/auth/passwordreset`, { token, newPassword });
+            await axios.post(`/auth/passwordreset`, { token, newPassword }, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
         } catch (e) {
             console.log(e.message);
         }
@@ -141,8 +148,10 @@ export function allowAdmin(token) {
             const { data } = await axios.post(`/auth/admin`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            localStorage.setItem("2FA", JSON.stringify(data));
-            dispatch({ type: ADMIN_ALLOWED, payload: data });
+            if(data?.hasOwnProperty('success')){
+                localStorage.setItem("2FA", JSON.stringify(data));
+                dispatch({ type: ADMIN_ALLOWED, payload: data });
+            }
         } catch (e) {
             console.log(e.message);
         }

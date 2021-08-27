@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom"
 import { motion } from "framer-motion";
 import "./wheelOfCoupons.css";
 import win_audio from "./Wheel_Win.mp3";
@@ -8,16 +9,17 @@ import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
 import {createCoupon} from "../../Redux/Coupon/couponActions"
 import verifyUser from "../../Utils/verifyUser";
-import { logOutUser } from "../../Redux/Users/userActions";
 import swal from "sweetalert";
+import { logOutUser } from "../../Redux/Users/userActions";
 
 export const WheelOfCoupons = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
     const { coins } = useSelector((state) => state.userReducer);
     const [muted, setMuted] = React.useState(false);
@@ -200,10 +202,10 @@ export const WheelOfCoupons = () => {
                     </div>
                     <div className="buttonroullete">
                     <Button
-                    style={{color: '#e6e6d8', borderColor:'#e6e6d8', width:'max-content'}}
+                    style={{color: (!idle || !currentUser || coins < 1) ? 'grey' : '#e6e6d8', borderColor: (!idle || !currentUser || coins < 1) ? 'grey' : '#e6e6d8', width:'max-content'}}
                         className="button"
                         size="large"
-                        disabled={!idle || !currentUser}
+                        disabled={!idle || !currentUser || coins < 1}
                         variant="outlined"
                         type="button"
                         onClick={spin}

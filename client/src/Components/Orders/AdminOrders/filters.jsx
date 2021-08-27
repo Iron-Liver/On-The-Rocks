@@ -144,7 +144,7 @@ const Filters = ({ handleSubmit, handleChange, handleSort, handleReset, form }) 
             <option value="firstName-ASC">First Name Asc</option>
           </select>
         </label>
-        <div>
+        <div className="admin-orders-filters-actions">
             <CustomButton
               type="button"
               margin= "5px 10px 0 0"

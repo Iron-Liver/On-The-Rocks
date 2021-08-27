@@ -1,19 +1,12 @@
 import './MercadopagoHelp.css';
 import React from 'react'
-import { useParams, useLocation, Link } from 'react-router-dom'
-import swal from 'sweetalert';
-import { color } from '@material-ui/system';
+import { useParams, Link } from 'react-router-dom'
+
 
 
 const MercadopagoHelp = () => {
 
   const { status } = useParams();
-  const { search } = useLocation();
-  const query = new URLSearchParams(search);
-  const a = query.entries();
-  for(let i of a) {
-    console.log(i)
-  }
 
   if(status === "failure") {
     return (

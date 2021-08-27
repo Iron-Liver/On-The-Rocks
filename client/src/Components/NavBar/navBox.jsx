@@ -1,17 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Container, ButtonBase } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useLocation } from 'react-router'
 import { logOutUser } from '../../Redux/Users/userActions'
 import { VerifiedUser } from '@material-ui/icons'
 import { useDispatch } from 'react-redux'
+import swal from "sweetalert";
 
 
 
 export const NavBox = ({ solid }) => {
     
-    
+    const history = useHistory();
     const location = useLocation();
     const path = location.pathname === '/' ?  '#fff': '#372c2e';
     const useStyles = makeStyles((theme) => ({
@@ -66,9 +67,9 @@ export const NavBox = ({ solid }) => {
     const dispatch = useDispatch();
     const currentUser = VerifiedUser
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
 
     return (

@@ -1,9 +1,9 @@
 import './AdminSidePanel.css';
 import React, { useEffect } from 'react';
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
 import { useDispatch, useSelector } from 'react-redux';
 import { readUser, logOutUser } from '../../../Redux/Users/userActions';
+import verifyUser from '../../../Utils/verifyUser'
 import swal from 'sweetalert';
 
 const AdminSidePanel = () => {
@@ -12,9 +12,12 @@ const AdminSidePanel = () => {
   const history = useHistory();
   const user = useSelector(state => state.userReducer?.userDetail);
 
-  const localProfile = JSON.parse(localStorage.getItem('token')) ? 
-  jwt.verify(JSON.parse(localStorage.getItem('token')), 
-  process.env.REACT_APP_SECRET_KEY) : null
+  const localProfile = verifyUser();
+  if (localProfile?.hasOwnProperty("logout")) {
+      dispatch(logOutUser());
+      history.push("/");
+      swal("Session expired", "Please login", "warning");
+  }
 
   const userId = localProfile?.id 
 
@@ -27,7 +30,7 @@ const AdminSidePanel = () => {
   }, [dispatch, userId]);
 
   const logOut = () => {
-    dispatch(logOutUser());
+    dispatch(logOutUser())
     history.push("/");
   }
 

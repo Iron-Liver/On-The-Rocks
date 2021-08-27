@@ -23,9 +23,9 @@ export default function UserLogin() {
     const history = useHistory();
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
     const [input, setInput] = useState({
         email: "",

@@ -40,6 +40,13 @@
 
 
 @media (max-width: 800px){
+  .footerContainer1 .social ul{
+    width: max-content;
+  }
+   .footerContainer1 .social-contact-container{
+     display: flex;
+     justify-content: space-evenly;
+  }
   .footerContainer1 {
     height: max-content;
   }
@@ -49,18 +56,11 @@
     align-items: flex-start;
     align-content: flex-start;
   }
-  .footerContainer1 .social{
-    width: max-content;
-  }
-  .footerContainer1 .social-test h4{
-    width: max-content;
-    margin-left: 50px;
-  }
+
   .footerContainer1 .ContactContainer{
     display: flex;
     align-content: flex-start;
     padding:0;
-    width: max-content;
     margin-left: 25px;
     align-items: flex-start;
   }
@@ -80,8 +80,7 @@
     padding: 0;
   }
   .footerContainer1 .ContactContainer h4{
-    margin-right: 35px;
-    margin-bottom: 5px;
+
   }
   .footerfat .divisorFooter{
     height: max-content;
@@ -105,9 +104,6 @@
 
 
 .social {
-  
-  margin-bottom: 20px;
-  padding-left: 15px;
   text-decoration: none;
 }
 
@@ -117,8 +113,7 @@
   justify-content: center;
 }
 .social-test h4{
-  margin-bottom: 25px;
-  margin-left: 23px;
+  margin-left: 30px;
   color: rgb(230, 230, 208);
 
 }
@@ -129,6 +124,10 @@
 }
 
 .social-test {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  width: 100%;
   vertical-align: middle;
   text-align: center;
   font-size: 19px;
@@ -155,6 +154,7 @@
 
 
 .ContactContainer{
+  width: 100%;
 display: flex;
 align-items: center;
 flex-direction: column;
@@ -178,7 +178,7 @@ height: max-content;
   background-color: rgb(220, 208, 192);
 }
 .FMenu{
-  margin-top: 15px;
+  margin-top: 0;
   margin-bottom: 25px;
   display: flex;
   align-items: center;
@@ -195,9 +195,10 @@ height: max-content;
 
 .about-us-footer{
   width: 200px;
-  height: 100%;
+  height: 105px;
   display: flex;
   flex-direction: column;
+
 }
 
 .footerlinks-container{
@@ -205,5 +206,24 @@ height: max-content;
   flex-direction: column;
 }
 
+.iconfooter{
+  width: max-content;
+}
 
+.about-icon{
+  width: 100%;
+  display: flex;
+  justify-content:space-evenly;
+  align-content: center;
+  align-items: center;
 
+}
+
+.social-contact-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+}

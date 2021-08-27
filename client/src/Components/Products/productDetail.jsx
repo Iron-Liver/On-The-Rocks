@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { useHistory } from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -184,6 +185,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetail = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = verifyUser();
     const { wishlists } = useSelector((state) => state.wishlistReducer);
@@ -194,9 +196,9 @@ const ProductDetail = () => {
             ?.hasOwnProperty("productId")
     );
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
   
     const [heartIcon, setHeartIcon] = React.useState(false);
