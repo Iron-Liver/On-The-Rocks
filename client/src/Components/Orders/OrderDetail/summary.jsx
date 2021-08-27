@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom"
 import {
     Grid,
     Paper,
@@ -15,6 +16,7 @@ import {
 import { ExpandMore, Payment, Help } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import verifyUser from "../../../Utils/verifyUser";
+import swal from "sweetalert";
 import { logOutUser } from "../../../Redux/Users/userActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -65,13 +67,14 @@ const message = {
 };
 
 const Summary = ({ order, orderStatus }) => {
-    const [summaryExpanded, setSummaryExpanded] = useState(false);
+    const history = useHistory();
     const dispatch = useDispatch();
+    const [summaryExpanded, setSummaryExpanded] = useState(false);
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
 
     const toggleAccordionSummary = () => {

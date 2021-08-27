@@ -116,8 +116,9 @@ export function logOutUser() {
             await localStorage.removeItem("cartItems");
             await localStorage.removeItem("shippingAddress");
             await localStorage.removeItem("wishListItems");
+            await localStorage.removeItem("coup")
+            await localStorage.removeItem("total")
             await axios.get(`/auth/logout`, { withCredentials: true });
-            window.location.replace(`${window.location.origin}`);
             dispatch({ type: LOGOUT });
         } catch (e) {
             console.log(e.message);
@@ -141,8 +142,10 @@ export function allowAdmin(token) {
             const { data } = await axios.post(`/auth/admin`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            localStorage.setItem("2FA", JSON.stringify(data));
-            dispatch({ type: ADMIN_ALLOWED, payload: data });
+            if(data?.hasOwnProperty('success')){
+                localStorage.setItem("2FA", JSON.stringify(data));
+                dispatch({ type: ADMIN_ALLOWED, payload: data });
+            }
         } catch (e) {
             console.log(e.message);
         }

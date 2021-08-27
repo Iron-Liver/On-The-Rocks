@@ -6,16 +6,16 @@ import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
 
 export const Admin2FA = () => {
+    const history = useHistory();
     const token = new URLSearchParams(window.location.search).get("token");
     localStorage.setItem("token", JSON.stringify(token));
     const currentUser = verifyUser();
     const dispatch = useDispatch();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
-    const history = useHistory();
 
     useEffect(() => {
         if (typeof currentUser?.Authenticated !== "undefined") {

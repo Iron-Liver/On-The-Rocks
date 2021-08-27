@@ -124,7 +124,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
     const userId = localProfile?.id;
 
     const logOut = () => {
-        dispatch(logOutUser());
+        dispatch(logOutUser())
     };
 
     const logOutAlert = () => {

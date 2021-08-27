@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom"
 import { motion } from "framer-motion";
 import "./wheelOfCoupons.css";
 import win_audio from "./Wheel_Win.mp3";
@@ -8,15 +9,17 @@ import { Button } from "@material-ui/core";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
 import {createCoupon} from "../../Redux/Coupon/couponActions"
 import verifyUser from "../../Utils/verifyUser";
+import swal from "sweetalert";
 import { logOutUser } from "../../Redux/Users/userActions";
 
 export const WheelOfCoupons = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = verifyUser();
     if (currentUser?.hasOwnProperty("logout")) {
-        dispatch(logOutUser());
-        window.location.replace(`${window.location.origin}/login`);
-        alert("please login");
+        dispatch(logOutUser())
+        history.push('/')
+        swal("Session expired","Please login","warning")
     }
     const { coins } = useSelector((state) => state.userReducer);
     const [muted, setMuted] = React.useState(false);
