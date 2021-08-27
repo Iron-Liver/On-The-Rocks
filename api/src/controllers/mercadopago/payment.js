@@ -79,8 +79,10 @@ module.exports = async (req, res, next) => {
       const user = await User.findOne({
         where: { id : userId },
       });
-
-      user.coins ++;
+      console.log('COIN TEST ---------------')
+      console.log(user);
+      user.coins += 1;
+      console.log(user.coins);
       
       if(order.status !== "created" && order.status !== "completed") {
         transporter.sendMail({
