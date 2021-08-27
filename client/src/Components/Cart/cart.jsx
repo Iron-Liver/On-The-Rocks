@@ -126,11 +126,7 @@ export function Cart() {
       } else {
         total = subTotal.toFixed(2)
       }      
-     
-    console.log("tot", total)
-    console.log("sub", subTotal)
-    
-    
+
     return (
         <CardContent className={classes.content}>
          {(state?.length > 0) ?( 
