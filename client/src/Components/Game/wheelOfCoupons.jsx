@@ -102,7 +102,6 @@ export const WheelOfCoupons = () => {
         luck <= 95 ? new Audio(win_audio).play() : new Audio(lose_audio).play()
     };
     const addCoupon = (discount) => {
-        //Here is where i would add a coupon to user but we dont have any coupon system yet
         const coupon = {
             code: `WHEEL${discount}`,
             discount: discount / 100,
@@ -116,32 +115,28 @@ export const WheelOfCoupons = () => {
     const spin = () => {
         dispatch(removeCoin(currentUser?.id));
         const discount = generateAward();
+        if(discount) {
+          addCoupon(discount);
+        }
         if (!muted) playAudio(discount);
         setState(true);
         setIdle(false);
         setTimeout(async () => {
             if (discount) {
-                // swal(`Congratulations! You got a %${discount} discount!`);
                 swal({
                     title: "Congratulations!",
                     text: `You got a %${discount} coupon discount! 🎟️ `,
                     icon: 'success',
                     buttons:"Continue",
-                })
-                addCoupon(discount);
-                setState(false);
-                setDegrees(0);
-                setTimeout(() => {
-                    setIdle(true);
-                }, 2000);
+                });
             } else {
-                alert("Thats so sad! Maybe you ll get it another time");
-                setState(false);
-                setDegrees(0);
-                setTimeout(() => {
-                    setIdle(true);
-                }, 2000);
+                swal("Thats so sad! Maybe you'll get it next time");
             }
+            setState(false);
+            setDegrees(0);
+            setTimeout(() => {
+                setIdle(true);
+            }, 2000);
         }, 10000);
     };
     return (

@@ -304,7 +304,7 @@ export const MenuList = ({ handleDrawerMenu }) => {
                 <Divider />
 
                 <Link
-                    to="/OnTheRocks"
+                    to="/aboutus"
                     style={{ textDecoration: "none", color: "black" }}
                 >
                     <ListItem button>
