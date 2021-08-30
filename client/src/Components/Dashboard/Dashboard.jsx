@@ -94,13 +94,13 @@ export default function Dashboard() {
             borderWidth: 1
             }],
           }}
-          height={400}
-          width={600}
+       
           options={{
             maintanAspectRatio: false,
           }}
         />
         <Pie
+
          className="pie2"
           data= {{
             labels: ['Users'],
@@ -124,8 +124,7 @@ export default function Dashboard() {
             borderWidth: 1
             }],
           }}
-          height={400}
-          width={600}
+      
           options={{
             maintanAspectRatio: false,
           }}
