@@ -1,5 +1,5 @@
 import './filters.css';
-import { useEffect, React } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 import { ExpandMore } from '@material-ui/icons'
@@ -19,10 +19,11 @@ const Filters = () => {
 
   const handleCategory = (name) => {
     query.set('category', name);
-    history.push({search: query.toString()})
+    query.delete('page');
+    history.push({search: query.toString()});
   };
 
-  const handleOnSale = (e) => {
+  const handleOnSale = () => {
     if(query.get('onSale')) {
       query.delete('onSale');
       query.delete('page');
@@ -41,18 +42,22 @@ const Filters = () => {
         filters.splice(filters.indexOf(e.target.name), 1);
         if(!filters.length) {
           query.delete('price');
+          query.delete('page');
           return history.push({search: query.toString()});
         }
         
         query.set('price', JSON.stringify(filters));
+        query.delete('page');
         history.push({search: query.toString()});
       } else {
         filters.push(e.target.name);
         query.set('price', JSON.stringify(filters));
+        query.delete('page');
         history.push({search: query.toString()});
       }
     } else {
-      query.set('price', JSON.stringify([e.target.name]))
+      query.set('price', JSON.stringify([e.target.name]));
+      query.delete('page');
       history.push({search: query.toString()})
     }
   }
@@ -64,19 +69,23 @@ const Filters = () => {
         filters.splice(filters.indexOf(e.target.name), 1);
         if(!filters.length) {
           query.delete('size');
+          query.delete('page');
           return history.push({search: query.toString()});
         }
         
         query.set('size', JSON.stringify(filters));
+        query.delete('page');
         history.push({search: query.toString()});
       } else {
         filters.push(e.target.name);
         query.set('size', JSON.stringify(filters));
+        query.delete('page');
         history.push({search: query.toString()});
       }
     } else {
-      query.set('size', JSON.stringify([e.target.name]))
-      history.push({search: query.toString()})
+      query.set('size', JSON.stringify([e.target.name]));
+      query.delete('page');
+      history.push({search: query.toString()});
     }
   }
 

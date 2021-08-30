@@ -7,7 +7,6 @@ module.exports = async (req, res, next) => {
         const user = await User.findOne({
             where: { id },
         });
-        console.log(coins)
         coins === -1 ? user.coins -= 1 : user.coins += 1;
         await User.update({ ...user, coins: user.coins}, { where: { id } });
         return res.json({ success: true }).status(200);

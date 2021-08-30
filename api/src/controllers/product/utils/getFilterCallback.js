@@ -21,41 +21,37 @@ module.exports = (name) => {
       }
     },
     U200ml: (product) => {
-      const size = parseFloat(product.size.split(" ")[0])
+      const size = parseFloat(product.size.split(" ")[0]);
       if(size <= 200) {
         return true;
       }
     },
     U500ml: (product) => {
-      const size = parseFloat(product.size.split(" ")[0])
+      const size = parseFloat(product.size.split(" ")[0]);
       if(size >= 200 && size <= 500) {
         return true;
       }
     },
     U700ml: (product) => {
-      const size = parseFloat(product.size.split(" ")[0])
+      const size = parseFloat(product.size.split(" ")[0]);
       if(size >= 500 && size <= 700) {
         return true;
       }
     },
     U750ml: (product) => {
-      const size = parseFloat(product.size.split(" ")[0])
+      const size = parseFloat(product.size.split(" ")[0]);
       if(size >= 700 && size <= 750) {
         return true;
       }
     },
     A750ml: (product) => {
-      const size = parseFloat(product.size.split(" ")[0])
-      if(size >= 750) {
+      const size = parseFloat(product.size.split(" ")[0]);
+      if(size > 750) {
         return true;
       }
     }
-  }
+  };
 
-  if(cbs[name]) {
-    return cbs[name]
-  } else {
-    return () => true
-  }
+  return cbs[name] ? cbs[name] : () => true;
   
 };

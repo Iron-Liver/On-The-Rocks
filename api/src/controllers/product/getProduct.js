@@ -1,5 +1,6 @@
 const { Product, Category } = require("../../db");
 const getFilterCallback = require("./utils/getFilterCallback");
+const getSortCallback = require("./utils/getSortCallback");
 
 module.exports = async (req, res, next) => {
 
@@ -14,88 +15,67 @@ module.exports = async (req, res, next) => {
           attributes: {
               include: ['name'],
               exclude: ['createdAt', 'updatedAt']
-          },
-          through: {
-              attributes: []
           }
         }
-      })
+      });
 
       return res.status(200).send(product);
     }
 
     const [ sort, type ] = orderBy.split("-");
 
-    const query = {
-      include: [Category]
-    }
+    const query = {include: [Category]};
 
     let products = await Product.findAll(query);
 
-    if(sort === "size") {
-      products = products.sort((a, b) => {
-        if(parseInt(a.size.split(" ")[0]) > parseInt(b.size.split(" ")[0])) {
-          return type === "ASC" ? 1 : -1
-        } 
-        if(parseInt(a.size.split(" ")[0]) < parseInt(b.size.split(" ")[0])) {
-          return type === "ASC" ? -1 : 1
-        }
-        return 0
-      })
-    }
-
-    if(sort === "price") {
-      products = products.sort((a, b) => {
-        if((a.onSale ? a.onSale : a.price) > (b.onSale ? b.onSale : b.price)) {
-          return type === "ASC" ? 1 : -1
-        } 
-
-        if((a.onSale ? a.onSale : a.price) < (b.onSale ? b.onSale : b.price)) {
-          return type === "ASC" ? -1 : 1
-        }
-
-        return 0
-      })
+    if(sort) {
+      products = products.sort(getSortCallback(sort, type));
     }
     
     let filtered = products;
 
-    if(filterBy.category) {
-      if(filterBy.category !== "all") {
-        filtered = filtered.filter(product => {
-          return product.categories.some(category => category.name === filterBy.category)   
-        })
-      }
-    }
+    const filters = Object.entries(filterBy);
 
-    if(filterBy.onSale && filterBy.onSale === "_") {
+    if(filters.length) {
       filtered = filtered.filter(product => {
-        return product.onSale !== null
-      })
-    }
+        for(filter in filters) {
+          if(filters[filter][0] === "onSale" && filters[filter][1] === "_") {
+            if(product.onSale === null) {
+              return false;
+            } 
+          }
 
-    if(filterBy.name) {
-      filtered = filtered.filter(product => {
-        const string = filterBy.name.toLowerCase();
-        return product.name.toLowerCase().includes(string);
-      })
-    }
+          if(filters[filter][0] === "category") {
+            if(filters[filter][1] !== "all") {
+              if(!product.categories.some(category => category.name === filters[filter][1])) {
+                return false;
+              }   
+            }
+          }
 
-    if(filterBy.price && filterBy.price.length) {
-      filtered = filtered.filter(product => {
-        for(filter of filterBy.price) {
-          if(getFilterCallback(filter)(product) === true) return true
+          if(filters[filter][0] === "name") {
+            const string = filters[filter][1].toLowerCase();
+            if(!product.name.toLowerCase().includes(string)) {
+              return false;
+            }
+          }
+
+          if(filters[filter][0] === "size" || filters[filter][0] === "price" ) {
+            let match = null;
+            for(param of filters[filter][1]) {
+              if(getFilterCallback(param)(product)) {
+                match = true;
+                break;
+              } else {
+                match = false;
+              }  
+            }
+            if(match === false) {
+              return false;
+            } 
+          }
         }
-        return false;
-      })
-    }
-
-    if(filterBy.size && filterBy.size.length) {
-      filtered = filtered.filter(product => {
-        for(filter of filterBy.size) {
-          if(getFilterCallback(filter)(product) === true) return true
-        }
-        return false;
+        return true;
       })
     }
  
@@ -106,7 +86,7 @@ module.exports = async (req, res, next) => {
     }
     
     if(page < 1) {
-      page = 1
+      page = 1;
     }
     
     const from = itemsPerPage * page - itemsPerPage;
@@ -122,9 +102,7 @@ module.exports = async (req, res, next) => {
       total,
       itemsPerPage,
       data: pageProducts,
-      orderBy: {
-        [sort]: type
-      },
+      orderBy: {[sort]: type},
       filters: filterBy ? filterBy : false
     }; 
 

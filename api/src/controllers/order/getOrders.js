@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
         "date"
       ],
       order: [[sort, type]]
-    }
+    };
 
     if(userId) {
       query.where = {
@@ -61,7 +61,7 @@ module.exports = async (req, res, next) => {
     }
 
     if(page < 1) {
-      page = 1
+      page = 1;
     }
     
     const from = itemsPerPage * page - itemsPerPage;
@@ -77,9 +77,7 @@ module.exports = async (req, res, next) => {
       total,
       itemsPerPage,
       data: pageOrders,
-      orderBy: {
-        [sort]: type
-      },
+      orderBy: {[sort]: type},
       filters: filterBy ? filterBy : false
     }; 
 

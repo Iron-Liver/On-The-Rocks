@@ -5,7 +5,7 @@ import CreateOrder from "../Orders/CreateOrder/createOrder";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { getCoupons } from "../../Redux/Coupon/couponActions";
 import "./cart.css";
 import verifyUser from "../../Utils/verifyUser";
@@ -137,7 +137,11 @@ export function Cart() {
                             key={e.id}
                         >
                             <div style={{ display: "flex", alignItems: "flex-start" }}>
-                                <h4 style={{ flexGrow: 1 }}>{e.name}</h4>
+                                  <h4 style={{ flexGrow: 1 }}>
+                                    <Link to={`/products/${e.id}`} style={{textDecoration: "none", color: "black"}}>
+                                      {e.name}
+                                    </Link>
+                                  </h4>
                                 <IconButton
                                     aria-label="delete"
                                     className={classes.margin}
@@ -275,7 +279,7 @@ export function Cart() {
                             )}
                         </div>
                     </div>
-                    {parseFloat(total).toFixed(2) < parseFloat(subTotal).toFixed(2) ? (
+                    {parseFloat(total) < parseFloat(subTotal) ? (
                         <div className={classes.box}>
                             {cupon ? (
                                 <div>

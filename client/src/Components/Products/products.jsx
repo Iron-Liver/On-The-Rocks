@@ -71,6 +71,7 @@ const Products = () => {
         return;
       }
       query.set('order', e.target.value);
+      query.delete('page');
       history.push({search: query.toString()})
     }
     
@@ -152,7 +153,7 @@ const Products = () => {
                             <h4>No results found</h4>
                           )
                         ) : (
-                          <div>
+                          <div className="products-loader-container">
                             <CircularProgress />
                           </div>
                         )}
