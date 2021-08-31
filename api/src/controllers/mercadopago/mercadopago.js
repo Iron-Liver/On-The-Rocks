@@ -7,6 +7,7 @@ module.exports = async (req, res, next) => {
   const { orderId } = req.params;
 
   try {
+    //gets id and cart of current order
     const { id, order_products: items } = await Order.findOne({
       where: {
         id: parseInt(orderId)
@@ -22,19 +23,24 @@ module.exports = async (req, res, next) => {
       }]
     });
 
+    //formats the cart for Mercadopago's preference needs
     const items_mp = items.map(item => {
-    return {
-      title: item.product.name,
-      unit_price: item.unitPrice,
-      quantity: item.units
-    }
+      return {
+        title: item.product.name,
+        unit_price: item.unitPrice,
+        quantity: item.units
+      }
     });
 
+    //creates the preference object with all necessary data
     const preference = {
       items: items_mp,
       external_reference: `${id}`,
       payment_methods: {
-        installments: 3
+        installments: 3,
+        excluded_payment_methods: [{
+          id: "atm"
+        }]
       },
       back_urls: {
         success: `${FRONT}/roulette`,
@@ -45,8 +51,13 @@ module.exports = async (req, res, next) => {
       notification_url: `${BACK}/mercadopago/webhook?source_news=webhooks`
     }
 
-    const response = await mercadopago.preferences.create(preference)
-    global.id = response.body.id;
+    //sends a POST request to Mercadopago's API with the preference to be created
+    const response = await mercadopago.preferences.create(preference);
+    /*
+      obtains the unique payment identifier provided by Mercadopago 
+      to send to the client to be assigned to the payment step 
+    */
+    const paymentId = response.body.id;
 
     await Order.update({
       status: "pending"
@@ -56,7 +67,8 @@ module.exports = async (req, res, next) => {
       }
     });
 
-    res.status(200).send({id: global.id});
+    //sends id back to client
+    res.status(200).send({id: paymentId});
   } catch (err) {
     next(err);
     return res.status(409).send({error: err.message})

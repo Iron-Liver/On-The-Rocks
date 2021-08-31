@@ -492,7 +492,355 @@ const productsMockUp = async () => {
         })
         gangstarVodka.addCategories([9])
 
+        const jackDaniels = await Product.create({
+            name: "Jack Daniel's Old No.7 With Gift Box Tennessee Whiskey 1L",
+            description: "This is the soul of American whiskey. Its distinct and unique taste comes from refining mellowing the freshly distilled whiskey drop by drop through 10 feet of sugar maple charcoal.",
+            size: "1000 mL",
+            brand: "Jack Daniels",
+            sku: "a41",
+            price: 64.99,
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jack-daniels-gb_720x.jpg?v=1615454485",
+            stock: 10
+        });
+        jackDaniels.addCategories([4])
 
+        const hennessyXXO = await Product.create({
+            name: "Hennessy XXO Cognac 1L",
+            description: "First created in 1870 alongside Hennessy X.O, Hennessy X.X.O widens the scope of possibilities through the selection and maturation of eaux-de-vie with higher potential. In 2018, our Master Blender recreates Hennessy X.X.O, a blend assembling a powerful structure and an aerial fineness.",
+            size: "1000 mL",
+            brand: "Hennessy",
+            sku: "a42",
+            price: 879.99,
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-hennessy-xxo-1_720x.jpg?v=1579726852",
+            stock: 10
+        })
+        hennessyXXO.addCategories([7])
+
+        const donJulioAnejo = await Product.create({
+            name: "Don Julio Anejo Tequila 700mL",
+            description: "A testament to Don Julio’s patience and determination for ideal quality, Tequila Don Julio Añejo is the culmination of distinct rich flavours of agave balanced with the perfect amount of wood influence.",
+            size: "700 mL",
+            brand: "Don Julio",
+            sku: "a43",
+            price: 99.99 ,
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-don-julio-anejo_720x.jpg?v=1598687321",
+            stock: 10
+        })
+        donJulioAnejo.addCategories([6])
+
+        const johnnieWalker = await Product.create({
+            name: "Johnnie Walker Blue Label Blended Scotch Whisky 700mL",
+            description: "Johnnie Walker Blue Label is the most highly sought after of the Johnnie Walker range, a whisky of superior blending and well-earned distinction. The very definition of rarity, Johnnie Walker Blue Label is renowned for its divine blend of the world's finest and scarcest whiskies. Rare casks are hand-selected and blended by Johnnie Walker's master distiller; chosen for their superlative, unparalleled quality and outstanding palates.",
+            size: "700 mL",
+            brand: "Johnnie Walker",
+            sku: "a44",
+            price: 214.99,
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-blue-label_aba6150d-8275-46c4-a586-12a31b28d698_720x.jpg?v=1608673679",
+            stock: 10
+        })
+        johnnieWalker.addCategories([4])
+
+        const royalSalute = await Product.create({
+            name: "Royal Salute 32 Year Old Union Of The Crown Blended Scotch Whisky 500mL",
+            description: "Royal Salute 32 Year Old celebrates the Union of the Crown, which saw the unification of Ireland, Scotland and England under the British Monarchy. An exquisite blend of hand-selected single malt and grain whiskies aged for a minimum of 32 years, it is presented in a magnificent porcelain flagon with a unique glaze.",
+            size: "500 mL",
+            brand: "Royal Salute",
+            sku: "a45",
+            price: 699.99,
+            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-royal-salute-32-union-crown_720x.jpg?v=1600932272",
+            stock: 10
+        })
+        royalSalute.addCategories([4])
+
+        const casaCanevel = await Product.create({
+          name: "Casa Canevel Prosecco DOC Extra Dry 750mL",
+          description: "Sparkling wine with a lively mousse and fresh aromas of fruit and flowers. Delicate but firm on the palate with good acidity and long-lasting aromas that are reminiscent of the nose.",
+          size: "750 mL",
+          brand: "Casa Canavel",
+          sku: "a46",
+          price: 19.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-casa-canavel-prosecco_720x.jpg?v=1628230188",
+          stock: 10
+      })
+      casaCanevel.addCategories([1])
+
+      const moetNChandon = await Product.create({
+          name: "Moët & Chandon Brut Impérial Champagne NV 750mL",
+          description: "First created in 1869, Moët Impérial embodies the unique Moët & Chandon style that is bright in fruit with a seductive palate and elegant maturity.",
+          size: "750 mL",
+          brand: "Moët & Chandon",
+          sku: "a47",
+          price: 60.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-moet-chandon-imperial-bottle_720x.jpg?v=1613885037",
+          stock: 10
+      })
+      moetNChandon.addCategories([1])
+
+      const taittinger = await Product.create({
+          name: "Taittinger Brut Reserve NV Champagne 750mL",
+          description: "Taittinger Brut Réserve is made from 40 % Chardonnay, 35% Pinot Noir and 25% Pinot Meunier, using perfectly matured grapes harvested from over 35 different vineyards. This subtle blend results in a light, elegant and balanced champagne.", 
+          size: "750 mL",
+          brand: "Tattinger",
+          sku: "a48",
+          price: 64.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-tattinger-brut-reserve_720x.jpg?v=1619509205",
+          stock: 10
+      })
+      taittinger.addCategories([1])
+
+      const penfolds = await Product.create({
+          name: "Penfolds Lot 518 Spirited Wine with Baijiu Shiraz 750mL",
+          description: "Curiosity led Penfolds to break the conventions of traditional winemaking from the very beginning; to experiment and innovate in order to create the unforgettable. Lot. 518 Spirited Wine with Baijiu, respects that legacy in true Penfolds style. A rich, complex, full-bodied hybrid, as floral and fruity notes of the Baijiu meet the bold signature style of Penfolds Fortified Shiraz.", 
+          size: "750 mL",
+          brand: "Penfolds",
+          sku: "a49",
+          price: 144.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-penfolds-lot-518-baiju_720x.jpg?v=1622700878",
+          stock: 10
+      })
+      penfolds.addCategories([2])
+
+      const penfoldsBin = await Product.create({
+          name: "Penfolds Bin 389 Cabernet Shiraz 2017 750mL",
+          description: "Bin 389 was often referred to as `Baby Grange', in part because components of the wine are matured in the same barrels that held the previous vintage of Grange. First made in 1960 by the legendary Max Schubert, this was the wine that helped forge Penfolds reputation with red wine drinkers by combining the structure of cabernet sauvignon with the richness of Shiraz.", 
+          size: "750 mL",
+          brand: "Penfolds",
+          sku: "a50",
+          price: 114.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-penfolds-bin-389-2017_720x.jpg?v=1623043498",
+          stock: 10
+      })
+      penfoldsBin.addCategories([2])
+
+      const vegaSicilia = await Product.create({
+          name: "Vega Sicilia Unico 2006 Ribera del Duero 750mL",
+          description: "Bin 389 was often referred to as `Baby Grange', in part because components of the wine are matured in the same barrels that held the previous vintage of Grange. First made in 1960 by the legendary Max Schubert, this was the wine that helped forge Penfolds reputation with red wine drinkers by combining the structure of cabernet sauvignon with the richness of Shiraz.", 
+          size: "750 mL",
+          brand: "Vega Sicilia",
+          sku: "a51",
+          price: 499.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-vega-sicilia-unico-2006_720x.jpg?v=1622701522",
+          stock: 10
+      })
+      vegaSicilia.addCategories([2])
+
+      const cinzanoBianco = await Product.create({
+          name: "Cinzano Bianco Vermouth 1L",
+          description: "Cinzano Bianco is a blend of high quality white wine and essences of herbs and spices, creating a delicate and balanced refreshing drink with a sweetness on the finish.", 
+          size: "1000 mL",
+          brand: "Cinzano",
+          sku: "a52",
+          price: 13.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-cinzano-bianco_720x.jpg?v=1579168067",
+          stock: 10
+      })
+      cinzanoBianco.addCategories([3])
+
+      const royalDragonElite = await Product.create({
+          name: "Royal Dragon Elite Passionfruit Flavoured Vodka 700mL",
+          description: "Introducing the most tantalising and unique flavoured collection of its time. Royal Dragon have carefully sourced products from trusted suppliers around the world, sampling every fruit, bean, and nut to compliment our award-winning vodka.", 
+          size: "700 mL",
+          brand: "Royal Dragon",
+          sku: "a53",
+          price: 69.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-royal-dragon-passionfruit-vodka_720x.jpg?v=1613035374",
+          stock: 10
+      })
+      royalDragonElite.addCategories([5])
+
+      const patronXoCafe = await Product.create({
+          name: "Patron XO Cafe Incendio 750mL",
+          description: "Patrón XO Café Incendio is a perfect combination of Mexican Arbol Chile with rich decadent essence of Criollo chocolate and tequila. There is nothing like it, handcrafted with great attention to detail and quality.", 
+          size: "750 mL",
+          brand: "Patron",
+          sku: "a54",
+          price: 54.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-patron-incendio_720x.jpg?v=1578619602",
+          stock: 10
+      })
+      patronXoCafe.addCategories([6])
+
+      const caboWabo = await Product.create({
+          name: "Cabo Wabo Reposado Tequila 750mL",
+          description: "Patrón XO Café Incendio is a perfect combination of Mexican Arbol Chile with rich decadent essence of Criollo chocolate and tequila. There is nothing like it, handcrafted with great attention to detail and quality.", 
+          size: "750 mL",
+          brand: "Cabo Wabo",
+          sku: "a55",
+          price: 89.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-cabo-wabo-reposado-tequila_720x.jpg?v=1629512621",
+          stock: 10
+      })
+      caboWabo.addCategories([6])
+
+      const grandMarnier = await Product.create({
+          name: "Grand Marnier Cuvee du Centenaire Liqueur 700mL",
+          description: "Cuvée du Centenaire is an exceptional blend of refined XO cognacs from the best Crus of Grande and Petite Champagne combined with the essence of wild tropical oranges. First introduced in 1927 to commemorate the 100th anniversary of our Maison’s founding; we now proudly unveil a modern presentation of our classic packaging.", 
+          size: "700 mL",
+          brand: "Grand Marnier",
+          sku: "a56",
+          price: 199.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-grand-marnier-100-cuvee_720x.jpg?v=1628908492",
+          stock: 10
+      })
+      grandMarnier.addCategories([7])
+
+      const alizeRed = await Product.create({
+          name: "Alizé Red Cognac Liqueur 750mL",
+          description: "French Cognac blended with passionfruit juice and cranberries.", 
+          size: "750 mL",
+          brand: "Alizé",
+          sku: "a57",
+          price: 37.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-alize-red-750_720x.jpg?v=1559565943",
+          stock: 10
+      })
+      alizeRed.addCategories([7])
+
+      const kraken94 = await Product.create({
+          name: "Kraken 94 Proof 47% ABV Black Spiced Rum 750mL",
+          description: "The Kraken Black Spiced Rum is promising to cause a 'perfect storm' in the rum category. An aged Caribbean rum enriched with exotic spices including cinnamon, ginger and clove. Strong, rich, black, smooth 47% ABV rum packaged in a distinctive 750mL Victorian 'flagon-style' clear glass bottle. The brand takes its name from a legendary, mythical sea beast - a squid of monstrous size said to grow up to 100ft long - which attacks ships and devours their crews.", 
+          size: "750 mL",
+          brand: "The Kraken",
+          sku: "a58",
+          price: 54.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-kraken-94-proof_720x.jpg?v=1594449941",
+          stock: 10
+      })
+      kraken94.addCategories([8])
+
+      const botranNCo = await Product.create({
+          name: "Botran & Co Gran Reserva Especial Ron 75th Anniversary Gift Pack 500mL + 2 x 50mL Samples",
+          description: "Special edition limited by the 75-year history of the distilleries in Guatemala of the Ron Botran accompanies this luxury case a bottle numbered Ron Botran 75th anniversary, a unit of rum and citrus flavour 50mL, a unit of flavoured rum Species, a pipette and booklet with the history of Botran House.", 
+          size: "500 mL",
+          brand: "Botran & Co",
+          sku: "a59",
+          price: 199.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-botran-co-75th-anniversary_720x.jpg?v=1614390103",
+          stock: 10
+      })
+      botranNCo.addCategories([8])
+
+      const diplomaticoReserva = await Product.create({
+          name: "Diplomatico Reserva Exclusiva Venezuelan Dark Rum 750mL",
+          description: "Reserva Exclusiva is Diplomatico Rum's flagship expression. It is an elegant and complex sipping rum, marrying a unique body with excellent balance. Produced with the best quality sugar cane honeys and molasses, and distilled in copper pot stills, small batch kettle and columns stills, then aged in American and Spanish oak casks for up to 12 years.", 
+          size: "750 mL",
+          brand: "Diplomatico",
+          sku: "a60",
+          price: 98.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-diplomatico-reserva-exclusiva_720x.jpg?v=1602373835",
+          stock: 10
+      })
+      diplomaticoReserva.addCategories([8])
+
+      const crownRoyal = await Product.create({
+          name: "Crown Royal Northern Harvest Rye Blended Canadian Whisky 1L",
+          description: "Crown Royal Northern Harvest Rye Blended Canadian Whisky is the special new whisky from the makers of the top-selling Canadian whisky of all time. Jim Murray chose this rye whisky as his winner for his 2016 Whisky Bible. This spicy, creamy whisky makes you stand up and pay attention to the power of rye!.", 
+          size: "1000 mL",
+          brand: "Crown Royal",
+          sku: "a61",
+          price: 94.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-crown-royal-harvest-1l_720x.jpg?v=1574481452",
+          stock: 10
+      })
+      crownRoyal.addCategories([9])
+
+      const Brockmans = await Product.create({
+          name: "Brockmans Premium Gin 700mL",
+          description: "Infused with exquisite botanicals from 100% neutral grain spirit. A unique blend of botanicals with subtle notes of berry give an intensely smooth taste, to this beautifully made Gin.", 
+          size: "700 mL",
+          brand: "Brockmans",
+          sku: "a62",
+          price: 79.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-brockmans-gin_720x.jpg?v=1598682667",
+          stock: 10
+      })
+      Brockmans.addCategories([10])
+
+      const Aviation = await Product.create({
+          name: "Aviation American Gin 750mL",
+          description: "Aviation Gin is a completely unique and distinguished gin from Portland, Oregon. Based on a `Botanical Democracy' Aviation Gin has a balance of flavours rather than being dictated by juniper.", 
+          size: "750 mL",
+          brand: "Aviation",
+          sku: "a63",
+          price: 74.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-aviation-gin_720x.jpg?v=1618618300",
+          stock: 10
+      })
+      Aviation.addCategories([10])
+
+      const theLondon = await Product.create({
+          name: "The London No. 1 Original Blue Dry Gin 750mL",
+          description: "It is all of the components that give The London Nº 1 its singular character - the quality of the ingredients, the distillation method, the colour and the bottle's design.", 
+          size: "750 mL",
+          brand: "The London No. 1",
+          sku: "a64",
+          price: 79.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-london-no1-gin_720x.jpg?v=1626324259",
+          stock: 10
+      })
+      theLondon.addCategories([10])
+
+      const camusCuvee = await Product.create({
+          name: "Camus Cuvee Baccarat 3.140 Masterpiece Collection Decanter Cognac 700mL",
+          description: "Enriched by the passion of five generations of Cognac masters—each inspired as much by the cultivation of the grape and its distillation as by aesthetics and art—Camus has created yet another exceptional Cognac. Thanks to its artistic, technical and creative qualities, not to mention its continuous search for exceptional vintages, the Masterpiece Collection by Cyril Camus is “a relentless revelation of taste and pleasure,” says the company.", 
+          size: "700 mL",
+          brand: "Camus",
+          sku: "a65",
+          price: 4799.00,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-camus-baccarat-3140_720x.jpg?v=1628670850",
+          stock: 10
+      })
+      camusCuvee.addCategories([11])
+
+      const remyMartinReserve = await Product.create({
+          name: "Remy Martin Reserve Cellar Selection No. 28 Cognac 700mL",
+          description: "The “Cellar Master’s Selection” celebrates the aromatic diversity of the cellars on the Domaine de Merpins. Due to their position fully underground, certain of our cellars are the true favourites of our Cellar Masters.", 
+          size: "700 mL",
+          brand: "Remy Martin",
+          sku: "a66",
+          price: 199.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-remy-martin-cellar-28_720x.jpg?v=1621739878",
+          stock: 10
+      })
+      remyMartinReserve.addCategories([11])
+
+      const stGermain = await Product.create({
+          name: "St Germain Elderflower Liqueur 750mL",
+          description: "St Germain Elderflower Liqueur has a light, refreshing sweetness and is an incredible cocktail ingredient for a variety of base spirits in addition to wine and Champagne. Extremely versatile adds character to many cocktails with a touch of style and sophistication. Made using the finest and fresh hand-picked elderflower.", 
+          size: "750 mL",
+          brand: "St Germain",
+          sku: "a67",
+          price: 58.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-st-germain-elderflower_720x.jpg?v=1586147341",
+          stock: 10
+      })
+      stGermain.addCategories([12])
+
+      const jagermeisterManifest = await Product.create({
+          name: "Jagermeister Manifest With Gift Box Herb Liqueur 1L",
+          description: "It’s an attitude that manifests itself in our latest creation. Based on our original elixir, we’ve crafted a truly special flavour that put Jägermeister again in a class of its own: We call it Jägermeister Manifest.", 
+          size: "1000 mL",
+          brand: "Jagermeister",
+          sku: "a68",
+          price: 89.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-jagermeister-manifest-1l_720x.jpg?v=1614403632",
+          stock: 10
+      })
+      jagermeisterManifest.addCategories([12])
+
+      const maverickCowboy = await Product.create({
+          name: "Maverick Cowboy Butterscotch Cream Liqueur 750mL",
+          description: "Maverick Cowboy is a smooth and indulgent Cowboy smoothie. It combines the ultimate blend of butterscotch Schnapps and cream liqueur. Best served chilled.", 
+          size: "750 mL",
+          brand: "Maverick",
+          sku: "a69",
+          price: 9.99,
+          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-maverick-cowboy-butterscotch-750ml_720x.jpg?v=1625888361",
+          stock: 10
+      })
+      maverickCowboy.addCategories([12])
+
+      
     }catch (e) {
         console.log(e)
     }

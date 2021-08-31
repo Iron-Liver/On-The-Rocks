@@ -32,7 +32,7 @@ const ordersMockUp = async () => {
     };
 
     const mockUpRes = {
-      status: (order) => ({
+      status: () => ({
         send: () => {}
       })
     };
@@ -40,10 +40,11 @@ const ordersMockUp = async () => {
     const users = await User.count();
 
     let order = 1;
+    let ordersPerUser = 4;
 
     while (mockUpReq.body.id <= users) {
       mockUpReq.body.id++;
-      while (order < 5) {
+      while (order < (ordersPerUser + 1)) {
         await createOrder(mockUpReq, mockUpRes, () => {});
         order++
       }

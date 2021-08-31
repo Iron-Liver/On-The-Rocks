@@ -3,8 +3,6 @@ const { Wishlist } = require("../../db");
 module.exports = async (req, res, next) => {
     let { userId, productId } = req.body;
 
-    console.log(userId, productId);
-
     try {
         if (userId && productId) {
             await Wishlist.create({ userId, productId });

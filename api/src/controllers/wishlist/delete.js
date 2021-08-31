@@ -3,7 +3,6 @@ const { Wishlist } = require("../../db");
 module.exports = async (req, res, next) => {
   const {id} = req.params;
 
-  console.log(id)
   try {
     await Wishlist.destroy({
         where: {

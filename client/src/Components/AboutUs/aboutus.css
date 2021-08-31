@@ -1,29 +1,49 @@
-.Title {
-    display: flex;
-    justify-content: center; 
-    font-size: 40px;
-    margin-bottom: 60px;
+.aboutus-title {
+  font-size: 30px;
+  align-self: flex-start;
+  padding: 0;
+  margin: 0;
 }
 
-.Subtitle {
-    font-size: 35px;
-    width: 80%;
-    margin-left: 10%;
+.aboutus-subtitle {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  text-align: center;
 }
 
-.Text {
-    font-size: 14px;
-    margin-left: 80px;
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    width: 80%;
+.aboutus-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 30px;
+  min-height: 59vh;
 }
 
-.Font {
+.aboutus-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.aboutus-info div img {
+  margin: 30px 0 30px 40px
+}
+
+.aboutus-text {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.aboutus-text p {
+  margin-bottom: 20px;
+}
+
+/* .Font {
     font-family: "Montserrat";
     margin-bottom: 80px;
-} 
+}  */
 
 @media (max-width: 55em){
     .Font {

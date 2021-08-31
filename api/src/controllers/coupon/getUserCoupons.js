@@ -17,11 +17,7 @@ module.exports = async (req, res, next) => {
                 ? coupons.concat(globals)
                 : coupons
             : coupons;
-
-        if (!coupons[0]) {
-            throw new Error(`User has no coupons`);
-        }
-
+            
         return res.status(200).send(coupons);
     } catch (err) {
         next(err);

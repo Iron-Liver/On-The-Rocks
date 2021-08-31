@@ -56,16 +56,9 @@ const AppGlobal = () => {
             <Route exact path="/category/:id" component={CategoryDetail} />
             <AuthRoute exact path="/order/:id" component={OrderDetail} />
             <AuthRoute exact path="/status/mercadopago/:status" component={MercadopagoHelp} />
-            <AuthRoute 
-              exact
-              path="/mercadopago/:orderId"
-              component={MercadoPago}
-              />
+            <AuthRoute exact path="/mercadopago/:orderId" component={MercadoPago} />
             <UserRoute path="/profile/:userId" component={UserProfile} />
-            <AdminRoute
-              path="/private/profile/:userId"
-              component={AdminProfile}
-              />
+            <AdminRoute path="/private/profile/:userId" component={AdminProfile} />
             <AdminRoute path="/private" component={AdminFeatures} />
             <Route exact path="/roulette" component={WheelOfCoupons} />
             <Route exact path="/aboutus" component={AboutUs} />

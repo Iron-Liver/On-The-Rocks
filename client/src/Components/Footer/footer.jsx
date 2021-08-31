@@ -36,20 +36,16 @@ const Footer = () => {
           </div> 
           <div className="info-footer-links">
             <h4>Devs</h4>
-              <div>
-                <Link style={{textDecoration:'none', color:'#e6e6d8', fontSize:'15px', marginBottom:'5px'}} to="/devs" className="links-footer" >About Us</Link>
-                <Link to="/devs#contact" style={{textDecoration:'none',fontSize:'15px', color:'#e6e6d8'}} className="links-footer" >Contact</Link> 
-              </div>
+            <div>
+              <Link style={{textDecoration:'none', color:'#e6e6d8', fontSize:'15px', marginBottom:'5px'}} to="/devs" className="links-footer" >About Us</Link>
+              <Link to="/devs#contact" style={{textDecoration:'none',fontSize:'15px', color:'#e6e6d8'}} className="links-footer" >Contact</Link> 
+            </div>
           </div> 
           <div>
             <div className="footer-logo-container">
               <img 
                 alt="iconfooterOnTheRocks" 
-                src={logoCircle} 
-                style={{
-                  width: "150px",
-                  margin: "5px 15px 0 10px"
-                }}
+                src={logoCircle}
               />
             </div> 
           </div>

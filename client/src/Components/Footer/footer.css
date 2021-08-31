@@ -87,6 +87,11 @@
   align-items: center;
   padding: 8px;
 }
+.footer-logo-container img {
+  width: 150px;
+  margin: 5px 15px 0 10px;
+}
+
 @media (max-width: 1072px) {
   .footerContainer1 {
     flex-direction: column;

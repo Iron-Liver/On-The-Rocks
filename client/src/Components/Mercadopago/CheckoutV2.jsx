@@ -38,6 +38,10 @@ const CheckoutV2 = ({ data, order, stock }) => {
       render: {
         container: '.payment-button', // Indica el nombre de la clase donde se mostrará el botón de pago
         label: 'Pay', // Cambia el texto del botón de pago (opcional)
+      },
+      theme: {
+        headerColor: "#372c2e",
+        elementsColor: "#372c2e"
       }
     });
   }, [data])
