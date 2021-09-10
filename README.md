@@ -1,6 +1,9 @@
 # On The Rocks
 
 _On The Rocks is an e-commerce about premium alcoholic beverages._
+  <br/>
+  <hr>
+  
 ## Built with 🛠️
 
 Javascript, CSS, HTML5, React, Redux, MaterialUI, Nodejs, Express, Sequelize, PostgreSQL, Multer, Passport, MercadoPago, among others.
@@ -51,6 +54,8 @@ Javascript, CSS, HTML5, React, Redux, MaterialUI, Nodejs, Express, Sequelize, Po
 <li>2FA</li>
 <li>Website data graph</li>
 <li>and much more...</li>
+  <br/>
+  <hr>
 
 ## Authors ✒️
 
@@ -65,6 +70,11 @@ Javascript, CSS, HTML5, React, Redux, MaterialUI, Nodejs, Express, Sequelize, Po
 
 ## Test credentials 🎁
 
+### User Side
+
 Email: user@email.com
 Password: 123
 
+### Admin Side
+
+PM one of the Authors to get access and test the webpage.
