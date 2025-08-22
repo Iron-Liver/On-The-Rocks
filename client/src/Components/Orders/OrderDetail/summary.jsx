@@ -9,11 +9,11 @@ import {
   AccordionSummary,
   AccordionDetails,
   Hidden,
-  makeStyles,
   Button,
   Tooltip,
-} from "@material-ui/core";
-import { ExpandMore, Payment, Help } from "@material-ui/icons";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { ExpandMore, Payment, Help } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
@@ -186,7 +186,7 @@ const Summary = ({ order, orderStatus }) => {
                                 <Typography variant="body2">
                                   {order.product.price > order.unitPrice ? (
                                     <>
-                                      <Hidden smDown>
+                                      <Hidden mdDown>
                                         <del> ${parseFloat(order.product.price).toFixed(2)} </del>
                                       </Hidden>
                                       <strong> ${parseFloat(order.unitPrice).toFixed(2)} </strong>

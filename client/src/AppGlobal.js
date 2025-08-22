@@ -29,7 +29,7 @@ import CreateOrder from "./Components/Orders/CreateOrder/createOrder";
 import MercadoPago from "./Components/Mercadopago/Mercadopago";
 // import Wishlist from "./Components/Wishlist/wishlist";
 import { WheelOfCoupons } from './Components/Game/wheelOfCoupons';
-import { ThemeProvider } from '@material-ui/core';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import theme from './Utils/theme';
 import Footer from './Components/Footer/footer';
 import ChatBotApp from "./Components/Chatbot/ChatBot";
@@ -41,32 +41,34 @@ const AppGlobal = () => {
 
   return (
       <Router>
-        <ThemeProvider theme={theme}>
-          <NavBar />    
-          <ChatBotApp />       
-          <Switch>
-            <Route exact path="/" component={landingPage} />            
-            <Route exact path="/login" component={LoginUser} />
-            <Route exact path="/register" component={CreateUser} />
-            <Route path="/verify/password" component={ResetPassword} />
-            <Route path="/verify/admin" component={Admin2FA} />
-            <Route exact path="/products" component={Products} />
-            <Route exact path="/createOrder" component={CreateOrder} />
-            <Route exact path="/products/:id" component={ProductDetail} />
-            <Route exact path="/category/:id" component={CategoryDetail} />
-            <AuthRoute exact path="/order/:id" component={OrderDetail} />
-            <AuthRoute exact path="/status/mercadopago/:status" component={MercadopagoHelp} />
-            <AuthRoute exact path="/mercadopago/:orderId" component={MercadoPago} />
-            <UserRoute path="/profile/:userId" component={UserProfile} />
-            <AdminRoute path="/private/profile/:userId" component={AdminProfile} />
-            <AdminRoute path="/private" component={AdminFeatures} />
-            <Route exact path="/roulette" component={WheelOfCoupons} />
-            <Route exact path="/aboutus" component={AboutUs} />
-            <Route exact path="/shipping" component={Shipping} />
-            <Route path="*" component={Error404} />
-          </Switch>
-          <Footer />
-        </ThemeProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <NavBar />    
+            <ChatBotApp />       
+            <Switch>
+              <Route exact path="/" component={landingPage} />            
+              <Route exact path="/login" component={LoginUser} />
+              <Route exact path="/register" component={CreateUser} />
+              <Route path="/verify/password" component={ResetPassword} />
+              <Route path="/verify/admin" component={Admin2FA} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/createOrder" component={CreateOrder} />
+              <Route exact path="/products/:id" component={ProductDetail} />
+              <Route exact path="/category/:id" component={CategoryDetail} />
+              <AuthRoute exact path="/order/:id" component={OrderDetail} />
+              <AuthRoute exact path="/status/mercadopago/:status" component={MercadopagoHelp} />
+              <AuthRoute exact path="/mercadopago/:orderId" component={MercadoPago} />
+              <UserRoute path="/profile/:userId" component={UserProfile} />
+              <AdminRoute path="/private/profile/:userId" component={AdminProfile} />
+              <AdminRoute path="/private" component={AdminFeatures} />
+              <Route exact path="/roulette" component={WheelOfCoupons} />
+              <Route exact path="/aboutus" component={AboutUs} />
+              <Route exact path="/shipping" component={Shipping} />
+              <Route path="*" component={Error404} />
+            </Switch>
+            <Footer />
+          </ThemeProvider>
+        </StyledEngineProvider>
       </Router>
   );
 };

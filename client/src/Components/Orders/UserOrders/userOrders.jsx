@@ -8,8 +8,8 @@ import swal from "sweetalert";
 import { logOutUser } from "../../../Redux/Users/userActions";
 import { useLocation, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core";
-import { Pagination } from '@material-ui/lab';
+import makeStyles from '@mui/styles/makeStyles';
+import { Pagination } from '@mui/material';
 import Filters from "./filters";
 
 const useStyles = makeStyles((theme) => ({

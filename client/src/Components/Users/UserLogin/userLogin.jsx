@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { Grid, Button, TextField } from "@material-ui/core";
-import { Email, VpnKey } from "@material-ui/icons";
+import { Grid, Button, TextField } from "@mui/material";
+import { Email, VpnKey } from "@mui/icons-material";
 import {
     loginUser,
     sendEmail,

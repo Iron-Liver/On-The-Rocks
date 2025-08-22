@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import {useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { readCategoryID } from '../../../Redux/Category/categoryActions'
-import {makeStyles, Container, Grid, Paper, Typography, ButtonBase} from '@material-ui/core'
+import { Container, Grid, Paper, Typography, ButtonBase } from '@mui/material';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
     root: {

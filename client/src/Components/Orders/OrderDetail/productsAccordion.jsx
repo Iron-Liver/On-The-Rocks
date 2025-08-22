@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import {
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  makeStyles
-} from "@material-ui/core";
+import { Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import { Link } from 'react-router-dom';
-import { ExpandMore, VisibilityOff, ShoppingCart } from "@material-ui/icons";
+import { ExpandMore, VisibilityOff, ShoppingCart } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   accordion: {

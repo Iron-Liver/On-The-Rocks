@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom"
-import { makeStyles, Grid, Paper } from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
+import { Grid, Paper } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import Rating from '@mui/material/Rating';
 import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
 import { logOutUser } from "../../../Redux/Users/userActions";

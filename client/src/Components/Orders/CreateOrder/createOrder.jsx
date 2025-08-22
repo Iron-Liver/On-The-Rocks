@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Modal } from "@material-ui/core";
+import { Button, Modal } from "@mui/material";
 import { useForm } from "./useForm";
 import { Link, useHistory } from "react-router-dom";
 import { userSchema1, userSchema2 } from "./ValidationOrder";

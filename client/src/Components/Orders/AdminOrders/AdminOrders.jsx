@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Order from "./order";
 import axios from "axios";
 import { useHistory } from "react-router";
-import { makeStyles, FormControl, NativeSelect } from "@material-ui/core";
-import { Pagination } from '@material-ui/lab';
+import { FormControl, NativeSelect } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { Pagination } from '@mui/material';
 import theme from "../../../Utils/theme";
 
 const useStyles = makeStyles((theme) => ({

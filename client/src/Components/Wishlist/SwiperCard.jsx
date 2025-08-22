@@ -1,6 +1,6 @@
 import './SwiperCard.css';
 import React from 'react';
-import { NewReleases } from '@material-ui/icons';
+import { NewReleases } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 const SwiperCard = ({ wishItem }) => {

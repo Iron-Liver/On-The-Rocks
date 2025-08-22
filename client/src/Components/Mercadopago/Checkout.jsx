@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Checkout.css';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Hidden } from "@material-ui/core"
+import { Hidden } from "@mui/material"
 
 // Import Swiper styles
 import "swiper/css";
@@ -52,7 +52,7 @@ const Checkout = ({ order, data, stock }) => {
         </div>
       </div>
       <div className="productview-wrapper">
-        <Hidden smDown>
+        <Hidden mdDown>
           <div className="swiper-wrap">
             <Swiper 
               modules={[Navigation, Mousewheel, Keyboard]}
@@ -87,7 +87,7 @@ const Checkout = ({ order, data, stock }) => {
         </Hidden>
       </div>
     </div>
-  )
+  );
 }
 
 export default Checkout

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Paper, makeStyles, Box, Typography, Button, Menu, MenuItem, Hidden } from '@material-ui/core';
-import { Add, Edit } from '@material-ui/icons';
+import { Paper, Box, Typography, Button, Menu, MenuItem, Hidden } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { Add, Edit } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -151,7 +152,7 @@ const Order = ({ order, setOrderStatus }) => {
                 </Typography>
               </div>
             </Box>
-            <Hidden smDown>
+            <Hidden mdDown>
               <Box className={classes.orderActions}>
                 <Link
                   to={`/order/${order.id}`}

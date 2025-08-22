@@ -1,14 +1,9 @@
 
 import './Checkout.css';
 import {  useState } from "react";
-import { 
-  Accordion, 
-  AccordionSummary, 
-  Typography, 
-  AccordionDetails,
-  makeStyles,
-} from '@material-ui/core';
-import { ExpandMore } from '@material-ui/icons';
+import { Accordion, AccordionSummary, Typography, AccordionDetails } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { ExpandMore } from '@mui/icons-material';
 
 
 
@@ -61,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   imageTitle: {
     position: "relative",
     width: '70px',
-    padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
+    padding: `${theme.spacing(1)} ${theme.spacing(0)} ${
         theme.spacing(1) + 2
     }px`,
     fontFamily: 'Montserrat',

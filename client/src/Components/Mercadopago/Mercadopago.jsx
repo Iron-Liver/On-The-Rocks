@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 import verifyUser from "../../Utils/verifyUser";
 import swal from "sweetalert";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import { logOutUser } from "../../Redux/Users/userActions";
 
 const MercadoPago = () => {
@@ -64,7 +64,7 @@ const MercadoPago = () => {
               </div>
             ) : (
                 // : <Checkout order={orderInfo} data={data} stock={stock}/>
-                <CheckoutV2 order={orderInfo} data={data} stock={stock} />
+                (<CheckoutV2 order={orderInfo} data={data} stock={stock} />)
             )}
         </div>
     );

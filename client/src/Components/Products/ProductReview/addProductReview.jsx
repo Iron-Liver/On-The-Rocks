@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles, TextField, Grid, Paper, Button } from "@material-ui/core";
+import { TextField, Grid, Paper, Button } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import axios from "axios";
-import Rating from "@material-ui/lab/Rating";
+import Rating from '@mui/material/Rating';
 import "./review.css";
 
 import { useDispatch } from "react-redux";

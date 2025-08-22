@@ -4,9 +4,9 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { ExpandMore } from '@material-ui/icons'
+import { ExpandMore } from '@mui/icons-material'
 import CustomButton from '../../Button/CustomButton';
 
 const Filters = ({ handleSubmit, handleChange, handleSort, handleReset, form }) => {

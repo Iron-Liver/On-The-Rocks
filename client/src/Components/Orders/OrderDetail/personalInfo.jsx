@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Grid, Paper, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
-import { Delete, Info, Edit, Email } from "@material-ui/icons";
+import { Grid, Paper, Button, Menu, MenuItem, Box } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { Delete, Info, Edit, Email } from "@mui/icons-material";
 import { logOutUser } from "../../../Redux/Users/userActions";
 import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
@@ -240,31 +241,16 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                     Cancelled
                   </MenuItem>
                 </Menu>
-                <Button 
-                  variant="text" 
-                  color="default" 
-                  startIcon={<Email />}
-                  disabled
-                >
+                <Button variant="text" startIcon={<Email />} disabled>
                   Contact user
                 </Button>
               </Box>
             ) : (
               <Box className={classes.actionsContainer}>
-                <Button
-                  color="default"
-                  variant="text"
-                  startIcon={<Delete />}
-                  onClick={handleRemove}
-                >
+                <Button variant="text" startIcon={<Delete />} onClick={handleRemove}>
                   Remove order
                 </Button>
-                <Button 
-                  variant="text" 
-                  color="default" 
-                  startIcon={<Info />}
-                  disabled
-                >
+                <Button variant="text" startIcon={<Info />} disabled>
                   Get help
                 </Button>
               </Box>

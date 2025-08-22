@@ -1,8 +1,9 @@
 import {useState,useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux';
-import { Button, TextField, makeStyles,Grid, Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
-import { Person, Email, VpnKey, Phone } from '@material-ui/icons';
+import { Button, TextField, Grid, Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { Person, Email, VpnKey, Phone } from '@mui/icons-material';
 import { readUser } from '../../../Redux/Users/userActions';
 import Validate from '../../../Utils/validate'
 import verifyAdmin from '../../../Utils/verifyAdmin'

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router';
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { getProductById } from "../../Redux/Products/productsActions"
-import { Card, CardContent, CardMedia, Typography, Button, Grid, Box } from "@material-ui/core";
-import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart } from '@material-ui/icons';
-import Rating from '@material-ui/lab/Rating';
-import { green } from '@material-ui/core/colors';
-import { red } from '@material-ui/core/colors';
+import { Card, CardContent, CardMedia, Typography, Button, Grid, Box } from "@mui/material";
+import { CheckCircle, Info, RemoveShoppingCart, ShoppingCart } from '@mui/icons-material';
+import Rating from '@mui/material/Rating';
+import { green } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
 
 
 const useStyles = makeStyles((theme) => ({

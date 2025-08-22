@@ -10,7 +10,8 @@ import {
     ListItemText,
     TextField,
     Button,
-} from "@material-ui/core";
+    ListItemIcon,
+} from "@mui/material";
 import {
     LocalBar,
     Receipt,
@@ -24,11 +25,10 @@ import {
     ExitToApp,
     ArrowForwardIos,
     ArrowBackIos,
-} from "@material-ui/icons";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+} from "@mui/icons-material";
+import Autocomplete from "@mui/material/Autocomplete";
 import { getProducts } from "../../Redux/Products/productsActions";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { logOutUser } from "../../Redux/Users/userActions";
 import verifyUser from "../../Utils/verifyUser";
 import swal from "sweetalert";
