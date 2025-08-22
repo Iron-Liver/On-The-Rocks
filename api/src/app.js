@@ -9,7 +9,7 @@ const passport = require("passport");
 // const cookieSession = require("cookie-session");
 
 const routes = require("./routes/index.js");
-const { SECRET_KEY, CLIENT_DOMAIN } = process.env;
+const { SECRET_KEY, CLIENT_DOMAIN, CLIENT_ORIGINS, FRONT, ALLOW_VERCEL_WILDCARD } = process.env;
 
 require("./db.js");
 require("./utils/auth/passport");
@@ -24,7 +24,31 @@ server.use(express.json({ limit: "50mb" }));
 // server.use(cookieParser());
 // server.set("trust proxy", 1);
 server.use(helmet());
-server.use(cors({ origin: CLIENT_DOMAIN, credentials: true }));
+// Configure CORS with allowlist from env
+const allowedOrigins = [CLIENT_DOMAIN, FRONT]
+    .concat((CLIENT_ORIGINS || "").split(",").map((s) => s.trim()).filter(Boolean))
+    .filter(Boolean);
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // allow non-browser requests or same-origin
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        // optional wildcard for any Vercel subdomain
+        if (
+            ALLOW_VERCEL_WILDCARD === "true" &&
+            (origin.endsWith(".vercel.app") || origin.endsWith(".vercel.sh"))
+        ) {
+            return callback(null, true);
+        }
+        return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+};
+
+server.use(cors(corsOptions));
+// Preflight for all routes
+server.options("*", cors(corsOptions));
 
 // server.use(
 //     session({
@@ -61,19 +85,9 @@ server.use(passport.session());
 //     })(req, res, next);
 // });
 
-server.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", `${CLIENT_DOMAIN}`);
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Access-Control-Allow-Headers, Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    next();
-});
-
 server.use("/", routes);
 
 module.exports = {
     server,
 };
+
