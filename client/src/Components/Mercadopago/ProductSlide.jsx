@@ -7,7 +7,14 @@ const ProductSlide = ({ product }) => {
     <div className="slide-product">
       <div className="slide-info-grow">
         <div className="image-background">
-          <img src={product.product.image} alt={product.product.name} />
+          <img 
+            src={product.product.image} 
+            alt={product.product.name} 
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/android-icon-192x192.png';
+            }}
+          />
         </div>
         <h2>{product.product.name}</h2>
       </div>

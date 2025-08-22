@@ -14,7 +14,15 @@ const SwiperCard = ({ wishItem }) => {
       >
       <div className="wishlist-product-info-container">
         <div className="wishlist-product-img">
-          <img src={wishItem.image} alt="" width="150px"/>
+          <img
+            src={wishItem.image}
+            alt={wishItem?.name || 'Product image'}
+            width="150px"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/android-icon-192x192.png';
+            }}
+          />
         </div>
         <div className="wishlist-product-info-text">
           <h4 style={{ textAlign: "center", fontWeight: 400, flexGrow: 1 }}>{wishItem.name}</h4>

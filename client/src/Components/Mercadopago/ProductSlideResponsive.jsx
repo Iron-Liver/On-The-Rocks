@@ -6,7 +6,15 @@ const ProductSlideResponsive = ({ product }) => {
     <div className="slide-product-responsive">
       <div className="slide-product-img-name">
         <div className="slide-product-img-circle">
-          <img src={product.product.image} alt={product.name} width="90px"/>
+          <img 
+            src={product.product.image} 
+            alt={product.product.name} 
+            width="90px"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/android-icon-192x192.png';
+            }}
+          />
         </div>
         <div className="slide-product-info-text">
           <h2>{product.product.name}</h2>

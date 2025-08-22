@@ -133,9 +133,13 @@ const Wishlist = () => {
                                                 <img
                                                     width="80px"
                                                     className={classes.img}
-                                                    alt="complex"
+                                                    alt={w[0]?.name || 'Product image'}
                                                     src={w[0]?.image}
-                                                    />
+                                                    onError={(e) => {
+                                                      e.currentTarget.onerror = null;
+                                                      e.currentTarget.src = '/android-icon-192x192.png';
+                                                    }}
+                                                />
                                             </Link>
                                             {w[0].onSale && (
                                               <div>

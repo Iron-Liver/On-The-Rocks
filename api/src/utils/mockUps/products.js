@@ -48,7 +48,7 @@ const productsMockUp = async () => {
             sku:"a14",
             price:679.99,
             onSale: 650.99,
-            image:"https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-remy-martin-shanghai_720x.jpg?v=1559369227",
+            image:"https://thedrinksociety.com.au/cdn/shop/files/tds-remy-coupe-shanghai.jpg?v=1699421889",
             stock: 10,
         })
         remyMartin.addCategories([11])
@@ -535,7 +535,7 @@ const productsMockUp = async () => {
             brand: "Johnnie Walker",
             sku: "a44",
             price: 214.99,
-            image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-blue-label_aba6150d-8275-46c4-a586-12a31b28d698_720x.jpg?v=1608673679",
+            image: "https://acdn-us.mitiendanube.com/stores/001/211/660/products/blue-ok1-3981bf93239f4efbe616455423206961-640-0.png",
             stock: 10
         })
         johnnieWalker.addCategories([4])
@@ -667,7 +667,7 @@ const productsMockUp = async () => {
           brand: "Cabo Wabo",
           sku: "a55",
           price: 89.99,
-          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-cabo-wabo-reposado-tequila_720x.jpg?v=1629512621",
+          image: "https://www.cabowabo.com/wp-content/uploads/2021/12/cabo-three.png",
           stock: 10
       })
       caboWabo.addCategories([6])
@@ -679,7 +679,7 @@ const productsMockUp = async () => {
           brand: "Grand Marnier",
           sku: "a56",
           price: 199.99,
-          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-grand-marnier-100-cuvee_720x.jpg?v=1628908492",
+          image: "https://static.cognac-expert.com/12347-large_default/grand-marnier-quintessence-limited-edition-liqueur.webp",
           stock: 10
       })
       grandMarnier.addCategories([7])
@@ -739,7 +739,7 @@ const productsMockUp = async () => {
           brand: "Crown Royal",
           sku: "a61",
           price: 94.99,
-          image: "https://cdn.shopify.com/s/files/1/0246/9753/6596/products/tds-crown-royal-harvest-1l_720x.jpg?v=1574481452",
+          image: "https://winevins.com/cdn/shop/files/Crown_Royal_Northern_Harvest_Rye_1L_809140f2-e47c-4f41-8e24-1aadea871d1a.png?v=1743364893",
           stock: 10
       })
       crownRoyal.addCategories([9])

@@ -52,7 +52,15 @@ const SwiperCard = ({ spirit }) => {
     <div className="swiper-card-container">
       <div className="aaa">
         <div className="bbb">
-          <img src={spirit.image} alt="" className="swiper-card-spirit-image" />
+          <img 
+            src={spirit.image} 
+            alt={spirit?.name || 'Product image'} 
+            className="swiper-card-spirit-image"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/android-icon-192x192.png';
+            }}
+          />
         </div>
         <div className="ccc">
             <div className="ddd">

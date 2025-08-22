@@ -146,14 +146,22 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                         product.product?.image ? (
                           <img
                             src={product.product.image}
-                            alt="order_product"
+                            alt={product.product?.name || 'Product image'}
                             width="200px"
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = '/android-icon-192x192.png';
+                            }}
                           />
                         ) : (
                           <img
                             src="https://i.stack.imgur.com/y9DpT.jpg" 
-                            alt="order_product"
+                            alt={product.product?.name || 'Product image'}
                             width="200px"
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = '/android-icon-192x192.png';
+                            }}
                           />
                         )
                       }

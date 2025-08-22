@@ -174,6 +174,10 @@ export function Cart() {
                                             src={e.image}
                                             alt={e.name}
                                             width="75px"
+                                            onError={(ev) => {
+                                              ev.currentTarget.onerror = null;
+                                              ev.currentTarget.src = '/android-icon-192x192.png';
+                                            }}
                                         />
                                     </div>
                                 </div>
