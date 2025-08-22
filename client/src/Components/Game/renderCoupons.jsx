@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom"
 import { getCoupons } from "../../Redux/Coupon/couponActions";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { logOutUser } from "../../Redux/Users/userActions";
 import verifyUser from "../../Utils/verifyUser";
 import swal from "sweetalert";

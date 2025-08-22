@@ -5,26 +5,18 @@ import im3 from '../../assets/au3.jpg'
 import React, { useEffect } from "react";
 import Locations from '../Maps/Locations'; 
 import verifyUser from '../../Utils/verifyUser';
-// Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/scrollbar/scrollbar.scss';
 import SwiperOS from '../OnSale/swiperOS';
 //import aos  
 import Aos from 'aos';
 import 'aos/dist/aos.css'
-import SwiperCore, {
-  Navigation
-} from 'swiper/core';
 import Brands from '../Brands/Brands';
 import SwiperWishlist from '../Wishlist/SwiperWishlist';
 import { useDispatch } from 'react-redux';
 import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
-// install Swiper modules
-SwiperCore.use([Navigation]);
+
 export const LandingPage = () => {
     const dispatch = useDispatch();
+    const currentUser = verifyUser();
     useEffect(() => {
       window.scrollTo(0,0)
     }, [])
@@ -32,9 +24,10 @@ export const LandingPage = () => {
       Aos.init({duration:3000})
     }, []);
     useEffect(() => {
-      dispatch(getWishlist());
-    }, [dispatch])
-    const currentUser = verifyUser();
+      if (currentUser && !currentUser.logout) {
+        dispatch(getWishlist());
+      }
+    }, [dispatch, currentUser])
     return (
       <div>
       <div>
@@ -69,7 +62,7 @@ export const LandingPage = () => {
           <SwiperOS />
       </div>
       {
-        currentUser && 
+        currentUser && !currentUser.logout && 
           <SwiperWishlist />
       }
         <div className="AboutUsContainer">

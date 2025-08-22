@@ -1,9 +1,10 @@
 import './products.css';
 import { useEffect } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
-import { makeStyles,  Button,  Container } from '@material-ui/core'
-import { ThemeProvider } from '@material-ui/core/styles';
-import { DataGrid } from '@material-ui/data-grid';
+import { Button, Container } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import theme from '../../../Utils/theme';
 import { getProducts } from '../../../Redux/Products/productsActions'
@@ -42,15 +43,16 @@ const ProductsList = () => {
 			headerName: 'EDIT',
 			sortable: false,
 			width: 120,
-			disableClickEventBubbling: true,
 			renderCell: params => {
 				return (
-					<ThemeProvider theme={theme}>
-					<Link to={`/private/product/update/${params.id}`} style={{textDecoration:'none'}}>
-						<Button style={{fontWeight: 1000}} variant="contained" color="secondary">EDIT</Button>
-					</Link>
-					</ThemeProvider>
-				);
+                    <StyledEngineProvider injectFirst>
+                        <ThemeProvider theme={theme}>
+                            <Link to={`/private/product/update/${params.id}`} style={{textDecoration:'none'}}>
+                                <Button style={{fontWeight: 1000}} variant="contained" color="secondary">EDIT</Button>
+                            </Link>
+                        </ThemeProvider>
+                    </StyledEngineProvider>
+                );
 			},
 		},
 		{
@@ -58,46 +60,49 @@ const ProductsList = () => {
 			headerName: 'DETAILS',
 			sortable: false,
 			width: 120,
-			disableClickEventBubbling: true,
 			renderCell: params => {
 				return (
-					<ThemeProvider theme={theme}>
-						<Link to={`/products/${params.id}`}>
-							<Button style={{fontWeight: 1000}} variant="contained" color="secondary">DETAILS</Button>
-						</Link>
-					</ThemeProvider>
-				);
+                    <StyledEngineProvider injectFirst>
+                        <ThemeProvider theme={theme}>
+                            <Link to={`/products/${params.id}`}>
+                                <Button style={{fontWeight: 1000}} variant="contained" color="secondary">DETAILS</Button>
+                            </Link>
+                        </ThemeProvider>
+                    </StyledEngineProvider>
+                );
 			},
 		},
 	];
 
-    return(
-      <div className="admin-products-tab-container">
-        <div className={classes.root}>  
-            <ThemeProvider theme={theme}>
+    return (
+        <div className="admin-products-tab-container">
+            <div className={classes.root}>  
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={theme}>
 
-					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: 50, marginBottom:'20px'}}>
-						<h1 >
-						Products:
-						</h1>
-            <Link to="/private/product/add">
-							<Button variant="contained" color="secondary">
-								Add New Product
-							</Button>
-            </Link>
-						
-					</Container>
+                            <Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: 50, marginBottom:'20px'}}>
+                                <h1 >
+                                Products:
+                                </h1>
+                    <Link to="/private/product/add">
+                                    <Button variant="contained" color="secondary">
+                                        Add New Product
+                                    </Button>
+                    </Link>
+                                
+                            </Container>
 
-				<Container style={{height: 460, width: '100%'}}>
-					<Container style={{display: 'flex', height: '100%'}}>
-						<DataGrid rows={Products ? Products : []} columns={columns} />
-					</Container>
-				</Container>
+                        <Container style={{height: 460, width: '100%'}}>
+                            <Container style={{display: 'flex', height: '100%'}}>
+                                <DataGrid rows={Products ? Products : []} columns={columns} disableSelectionOnClick />
+                            </Container>
+                        </Container>
 
-			</ThemeProvider>
+                    </ThemeProvider>
+                </StyledEngineProvider>
+            </div>
         </div>
-      </div>
-    )
+    );
 
 }
 export default ProductsList;

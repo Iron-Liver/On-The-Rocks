@@ -11,20 +11,12 @@ import { logOutUser } from "../../Redux/Users/userActions";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCard from "./SwiperCard";
 // Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
+import "swiper/css";
+import "swiper/css/pagination";
 // import Swiper core and required modules
-import SwiperCore, {
-  Navigation,
-  Pagination,
-  Mousewheel,
-  Keyboard,
-  Autoplay
-} from 'swiper/core';
-
-// install Swiper modules
-SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
+import {
+  Pagination
+} from 'swiper/modules';
 
 const SwiperWishlist = () => {
   const history = useHistory();
@@ -118,6 +110,7 @@ const SwiperWishlist = () => {
               marginTop: "40px"
             }}>
               <Swiper
+                modules={[Pagination]}
                 slidesPerView={views} 
                 spaceBetween={2} 
                 pagination={{

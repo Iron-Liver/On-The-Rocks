@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./products.css";
 import ProductCard from "./productCard";
 import Filters from "./filters";
-import { Pagination } from "@material-ui/lab";
+import { Pagination } from '@mui/material';
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 
 
 const Products = () => {
@@ -176,6 +176,6 @@ const Products = () => {
         </div>
         );
       };
-      
-      export default Products;
+
+export default Products;
       

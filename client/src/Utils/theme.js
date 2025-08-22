@@ -1,6 +1,6 @@
-import { createTheme } from "@material-ui/core"
+import { createTheme, adaptV4Theme } from "@mui/material/styles";
 
-const theme = createTheme({
+const theme = createTheme(adaptV4Theme({
     palette: {
         primary: {
             main: '#372c2e',
@@ -24,6 +24,6 @@ const theme = createTheme({
             main: '#372c2e'
         }
     }
-})
+}))
 
 export default theme;

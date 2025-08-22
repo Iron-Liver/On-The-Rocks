@@ -2,8 +2,8 @@ import React, { useState } from "react";
 // import "./productImages.css";
 import Axios from "axios";
 import swal from "sweetalert";
-import Button from "@material-ui/core/Button";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import Button from "@mui/material/Button";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 function ProductImages({ sku, name }) {
     // eslint-disable-next-line
     const [state, setState] = useState();
@@ -37,10 +37,8 @@ function ProductImages({ sku, name }) {
                 <Button
                     style={{margin: '20px', width: '80%'}}
                     variant="contained"
-                    color="default"
                     startIcon={<CloudUploadIcon />}
-                    onClick={handleClick}
-                >
+                    onClick={handleClick}>
                     Upload
                 </Button>
                 <input

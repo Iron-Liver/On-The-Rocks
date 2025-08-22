@@ -7,10 +7,10 @@ import { getWishlist, deleteWish } from "../../Redux/Wishlist/wishlistActions";
 import { getProducts } from "../../Redux/Products/productsActions";
 import verifyUser from "../../Utils/verifyUser";
 import swal from "sweetalert";
-import { IconButton, Paper } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { makeStyles } from "@material-ui/core/styles";
-import { NewReleases } from "@material-ui/icons";
+import { IconButton, Paper } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import makeStyles from '@mui/styles/makeStyles';
+import { NewReleases } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { logOutUser } from "../../Redux/Users/userActions";
 
@@ -114,101 +114,101 @@ const Wishlist = () => {
     }
 
     return (
-      <div className="user-wishlist-tab-container">
-        <div className={classes.root}>
-            {filtProduct?.length > 0 ? (
-              filtProduct?.map(
-                (w) =>
-                w[0] && (
-                  <Paper
-                  className={
-                    w[0].onSale
-                    ? classes.onSalePaper
-                    : classes.paper
-                  }
-                  >
-                                <div className="user-wishlist-imgsale-wrapper">
-                                    <div className="user-wishlist-img-container">
-                                        <Link to={`/products/${w[0].id}`}>
-                                            <img
-                                                width="80px"
-                                                className={classes.img}
-                                                alt="complex"
-                                                src={w[0]?.image}
-                                                />
-                                        </Link>
-                                        {w[0].onSale && (
-                                          <div>
-                                                <div className="user-wishlist-flag-shadow" />
-                                                <div className="user-wishlist-flag">
-                                                    <NewReleases id="user-wishlist-flag-icon" />
+        <div className="user-wishlist-tab-container">
+            <div className={classes.root}>
+                {filtProduct?.length > 0 ? (
+                  filtProduct?.map(
+                    (w) =>
+                    w[0] && (
+                      <Paper
+                      className={
+                        w[0].onSale
+                        ? classes.onSalePaper
+                        : classes.paper
+                      }
+                      >
+                                    <div className="user-wishlist-imgsale-wrapper">
+                                        <div className="user-wishlist-img-container">
+                                            <Link to={`/products/${w[0].id}`}>
+                                                <img
+                                                    width="80px"
+                                                    className={classes.img}
+                                                    alt="complex"
+                                                    src={w[0]?.image}
+                                                    />
+                                            </Link>
+                                            {w[0].onSale && (
+                                              <div>
+                                                    <div className="user-wishlist-flag-shadow" />
+                                                    <div className="user-wishlist-flag">
+                                                        <NewReleases id="user-wishlist-flag-icon" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )}
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="user-wishlist-description">
-                                    <div style={{ flexGrow: 1 }}>
-                                        <Link
-                                            to={`/products/${w[0].id}`}
-                                            style={{
-                                              textDecoration: "none",
-                                              color: "black",
-                                            }}
-                                            >
-                                            <h4 className="user-wishlist-item-title">
-                                                {w[0]?.name}
-                                            </h4>
-                                        </Link>
-                                        {w[0].onSale ? (
-                                          <h4 className="user-wishlist-item-price">
-                                                <span
-                                                    style={{
-                                                      color: "rgb(144, 0, 32)",
-                                                    }}
-                                                    >
-                                                    ${w[0].onSale}{" "}
-                                                </span>
-                                                <del className="user-wishlist-item-regular">
+                                    <div className="user-wishlist-description">
+                                        <div style={{ flexGrow: 1 }}>
+                                            <Link
+                                                to={`/products/${w[0].id}`}
+                                                style={{
+                                                  textDecoration: "none",
+                                                  color: "black",
+                                                }}
+                                                >
+                                                <h4 className="user-wishlist-item-title">
+                                                    {w[0]?.name}
+                                                </h4>
+                                            </Link>
+                                            {w[0].onSale ? (
+                                              <h4 className="user-wishlist-item-price">
+                                                    <span
+                                                        style={{
+                                                          color: "rgb(144, 0, 32)",
+                                                        }}
+                                                        >
+                                                        ${w[0].onSale}{" "}
+                                                    </span>
+                                                    <del className="user-wishlist-item-regular">
+                                                        ${w[0]?.price}
+                                                    </del>
+                                                </h4>
+                                            ) : (
+                                              <h4 className="user-wishlist-item-price">
                                                     ${w[0]?.price}
-                                                </del>
-                                            </h4>
-                                        ) : (
-                                          <h4 className="user-wishlist-item-price">
-                                                ${w[0]?.price}
-                                            </h4>
-                                        )}
+                                                </h4>
+                                            )}
+                                        </div>
+                                        <IconButton
+                                            onClick={(e) =>
+                                              deleteWishh(
+                                                e,
+                                                currentUser?.id,
+                                                w[0]?.id
+                                                )
+                                              }
+                                            style={{ padding: "1px" }}
+                                            size="large">
+                                            <DeleteIcon fontSize="medium" />
+                                        </IconButton>
                                     </div>
-                                    <IconButton
-                                        onClick={(e) =>
-                                          deleteWishh(
-                                            e,
-                                            currentUser?.id,
-                                            w[0]?.id
-                                            )
-                                          }
-                                          style={{ padding: "1px" }}
-                                          >
-                                        <DeleteIcon fontSize="medium" />
-                                    </IconButton>
-                                </div>
-                            </Paper>
-                        )
-                        )
-                        ) : (
-                          <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            height: "55vh",
-                          }}
-                          >
-                    <h4 id="user-wishlist-empty-message">Nothing to show...</h4>
-                </div>
-            )}
+                                </Paper>
+                            )
+                            )
+                            ) : (
+                              <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                height: "55vh",
+                              }}
+                              >
+                        <h4 id="user-wishlist-empty-message">Nothing to show...</h4>
+                    </div>
+                )}
+            </div>
         </div>
-      </div>
     );
 };
 

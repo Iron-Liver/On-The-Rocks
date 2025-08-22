@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 
 
 export function useForm({initialForm2, initialForm1}) {

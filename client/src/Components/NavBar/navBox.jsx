@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Container, ButtonBase } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Container, ButtonBase } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import { useLocation } from 'react-router'
 import { logOutUser } from '../../Redux/Users/userActions'
-import { VerifiedUser } from '@material-ui/icons'
+import { VerifiedUser } from '@mui/icons-material'
 import { useDispatch } from 'react-redux'
 import swal from "sweetalert";
 
@@ -38,7 +38,7 @@ export const NavBox = ({ solid }) => {
         imageTitle: {
             position: "relative",
             width: '70px',
-            padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${
+            padding: `${theme.spacing(1)} ${theme.spacing(0)} ${
                 theme.spacing(1) + 2
             }px`,
             fontFamily: 'Montserrat',

@@ -1,26 +1,23 @@
 import React, { useEffect } from 'react';
 import './Checkout.css';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Hidden } from "@material-ui/core"
+import { Hidden } from "@mui/material"
 
 // Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination"
 
 // import Swiper core and required modules
-import SwiperCore, {
+import {
   Navigation,
   Pagination,
   Mousewheel,
   Keyboard
-} from 'swiper/core';
+} from 'swiper/modules';
 import ProductSlide from './ProductSlide';
 import OrderInfo from './OrderInfo';
 import ProductSlideResponsive from './ProductSlideResponsive';
-
-// install Swiper modules
-SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard]);
 
 const Checkout = ({ order, data, stock }) => {
 
@@ -55,9 +52,10 @@ const Checkout = ({ order, data, stock }) => {
         </div>
       </div>
       <div className="productview-wrapper">
-        <Hidden smDown>
+        <Hidden mdDown>
           <div className="swiper-wrap">
             <Swiper 
+              modules={[Navigation, Mousewheel, Keyboard]}
               navigation={order.order_products.length > 1}
               mousewheel={true} 
               keyboard={true}
@@ -73,11 +71,12 @@ const Checkout = ({ order, data, stock }) => {
         <Hidden mdUp>
           <h2 style={{textAlign: "center", fontFamily: `"Heebo", sans-serif`}}>PRODUCTS</h2>
           <Swiper
+            modules={[Pagination]}
             slidesPerView={2} 
             spaceBetween={30} 
             slidesPerGroup={2}
             loopFillGroupWithBlank={true} 
-            pagination={true}
+            pagination={{ clickable: true }}
           >
             {order.order_products.map(product => 
               <SwiperSlide key={Math.random() * 3}>
@@ -88,7 +87,7 @@ const Checkout = ({ order, data, stock }) => {
         </Hidden>
       </div>
     </div>
-  )
+  );
 }
 
 export default Checkout

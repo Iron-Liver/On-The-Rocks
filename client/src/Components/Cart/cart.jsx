@@ -1,6 +1,6 @@
-import { IconButton, CardContent } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { makeStyles } from "@material-ui/core/styles";
+import { IconButton, CardContent } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import makeStyles from '@mui/styles/makeStyles';
 import CreateOrder from "../Orders/CreateOrder/createOrder";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -146,7 +146,7 @@ export function Cart() {
                                     aria-label="delete"
                                     className={classes.margin}
                                     onClick={() => removeProduct(e.id)}
-                                >
+                                    size="large">
                                     <DeleteIcon fontSize="medium" />
                                 </IconButton>
                             </div>

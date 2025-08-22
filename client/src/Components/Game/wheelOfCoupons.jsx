@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import "./wheelOfCoupons.css";
 import win_audio from "./Wheel_Win.mp3";
 import lose_audio from "./Wheel_Lose.mp3";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import { getCoins, removeCoin } from "../../Redux/Users/userActions";
 import {createCoupon} from "../../Redux/Coupon/couponActions"
 import verifyUser from "../../Utils/verifyUser";

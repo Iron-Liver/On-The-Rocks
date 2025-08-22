@@ -1,8 +1,8 @@
 import './filters.css';
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
-import { ExpandMore } from '@material-ui/icons'
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { ExpandMore } from '@mui/icons-material'
 import { getAllCategories } from "../../Redux/Category/categoryActions";
 import { useLocation, useHistory } from 'react-router';
 

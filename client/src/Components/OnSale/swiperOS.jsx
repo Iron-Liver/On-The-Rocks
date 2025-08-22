@@ -3,23 +3,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "./swiperOS.css";
 import SwiperCard from "./swiperCard";
 // Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css";
-import "swiper/components/pagination/pagination.min.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 // import Swiper core and required modules
-import SwiperCore, {
+import {
     Navigation,
     Pagination,
     Mousewheel,
     Keyboard,
     Autoplay,
-} from "swiper/core";
+} from "swiper/modules";
 import { getWishlist } from "../../Redux/Wishlist/wishlistActions";
 import { getProducts } from "../../Redux/Products/productsActions";
 import { useEffect } from "react";
 
-// install Swiper modules
-SwiperCore.use([Navigation, Pagination, Mousewheel, Keyboard, Autoplay]);
 
 function SwiperOS() {
     const { Products } = useSelector((state) => state.productReducer);
@@ -35,11 +33,12 @@ function SwiperOS() {
 
     return (
         <Swiper
+            modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
             className="swiper"
             slidesPerView={1}
             navigation
             spaceBetween={5}
-            pagination={true}
+            pagination={{ clickable: true }}
             autoplay={{
                 delay: 6000,
             }}

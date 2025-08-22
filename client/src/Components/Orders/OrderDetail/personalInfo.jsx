@@ -2,27 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Grid, Paper, makeStyles, Button, Menu, MenuItem, Box } from "@material-ui/core";
-import { Delete, Info, Edit, Email } from "@material-ui/icons";
+import { Grid, Paper, Button, Menu, MenuItem, Box } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { Delete, Info, Edit, Email } from "@mui/icons-material";
 import { logOutUser } from "../../../Redux/Users/userActions";
 import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 // import Swiper core and required modules
-import SwiperCore, {
+import {
   Navigation,
   Pagination,
   Mousewheel,
   Keyboard,
   Autoplay
-} from 'swiper/core';
-
-// install Swiper modules
-SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
+} from 'swiper/modules';
 
 const useStyles = makeStyles((theme) => ({
   paperContainer: {
@@ -134,7 +132,8 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
           <Box className={classes.paperPosition}>
             <Box className={classes.imgContainer}>
               <Swiper
-                pagination={true}
+                modules={[Pagination, Navigation, Mousewheel, Keyboard, Autoplay]}
+                pagination={{ clickable: true }}
                 navigation={true}
               >
                 {
@@ -242,31 +241,16 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
                     Cancelled
                   </MenuItem>
                 </Menu>
-                <Button 
-                  variant="text" 
-                  color="default" 
-                  startIcon={<Email />}
-                  disabled
-                >
+                <Button variant="text" startIcon={<Email />} disabled>
                   Contact user
                 </Button>
               </Box>
             ) : (
               <Box className={classes.actionsContainer}>
-                <Button
-                  color="default"
-                  variant="text"
-                  startIcon={<Delete />}
-                  onClick={handleRemove}
-                >
+                <Button variant="text" startIcon={<Delete />} onClick={handleRemove}>
                   Remove order
                 </Button>
-                <Button 
-                  variant="text" 
-                  color="default" 
-                  startIcon={<Info />}
-                  disabled
-                >
+                <Button variant="text" startIcon={<Info />} disabled>
                   Get help
                 </Button>
               </Box>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { Grid, Button, TextField } from "@material-ui/core";
-import { Email, VpnKey } from "@material-ui/icons";
+import { Grid, Button, TextField } from "@mui/material";
+import { Email, VpnKey } from "@mui/icons-material";
 import {
     loginUser,
     sendEmail,
@@ -10,12 +10,10 @@ import {
     logOutUser,
 } from "../../../Redux/Users/userActions";
 import useFormStyles from "../../../Utils/formStyles";
-import { GoogleLogin } from "react-google-login";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
-import dotenv from "dotenv";
-dotenv.config();
 
 export default function UserLogin() {
     const classes = useFormStyles();
@@ -160,15 +158,14 @@ export default function UserLogin() {
                                 </Button>
                             </Link>
                             <br />
-                            <GoogleLogin
-                                clientId={
-                                    process.env.REACT_APP_GOOGLE_CLIENT_ID
-                                }
-                                buttonText="Google"
-                                onSuccess={responseSuccessGoogle}
-                                onFailure={responseRejectGoogle}
-                                cookiePolicy={"single_host_origin"}
-                            />
+                            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                                <GoogleLogin
+                                    onSuccess={(credentialResponse) =>
+                                        responseSuccessGoogle({ tokenId: credentialResponse?.credential })
+                                    }
+                                    onError={responseRejectGoogle}
+                                />
+                            </GoogleOAuthProvider>
                         </Grid>
                     </Grid>
                 </Grid>

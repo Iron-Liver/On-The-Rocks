@@ -1,9 +1,10 @@
 import './category.css';
 import { useEffect } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
-import { makeStyles,  Button,  Container } from '@material-ui/core'
-import { ThemeProvider } from '@material-ui/core/styles';
-import { DataGrid } from '@material-ui/data-grid';
+import { Button, Container } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { DataGrid } from '@mui/x-data-grid';
 import theme from '../../../Utils/theme';
 import { Link } from 'react-router-dom';
 import { getAllCategories } from '../../../Redux/Category/categoryActions'
@@ -41,15 +42,16 @@ const CategoryList = () => {
 			headerName: 'EDIT',
 			sortable: false,
 			width: 120,
-			disableClickEventBubbling: true,
 			renderCell: params => {
 				return (
-					<ThemeProvider theme={theme}>
-            <Link to={`/private/category/update/${params.id}`} style={{textDecoration:'none'}}>
-              <Button style={{fontWeight: 1000}} variant="contained" color="secondary">Edit</Button>
-            </Link>
-					</ThemeProvider>
-				);
+                    <StyledEngineProvider injectFirst>
+                        <ThemeProvider theme={theme}>
+                            <Link to={`/private/category/update/${params.id}`} style={{textDecoration:'none'}}>
+                              <Button style={{fontWeight: 1000}} variant="contained" color="secondary">Edit</Button>
+                            </Link>
+                        </ThemeProvider>
+                    </StyledEngineProvider>
+                );
 			},
 		},
 		{
@@ -57,45 +59,48 @@ const CategoryList = () => {
 			headerName: 'DETAIL',
 			sortable: false,
 			width: 120,
-			disableClickEventBubbling: true,
 			renderCell: params => {
 				return (
-					<ThemeProvider theme={theme}>
-            <Link to={`/category/${params.id}`}>
-						  <Button style={{fontWeight: 1000}} variant="contained" color="secondary">Detail</Button>
-            </Link>
-					</ThemeProvider>
-				);
+                    <StyledEngineProvider injectFirst>
+                        <ThemeProvider theme={theme}>
+                            <Link to={`/category/${params.id}`}>
+                                          <Button style={{fontWeight: 1000}} variant="contained" color="secondary">Detail</Button>
+                            </Link>
+                        </ThemeProvider>
+                    </StyledEngineProvider>
+                );
 			},
 		},
 	];
 
-    return(
-      <div className="admin-category-tab-container">
-        <div className={classes.root}>  
-            <ThemeProvider theme={theme}>
+    return (
+        <div className="admin-category-tab-container">
+            <div className={classes.root}>  
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={theme}>
 
-					<Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '50px', marginBottom:'20px'}}>
-						<h1 >
-							Categories:
-						</h1>
-						<Link to="/private/category/add" style={{textDecoration:'none'}}>
-							<Button variant="contained" color="secondary" >
-								Add New Category
-							</Button>
-						</Link>
-					</Container>
+                            <Container style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '50px', marginBottom:'20px'}}>
+                                <h1 >
+                                    Categories:
+                                </h1>
+                                <Link to="/private/category/add" style={{textDecoration:'none'}}>
+                                    <Button variant="contained" color="secondary" >
+                                        Add New Category
+                                    </Button>
+                                </Link>
+                            </Container>
 
-				<Container style={{height: 460, width: '100%'}}>
-					<Container style={{display: 'flex', height: '100%'}}>
-						<DataGrid rows={categories} columns={columns} />
-					</Container>
-				</Container>
+                        <Container style={{height: 460, width: '100%'}}>
+                            <Container style={{display: 'flex', height: '100%'}}>
+                                <DataGrid rows={categories} columns={columns} disableSelectionOnClick />
+                            </Container>
+                        </Container>
 
-			</ThemeProvider>
+                    </ThemeProvider>
+                </StyledEngineProvider>
+            </div>
         </div>
-      </div>
-    )
+    );
 
 }
 export default CategoryList;

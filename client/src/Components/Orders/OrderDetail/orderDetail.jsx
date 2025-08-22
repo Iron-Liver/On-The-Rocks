@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { useDispatch } from "react-redux";

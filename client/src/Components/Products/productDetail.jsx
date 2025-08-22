@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom"
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
     Card,
@@ -13,17 +13,15 @@ import {
     Box,
     CircularProgress,
     IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import {
-    CheckCircle,
-    Info,
-    RemoveShoppingCart,
-    ShoppingCart,
-    Add,
-    Remove,
-} from "@material-ui/icons";
-import Rating from "@material-ui/lab/Rating";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import Info from "@mui/icons-material/Info";
+import RemoveShoppingCart from "@mui/icons-material/RemoveShoppingCart";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
+import Add from "@mui/icons-material/Add";
+import Remove from "@mui/icons-material/Remove";
+import Rating from "@mui/material/Rating";
 import { addProductCart } from "../../Redux/Cart/cartActions";
 import swal from "sweetalert";
 import { getProductReviews } from "../../Redux/Reviews/reviewActions";
@@ -35,7 +33,7 @@ import {
     // getWishlist,
     deleteWish,
 } from "../../Redux/Wishlist/wishlistActions";
-import { green, red } from "@material-ui/core/colors";
+import { green, red } from "@mui/material/colors";
 import { getProducts } from "../../Redux/Products/productsActions";
 import CustomButton from "../Button/CustomButton";
 import { logOutUser } from "../../Redux/Users/userActions";
@@ -357,7 +355,6 @@ const ProductDetail = () => {
             <Button
                 disabled
                 variant="contained"
-                color="disabled"
                 className={classes.button}
                 startIcon={<RemoveShoppingCart className={classes.cartIcon} />}
             >
@@ -432,7 +429,7 @@ const ProductDetail = () => {
                                                 color="primary"
                                                 className={classes.buttonWish}
                                                 onClick={handleWishClick}
-                                            >
+                                                size="large">
                                                 {wished ? (
                                                     <i class="fas fa-heart"></i>
                                                 ) : (
@@ -552,7 +549,7 @@ const ProductDetail = () => {
                                                 onClick={() =>
                                                     handleChangeQuant("-")
                                                 }
-                                            >
+                                                size="large">
                                                 <Remove />
                                             </IconButton>
                                             <Grid
@@ -566,7 +563,7 @@ const ProductDetail = () => {
                                                 onClick={() =>
                                                     handleChangeQuant("+")
                                                 }
-                                            >
+                                                size="large">
                                                 <Add />
                                             </IconButton>
                                         </div>

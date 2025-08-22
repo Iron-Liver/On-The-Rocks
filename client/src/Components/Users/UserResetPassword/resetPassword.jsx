@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Button, TextField, Grid, makeStyles } from '@material-ui/core';
-import { Email, VpnKey } from '@material-ui/icons';
+import { Button, TextField, Grid } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { Email, VpnKey } from '@mui/icons-material';
 import {sendEmail,resetPass} from '../../../Redux/Users/userActions'
 import swal from 'sweetalert'
 

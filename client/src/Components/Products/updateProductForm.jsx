@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Grid, Button, TextField, Chip, Select, FormControl, MenuItem, InputLabel, Input } from '@material-ui/core'
-import { Label, Description, Image, Crop, Fingerprint, Assistant, Storage, MonetizationOn, Category } from '@material-ui/icons';
-import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { Grid, Button, TextField, Chip, Select, FormControl, MenuItem, InputLabel, Input } from '@mui/material'
+import { Label, Description, Image, Crop, Fingerprint, Assistant, Storage, MonetizationOn, Category } from '@mui/icons-material';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import Validate from '../../Utils/validate'
 import theme from '../../Utils/theme'
 import { getAllCategories } from '../../Redux/Category/categoryActions'
@@ -108,231 +109,233 @@ const CreateProductForm = ({ input, setInput, handleSubmit, handleDelete }) => {
 	};
 
 	return (
-		<ThemeProvider theme={theme}>
-			<div className='extContCAF'>
-				<form noValidate autoComplete="off" >
-					<Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
-						<Grid >
-							<h1 className={classes.title}>Update Product</h1>
-							<Grid container spacing={1} alignItems="center">
-								<Grid item >
-									<Label />
-								</Grid>
-								<Grid item >
-									<TextField
-										error={error["productName"]}
-										helperText={[helperText["productName"]]}
-										id="name"
-										label='Name'
-										name="name"
-										value={input.name}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
+        <StyledEngineProvider injectFirst>
+            (<ThemeProvider theme={theme}>
+                <div className='extContCAF'>
+                    <form noValidate autoComplete="off" >
+                        <Grid container direction="column" justifyContent="space-around" alignItems="center" className={`componentDataBox ${classes.root}`} spacing={1}>
+                            <Grid >
+                                <h1 className={classes.title}>Update Product</h1>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item >
+                                        <Label />
+                                    </Grid>
+                                    <Grid item >
+                                        <TextField
+                                            error={error["productName"]}
+                                            helperText={[helperText["productName"]]}
+                                            id="name"
+                                            label='Name'
+                                            name="name"
+                                            value={input.name}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
 
-							<Grid container spacing={1} alignItems="center">
-								<Grid item >
-									<Description />
-								</Grid>
-								<Grid item >
-									<TextField
-										error={error["description"]}
-										helperText={[helperText["description"]]}
-										id="description"
-										label="Description"
-										name="description"
-										multiline
-										rows={4}
-										value={input.description}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<Crop />
-								</Grid>
-								<Grid item>
-									<TextField
-										error={error["size"]}
-										helperText={[helperText["size"]]}
-										id="size"
-										label="Size"
-										name='size'
-										value={input.size}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item >
+                                        <Description />
+                                    </Grid>
+                                    <Grid item >
+                                        <TextField
+                                            error={error["description"]}
+                                            helperText={[helperText["description"]]}
+                                            id="description"
+                                            label="Description"
+                                            name="description"
+                                            multiline
+                                            rows={4}
+                                            value={input.description}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item>
+                                        <Crop />
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField
+                                            error={error["size"]}
+                                            helperText={[helperText["size"]]}
+                                            id="size"
+                                            label="Size"
+                                            name='size'
+                                            value={input.size}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
 
-							<Grid container spacing={1}>
-								<Grid item>
-									<Category />
-								</Grid>
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-mutiple-chip-label">Category</InputLabel>
-									<Select
-										labelId="demo-mutiple-chip-label"
-										id="demo-mutiple-chip"
-										multiple
-										value={input.categories}
-										name='categories'
-										onChange={handleInputChange}
-										input={<Input id="select-multiple-chip" />}
-										renderValue={(selected) => (
-											<div className={classes.chips}>
+                                <Grid container spacing={1}>
+                                    <Grid item>
+                                        <Category />
+                                    </Grid>
+                                    <FormControl className={classes.formControl}>
+                                        <InputLabel id="demo-mutiple-chip-label">Category</InputLabel>
+                                        <Select
+                                            labelId="demo-mutiple-chip-label"
+                                            id="demo-mutiple-chip"
+                                            multiple
+                                            value={input.categories}
+                                            name='categories'
+                                            onChange={handleInputChange}
+                                            input={<Input id="select-multiple-chip" />}
+                                            renderValue={(selected) => (
+                                                <div className={classes.chips}>
 
-												{categories?.map((value) => (
-													selected.map(e => value.id === e ?
+                                                    {categories?.map((value) => (
+                                                        selected.map(e => value.id === e ?
 
-														<Chip key={e} label={value.name} className={classes.chip} />
+                                                            <Chip key={e} label={value.name} className={classes.chip} />
 
-														: null
-													)))}
+                                                            : null
+                                                        )))}
 
-											</div>
-										)}
-										MenuProps={MenuProps}
-									>
-										{categories?.map((category) => (
-											<MenuItem
-												key={category.id}
-												value={category.id}
-												style={getStyles(category.id, input.categories, theme)}
-											>
-												{category.name}
-											</MenuItem>
+                                                </div>
+                                            )}
+                                            MenuProps={MenuProps}
+                                        >
+                                            {categories?.map((category) => (
+                                                <MenuItem
+                                                    key={category.id}
+                                                    value={category.id}
+                                                    style={getStyles(category.id, input.categories, theme)}
+                                                >
+                                                    {category.name}
+                                                </MenuItem>
 
-										))}
-									</Select>
-								</FormControl>
-							</Grid>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
 
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<Assistant />
-								</Grid>
-								<Grid item>
-									<TextField
-										error={error["brand"]}
-										helperText={[helperText["brand"]]}
-										id="brand"
-										label="Brand"
-										name='brand'
-										value={input.brand}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item>
+                                        <Assistant />
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField
+                                            error={error["brand"]}
+                                            helperText={[helperText["brand"]]}
+                                            id="brand"
+                                            label="Brand"
+                                            name='brand'
+                                            value={input.brand}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
 
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<Fingerprint />
-								</Grid>
-								<Grid item>
-									<TextField
-										error={error["sku"]}
-										helperText={[helperText["sku"]]}
-										id="sku"
-										label="Sku"
-										name='sku'
-										value={input.sku}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item>
+                                        <Fingerprint />
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField
+                                            error={error["sku"]}
+                                            helperText={[helperText["sku"]]}
+                                            id="sku"
+                                            label="Sku"
+                                            name='sku'
+                                            value={input.sku}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
 
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<MonetizationOn />
-								</Grid>
-								<Grid item>
-									<TextField
-										error={error["price"]}
-										helperText={[helperText["price"]]}
-										id="price"
-										label="Price"
-										name='price'
-										value={input.price}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<MonetizationOn />
-								</Grid> 					
-								<Grid item>
-									<TextField
-										helperText={[helperText["onSale"]]}
-										id="onSale"
-										label="offer price"
-										name='onSale'
-										value={input.onSale}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item>
+                                        <MonetizationOn />
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField
+                                            error={error["price"]}
+                                            helperText={[helperText["price"]]}
+                                            id="price"
+                                            label="Price"
+                                            name='price'
+                                            value={input.price}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item>
+                                        <MonetizationOn />
+                                    </Grid> 					
+                                    <Grid item>
+                                        <TextField
+                                            helperText={[helperText["onSale"]]}
+                                            id="onSale"
+                                            label="offer price"
+                                            name='onSale'
+                                            value={input.onSale}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
 
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<Storage />
-								</Grid>
-								<Grid item>
-									<TextField
-										error={error["stock"]}
-										helperText={[helperText["stock"]]}
-										id="stock"
-										label="Stock"
-										name='stock'
-										value={input.stock}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item>
+                                        <Storage />
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField
+                                            error={error["stock"]}
+                                            helperText={[helperText["stock"]]}
+                                            id="stock"
+                                            label="Stock"
+                                            name='stock'
+                                            value={input.stock}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
 
-							<Grid container spacing={1} alignItems="center">
-								<Grid item>
-									<Image />
-								</Grid>
-								<Grid item>
-									<TextField
-										error={error["image"]}
-										helperText={[helperText["image"]]}
-										id="image"
-										label="Image-URL"
-										name='image'
-										value={input.image}
-										onChange={handleInputChange}
-									/>
-								</Grid>
-							</Grid>
+                                <Grid container spacing={1} alignItems="center">
+                                    <Grid item>
+                                        <Image />
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField
+                                            error={error["image"]}
+                                            helperText={[helperText["image"]]}
+                                            id="image"
+                                            label="Image-URL"
+                                            name='image'
+                                            value={input.image}
+                                            onChange={handleInputChange}
+                                        />
+                                    </Grid>
+                                </Grid>
 
-						</Grid>
-						<Grid container direction="row" justifyContent="center" alignItems="center">
-							<Grid item>
-								<Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">set changes</Button>
-								{Object.values(error).indexOf(true) === -1
-									? <Button
-										style={{ fontWeight: 1000, marginTop: 50 }}
-										color="secondary" onClick={handleDelete}
-										variant="contained">
-										delete
-									</Button>
-									: <Button style={{ fontWeight: 1000, marginTop: 50 }}
-										color="secondary" onClick={handleDelete}
-										variant="contained" disabled={true}>
+                            </Grid>
+                            <Grid container direction="row" justifyContent="center" alignItems="center">
+                                <Grid item>
+                                    <Button style={{ fontWeight: 1000, marginTop: 50 }} color="secondary" onClick={handleSubmit} variant="contained">set changes</Button>
+                                    {Object.values(error).indexOf(true) === -1
+                                        ? <Button
+                                            style={{ fontWeight: 1000, marginTop: 50 }}
+                                            color="secondary" onClick={handleDelete}
+                                            variant="contained">
+                                            delete
+                                        </Button>
+                                        : <Button style={{ fontWeight: 1000, marginTop: 50 }}
+                                            color="secondary" onClick={handleDelete}
+                                            variant="contained" disabled={true}>
 
-										delete
-									</Button>
-								}
-							</Grid>
-						</Grid>
-					</Grid>
-				</form>
-			</div>
-		</ThemeProvider>
-	)
+                                            delete
+                                        </Button>
+                                    }
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </div>
+            </ThemeProvider>)
+        </StyledEngineProvider>
+    );
 }
 export default CreateProductForm;

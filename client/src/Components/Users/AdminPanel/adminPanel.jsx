@@ -1,5 +1,7 @@
-import { Grid, Button } from "@material-ui/core";
-import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { Grid, Button } from "@mui/material";
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import React from "react";
 import { Link } from "react-router-dom";
@@ -19,42 +21,44 @@ const useStyles = makeStyles((theme)=>({
 function AdminPanel() {
     const style = useStyles();
   return (
-    <ThemeProvider theme={theme}>
-      <h1 className={style.title}>Admin Panel</h1>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-around"
-        alignItems="center"
-        
-        spacing={1}
-      >
-        <Grid>
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Link to="/private/panel/users">
-              <Button className={style.button} variant="body2" color="secondary">
-                Users
-              </Button>
-            </Link>
-            <Link to="/private/panel/categories">
-              <Button className={style.button} variant="body2" color="secondary">
-                Categories
-              </Button>
-            </Link>
-            <Link to="/private/panel/products">
-              <Button className={style.button} variant="body2" color="secondary">
-                Products
-              </Button>
-            </Link>
+    <StyledEngineProvider injectFirst>
+      (<ThemeProvider theme={theme}>
+        <h1 className={style.title}>Admin Panel</h1>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-around"
+          alignItems="center"
+          
+          spacing={1}
+        >
+          <Grid>
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Link to="/private/panel/users">
+                <Button className={style.button} variant="body2" color="secondary">
+                  Users
+                </Button>
+              </Link>
+              <Link to="/private/panel/categories">
+                <Button className={style.button} variant="body2" color="secondary">
+                  Categories
+                </Button>
+              </Link>
+              <Link to="/private/panel/products">
+                <Button className={style.button} variant="body2" color="secondary">
+                  Products
+                </Button>
+              </Link>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </ThemeProvider>
+      </ThemeProvider>)
+    </StyledEngineProvider>
   );
 }
 

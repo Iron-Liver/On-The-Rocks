@@ -9,15 +9,15 @@ import {
     Hidden,
     IconButton,
     Container,
-} from "@material-ui/core";
+} from "@mui/material";
 import {
     Menu,
     ShoppingCart,
     Search,
     AccountCircle,
     ExitToApp,
-} from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles";
+} from "@mui/icons-material";
+import { makeStyles } from "@mui/styles";
 import { MenuList, SearchList, CartList } from "./drawerLists";
 import NavBox from "./navBox";
 import { logOutUser } from "../../Redux/Users/userActions";
@@ -229,7 +229,7 @@ function NavBar(props) {
                             </Link>
                         </div>
 
-                        <Hidden smDown>
+                        <Hidden mdDown>
                             <NavBox solid={solid} />
                         </Hidden>
 
@@ -240,7 +240,7 @@ function NavBar(props) {
                                 edge="start"
                                 onClick={handleDrawerSearch}
                                 className={`${classes.menuButton} ${classes.search}`}
-                            >
+                                size="large">
                                 <Search
                                     className={`${classes.icons} ${
                                         solid ? "" : classes.blackColor
@@ -254,7 +254,7 @@ function NavBar(props) {
                                 edge="start"
                                 onClick={handleDrawerCart}
                                 className={classes.menuButton}
-                            >
+                                size="large">
                                 <ShoppingCart
                                     className={`${classes.icons} ${
                                         solid ? "" : classes.blackColor
@@ -264,14 +264,14 @@ function NavBar(props) {
 
                             
 
-                            <Hidden xsDown>
+                            <Hidden smDown>
                                 <IconButton
                                     color="inherit"
                                     aria-label="open drawer"
                                     edge="start"
                                     className={classes.menuButton}
                                     onClick={handleProfile}
-                                >
+                                    size="large">
                                     <AccountCircle
                                         className={`${classes.icons} ${
                                             solid ? "" : classes.blackColor
@@ -281,14 +281,14 @@ function NavBar(props) {
                             </Hidden>
 
                             {JSON.parse(localStorage.getItem("token")) && (
-                                <Hidden xsDown>
+                                <Hidden smDown>
                                     <IconButton
                                         color="inherit"
                                         aria-label="open drawer"
                                         edge="start"
                                         className={classes.menuButton}
                                         onClick={logOutAlert}
-                                    >
+                                        size="large">
                                         <ExitToApp
                                             className={`${classes.icons} ${
                                                 solid ? "" : classes.blackColor
@@ -304,7 +304,7 @@ function NavBar(props) {
                                 edge="start"
                                 onClick={handleDrawerMenu}
                                 className={classes.menuButton}
-                            >
+                                size="large">
                                 <Menu
                                     className={`${classes.icons} ${
                                         solid ? "" : classes.blackColor
