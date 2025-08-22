@@ -96,9 +96,13 @@ const ProductsAccordion = ({ order }) => {
                     <img
                       src={order.product.image}
                       width="150px"
-                      alt="productimage"
+                      alt={order.product.name}
                       style={{
                         border: "1px solid #372c2e11"
+                      }}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = '/android-icon-192x192.png';
                       }}
                     />
                   </Link>

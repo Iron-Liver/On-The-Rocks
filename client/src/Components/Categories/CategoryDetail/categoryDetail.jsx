@@ -46,7 +46,15 @@ export const CategoryDetail = () => {
                 <Grid container spacing={2} alignItems="center" justifyContent="center">
                     <Grid item >
                         <ButtonBase className={classes.image} >
-                            <img className={classes.img} src={categoryDetail?.image} alt={categoryDetail?.name} />
+                            <img 
+                              className={classes.img} 
+                              src={categoryDetail?.image} 
+                              alt={categoryDetail?.name}
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = '/android-icon-192x192.png';
+                              }}
+                            />
                         </ButtonBase>
                     </Grid>
                 </Grid>

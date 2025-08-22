@@ -48,7 +48,11 @@ const SaleCard = ({ spirit }) => {
           <div className="card">
               <div className="imgBx">
                 <Link to={`/products/${spirit.id}`}>
-                  <img src={spirit.image} alt="Licorimage"/>
+                  <img 
+                    src={spirit.image} 
+                    alt={spirit.name}
+                    onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/android-icon-192x192.png'; }}
+                  />
                 </Link>
               </div>
               <div className="contentBx">

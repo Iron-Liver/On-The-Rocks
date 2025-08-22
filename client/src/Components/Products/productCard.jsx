@@ -54,8 +54,9 @@ const ProductCard = ({ spirit }) => {
                 draggable={false}
               >
                 <img 
-                  src={spirit.image} 
-                  alt="Licorimage"
+                  src={spirit.image}
+                  alt={spirit.name}
+                  onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/android-icon-192x192.png'; }}
                   draggable={false}
                 />
               </Link>

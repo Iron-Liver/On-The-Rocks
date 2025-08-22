@@ -71,6 +71,10 @@ const Order = ({ order, handleSubmit }) => {
                         draggable={false}
                         className="user-order-img"
                         width="100px"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = '/android-icon-192x192.png';
+                        }}
                       />
                     </SwiperSlide>
                   )}
@@ -132,6 +136,12 @@ const Order = ({ order, handleSubmit }) => {
                         }} 
                         alt={product.name} 
                         src={product.image} 
+                        imgProps={{
+                          onError: (e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = '/android-icon-192x192.png';
+                          }
+                        }}
                         key={Math.random()}
                       />
                     )}

@@ -374,6 +374,7 @@ const ProductDetail = () => {
                                     className={classes.cover}
                                     src={liqueur.image}
                                     alt={liqueur.name}
+                                    onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/android-icon-192x192.png'; }}
                                     draggable={false}
                                 />
                             ) : (
@@ -390,12 +391,13 @@ const ProductDetail = () => {
                                 >
                                     {liqueur?.img.map((spirit) => (
                                         <SwiperSlide
-                                            key={spirit.id}
+                                            key={spirit}
                                             className="swipperDetailH"
                                         >
                                             <img
                                                 src={`/img/${spirit}`}
-                                                alt={spirit.name}
+                                                alt={liqueur.name}
+                                                onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/android-icon-192x192.png'; }}
                                                 className="imageH"
                                             />
                                         </SwiperSlide>
