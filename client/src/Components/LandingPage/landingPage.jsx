@@ -8,8 +8,8 @@ import verifyUser from '../../Utils/verifyUser';
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css"
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/scrollbar/scrollbar.scss';
+import 'swiper/components/pagination/pagination.min.css';
+import 'swiper/components/scrollbar/scrollbar.min.css';
 import SwiperOS from '../OnSale/swiperOS';
 //import aos  
 import Aos from 'aos';
