@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import axios from "axios";
 import {
     CREATE_USER,
@@ -11,9 +10,7 @@ import {
     GET_COINS,
 } from "../../Utils/constants";
 import swal from "sweetalert";
-import jwt from "jsonwebtoken";
 import decode from "jwt-decode";
-dotenv.config();
 
 export function getAllUsers() {
     return async function (dispatch) {
@@ -44,10 +41,7 @@ export function loginUser(login) {
                 { email: login.email.toLowerCase(), password: login.password },
                 { withCredentials: true }
             );
-            const { id, email, isAdmin, isDeleted} = jwt.verify(
-                token.data,
-                process.env.REACT_APP_SECRET_KEY
-            );
+            const { id, email, isAdmin, isDeleted } = decode(token.data);
             if (decode(token.data).isDeleted) {
                 swal("You are banned.", "Contact us if you have a question about it.", "error")
             }else{

@@ -14,8 +14,6 @@ import { GoogleLogin } from "react-google-login";
 import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
-import dotenv from "dotenv";
-dotenv.config();
 
 export default function UserLogin() {
     const classes = useFormStyles();
