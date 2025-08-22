@@ -5,24 +5,15 @@ import im3 from '../../assets/au3.jpg'
 import React, { useEffect } from "react";
 import Locations from '../Maps/Locations'; 
 import verifyUser from '../../Utils/verifyUser';
-// Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import 'swiper/components/pagination/pagination.min.css';
-import 'swiper/components/scrollbar/scrollbar.min.css';
 import SwiperOS from '../OnSale/swiperOS';
 //import aos  
 import Aos from 'aos';
 import 'aos/dist/aos.css'
-import SwiperCore, {
-  Navigation
-} from 'swiper/core';
 import Brands from '../Brands/Brands';
 import SwiperWishlist from '../Wishlist/SwiperWishlist';
 import { useDispatch } from 'react-redux';
 import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
-// install Swiper modules
-SwiperCore.use([Navigation]);
+
 export const LandingPage = () => {
     const dispatch = useDispatch();
     const currentUser = verifyUser();

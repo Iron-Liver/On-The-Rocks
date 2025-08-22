@@ -9,20 +9,17 @@ import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 // import Swiper core and required modules
-import SwiperCore, {
+import {
   Navigation,
   Pagination,
   Mousewheel,
   Keyboard,
   Autoplay
-} from 'swiper/core';
-
-// install Swiper modules
-SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard,Autoplay]);
+} from 'swiper/modules';
 
 const useStyles = makeStyles((theme) => ({
   paperContainer: {
@@ -134,7 +131,8 @@ const PersonalInfo = ({ order, id, setOrderStatus, orderStatus }) => {
           <Box className={classes.paperPosition}>
             <Box className={classes.imgContainer}>
               <Swiper
-                pagination={true}
+                modules={[Pagination, Navigation, Mousewheel, Keyboard, Autoplay]}
+                pagination={{ clickable: true }}
                 navigation={true}
               >
                 {

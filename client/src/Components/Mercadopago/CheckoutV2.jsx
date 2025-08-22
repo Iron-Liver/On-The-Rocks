@@ -4,25 +4,22 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Hidden } from "@material-ui/core"
 
 // Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination"
 
 // import Swiper core and required modules
-import SwiperCore, {
+import {
   Navigation,
   Pagination,
   Mousewheel,
   Keyboard
-} from 'swiper/core';
+} from 'swiper/modules';
 import ProductSlide from './ProductSlide';
 import OrderInfo from './OrderInfo';
 import ProductSlideResponsive from './ProductSlideResponsive';
 
 const { REACT_APP_PUBLIC_KEY_MERCADOPAGO } = process.env;
-
-// install Swiper modules
-SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard]);
 
 const CheckoutV2 = ({ data, order, stock }) => {
 
@@ -65,6 +62,7 @@ const CheckoutV2 = ({ data, order, stock }) => {
           <Hidden smDown>
             <div className="swiper-wrap">
               <Swiper 
+                modules={[Navigation, Mousewheel, Keyboard]}
                 navigation={order.order_products.length > 1}
                 mousewheel={true} 
                 keyboard={true}
@@ -81,9 +79,10 @@ const CheckoutV2 = ({ data, order, stock }) => {
           <div className="swiper-wrap-responsive">
             <h2 style={{textAlign: "center", fontFamily: `"Montserrat", sans-serif`, fontWeight: 300}}>PRODUCTS</h2>
               <Swiper
+                modules={[Pagination]}
                 slidesPerView={1} 
                 spaceBetween={30}
-                pagination={true}
+                pagination={{ clickable: true }}
               >
                 {order.order_products.map(product => 
                   <SwiperSlide key={Math.random() * 3}>

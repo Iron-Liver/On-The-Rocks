@@ -4,19 +4,6 @@ import './order.css';
 import { Menu, MenuItem, IconButton } from '@material-ui/core';
 import { MoreVert, Edit } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-// Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
-// import Swiper core and required modules
-import SwiperCore, {
-  Navigation,
-  Pagination,
-  Mousewheel,
-  Keyboard
-} from 'swiper/core';
-// install Swiper modules
-SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard]);
 
 const statusColor = {
   pending: "#262b2fdd",

@@ -9,21 +9,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CustomButton from '../../Button/CustomButton';
 
 // Import Swiper styles
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
+import "swiper/css";
+import "swiper/css/pagination";
 
 // import Swiper core and required modules
-import SwiperCore, {
-  Navigation,
+import {
   Pagination,
   Mousewheel,
   Keyboard
-} from 'swiper/core';
-
-// install Swiper modules
-SwiperCore.use([Navigation,Pagination,Mousewheel,Keyboard]);
-
+} from 'swiper/modules';
 
 const Order = ({ order, handleSubmit }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -60,7 +54,8 @@ const Order = ({ order, handleSubmit }) => {
           <div className="user-order-info">
             <div className="user-order-img-container">
               <Swiper
-                pagination={order.order_products.length > 1}
+                modules={[Pagination, Mousewheel, Keyboard]}
+                pagination={order.order_products.length > 1 ? { clickable: true } : false}
                 mousewheel={true} 
                 keyboard={true}
                 style={{ height: "100%", display: "flex"}}
