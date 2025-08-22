@@ -25,6 +25,7 @@ import { getWishlist } from '../../Redux/Wishlist/wishlistActions';
 SwiperCore.use([Navigation]);
 export const LandingPage = () => {
     const dispatch = useDispatch();
+    const currentUser = verifyUser();
     useEffect(() => {
       window.scrollTo(0,0)
     }, [])
@@ -32,9 +33,10 @@ export const LandingPage = () => {
       Aos.init({duration:3000})
     }, []);
     useEffect(() => {
-      dispatch(getWishlist());
-    }, [dispatch])
-    const currentUser = verifyUser();
+      if (currentUser && !currentUser.logout) {
+        dispatch(getWishlist());
+      }
+    }, [dispatch, currentUser])
     return (
       <div>
       <div>
@@ -69,7 +71,7 @@ export const LandingPage = () => {
           <SwiperOS />
       </div>
       {
-        currentUser && 
+        currentUser && !currentUser.logout && 
           <SwiperWishlist />
       }
         <div className="AboutUsContainer">
