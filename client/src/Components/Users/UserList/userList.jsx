@@ -49,7 +49,6 @@ const UserList = () => {
 			headerName: 'EDIT',
 			sortable: false,
 			width: 120,
-			disableClickEventBubbling: true,
 			renderCell: params => {
 				return (
 					<Link to={`/private/user/update/${params.id}`} style={{textDecoration:'none'}}>
@@ -77,7 +76,7 @@ const UserList = () => {
 
 					<Container style={{height: 460, width: '100%'}}>
 						<Container style={{display: 'flex', height: '100%'}}>
-							<DataGrid rows={users} columns={columns} />
+							<DataGrid rows={users} columns={columns} disableSelectionOnClick />
 						</Container>
 					</Container>
 
