@@ -10,7 +10,7 @@ import {
     logOutUser,
 } from "../../../Redux/Users/userActions";
 import useFormStyles from "../../../Utils/formStyles";
-import { GoogleLogin } from "react-google-login";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import verifyUser from "../../../Utils/verifyUser";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
@@ -158,15 +158,14 @@ export default function UserLogin() {
                                 </Button>
                             </Link>
                             <br />
-                            <GoogleLogin
-                                clientId={
-                                    process.env.REACT_APP_GOOGLE_CLIENT_ID
-                                }
-                                buttonText="Google"
-                                onSuccess={responseSuccessGoogle}
-                                onFailure={responseRejectGoogle}
-                                cookiePolicy={"single_host_origin"}
-                            />
+                            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                                <GoogleLogin
+                                    onSuccess={(credentialResponse) =>
+                                        responseSuccessGoogle({ tokenId: credentialResponse?.credential })
+                                    }
+                                    onError={responseRejectGoogle}
+                                />
+                            </GoogleOAuthProvider>
                         </Grid>
                     </Grid>
                 </Grid>
