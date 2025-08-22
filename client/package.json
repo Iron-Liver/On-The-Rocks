@@ -48,6 +48,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "engines": {
+    "node": "22.x"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.35",
@@ -74,6 +77,16 @@
   "overrides": {
     "postcss": "^8.4.35",
     "postcss-loader": "^6.2.1",
-    "autoprefixer": "^10.4.20"
+    "autoprefixer": "^10.4.20",
+    "schema-utils@^3.0.0": {
+      "ajv": "6.12.6",
+      "ajv-keywords": "3.5.2"
+    },
+    "schema-utils@^4.0.0": {
+      "ajv": "^8.12.0",
+      "ajv-formats": "^2.1.1"
+    },
+    "terser-webpack-plugin": "5.3.10",
+    "css-minimizer-webpack-plugin": "3.4.1"
   }
 }
