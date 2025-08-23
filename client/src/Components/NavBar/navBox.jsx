@@ -38,9 +38,11 @@ export const NavBox = ({ solid }) => {
         imageTitle: {
             position: "relative",
             width: '70px',
-            padding: `${theme.spacing(1)} ${theme.spacing(0)} ${
-                theme.spacing(1) + 2
-            }px`,
+            display: 'inline-block',
+            paddingTop: theme.spacing(1),
+            paddingRight: theme.spacing(0),
+            paddingBottom: theme.spacing(1),
+            paddingLeft: theme.spacing(0),
             fontFamily: 'Montserrat',
             fontWeight: '500'
         },
